@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.c22.teamB;
+/*package edu.wpi.cs3733.c22.teamB;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.*;
@@ -74,3 +74,4 @@ public class MedicalEquipmentSRDBTest {
     //    }
 
 }
+*/

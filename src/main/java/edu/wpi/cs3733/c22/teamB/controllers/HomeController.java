@@ -120,7 +120,7 @@ public class HomeController {
             ex.printStackTrace();
         }
     }
-
+/*
     @FXML
     private void goToCSVImport(ActionEvent actionEvent) {
         try {
@@ -131,7 +131,7 @@ public class HomeController {
             ex.printStackTrace();
         }
     }
-
+*/
     @FXML
     private void shutDown() {
         Platform.exit();
