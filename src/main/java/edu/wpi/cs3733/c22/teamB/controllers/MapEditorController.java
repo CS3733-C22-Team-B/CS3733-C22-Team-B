@@ -9,13 +9,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -184,6 +188,25 @@ public class MapEditorController {
         refresh();
     }
 
+    public void editNodeDetails (Location location){
+        try {
+            Parent root =
+                        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationDetailsDialog.fxml"));
+            Stage editStage = new Stage();
+            editStage.setTitle("Set Location Details");
+            StackPane stack = new StackPane();
+            Scene editScene = new Scene(stack, 600, 400);
+            editScene.setRoot(root);
+            //editStage.getClass().getResource("views/LocationDetailsDialog.fxml");
+            editStage.setScene(editScene);
+            editStage.show();
+            Bapp.getPrimaryStage().hide();
+            editStage.setResizable(false);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @FXML public void delete(){
         deleteSelectedNode();
     }
@@ -223,11 +246,12 @@ public class MapEditorController {
             //Adds point to the map
             addPoint(String.valueOf(nextID),xCord,yCord,Color.GREEN);
             //Create new location
-            Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Tower","TODO","TODO","TODO");
+            Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Temp","Temp","Temp","Temp");
             //Add new location to the database
             locationDBI.insertNode(newLoc);
             //Make sure the locationList has this update
             locationList = locationDBI.getAllNodes();
+            editNodeDetails(newLoc);
             //Set button back to add mode
             addButton.setOpacity(1);
             addButton.setText("Add");
@@ -235,6 +259,7 @@ public class MapEditorController {
             addState = false;
         }
     }
+
 
     @FXML
     void homeButton(ActionEvent event) {
@@ -263,6 +288,12 @@ public class MapEditorController {
 
     @FXML public void modify(){
 
+    }
+
+    @FXML
+    void loadFromCSV(ActionEvent event) {
+        //Ben Here's your button it exists now lessssgoooo
+        //TODO get it to work
     }
 
 }
