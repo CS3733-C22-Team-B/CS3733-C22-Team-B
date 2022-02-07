@@ -98,8 +98,8 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MedicalEquipmentSR");
             ResultSet rset = pstmt.executeQuery();
 
-            String srID;
-            String status;
+            String srID = "";
+            String status = "";
             Location destination;
             MedicalEquipment medicalEquipment;
             Employee assignedEmployee;
