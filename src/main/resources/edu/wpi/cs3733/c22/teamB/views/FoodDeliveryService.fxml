@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.FoodDeliverySRController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="#93c0eb" height="340.0" layoutX="15.0" layoutY="45.0" stroke="BLACK" strokeType="OUTSIDE" width="575.0" />
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="90.0" layoutX="40.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="90.0" layoutX="230.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="35.0" layoutX="40.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="90.0" layoutX="425.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="35.0" layoutX="40.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="40.0" layoutX="250.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+        <Label layoutX="45.0" layoutY="160.0" prefHeight="150.0" prefWidth="150.0" text="Chicken and Potatoes" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="230.0" layoutY="160.0" prefHeight="150.0" prefWidth="150.0" text="Salad and Fruits" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="425.0" layoutY="165.0" prefHeight="150.0" prefWidth="150.0" text="Soup fo the day" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="103.0" layoutY="286.0" prefHeight="50.0" prefWidth="450.0" text="Please choose a meal to be delivered" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="41.0" layoutY="67.0" text="Location: ">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="LocationField" layoutX="124.0" layoutY="61.0" prefHeight="40.0" prefWidth="450.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <Label layoutX="51.0" layoutY="113.0" text="Name:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="AssigneeName" layoutX="124.0" layoutY="107.0" prefHeight="40.0" prefWidth="450.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="35.0" layoutX="15.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="575.0" />
+        <Label layoutX="42.0" layoutY="7.0" text="Food Delivery">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <JFXComboBox fx:id="ComboMeals" layoutX="42.0" layoutY="326.0" prefHeight="30.0" prefWidth="540.0" promptText="Meal" />
+        <Label layoutX="269.0" layoutY="154.0" text="Menu">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
+

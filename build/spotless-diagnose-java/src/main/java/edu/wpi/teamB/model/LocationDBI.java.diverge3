@@ -1,0 +1,163 @@
+package edu.wpi.teamB.model;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class LocationDBI extends AbstactDatabaseI<Location> {
+    @Override
+    void backup() {}
+
+    @Override
+    void restore(List nodes) {}
+
+    /*
+                                                                                                                                    @Override
+                                                                                                                                    void restore(List<> nodes) {
+
+                                                                                                                                    }
+    */
+
+    @Override
+    public List<Location> getAllNodes() {
+
+        List<Location> locations = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Location");
+            ResultSet rset = pstmt.executeQuery();
+
+            String nodeID = "";
+            int xcoord = 0;
+            int ycoord = 0;
+            String floor = "";
+            String building = "";
+            String nodeType = "";
+            String longName = "";
+            String shortName = "";
+
+            while (rset.next()) {
+                nodeID = rset.getString("nodeID");
+                xcoord = rset.getInt("xcoord");
+                ycoord = rset.getInt("ycoord");
+                floor = rset.getString("floor");
+                building = rset.getString("building");
+                nodeType = rset.getString("nodeType");
+                longName = rset.getString("longName");
+                shortName = rset.getString("shortname");
+
+                locations.add(
+                        new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName));
+            }
+        } catch (SQLException e) {
+            System.out.println("New CSV file: SQL Failed!");
+            e.printStackTrace();
+        }
+        return locations;
+    }
+
+    @Override
+    public Location getNode(String nodeID) {
+        Location location = new Location();
+        try {
+            PreparedStatement pstmt =
+                    connection.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+            pstmt.setString(1, nodeID);
+            ResultSet rset = pstmt.executeQuery();
+
+            int xcoord = rset.getInt("xcoord");
+            int ycoord = rset.getInt("ycoord");
+            String floor = rset.getString("floor");
+            String building = rset.getString("building");
+            String nodeType = rset.getString("nodeType");
+            String longName = rset.getString("longName");
+            String shortName = rset.getString("shortname");
+
+            location =
+                    new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
+
+        } catch (SQLException e) {
+            System.out.println("New CSV file: SQL Failed!");
+            e.printStackTrace();
+        }
+        return location;
+    }
+
+    public void deleteNode(Location node) {
+
+        try {
+            PreparedStatement pstmt =
+                    connection.prepareStatement("DELETE FROM Location WHERE nodeID = ?");
+            pstmt.setString(1, node.getNodeID());
+            pstmt.executeUpdate();
+
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Delete From Table Using Node ID: Failed!");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateNode(Location node) {
+
+        try {
+            PreparedStatement pstmt =
+                    connection.prepareStatement(
+                            "UPDATE Location SET xcoord = ?, ycoord = ?, floor = ?, building = ?, nodeType = ?, longName = ?, shortName = ? WHERE nodeID = ?");
+            pstmt.setInt(1, node.getXcoord());
+            pstmt.setInt(2, node.getYcoord());
+            pstmt.setString(3, node.getFloor());
+            pstmt.setString(3, node.getBuilding());
+            pstmt.setString(3, node.getNodeType());
+            pstmt.setString(3, node.getLongName());
+            pstmt.setString(3, node.getShortName());
+
+            pstmt.executeUpdate();
+
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Update Node ID: Failed!");
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    public void insertNode(Location node) {
+
+        try {
+            PreparedStatement pstmt =
+                    connection.prepareStatement(
+                            "INSERT INTO Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName) VALUES( ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, node.getNodeID());
+            pstmt.setInt(2, node.getXcoord());
+            pstmt.setInt(3, node.getYcoord());
+            pstmt.setString(4, node.getFloor());
+            pstmt.setString(5, node.getBuilding());
+            pstmt.setString(6, node.getNodeType());
+            pstmt.setString(7, node.getLongName());
+            pstmt.setString(8, node.getShortName());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+
+            // Add the new object to the list
+            //            list.add(
+            //                    new Location(
+            //                            nodeInput,
+            //                            xcoordint,
+            //                            ycoordint,
+            //                            floorInput,
+            //                            buildingInput,
+            //                            nodeTypeInput,
+            //                            longInput,
+            //                            shortInput));
+
+        } catch (SQLException e) {
+            System.out.println("Insert Into Table Using Node ID: Failed!");
+            e.printStackTrace();
+        }
+    }
+}

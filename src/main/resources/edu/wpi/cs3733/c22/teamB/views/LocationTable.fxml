@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.pannable.PannableScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.LocationTableController">
+   <children>
+      <PannableScrollPane layoutX="35.0" layoutY="40.0" prefHeight="366.0" prefWidth="445.0" style="-fx-background-color: lightgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <TableView fx:id="table" prefHeight="357.0" prefWidth="424.0" />
+         </children>
+      </PannableScrollPane>
+      <JFXButton fx:id="loadButton" layoutX="501.0" layoutY="39.0" onAction="#loadTable" style="-fx-background-color: lightblue;" text="Load" />
+      <JFXButton fx:id="homeButton" layoutX="501.0" layoutY="86.0" onAction="#goToHome" style="-fx-background-color: lightblue;" text="Home" />
+   </children>
+</AnchorPane>

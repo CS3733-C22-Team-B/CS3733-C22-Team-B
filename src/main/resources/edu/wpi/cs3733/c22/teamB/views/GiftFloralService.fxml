@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXBadge?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.GiftFloralServiceController">
+   <children>
+      <Pane layoutX="8.0" layoutY="9.0" prefHeight="381.0" prefWidth="582.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="9.0">
+         <children>
+            <DatePicker fx:id="dateID" layoutX="9.0" layoutY="231.0" prefHeight="25.0" prefWidth="386.0" />
+            <Label layoutX="14.0" layoutY="330.0" prefHeight="18.0" prefWidth="446.0" text="What room does the patient reside in? (Please select a floor first)" />
+            <JFXComboBox fx:id="roomID" layoutX="9.0" layoutY="348.0" prefHeight="26.0" prefWidth="531.0" promptText="Select the patient's room." />
+            <JFXComboBox id="floorDropdown" fx:id="floorID" layoutX="9.0" layoutY="290.0" prefHeight="26.0" prefWidth="531.0" promptText="Please select a floor." />
+            <Label layoutX="14.0" layoutY="265.0" prefHeight="18.0" prefWidth="306.0" text="What floor does the patient reside on?" />
+            <Label layoutX="14.0" layoutY="206.0" prefHeight="18.0" prefWidth="320.0" text="When should these gifts be delivered by?" />
+         </children>
+      </Pane>
+      <Label layoutX="22.0" layoutY="14.0" prefHeight="75.0" prefWidth="554.0" text="Reminder: This form will only fulfill a single service request to a single patient. If you wish to deliver gifts to multiple patients, please make multiple service requests." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="23.600000000000023" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="23.0" layoutY="83.0" prefHeight="18.0" prefWidth="554.0" text="What gifts are being delivered?" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <JFXBadge layoutX="38.0" layoutY="191.0" />
+      <ScrollPane layoutX="22.0" layoutY="101.0" prefHeight="102.0" prefWidth="554.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="101.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="104.0" prefWidth="540.0">
+               <children>
+                  <JFXCheckBox fx:id="teddy1" text="Teddy Bear" />
+                  <JFXCheckBox fx:id="rose1" layoutY="28.0" text="Rose Bouquet" />
+                  <JFXCheckBox fx:id="wreath1" layoutY="56.0" text="Floral Wreath" />
+                  <JFXCheckBox fx:id="teddy2" layoutY="82.0" text="Tulip Bouquet" />
+                  <JFXCheckBox fx:id="teddy3" layoutX="108.0" text="Teddy Bear" />
+                  <JFXCheckBox fx:id="rose2" layoutX="108.0" layoutY="28.0" text="Rose Bouquet" />
+                  <JFXCheckBox fx:id="wreath2" layoutX="108.0" layoutY="56.0" text="Floral Wreath" />
+                  <JFXCheckBox fx:id="teddy4" layoutX="108.0" layoutY="82.0" text="Tulip Bouquet" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label fx:id="confirmLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="394.0" prefHeight="59.0" prefWidth="554.0" text="  " AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="394.0" />
+   </children>
+</AnchorPane>

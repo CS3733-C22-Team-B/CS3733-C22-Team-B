@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="949.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.HomeController">
+   <children>
+      <Pane layoutX="73.0" layoutY="368.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" styleClass="rectangle" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="325.0">
+         <children>
+            <JFXButton layoutX="80.0" layoutY="80.0" onAction="#goToServiceRequestPanel" prefWidth="100.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Start" />
+            <JFXButton layoutX="354.0" layoutY="80.0" prefWidth="100.0" ripplerFill="#3b99eb" text="Help" />
+            <JFXButton layoutX="616.0" layoutY="80.0" onAction="#shutDown" prefWidth="100.0" ripplerFill="#3b99eb" text="Exit" />
+            <JFXButton fx:id="equipmentButton" layoutX="21.0" layoutY="18.0" onAction="#goToEquipmentTable" text="Equipment Manager" />
+            <JFXButton fx:id="locationButton" layoutX="226.0" layoutY="18.0" onAction="#goToLocationTable" text="Location Manager" />
+         </children>
+      </Pane>
+      <Label layoutX="115.0" layoutY="21.0" text="Mass General Brigham" textFill="WHITE">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
