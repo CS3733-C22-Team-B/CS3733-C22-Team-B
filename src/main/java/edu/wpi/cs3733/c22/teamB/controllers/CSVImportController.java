@@ -20,38 +20,60 @@ public class CSVImportController {
     @FXML
     JFXToggleButton ImportExportSlider;
     @FXML
-    TextField ImportingTxt;
+    TextField RestoringTxt;
     @FXML
-    TextField ExportingTxt;
+    TextField BackupTxt;
     @FXML
     Label FileNameLabel;
     @FXML
     Label TitleLabel;
 
+    private boolean isRestoring;
+
+    public boolean isRestoring() {
+        return isRestoring;
+    }
+
+    public void setRestoring(boolean restoring) {
+        isRestoring = restoring;
+    }
+
+    @FXML
+    void initialize(){
+        isRestoring = true;
+    }
+
     @FXML
     void SwitchAction(ActionEvent event) {
-        if(ImportExportSlider.getText().equals("Importing file")) {
-            ImportExportSlider.setText("Exporting file");
-            ImportingTxt.setDisable(true);
-            ImportingTxt.setVisible(false);
-            ExportingTxt.setDisable(false);
-            ExportingTxt.setVisible(true);
+        isRestoring = !isRestoring;
+        this.update();
+    }
+
+    private void update(){
+        if(isRestoring) {
+            ImportExportSlider.setText("Backing up file");
+            RestoringTxt.setDisable(true);
+            RestoringTxt.setVisible(false);
+            BackupTxt.setDisable(false);
+            BackupTxt.setVisible(true);
+            isRestoring=false;
         }
-        else if(ImportExportSlider.getText().equals("Exporting file")) {
-            ImportExportSlider.setText("Importing file");
-            ImportingTxt.setDisable(false);
-            ImportingTxt.setVisible(true);
-            ExportingTxt.setDisable(true);
-            ExportingTxt.setVisible(false);
+        else if(!isRestoring) {
+            ImportExportSlider.setText("Restoring file");
+            RestoringTxt.setDisable(false);
+            RestoringTxt.setVisible(true);
+            BackupTxt.setDisable(true);
+            BackupTxt.setVisible(false);
+            isRestoring = true;
         }
     }
 
     @FXML
     void Submit(ActionEvent event) {
-        if(ImportExportSlider.getText().equals("Importing file")) {
+        if(isRestoring) {
 
         }
-        else if(ImportExportSlider.getText().equals("Exporting file")) {
+        else if(isRestoring == false) {
 
         }
     }
