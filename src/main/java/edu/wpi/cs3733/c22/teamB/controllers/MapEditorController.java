@@ -32,6 +32,13 @@ public class MapEditorController {
     String currentFloor = "3";
     boolean addState = false;
 
+    //TODO Probably needs to be changed to work with jar file vvv
+    Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
+    Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
+    Image lowerLevel2Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
+    Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
+    Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
+
     @FXML
     private AnchorPane anchorPane;
 
@@ -157,26 +164,24 @@ public class MapEditorController {
     }
 
     @FXML public void goTo(){
-        Image image;
         switch (currentFloor) {
             case "1":   //TODO Probably needs to be changed to work with jar file vvv
-                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
+                imageView.setImage(firstFloorImage);
                 break;
             case "2":
-                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
+                imageView.setImage(secondFloorImage);
                 break;
             case"L2":
-                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
+                imageView.setImage(lowerLevel2Image);
                 break;
             case"L1":
-                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
+                imageView.setImage(lowerLevel1Image);
                 break;
             default:
-                image = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
+                imageView.setImage(thirdFloorImage);
             break;
         }
         refresh();
-        imageView.setImage(image);
     }
 
     @FXML public void delete(){
