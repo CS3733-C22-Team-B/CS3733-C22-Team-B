@@ -81,6 +81,10 @@ public class FoodDeliverySRController implements IController, Initializable {
                 new FoodDeliverySR(
                         "1", "WAITING", destination, foodName, foodRecipientName, new Employee()));
         System.out.println(srList.get(srList.size() - 1).toString());
+
+        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
+        foodDeliverySRDBI.insertNode(
+                new FoodDeliverySR(idField.getText(), statusField.getValue(), locMap.get(destinationField.getValue()), ComboMeals.getValue(), AssigneeName.getText(), employeeMap.get(assignedEmployeeField.getValue())));
     }
 
     @Override
