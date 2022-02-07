@@ -13,18 +13,27 @@ import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class LocationTableController {
 
-    @FXML TableView table;
-    @FXML JFXButton loadButton;
+    @FXML private JFXButton addButton;
+    @FXML private JFXButton modifyButton;
+    @FXML private JFXButton deleteButton;
+    @FXML private TableView table;
+    @FXML private JFXButton loadButton;
 
     public LocationTableController() {}
 
     @FXML
-    private void initialize() throws NullPointerException {}
+    private void initialize() throws NullPointerException {
+        addButton.setDisable(false);
+        modifyButton.setDisable(false);
+        deleteButton.setDisable(false);
+    }
 
-    public void loadTable() throws NullPointerException {
+    @FXML
+    private void loadTable() throws NullPointerException {
         LocationDBI locationDBI = new LocationDBI();
         List<Location> listOfLocations = locationDBI.getAllNodes();
 
@@ -57,12 +66,8 @@ public class LocationTableController {
         table.getColumns().add(col8);
 
         table.getItems().addAll(listOfLocations); // create and add object
-        // table.getItems().addAll(new Location("3", 3 , 4, "floor 3", "This building", " idkman",
-        // "longname", "shortname")); //create and add object
-        // table.getItems().addAll(--list of objects here--); //
 
     }
-    // Go to the home fxml when the home button is pressed
     @FXML
     void goToHome(ActionEvent event) {
         // Try to go home
@@ -73,5 +78,22 @@ public class LocationTableController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    private void addLocation(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    private void modifyLocation(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void deleteLocation(ActionEvent actionEvent) {
+    }
+
+    public void locationTableClick(MouseEvent mouseEvent) {
+        table.getSelectionModel().getSelectedItem();
     }
 }
