@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.VBox?>
+
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefWidth="500" />
-            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" smooth="false">
+            <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@../images/thirdFloorMap.png" />
                </image>
             </ImageView>
             <VBox prefWidth="500">
                <children>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="Home" onAction="#homeButton" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="Refresh" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="Delete" onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="GoTo Floor L2" onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="GoTo Floor L1" onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="GoTo Floor 1" onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="GoTo Floor 2" onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
-                  <Pane prefHeight="20"/>
-                  <JFXButton text="GoTo Floor 3" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#homeButton" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Home" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Refresh" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton fx:id="addButton" onAction="#add" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Add" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#modify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Modify" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Delete" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L2" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L1" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 1" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 2" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>

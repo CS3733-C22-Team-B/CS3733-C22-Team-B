@@ -1,14 +1,17 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.Location;
 import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
+import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -27,6 +30,7 @@ public class MapEditorController {
     LocationDBI locationDBI = new LocationDBI();
     List<Location> locationList = locationDBI.getAllNodes();
     String currentFloor = "3";
+    boolean addState = false;
 
     @FXML
     private AnchorPane anchorPane;
@@ -34,6 +38,8 @@ public class MapEditorController {
     @FXML
     private ImageView imageView;
 
+    @FXML
+    private JFXButton addButton;
 
     //Scene x coordinate to image x coordinate
     double getImageX(double desiredX){
@@ -52,6 +58,37 @@ public class MapEditorController {
         return (desiredY/imageHeight)*sceneHeight;
     }
 
+    //Scene x coordinate to image x coordinate
+    double getMapX(double desiredX){
+        //The width of the map in image coordinates
+        double mapWidth = imageWidth*(sceneHeight/imageHeight);
+        //System.out.println("mapWidth = " + mapWidth);
+        //The offset from the side of the scene
+        double xOffset = (sceneWidth-mapWidth)/2.0;
+        //Return the new coordinate
+        return (desiredX-xOffset)/(mapWidth/imageWidth);
+    }
+
+    //Scene y coordinate to image y coordinate
+    double getMapY(double desiredY){
+        //The map is fit to the window's height
+        return desiredY/(sceneHeight/imageHeight);
+    }
+
+    public void onPointClick(Circle testPoint){
+        //Deselect previous point, make black
+        for(Location local: locationList){
+            if(local.getNodeID().equals(selectedPoint)){
+                //addPoint(local.getNodeID(),local.getXcoord(),local.getYcoord(),Color.BLACK);
+                selectedPnt.setFill(Color.BLACK);
+            }
+        }
+        //Select current point
+        testPoint.setFill(Color.RED);
+        //System.out.println(testPoint.idProperty().get());
+        selectedPoint = (testPoint.idProperty().get());
+        selectedPnt = testPoint;
+    }
 
     //Add a point to the map using image coordinates. Set up onclick.
     public void addPoint(String ID, double x, double y, Color color){
@@ -64,18 +101,7 @@ public class MapEditorController {
         testPoint.idProperty().set(ID);
         //Set up onclick events
         testPoint.setOnMouseClicked(event -> {
-            //Deselect previous point, make black
-            for(Location local: locationList){
-                    if(local.getNodeID().equals(selectedPoint)){
-                        //addPoint(local.getNodeID(),local.getXcoord(),local.getYcoord(),Color.BLACK);
-                        selectedPnt.setFill(Color.BLACK);
-                    }
-            }
-            //Select current point
-            testPoint.setFill(Color.RED);
-            //System.out.println(testPoint.idProperty().get());
-            selectedPoint = (testPoint.idProperty().get());
-            selectedPnt = testPoint;
+            onPointClick(testPoint);
         });
     }
 
@@ -97,10 +123,12 @@ public class MapEditorController {
 
     void deleteSelectedNode(){
         anchorPane.getChildren().remove(selectedPnt);
-        locationDBI.deleteNode(selectedPoint);
+        locationDBI.deleteNode(selectedPnt.getId());
     }
 
     @FXML public void refresh(){
+        //TODO load from CSV instead of database
+        locationList = locationDBI.getAllNodes();
         removeAllPoints();
         addPoints();
     }
@@ -128,7 +156,6 @@ public class MapEditorController {
 
     @FXML public void goTo(){
         Image image;
-        removeAllPoints();
         switch (currentFloor) {
             case "1":
                     image = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
@@ -146,8 +173,7 @@ public class MapEditorController {
                 image = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
             break;
         }
-        removeAllPoints();
-        addPoints();
+        refresh();
         imageView.setImage(image);
     }
 
@@ -176,6 +202,21 @@ public class MapEditorController {
     }
 
     @FXML
+    void imageClicked(MouseEvent event) {
+        if(addState){
+            addState = false;
+            String newID = "TEST";
+            double xCord = getMapX(event.getSceneX());
+            double yCord = getMapY(event.getSceneY());
+            addPoint(newID,xCord,yCord,Color.GREEN);
+            Location newLoc = new Location(newID,(int)xCord,(int)yCord,currentFloor,"Tower","TODO","TODO","TODO");
+            locationDBI.insertNode(newLoc);
+            addButton.setOpacity(1);
+            addButton.setText("Add");
+        }
+    }
+
+    @FXML
     void homeButton(ActionEvent event) {
         // Try to go home
         try {
@@ -186,6 +227,22 @@ public class MapEditorController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML public void add(){
+        if(addState){
+            addState = false;
+            addButton.setOpacity(1);
+            addButton.setText("Add");
+        } else{
+            addState = true;
+            addButton.setOpacity(0.5);
+            addButton.setText("Cancel Add");
+        }
+    }
+
+    @FXML public void modify(){
+
     }
 
 }
