@@ -45,17 +45,17 @@ public class ExternalTransportController implements IController {
 
     @Override
     public void submit() {
-        ExternalTransportSR request =
-                new ExternalTransportSR(
-                        "11112",
-                        PickupLocTxt.getText(),
-                        DestinationTxt.getText(),
-                        "WAITING",
-                        InfoTxt.getText(),
-                        DateCal.getAccessibleText(),
-                        FormOfTransport.getAccessibleText());
-        System.out.println(request.toString());
-        clear();
+//        ExternalTransportSR request =
+//                new ExternalTransportSR(
+//                        "11112",
+//                        PickupLocTxt.getText(),
+//                        DestinationTxt.getText(),
+//                        "WAITING",
+//                        InfoTxt.getText(),
+//                        DateCal.getAccessibleText(),
+//                        FormOfTransport.getAccessibleText());
+//        System.out.println(request.toString());
+//        clear();
     }
 
     @Override

@@ -7,8 +7,21 @@ public class ExternalTransportSR extends AbstractSR {
     private String info;
     private String date; // date type
     private String formOfTransport;
-    //    private Employee assignedEmployee;
-    String assignedEmployee;
+    private Employee assignedEmployee;
+//    String assignedEmployee;
+
+
+
+    public ExternalTransportSR() {
+
+        super(null, null);
+        this.pickupLoc = null;
+        this.destination = null;
+        this.info = null;
+        this.date = null;
+        this.formOfTransport = null;
+        this.assignedEmployee = null;
+    }
 
     public ExternalTransportSR(
             String srID,
@@ -17,7 +30,8 @@ public class ExternalTransportSR extends AbstractSR {
             String status,
             String info,
             String date,
-            String formOfTransport) {
+            String formOfTransport,
+            Employee assignedEmployee) {
         super(srID, status);
         this.destination = destination;
         this.pickupLoc = pickupLoc;
@@ -25,6 +39,30 @@ public class ExternalTransportSR extends AbstractSR {
         this.date = date;
         this.formOfTransport = formOfTransport;
         this.assignedEmployee = assignedEmployee;
+    }
+
+    public String getPickupLoc() {
+        return pickupLoc;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getFormOfTransport() {
+        return formOfTransport;
+    }
+
+    public Employee getAssignedEmployee() {
+        return assignedEmployee;
     }
 
     public String getSrID() {

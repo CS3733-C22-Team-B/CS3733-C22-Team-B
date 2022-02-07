@@ -43,6 +43,9 @@ public class Bapp extends Application {
 
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         medicineDeliverySRDBI.createTable();
+
+        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
+        externalTransportSRDBI.createTable();
     }
 
 
