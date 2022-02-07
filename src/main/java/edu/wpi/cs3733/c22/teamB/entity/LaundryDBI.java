@@ -4,7 +4,7 @@ import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class LaundryDBI extends AbstractDatabaseI<LaundrySR> {
+public class LaundryDBI implements IDatabase<LaundrySR> {
 
     //    final private List<LaundrySR> db;
     private final Map<String, LaundrySR> dbMap;

@@ -21,11 +21,10 @@ public class LocationDBI implements IDatabase<Location> {
 
             if (rset.next() && rset.getString(3).equals("Location")){
                 // table exists
-
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
-                stmt.execute("CREATE TABLE LOCATION ( "
+                stmt.execute("CREATE TABLE Location ( "
                         + "nodeID VARCHAR(50) , "
                         + "xcoord int not null, "
                         + "ycoord int not null, "

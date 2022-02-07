@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
+public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
 
     Connection conn;
 

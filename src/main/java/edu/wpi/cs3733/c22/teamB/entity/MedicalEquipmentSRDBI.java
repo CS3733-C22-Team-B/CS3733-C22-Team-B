@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentSRDBI extends AbstractDatabaseI<MedicalEquipmentSR> {
+public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
 
     private Connection conn;
 
@@ -26,13 +26,10 @@ public class MedicalEquipmentSRDBI extends AbstractDatabaseI<MedicalEquipmentSR>
                         "create table MedicalEquipmentSR( "
                                 + "srID VARCHAR(50), "
                                 + "status VARCHAR(50), "
-                                + "locationID VARCHAR(50), "
-                                + "equipmentID VARCHAR(50), "
-                                + "employeeID VARCHAR(50), "
-                                + "PRIMARY KEY (srID), "
-                                + "CONSTRAINT FK_MedicalEquipmentSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID),"
-                                + "CONSTRAINT FK_MedicalEquipmentSR_MedicalEquipment FOREIGN KEY (equipmentID) REFERENCES MedicalEquipment (equipmentID),"
-                                + "CONSTRAINT FK_MedicalEquipmentSR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID))");
+                                + "locationID VARCHAR(50) REFERENCES Location(nodeID), "
+                                + "equipmentID VARCHAR(50) REFERENCES MedicalEquipment(equipmentID), "
+                                + "employeeID VARCHAR(50) REFERENCES Employee(employeeID),"
+                                + "PRIMARY KEY (srID))");
 
             }
         } catch (SQLException e) {
@@ -201,7 +198,7 @@ public class MedicalEquipmentSRDBI extends AbstractDatabaseI<MedicalEquipmentSR>
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
-                            "UPDATE MedicalEquipmentSR SET status = ?, destination = ?, medicalEquipment = ?, assignedEmployee = ? WHERE srID = ?");
+                            "UPDATE MedicalEquipmentSR SET status = ?, LOCATIONID = ?, EQUIPMENTID = ?, EMPLOYEEID = ? WHERE srID = ?");
 
             pstmt.setString(1, node.getStatusString());
             pstmt.setString(2, node.getDestination().getNodeID());

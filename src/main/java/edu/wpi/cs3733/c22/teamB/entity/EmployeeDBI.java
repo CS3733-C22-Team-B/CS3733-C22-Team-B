@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDBI extends AbstractDatabaseI<Employee> {
+public class EmployeeDBI implements IDatabase<Employee> {
 
     Connection conn;
 

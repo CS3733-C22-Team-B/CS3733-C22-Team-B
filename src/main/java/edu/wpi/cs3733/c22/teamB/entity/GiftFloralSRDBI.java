@@ -3,7 +3,7 @@ package edu.wpi.cs3733.c22.teamB.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GiftFloralSRDBI extends AbstractDatabaseI<GiftFloralSR> {
+public class GiftFloralSRDBI implements IDatabase<GiftFloralSR> {
     private List<GiftFloralSR> db = new ArrayList<>();
 
     @Override
