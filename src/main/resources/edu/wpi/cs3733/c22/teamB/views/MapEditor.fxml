@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
-      <ImageView fx:id="imageView" fitWidth="799.0" layoutX="33.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+      <ImageView fx:id="imageView" fitWidth="799" layoutX="33.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
             <Image url="@../images/thirdFloorMap.png" />
          </image>
