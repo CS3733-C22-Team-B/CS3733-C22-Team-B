@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.VBox?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -17,12 +18,18 @@
                   <Image url="@../images/thirdFloorMap.png" />
                </image>
             </ImageView>
-            <HBox prefWidth="500">
+            <VBox prefWidth="500">
                <children>
-                  <JFXButton text="Refresh" onAction="#refresh"></JFXButton>
-                  <JFXButton text="Delete" onAction="#delete"></JFXButton>
+                  <Pane prefHeight="20"/>
+                  <JFXButton text="Refresh" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <JFXButton text="Delete" onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <JFXButton text="GoTo Floor L2" onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <JFXButton text="GoTo Floor L1" onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <JFXButton text="GoTo Floor 1" onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <JFXButton text="GoTo Floor 2" onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <JFXButton text="GoTo Floor 3" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </HBox>
    </children>

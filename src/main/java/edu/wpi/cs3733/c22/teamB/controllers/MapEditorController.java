@@ -34,7 +34,7 @@ public class MapEditorController {
     double getImageX(double desiredX){
         //The width of the map in image coordinates
         double mapWidth = imageWidth*(sceneHeight/imageHeight);
-        System.out.println("mapWidth = " + mapWidth);
+        //System.out.println("mapWidth = " + mapWidth);
         //The offset from the side of the scene
         double xOffset = (sceneWidth-mapWidth)/2.0;
         //Return the new coordinate
@@ -68,7 +68,7 @@ public class MapEditorController {
             }
             //Select current point
             testPoint.setFill(Color.RED);
-            System.out.println(testPoint.idProperty().get());
+            //System.out.println(testPoint.idProperty().get());
             selectedPoint = (testPoint.idProperty().get());
             selectedPnt = testPoint;
         });
@@ -100,6 +100,22 @@ public class MapEditorController {
         addPoints("3");
     }
 
+    @FXML public void goToL2(){
+        goTo("L2");
+    }
+    @FXML public void goToL1(){
+        goTo("L1");
+    }
+    @FXML public void goTo1(){
+        goTo("1");
+    }
+    @FXML public void goTo2(){
+        goTo("2");
+    }
+    @FXML public void goTo3(){
+        goTo("3");
+    }
+
     @FXML public void goTo(String floor){
         Image image;
         removeAllPoints();
@@ -120,10 +136,10 @@ public class MapEditorController {
                 image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thirdFloorMap.png");
             break;
         }
+        removeAllPoints();
         addPoints(floor);
-
         imageView.setImage(image);
-        addPoints(floor);
+
     }
 
     @FXML public void delete(){
@@ -137,8 +153,8 @@ public class MapEditorController {
         Bapp.getPrimaryStage().resizableProperty().set(false);
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
-        System.out.println("Scene Width = " + sceneWidth);
-        System.out.println("Scene Height = " + sceneHeight);
+        //System.out.println("Scene Width = " + sceneWidth);
+        //System.out.println("Scene Height = " + sceneHeight);
         imageView.setFitHeight(sceneHeight);
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
