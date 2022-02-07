@@ -3,13 +3,17 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.Location;
 import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MapEditorController {
@@ -22,6 +26,7 @@ public class MapEditorController {
     double imageWidth;
     LocationDBI locationDBI = new LocationDBI();
     List<Location> locationList = locationDBI.getAllNodes();
+    String currentFloor = "3";
 
     @FXML
     private AnchorPane anchorPane;
@@ -75,9 +80,9 @@ public class MapEditorController {
     }
 
     //Add points from DB
-    public void addPoints(String Floor){
+    public void addPoints(){
         for(Location local: locationList){
-            if(local.getFloor().equals(Floor)) {
+            if(local.getFloor().equals(currentFloor)) {
                 String ID = local.getNodeID();
                 double x = local.getXcoord();
                 double y = local.getYcoord();
@@ -90,60 +95,64 @@ public class MapEditorController {
         anchorPane.getChildren().remove(1,anchorPane.getChildren().size());
     }
 
-    void removePoint(){
+    void deleteSelectedNode(){
         anchorPane.getChildren().remove(selectedPnt);
-        //TODO remove from DB
+        locationDBI.deleteNode(selectedPoint);
     }
 
     @FXML public void refresh(){
         removeAllPoints();
-        addPoints("3");
+        addPoints();
     }
 
     @FXML public void goToL2(){
-        goTo("L2");
+        currentFloor = "L2";
+        goTo();
     }
     @FXML public void goToL1(){
-        goTo("L1");
+        currentFloor = "L1";
+        goTo();
     }
     @FXML public void goTo1(){
-        goTo("1");
+        currentFloor = "1";
+        goTo();
     }
     @FXML public void goTo2(){
-        goTo("2");
+        currentFloor = "2";
+        goTo();
     }
     @FXML public void goTo3(){
-        goTo("3");
+        currentFloor = "3";
+        goTo();
     }
 
-    @FXML public void goTo(String floor){
+    @FXML public void goTo(){
         Image image;
         removeAllPoints();
-        switch (floor) {
+        switch (currentFloor) {
             case "1":
-                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thefirstfloor.png");
+                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
                 break;
             case "2":
-                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thesecondfloor.png");
+                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
                 break;
             case"L2":
-                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thelowerlevel2.png");
+                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
                 break;
             case"L1":
-                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thelowerlevel1.png");
+                    image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
                 break;
             default:
-                image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thirdFloorMap.png");
+                image = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
             break;
         }
         removeAllPoints();
-        addPoints(floor);
+        addPoints();
         imageView.setImage(image);
-
     }
 
     @FXML public void delete(){
-        removePoint();
+        deleteSelectedNode();
     }
 
     @FXML
@@ -163,10 +172,20 @@ public class MapEditorController {
 
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",5000,3400, Color.RED);
-        addPoints("3");
-
+        addPoints();
     }
 
-
+    @FXML
+    void homeButton(ActionEvent event) {
+        // Try to go home
+        try {
+            Bapp.getPrimaryStage().resizableProperty().set(true);
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+            // Print stack trace if unable to go home
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

@@ -21,12 +21,20 @@
             <VBox prefWidth="500">
                <children>
                   <Pane prefHeight="20"/>
+                  <JFXButton text="Home" onAction="#homeButton" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="Refresh" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="Delete" onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="GoTo Floor L2" onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="GoTo Floor L1" onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="GoTo Floor 1" onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="GoTo Floor 2" onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
+                  <Pane prefHeight="20"/>
                   <JFXButton text="GoTo Floor 3" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" textAlignment="CENTER"></JFXButton>
                </children>
             </VBox>
