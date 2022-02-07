@@ -1,7 +1,7 @@
-package edu.wpi.teamB;
+package edu.wpi.cs3733.c22.teamB;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
-import edu.wpi.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;

@@ -4,11 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public abstract class DBConnection  {
+    abstract class DBConnection  {
 
     private static Connection conn;
 
-    private DBConnection() {}
 
     public static Connection getConnection() {
         try {

@@ -4,9 +4,44 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationDBI extends AbstractDatabaseI<Location> {
+public class LocationDBI implements IDatabase<Location> {
 
-    Connection conn = DBConnection.getConnection();
+    private Connection conn;
+
+    public LocationDBI() {
+        this.conn = DBConnection.getConnection();
+    }
+
+//    Connection conn = DBConnection.getConnection();
+
+    public void createTable() {
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rset = dbmd.getTables(null, null, "Location", null);
+
+            if (rset.next() && rset.getString(3).equals("Location")){
+                // table exists
+
+            } else {
+                // Create table
+                Statement stmt = conn.createStatement();
+                stmt.execute("CREATE TABLE LOCATION ( "
+                        + "nodeID VARCHAR(50) , "
+                        + "xcoord int not null, "
+                        + "ycoord int not null, "
+                        + "floor VARCHAR(2), "
+                        + "building VARCHAR(50), "
+                        + "nodeType VARCHAR(50), "
+                        + "longName VARCHAR(50), "
+                        + "shortName VARCHAR(50),"
+                        + "PRIMARY KEY (nodeID))");
+            }
+        } catch (SQLException e) {
+            System.out.println("Create Location Table: Failed!");
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void restore(List<Location> list) {
@@ -21,14 +56,15 @@ public class LocationDBI extends AbstractDatabaseI<Location> {
             Statement stmt = conn.createStatement();
             stmt.execute(
                     "create table Location( "
-                            + "nodeID VARCHAR(50) CONSTRAINT Primary Key, "
+                            + "nodeID VARCHAR(50), "
                             + "xcoord int not null, "
                             + "ycoord int not null, "
                             + "floor VARCHAR(2), "
                             + "building VARCHAR(50), "
                             + "nodeType VARCHAR(50), "
                             + "longName VARCHAR(50), "
-                            + "shortName VARCHAR(50) )");
+                            + "shortName VARCHAR(50)," +
+                            "PRIMARY KEY (nodeID));");
 
             // For each iteration of location in the list of location
             for (Location location : list) {

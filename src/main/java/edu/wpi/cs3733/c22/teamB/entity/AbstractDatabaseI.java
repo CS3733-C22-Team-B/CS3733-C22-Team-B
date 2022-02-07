@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.sql.*;
+
 abstract class AbstractDatabaseI<T> implements IDatabase<T> {
 //
 //    public Connection connection;

@@ -1,4 +1,4 @@
-package edu.wpi.teamB;
+package edu.wpi.cs3733.c22.teamB;
 
 import static org.junit.jupiter.api.Assertions.*;
 

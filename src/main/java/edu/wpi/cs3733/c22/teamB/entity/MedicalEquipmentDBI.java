@@ -6,7 +6,43 @@ import java.util.List;
 
 public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
 
-    Connection conn = DBConnection.getConnection();
+    Connection conn;
+
+    public MedicalEquipmentDBI() {
+        this.conn = DBConnection.getConnection();
+    }
+
+    public void createTable() {
+
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rset = dbmd.getTables(null, null, "MedicalEquipment", null);
+
+            if (rset.next() && rset.getString(3).equals("MedicalEquipment")) {
+                // table exists
+            } else {
+                // Create table
+                Statement stmt = conn.createStatement();
+                stmt.execute("CREATE TABLE MedicalEquipment( "
+                        + "equipmentID VARCHAR(50), "
+                        + "equipmentName VARCHAR(255), "
+                        + "equipmentType VARCHAR(255), "
+                        + "manufacturer VARCHAR(255), "
+                        + "locationID VARCHAR(50) REFERENCES Location(nodeID), "
+                        + "status VARCHAR(255), "
+                        + "color VARCHAR(255), "
+                        + "size VARCHAR(255), "
+                        + "description VARCHAR(255),"
+                        + "PRIMARY KEY (equipmentID))");
+            }
+        } catch (SQLException e) {
+            System.out.println("Create MedicalEquipment Table: Failed!");
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     @Override
     public void restore(List<MedicalEquipment> list) {
@@ -23,7 +59,7 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
 
             stmt.execute(
                     "create table MedicalEquipment( "
-                            + "equipmentID VARCHAR(50) Primary Key, "
+                            + "equipmentID VARCHAR(50), "
                             + "equipmentName VARCHAR(255), "
                             + "equipmentType VARCHAR(255), "
                             + "manufacturer VARCHAR(255), "
@@ -31,7 +67,8 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
                             + "status VARCHAR(255), "
                             + "color VARCHAR(255), "
                             + "size VARCHAR(255), "
-                            + "description VARCHAR(255))");
+                            + "description VARCHAR(255)," +
+                            "PRIMARY KEY (equipmentID));");
 
             // For each iteration of location in the list of location
             for (MedicalEquipment medEquipment : list) {

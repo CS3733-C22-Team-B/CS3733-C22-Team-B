@@ -62,15 +62,15 @@ jar {
 }
 
 def codeCoverageExcludes = [
-        'edu.wpi.teamB.Main',
-        'edu.wpi.teamB.controllers.MedicineDeliveryService',
-        'edu.wpi.teamB.Bapp',
-        'edu.wpi.teamB.controllers.HomeController',
-        'edu.wpi.teamB.controllers.MedicalEquipmentDeliveryServiceController',
-        'edu.wpi.teamB.controllers.FoodDeliveryService',
-        'edu.wpi.teamB.controllers.ExternalTransportController',
-        'edu.wpi.teamB.controllers.GiftFloralServiceController',
-        'edu.wpi.teamB.controllers.LaundryController'
+        'edu.wpi.cs3733.c22.teamB.Main',
+        'edu.wpi.cs3733.c22.teamB.controllers.MedicineDeliveryService',
+        'edu.wpi.cs3733.c22.teamB.Bapp',
+        'edu.wpi.cs3733.c22.teamB.controllers.HomeController',
+        'edu.wpi.cs3733.c22.teamB.controllers.MedicalEquipmentDeliveryServiceController',
+        'edu.wpi.cs3733.c22.teamB.controllers.FoodDeliveryService',
+        'edu.wpi.cs3733.c22.teamB.controllers.ExternalTransportController',
+        'edu.wpi.cs3733.c22.teamB.controllers.GiftFloralServiceController',
+        'edu.wpi.cs3733.c22.teamB.controllers.LaundryController'
 ]
 
 jacoco {

@@ -6,7 +6,41 @@ import java.util.List;
 
 public class MedicalEquipmentSRDBI extends AbstractDatabaseI<MedicalEquipmentSR> {
 
-    Connection conn = DBConnection.getConnection();
+    private Connection conn;
+
+    public MedicalEquipmentSRDBI() {
+        this.conn = DBConnection.getConnection();
+    }
+
+    public void createTable() {
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rset = dbmd.getTables(null, null, "MedicalEquipmentSR", null);
+
+            if (rset.next() && rset.getString(3).equals("MedicalEquipmentSR")){
+                // table exists
+            } else {
+                // Create table
+                Statement stmt = conn.createStatement();
+                stmt.execute(
+                        "create table MedicalEquipmentSR( "
+                                + "srID VARCHAR(50), "
+                                + "status VARCHAR(50), "
+                                + "locationID VARCHAR(50), "
+                                + "equipmentID VARCHAR(50), "
+                                + "employeeID VARCHAR(50), "
+                                + "PRIMARY KEY (srID), "
+                                + "CONSTRAINT FK_MedicalEquipmentSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID),"
+                                + "CONSTRAINT FK_MedicalEquipmentSR_MedicalEquipment FOREIGN KEY (equipmentID) REFERENCES MedicalEquipment (equipmentID),"
+                                + "CONSTRAINT FK_MedicalEquipmentSR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID))");
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Create MedicalEquipmentSR Table: Failed!");
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void restore(List<MedicalEquipmentSR> list) {
         try {

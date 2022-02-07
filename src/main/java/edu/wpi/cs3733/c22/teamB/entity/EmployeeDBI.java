@@ -6,11 +6,40 @@ import java.util.List;
 
 public class EmployeeDBI extends AbstractDatabaseI<Employee> {
 
-    Connection conn = DBConnection.getConnection();
+    Connection conn;
+
+    public EmployeeDBI() {
+        this.conn = DBConnection.getConnection();
+    }
+    public void createTable() {
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rset = dbmd.getTables(null, null, "Employee", null);
+
+            if (rset.next() && rset.getString(3).equals("Employee")){
+                // table exists
+            } else {
+                Statement stmt = conn.createStatement();
+                stmt.execute(
+                        "create table Employee( "
+                                + "employeeID VARCHAR(50), "
+                                + "name VARCHAR(50), "
+                                + "position VARCHAR(50), "
+                                + "address VARCHAR(50), "
+                                + "email VARCHAR(50), "
+                                + "phoneNumber VARCHAR(50)," +
+                                " PRIMARY KEY (employeeID))");
+            }
+        } catch (SQLException e) {
+            System.out.println("Create Employee Table: Failed!");
+            e.printStackTrace();
+        }
+            }
+
 
     @Override
     public void restore(List<Employee> list) {
-        //
+//
 //        try {
 //            Statement stmt = conn.createStatement();
 //            stmt.execute("drop table Employee");
@@ -22,12 +51,13 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
             Statement stmt = conn.createStatement();
             stmt.execute(
                     "create table Employee( "
-                            + "employeeID VARCHAR(50) Primary Key, "
+                            + "employeeID VARCHAR(50), "
                             + "name VARCHAR(50), "
                             + "position VARCHAR(50), "
                             + "address VARCHAR(50), "
                             + "email VARCHAR(50), "
-                            + "phoneNumber VARCHAR(50))");
+                            + "phoneNumber VARCHAR(50)," +
+                            " PRIMARY KEY (employeeID))");
 
             // For each iteration of location in the list of location
             for (Employee employee : list) {
