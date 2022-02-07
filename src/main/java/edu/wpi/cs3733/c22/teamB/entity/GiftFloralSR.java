@@ -5,23 +5,33 @@ import java.util.List;
 
 public class GiftFloralSR extends AbstractSR {
 
-    List<GiftType> _listOfGifts;
-    LocalDate _deliveryDate;
-    String _deliveryFloor;
-    String _deliveryRoom;
+    List<GiftType> listOfGifts;
+    String deliveryDate;
+    String deliveryFloor;
+    String deliveryRoom;
+
+//    public GiftFloralSR(){}
 
     public GiftFloralSR(
             String srID,
             String statusStr,
             List<GiftType> listOfGifts,
-            LocalDate deliveryDate,
+            String deliveryDate,
             String deliveryFloor,
             String deliveryRoom) {
 
         super(srID, statusStr);
-        _listOfGifts = listOfGifts;
-        _deliveryDate = deliveryDate;
-        _deliveryFloor = deliveryFloor;
-        _deliveryRoom = deliveryRoom;
+        this.listOfGifts = listOfGifts;
+        this.deliveryDate = deliveryDate;
+        this.deliveryFloor = deliveryFloor;
+        this.deliveryRoom = deliveryRoom;
+    }
+
+    public GiftFloralSR(String srID, String statusStr) {
+        super(srID, statusStr);
+    }
+
+    public List<GiftType> getListOfGifts() {
+        return listOfGifts;
     }
 }

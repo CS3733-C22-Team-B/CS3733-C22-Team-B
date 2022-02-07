@@ -94,7 +94,7 @@ public class GiftFloralServiceController implements IController {
                         "id23",
                         "WAITING",
                         listOfGifts,
-                        dateID.getValue(),
+                        "01012020",
                         floorID.getValue(),
                         roomID.getValue()));
     }

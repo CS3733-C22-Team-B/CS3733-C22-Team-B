@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import java.util.Locale;
+
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,9 +41,16 @@ public class Bapp extends Application {
         LocationParserI locParser = new LocationParserI();
         CSVReader2 reader = new CSVReader2();
 
+        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+        giftFloralSRDBI.createTable();
+
+        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
+        foodDeliverySRDBI.createTable();
+
         List<String> stringList = reader.firstRestore("TowerLocationsB.csv");
         locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
