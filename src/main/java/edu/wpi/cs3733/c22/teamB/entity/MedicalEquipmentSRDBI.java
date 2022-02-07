@@ -246,14 +246,14 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
         try {
             // search for NodeID
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+                    conn.prepareStatement("SELECT * FROM MedicalEquipmentSR WHERE SRID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
             ans = rs.next(); // if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Search for MedicalEquipmentSR Failed!");
+            System.out.println("Search for MedicalEquipmentSR ID Failed!");
             e.printStackTrace();
         }
         return ans;

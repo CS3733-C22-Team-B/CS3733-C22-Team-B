@@ -15,20 +15,20 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "MEDICINEDELIVERY", null);
+            ResultSet rset = dbmd.getTables(null, null, "MEDICINEDELIVERYSR", null);
 
-            if (rset.next() && rset.getString(3).equals("MEDICINEDELIVERY")) {
+            if (rset.next() && rset.getString(3).equals("MEDICINEDELIVERYSR")) {
                 // table exists
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
                 stmt.execute(
-                        "create table MEDICINEDELIVERY( "
+                        "CREATE TABLE MedicineDeliverySR( "
                                 + "srID VARCHAR(50), "
                                 + "status VARCHAR(50), "
-                                + "locationID VARCHAR(50) REFERENCES Location(nodeID), "
+                                + "locationID VARCHAR(50), "
                                 + "medicineID VARCHAR(50),"
-                                + "employeeID VARCHAR(50) REFERENCES Employee(employeeID),"
+                                + "employeeID VARCHAR(50),"
                                 + "patientFirstName VARCHAR(50),"
                                 + "patientLastName VARCHAR(50),"
                                 + "patientID VARCHAR(50),"
@@ -41,11 +41,13 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                                 + "frequency VARCHAR(50),"
                                 + "form VARCHAR(50),"
                                 + "mgPerDose VARCHAR(50),"
-                                + " PRIMARY KEY (srID))");
+                                + " PRIMARY KEY (srID)," +
+                                "CONSTRAINT FK_MedicineDelivery_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
+                                "CONSTRAINT FK_MedicineDelivery_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
 
             }
         } catch (SQLException e) {
-            System.out.println("Create MEDICINEDELIVERY Table: Failed!");
+            System.out.println("Create MedicineDeliverySR Table: Failed!");
             e.printStackTrace();
         }
     }
@@ -55,7 +57,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
         List<MedicineDeliverySR> medicineDeliverySRList = new ArrayList<>();
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MEDICINEDELIVERY");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MedicineDeliverySR");
             ResultSet rset = pstmt.executeQuery();
 
             String srID;
@@ -129,7 +131,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                                 mgPerDose));
             }
         } catch (SQLException e) {
-            System.out.println("Get all nodes: SQL Failed!");
+            System.out.println("Get all MedicineDeliverySR: SQL Failed!");
             e.printStackTrace();
         }
         return medicineDeliverySRList;
@@ -141,7 +143,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
 
         try {
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM MEDICINEDELIVERY WHERE srID = ?");
+                    conn.prepareStatement("SELECT * FROM MedicineDeliverySR WHERE srID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rset = pstmt.executeQuery();
 
@@ -175,7 +177,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             medicineDeliverySR =  new MedicineDeliverySR(nodeID, status,location,medicine,employee,patientFirstName,patientLastName,patientID,DOB,email,room,dosage,medicineName,dispenseAmount,frequency,form,mgPerDose);
 
         } catch (SQLException e) {
-            System.out.println("Get Node Failed");
+            System.out.println("Get MedicineDeliverySR ID Failed");
             e.printStackTrace();
         }
         return medicineDeliverySR;
@@ -184,7 +186,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
     public void deleteNode(String nodeID) {
         try {
             PreparedStatement pstmt =
-                    conn.prepareStatement("DELETE FROM MEDICINEDELIVERY WHERE srID = ?");
+                    conn.prepareStatement("DELETE FROM MedicineDeliverySR WHERE srID = ?");
             pstmt.setString(1, nodeID);
 
                 pstmt.executeUpdate();
@@ -193,7 +195,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Delete From Medical Equipment Table Using Equipment ID: Failed!");
+            System.out.println("Delete From MedicineDeliverySR SR ID: Failed!");
             e.printStackTrace();
         }
     }
@@ -204,7 +206,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
-                            "UPDATE MEDICINEDELIVERY SET status = ?, locationID = ?, medicineID = ?, employeeID = ?, patientFirstName = ?, patientLastName = ?, patientID = ?, DOB = ?, email = ?, room = ?, dosage = ?, medicineName = ?, dispenseAmount = ?, frequency = ?, form = ?, mgPerDose = ? WHERE srID = ? ");
+                            "UPDATE MedicineDeliverySR SET status = ?, locationID = ?, medicineID = ?, employeeID = ?, patientFirstName = ?, patientLastName = ?, patientID = ?, DOB = ?, email = ?, room = ?, dosage = ?, medicineName = ?, dispenseAmount = ?, frequency = ?, form = ?, mgPerDose = ? WHERE srID = ? ");
 
             pstmt.setString(1, node.getStatusString());
             pstmt.setString(2,node.getDestination().getNodeID());
@@ -229,7 +231,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Update Node ID: Failed!");
+            System.out.println("Update MedicineDeliverySR SR ID: Failed!");
             e.printStackTrace();
             return;
         }
@@ -240,7 +242,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
-                            "INSERT INTO MEDICINEDELIVERY(srID,status,LOCATIONID ,medicineID ,employeeID ,patientFirstName,patientLastName,patientID,DOB, email,room, dosage,medicineName,dispenseAmount,frequency,form,mgPerDose) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            "INSERT INTO MedicineDeliverySR(srID,status, locationID ,medicineID ,employeeID ,patientFirstName,patientLastName,patientID,DOB, email,room, dosage,medicineName,dispenseAmount,frequency,form,mgPerDose) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, node.getStatusString());
             pstmt.setString(2,node.getDestination().getNodeID());
             pstmt.setString(3, node.getMedicine().getMedicationID());
@@ -264,10 +266,70 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Insert Into Medicine Delivery Table: Failed!");
+            System.out.println("Insert Into MedicineDeliverySR Table: Failed!");
             e.printStackTrace();
         }
     }
 
-    public void restore(List list) {}
+    public void restore(List<MedicineDeliverySR> list) {
+
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE MEDICINEDELIVERYSR");
+        } catch (SQLException e) {
+            System.out.println("Drop Medicine Delivery SR Table: Failed!");
+        }
+
+        try {
+            createTable();
+            for (MedicineDeliverySR medicineDeliverySR : list) {
+
+                // Get all the parameter information
+                String srID = medicineDeliverySR.getSrID();
+                String status = medicineDeliverySR.getStatusString();
+                Location destination = medicineDeliverySR.getDestination();
+                Medicine medicine = medicineDeliverySR.getMedicine();
+                Employee employee = medicineDeliverySR.getAssignedEmployee();
+                String patientFirstName = medicineDeliverySR.getPatientFirstName();
+                String patientLastName = medicineDeliverySR.getPatientLastName();
+                String patientID = medicineDeliverySR.getPatientID();
+                String DOB = medicineDeliverySR.getDOB();
+                String email = medicineDeliverySR.getEmail();
+                String room = medicineDeliverySR.getRoom();
+                String dosage = medicineDeliverySR.getDosage();
+                String medicineName = medicineDeliverySR.getMedicineName();
+                String dispenseAmount = medicineDeliverySR.getDispenseAmount();
+                String frequency = medicineDeliverySR.getFrequency();
+                String form = medicineDeliverySR.getForm();
+                String mgPerDose = medicineDeliverySR.getMgPerDose();
+
+                PreparedStatement pstmt =
+                        conn.prepareStatement(
+                                "INSERT INTO MedicineDeliverySR (srID, status, locationID, medicineID, employeeID, patientFirstName, patientLastName, patientID, DOB, email, room, dosage, medicineName, dispenseAmount, frequency, form, mgPerDose) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                pstmt.setString(1, srID);
+                pstmt.setString(2, status);
+                pstmt.setString(3, destination.getNodeID());
+                pstmt.setString(4, medicine.getMedicationID());
+                pstmt.setString(5, employee.getEmployeeID());
+                pstmt.setString(6, patientFirstName);
+                pstmt.setString(7, patientLastName);
+                pstmt.setString(8, patientID);
+                pstmt.setString(9, DOB);
+                pstmt.setString(10, email);
+                pstmt.setString(11, room);
+                pstmt.setString(12, dosage);
+                pstmt.setString(13, medicineName);
+                pstmt.setString(14, dispenseAmount);
+                pstmt.setString(15, frequency);
+                pstmt.setString(16, form);
+                pstmt.setString(17, mgPerDose);
+
+                pstmt.executeUpdate();
+                pstmt.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Restore MedicineDeliverySR Table: Failed!");
+            e.printStackTrace();
+        }
+    }
 }

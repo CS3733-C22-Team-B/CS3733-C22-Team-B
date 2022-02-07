@@ -153,7 +153,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
                                 description));
             }
         } catch (SQLException e) {
-            System.out.println("Get all nodes: SQL Failed!");
+            System.out.println("Get All MedicalEquipment Nodes: SQL Failed!");
             e.printStackTrace();
         }
         return medEquipments;
@@ -195,7 +195,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
                             description);
 
         } catch (SQLException e) {
-            System.out.println("Get Node Failed");
+            System.out.println("Get MedicalEquipment Node Failed");
             e.printStackTrace();
         }
         return medEquipment;
@@ -241,7 +241,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Update Node ID: Failed!");
+            System.out.println("Update MedicalEquipment ID: Failed!");
             e.printStackTrace();
             return;
         }
@@ -280,14 +280,14 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
         try {
             //search for NodeID
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+                    conn.prepareStatement("SELECT * FROM MedicalEquipment WHERE EQUIPMENTID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
             ans = rs.next();    //if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Search for NodeID Failed!");
+            System.out.println("Search for MedicalEquipment ID Failed!");
             e.printStackTrace();
         }
         return ans;

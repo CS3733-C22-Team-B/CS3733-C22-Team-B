@@ -26,14 +26,14 @@ public class GiftFloralSRDBI implements IDatabase<GiftFloralSR> {
                 stmt.execute("CREATE TABLE GiftFloralSR ( "
                         + "srID VARCHAR(50) , "
                         + "statusStr VARCHAR(50), "
-                        + "listOfGifts VARCHAR(50), "
+                        + "giftName VARCHAR(50), "
                         + "deliveryDate VARCHAR(50), "
                         + "deliveryFloor VARCHAR(50), "
                         + "deliveryRoom VARCHAR(50), "
                         + "PRIMARY KEY (srID))");
             }
         } catch (SQLException e) {
-            System.out.println("Create Location Table: Failed!");
+            System.out.println("Create GiftFloralSR Table: Failed!");
             e.printStackTrace();
         }
     }

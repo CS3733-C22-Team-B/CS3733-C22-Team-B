@@ -116,7 +116,7 @@ public class EmployeeDBI implements IDatabase<Employee> {
                 EmployeeList.add(new Employee(employeeID, name, position, address, email, phoneNumber));
             }
         } catch (SQLException e) {
-            System.out.println("Get all nodes: SQL Failed!");
+            System.out.println("Get All Employee Nodes: SQL Failed!");
             e.printStackTrace();
         }
         return EmployeeList;
@@ -161,7 +161,7 @@ public class EmployeeDBI implements IDatabase<Employee> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Delete From Medical Equipment Table Using Equipment ID: Failed!");
+            System.out.println("Delete From Employee Table Using Equipment ID: Failed!");
             e.printStackTrace();
         }
     }
@@ -187,7 +187,7 @@ public class EmployeeDBI implements IDatabase<Employee> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Update Node ID: Failed!");
+            System.out.println("Update Employee ID: Failed!");
             e.printStackTrace();
             return;
         }
@@ -212,7 +212,7 @@ public class EmployeeDBI implements IDatabase<Employee> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Insert Into Table Using Node ID: Failed!");
+            System.out.println("Insert Into Employee Table Using Employee ID: Failed!");
             e.printStackTrace();
         }
     }
@@ -222,14 +222,14 @@ public class EmployeeDBI implements IDatabase<Employee> {
         try {
             //search for NodeID
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+                    conn.prepareStatement("SELECT * FROM Employee WHERE EMPLOYEEID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
             ans = rs.next();    //if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Search for NodeID Failed!");
+            System.out.println("Search for Employee ID Failed!");
             e.printStackTrace();
         }
         return ans;
