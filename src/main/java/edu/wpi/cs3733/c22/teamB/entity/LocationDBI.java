@@ -17,9 +17,9 @@ public class LocationDBI implements IDatabase<Location> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "Location", null);
+            ResultSet rset = dbmd.getTables(null, null, "LOCATION", null);
 
-            if (rset.next() && rset.getString(3).equals("Location")){
+            if (rset.next() && rset.getString(3).equals("LOCATION")){
                 // table exists
             } else {
                 // Create table

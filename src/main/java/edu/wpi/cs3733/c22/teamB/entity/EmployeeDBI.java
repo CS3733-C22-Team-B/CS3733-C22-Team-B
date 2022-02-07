@@ -14,9 +14,9 @@ public class EmployeeDBI implements IDatabase<Employee> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "Employee", null);
+            ResultSet rset = dbmd.getTables(null, null, "EMPLOYEE", null);
 
-            if (rset.next() && rset.getString(3).equals("Employee")){
+            if (rset.next() && rset.getString(3).equals("EMPLOYEE")){
                 // table exists
             } else {
                 Statement stmt = conn.createStatement();
