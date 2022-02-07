@@ -211,15 +211,28 @@ public class MapEditorController {
     @FXML
     void imageClicked(MouseEvent event) {
         if(addState){
-            addState = false;
-            String newID = "TEST";
+            //Set up ID, coordinates, etc
+            int nextID = 0;
+            //Generate next unique ID
+            while(locationDBI.isInTable(String.valueOf(nextID))){
+                nextID++;
+            }
+            //Get coordinates in the space of the original map
             double xCord = getMapX(event.getSceneX());
             double yCord = getMapY(event.getSceneY());
-            addPoint(newID,xCord,yCord,Color.GREEN);
-            Location newLoc = new Location(newID,(int)xCord,(int)yCord,currentFloor,"Tower","TODO","TODO","TODO");
+            //Adds point to the map
+            addPoint(String.valueOf(nextID),xCord,yCord,Color.GREEN);
+            //Create new location
+            Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Tower","TODO","TODO","TODO");
+            //Add new location to the database
             locationDBI.insertNode(newLoc);
+            //Make sure the locationList has this update
+            locationList = locationDBI.getAllNodes();
+            //Set button back to add mode
             addButton.setOpacity(1);
             addButton.setText("Add");
+            //No longer adding a node
+            addState = false;
         }
     }
 
