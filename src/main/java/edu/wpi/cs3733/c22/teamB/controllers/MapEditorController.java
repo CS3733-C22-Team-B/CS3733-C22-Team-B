@@ -13,6 +13,7 @@ import java.util.List;
 
 public class MapEditorController {
 
+    String SelectedPoint;
 
     @FXML
     private AnchorPane anchorPane;
@@ -35,20 +36,36 @@ public class MapEditorController {
 
     }
 
+//   button(){
+//        delete selectedbutton
+//   }
+//
+//   otherbutton(){
+//        modify selectedbutton
+//   }
 
-    public void addPoint(double x, double y, Color color){
+    public void addPoint(String ID, double x, double y, Color color){
         Circle testPoint = new Circle(getImageX(x),getImageY(y),3);
         anchorPane.getChildren().add(testPoint);
         testPoint.setFill(color);
+        testPoint.idProperty().set(ID);
+        testPoint.setOnMouseClicked(event -> {
+            System.out.println(testPoint.idProperty().get());
+            SelectedPoint = (testPoint.idProperty().get());
+        });
     }
+
 
     public void addPoints(){
         LocationDBI locationDBI = new LocationDBI();
         List<Location> locationList = locationDBI.getAllNodes();
         for(Location local: locationList){
-            double x = local.getXcoord();
-            double y = local.getYcoord();
-            addPoint(x,y,Color.BLACK);
+            if(local.getFloor().equals("3")) {
+                String ID = local.getNodeID();
+                double x = local.getXcoord();
+                double y = local.getYcoord();
+                addPoint(ID, x, y, Color.BLACK);
+            }
         }
     }
 
@@ -59,8 +76,8 @@ public class MapEditorController {
     public void initialize(){
         //Bapp.getPrimaryStage().setFullScreen(false);
         System.out.println(imageView.fitHeightProperty().get());
-        addPoint(0,0,Color.ORANGE);
-        addPoint(5000,3400, Color.RED);
+        addPoint("1",0,0,Color.ORANGE);
+        addPoint("2",5000,3400, Color.RED);
         addPoints();
 
     }
