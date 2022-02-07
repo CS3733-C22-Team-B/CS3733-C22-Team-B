@@ -133,6 +133,8 @@ public class MapEditorController {
         addPoints();
     }
 
+    //TODO Backup Button (go to csv)
+
     @FXML public void goToL2(){
         currentFloor = "L2";
         goTo();
@@ -157,7 +159,7 @@ public class MapEditorController {
     @FXML public void goTo(){
         Image image;
         switch (currentFloor) {
-            case "1":
+            case "1":   //TODO Probably needs to be changed to work with jar file vvv
                     image = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
                 break;
             case "2":
