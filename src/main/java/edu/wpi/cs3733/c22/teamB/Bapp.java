@@ -3,10 +3,7 @@ package edu.wpi.cs3733.c22.teamB;
 import java.io.IOException;
 import java.util.Locale;
 
-import edu.wpi.cs3733.c22.teamB.entity.EmployeeDBI;
-import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
-import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipmentDBI;
-import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipmentSRDBI;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,17 +23,20 @@ public class Bapp extends Application {
     public void init() {
         log.info("Starting Up");
 
-        LocationDBI locationDBI = new LocationDBI();
-        locationDBI.createTable();
+//        LocationDBI locationDBI = new LocationDBI();
+//        locationDBI.createTable();
+//
+//        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
+//        medicalEquipmentDBI.createTable();
+//
+//        EmployeeDBI employeeDBI = new EmployeeDBI();
+//        employeeDBI.createTable();
+//
+//        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
+//        medicalEquipmentSRDBI.createTable();
 
-        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-        medicalEquipmentDBI.createTable();
-
-        EmployeeDBI employeeDBI = new EmployeeDBI();
-        employeeDBI.createTable();
-
-        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
-        medicalEquipmentSRDBI.createTable();
+        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+        giftFloralSRDBI.createTable();
     }
 
     @Override
