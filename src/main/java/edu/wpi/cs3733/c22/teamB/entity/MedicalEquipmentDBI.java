@@ -16,9 +16,9 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
 
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "MedicalEquipment", null);
+            ResultSet rset = dbmd.getTables(null, null, "MEDICALEQUIPMENT", null);
 
-            if (rset.next() && rset.getString(3).equals("MedicalEquipment")) {
+            if (rset.next() && rset.getString(3).equals("MEDICALEQUIPMENT")) {
                 // table exists
             } else {
                 // Create table

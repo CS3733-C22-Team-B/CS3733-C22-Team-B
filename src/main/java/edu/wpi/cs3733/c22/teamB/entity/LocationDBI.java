@@ -17,11 +17,10 @@ public class LocationDBI implements IDatabase<Location> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "Location", null);
+            ResultSet rset = dbmd.getTables(null, null, "LOCATION", null);
 
-            if (rset.next() && rset.getString(3).equals("Location")){
+            if (rset.next() && rset.getString(3).equals("LOCATION")){
                 // table exists
-
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
@@ -64,7 +63,7 @@ public class LocationDBI implements IDatabase<Location> {
                             + "nodeType VARCHAR(50), "
                             + "longName VARCHAR(50), "
                             + "shortName VARCHAR(50)," +
-                            "PRIMARY KEY (nodeID));");
+                            "PRIMARY KEY (nodeID))");
 
             // For each iteration of location in the list of location
             for (Location location : list) {

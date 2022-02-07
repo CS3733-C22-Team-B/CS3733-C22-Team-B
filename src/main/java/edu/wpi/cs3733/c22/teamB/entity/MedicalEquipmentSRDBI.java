@@ -15,9 +15,9 @@ public class MedicalEquipmentSRDBI extends AbstractDatabaseI<MedicalEquipmentSR>
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "MedicalEquipmentSR", null);
+            ResultSet rset = dbmd.getTables(null, null, "MEDICALEQUIPMENTSR", null);
 
-            if (rset.next() && rset.getString(3).equals("MedicalEquipmentSR")){
+            if (rset.next() && rset.getString(3).equals("MEDICALEQUIPMENTSR")){
                 // table exists
             } else {
                 // Create table
