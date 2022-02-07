@@ -1,14 +1,14 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXListView;
-import edu.wpi.cs3733.c22.teamB.entity.LaundryDBI;
+import edu.wpi.cs3733.c22.teamB.entity.LaundrySRDBI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class LaundrySRController implements IController {
 
-    private LaundryDBI laundryDBI = new LaundryDBI();
+    private LaundrySRDBI laundryDBI = new LaundrySRDBI();
 
     @FXML private TextField roomNumberTextField;
 

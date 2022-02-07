@@ -4,14 +4,14 @@ import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class LaundryDBI extends AbstractDatabaseI<LaundrySR> {
+public class LaundrySRDBI implements IDatabase<LaundrySR> {
 
     //    final private List<LaundrySR> db;
     private final Map<String, LaundrySR> dbMap;
     // for testing only, not real design
     private int internalID = 1;
 
-    public LaundryDBI() {
+    public LaundrySRDBI() {
         //        this.db = new ArrayList<>();
         this.dbMap = new HashMap<String, LaundrySR>();
     }

@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.util.List;
 
-public class MedicineDeliverySRDBI extends AbstractDatabaseI {
+public class MedicineDeliverySRDBI implements IDatabase {
 
     public List getAllNodes() {
         return null;

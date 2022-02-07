@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
+public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
 
     Connection conn;
 
@@ -28,12 +28,13 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
                         + "equipmentName VARCHAR(255), "
                         + "equipmentType VARCHAR(255), "
                         + "manufacturer VARCHAR(255), "
-                        + "locationID VARCHAR(50) REFERENCES Location(nodeID), "
+                        + "locationID VARCHAR(50), "
                         + "status VARCHAR(255), "
                         + "color VARCHAR(255), "
                         + "size VARCHAR(255), "
                         + "description VARCHAR(255),"
-                        + "PRIMARY KEY (equipmentID))");
+                        + "PRIMARY KEY (equipmentID),"
+                        + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
             System.out.println("Create MedicalEquipment Table: Failed!");
@@ -41,34 +42,33 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
         }
     }
 
-
-
-
     @Override
     public void restore(List<MedicalEquipment> list) {
         try {
             Statement stmt = conn.createStatement();
 
-            stmt.execute("drop table MedicalEquipment");
+            stmt.execute("DROP TABLE MedicalEquipment");
         } catch (SQLException e) {
             System.out.println("Drop Medical Equipment Table: Failed!");
         }
 
         try {
-            Statement stmt = conn.createStatement();
-
-            stmt.execute(
-                    "create table MedicalEquipment( "
-                            + "equipmentID VARCHAR(50), "
-                            + "equipmentName VARCHAR(255), "
-                            + "equipmentType VARCHAR(255), "
-                            + "manufacturer VARCHAR(255), "
-                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
-                            + "status VARCHAR(255), "
-                            + "color VARCHAR(255), "
-                            + "size VARCHAR(255), "
-                            + "description VARCHAR(255)," +
-                            "PRIMARY KEY (equipmentID));");
+            createTable();
+//            Statement stmt = conn.createStatement();
+//
+//            stmt.execute(
+//                    "create table MedicalEquipment( "
+//                            + "equipmentID VARCHAR(50), "
+//                            + "equipmentName VARCHAR(255), "
+//                            + "equipmentType VARCHAR(255), "
+//                            + "manufacturer VARCHAR(255), "
+//                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
+//                            + "status VARCHAR(255), "
+//                            + "color VARCHAR(255), "
+//                            + "size VARCHAR(255), "
+//                            + "description VARCHAR(255),"
+//                            + "PRIMARY KEY (equipmentID),"
+//                            + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
 
             // For each iteration of location in the list of location
             for (MedicalEquipment medEquipment : list) {

@@ -37,6 +37,7 @@ public class Bapp extends Application {
 
         LocationParserI locParser = new LocationParserI();
         CSVReader2 reader = new CSVReader2();
+
         List<String> stringList = reader.firstRestore("TowerLocationsB.csv");
         locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }

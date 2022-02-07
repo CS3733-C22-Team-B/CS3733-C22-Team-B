@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDBI extends AbstractDatabaseI<Employee> {
+public class EmployeeDBI implements IDatabase<Employee> {
 
     Connection conn;
 
@@ -36,28 +36,27 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
         }
             }
 
-
     @Override
     public void restore(List<Employee> list) {
-//
-//        try {
-//            Statement stmt = conn.createStatement();
-//            stmt.execute("drop table Employee");
-//        } catch (SQLException e) {
-//            System.out.println("Drop Employee Table: Failed!");
-//        }
-
         try {
             Statement stmt = conn.createStatement();
-            stmt.execute(
-                    "create table Employee( "
-                            + "employeeID VARCHAR(50), "
-                            + "name VARCHAR(50), "
-                            + "position VARCHAR(50), "
-                            + "address VARCHAR(50), "
-                            + "email VARCHAR(50), "
-                            + "phoneNumber VARCHAR(50)," +
-                            " PRIMARY KEY (employeeID))");
+            stmt.execute("DROP TABLE Employee");
+        } catch (SQLException e) {
+            System.out.println("Drop Employee Table: Failed!");
+        }
+
+        try {
+            createTable();
+//            Statement stmt = conn.createStatement();
+//            stmt.execute(
+//                    "create table Employee( "
+//                            + "employeeID VARCHAR(50), "
+//                            + "name VARCHAR(50), "
+//                            + "position VARCHAR(50), "
+//                            + "address VARCHAR(50), "
+//                            + "email VARCHAR(50), "
+//                            + "phoneNumber VARCHAR(50)," +
+//                            " PRIMARY KEY (employeeID))");
 
             // For each iteration of location in the list of location
             for (Employee employee : list) {
