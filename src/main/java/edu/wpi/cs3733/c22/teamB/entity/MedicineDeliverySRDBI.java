@@ -42,8 +42,8 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                                 + "form VARCHAR(50),"
                                 + "mgPerDose VARCHAR(50),"
                                 + " PRIMARY KEY (srID)," +
-                                "CONSTRAINT FK_MedicineDelivery_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
-                                "CONSTRAINT FK_MedicineDelivery_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
+                                "CONSTRAINT FK_MedicineDeliverySR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
+                                "CONSTRAINT FK_MedicineDeliverySR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
 
             }
         } catch (SQLException e) {

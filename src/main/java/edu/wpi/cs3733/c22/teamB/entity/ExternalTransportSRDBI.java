@@ -24,7 +24,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
                 // Create table
                 Statement stmt = conn.createStatement();
                 stmt.execute(
-                        "create table EXTERNALTRANSPORTSR( "
+                        "create table ExternalTransportSR( "
                                 + "srID VARCHAR(50), "
                                 + "status VARCHAR(50), "
                                 + "pickupLocation VARCHAR(50),"
@@ -32,12 +32,54 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
                                 + "info VARCHAR(50),"
                                 + "date VARCHAR(50),"
                                 + "formOfTransport VARCHAR(50),"
-                                + "assignedEmployee VARCHAR(50) REFERENCES EMPLOYEE(EMPLOYEEID),"
-                                + " PRIMARY KEY (srID))");
-
+                                + "assignedEmployee VARCHAR(50),"
+                                + " PRIMARY KEY (srID)," +
+                                "CONSTRAINT FK_ExternalTransportSR_Employee FOREIGN KEY (assignedEmployee) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
-            System.out.println("Create EXTERNALTRANSPORTSR Table: Failed!");
+            System.out.println("Create ExternalTransportSR Table: Failed!");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void restore(List<ExternalTransportSR> list) {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE ExternalTransportSR");
+        } catch (SQLException e) {
+            System.out.println("Drop ExternalTransportationSR Table: Failed!");
+        }
+
+        try {
+            createTable();
+
+            // For each iteration of location in the list of location
+            for (ExternalTransportSR externalTransportSR : list) {
+
+                // Get all the parameter information
+                String srID = externalTransportSR.getSrID();
+                String status = externalTransportSR.getStatusString();
+                String pickupLocation = externalTransportSR.getPickupLoc();
+                String destination = externalTransportSR.getDestination();
+                String info = externalTransportSR.getInfo();
+                String date = externalTransportSR.getDate();
+
+                PreparedStatement pstmt =
+                        conn.prepareStatement(
+                                "INSERT INTO ExternalTransportSR(srID, status, pickupLocation, destination, info, date, formOfTransport, assignedEmployee) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                pstmt.setString(1, srID);
+                pstmt.setString(2, status);
+                pstmt.setString(3, pickupLocation);
+                pstmt.setString(4, destination);
+                pstmt.setString(5, info);
+                pstmt.setString(6, date);
+
+                pstmt.executeUpdate();
+                pstmt.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Restore ExternalTransportSR Table: Failed!");
             e.printStackTrace();
         }
     }
@@ -48,7 +90,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
         List<ExternalTransportSR> externalTransportSRList = new ArrayList<>();
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM EXTERNALTRANSPORTSR");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM ExternalTransportSR");
             ResultSet rset = pstmt.executeQuery();
 
             String srID = "";
@@ -76,7 +118,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
                 externalTransportSRList.add(new ExternalTransportSR(srID,status,pickupLocation,destination,info,date,formOfTransport, employee));
             }
         } catch (SQLException e) {
-            System.out.println("Get all nodes: SQL Failed!");
+            System.out.println("Get All ExternalTransportSR Nodes: SQL Failed!");
             e.printStackTrace();
         }
         return externalTransportSRList;
@@ -84,14 +126,14 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
     }
 
     @Override
-    public ExternalTransportSR getNode(String nodeID) {
+    public ExternalTransportSR getNode(String srID) {
 
         ExternalTransportSR externalTransportSR = new ExternalTransportSR();
 
         try {
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM EXTERNALTRANSPORTSR WHERE srID = ?");
-            pstmt.setString(1, nodeID);
+                    conn.prepareStatement("SELECT * FROM ExternalTransportSR WHERE srID = ?");
+            pstmt.setString(1, srID);
             ResultSet rset = pstmt.executeQuery();
 
             rset.next();
@@ -107,10 +149,10 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
             Employee employee = employeeDBI.getNode(employeeID);
 
             externalTransportSR =
-                    new ExternalTransportSR(nodeID, status, pickupLocation, destination, info, date, formOfTransport, employee);
+                    new ExternalTransportSR(srID, status, pickupLocation, destination, info, date, formOfTransport, employee);
 
         } catch (SQLException e) {
-            System.out.println("Get Node Failed");
+            System.out.println("Get ExternalTransportSR Node Failed");
             e.printStackTrace();
         }
         return externalTransportSR;
@@ -118,30 +160,25 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
 
 
     @Override
-    public void deleteNode(String nodeID) {
+    public void deleteNode(String srID) {
 
         try {
             PreparedStatement pstmt =
-                    conn.prepareStatement("DELETE FROM EXTERNALTRANSPORTSR WHERE srID = ?");
-            pstmt.setString(1, nodeID);
-
+                    conn.prepareStatement("DELETE FROM ExternalTransportSR WHERE srID = ?");
+            pstmt.setString(1, srID);
             pstmt.executeUpdate();
-
-
             pstmt.close();
-
         } catch (SQLException e) {
-            System.out.println("Delete From EXTERNALTRANSPORTSR Table Using Equipment ID: Failed!");
+            System.out.println("Delete From ExternalTransportSR Table Using Equipment ID: Failed!");
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void updateNode(ExternalTransportSR node) {
         try {
             PreparedStatement pstmt =
-                    conn.prepareStatement("UPDATE EXTERNALTRANSPORTSR SET status = ?, pickupLocation = ?, destination = ?, info = ?, date = ?, formOfTransport = ? , as = ? WHERE srID = ? ");
+                    conn.prepareStatement("UPDATE ExternalTransportSR SET status = ?, pickupLocation = ?, destination = ?, info = ?, date = ?, formOfTransport = ? , ASSIGNEDEMPLOYEE = ? WHERE srID = ? ");
 
             pstmt.setString(1, node.getStatusString());
             pstmt.setString(2, node.getPickupLoc());
@@ -157,7 +194,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Update Node ID: Failed!");
+            System.out.println("Update ExternalTransportSR ID: Failed!");
             e.printStackTrace();
             return;
         }
@@ -167,7 +204,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
     public void insertNode(ExternalTransportSR node) {
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO EXTERNALTRANSPORTSR (srID, status, pickupLocation, destination, info, date, formOfTransport, employeeID) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO ExternalTransportSR(srID, status, pickupLocation, destination, info, date, formOfTransport, assignedEmployee) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, node.getSrID());
             pstmt.setString(2, node.getStatusString());
             pstmt.setString(3, node.getPickupLoc());
@@ -183,15 +220,8 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Insert Into EXTERNALTRANSPORTSR Table: Failed!");
+            System.out.println("Insert Into ExternalTransportSR Table: Failed!");
             e.printStackTrace();
         }
-    }
-
-
-
-    @Override
-    public void restore(List<ExternalTransportSR> list) {
-
     }
 }
