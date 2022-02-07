@@ -14,6 +14,7 @@ import java.util.List;
 public class MapEditorController {
 
     String selectedPoint;
+    Circle selectedPnt;
     double sceneWidth;
     double sceneHeight;
     double imageHeight;
@@ -67,13 +68,15 @@ public class MapEditorController {
             //Deselect previous point, make black
             for(Location local: locationList){
                     if(local.getNodeID().equals(selectedPoint)){
-                        addPoint(local.getNodeID(),local.getXcoord(),local.getYcoord(),Color.BLACK);
+                        //addPoint(local.getNodeID(),local.getXcoord(),local.getYcoord(),Color.BLACK);
+                        selectedPnt.setFill(Color.BLACK);
                     }
             }
             //Select current point
             testPoint.setFill(Color.RED);
             System.out.println(testPoint.idProperty().get());
             selectedPoint = (testPoint.idProperty().get());
+            selectedPnt = testPoint;
         });
     }
 
@@ -93,9 +96,13 @@ public class MapEditorController {
         anchorPane.getChildren().remove(1,anchorPane.getChildren().size());
     }
 
+    void removePoint(){
+        anchorPane.getChildren().remove(selectedPnt);
+        //TODO remove from DB
+    }
+
     @FXML public void refresh(){
-        removePoints();
-        addPoints();
+        removePoint();
     }
 
     @FXML
