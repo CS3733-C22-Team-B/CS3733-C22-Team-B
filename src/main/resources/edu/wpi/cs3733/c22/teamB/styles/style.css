@@ -3,6 +3,11 @@
     -fx-background-size: cover;
 }
 
+.mapEditor {
+    -fx-background-image: url('../images/thirdFloorMap.png');
+    -fx-background-size: cover;
+}
+
 .anchor:hover {
     -fx-opacity: 95%;
 }
