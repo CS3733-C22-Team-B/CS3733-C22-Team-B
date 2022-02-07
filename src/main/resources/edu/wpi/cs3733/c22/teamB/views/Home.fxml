@@ -15,6 +15,7 @@
             <JFXButton layoutX="616.0" layoutY="80.0" onAction="#shutDown" prefWidth="100.0" ripplerFill="#3b99eb" text="Exit" />
             <JFXButton fx:id="equipmentButton" layoutX="21.0" layoutY="18.0" onAction="#goToEquipmentTable" text="Equipment Manager" />
             <JFXButton fx:id="locationButton" layoutX="226.0" layoutY="18.0" onAction="#goToLocationTable" text="Location Manager" />
+            <JFXButton fx:id="CSVImportButton" layoutX="430.0" layoutY="18.0" onAction="#goToCSVImport" text="CSV Import/Export" />
          </children>
       </Pane>
       <Label layoutX="115.0" layoutY="21.0" text="Mass General Brigham" textFill="WHITE">

@@ -122,6 +122,17 @@ public class HomeController {
     }
 
     @FXML
+    private void goToCSVImport(ActionEvent actionEvent) {
+        try {
+            Parent root =
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/CSV_ImportExport.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     private void shutDown() {
         Platform.exit();
     }
