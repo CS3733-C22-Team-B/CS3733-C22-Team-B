@@ -7,6 +7,7 @@ public class ExternalTransportSR extends AbstractSR {
     private String info;
     private String date; // date type
     private String formOfTransport;
+    private Employee employee;
     //    private Employee assignedEmployee;
     String assignedEmployee;
 
@@ -17,14 +18,15 @@ public class ExternalTransportSR extends AbstractSR {
             String status,
             String info,
             String date,
-            String formOfTransport) {
+            String formOfTransport,
+            Employee employee) {
         super(srID, status);
         this.destination = destination;
         this.pickupLoc = pickupLoc;
         this.info = info;
         this.date = date;
         this.formOfTransport = formOfTransport;
-        this.assignedEmployee = assignedEmployee;
+        this.employee = employee;
     }
 
     public String getSrID() {

@@ -1,9 +1,17 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.EmployeeDBI;
 import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,13 +32,33 @@ public class ExternalTransportController implements IController {
     @FXML DatePicker DateCal;
     @FXML ChoiceBox FormOfTransport;
     @FXML Button HomeB;
+    @FXML ChoiceBox EmployeeAssignment;
+
     boolean isDone;
     String assignedP;
+    private List<Employee> employeeList;
+    private Map<String, Employee> employeeMap;
 
     @FXML
     private void initialize() {
         String st[] = {"Car", "Helicopter", "Ambulance", "Wheelchair", "Plane", "Boat", "Spaceship"};
         FormOfTransport.setItems(FXCollections.observableArrayList(st));
+        EmployeeDBI employeeDBI = new EmployeeDBI();
+//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeList = employeeDBI.getAllNodes();
+        employeeMap =
+                IntStream.range(0, employeeList.size())
+                        .boxed()
+                        .collect(
+                                Collectors.toMap(
+                                        i ->
+                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
+                                        i -> employeeList.get(i)));
+//        employeeDBI.closeConnection();
+
+
+
+        EmployeeAssignment.getItems().addAll(employeeMap.keySet());
     }
 
     @FXML
@@ -47,13 +75,14 @@ public class ExternalTransportController implements IController {
     public void submit() {
         ExternalTransportSR request =
                 new ExternalTransportSR(
-                        "11112",
+                        SenderTxt.getText(),
                         PickupLocTxt.getText(),
                         DestinationTxt.getText(),
                         "WAITING",
                         InfoTxt.getText(),
                         DateCal.getAccessibleText(),
-                        FormOfTransport.getAccessibleText());
+                        FormOfTransport.getAccessibleText(),
+                        employeeMap.get(EmployeeAssignment.getValue()));
         System.out.println(request.toString());
         clear();
     }
@@ -67,5 +96,6 @@ public class ExternalTransportController implements IController {
         DateCal.getEditor().clear();
         FormOfTransport.setAccessibleText("");
         FormOfTransport.valueProperty().set(null);
+        EmployeeAssignment.valueProperty().set(null);
     }
 }
