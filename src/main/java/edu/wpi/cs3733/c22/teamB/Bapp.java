@@ -47,12 +47,14 @@ public class Bapp extends Application {
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         medicineDeliverySRDBI.createTable();
 
+        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
+        externalTransportSRDBI.createTable();
+
         LocationParserI locParser = new LocationParserI();
         CSVReader2 reader = new CSVReader2();
 
 //        List<String> stringList = reader.firstRestore("TowerLocationsB.csv");
 //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
-
     }
 
     @Override
