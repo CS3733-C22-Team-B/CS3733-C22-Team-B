@@ -31,17 +31,17 @@ public class MapEditorController {
     private ImageView imageView;
 
     double getImageX(int desiredX){
-        final int imageWidth = 5000;
-        double x =imageView.fitWidthProperty().get();
-    double addx = imageView.getX();
+        final int imageHeight = 5000;
+        double x = imageView.fitWidthProperty().get();
+        double addx = imageView.getLayoutX();
         System.out.println("x + " + addx);
-        return ((x/imageWidth)*desiredX) + addx;
+        return ((x/imageHeight)*desiredX) + addx;
     }
 
     double getImageY(int desiredY){
         final int imageHeight = 3400;
         double y = imageView.fitHeightProperty().get();
-        double addy = imageView.getY();
+        double addy = imageView.getLayoutY();
         System.out.println("x + " + addy);
         return ((y/imageHeight)*desiredY) + addy;
 
@@ -55,18 +55,10 @@ public class MapEditorController {
 
     @FXML
     public void initialize(){
-        Bapp.getPrimaryStage().setFullScreen(true);
+        //Bapp.getPrimaryStage().setFullScreen(false);
         System.out.println(imageView.fitHeightProperty().get());
-        Circle testPoint4 = new Circle(getImageX(1700),getImageY(912),1);
-        anchorPane.getChildren().add(testPoint0);
-        anchorPane.getChildren().add(testPoint1);
-        anchorPane.getChildren().add(testPoint2);
-        anchorPane.getChildren().add(testPoint3);
+        Circle testPoint4 = new Circle(getImageX(956),getImageY(3036),3);
         anchorPane.getChildren().add(testPoint4);
-        testPoint0.setFill(Color.BLUE);
-        testPoint1.setFill(Color.RED);
-        testPoint2.setFill(Color.GREEN);
-        testPoint3.setFill(Color.BLACK);
         testPoint4.setFill(Color.PURPLE);
     }
 
