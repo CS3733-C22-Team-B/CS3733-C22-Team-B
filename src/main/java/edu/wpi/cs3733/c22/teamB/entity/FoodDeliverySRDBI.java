@@ -15,9 +15,9 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "FoodDeliverySR", null);
+            ResultSet rset = dbmd.getTables(null, null, "FOODDELIVERYSR", null);
 
-            if (rset.next() && rset.getString(3).equals("FoodDeliverySR")){
+            if (rset.next() && rset.getString(3).equals("FOODDELIVERYSR")){
                 // table exists
             } else {
                 // Create table

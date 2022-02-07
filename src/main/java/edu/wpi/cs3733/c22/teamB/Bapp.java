@@ -23,23 +23,23 @@ public class Bapp extends Application {
     public void init() {
         log.info("Starting Up");
 
-//        LocationDBI locationDBI = new LocationDBI();
-//        locationDBI.createTable();
-//
-//        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-//        medicalEquipmentDBI.createTable();
-//
-//        EmployeeDBI employeeDBI = new EmployeeDBI();
-//        employeeDBI.createTable();
-//
-//        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
-//        medicalEquipmentSRDBI.createTable();
+        LocationDBI locationDBI = new LocationDBI();
+        locationDBI.createTable();
 
-//        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
-//        giftFloralSRDBI.createTable();
+        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
+        medicalEquipmentDBI.createTable();
 
-//        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
-//        foodDeliverySRDBI.createTable();
+        EmployeeDBI employeeDBI = new EmployeeDBI();
+        employeeDBI.createTable();
+
+        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
+        medicalEquipmentSRDBI.createTable();
+
+        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+        giftFloralSRDBI.createTable();
+
+        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
+        foodDeliverySRDBI.createTable();
     }
 
 

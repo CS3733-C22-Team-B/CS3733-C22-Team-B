@@ -16,9 +16,9 @@ public class GiftFloralSRDBI implements IDatabase<GiftFloralSR> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "Location", null);
+            ResultSet rset = dbmd.getTables(null, null, "GIFTFLORALSR", null);
 
-            if (rset.next() && rset.getString(3).equals("GiftFloralSR")){
+            if (rset.next() && rset.getString(3).equals("GIFTFLORALSR")){
                 // table exists
             } else {
                 // Create table
