@@ -3,13 +3,27 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
-      <ImageView fx:id="imageView" fitWidth="799" layoutX="33.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" smooth="false">
-         <image>
-            <Image url="@../images/thirdFloorMap.png" />
-         </image>
-      </ImageView>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefWidth="500" />
+            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../images/thirdFloorMap.png" />
+               </image>
+            </ImageView>
+            <HBox prefWidth="500">
+               <children>
+                  <JFXButton text="Refresh" onAction="#refresh"></JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </children>
+
 </AnchorPane>
