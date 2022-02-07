@@ -35,9 +35,13 @@ public class Bapp extends Application {
 //        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
 //        medicalEquipmentSRDBI.createTable();
 
-        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
-        giftFloralSRDBI.createTable();
+//        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+//        giftFloralSRDBI.createTable();
+
+//        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
+//        foodDeliverySRDBI.createTable();
     }
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
