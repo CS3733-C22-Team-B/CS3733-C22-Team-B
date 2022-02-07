@@ -20,6 +20,7 @@
             <HBox prefWidth="500">
                <children>
                   <JFXButton text="Refresh" onAction="#refresh"></JFXButton>
+                  <JFXButton text="Delete" onAction="#delete"></JFXButton>
                </children>
             </HBox>
          </children>

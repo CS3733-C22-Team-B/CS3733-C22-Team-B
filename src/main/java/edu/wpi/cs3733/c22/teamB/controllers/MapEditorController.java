@@ -4,6 +4,7 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.Location;
 import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -46,13 +47,6 @@ public class MapEditorController {
         return (desiredY/imageHeight)*sceneHeight;
     }
 
-//   button(){
-//        delete selectedbutton
-//   }
-//
-//   otherbutton(){
-//        modify selectedbutton
-//   }
 
     //Add a point to the map using image coordinates. Set up onclick.
     public void addPoint(String ID, double x, double y, Color color){
@@ -81,9 +75,9 @@ public class MapEditorController {
     }
 
     //Add points from DB
-    public void addPoints(){
+    public void addPoints(String Floor){
         for(Location local: locationList){
-            if(local.getFloor().equals("3")) {
+            if(local.getFloor().equals(Floor)) {
                 String ID = local.getNodeID();
                 double x = local.getXcoord();
                 double y = local.getYcoord();
@@ -92,7 +86,7 @@ public class MapEditorController {
         }
     }
 
-    void removePoints(){
+    void removeAllPoints(){
         anchorPane.getChildren().remove(1,anchorPane.getChildren().size());
     }
 
@@ -102,6 +96,37 @@ public class MapEditorController {
     }
 
     @FXML public void refresh(){
+        removeAllPoints();
+        addPoints("3");
+    }
+
+    @FXML public void goTo(String floor){
+        Image image;
+        removeAllPoints();
+        switch (floor) {
+            case "1":
+                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thefirstfloor.png");
+                break;
+            case "2":
+                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thesecondfloor.png");
+                break;
+            case"L2":
+                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thelowerlevel2.png");
+                break;
+            case"L1":
+                    image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thelowerlevel1.png");
+                break;
+            default:
+                image = new Image("C:\\Users\\Owner\\Downloads\\SpikeB\\CS3733-C22-Team-B\\src\\main\\resources\\edu\\wpi\\cs3733\\c22\\teamB\\images\\thirdFloorMap.png");
+            break;
+        }
+        addPoints(floor);
+
+        imageView.setImage(image);
+        addPoints(floor);
+    }
+
+    @FXML public void delete(){
         removePoint();
     }
 
@@ -119,9 +144,10 @@ public class MapEditorController {
         imageWidth = imageView.getImage().getWidth();
 
 
+
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",5000,3400, Color.RED);
-        addPoints();
+        addPoints("3");
 
     }
 
