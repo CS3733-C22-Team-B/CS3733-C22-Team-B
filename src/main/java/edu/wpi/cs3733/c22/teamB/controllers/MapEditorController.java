@@ -30,20 +30,20 @@ public class MapEditorController {
     @FXML
     private ImageView imageView;
 
-    double getImageX(int desiredX){
+    double getImageX(double desiredX){
         final int imageHeight = 5000;
-        double x = imageView.fitWidthProperty().get();
-        double addx = imageView.getLayoutX();
-        System.out.println("x + " + addx);
-        return ((x/imageHeight)*desiredX) + addx;
+        double x = imageView.getFitWidth();
+        double addX = imageView.getLayoutX();
+        System.out.println("x + " + addX);
+        return ((x/imageHeight)*desiredX) + addX;
     }
 
-    double getImageY(int desiredY){
-        final int imageHeight = 3400;
-        double y = imageView.fitHeightProperty().get();
-        double addy = imageView.getLayoutY();
-        System.out.println("x + " + addy);
-        return ((y/imageHeight)*desiredY) + addy;
+    double getImageY(double desiredY){
+        final int imageHeight = 5000;
+        double x = imageView.getFitWidth();
+        double addY = imageView.getLayoutY();
+        System.out.println("y + " + addY);
+        return ((x/imageHeight)*desiredY) + addY;
 
     }
 
@@ -55,11 +55,15 @@ public class MapEditorController {
 
     @FXML
     public void initialize(){
+        //imageView.setFitHeight(Bapp.getPrimaryStage().getOutputScaleY()-50);
         //Bapp.getPrimaryStage().setFullScreen(false);
         System.out.println(imageView.fitHeightProperty().get());
-        Circle testPoint4 = new Circle(getImageX(956),getImageY(3036),3);
+        Circle testPoint4 = new Circle(getImageX(0),getImageY(0),3);
         anchorPane.getChildren().add(testPoint4);
+        Circle testPoint5 = new Circle(getImageX(5000),getImageY(3400),3);
+        anchorPane.getChildren().add(testPoint5);
         testPoint4.setFill(Color.PURPLE);
+        testPoint5.setFill(Color.ORANGE);
     }
 
 }
