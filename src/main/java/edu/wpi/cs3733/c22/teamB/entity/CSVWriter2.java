@@ -41,7 +41,7 @@ public class CSVWriter2 {
         String pathString = new File("").getAbsolutePath();
         File f = new File(pathString);
 
-        File dir = new File(f.getAbsolutePath() + "/backup1");
+        File dir = new File(f.getAbsolutePath() + "/backup");
 
         File filePath;
 

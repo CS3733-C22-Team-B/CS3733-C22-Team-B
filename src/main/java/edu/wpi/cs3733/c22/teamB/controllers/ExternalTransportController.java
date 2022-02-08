@@ -84,6 +84,7 @@ public class ExternalTransportController implements IController {
                         FormOfTransport.getAccessibleText(),
                         employeeMap.get(EmployeeAssignment.getValue()));
         System.out.println(request.toString());
+
         clear();
     }
 

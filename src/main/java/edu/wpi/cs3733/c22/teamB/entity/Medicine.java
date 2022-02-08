@@ -1,13 +1,13 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 public class Medicine {
-    private int medicationID;
+    private String medicationID;
 
-    public int getMedicationID() {
+    public String getMedicationID() {
         return medicationID;
     }
 
-    public void setMedicationID(int medicationID) {
+    public void setMedicationID(String medicationID) {
         this.medicationID = medicationID;
     }
 
