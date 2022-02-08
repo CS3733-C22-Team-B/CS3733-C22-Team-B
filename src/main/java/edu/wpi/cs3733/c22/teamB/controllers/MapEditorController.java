@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -45,6 +47,7 @@ public class MapEditorController {
     public Label header6;
     public Label header7;
     public Label header8;
+    public JFXButton deleteButton;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -79,6 +82,11 @@ public class MapEditorController {
 
     @FXML
     private JFXButton submitModifyButton;
+    @FXML private JFXButton goToL1Button;
+    @FXML private JFXButton goToL2Button;
+    @FXML private JFXButton goTo1Button;
+    @FXML private JFXButton goTo2Button;
+    @FXML private JFXButton goTo3Button;
     
 
     void setEditFieldsVisible(boolean isVisible){
@@ -107,7 +115,7 @@ public class MapEditorController {
         double mapWidth = imageWidth*(sceneHeight/imageHeight);
         //System.out.println("mapWidth = " + mapWidth);
         //The offset from the side of the scene
-        double xOffset = (sceneWidth-mapWidth)/2.0;
+        double xOffset = 0;//(sceneWidth-mapWidth)/2.0;
         //Return the new coordinate
         return desiredX*(mapWidth/imageWidth) + xOffset;
     }
@@ -124,7 +132,7 @@ public class MapEditorController {
         double mapWidth = imageWidth*(sceneHeight/imageHeight);
         //System.out.println("mapWidth = " + mapWidth);
         //The offset from the side of the scene
-        double xOffset = (sceneWidth-mapWidth)/2.0;
+        double xOffset = 0;//(sceneWidth-mapWidth)/2.0;
         //Return the new coordinate
         return (desiredX-xOffset)/(mapWidth/imageWidth);
     }
@@ -163,6 +171,8 @@ public class MapEditorController {
         testPoint.setOnMouseClicked(event -> {
             modifyButton.setOpacity(1);
             modifyButton.setDisable(false);
+            deleteButton.setOpacity(1);
+            deleteButton.setDisable(false);
             onPointClick(testPoint);
         });
     }
@@ -261,27 +271,40 @@ public class MapEditorController {
     }
 
     @FXML public void goTo(){
+        goTo1Button.setStyle("-fx-background-color: #eaeaea");
+        goTo2Button.setStyle("-fx-background-color: #eaeaea");
+        goTo3Button.setStyle("-fx-background-color: #eaeaea");
+        goToL1Button.setStyle("-fx-background-color: #eaeaea");
+        goToL2Button.setStyle("-fx-background-color: #eaeaea");
+
         switch (currentFloor) {
             case "1":   //TODO Probably needs to be changed to work with jar file vvv
                 imageView.setImage(firstFloorImage);
+                goTo1Button.setStyle("-fx-background-color: #007fff");
                 break;
             case "2":
                 imageView.setImage(secondFloorImage);
+                goTo2Button.setStyle("-fx-background-color: #007fff");
                 break;
             case"L2":
                 imageView.setImage(lowerLevel2Image);
+                goToL2Button.setStyle("-fx-background-color: #007fff");
                 break;
             case"L1":
                 imageView.setImage(lowerLevel1Image);
+                goToL1Button.setStyle("-fx-background-color: #007fff");
                 break;
             default:
                 imageView.setImage(thirdFloorImage);
+                goTo3Button.setStyle("-fx-background-color: #007fff");
             break;
         }
         selectedPoint = null;
         selectedPnt = null;
-        modifyButton.setOpacity(1);
-        modifyButton.setDisable(false);
+        modifyButton.setOpacity(0.5);
+        modifyButton.setDisable(true);
+        deleteButton.setOpacity(0.5);
+        deleteButton.setDisable(true);
         refresh();
     }
 
@@ -323,6 +346,9 @@ public class MapEditorController {
         setEditFieldsVisible(false);
         modifyButton.setOpacity(0.5);
         modifyButton.setDisable(true);
+        deleteButton.setOpacity(0.5);
+        deleteButton.setDisable(true);
+        goTo3Button.setStyle("-fx-background-color: #007fff");
 
 
         addPoint("1",0,0,Color.ORANGE);
