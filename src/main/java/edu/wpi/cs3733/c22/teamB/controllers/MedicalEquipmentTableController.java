@@ -74,7 +74,8 @@ public class MedicalEquipmentTableController {
     void goToHome(ActionEvent event) {
         // Try to go home
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Parent root =
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {

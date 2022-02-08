@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.util.Objects;
+
 public class Location {
     private String nodeID; // primary key
     private int xcoord;
@@ -135,5 +137,25 @@ public class Location {
     public String toStringFields() {
         return nodeID + "," + xcoord + "," + ycoord + "," + floor + "," + building + "," + nodeType
                 + "," + longName + "," + shortName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return xcoord == location.xcoord
+                && ycoord == location.ycoord
+                && nodeID.equals(location.nodeID)
+                && floor.equals(location.floor)
+                && building.equals(location.building)
+                && nodeType.equals(location.nodeType)
+                && longName.equals(location.longName)
+                && shortName.equals(location.shortName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
     }
 }

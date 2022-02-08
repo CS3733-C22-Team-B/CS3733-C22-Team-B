@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.util.Objects;
+
 public class MedicalEquipmentSR extends AbstractSR {
     private MedicalEquipment medicalEquipment;
     private Location destination;
@@ -53,14 +55,17 @@ public class MedicalEquipmentSR extends AbstractSR {
     @Override
     public String toString() {
         return "MedicalEquipmentSR{"
-                + "srID="
+                + "srID='"
                 + srID
-                + "destination="
-                + destination.getNodeID()
+                + '\''
+                + ", status="
+                + status
                 + ", medicalEquipment="
-                + medicalEquipment.getEquipmentID()
+                + medicalEquipment
+                + ", destination="
+                + destination
                 + ", assignedEmployee="
-                + assignedEmployee.getEmployeeID()
+                + assignedEmployee
                 + '}';
     }
 
@@ -72,5 +77,20 @@ public class MedicalEquipmentSR extends AbstractSR {
                 + medicalEquipment.getEquipmentID()
                 + ","
                 + assignedEmployee.getEmployeeID();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MedicalEquipmentSR that = (MedicalEquipmentSR) o;
+        return medicalEquipment.equals(that.medicalEquipment)
+                && destination.equals(that.destination)
+                && assignedEmployee.equals(that.assignedEmployee);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(medicalEquipment, destination, assignedEmployee);
     }
 }

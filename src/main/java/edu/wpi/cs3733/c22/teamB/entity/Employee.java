@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.util.Objects;
+
 public class Employee {
     private String employeeID;
     private String name;
@@ -122,5 +124,23 @@ public class Employee {
                 + email
                 + ","
                 + phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return employeeID.equals(employee.employeeID)
+                && name.equals(employee.name)
+                && position.equals(employee.position)
+                && address.equals(employee.address)
+                && email.equals(employee.email)
+                && phoneNumber.equals(employee.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeID, name, position, address, email, phoneNumber);
     }
 }

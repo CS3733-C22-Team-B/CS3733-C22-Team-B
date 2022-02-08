@@ -1,13 +1,8 @@
 package edu.wpi.cs3733.c22.teamB;
 
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import edu.wpi.cs3733.c22.teamB.entity.*;
-import java.util.Locale;
-
-import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 public class Bapp extends Application {
     private static Stage _primaryStage;
 
-    public static Stage getPrimaryStage() { return _primaryStage; }
+    public static Stage getPrimaryStage() {
+        return _primaryStage;
+    }
 
     @Override
     public void init() throws IOException {
@@ -48,16 +45,27 @@ public class Bapp extends Application {
 
         List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
         List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-        List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
-        List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
-        List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
-        List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
-        List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
+        List<ExternalTransportSR> externalTransportSRList1 =
+                extTransSRParserI.fromStringsToObjects(externalTransportList);
+        List<FoodDeliverySR> foodDeliverySRList1 =
+                foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
+        List<MedicalEquipment> medicalEquipmentList1 =
+                medicalEquipmentParserI.fromStringsToObjects(equipmentList);
+        List<MedicalEquipmentSR> medicalEquipmentSRList1 =
+                medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
+        List<MedicineDeliverySR> medicineDeliverySRList1 =
+                medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
 
-        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+        databaseManager.restoreTables(
+                locationList1,
+                employeeList1,
+                externalTransportSRList1,
+                medicineDeliverySRList1,
+                foodDeliverySRList1,
+                medicalEquipmentSRList1,
+                medicalEquipmentList1);
 
-//        locationDBI.restore(locParser.fromStringsToObjects(stringList));
+        //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
 
     @Override

@@ -27,21 +27,22 @@ public class LocationDBI implements IDatabase<Location> {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "LOCATION", null);
 
-            if (rset.next() && rset.getString(3).equals("LOCATION")){
+            if (rset.next() && rset.getString(3).equals("LOCATION")) {
                 // table exists
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
-                stmt.execute("CREATE TABLE Location ( "
-                        + "nodeID VARCHAR(50) , "
-                        + "xcoord int not null, "
-                        + "ycoord int not null, "
-                        + "floor VARCHAR(2), "
-                        + "building VARCHAR(50), "
-                        + "nodeType VARCHAR(50), "
-                        + "longName VARCHAR(50), "
-                        + "shortName VARCHAR(50),"
-                        + "PRIMARY KEY (nodeID))");
+                stmt.execute(
+                        "CREATE TABLE Location ( "
+                                + "nodeID VARCHAR(50) , "
+                                + "xcoord int not null, "
+                                + "ycoord int not null, "
+                                + "floor VARCHAR(2), "
+                                + "building VARCHAR(50), "
+                                + "nodeType VARCHAR(50), "
+                                + "longName VARCHAR(50), "
+                                + "shortName VARCHAR(50),"
+                                + "PRIMARY KEY (nodeID))");
             }
         } catch (SQLException e) {
             System.out.println("Create Location Table: Failed!");
@@ -54,18 +55,6 @@ public class LocationDBI implements IDatabase<Location> {
 
         try {
             createTable();
-//            Statement stmt = conn.createStatement();
-//            stmt.execute(
-//                    "create table Location( "
-//                            + "nodeID VARCHAR(50), "
-//                            + "xcoord int not null, "
-//                            + "ycoord int not null, "
-//                            + "floor VARCHAR(2), "
-//                            + "building VARCHAR(50), "
-//                            + "nodeType VARCHAR(50), "
-//                            + "longName VARCHAR(50), "
-//                            + "shortName VARCHAR(50)," +
-//                            "PRIMARY KEY (nodeID))");
 
             // For each iteration of location in the list of location
             for (Location location : list) {
@@ -142,7 +131,8 @@ public class LocationDBI implements IDatabase<Location> {
     @Override
     public Location getNode(String nodeID) {
         Location location = new Location();
-        try {PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rset = pstmt.executeQuery();
 
@@ -168,15 +158,13 @@ public class LocationDBI implements IDatabase<Location> {
     public void deleteNode(String nodeID) {
 
         try {
-            PreparedStatement pstmt =
-                    conn.prepareStatement("DELETE FROM Location WHERE nodeID = ?");
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM Location WHERE nodeID = ?");
             pstmt.setString(1, nodeID);
 
             if (isInTable(nodeID)) {
                 pstmt.executeUpdate();
-
             }
-//            pstmt.executeUpdate();
+            //            pstmt.executeUpdate();
 
             pstmt.close();
 
@@ -227,9 +215,7 @@ public class LocationDBI implements IDatabase<Location> {
 
             if (!isInTable(node.getNodeID())) {
                 pstmt.executeUpdate();
-
             }
-//            pstmt.executeUpdate();
             pstmt.close();
 
         } catch (SQLException e) {
@@ -237,15 +223,15 @@ public class LocationDBI implements IDatabase<Location> {
             e.printStackTrace();
         }
     }
-    public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
+
+    public boolean isInTable(String nodeID) { // check if there is a node with given ID in table
         boolean ans = false;
         try {
-            //search for NodeID
-            PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+            // search for NodeID
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
-            ans = rs.next();    //if any ids are found
+            ans = rs.next(); // if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {
