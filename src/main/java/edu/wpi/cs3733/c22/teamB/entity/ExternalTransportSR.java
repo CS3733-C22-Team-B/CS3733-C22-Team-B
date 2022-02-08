@@ -99,6 +99,20 @@ public class ExternalTransportSR extends AbstractSR {
         this.assignedEmployee = assignedEmployee;
     }
 
+    @Override
+    public String toString() {
+        return "ExternalTransportSR{" +
+                "srID='" + srID + '\'' +
+                ", status=" + status +
+                ", pickupLoc='" + pickupLoc + '\'' +
+                ", destination='" + destination + '\'' +
+                ", info='" + info + '\'' +
+                ", date='" + date + '\'' +
+                ", formOfTransport='" + formOfTransport + '\'' +
+                ", employee=" + employee +
+                ", assignedEmployee='" + assignedEmployee + '\'' +
+                '}';
+    }
 
     public String toStringFields() {
         return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + assignedEmployee;
