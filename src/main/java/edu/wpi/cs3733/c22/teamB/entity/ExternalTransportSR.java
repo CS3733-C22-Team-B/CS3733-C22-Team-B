@@ -9,7 +9,6 @@ public class ExternalTransportSR extends AbstractSR {
     private String formOfTransport;
     private Employee employee;
     //    private Employee assignedEmployee;
-    String assignedEmployee;
 
     public ExternalTransportSR(){
         super(null, null);
@@ -23,9 +22,9 @@ public class ExternalTransportSR extends AbstractSR {
 
     public ExternalTransportSR(
             String srID,
+            String status,
             String pickupLoc,
             String destination,
-            String status,
             String info,
             String date,
             String formOfTransport,
@@ -91,13 +90,13 @@ public class ExternalTransportSR extends AbstractSR {
         this.employee = employee;
     }
 
-    public String getAssignedEmployee() {
-        return assignedEmployee;
-    }
-
-    public void setAssignedEmployee(String assignedEmployee) {
-        this.assignedEmployee = assignedEmployee;
-    }
+//    public String getAssignedEmployee() {
+//        return assignedEmployee;
+//    }
+//
+//    public void setAssignedEmployee(String assignedEmployee) {
+//        this.assignedEmployee = assignedEmployee;
+//    }
 
     @Override
     public String toString() {
@@ -110,11 +109,11 @@ public class ExternalTransportSR extends AbstractSR {
                 ", date='" + date + '\'' +
                 ", formOfTransport='" + formOfTransport + '\'' +
                 ", employee=" + employee +
-                ", assignedEmployee='" + assignedEmployee + '\'' +
+                ", assignedEmployee='" + employee.getEmployeeID() + '\'' +
                 '}';
     }
 
     public String toStringFields() {
-        return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + assignedEmployee;
+        return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + employee.getEmployeeID();
     }
 }
