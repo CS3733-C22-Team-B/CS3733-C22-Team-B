@@ -1,4 +1,4 @@
-package edu.wpi.teamB;
+/*package edu.wpi.cs3733.c22.teamB;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,51 +18,52 @@ public class EmployeeDBTest {
 
     @Test
     public void testGetNode() {
-        //employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 
         assertEquals(employee1.toString(), employeeDBI.getNode("1").toString());
 
-        //employeeDBI.closeConnection();
+        employeeDBI.closeConnection();
     }
 
     @Test
     public void testInsertNode() {
-        //employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 
         employeeDBI.insertNode(employee4);
         assertEquals("4", employee4.getEmployeeID());
 
-        //employeeDBI.closeConnection();
+        employeeDBI.closeConnection();
     }
 
     @Test
     public void testInsertEmptyNode() {
-        //employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 
         assertNull(emptyEmp.getEmployeeID());
 
-        //employeeDBI.closeConnection();
+        employeeDBI.closeConnection();
     }
 
     @Test
     public void testDeleteNode() {
-        //employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 
         employeeDBI.deleteNode("4");
         assertFalse(employeeDBI.getAllNodes().contains(employee4));
 
-        //employeeDBI.closeConnection();
+        employeeDBI.closeConnection();
     }
 
     @Test
     public void testUpdateNode() {
-        //employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 
         employeeDBI.insertNode(employee2);
         employeeDBI.updateNode(employee3);
         assertEquals(employee3.toString(), employeeDBI.getNode("2").toString());
         employeeDBI.deleteNode("2");
 
-        //employeeDBI.closeConnection();
+        employeeDBI.closeConnection();
     }
 }
+*/
