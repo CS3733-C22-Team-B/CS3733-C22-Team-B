@@ -7,35 +7,22 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        //args = getLogin(args);
-        args = new String[] {"", ""};
-        args[0] = "admin";
-        args[1] = "";
-
-        LoginApp.launch(LoginApp.class,args);
-
         //bDB.main(args);
-        //Bapp.launch(Bapp.class, args);
-    }
-
-    private static String[] getLogin(String[] input) {
-        if (input.length != 2) {
-            input = new String[] {"", ""};
-        }
-        while (!input[0].equals("admin") || !input[1].equals("admin")) {
-            System.out.println("Incorrect Login");
-            Scanner userInput = new Scanner(System.in);
-            System.out.println("Enter Username:");
-            input[0] = userInput.nextLine();
-            System.out.println("Enter Password:");
-            input[1] = userInput.nextLine();
-        }
-
-        return input;
-    }
-
-    public static void startMainApp(String[] args){
-        bDB.main(args);
         Bapp.launch(Bapp.class, args);
     }
+
+//    private static String[] getLogin(String[] input) {
+//        if (input.length != 2) {
+//            input = new String[] {"", ""};
+//        }
+//        while (!input[0].equals("admin") || !input[1].equals("admin")) {
+//            System.out.println("Incorrect Login");
+//            Scanner userInput = new Scanner(System.in);
+//            System.out.println("Enter Username:");
+//            input[0] = userInput.nextLine();
+//            System.out.println("Enter Password:");
+//            input[1] = userInput.nextLine();
+//        }
+//        return input;
+//    }
 }
