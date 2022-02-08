@@ -26,6 +26,7 @@ public class MedicalEquipmentSRController implements IController, Initializable 
     private Map<String, MedicalEquipment> medEqpMap;
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
+    private int nextID;
 //    Connection conn = DBConnection.getConnection();
 
     private MedicalEquipmentSRDBI medSRDB = new MedicalEquipmentSRDBI();
@@ -80,17 +81,21 @@ public class MedicalEquipmentSRController implements IController, Initializable 
         equipmentNameField.getItems().addAll(medEqpMap.keySet());
 
         assignedEmployeeField.getItems().addAll(employeeMap.keySet());
+
+        this.nextID = 0;
+        //Generate next unique ID
+        while(medSRDB.isInTable(String.valueOf(nextID))){
+            this.nextID++;
+        }
+        idField.setText(Integer.toString(nextID));
     }
 
     @Override
     public void submit() {
-        //        Location destination = new Location();
-
-//        medSRDB.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 
         medSRDB.insertNode(
                 new MedicalEquipmentSR(
-                        idField.getText(),
+                        String.valueOf(this.nextID),
                         statusField.getValue(),
                         locMap.get(destinationField.getValue()),
                         medEqpMap.get(equipmentNameField.getValue()),

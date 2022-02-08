@@ -64,6 +64,7 @@ public class MedicineDeliverySRParserI implements IParser<MedicineDeliverySR> {
     @Override
     public List<String> fromObjectsToStrings(List<MedicineDeliverySR> listT) {
         List<String> listString = new ArrayList<>();
+        listString.add(MedicineDeliverySR.toStringHeader());
         for (MedicineDeliverySR medicineDeliverySR : listT) {
             listString.add(medicineDeliverySR.toStringFields());
         }

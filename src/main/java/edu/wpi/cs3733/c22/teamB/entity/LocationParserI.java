@@ -48,6 +48,7 @@ public class LocationParserI implements IParser<Location> {
     @Override
     public List<String> fromObjectsToStrings(List<Location> listLocations) {
         List<String> listString = new ArrayList<>();
+        listString.add(Location.toStringHeader());
         for (Location location : listLocations) {
             listString.add(location.toStringFields());
         }

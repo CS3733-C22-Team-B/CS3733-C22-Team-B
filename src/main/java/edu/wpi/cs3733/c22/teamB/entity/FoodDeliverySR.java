@@ -88,6 +88,10 @@ public class FoodDeliverySR extends AbstractSR {
                 + assignedEmployee.getEmployeeID();
     }
 
+    public static String toStringHeader() {
+        return "srID,status,locationID,foodName,foodRecipientName,employeeID";
+    }
+
     public String getFoodName() {
         return foodName;
     }
