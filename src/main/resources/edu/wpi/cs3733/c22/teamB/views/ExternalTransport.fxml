@@ -15,7 +15,7 @@
     <children>
         <Rectangle fill="#92bbdc" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
         <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" layoutX="32.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="360.0" />
-        <Label layoutX="64.0" layoutY="35.0" text="External Patient Traposrtation Service">
+        <Label layoutX="64.0" layoutY="35.0" text="External Patient Transportation Service">
             <font>
                 <Font size="18.0" />
             </font>
