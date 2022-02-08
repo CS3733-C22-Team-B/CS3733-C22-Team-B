@@ -4,10 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,7 +20,7 @@ public class GiftFloralServiceController implements IController, Initializable {
 
     @FXML private JFXComboBox<String> roomID;
     @FXML private DatePicker dateID;
-    @FXML private GiftFloralSRDBI giftfloralDatabase = new GiftFloralSRDBI();
+    private GiftFloralSRDBI giftfloralDatabase = new GiftFloralSRDBI();
     @FXML private TextField idField;
     @FXML private JFXComboBox<String> assignedEmployeeField;
     @FXML private JFXComboBox<String> statusField;
@@ -96,22 +94,11 @@ public class GiftFloralServiceController implements IController, Initializable {
 
     @Override
     public void submit() {
-        List<GiftType> listOfGifts = new ArrayList<>();
-        String test = " ";
 
-
-
-
-        confirmLabel.setText("Order confirmed for gifts " + test + "." );
-
-
-        giftfloralDatabase.insertNode(
-                new GiftFloralSR(
-                        "id23",
-                        "WAITING",
-                        listOfGifts,
-                        "01012020",
-                        roomID.getValue()));
+      GiftFloralSR request = new GiftFloralSR(idField.getText(), statusField.getValue(), giftOptions.getValue(), dateID.getValue().toString(), roomID.getValue());
+      System.out.println(request.toString());
+      giftfloralDatabase.insertNode(request);
+      clear();
     }
 
     @Override
