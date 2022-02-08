@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
-import edu.wpi.cs3733.c22.teamB.entity.Employee;
-import edu.wpi.cs3733.c22.teamB.entity.EmployeeDBI;
-import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +35,8 @@ public class ExternalTransportController implements IController {
     String assignedP;
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
+
+    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
 
     @FXML
     private void initialize() {
@@ -80,11 +79,11 @@ public class ExternalTransportController implements IController {
                         DestinationTxt.getText(),
                         "WAITING",
                         InfoTxt.getText(),
-                        DateCal.getAccessibleText(),
-                        FormOfTransport.getAccessibleText(),
+                        DateCal.getValue().toString(),
+                        FormOfTransport.getValue().toString(),
                         employeeMap.get(EmployeeAssignment.getValue()));
         System.out.println(request.toString());
-
+        db.insertNode(request);
         clear();
     }
 
