@@ -374,6 +374,10 @@ public class MapEditorController {
         locationDBI.updateNode(changedNode);
         refresh();
         setEditFieldsVisible(false);
+        modifyButton.setOpacity(0.5);
+        modifyButton.setDisable(true);
+        deleteButton.setOpacity(0.5);
+        deleteButton.setDisable(true);
     }
 
     @FXML
