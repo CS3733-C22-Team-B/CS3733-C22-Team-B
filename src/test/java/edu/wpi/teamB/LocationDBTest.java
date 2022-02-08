@@ -63,7 +63,6 @@ public class LocationDBTest {
                         "Center for International Medicine",
                         "CIM"));
         assertEquals(location1.toString(), locationDBI.getNode("FDEPT00101").toString());
-
     }
 
     @Test
@@ -102,5 +101,3 @@ public class LocationDBTest {
         locationDBI.deleteNode("UpdateTest");
     }
 }
-
-

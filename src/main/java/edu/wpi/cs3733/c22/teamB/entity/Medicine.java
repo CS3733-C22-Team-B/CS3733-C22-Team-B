@@ -10,7 +10,4 @@ public class Medicine {
     public void setMedicationID(String medicationID) {
         this.medicationID = medicationID;
     }
-
-
-
 }

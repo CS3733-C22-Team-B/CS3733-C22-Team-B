@@ -8,7 +8,7 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
 
     private Connection conn;
 
-    public FoodDeliverySRDBI(){
+    public FoodDeliverySRDBI() {
         this.conn = DBConnection.getConnection();
     }
 
@@ -27,7 +27,7 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "FOODDELIVERYSR", null);
 
-            if (rset.next() && rset.getString(3).equals("FOODDELIVERYSR")){
+            if (rset.next() && rset.getString(3).equals("FOODDELIVERYSR")) {
                 // table exists
             } else {
                 // Create table
@@ -41,10 +41,9 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
                                 + "foodName VARCHAR(50), "
                                 + "foodRecipientName VARCHAR(50),"
                                 + "employeeID VARCHAR(50),"
-                                + "PRIMARY KEY (srID)," +
-                                "CONSTRAINT FK_FoodDeliverySR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
-                                "CONSTRAINT FK_FoodDeliverySR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
-
+                                + "PRIMARY KEY (srID),"
+                                + "CONSTRAINT FK_FoodDeliverySR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL,"
+                                + "CONSTRAINT FK_FoodDeliverySR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
             System.out.println("Create FoodDeliverySR Table: Failed!");
@@ -88,7 +87,6 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
         }
     }
 
-
     @Override
     public List<FoodDeliverySR> getAllNodes() {
 
@@ -104,7 +102,6 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
             String foodName;
             String foodRecipientName;
             Employee assignedEmployee;
-
 
             String locationID = "";
             String employeeID = "";
@@ -124,7 +121,8 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
                 assignedEmployee = employeeDBI.getNode(employeeID);
 
                 foodDeliverySRList.add(
-                        new FoodDeliverySR(srID, status, destination, foodName,foodRecipientName, assignedEmployee));
+                        new FoodDeliverySR(
+                                srID, status, destination, foodName, foodRecipientName, assignedEmployee));
             }
         } catch (SQLException e) {
             System.out.println("Get All FoodDeliverySR Nodes: Failed!");
@@ -157,7 +155,8 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
             Employee assignedEmployee = employeeDBI.getNode(employeeID);
 
             foodDeliverySR =
-                    new FoodDeliverySR(nodeID, status, destination, foodName, foodRecipientName, assignedEmployee);
+                    new FoodDeliverySR(
+                            nodeID, status, destination, foodName, foodRecipientName, assignedEmployee);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");
@@ -175,11 +174,10 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
             pstmt.executeUpdate();
 
             pstmt.close();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Delete From FoodDeliverySR Table Using SR ID: Failed!");
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -206,13 +204,13 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
         }
     }
 
-
-
     @Override
     public void insertNode(FoodDeliverySR node) {
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO FoodDeliverySR (srID, status, locationID, foodName, foodRecipientName, employeeID) VALUES(?, ?, ?, ?, ?, ?)");
+            PreparedStatement pstmt =
+                    conn.prepareStatement(
+                            "INSERT INTO FoodDeliverySR (srID, status, locationID, foodName, foodRecipientName, employeeID) VALUES(?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, node.getSrID());
             pstmt.setString(2, node.getStatusString());
             pstmt.setString(3, node.getDestination().getNodeID());
@@ -229,5 +227,4 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
-
-import java.io.IOException;
 
 public class MasterServiceRequestController {
     @FXML private MedicalEquipmentSRController medicalEquipmentSRController;
@@ -39,7 +38,8 @@ public class MasterServiceRequestController {
     void homeButton(ActionEvent event) {
         // Try to go home
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Parent root =
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {

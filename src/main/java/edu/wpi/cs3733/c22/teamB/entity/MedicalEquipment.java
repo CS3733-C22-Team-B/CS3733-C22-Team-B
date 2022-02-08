@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.util.Objects;
+
 public class MedicalEquipment {
     private String equipmentID;
     private String equipmentName;
@@ -123,20 +125,36 @@ public class MedicalEquipment {
 
     // to string
 
-
     @Override
     public String toString() {
-        return "MedicalEquipment{" +
-                "equipmentID='" + equipmentID + '\'' +
-                ", equipmentName='" + equipmentName + '\'' +
-                ", equipmentType='" + equipmentType + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", location=" + location +
-                ", status='" + status + '\'' +
-                ", color='" + color + '\'' +
-                ", size='" + size + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "MedicalEquipment{"
+                + "equipmentID='"
+                + equipmentID
+                + '\''
+                + ", equipmentName='"
+                + equipmentName
+                + '\''
+                + ", equipmentType='"
+                + equipmentType
+                + '\''
+                + ", manufacturer='"
+                + manufacturer
+                + '\''
+                + ", location="
+                + location
+                + ", status='"
+                + status
+                + '\''
+                + ", color='"
+                + color
+                + '\''
+                + ", size='"
+                + size
+                + '\''
+                + ", description='"
+                + description
+                + '\''
+                + '}';
     }
 
     public String toStringFields() {
@@ -158,5 +176,35 @@ public class MedicalEquipment {
                 + size
                 + ","
                 + description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MedicalEquipment that = (MedicalEquipment) o;
+        return equipmentID.equals(that.equipmentID)
+                && equipmentName.equals(that.equipmentName)
+                && equipmentType.equals(that.equipmentType)
+                && manufacturer.equals(that.manufacturer)
+                && location.equals(that.location)
+                && status.equals(that.status)
+                && color.equals(that.color)
+                && size.equals(that.size)
+                && description.equals(that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                equipmentID,
+                equipmentName,
+                equipmentType,
+                manufacturer,
+                location,
+                status,
+                color,
+                size,
+                description);
     }
 }

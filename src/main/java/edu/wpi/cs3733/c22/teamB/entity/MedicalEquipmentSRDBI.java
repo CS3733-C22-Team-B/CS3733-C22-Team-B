@@ -27,7 +27,7 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "MEDICALEQUIPMENTSR", null);
 
-            if (rset.next() && rset.getString(3).equals("MEDICALEQUIPMENTSR")){
+            if (rset.next() && rset.getString(3).equals("MEDICALEQUIPMENTSR")) {
                 // table exists
             } else {
                 // Create table
@@ -55,17 +55,20 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
 
         try {
             createTable();
-//            Statement stmt = conn.createStatement();
-//            stmt.execute(
-//                    "create table MedicalEquipmentSR( "
-//                            + "srID VARCHAR(50) PRIMARY KEY,"
-//                            + "status VARCHAR(50), "
-//                            + "locationID VARCHAR(50), "
-//                            + "equipmentID VARCHAR(50), "
-//                            + "employeeID VARCHAR(50),"
-//                            + "CONSTRAINT FK_MedicalEquipmentSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL,"
-//                            + "CONSTRAINT FK_MedicalEquipmentSR_MedicalEquipment FOREIGN KEY (equipmentID) REFERENCES MedicalEquipment (equipmentID) ON DELETE SET NULL,"
-//                            + "CONSTRAINT FK_MedicalEquipmentSR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
+            //            Statement stmt = conn.createStatement();
+            //            stmt.execute(
+            //                    "create table MedicalEquipmentSR( "
+            //                            + "srID VARCHAR(50) PRIMARY KEY,"
+            //                            + "status VARCHAR(50), "
+            //                            + "locationID VARCHAR(50), "
+            //                            + "equipmentID VARCHAR(50), "
+            //                            + "employeeID VARCHAR(50),"
+            //                            + "CONSTRAINT FK_MedicalEquipmentSR_Location FOREIGN KEY
+            // (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL,"
+            //                            + "CONSTRAINT FK_MedicalEquipmentSR_MedicalEquipment FOREIGN KEY
+            // (equipmentID) REFERENCES MedicalEquipment (equipmentID) ON DELETE SET NULL,"
+            //                            + "CONSTRAINT FK_MedicalEquipmentSR_Employee FOREIGN KEY
+            // (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
 
             // For each iteration of location in the list of location
             for (MedicalEquipmentSR medEquipSR : list) {
@@ -123,15 +126,15 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
                 employeeID = rset.getString("employeeID");
 
                 LocationDBI locationDBI = new LocationDBI();
-//                locationDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+                //                locationDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
                 destination = locationDBI.getNode(locationID);
 
                 MedicalEquipmentDBI equipmentDBI = new MedicalEquipmentDBI();
-//                equipmentDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+                //                equipmentDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
                 medicalEquipment = equipmentDBI.getNode(equipmentID);
 
                 EmployeeDBI employeeDBI = new EmployeeDBI();
-//                employeeDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+                //                employeeDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
                 assignedEmployee = employeeDBI.getNode(employeeID);
 
                 medEquipmentSRlist.add(
@@ -162,15 +165,15 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
             String employeeID = rset.getString("employeeID");
 
             LocationDBI locationDBI = new LocationDBI();
-//            locationDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+            //            locationDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
             Location destination = locationDBI.getNode(locationID);
 
             MedicalEquipmentDBI equipmentDBI = new MedicalEquipmentDBI();
-//            equipmentDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+            //            equipmentDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
             MedicalEquipment medicalEquipment = equipmentDBI.getNode(equipmentID);
 
             EmployeeDBI employeeDBI = new EmployeeDBI();
-//            employeeDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+            //            employeeDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
             Employee assignedEmployee = employeeDBI.getNode(employeeID);
 
             medEquipmentSR =

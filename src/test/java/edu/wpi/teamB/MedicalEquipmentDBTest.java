@@ -21,8 +21,7 @@ public class MedicalEquipmentDBTest {
             new Location(
                     "goodbye", 1627, 1029, "1", "Tower", "HALL", "Tower Hallway 6", "Hallway F01401");
     Location location3 =
-            new Location(
-                    "yes", 1758, 1120, "1", "Tower", "HALL", "Tower Hallway 11", "Hallway F01901");
+            new Location("yes", 1758, 1120, "1", "Tower", "HALL", "Tower Hallway 11", "Hallway F01901");
     MedicalEquipment equipment1 =
             new MedicalEquipment(
                     "E1", "bed", "type", "manufacturer", location2, "status", "color", "size", "description");
@@ -31,7 +30,7 @@ public class MedicalEquipmentDBTest {
                     "E2", "wheelchair", "type", "manu", location3, "status", "color", "size", "desciption");
 
     @BeforeAll
-    public void start(){
+    public void start() {
         locationDBI.insertNode(location2);
         locationDBI.insertNode(location3);
     }
@@ -46,7 +45,8 @@ public class MedicalEquipmentDBTest {
     @Test
     public void testInsertNode() {
         medEquipDBI.insertNode(equipment1);
-        assertTrue(medEquipDBI.isInTable(equipment1.getEquipmentID()));
+        //        assertTrue(medEquipDBI.isInTable(equipment1.getEquipmentID()));
+        assertTrue(medEquipDBI.getAllNodes().contains(equipment1));
         medEquipDBI.deleteNode("E1");
     }
 
@@ -74,7 +74,7 @@ public class MedicalEquipmentDBTest {
     }
 
     @AfterAll
-    public void end(){
+    public void end() {
         locationDBI.deleteNode(location2.getNodeID());
         locationDBI.deleteNode(location3.getNodeID());
     }

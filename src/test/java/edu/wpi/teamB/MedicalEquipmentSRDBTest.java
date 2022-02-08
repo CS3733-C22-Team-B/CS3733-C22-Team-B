@@ -1,14 +1,13 @@
 package edu.wpi.teamB;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MedicalEquipmentSRDBTest {
@@ -24,8 +23,7 @@ public class MedicalEquipmentSRDBTest {
             new Location(
                     "goodbye", 1627, 1029, "1", "Tower", "HALL", "Tower Hallway 6", "Hallway F01401");
     Location location2 =
-            new Location(
-                    "yes", 1758, 1120, "1", "Tower", "HALL", "Tower Hallway 11", "Hallway F01901");
+            new Location("yes", 1758, 1120, "1", "Tower", "HALL", "Tower Hallway 11", "Hallway F01901");
 
     MedicalEquipment equipment1 =
             new MedicalEquipment(
@@ -56,23 +54,24 @@ public class MedicalEquipmentSRDBTest {
         List<MedicalEquipmentSR> l = medEquipSRDBI.getAllNodes();
         System.out.println(l);
         System.out.println(medEquipSR);
-//        assertTrue(l.contains(medEquipSR));
-        assertTrue(medEquipSRDBI.isInTable(medEquipSR.getSrID()));
+        assertTrue(l.contains(medEquipSR));
+        //        assertTrue(medEquipSRDBI.isInTable(medEquipSR.getSrID()));
         medEquipSRDBI.deleteNode(medEquipSR.getSrID());
     }
 
     @Test
-    public void testGetNode(){
+    public void testGetNode() {
         medEquipSRDBI.insertNode(medEquipSR);
         assertEquals(medEquipSR.toString(), medEquipSRDBI.getNode("idhehe").toString());
         medEquipSRDBI.deleteNode("idhehe");
     }
 
     @Test
-    public void testDeleteNode(){
+    public void testDeleteNode() {
         medEquipSRDBI.insertNode(medEquipSR);
-        assertFalse(medEquipSRDBI.getAllNodes().contains(medEquipSRDBI.getNode("idhehe")));
+        assertTrue(medEquipSRDBI.getAllNodes().contains(medEquipSR));
         medEquipSRDBI.deleteNode("idhehe");
+        assertFalse(medEquipSRDBI.getAllNodes().contains(medEquipSR));
     }
 
     @Test
@@ -90,7 +89,7 @@ public class MedicalEquipmentSRDBTest {
     }
 
     @AfterAll
-    public void end(){
+    public void end() {
         employeeDBI.deleteNode(employee2.getEmployeeID());
         employeeDBI.deleteNode(employee1.getEmployeeID());
         equipmentDBI.deleteNode(equipment2.getEquipmentID());
