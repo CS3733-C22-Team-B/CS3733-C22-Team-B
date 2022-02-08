@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.LoginController">
+   <children>
+      <TextField fx:id="userField" layoutX="226.0" layoutY="91.0" promptText="Username" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0" />
+      <TextField fx:id="passField" layoutX="213.0" layoutY="271.0" promptText="Password" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="246.0" layoutY="54.0" text="Welcome! Login:" textAlignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="75.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="274.0" layoutY="333.0" onAction="#loginButton" styleClass="JFXButtonDark" stylesheets="@../styles/style.css" text="Login" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" />
+      <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="117.0" style="-fx-text-fill: #ff0000;" textAlignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="120.0" />
+   </children>
+</AnchorPane>

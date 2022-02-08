@@ -7,9 +7,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        args = getLogin(args);
-        // bDB.main(args);
-        Bapp.launch(Bapp.class, args);
+        //args = getLogin(args);
+        args = new String[] {"", ""};
+        args[0] = "admin";
+        args[1] = "";
+
+        LoginApp.launch(LoginApp.class,args);
+
+        //bDB.main(args);
+        //Bapp.launch(Bapp.class, args);
     }
 
     private static String[] getLogin(String[] input) {
@@ -26,5 +32,10 @@ public class Main {
         }
 
         return input;
+    }
+
+    public static void startMainApp(String[] args){
+        bDB.main(args);
+        Bapp.launch(Bapp.class, args);
     }
 }

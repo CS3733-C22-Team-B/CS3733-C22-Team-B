@@ -18,9 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Bapp extends Application {
     private static Stage _primaryStage;
 
-    public static Stage getPrimaryStage() {
-        return _primaryStage;
-    }
+    public static Stage getPrimaryStage() { return _primaryStage; }
 
     @Override
     public void init() throws IOException {
