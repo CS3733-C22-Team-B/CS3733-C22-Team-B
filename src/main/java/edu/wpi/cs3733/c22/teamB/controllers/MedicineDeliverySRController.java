@@ -2,15 +2,16 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 
 public class MedicineDeliverySRController implements IController, Initializable {
     @FXML private TextField firstName;
@@ -18,7 +19,7 @@ public class MedicineDeliverySRController implements IController, Initializable 
     @FXML private TextField patientID;
     @FXML private TextField DOB;
     @FXML private TextField email;
-    //    TODO add allergies
+//    TODO add allergies
     @FXML private TextField dosage;
     @FXML private TextField medicineName;
     @FXML private TextField dispenseAmount;
@@ -64,45 +65,47 @@ public class MedicineDeliverySRController implements IController, Initializable 
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
-        //        employeeDBI.closeConnection();
+//        employeeDBI.closeConnection();
 
         statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
         statusField.setValue("BLANK");
 
         roomNumber.getItems().addAll(locMap.keySet());
 
+
         assignedEmployeeField.getItems().addAll(employeeMap.keySet());
     }
 
     public void submit() {
-        //        medicineDeliverySRDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        //        medicineDeliverySRDBI.closeConnection();
+//        medicineDeliverySRDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+//        medicineDeliverySRDBI.closeConnection();
         MedicineDeliverySR medicineDeliverySR =
                 new MedicineDeliverySR(
                         idField.getText(),
-                        statusField.getValue(),
-                        locMap.get(roomNumber.getValue()),
-                        medicineID.getText(),
-                        employeeMap.get(assignedEmployeeField.getValue()),
-                        firstName.getText(),
-                        lastName.getText(),
-                        patientID.getText(),
-                        DOB.getText(),
-                        email.getText(),
-                        dosage.getText(),
-                        medicineName.getText(),
-                        dispenseAmount.getText(),
-                        frequency.getText(),
-                        form.getText(),
-                        mgPerDose.getText());
-        //        System.out.println(medicineDeliverySR.toString());
+                statusField.getValue(),
+                locMap.get(roomNumber.getValue()),
+                medicineID.getText(),
+                employeeMap.get(assignedEmployeeField.getValue()),
+                firstName.getText(),
+                lastName.getText(),
+                patientID.getText(),
+                DOB.getText(),
+                email.getText(),
+                dosage.getText(),
+                medicineName.getText(),
+                dispenseAmount.getText(),
+                frequency.getText(),
+                form.getText(),
+                mgPerDose.getText());
+//        System.out.println(medicineDeliverySR.toString());
 
-        // roomNumber.getValue(),
+        //roomNumber.getValue(),
 
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         medicineDeliverySRDBI.insertNode(medicineDeliverySR);
         clear();
     }
+
 
     @Override
     public void clear() {
@@ -112,8 +115,7 @@ public class MedicineDeliverySRController implements IController, Initializable 
         DOB.clear();
         email.clear();
         dosage.clear();
-        medicineName.clear();
-        ;
+        medicineName.clear();;
         dispenseAmount.clear();
         frequency.clear();
         form.clear();
@@ -124,4 +126,5 @@ public class MedicineDeliverySRController implements IController, Initializable 
         statusField.setValue("");
         roomNumber.setValue("");
     }
+
 }

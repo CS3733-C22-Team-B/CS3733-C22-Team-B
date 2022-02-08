@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EmployeeDBI implements IDatabase<Employee> {
 
-    private Connection conn;
+    Connection conn;
 
     public EmployeeDBI() {
         this.conn = DBConnection.getConnection();
@@ -27,7 +27,7 @@ public class EmployeeDBI implements IDatabase<Employee> {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "EMPLOYEE", null);
 
-            if (rset.next() && rset.getString(3).equals("EMPLOYEE")) {
+            if (rset.next() && rset.getString(3).equals("EMPLOYEE")){
                 // table exists
             } else {
                 Statement stmt = conn.createStatement();
@@ -38,30 +38,30 @@ public class EmployeeDBI implements IDatabase<Employee> {
                                 + "position VARCHAR(50), "
                                 + "address VARCHAR(50), "
                                 + "email VARCHAR(50), "
-                                + "phoneNumber VARCHAR(50),"
-                                + " PRIMARY KEY (employeeID))");
+                                + "phoneNumber VARCHAR(50)," +
+                                " PRIMARY KEY (employeeID))");
             }
         } catch (SQLException e) {
             System.out.println("Create Employee Table: Failed!");
             e.printStackTrace();
         }
-    }
+            }
 
     @Override
     public void restore(List<Employee> list) {
 
         try {
             createTable();
-            //            Statement stmt = conn.createStatement();
-            //            stmt.execute(
-            //                    "create table Employee( "
-            //                            + "employeeID VARCHAR(50), "
-            //                            + "name VARCHAR(50), "
-            //                            + "position VARCHAR(50), "
-            //                            + "address VARCHAR(50), "
-            //                            + "email VARCHAR(50), "
-            //                            + "phoneNumber VARCHAR(50)," +
-            //                            " PRIMARY KEY (employeeID))");
+//            Statement stmt = conn.createStatement();
+//            stmt.execute(
+//                    "create table Employee( "
+//                            + "employeeID VARCHAR(50), "
+//                            + "name VARCHAR(50), "
+//                            + "position VARCHAR(50), "
+//                            + "address VARCHAR(50), "
+//                            + "email VARCHAR(50), "
+//                            + "phoneNumber VARCHAR(50)," +
+//                            " PRIMARY KEY (employeeID))");
 
             // For each iteration of location in the list of location
             for (Employee employee : list) {
@@ -156,10 +156,12 @@ public class EmployeeDBI implements IDatabase<Employee> {
     public void deleteNode(String nodeID) {
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM Employee WHERE employeeID = ?");
+            PreparedStatement pstmt =
+                    conn.prepareStatement("DELETE FROM Employee WHERE employeeID = ?");
             pstmt.setString(1, nodeID);
 
-            pstmt.executeUpdate();
+                pstmt.executeUpdate();
+
 
             pstmt.close();
 
@@ -220,15 +222,15 @@ public class EmployeeDBI implements IDatabase<Employee> {
         }
     }
 
-    public boolean isInTable(String nodeID) { // check if there is a node with given ID in table
+    public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
         boolean ans = false;
         try {
-            // search for NodeID
+            //search for NodeID
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM Employee WHERE EMPLOYEEID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
-            ans = rs.next(); // if any ids are found
+            ans = rs.next();    //if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {

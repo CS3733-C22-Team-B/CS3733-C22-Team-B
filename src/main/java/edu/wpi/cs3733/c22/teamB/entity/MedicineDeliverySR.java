@@ -10,31 +10,33 @@ public class MedicineDeliverySR extends AbstractSR {
     private String DOB;
     private String email;
     //    TODO add allergies
-    //    private String allergies;
+//    private String allergies;
     private String dosage;
     private String medicineName;
     private String dispenseAmount;
-    private String frequency;
+    private  String frequency;
     private String form;
     private String mgPerDose;
 
+
     public MedicineDeliverySR(
-            String srID,
-            String statusStr,
-            Location destination,
-            String medicineID,
-            Employee assignedEmployee,
-            String patientFirstName,
-            String patientLastName,
-            String patientID,
-            String DOB,
-            String email,
-            String dosage,
-            String medicineName,
-            String dispenseAmount,
-            String frequency,
-            String form,
-            String mgPerDose) {
+                String srID,
+                String statusStr,
+                Location destination,
+                String medicineID,
+                Employee assignedEmployee,
+                String patientFirstName,
+                String patientLastName,
+                String patientID,
+                String DOB,
+                String email,
+                String dosage,
+                String medicineName,
+                String dispenseAmount,
+                String frequency,
+                String form,
+                String mgPerDose
+                ) {
         super(srID, statusStr);
         this.destination = destination;
         this.medicineID = medicineID;
@@ -50,6 +52,7 @@ public class MedicineDeliverySR extends AbstractSR {
         this.frequency = frequency;
         this.form = form;
         this.mgPerDose = mgPerDose;
+
     }
 
     public MedicineDeliverySR() {
@@ -213,10 +216,11 @@ public class MedicineDeliverySR extends AbstractSR {
                 + ","
                 + dispenseAmount
                 + ","
-                + frequency
+                +frequency
                 + ","
                 + form
                 + ","
                 + mgPerDose;
     }
+
 }

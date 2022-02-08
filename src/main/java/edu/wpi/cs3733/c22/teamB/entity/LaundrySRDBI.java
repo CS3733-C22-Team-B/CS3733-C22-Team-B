@@ -17,7 +17,9 @@ public class LaundrySRDBI implements IDatabase<LaundrySR> {
     }
 
     @Override
-    public void drop() {}
+    public void drop() {
+
+    }
 
     public void add(LaundrySR sr) {
         if (dbMap.containsKey(sr.getSrID()))

@@ -33,35 +33,34 @@ public class DatabaseManager {
 
         ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
         externalTransportSRDBI.createTable();
+
     }
 
-    public void restoreTables(
-            List<Location> locationList,
-            List<Employee> employeeList,
-            List<ExternalTransportSR> externalTransportSRList,
-            List<MedicineDeliverySR> medicineDeliverySRList,
-            List<FoodDeliverySR> foodDeliverySRList,
-            List<MedicalEquipmentSR> medicalEquipmentSRList,
-            List<MedicalEquipment> medicalEquipmentList) {
-        // List<GiftFloralSR> giftFloralSRList
+    public void restoreTables(List<Location> locationList, List<Employee> employeeList, List<ExternalTransportSR> externalTransportSRList,
+                              List<MedicineDeliverySR> medicineDeliverySRList, List<FoodDeliverySR> foodDeliverySRList
+                              , List<MedicalEquipmentSR> medicalEquipmentSRList,
+                              List<MedicalEquipment> medicalEquipmentList) {
+//List<GiftFloralSR> giftFloralSRList
         MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
         MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
-        //        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+//        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
         FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
         EmployeeDBI employeeDBI = new EmployeeDBI();
         LocationDBI locationDBI = new LocationDBI();
 
+
         // Drop all Tables in specific order
         medicalEquipmentSRDBI.drop();
         medicineDeliverySRDBI.drop();
-        //        giftFloralSRDBI.drop();
+//        giftFloralSRDBI.drop();
         foodDeliverySRDBI.drop();
         externalTransportSRDBI.drop();
         medicalEquipmentDBI.drop();
         employeeDBI.drop();
         locationDBI.drop();
+
 
         // Create and populate all Tables in specific order
         locationDBI.restore(locationList);
@@ -69,9 +68,10 @@ public class DatabaseManager {
         medicalEquipmentDBI.restore(medicalEquipmentList);
         externalTransportSRDBI.restore(externalTransportSRList);
         foodDeliverySRDBI.restore(foodDeliverySRList);
-        //        giftFloralSRDBI.restore(giftFloralSRList);
+//        giftFloralSRDBI.restore(giftFloralSRList);
         medicineDeliverySRDBI.restore(medicineDeliverySRList);
         medicalEquipmentSRDBI.restore(medicalEquipmentSRList);
+
     }
 
     /*
@@ -88,5 +88,5 @@ public class DatabaseManager {
 
 
 
-    */
+     */
 }

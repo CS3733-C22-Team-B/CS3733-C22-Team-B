@@ -1,15 +1,22 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class GiftFloralSR extends AbstractSR {
 
     String gift;
     String deliveryDate;
     String deliveryRoom;
 
-    //    public GiftFloralSR(){}
+//    public GiftFloralSR(){}
 
     public GiftFloralSR(
-            String srID, String statusStr, String gift, String deliveryDate, String deliveryRoom) {
+            String srID,
+            String statusStr,
+            String gift,
+            String deliveryDate,
+            String deliveryRoom) {
 
         super(srID, statusStr);
         this.gift = gift;
@@ -21,3 +28,5 @@ public class GiftFloralSR extends AbstractSR {
         super(srID, statusStr);
     }
 }
+
+
