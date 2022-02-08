@@ -1,24 +1,29 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.*;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
+import edu.wpi.cs3733.c22.teamB.entity.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.EmployeeDBI;
+import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
+import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSRDBI;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class ExternalTransportController implements IController {
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class ExternalTransportController implements IController, Initializable {
 
     @FXML TextField SenderTxt;
     @FXML TextField PickupLocTxt;
@@ -68,6 +73,12 @@ public class ExternalTransportController implements IController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     @Override
