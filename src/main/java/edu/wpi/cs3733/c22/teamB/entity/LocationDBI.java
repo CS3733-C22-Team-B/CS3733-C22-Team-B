@@ -12,7 +12,15 @@ public class LocationDBI implements IDatabase<Location> {
         this.conn = DBConnection.getConnection();
     }
 
-//    Connection conn = DBConnection.getConnection();
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE Location");
+        } catch (SQLException e) {
+            System.out.println("Drop Location Table: Failed!");
+        }
+    }
 
     public void createTable() {
         try {
@@ -43,12 +51,6 @@ public class LocationDBI implements IDatabase<Location> {
 
     @Override
     public void restore(List<Location> list) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE Location");
-        } catch (SQLException e) {
-            System.out.println("Drop Location Table: Failed!");
-        }
 
         try {
             createTable();

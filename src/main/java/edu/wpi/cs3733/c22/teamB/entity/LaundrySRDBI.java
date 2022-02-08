@@ -16,6 +16,11 @@ public class LaundrySRDBI implements IDatabase<LaundrySR> {
         this.dbMap = new HashMap<String, LaundrySR>();
     }
 
+    @Override
+    public void drop() {
+
+    }
+
     public void add(LaundrySR sr) {
         if (dbMap.containsKey(sr.getSrID()))
             throw new RuntimeException("The LaundrySR " + sr.getSrID() + " is already in the database.");

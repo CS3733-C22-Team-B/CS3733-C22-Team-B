@@ -66,4 +66,55 @@ public class ExternalTransportSR extends AbstractSR {
     public String getSrID() {
         return this.srID;
     }
+
+    public void setPickupLoc(String pickupLoc) {
+        this.pickupLoc = pickupLoc;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setFormOfTransport(String formOfTransport) {
+        this.formOfTransport = formOfTransport;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public String getAssignedEmployee() {
+        return assignedEmployee;
+    }
+
+    public void setAssignedEmployee(String assignedEmployee) {
+        this.assignedEmployee = assignedEmployee;
+    }
+
+    @Override
+    public String toString() {
+        return "ExternalTransportSR{" +
+                "srID='" + srID + '\'' +
+                ", status=" + status +
+                ", pickupLoc='" + pickupLoc + '\'' +
+                ", destination='" + destination + '\'' +
+                ", info='" + info + '\'' +
+                ", date='" + date + '\'' +
+                ", formOfTransport='" + formOfTransport + '\'' +
+                ", employee=" + employee +
+                ", assignedEmployee='" + assignedEmployee + '\'' +
+                '}';
+    }
+
+    public String toStringFields() {
+        return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + assignedEmployee;
+    }
 }

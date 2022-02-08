@@ -12,6 +12,17 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+
+            stmt.execute("DROP TABLE MedicalEquipment");
+        } catch (SQLException e) {
+            System.out.println("Drop Medical Equipment Table: Failed!");
+        }
+    }
+
     public void createTable() {
 
         try {
@@ -44,13 +55,6 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
 
     @Override
     public void restore(List<MedicalEquipment> list) {
-        try {
-            Statement stmt = conn.createStatement();
-
-            stmt.execute("DROP TABLE MedicalEquipment");
-        } catch (SQLException e) {
-            System.out.println("Drop Medical Equipment Table: Failed!");
-        }
 
         try {
             createTable();

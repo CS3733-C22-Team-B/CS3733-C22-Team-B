@@ -13,6 +13,16 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE ExternalTransportSR");
+        } catch (SQLException e) {
+            System.out.println("Drop ExternalTransportationSR Table: Failed!");
+        }
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -44,12 +54,6 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
 
     @Override
     public void restore(List<ExternalTransportSR> list) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE ExternalTransportSR");
-        } catch (SQLException e) {
-            System.out.println("Drop ExternalTransportationSR Table: Failed!");
-        }
 
         try {
             createTable();
@@ -64,6 +68,8 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
                 String destination = externalTransportSR.getDestination();
                 String info = externalTransportSR.getInfo();
                 String date = externalTransportSR.getDate();
+                String formOfTransport = externalTransportSR.getFormOfTransport();
+                String assignedEmployee = externalTransportSR.getAssignedEmployee();
 
                 PreparedStatement pstmt =
                         conn.prepareStatement(
@@ -74,6 +80,8 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
                 pstmt.setString(4, destination);
                 pstmt.setString(5, info);
                 pstmt.setString(6, date);
+                pstmt.setString(7, formOfTransport);
+                pstmt.setString(8, assignedEmployee);
 
                 pstmt.executeUpdate();
                 pstmt.close();
