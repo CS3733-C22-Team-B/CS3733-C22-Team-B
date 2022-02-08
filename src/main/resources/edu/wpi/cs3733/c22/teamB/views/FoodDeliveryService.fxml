@@ -9,43 +9,37 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.FoodDeliverySRController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="#93c0eb" height="340.0" layoutX="15.0" layoutY="45.0" stroke="BLACK" strokeType="OUTSIDE" width="575.0" />
-        <Label layoutX="103.0" layoutY="286.0" prefHeight="50.0" prefWidth="450.0" text="Please choose a meal to be delivered" textAlignment="CENTER" wrapText="true">
+        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="#93c0eb" height="373.0" layoutX="12.0" layoutY="14.0" stroke="BLACK" strokeType="OUTSIDE" width="577.0" />
+        <Label layoutX="93.0" layoutY="268.0" prefHeight="50.0" prefWidth="450.0" text="Please choose a meal to be delivered" textAlignment="CENTER" wrapText="true">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <Label layoutX="42.0" layoutY="114.0">
+        <Label layoutX="40.0" layoutY="84.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="33.0" layoutY="68.0" text="Name">
+        <Label layoutX="31.0" layoutY="38.0" text="Name">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="AssigneeName" layoutX="33.0" layoutY="95.0" prefHeight="39.0" prefWidth="540.0">
+        <TextField fx:id="AssigneeName" layoutX="31.0" layoutY="65.0" prefHeight="39.0" prefWidth="540.0">
             <font>
                 <Font size="18.0" />
             </font>
         </TextField>
-        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="DODGERBLUE" height="35.0" layoutX="15.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="575.0" />
-        <Label layoutX="42.0" layoutY="7.0" text="Food Delivery">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Label>
-        <JFXComboBox fx:id="ComboMeals" layoutX="42.0" layoutY="326.0" prefHeight="30.0" prefWidth="540.0" promptText="Meal" />
-      <JFXComboBox id="destinationField" fx:id="destinationField" layoutX="33.0" layoutY="153.0" prefHeight="25.0" prefWidth="540.0" promptText="Deliver to Location" />
-      <JFXComboBox fx:id="assignedEmployeeField" layoutX="33.0" layoutY="200.0" prefHeight="25.0" prefWidth="417.0" promptText="Assign employee" />
-      <JFXComboBox fx:id="statusField" layoutX="482.0" layoutY="203.0" prefHeight="25.0" prefWidth="91.0" promptText="Status" />
-      <TextField fx:id="idField" layoutX="30.0" layoutY="259.0" prefHeight="39.0" prefWidth="540.0">
+        <JFXComboBox fx:id="ComboMeals" layoutX="40.0" layoutY="313.0" prefHeight="30.0" prefWidth="540.0" promptText="Meal" />
+      <JFXComboBox id="destinationField" fx:id="destinationField" layoutX="31.0" layoutY="123.0" prefHeight="25.0" prefWidth="540.0" promptText="Deliver to Location" />
+      <JFXComboBox fx:id="assignedEmployeeField" layoutX="31.0" layoutY="170.0" prefHeight="25.0" prefWidth="417.0" promptText="Assign employee" />
+      <JFXComboBox fx:id="statusField" layoutX="480.0" layoutY="173.0" prefHeight="25.0" prefWidth="91.0" promptText="Status" />
+      <TextField fx:id="idField" layoutX="28.0" layoutY="229.0" prefHeight="39.0" prefWidth="540.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Label layoutX="33.0" layoutY="232.0" text="ID">
+      <Label layoutX="31.0" layoutY="202.0" text="ID">
          <font>
             <Font size="18.0" />
          </font>
