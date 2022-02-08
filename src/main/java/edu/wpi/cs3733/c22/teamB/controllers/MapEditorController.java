@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,14 @@ import java.util.List;
 
 public class MapEditorController {
 
+    public javafx.scene.control.TextField idField;
+    public TextField xCoordinate;
+    public TextField yCoordinate;
+    public TextField floor;
+    public TextField building;
+    public TextField nodeType;
+    public TextField shortName;
+    public TextField longName;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -51,6 +60,8 @@ public class MapEditorController {
 
     @FXML
     private JFXButton addButton;
+
+
 
     //Scene x coordinate to image x coordinate
     double getImageX(double desiredX){
@@ -288,7 +299,15 @@ public class MapEditorController {
     }
 
     @FXML public void modify(){
-
+        Location local = locationDBI.getNode(selectedPoint);
+        idField.setText(selectedPoint);
+        xCoordinate.setText(String.valueOf(local.getXcoord()));
+        yCoordinate.setText(String.valueOf(local.getYcoord()));
+        floor.setText(local.getFloor());
+        building.setText(local.getBuilding());
+        nodeType.setText(local.getNodeType());
+        shortName.setText(local.getShortName());
+        longName.setText(local.getLongName());
     }
 
     @FXML
