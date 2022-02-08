@@ -236,7 +236,6 @@ public class MedicineDeliverySR extends AbstractSR {
                 + ",patientID"
                 + ",DOB"
                 + ",email"
-                + ",room"
                 + ",dosage"
                 + ",medicineName"
                 + ",dispenseAmount"
