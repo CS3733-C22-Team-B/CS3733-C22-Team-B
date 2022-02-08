@@ -14,9 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Bapp extends Application {
     private static Stage _primaryStage;
 
-    public static Stage getPrimaryStage() {
-        return _primaryStage;
-    }
+    public static Stage getPrimaryStage() { return _primaryStage; }
 
     @Override
     public void init() throws IOException {
@@ -71,13 +69,13 @@ public class Bapp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/Login.fxml"));
         _primaryStage = primaryStage;
 
         Parent root = loader.load();
         primaryStage.setTitle("Bapp - Home Page");
         Scene scene = new Scene(root);
-        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
         scene.getStylesheets().add("/edu/wpi/cs3733/c22/teamB/styles/style.css");
         primaryStage.setScene(scene);
         primaryStage.show();

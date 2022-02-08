@@ -11,7 +11,7 @@ public class MedicineDeliverySRParserI implements IParser<MedicineDeliverySR> {
         MedicineDeliverySR medicineDeliverySR = new MedicineDeliverySR();
         Location destination = new Location();
         Employee assignedEmployee = new Employee();
-        Medicine medicine = new Medicine();
+
 
         String[] data = string.split(",");
 
@@ -21,8 +21,7 @@ public class MedicineDeliverySRParserI implements IParser<MedicineDeliverySR> {
         destination.setNodeID(data[2]);
         medicineDeliverySR.setDestination(destination);
 
-        medicine.setMedicationID(data[3]);
-        medicineDeliverySR.setMedicine(medicine);
+        medicineDeliverySR.setMedicineID(data[3]);
 
         assignedEmployee.setEmployeeID(data[4]);
         medicineDeliverySR.setAssignedEmployee(assignedEmployee);
@@ -32,13 +31,12 @@ public class MedicineDeliverySRParserI implements IParser<MedicineDeliverySR> {
         medicineDeliverySR.setPatientID(data[7]);
         medicineDeliverySR.setDOB(data[8]);
         medicineDeliverySR.setEmail(data[9]);
-        medicineDeliverySR.setRoom(data[10]);
-        medicineDeliverySR.setDosage(data[11]);
-        medicineDeliverySR.setMedicineName(data[12]);
-        medicineDeliverySR.setDispenseAmount(data[13]);
-        medicineDeliverySR.setFrequency(data[14]);
-        medicineDeliverySR.setForm(data[15]);
-        medicineDeliverySR.setMgPerDose(data[16]);
+        medicineDeliverySR.setDosage(data[10]);
+        medicineDeliverySR.setMedicineName(data[11]);
+        medicineDeliverySR.setDispenseAmount(data[12]);
+        medicineDeliverySR.setFrequency(data[13]);
+        medicineDeliverySR.setForm(data[14]);
+        medicineDeliverySR.setMgPerDose(data[15]);
 
         return medicineDeliverySR;
     }

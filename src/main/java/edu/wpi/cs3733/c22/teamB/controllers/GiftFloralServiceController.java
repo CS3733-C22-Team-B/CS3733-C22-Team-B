@@ -2,10 +2,13 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.entity.*;
+
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -13,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class GiftFloralServiceController implements IController, Initializable {
+
 
     @FXML private JFXComboBox<String> roomID;
     @FXML private DatePicker dateID;
@@ -47,68 +51,64 @@ public class GiftFloralServiceController implements IController, Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        LocationDBI locationDBI = new LocationDBI();
-        //        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        locList = locationDBI.getAllNodes();
-        locMap =
-                IntStream.range(0, locList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
-                                        i -> locList.get(i)));
-        //        locationDBI.closeConnection();
+        public void initialize(URL location, ResourceBundle resources) {
+            LocationDBI locationDBI = new LocationDBI();
+//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+            locList = locationDBI.getAllNodes();
+            locMap =
+                    IntStream.range(0, locList.size())
+                            .boxed()
+                            .collect(
+                                    Collectors.toMap(
+                                            i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
+                                            i -> locList.get(i)));
+//        locationDBI.closeConnection();
 
-        EmployeeDBI employeeDBI = new EmployeeDBI();
-        //        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        employeeList = employeeDBI.getAllNodes();
-        employeeMap =
-                IntStream.range(0, employeeList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i ->
-                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
-                                        i -> employeeList.get(i)));
-        //        employeeDBI.closeConnection();
 
-        statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
-        statusField.setValue("BLANK");
+            EmployeeDBI employeeDBI = new EmployeeDBI();
+//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+            employeeList = employeeDBI.getAllNodes();
+            employeeMap =
+                    IntStream.range(0, employeeList.size())
+                            .boxed()
+                            .collect(
+                                    Collectors.toMap(
+                                            i ->
+                                                    (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
+                                            i -> employeeList.get(i)));
+//        employeeDBI.closeConnection();
 
-        roomID.getItems().addAll(locMap.keySet());
+            statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
+            statusField.setValue("BLANK");
 
-        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
+            roomID.getItems().addAll(locMap.keySet());
 
-        giftOptions.getItems().add("Teddy Bears");
-        giftOptions.getItems().add("Rose Bouquet");
-        giftOptions.getItems().add("Floral Wreath");
-        giftOptions.getItems().add("Tulip Bouquet");
-    }
+
+            assignedEmployeeField.getItems().addAll(employeeMap.keySet());
+
+            giftOptions.getItems().add("Teddy Bears");
+            giftOptions.getItems().add("Rose Bouquet");
+            giftOptions.getItems().add("Floral Wreath");
+            giftOptions.getItems().add("Tulip Bouquet");
+        }
 
     @Override
     public void submit() {
 
-        GiftFloralSR request =
-                new GiftFloralSR(
-                        idField.getText(),
-                        statusField.getValue(),
-                        giftOptions.getValue(),
-                        dateID.getValue().toString(),
-                        roomID.getValue());
-        System.out.println(request.toString());
-        giftfloralDatabase.insertNode(request);
-        clear();
+      GiftFloralSR request = new GiftFloralSR(idField.getText(), statusField.getValue(), giftOptions.getValue(), dateID.getValue().toString(), roomID.getValue());
+      System.out.println(request.toString());
+      giftfloralDatabase.insertNode(request);
+      clear();
     }
 
     @Override
     public void clear() {
         confirmLabel.setText(" ");
-        statusField.setValue("BLANK");
-        roomID.setValue(locList.get(0).getNodeID() + ' ' + locList.get(0).getLongName());
+        statusField.setValue("");
+        roomID.setValue("");
         idField.clear();
-        giftOptions.setValue(" ");
-        assignedEmployeeField.setValue(
-                employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
+        giftOptions.setValue("");
+        assignedEmployeeField.setValue("");
+        dateID.getEditor().clear();
     }
 }

@@ -2,57 +2,57 @@ package edu.wpi.cs3733.c22.teamB.entity;
 
 public class MedicineDeliverySR extends AbstractSR {
     private Location destination;
-    private Medicine medicine;
+    private String medicineID;
     private Employee assignedEmployee;
     private String patientFirstName;
     private String patientLastName;
     private String patientID;
     private String DOB;
     private String email;
-    private String room;
     //    TODO add allergies
-    //    private String allergies;
+//    private String allergies;
     private String dosage;
     private String medicineName;
     private String dispenseAmount;
-    private String frequency;
+    private  String frequency;
     private String form;
     private String mgPerDose;
 
+
     public MedicineDeliverySR(
-            String srID,
-            String statusStr,
-            Location destination,
-            Medicine medicine,
-            Employee assignedEmployee,
-            String patientFirstName,
-            String patientLastName,
-            String patientID,
-            String DOB,
-            String email,
-            String room,
-            String dosage,
-            String medicineName,
-            String dispenseAmount,
-            String frequency,
-            String form,
-            String mgPerDose) {
+                String srID,
+                String statusStr,
+                Location destination,
+                String medicineID,
+                Employee assignedEmployee,
+                String patientFirstName,
+                String patientLastName,
+                String patientID,
+                String DOB,
+                String email,
+                String dosage,
+                String medicineName,
+                String dispenseAmount,
+                String frequency,
+                String form,
+                String mgPerDose
+                ) {
         super(srID, statusStr);
         this.destination = destination;
-        this.medicine = medicine;
+        this.medicineID = medicineID;
         this.assignedEmployee = assignedEmployee;
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.patientID = patientID;
         this.DOB = DOB;
         this.email = email;
-        this.room = room;
         this.dosage = dosage;
         this.medicineName = medicineName;
         this.dispenseAmount = dispenseAmount;
         this.frequency = frequency;
         this.form = form;
         this.mgPerDose = mgPerDose;
+
     }
 
     public MedicineDeliverySR() {
@@ -79,10 +79,6 @@ public class MedicineDeliverySR extends AbstractSR {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getRoom() {
-        return room;
     }
 
     public String getDosage() {
@@ -117,12 +113,8 @@ public class MedicineDeliverySR extends AbstractSR {
         this.destination = destination;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
-    }
-
-    public void setMedicalEquipment(Medicine medicine) {
-        this.medicine = medicine;
+    public String getMedicineID() {
+        return medicineID;
     }
 
     public Employee getAssignedEmployee() {
@@ -133,8 +125,8 @@ public class MedicineDeliverySR extends AbstractSR {
         this.assignedEmployee = assignedEmployee;
     }
 
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
+    public void setMedicineID(String medicineID) {
+        this.medicineID = medicineID;
     }
 
     public void setPatientFirstName(String patientFirstName) {
@@ -155,10 +147,6 @@ public class MedicineDeliverySR extends AbstractSR {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setRoom(String room) {
-        this.room = room;
     }
 
     public void setDosage(String dosage) {
@@ -195,7 +183,7 @@ public class MedicineDeliverySR extends AbstractSR {
                 + "destination="
                 + destination.getNodeID()
                 + ", medicalEquipment="
-                + medicine.getMedicationID()
+                + medicineID
                 + ", assignedEmployee="
                 + assignedEmployee.getEmployeeID()
                 + '}';
@@ -208,7 +196,7 @@ public class MedicineDeliverySR extends AbstractSR {
                 + ","
                 + destination.getNodeID()
                 + ","
-                + medicine.getMedicationID()
+                + medicineID
                 + ","
                 + assignedEmployee.getEmployeeID()
                 + ","
@@ -222,18 +210,17 @@ public class MedicineDeliverySR extends AbstractSR {
                 + ","
                 + email
                 + ","
-                + room
-                + ","
                 + dosage
                 + ","
                 + medicineName
                 + ","
                 + dispenseAmount
                 + ","
-                + frequency
+                +frequency
                 + ","
                 + form
                 + ","
                 + mgPerDose;
     }
+
 }

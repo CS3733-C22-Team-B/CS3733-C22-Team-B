@@ -7,8 +7,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Screen;
 
 public class HomeController {
+
+    @FXML
+    private void initialize(){
+        Bapp.getPrimaryStage().setResizable(true);
+        Bapp.getPrimaryStage().setX(0);
+        Bapp.getPrimaryStage().setY(0);
+        Bapp.getPrimaryStage().setWidth(Screen.getPrimary().getVisualBounds().getWidth());
+        Bapp.getPrimaryStage().setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+    }
+
     @FXML
     private void goToMedEquipDeliveryService(ActionEvent actionEvent) {
         try {
