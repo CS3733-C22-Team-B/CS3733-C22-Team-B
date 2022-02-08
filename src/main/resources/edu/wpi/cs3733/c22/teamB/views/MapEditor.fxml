@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -42,6 +43,24 @@
                   <JFXButton onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
                   <Pane prefHeight="20" />
                   <JFXButton onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Pane prefHeight="20" />
+                  <JFXButton onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>

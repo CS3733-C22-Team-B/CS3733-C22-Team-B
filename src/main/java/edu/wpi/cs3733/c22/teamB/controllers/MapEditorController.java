@@ -144,6 +144,7 @@ public class MapEditorController {
         addPoints();
     }
 
+    @FXML public void loadFromCSV(){}
     //TODO Backup Button (go to csv)
 
     @FXML public void goToL2(){
@@ -294,6 +295,10 @@ public class MapEditorController {
     void loadFromCSV(ActionEvent event) {
         //Ben Here's your button it exists now lessssgoooo
         //TODO get it to work
+    }
+
+    public void submitModify(ActionEvent actionEvent) {
+        
     }
 
 }
