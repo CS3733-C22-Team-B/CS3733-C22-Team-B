@@ -37,7 +37,7 @@ public class CSVWriter2 {
         writer.close();
     }
 
-    private void backupDir(String fileName) throws FileNotFoundException {
+    public void backupDir(String fileName) throws FileNotFoundException {
         String pathString = new File("").getAbsolutePath();
         File f = new File(pathString);
 
