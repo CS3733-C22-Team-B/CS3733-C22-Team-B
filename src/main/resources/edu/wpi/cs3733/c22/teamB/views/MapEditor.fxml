@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
+   <children>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefWidth="500" />
+            <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../images/thirdFloorMap.png" />
+               </image>
+            </ImageView>
+            <VBox prefWidth="500">
+               <children>
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#homeButton" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Home" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton fx:id="addButton" onAction="#add" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Add" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton fx:id="modifyButton" onAction="#modify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Modify" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Delete" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L2" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L1" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 1" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 2" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#saveToCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Save to CSV" textAlignment="CENTER" />
+                  <Label fx:id="header1" text="Location ID:" prefHeight="15" />
+                  <TextField fx:id="idField" promptText="Location ID" />
+                  <Label fx:id="header2" text="x Coordinate:" prefHeight="15" />
+                  <TextField fx:id="xCoordinate" promptText="x Coordinate" />
+                  <Label fx:id="header3" text="y Coordinate:" prefHeight="15" />
+                  <TextField fx:id="yCoordinate" promptText="y Coordinate" />
+                  <Label fx:id="header4" text="Floor:" prefHeight="15" />
+                  <TextField fx:id="floor" promptText="Floor" />
+                  <Label fx:id="header5" text="Building:" prefHeight="15" />
+                  <TextField fx:id="building" promptText="Building" />
+                  <Label fx:id="header6" text="Node Type:" prefHeight="15" />
+                  <TextField fx:id="nodeType" promptText="Node Type" />
+                  <Label fx:id="header7" text="Short Name:" prefHeight="15" />
+                  <TextField fx:id="shortName" promptText="Short Name" />
+                  <Label fx:id="header8" text="Long Name:" prefHeight="15" />
+                  <TextField fx:id="longName" promptText="Long Name" />
+                  <Pane prefHeight="15" />
+                  <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+
+</AnchorPane>
