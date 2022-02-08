@@ -17,7 +17,6 @@ public class GiftFloralSR extends AbstractSR {
             String statusStr,
             List<GiftType> listOfGifts,
             String deliveryDate,
-            String deliveryFloor,
             String deliveryRoom) {
 
         super(srID, statusStr);
