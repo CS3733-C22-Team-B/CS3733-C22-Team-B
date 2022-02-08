@@ -103,6 +103,7 @@ public class MedicineDeliverySRController implements IController, Initializable 
 
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         medicineDeliverySRDBI.insertNode(medicineDeliverySR);
+        clear();
     }
 
 
@@ -121,10 +122,9 @@ public class MedicineDeliverySRController implements IController, Initializable 
         mgPerDose.clear();
         idField.clear();
         roomNumber.setValue("");
-        assignedEmployeeField.setValue(
-                employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
-        statusField.setValue("BLANK");
-        roomNumber.setValue(locList.get(0).getNodeID() + ' ' + locList.get(0).getLongName());
+        assignedEmployeeField.setValue("");
+        statusField.setValue("");
+        roomNumber.setValue("");
     }
 
 }
