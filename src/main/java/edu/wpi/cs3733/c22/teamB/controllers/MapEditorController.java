@@ -47,6 +47,7 @@ public class MapEditorController {
     public Label header6;
     public Label header7;
     public Label header8;
+    public JFXButton deleteButton;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -114,7 +115,7 @@ public class MapEditorController {
         double mapWidth = imageWidth*(sceneHeight/imageHeight);
         //System.out.println("mapWidth = " + mapWidth);
         //The offset from the side of the scene
-        double xOffset = (sceneWidth-mapWidth)/2.0;
+        double xOffset = 0;//(sceneWidth-mapWidth)/2.0;
         //Return the new coordinate
         return desiredX*(mapWidth/imageWidth) + xOffset;
     }
@@ -131,7 +132,7 @@ public class MapEditorController {
         double mapWidth = imageWidth*(sceneHeight/imageHeight);
         //System.out.println("mapWidth = " + mapWidth);
         //The offset from the side of the scene
-        double xOffset = (sceneWidth-mapWidth)/2.0;
+        double xOffset = 0;//(sceneWidth-mapWidth)/2.0;
         //Return the new coordinate
         return (desiredX-xOffset)/(mapWidth/imageWidth);
     }
@@ -170,6 +171,8 @@ public class MapEditorController {
         testPoint.setOnMouseClicked(event -> {
             modifyButton.setOpacity(1);
             modifyButton.setDisable(false);
+            deleteButton.setOpacity(1);
+            deleteButton.setDisable(false);
             onPointClick(testPoint);
         });
     }
@@ -298,8 +301,10 @@ public class MapEditorController {
         }
         selectedPoint = null;
         selectedPnt = null;
-        modifyButton.setOpacity(1);
-        modifyButton.setDisable(false);
+        modifyButton.setOpacity(0.5);
+        modifyButton.setDisable(true);
+        deleteButton.setOpacity(0.5);
+        deleteButton.setDisable(true);
         refresh();
     }
 
@@ -341,6 +346,8 @@ public class MapEditorController {
         setEditFieldsVisible(false);
         modifyButton.setOpacity(0.5);
         modifyButton.setDisable(true);
+        deleteButton.setOpacity(0.5);
+        deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
 
 
