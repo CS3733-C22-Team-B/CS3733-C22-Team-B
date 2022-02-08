@@ -64,6 +64,54 @@ public class MedicineDeliverySR extends AbstractSR {
         this.assignedEmployee = null;
     }
 
+    public String getPatientFirstName() {
+        return patientFirstName;
+    }
+
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public String getDispenseAmount() {
+        return dispenseAmount;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public String getForm() {
+        return form;
+    }
+
+    public String getMgPerDose() {
+        return mgPerDose;
+    }
+
     public Location getDestination() {
         return destination;
     }

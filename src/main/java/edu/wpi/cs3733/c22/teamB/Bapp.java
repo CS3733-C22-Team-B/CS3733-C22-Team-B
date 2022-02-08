@@ -1,6 +1,12 @@
 package edu.wpi.cs3733.c22.teamB;
 
 import java.io.IOException;
+import java.util.List;
+
+import edu.wpi.cs3733.c22.teamB.entity.*;
+import java.util.Locale;
+
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +23,38 @@ public class Bapp extends Application {
     }
 
     @Override
-    public void init() {
+    public void init() throws IOException {
         log.info("Starting Up");
+
+        LocationDBI locationDBI = new LocationDBI();
+        locationDBI.createTable();
+
+        EmployeeDBI employeeDBI = new EmployeeDBI();
+        employeeDBI.createTable();
+
+        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
+        medicalEquipmentDBI.createTable();
+
+        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
+        medicalEquipmentSRDBI.createTable();
+
+        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+        giftFloralSRDBI.createTable();
+
+        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
+        foodDeliverySRDBI.createTable();
+
+        MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
+        medicineDeliverySRDBI.createTable();
+
+        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
+        externalTransportSRDBI.createTable();
+
+        LocationParserI locParser = new LocationParserI();
+        CSVReader2 reader = new CSVReader2();
+
+//        List<String> stringList = reader.firstRestore("TowerLocationsB.csv");
+//        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
 
     @Override

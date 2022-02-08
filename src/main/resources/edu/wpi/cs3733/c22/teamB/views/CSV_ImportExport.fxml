@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.CSVImportController_unused">
+   <children>
+      <TextField fx:id="RestoringTxt" layoutX="226.0" layoutY="175.0" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="180.0" />
+      <JFXButton fx:id="HomeButton" layoutX="61.0" layoutY="50.0" onAction="#goToHome" prefHeight="37.0" styleClass="pane" stylesheets="@../styles/style.css" text="Home" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <Label fx:id="TitleLabel" layoutX="223.0" layoutY="42.0" prefWidth="300.0" styleClass="tab" stylesheets="@../styles/style.css" text="CSV Restore and Backup" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="SubmitButton" layoutX="119.0" layoutY="312.0" onAction="#Submit" prefHeight="58.0" prefWidth="363.0" styleClass="pane" stylesheets="@../styles/style.css" text="Done" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" />
+      <JFXToggleButton fx:id="ImportExportSlider" layoutX="237.0" layoutY="89.0" onAction="#SwitchAction" text="Restoring file" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="BackupTxt" disable="true" layoutX="215.0" layoutY="212.0" visible="false" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="180.0" />
+      <Label fx:id="FileNameLabel" layoutX="110.0" layoutY="184.0" text="File from path" />
+      <JFXComboBox fx:id="TablePicker" layoutX="226.0" layoutY="225.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label fx:id="FileNameLabel1" layoutX="110.0" layoutY="229.0" text="Table to Restore" />
+   </children>
+</AnchorPane>
