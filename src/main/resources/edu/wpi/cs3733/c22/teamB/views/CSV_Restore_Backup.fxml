@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.CSVRestoreBackupController">
    <children>
       <GridPane layoutX="4.0" layoutY="78.0" prefHeight="345.0" prefWidth="500.0">
@@ -25,7 +24,7 @@
          </children>
       </GridPane>
       <JFXButton fx:id="HomeB" layoutX="509.0" layoutY="45.0" onAction="#goToHome" styleClass="JFXButtonLight" stylesheets="@../styles/style.css" text="Home" />
-      <Label alignment="TOP_CENTER" layoutX="97.0" layoutY="14.0" prefHeight="17.0" prefWidth="407.0" styleClass="tab" stylesheets="@../styles/style.css" text="CSV File Restoring and Backup">
+      <Label alignment="TOP_CENTER" layoutX="97.0" layoutY="14.0" prefHeight="17.0" prefWidth="407.0" styleClass="lightPane" stylesheets="@../styles/style.css" text="CSV File Restoring and Backup">
          <font>
             <Font size="18.0" />
          </font>
