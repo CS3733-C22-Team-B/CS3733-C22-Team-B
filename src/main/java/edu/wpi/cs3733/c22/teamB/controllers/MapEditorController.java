@@ -61,7 +61,48 @@ public class MapEditorController {
     @FXML
     private JFXButton addButton;
 
+    @FXML
+    private JFXButton modifyButton;
 
+    @FXML
+    private JFXButton submitModifyButton;
+
+    @FXML
+    private Label header1;
+    @FXML
+    private Label header2;
+    @FXML
+    private Label header3;
+    @FXML
+    private Label header4;
+    @FXML
+    private Label header5;
+    @FXML
+    private Label header6;
+    @FXML
+    private Label header7;
+    @FXML
+    private Label header8;
+
+    void setEditFieldsVisible(boolean isVisible){
+        header1.setVisible(isVisible);
+        header2.setVisible(isVisible);
+        header3.setVisible(isVisible);
+        header4.setVisible(isVisible);
+        header5.setVisible(isVisible);
+        header6.setVisible(isVisible);
+        header7.setVisible(isVisible);
+        header8.setVisible(isVisible);
+        idField.setVisible(isVisible);
+        xCoordinate.setVisible(isVisible);
+        yCoordinate.setVisible(isVisible);
+        floor.setVisible(isVisible);
+        building.setVisible(isVisible);
+        nodeType.setVisible(isVisible);
+        longName.setVisible(isVisible);
+        shortName.setVisible(isVisible);
+        submitModifyButton.setVisible(isVisible);
+    }
 
     //Scene x coordinate to image x coordinate
     double getImageX(double desiredX){
@@ -123,6 +164,8 @@ public class MapEditorController {
         testPoint.idProperty().set(ID);
         //Set up onclick events
         testPoint.setOnMouseClicked(event -> {
+            modifyButton.setOpacity(1);
+            modifyButton.setDisable(false);
             onPointClick(testPoint);
         });
     }
@@ -197,6 +240,10 @@ public class MapEditorController {
                 imageView.setImage(thirdFloorImage);
             break;
         }
+        selectedPoint = null;
+        selectedPnt = null;
+        modifyButton.setOpacity(1);
+        modifyButton.setDisable(false);
         refresh();
     }
 
@@ -235,12 +282,34 @@ public class MapEditorController {
         imageView.setFitHeight(sceneHeight);
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
-
+        setEditFieldsVisible(false);
+        modifyButton.setOpacity(0.5);
+        modifyButton.setDisable(true);
 
 
         addPoint("1",0,0,Color.ORANGE);
-        addPoint("2",5000,3400, Color.RED);
+        addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
+    }
+
+    @FXML public void modify(){
+        setEditFieldsVisible(true);
+        Location local = locationDBI.getNode(selectedPoint);
+        idField.setText(selectedPoint);
+        xCoordinate.setText(String.valueOf(local.getXcoord()));
+        yCoordinate.setText(String.valueOf(local.getYcoord()));
+        floor.setText(local.getFloor());
+        building.setText(local.getBuilding());
+        nodeType.setText(local.getNodeType());
+        shortName.setText(local.getShortName());
+        longName.setText(local.getLongName());
+    }
+
+    public void submitModify(ActionEvent actionEvent) {
+        Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getText(),building.getText(),nodeType.getText(),shortName.getText(),longName.getText());
+        locationDBI.updateNode(changedNode);
+        refresh();
+        setEditFieldsVisible(false);
     }
 
     @FXML
@@ -256,14 +325,19 @@ public class MapEditorController {
             double xCord = getMapX(event.getSceneX());
             double yCord = getMapY(event.getSceneY());
             //Adds point to the map
-            addPoint(String.valueOf(nextID),xCord,yCord,Color.GREEN);
+            addPoint(String.valueOf(nextID),xCord,yCord,Color.YELLOW);
             //Create new location
-            Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Temp","Temp","Temp","Temp");
+            Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Building","Node Type","Long Name","Short Name");
             //Add new location to the database
             locationDBI.insertNode(newLoc);
-            //Make sure the locationList has this update
-            locationList = locationDBI.getAllNodes();
-            editNodeDetails(newLoc);
+
+            selectedPoint = newLoc.getNodeID();
+            modify();
+
+            //FEATURE ON HOLD
+            //editNodeDetails(newLoc);
+
+
             //Set button back to add mode
             addButton.setOpacity(1);
             addButton.setText("Add");
@@ -298,26 +372,10 @@ public class MapEditorController {
         }
     }
 
-    @FXML public void modify(){
-        Location local = locationDBI.getNode(selectedPoint);
-        idField.setText(selectedPoint);
-        xCoordinate.setText(String.valueOf(local.getXcoord()));
-        yCoordinate.setText(String.valueOf(local.getYcoord()));
-        floor.setText(local.getFloor());
-        building.setText(local.getBuilding());
-        nodeType.setText(local.getNodeType());
-        shortName.setText(local.getShortName());
-        longName.setText(local.getLongName());
-    }
-
     @FXML
     void loadFromCSV(ActionEvent event) {
         //Ben Here's your button it exists now lessssgoooo
         //TODO get it to work
-    }
-
-    public void submitModify(ActionEvent actionEvent) {
-        
     }
 
 }
