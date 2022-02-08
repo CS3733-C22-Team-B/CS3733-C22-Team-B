@@ -46,19 +46,19 @@
                   <Pane prefHeight="20" />
                   <TextField fx:id="idField" promptText="Location ID" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="xCoordinate" promptText="x Coordinate" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="yCoordinate" promptText="y Coordinate" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="floor" promptText="Current Floor" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="building" promptText="Building" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="nodeType" promptText="Node Type" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="shortName" promptText="Short Name" />
                   <Pane prefHeight="20" />
-                  <TextField fx:id="idField" promptText="Location ID" />
+                  <TextField fx:id="longName" promptText="Long Name" />
                   <Pane prefHeight="20" />
                   <JFXButton onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
                </children>
