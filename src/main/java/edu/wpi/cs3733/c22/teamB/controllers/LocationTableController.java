@@ -75,6 +75,8 @@ public class LocationTableController {
                 deleteButton.setDisable(false);
             }
         });
+
+        loadTable();
     }
 
     @FXML
