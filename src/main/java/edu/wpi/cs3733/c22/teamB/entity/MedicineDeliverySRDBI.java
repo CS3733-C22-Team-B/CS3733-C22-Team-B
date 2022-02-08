@@ -50,15 +50,17 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                                 + "frequency VARCHAR(50),"
                                 + "form VARCHAR(50),"
                                 + "mgPerDose VARCHAR(50),"
-                                + " PRIMARY KEY (srID),"
-                                + "CONSTRAINT FK_MedicineDeliverySR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL,"
-                                + "CONSTRAINT FK_MedicineDeliverySR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
+                                + " PRIMARY KEY (srID)," +
+                                "CONSTRAINT FK_MedicineDeliverySR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
+                                "CONSTRAINT FK_MedicineDeliverySR_Employee FOREIGN KEY (employeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
+
             }
         } catch (SQLException e) {
             System.out.println("Create MedicineDeliverySR Table: Failed!");
             e.printStackTrace();
         }
     }
+
 
     public List<MedicineDeliverySR> getAllNodes() {
         List<MedicineDeliverySR> medicineDeliverySRList = new ArrayList<>();
@@ -112,6 +114,8 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                 EmployeeDBI employeeDBI = new EmployeeDBI();
                 Employee employee = employeeDBI.getNode(employeeID);
 
+
+
                 medicineDeliverySRList.add(
                         new MedicineDeliverySR(
                                 srID,
@@ -137,6 +141,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
         }
         return medicineDeliverySRList;
     }
+
 
     public MedicineDeliverySR getNode(String nodeID) {
         MedicineDeliverySR medicineDeliverySR = new MedicineDeliverySR();
@@ -170,24 +175,9 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             EmployeeDBI employeeDBI = new EmployeeDBI();
             Employee employee = employeeDBI.getNode(employeeID);
 
-            medicineDeliverySR =
-                    new MedicineDeliverySR(
-                            nodeID,
-                            status,
-                            location,
-                            medicineID,
-                            employee,
-                            patientFirstName,
-                            patientLastName,
-                            patientID,
-                            DOB,
-                            email,
-                            dosage,
-                            medicineName,
-                            dispenseAmount,
-                            frequency,
-                            form,
-                            mgPerDose);
+
+
+            medicineDeliverySR =  new MedicineDeliverySR(nodeID, status,location,medicineID,employee,patientFirstName,patientLastName,patientID,DOB,email,dosage,medicineName,dispenseAmount,frequency,form,mgPerDose);
 
         } catch (SQLException e) {
             System.out.println("Get MedicineDeliverySR ID Failed");
@@ -202,7 +192,8 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                     conn.prepareStatement("DELETE FROM MedicineDeliverySR WHERE srID = ?");
             pstmt.setString(1, nodeID);
 
-            pstmt.executeUpdate();
+                pstmt.executeUpdate();
+
 
             pstmt.close();
 
@@ -212,6 +203,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
         }
     }
 
+
     public void updateNode(MedicineDeliverySR node) {
 
         try {
@@ -220,7 +212,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
                             "UPDATE MedicineDeliverySR SET status = ?, locationID = ?, medicineID = ?, employeeID = ?, patientFirstName = ?, patientLastName = ?, patientID = ?, DOB = ?, email = ?, dosage = ?, medicineName = ?, dispenseAmount = ?, frequency = ?, form = ?, mgPerDose = ? WHERE srID = ? ");
 
             pstmt.setString(1, node.getStatusString());
-            pstmt.setString(2, node.getDestination().getNodeID());
+            pstmt.setString(2,node.getDestination().getNodeID());
             pstmt.setString(3, node.getMedicineID());
             pstmt.setString(4, node.getAssignedEmployee().getEmployeeID());
             pstmt.setString(5, node.getPatientFirstName());
@@ -235,6 +227,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             pstmt.setString(14, node.getForm());
             pstmt.setString(15, node.getMgPerDose());
             pstmt.setString(16, node.getSrID());
+
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -255,7 +248,7 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
 
             pstmt.setString(1, node.getSrID());
             pstmt.setString(2, node.getStatusString());
-            pstmt.setString(3, node.getDestination().getNodeID());
+            pstmt.setString(3,node.getDestination().getNodeID());
             pstmt.setString(4, node.getMedicineID());
             pstmt.setString(5, node.getAssignedEmployee().getEmployeeID());
             pstmt.setString(6, node.getPatientFirstName());
@@ -269,6 +262,8 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
             pstmt.setString(14, node.getFrequency());
             pstmt.setString(15, node.getForm());
             pstmt.setString(16, node.getMgPerDose());
+
+
 
             pstmt.executeUpdate();
             pstmt.close();

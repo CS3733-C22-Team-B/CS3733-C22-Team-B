@@ -1,4 +1,4 @@
-package edu.wpi.teamB;
+/*package edu.wpi.cs3733.c22.teamB;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,8 +7,6 @@ import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
 import org.junit.jupiter.api.Test;
 
 public class LocationDBTest {
-
-    // assertEquals(expected, actual);
 
     LocationDBI locationDBI = new LocationDBI();
     Location location1 =
@@ -52,6 +50,8 @@ public class LocationDBTest {
     @Test
     public void testGetNode1() {
 
+        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         locationDBI.updateNode(
                 new Location(
                         "FDEPT00101",
@@ -63,35 +63,52 @@ public class LocationDBTest {
                         "Center for International Medicine",
                         "CIM"));
         assertEquals(location1.toString(), locationDBI.getNode("FDEPT00101").toString());
+
+        locationDBI.closeConnection();
     }
 
     @Test
     public void testGetNode2() {
+        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
         assertEquals(location88.toString(), locationDBI.getNode("HHALL00603").toString());
+        locationDBI.closeConnection();
     }
 
     @Test
     public void testInsertNode() {
+        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         locationDBI.insertNode(location3);
         locationDBI.isInTable("InsertTest");
         assertEquals("InsertTest", location3.getNodeID());
         locationDBI.deleteNode("InsertTest");
+
+        locationDBI.closeConnection();
     }
 
     @Test
     public void testInsertEmptyNode() {
+        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         assertNull(emptyLocation.getNodeID());
+
+        locationDBI.closeConnection();
     }
 
     @Test
     public void testDeleteNode() {
+        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         locationDBI.deleteNode("CDEPT002L1");
         assertFalse(locationDBI.getAllNodes().contains(location2));
         locationDBI.insertNode(location2);
+        locationDBI.closeConnection();
     }
 
     @Test
     public void testUpdateNode() {
+        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         locationDBI.insertNode(location4);
         Location locationTest1 =
                 new Location("UpdateTest", 6, 7, "1", "building", "type", "name", "shortname");
@@ -99,5 +116,10 @@ public class LocationDBTest {
         locationDBI.updateNode(locationTest1);
         assertEquals(locationTest1.toString(), locationDBI.getNode("UpdateTest").toString());
         locationDBI.deleteNode("UpdateTest");
+
+        locationDBI.closeConnection();
     }
 }
+
+                                                                    // assertEquals(expected, actual);
+*/
