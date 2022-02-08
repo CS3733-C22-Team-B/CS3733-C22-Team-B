@@ -63,6 +63,7 @@ public class MedicalEquipmentSRParserI implements IParser<MedicalEquipmentSR> {
     @Override
     public List<String> fromObjectsToStrings(List<MedicalEquipmentSR> medEqSRList) {
         List<String> listString = new ArrayList<>();
+        listString.add(MedicineDeliverySR.toStringHeader());
         for (MedicalEquipmentSR medEqSR : medEqSRList) {
             listString.add(medEqSR.toStringFields());
         }

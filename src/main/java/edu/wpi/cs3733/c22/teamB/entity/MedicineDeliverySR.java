@@ -240,4 +240,26 @@ public class MedicineDeliverySR extends AbstractSR {
                 + mgPerDose;
     }
 
+
+    public static String toStringHeader() {
+
+        return "srID"
+                + ",status"
+                + ",locationID"
+                + ",medicineID"
+                + ",employeeID"
+                + ",patientFirstName"
+                + ",patientLastName"
+                + ",patientID"
+                + ",DOB"
+                + ",email"
+                + ",room"
+                + ",dosage"
+                + ",medicineName"
+                + ",dispenseAmount"
+                + ",frequency"
+                + ",form"
+                + ",mGPerDose";
+    }
+
 }

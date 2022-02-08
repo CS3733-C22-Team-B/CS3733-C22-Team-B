@@ -70,4 +70,9 @@ public class MedicalEquipmentSR extends AbstractSR {
                 + ","
                 + assignedEmployee.getEmployeeID();
     }
+
+    public static String toStringHeader() {
+
+        return "srID,status,locationID,equipmentID,employeeID";
+    }
 }
