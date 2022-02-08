@@ -155,6 +155,7 @@ public class MedicalEquipmentTableController {
         equipmentTypeField.setVisible(true);
         manufacturerField.setVisible(true);
         statusField.setVisible(true);
+        LocationChoice.setVisible(true);
         colorField.setVisible(true);
         sizeField.setVisible(true);
         descriptionField.setVisible(true);
@@ -162,6 +163,7 @@ public class MedicalEquipmentTableController {
         equipmentTypeField.setDisable(false);
         manufacturerField.setDisable(false);
         statusField.setDisable(false);
+        LocationChoice.setDisable(false);
         colorField.setDisable(false);
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
@@ -175,6 +177,7 @@ public class MedicalEquipmentTableController {
         equipmentTypeField.setVisible(true);
         manufacturerField.setVisible(true);
         statusField.setVisible(true);
+        LocationChoice.setVisible(true);
         colorField.setVisible(true);
         sizeField.setVisible(true);
         descriptionField.setVisible(true);
@@ -182,6 +185,7 @@ public class MedicalEquipmentTableController {
         equipmentTypeField.setDisable(false);
         manufacturerField.setDisable(false);
         statusField.setDisable(false);
+        LocationChoice.setDisable(false);
         colorField.setDisable(false);
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
@@ -192,6 +196,7 @@ public class MedicalEquipmentTableController {
         equipmentTypeField.setText(loc.getEquipmentType());
         manufacturerField.setText(loc.getManufacturer());
         statusField.setValue(loc.getStatus());
+        LocationChoice.setValue(loc.getLocation());
         colorField.setText(loc.getColor());
         sizeField.setText(loc.getDescription());
         descriptionField.setText(loc.getDescription());
@@ -252,6 +257,7 @@ public class MedicalEquipmentTableController {
         equipmentTypeField.clear();
         manufacturerField.clear();
         statusField.setValue("");
+        LocationChoice.setValue("");
         colorField.clear();
         sizeField.clear();
         descriptionField.clear();
@@ -280,6 +286,7 @@ public class MedicalEquipmentTableController {
         equipmentNameField.setVisible(false);
         manufacturerField.setVisible(false);
         statusField.setVisible(false);
+        LocationChoice.setVisible(false);
         colorField.setVisible(false);
         sizeField.setVisible(false);
         descriptionField.setVisible(false);
