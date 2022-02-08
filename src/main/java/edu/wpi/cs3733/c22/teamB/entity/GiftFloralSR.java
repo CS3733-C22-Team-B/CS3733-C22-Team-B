@@ -5,9 +5,8 @@ import java.util.List;
 
 public class GiftFloralSR extends AbstractSR {
 
-    List<GiftType> listOfGifts;
+    String gift;
     String deliveryDate;
-    String deliveryFloor;
     String deliveryRoom;
 
 //    public GiftFloralSR(){}
@@ -15,26 +14,19 @@ public class GiftFloralSR extends AbstractSR {
     public GiftFloralSR(
             String srID,
             String statusStr,
-            List<GiftType> listOfGifts,
+            String gift,
             String deliveryDate,
-            String deliveryFloor,
             String deliveryRoom) {
 
         super(srID, statusStr);
-        this.listOfGifts = listOfGifts;
+        this.gift = gift;
         this.deliveryDate = deliveryDate;
-        this.deliveryFloor = deliveryFloor;
         this.deliveryRoom = deliveryRoom;
     }
 
     public GiftFloralSR(String srID, String statusStr) {
         super(srID, statusStr);
     }
-
-    public List<GiftType> getListOfGifts() {
-        return listOfGifts;
-    }
-
-
-
 }
+
+

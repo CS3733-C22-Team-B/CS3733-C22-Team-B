@@ -23,5 +23,6 @@
             <Font size="64.0" />
          </font>
       </Label>
+      <JFXButton fx:id="locationButton1" layoutX="421.0" layoutY="322.0" onAction="#goToMapEditor" text="Map Editor" />
    </children>
 </AnchorPane>
