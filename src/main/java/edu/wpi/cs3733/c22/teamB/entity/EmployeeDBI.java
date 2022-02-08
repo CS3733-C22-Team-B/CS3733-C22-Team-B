@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EmployeeDBI implements IDatabase<Employee> {
 
-    Connection conn;
+    private Connection conn;
 
     public EmployeeDBI() {
         this.conn = DBConnection.getConnection();

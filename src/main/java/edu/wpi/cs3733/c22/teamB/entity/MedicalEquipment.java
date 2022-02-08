@@ -123,36 +123,20 @@ public class MedicalEquipment {
 
     // to string
 
+
     @Override
     public String toString() {
-        return "MedicalEquipment{"
-                + "equipmentID='"
-                + equipmentID
-                + '\''
-                + ", equipmentName='"
-                + equipmentName
-                + '\''
-                + ", equipmentType='"
-                + equipmentType
-                + '\''
-                + ", manufacturer='"
-                + manufacturer
-                + '\''
-                + ", location="
-                + location.getNodeID()
-                + ", status='"
-                + status
-                + '\''
-                + ", color='"
-                + color
-                + '\''
-                + ", size='"
-                + size
-                + '\''
-                + ", description='"
-                + description
-                + '\''
-                + '}';
+        return "MedicalEquipment{" +
+                "equipmentID='" + equipmentID + '\'' +
+                ", equipmentName='" + equipmentName + '\'' +
+                ", equipmentType='" + equipmentType + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", location=" + location +
+                ", status='" + status + '\'' +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     public String toStringFields() {

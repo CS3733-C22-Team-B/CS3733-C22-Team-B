@@ -58,21 +58,6 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
 
         try {
             createTable();
-//            Statement stmt = conn.createStatement();
-//
-//            stmt.execute(
-//                    "create table MedicalEquipment( "
-//                            + "equipmentID VARCHAR(50), "
-//                            + "equipmentName VARCHAR(255), "
-//                            + "equipmentType VARCHAR(255), "
-//                            + "manufacturer VARCHAR(255), "
-//                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
-//                            + "status VARCHAR(255), "
-//                            + "color VARCHAR(255), "
-//                            + "size VARCHAR(255), "
-//                            + "description VARCHAR(255),"
-//                            + "PRIMARY KEY (equipmentID),"
-//                            + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
 
             // For each iteration of location in the list of location
             for (MedicalEquipment medEquipment : list) {
@@ -267,14 +252,13 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             pstmt.setString(8, node.getSize());
             pstmt.setString(9, node.getDescription());
 
-            if(isInTable(node.getEquipmentID())) {
+            if(!isInTable(node.getEquipmentID())) {
                 pstmt.executeUpdate();
             }
-
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Insert Into Medical Equipment Table Using Equipment ID: Failed!");
+            System.out.println("Insert Into Medical Equipment Table: Failed!");
             e.printStackTrace();
         }
     }
