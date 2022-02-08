@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.Employee;
-import edu.wpi.cs3733.c22.teamB.entity.EmployeeDBI;
-import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
-import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSRDBI;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +32,7 @@ public class ExternalTransportController implements IController {
     @FXML ChoiceBox<String> FormOfTransport;
     @FXML Button HomeB;
     @FXML ChoiceBox<String> EmployeeAssignment;
+    @FXML ChoiceBox<String> statusField;
 
     boolean isDone;
     String assignedP;
@@ -61,7 +59,8 @@ public class ExternalTransportController implements IController {
 //        employeeDBI.closeConnection();
 
 
-
+        statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
+        statusField.setValue("BLANK");
 
         EmployeeAssignment.getItems().addAll(employeeMap.keySet());
     }
@@ -81,9 +80,9 @@ public class ExternalTransportController implements IController {
         ExternalTransportSR request =
                 new ExternalTransportSR(
                         SenderTxt.getText(),
+                        statusField.getValue(),
                         PickupLocTxt.getText(),
                         DestinationTxt.getText(),
-                        "WAITING",
                         InfoTxt.getText(),
                         DateCal.getValue().toString(),
                         FormOfTransport.getValue().toString(),
