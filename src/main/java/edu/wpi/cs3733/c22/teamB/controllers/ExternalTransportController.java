@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ExternalTransportController implements IController, Initializable {
+public class ExternalTransportController implements IController {
 
     @FXML TextField SenderTxt;
     @FXML TextField PickupLocTxt;
@@ -32,9 +32,9 @@ public class ExternalTransportController implements IController, Initializable {
     @FXML Button SubmitB;
     @FXML Button HelpB;
     @FXML DatePicker DateCal;
-    @FXML ChoiceBox FormOfTransport;
+    @FXML ChoiceBox<String> FormOfTransport;
     @FXML Button HomeB;
-    @FXML ChoiceBox EmployeeAssignment;
+    @FXML ChoiceBox<String> EmployeeAssignment;
 
     boolean isDone;
     String assignedP;
@@ -73,12 +73,6 @@ public class ExternalTransportController implements IController, Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @Override

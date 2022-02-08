@@ -30,6 +30,7 @@ public class MedicineDeliverySRController implements IController, Initializable 
     @FXML private TextField idField;
     @FXML private JFXComboBox<String> statusField;
     @FXML private JFXComboBox<String> assignedEmployeeField;
+    @FXML private TextField medicineID;
 
     private List<Location> locList;
     private Map<String, Location> locMap;
@@ -43,7 +44,7 @@ public class MedicineDeliverySRController implements IController, Initializable 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LocationDBI locationDBI = new LocationDBI();
-//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         locList = locationDBI.getAllNodes();
         locMap =
                 IntStream.range(0, locList.size())
@@ -52,9 +53,9 @@ public class MedicineDeliverySRController implements IController, Initializable 
                                 Collectors.toMap(
                                         i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
                                         i -> locList.get(i)));
-//        locationDBI.closeConnection();
+
         EmployeeDBI employeeDBI = new EmployeeDBI();
-//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+
         employeeList = employeeDBI.getAllNodes();
         employeeMap =
                 IntStream.range(0, employeeList.size())
@@ -78,25 +79,30 @@ public class MedicineDeliverySRController implements IController, Initializable 
     public void submit() {
 //        medicineDeliverySRDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
 //        medicineDeliverySRDBI.closeConnection();
-        MedicineDeliverySR medicineDeliverySR = new MedicineDeliverySR(
-                "1",
-                "WAITING",
-                new Location(),
-                new Medicine(),
-                new Employee(),
+        MedicineDeliverySR medicineDeliverySR =
+                new MedicineDeliverySR(
+                        idField.getText(),
+                statusField.getValue(),
+                locMap.get(roomNumber.getValue()),
+                medicineID.getText(),
+                employeeMap.get(assignedEmployeeField.getValue()),
                 firstName.getText(),
                 lastName.getText(),
                 patientID.getText(),
                 DOB.getText(),
                 email.getText(),
-                roomNumber.getValue(),
                 dosage.getText(),
                 medicineName.getText(),
                 dispenseAmount.getText(),
                 frequency.getText(),
                 form.getText(),
                 mgPerDose.getText());
-        System.out.println(medicineDeliverySR.toString());
+//        System.out.println(medicineDeliverySR.toString());
+
+        //roomNumber.getValue(),
+
+        MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
+        medicineDeliverySRDBI.insertNode(medicineDeliverySR);
     }
 
 

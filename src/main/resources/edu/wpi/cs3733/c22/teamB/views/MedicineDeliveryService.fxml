@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="backgroundColor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MedicineDeliverySRController">
    <children>
       <TextField fx:id="firstName" alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="60.0" promptText="First Name" style="-fx-border-color: white;" />
@@ -64,5 +64,6 @@
          </font>
       </Label>
       <JFXComboBox fx:id="assignedEmployeeField" layoutX="13.0" layoutY="224.0" prefHeight="25.0" prefWidth="139.0" />
+      <TextField fx:id="medicineID" layoutX="24.0" layoutY="257.0" promptText="MedicineID" />
    </children>
 </AnchorPane>
