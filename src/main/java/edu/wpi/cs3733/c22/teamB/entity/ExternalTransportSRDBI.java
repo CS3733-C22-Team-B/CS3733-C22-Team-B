@@ -186,7 +186,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
             pstmt.setString(4, node.getInfo());
             pstmt.setString(5, node.getDate());
             pstmt.setString(6, node.getFormOfTransport());
-            pstmt.setString(7, node.getAssignedEmployee().getEmployeeID());
+            pstmt.setString(7, node.getEmployee().getEmployeeID());
             pstmt.setString(8, node.getSrID());
 
 
@@ -212,7 +212,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
             pstmt.setString(5, node.getInfo());
             pstmt.setString(6, node.getDate());
             pstmt.setString(7, node.getFormOfTransport());
-            pstmt.setString(8, node.getAssignedEmployee().getEmployeeID());
+            pstmt.setString(8, node.getEmployee().getEmployeeID());
 
 
             pstmt.executeUpdate();
