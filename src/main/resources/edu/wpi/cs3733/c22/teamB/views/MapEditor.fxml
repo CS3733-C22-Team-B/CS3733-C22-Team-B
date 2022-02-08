@@ -31,15 +31,15 @@
                   <Pane prefHeight="15" />
                   <JFXButton onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Delete" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L2" textAlignment="CENTER" />
+                  <JFXButton fx:id="goToL2Button" onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L2" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L1" textAlignment="CENTER" />
+                  <JFXButton fx:id="goToL1Button" onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L1" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 1" textAlignment="CENTER" />
+                  <JFXButton fx:id="goTo1Button" onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 1" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 2" textAlignment="CENTER" />
+                  <JFXButton fx:id="goTo2Button" onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 2" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
+                  <JFXButton fx:id="goTo3Button" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
