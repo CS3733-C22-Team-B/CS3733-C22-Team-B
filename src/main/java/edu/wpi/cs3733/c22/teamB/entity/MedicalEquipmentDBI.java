@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
+public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
 
     Connection conn;
 
@@ -12,13 +12,24 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+
+            stmt.execute("DROP TABLE MedicalEquipment");
+        } catch (SQLException e) {
+            System.out.println("Drop Medical Equipment Table: Failed!");
+        }
+    }
+
     public void createTable() {
 
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "MedicalEquipment", null);
+            ResultSet rset = dbmd.getTables(null, null, "MEDICALEQUIPMENT", null);
 
-            if (rset.next() && rset.getString(3).equals("MedicalEquipment")) {
+            if (rset.next() && rset.getString(3).equals("MEDICALEQUIPMENT")) {
                 // table exists
             } else {
                 // Create table
@@ -28,12 +39,13 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
                         + "equipmentName VARCHAR(255), "
                         + "equipmentType VARCHAR(255), "
                         + "manufacturer VARCHAR(255), "
-                        + "locationID VARCHAR(50) REFERENCES Location(nodeID), "
+                        + "locationID VARCHAR(50), "
                         + "status VARCHAR(255), "
                         + "color VARCHAR(255), "
                         + "size VARCHAR(255), "
                         + "description VARCHAR(255),"
-                        + "PRIMARY KEY (equipmentID))");
+                        + "PRIMARY KEY (equipmentID),"
+                        + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
             System.out.println("Create MedicalEquipment Table: Failed!");
@@ -41,34 +53,26 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
         }
     }
 
-
-
-
     @Override
     public void restore(List<MedicalEquipment> list) {
-        try {
-            Statement stmt = conn.createStatement();
-
-            stmt.execute("drop table MedicalEquipment");
-        } catch (SQLException e) {
-            System.out.println("Drop Medical Equipment Table: Failed!");
-        }
 
         try {
-            Statement stmt = conn.createStatement();
-
-            stmt.execute(
-                    "create table MedicalEquipment( "
-                            + "equipmentID VARCHAR(50), "
-                            + "equipmentName VARCHAR(255), "
-                            + "equipmentType VARCHAR(255), "
-                            + "manufacturer VARCHAR(255), "
-                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
-                            + "status VARCHAR(255), "
-                            + "color VARCHAR(255), "
-                            + "size VARCHAR(255), "
-                            + "description VARCHAR(255)," +
-                            "PRIMARY KEY (equipmentID));");
+            createTable();
+//            Statement stmt = conn.createStatement();
+//
+//            stmt.execute(
+//                    "create table MedicalEquipment( "
+//                            + "equipmentID VARCHAR(50), "
+//                            + "equipmentName VARCHAR(255), "
+//                            + "equipmentType VARCHAR(255), "
+//                            + "manufacturer VARCHAR(255), "
+//                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
+//                            + "status VARCHAR(255), "
+//                            + "color VARCHAR(255), "
+//                            + "size VARCHAR(255), "
+//                            + "description VARCHAR(255),"
+//                            + "PRIMARY KEY (equipmentID),"
+//                            + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
 
             // For each iteration of location in the list of location
             for (MedicalEquipment medEquipment : list) {
@@ -153,7 +157,7 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
                                 description));
             }
         } catch (SQLException e) {
-            System.out.println("Get all nodes: SQL Failed!");
+            System.out.println("Get All MedicalEquipment Nodes: SQL Failed!");
             e.printStackTrace();
         }
         return medEquipments;
@@ -195,7 +199,7 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
                             description);
 
         } catch (SQLException e) {
-            System.out.println("Get Node Failed");
+            System.out.println("Get MedicalEquipment Node Failed");
             e.printStackTrace();
         }
         return medEquipment;
@@ -241,7 +245,7 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Update Node ID: Failed!");
+            System.out.println("Update MedicalEquipment ID: Failed!");
             e.printStackTrace();
             return;
         }
@@ -280,14 +284,14 @@ public class MedicalEquipmentDBI extends AbstractDatabaseI<MedicalEquipment> {
         try {
             //search for NodeID
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+                    conn.prepareStatement("SELECT * FROM MedicalEquipment WHERE EQUIPMENTID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
             ans = rs.next();    //if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Search for NodeID Failed!");
+            System.out.println("Search for MedicalEquipment ID Failed!");
             e.printStackTrace();
         }
         return ans;

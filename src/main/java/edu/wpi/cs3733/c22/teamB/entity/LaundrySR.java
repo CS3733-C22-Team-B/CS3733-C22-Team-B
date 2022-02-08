@@ -23,4 +23,8 @@ public class LaundrySR extends AbstractSR {
     public String getLocation() {
         return location;
     }
+
+    public String toStringFields() {
+        return srID + "," + status + "," + location + "," + assignedEmployee;
+    }
 }

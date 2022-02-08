@@ -5,6 +5,7 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.Location;
 import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,57 +13,99 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import org.w3c.dom.Text;
 
 public class LocationTableController {
 
-    @FXML TableView table;
-    @FXML JFXButton loadButton;
+    @FXML private GridPane gridPane;
+    @FXML private JFXButton confirmButton;
+    @FXML private TextField nodeIDField;
+    @FXML private TextField ycoordField;
+    @FXML private TextField xcoordField;
+    @FXML private TextField floorField;
+    @FXML private TextField buildingField;
+    @FXML private TextField nodeTypeField;
+    @FXML private TextField longNameField;
+    @FXML private TextField shortNameField;
+    @FXML private JFXButton addButton;
+    @FXML private JFXButton modifyButton;
+    @FXML private JFXButton deleteButton;
+    @FXML private TableView<Location> table;
+    @FXML private JFXButton loadButton;
+
+
+
+
+    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
+    Function func = Function.NOTHING;
+
+    private boolean initTable = false;
+    private LocationDBI locationDBI = new LocationDBI();
+    List<Location> listOfLocations;
 
     public LocationTableController() {}
 
     @FXML
-    private void initialize() throws NullPointerException {}
+    private void initialize() throws NullPointerException {
+        modifyButton.setDisable(true);
+        deleteButton.setDisable(true);
 
-    public void loadTable() throws NullPointerException {
-        LocationDBI locationDBI = new LocationDBI();
-        List<Location> listOfLocations = locationDBI.getAllNodes();
+        gridPane.setVisible(false);
+        gridPane.setDisable(true);
 
-        table.setEditable(true);
-        TableColumn<Location, String> col1 = new TableColumn<>("nodeID"); // column names
-        TableColumn<Location, String> col2 = new TableColumn<>("xcoord");
-        TableColumn<Location, String> col3 = new TableColumn<>("ycoord");
-        TableColumn<Location, String> col4 = new TableColumn<>("floor");
-        TableColumn<Location, String> col5 = new TableColumn<>("building"); // column names
-        TableColumn<Location, String> col6 = new TableColumn<>("nodeType");
-        TableColumn<Location, String> col7 = new TableColumn<>("longName");
-        TableColumn<Location, String> col8 = new TableColumn<>("shortName");
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                modifyButton.setDisable(false);
+                deleteButton.setDisable(false);
+            }
+        });
 
-        col1.setCellValueFactory(new PropertyValueFactory<>("nodeID")); // MedicalEquipmentSR fields
-        col2.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
-        col4.setCellValueFactory(new PropertyValueFactory<>("floor"));
-        col5.setCellValueFactory(new PropertyValueFactory<>("building")); // MedicalEquipmentSR fields
-        col6.setCellValueFactory(new PropertyValueFactory<>("nodeType"));
-        col7.setCellValueFactory(new PropertyValueFactory<>("longName"));
-        col8.setCellValueFactory(new PropertyValueFactory<>("shortName"));
-
-        table.getColumns().add(col1); // adding columns to setup table
-        table.getColumns().add(col2);
-        table.getColumns().add(col3);
-        table.getColumns().add(col4);
-        table.getColumns().add(col5);
-        table.getColumns().add(col6);
-        table.getColumns().add(col7);
-        table.getColumns().add(col8);
-
-        table.getItems().addAll(listOfLocations); // create and add object
-        // table.getItems().addAll(new Location("3", 3 , 4, "floor 3", "This building", " idkman",
-        // "longname", "shortname")); //create and add object
-        // table.getItems().addAll(--list of objects here--); //
-
+        loadTable();
     }
-    // Go to the home fxml when the home button is pressed
+
+    @FXML
+    private void loadTable() throws NullPointerException {
+        if (!initTable) {
+            initTable = true;
+
+            TableColumn<Location, String> col1 = new TableColumn<>("nodeID"); // column names
+            TableColumn<Location, String> col2 = new TableColumn<>("xcoord");
+            TableColumn<Location, String> col3 = new TableColumn<>("ycoord");
+            TableColumn<Location, String> col4 = new TableColumn<>("floor");
+            TableColumn<Location, String> col5 = new TableColumn<>("building"); // column names
+            TableColumn<Location, String> col6 = new TableColumn<>("nodeType");
+            TableColumn<Location, String> col7 = new TableColumn<>("longName");
+            TableColumn<Location, String> col8 = new TableColumn<>("shortName");
+
+            col1.setCellValueFactory(new PropertyValueFactory<>("nodeID")); // MedicalEquipmentSR fields
+            col2.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+            col3.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
+            col4.setCellValueFactory(new PropertyValueFactory<>("floor"));
+            col5.setCellValueFactory(new PropertyValueFactory<>("building")); // MedicalEquipmentSR fields
+            col6.setCellValueFactory(new PropertyValueFactory<>("nodeType"));
+            col7.setCellValueFactory(new PropertyValueFactory<>("longName"));
+            col8.setCellValueFactory(new PropertyValueFactory<>("shortName"));
+
+            table.getColumns().add(col1); // adding columns to setup table
+            table.getColumns().add(col2);
+            table.getColumns().add(col3);
+            table.getColumns().add(col4);
+            table.getColumns().add(col5);
+            table.getColumns().add(col6);
+            table.getColumns().add(col7);
+            table.getColumns().add(col8);
+
+            table.setEditable(true);
+        }
+        table.getItems().clear();
+        listOfLocations = locationDBI.getAllNodes();
+        table.getItems().addAll(listOfLocations); // create and add object
+    }
+
     @FXML
     void goToHome(ActionEvent event) {
         // Try to go home
@@ -73,5 +116,144 @@ public class LocationTableController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    private void addLocation(ActionEvent actionEvent) {
+        gridPane.setVisible(true);
+        gridPane.setDisable(false);
+        xcoordField.setVisible(true);
+        ycoordField.setVisible(true);
+        floorField.setVisible(true);
+        buildingField.setVisible(true);
+        nodeTypeField.setVisible(true);
+        longNameField.setVisible(true);
+        shortNameField.setVisible(true);
+        xcoordField.setDisable(false);
+        ycoordField.setDisable(false);
+        floorField.setDisable(false);
+        buildingField.setDisable(false);
+        nodeTypeField.setDisable(false);
+        longNameField.setDisable(false);
+        shortNameField.setDisable(false);
+        func = Function.ADD;
+    }
+
+    @FXML
+    private void modifyLocation(ActionEvent actionEvent) {
+        gridPane.setVisible(true);
+        gridPane.setDisable(false);
+        xcoordField.setVisible(true);
+        ycoordField.setVisible(true);
+        floorField.setVisible(true);
+        buildingField.setVisible(true);
+        nodeTypeField.setVisible(true);
+        longNameField.setVisible(true);
+        shortNameField.setVisible(true);
+        xcoordField.setDisable(false);
+        ycoordField.setDisable(false);
+        floorField.setDisable(false);
+        buildingField.setDisable(false);
+        nodeTypeField.setDisable(false);
+        longNameField.setDisable(false);
+        shortNameField.setDisable(false);
+
+        Location loc = table.getSelectionModel().getSelectedItem();
+        nodeIDField.setText(loc.getNodeID());
+        xcoordField.setText(Integer.toString(loc.getXcoord()));
+        ycoordField.setText(Integer.toString(loc.getYcoord()));
+        floorField.setText(loc.getFloor());
+        buildingField.setText(loc.getBuilding());
+        nodeTypeField.setText(loc.getNodeType());
+        longNameField.setText(loc.getLongName());
+        shortNameField.setText(loc.getShortName());
+
+        func = Function.MODIFY;
+    }
+
+    @FXML
+    private void deleteLocation(ActionEvent actionEvent) {
+        locationDBI.deleteNode(table.getSelectionModel().getSelectedItem().getNodeID());
+        loadTable();
+    }
+
+    @FXML private void locationTableClick(MouseEvent mouseEvent) {
+        modifyButton.setVisible(true);
+        deleteButton.setVisible(true);
+    }
+
+    @FXML private void confirm(ActionEvent actionEvent) {
+        if(func == Function.ADD) {
+            locationDBI.insertNode
+                    (new Location(
+                            nodeIDField.getText(),
+                            Integer.parseInt(xcoordField.getText()),
+                            Integer.parseInt(ycoordField.getText()),
+                            floorField.getText(),
+                            buildingField.getText(),
+                            nodeTypeField.getText(),
+                            longNameField.getText(),
+                            shortNameField.getText()
+            ));
+            loadTable();
+        } else if (func == Function.MODIFY) {
+            locationDBI.updateNode(new Location(
+                    nodeIDField.getText(),
+                    Integer.parseInt(xcoordField.getText()),
+                    Integer.parseInt(ycoordField.getText()),
+                    floorField.getText(),
+                    buildingField.getText(),
+                    nodeTypeField.getText(),
+                    longNameField.getText(),
+                    shortNameField.getText()));
+            loadTable();
+        } else if (func == Function.IDLOOKUP) {
+            table.getItems().clear();
+            table.getItems().add(locationDBI.getNode(nodeIDField.getText())); // create and add object
+        }
+
+        clearForm(actionEvent);
+        func = Function.NOTHING;
+    }
+
+    @FXML private void clearForm(ActionEvent actionEvent) {
+        nodeIDField.clear();
+        xcoordField.clear();
+        ycoordField.clear();
+        floorField.clear();
+        buildingField.clear();
+        nodeTypeField.clear();
+        longNameField.clear();
+        shortNameField.clear();
+    }
+
+    @FXML private void cancelForm(ActionEvent actionEvent) {
+        gridPane.setDisable(true);
+        gridPane.setVisible(false);
+        clearForm(actionEvent);
+
+        addButton.setVisible(true);
+        addButton.setDisable(false);
+
+        modifyButton.setVisible(true);
+        modifyButton.setDisable(false);
+
+        deleteButton.setVisible(true);
+        deleteButton.setDisable(false);
+
+        func = Function.NOTHING;
+    }
+    @FXML private void idLookup(ActionEvent actionEvent) {
+        gridPane.setVisible(true);
+        gridPane.setDisable(false);
+        xcoordField.setVisible(false);
+        ycoordField.setVisible(false);
+        floorField.setVisible(false);
+        buildingField.setVisible(false);
+        nodeTypeField.setVisible(false);
+        longNameField.setVisible(false);
+        shortNameField.setVisible(false);
+
+        func = Function.IDLOOKUP;
     }
 }

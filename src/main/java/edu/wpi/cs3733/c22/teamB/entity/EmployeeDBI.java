@@ -4,19 +4,30 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDBI extends AbstractDatabaseI<Employee> {
+public class EmployeeDBI implements IDatabase<Employee> {
 
     Connection conn;
 
     public EmployeeDBI() {
         this.conn = DBConnection.getConnection();
     }
+
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE Employee");
+        } catch (SQLException e) {
+            System.out.println("Drop Employee Table: Failed!");
+        }
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "Employee", null);
+            ResultSet rset = dbmd.getTables(null, null, "EMPLOYEE", null);
 
-            if (rset.next() && rset.getString(3).equals("Employee")){
+            if (rset.next() && rset.getString(3).equals("EMPLOYEE")){
                 // table exists
             } else {
                 Statement stmt = conn.createStatement();
@@ -36,28 +47,21 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
         }
             }
 
-
     @Override
     public void restore(List<Employee> list) {
-//
-//        try {
-//            Statement stmt = conn.createStatement();
-//            stmt.execute("drop table Employee");
-//        } catch (SQLException e) {
-//            System.out.println("Drop Employee Table: Failed!");
-//        }
 
         try {
-            Statement stmt = conn.createStatement();
-            stmt.execute(
-                    "create table Employee( "
-                            + "employeeID VARCHAR(50), "
-                            + "name VARCHAR(50), "
-                            + "position VARCHAR(50), "
-                            + "address VARCHAR(50), "
-                            + "email VARCHAR(50), "
-                            + "phoneNumber VARCHAR(50)," +
-                            " PRIMARY KEY (employeeID))");
+            createTable();
+//            Statement stmt = conn.createStatement();
+//            stmt.execute(
+//                    "create table Employee( "
+//                            + "employeeID VARCHAR(50), "
+//                            + "name VARCHAR(50), "
+//                            + "position VARCHAR(50), "
+//                            + "address VARCHAR(50), "
+//                            + "email VARCHAR(50), "
+//                            + "phoneNumber VARCHAR(50)," +
+//                            " PRIMARY KEY (employeeID))");
 
             // For each iteration of location in the list of location
             for (Employee employee : list) {
@@ -117,7 +121,7 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
                 EmployeeList.add(new Employee(employeeID, name, position, address, email, phoneNumber));
             }
         } catch (SQLException e) {
-            System.out.println("Get all nodes: SQL Failed!");
+            System.out.println("Get All Employee Nodes: SQL Failed!");
             e.printStackTrace();
         }
         return EmployeeList;
@@ -162,7 +166,7 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Delete From Medical Equipment Table Using Equipment ID: Failed!");
+            System.out.println("Delete From Employee Table Using Equipment ID: Failed!");
             e.printStackTrace();
         }
     }
@@ -188,7 +192,7 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Update Node ID: Failed!");
+            System.out.println("Update Employee ID: Failed!");
             e.printStackTrace();
             return;
         }
@@ -213,7 +217,7 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Insert Into Table Using Node ID: Failed!");
+            System.out.println("Insert Into Employee Table Using Employee ID: Failed!");
             e.printStackTrace();
         }
     }
@@ -223,14 +227,14 @@ public class EmployeeDBI extends AbstractDatabaseI<Employee> {
         try {
             //search for NodeID
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+                    conn.prepareStatement("SELECT * FROM Employee WHERE EMPLOYEEID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
             ans = rs.next();    //if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Search for NodeID Failed!");
+            System.out.println("Search for Employee ID Failed!");
             e.printStackTrace();
         }
         return ans;

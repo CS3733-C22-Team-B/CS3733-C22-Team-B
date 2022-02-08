@@ -1,14 +1,20 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXListView;
-import edu.wpi.cs3733.c22.teamB.entity.LaundryDBI;
+import edu.wpi.cs3733.c22.teamB.entity.LaundrySRDBI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 
-public class LaundrySRController implements IController {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    private LaundryDBI laundryDBI = new LaundryDBI();
+public class LaundrySRController implements IController, Initializable {
+
+    private LaundrySRDBI laundryDBI = new LaundrySRDBI();
 
     @FXML private TextField roomNumberTextField;
 
@@ -26,6 +32,12 @@ public class LaundrySRController implements IController {
 
     private void updateRoomsWithRequest() {
         roomsWithRequest.setItems(laundryDBI.getRooms());
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
     @Override

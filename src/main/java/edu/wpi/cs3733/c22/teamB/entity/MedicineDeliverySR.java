@@ -2,15 +2,14 @@ package edu.wpi.cs3733.c22.teamB.entity;
 
 public class MedicineDeliverySR extends AbstractSR {
     private Location destination;
-    private Medicine medicine;
+    private String medicineID;
     private Employee assignedEmployee;
     private String patientFirstName;
     private String patientLastName;
     private String patientID;
     private String DOB;
     private String email;
-    private String room;
-//    TODO add allergies
+    //    TODO add allergies
 //    private String allergies;
     private String dosage;
     private String medicineName;
@@ -24,14 +23,13 @@ public class MedicineDeliverySR extends AbstractSR {
                 String srID,
                 String statusStr,
                 Location destination,
-                Medicine medicine,
+                String medicineID,
                 Employee assignedEmployee,
                 String patientFirstName,
                 String patientLastName,
                 String patientID,
                 String DOB,
                 String email,
-                String room,
                 String dosage,
                 String medicineName,
                 String dispenseAmount,
@@ -41,14 +39,13 @@ public class MedicineDeliverySR extends AbstractSR {
                 ) {
         super(srID, statusStr);
         this.destination = destination;
-        this.medicine = medicine;
+        this.medicineID = medicineID;
         this.assignedEmployee = assignedEmployee;
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.patientID = patientID;
         this.DOB = DOB;
         this.email = email;
-        this.room = room;
         this.dosage = dosage;
         this.medicineName = medicineName;
         this.dispenseAmount = dispenseAmount;
@@ -64,6 +61,50 @@ public class MedicineDeliverySR extends AbstractSR {
         this.assignedEmployee = null;
     }
 
+    public String getPatientFirstName() {
+        return patientFirstName;
+    }
+
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public String getDispenseAmount() {
+        return dispenseAmount;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public String getForm() {
+        return form;
+    }
+
+    public String getMgPerDose() {
+        return mgPerDose;
+    }
+
     public Location getDestination() {
         return destination;
     }
@@ -72,12 +113,8 @@ public class MedicineDeliverySR extends AbstractSR {
         this.destination = destination;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
-    }
-
-    public void setMedicalEquipment(Medicine medicine) {
-        this.medicine = medicine;
+    public String getMedicineID() {
+        return medicineID;
     }
 
     public Employee getAssignedEmployee() {
@@ -86,6 +123,54 @@ public class MedicineDeliverySR extends AbstractSR {
 
     public void setAssignedEmployee(Employee assignedEmployee) {
         this.assignedEmployee = assignedEmployee;
+    }
+
+    public void setMedicineID(String medicineID) {
+        this.medicineID = medicineID;
+    }
+
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public void setDispenseAmount(String dispenseAmount) {
+        this.dispenseAmount = dispenseAmount;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public void setForm(String form) {
+        this.form = form;
+    }
+
+    public void setMgPerDose(String mgPerDose) {
+        this.mgPerDose = mgPerDose;
     }
 
     // to string
@@ -98,7 +183,7 @@ public class MedicineDeliverySR extends AbstractSR {
                 + "destination="
                 + destination.getNodeID()
                 + ", medicalEquipment="
-                + medicine.getMedicationID()
+                + medicineID
                 + ", assignedEmployee="
                 + assignedEmployee.getEmployeeID()
                 + '}';
@@ -107,11 +192,35 @@ public class MedicineDeliverySR extends AbstractSR {
     public String toStringFields() {
         return srID
                 + ","
+                + status
+                + ","
                 + destination.getNodeID()
                 + ","
-                + medicine.getMedicationID()
+                + medicineID
                 + ","
-                + assignedEmployee.getEmployeeID();
+                + assignedEmployee.getEmployeeID()
+                + ","
+                + patientFirstName
+                + ","
+                + patientLastName
+                + ","
+                + patientID
+                + ","
+                + DOB
+                + ","
+                + email
+                + ","
+                + dosage
+                + ","
+                + medicineName
+                + ","
+                + dispenseAmount
+                + ","
+                +frequency
+                + ","
+                + form
+                + ","
+                + mgPerDose;
     }
 
 }

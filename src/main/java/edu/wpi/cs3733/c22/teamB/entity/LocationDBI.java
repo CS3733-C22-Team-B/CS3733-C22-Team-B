@@ -12,20 +12,27 @@ public class LocationDBI implements IDatabase<Location> {
         this.conn = DBConnection.getConnection();
     }
 
-//    Connection conn = DBConnection.getConnection();
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE Location");
+        } catch (SQLException e) {
+            System.out.println("Drop Location Table: Failed!");
+        }
+    }
 
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "Location", null);
+            ResultSet rset = dbmd.getTables(null, null, "LOCATION", null);
 
-            if (rset.next() && rset.getString(3).equals("Location")){
+            if (rset.next() && rset.getString(3).equals("LOCATION")){
                 // table exists
-
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
-                stmt.execute("CREATE TABLE LOCATION ( "
+                stmt.execute("CREATE TABLE Location ( "
                         + "nodeID VARCHAR(50) , "
                         + "xcoord int not null, "
                         + "ycoord int not null, "
@@ -42,29 +49,23 @@ public class LocationDBI implements IDatabase<Location> {
         }
     }
 
-
     @Override
     public void restore(List<Location> list) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("drop table Location");
-        } catch (SQLException e) {
-            System.out.println("Drop Location Table: Failed!");
-        }
 
         try {
-            Statement stmt = conn.createStatement();
-            stmt.execute(
-                    "create table Location( "
-                            + "nodeID VARCHAR(50), "
-                            + "xcoord int not null, "
-                            + "ycoord int not null, "
-                            + "floor VARCHAR(2), "
-                            + "building VARCHAR(50), "
-                            + "nodeType VARCHAR(50), "
-                            + "longName VARCHAR(50), "
-                            + "shortName VARCHAR(50)," +
-                            "PRIMARY KEY (nodeID));");
+            createTable();
+//            Statement stmt = conn.createStatement();
+//            stmt.execute(
+//                    "create table Location( "
+//                            + "nodeID VARCHAR(50), "
+//                            + "xcoord int not null, "
+//                            + "ycoord int not null, "
+//                            + "floor VARCHAR(2), "
+//                            + "building VARCHAR(50), "
+//                            + "nodeType VARCHAR(50), "
+//                            + "longName VARCHAR(50), "
+//                            + "shortName VARCHAR(50)," +
+//                            "PRIMARY KEY (nodeID))");
 
             // For each iteration of location in the list of location
             for (Location location : list) {
