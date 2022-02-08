@@ -38,19 +38,7 @@ public class LocationTableController {
     @FXML private JFXButton loadButton;
 
 
-    @FXML private void idLookup(ActionEvent actionEvent) {
-        gridPane.setVisible(true);
-        gridPane.setDisable(false);
-        xcoordField.setVisible(false);
-        ycoordField.setVisible(false);
-        floorField.setVisible(false);
-        buildingField.setVisible(false);
-        nodeTypeField.setVisible(false);
-        longNameField.setVisible(false);
-        shortNameField.setVisible(false);
 
-        func = Function.IDLOOKUP;
-    }
 
     private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
     Function func = Function.NOTHING;
@@ -133,7 +121,7 @@ public class LocationTableController {
     @FXML
     private void addLocation(ActionEvent actionEvent) {
         gridPane.setVisible(true);
-        gridPane.setDisable(true);
+        gridPane.setDisable(false);
         xcoordField.setVisible(true);
         ycoordField.setVisible(true);
         floorField.setVisible(true);
@@ -141,6 +129,13 @@ public class LocationTableController {
         nodeTypeField.setVisible(true);
         longNameField.setVisible(true);
         shortNameField.setVisible(true);
+        xcoordField.setDisable(false);
+        ycoordField.setDisable(false);
+        floorField.setDisable(false);
+        buildingField.setDisable(false);
+        nodeTypeField.setDisable(false);
+        longNameField.setDisable(false);
+        shortNameField.setDisable(false);
         func = Function.ADD;
     }
 
@@ -155,6 +150,13 @@ public class LocationTableController {
         nodeTypeField.setVisible(true);
         longNameField.setVisible(true);
         shortNameField.setVisible(true);
+        xcoordField.setDisable(false);
+        ycoordField.setDisable(false);
+        floorField.setDisable(false);
+        buildingField.setDisable(false);
+        nodeTypeField.setDisable(false);
+        longNameField.setDisable(false);
+        shortNameField.setDisable(false);
 
         Location loc = table.getSelectionModel().getSelectedItem();
         nodeIDField.setText(loc.getNodeID());
@@ -240,5 +242,18 @@ public class LocationTableController {
         deleteButton.setDisable(false);
 
         func = Function.NOTHING;
+    }
+    @FXML private void idLookup(ActionEvent actionEvent) {
+        gridPane.setVisible(true);
+        gridPane.setDisable(false);
+        xcoordField.setVisible(false);
+        ycoordField.setVisible(false);
+        floorField.setVisible(false);
+        buildingField.setVisible(false);
+        nodeTypeField.setVisible(false);
+        longNameField.setVisible(false);
+        shortNameField.setVisible(false);
+
+        func = Function.IDLOOKUP;
     }
 }
