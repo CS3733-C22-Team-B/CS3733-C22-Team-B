@@ -12,6 +12,16 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE MedicalEquipmentSR");
+        } catch (SQLException e) {
+            System.out.println("Drop MedicalEquipmentSR Table: Failed!");
+        }
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -42,12 +52,6 @@ public class MedicalEquipmentSRDBI implements IDatabase<MedicalEquipmentSR> {
 
     @Override
     public void restore(List<MedicalEquipmentSR> list) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE MedicalEquipmentSR");
-        } catch (SQLException e) {
-            System.out.println("Drop MedicalEquipmentSR Table: Failed!");
-        }
 
         try {
             createTable();

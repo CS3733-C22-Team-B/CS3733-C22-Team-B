@@ -15,5 +15,7 @@ public interface IDatabase<T> {
 
     void restore(List<T> list);
 
+    void drop();
+
     // boolean isInTable(String nodeID);
 }

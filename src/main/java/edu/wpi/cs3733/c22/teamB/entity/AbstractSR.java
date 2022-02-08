@@ -29,6 +29,7 @@ public abstract class AbstractSR {
 
     public AbstractSR(String srID, String statusStr) {
         this.srID = srID;
+        if (statusStr == null) statusStr = "BLANK";
         this.status = stringToSRStatus(statusStr);
     }
 
@@ -53,7 +54,7 @@ public abstract class AbstractSR {
         this.srID = srID;
     }
 
-    public void setStatus(SRStatus status) {
-        this.status = status;
+    public void setStatus(String statusStr) {
+        this.status = stringToSRStatus(statusStr);
     }
 }

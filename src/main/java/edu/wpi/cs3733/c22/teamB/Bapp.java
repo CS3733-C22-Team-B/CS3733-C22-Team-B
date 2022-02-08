@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
@@ -24,34 +25,38 @@ public class Bapp extends Application {
     public void init() throws IOException {
         log.info("Starting Up");
 
-        LocationDBI locationDBI = new LocationDBI();
-        locationDBI.createTable();
+        DatabaseManager databaseManager = new DatabaseManager();
+        databaseManager.createTable();
 
-        EmployeeDBI employeeDBI = new EmployeeDBI();
-        employeeDBI.createTable();
-
-        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-        medicalEquipmentDBI.createTable();
-
-        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
-        medicalEquipmentSRDBI.createTable();
-
-        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
-        giftFloralSRDBI.createTable();
-
-        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
-        foodDeliverySRDBI.createTable();
-
-        MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
-        medicineDeliverySRDBI.createTable();
-
-        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
-        externalTransportSRDBI.createTable();
-
-        LocationParserI locParser = new LocationParserI();
         CSVReader2 reader = new CSVReader2();
 
-//        List<String> stringList = reader.firstRestore("TowerLocationsB.csv");
+        List<String> locationList = reader.firstRestore("TowerLocationsB.csv");
+        List<String> employeeList = reader.firstRestore("EmployeeB.csv");
+        List<String> externalTransportList = reader.firstRestore("ExternalTransportSRB.csv");
+        List<String> foodDeliveryList = reader.firstRestore("FoodDeliverySRB.csv");
+        List<String> equipmentList = reader.firstRestore("MedicalEquipmentB.csv");
+        List<String> equipmentSRList = reader.firstRestore("MedicalEquipmentSRB.csv");
+        List<String> medicineDeliveryList = reader.firstRestore("MedicineDeliverySRB.csv");
+
+        LocationParserI locParser = new LocationParserI();
+        EmployeeParserI employeeParserI = new EmployeeParserI();
+        ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
+        FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
+        MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
+        MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
+        MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
+
+        List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
+        List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
+        List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
+        List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
+        List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
+        List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
+        List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
+
+        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+
 //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
 
