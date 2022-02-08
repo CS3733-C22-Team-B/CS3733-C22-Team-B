@@ -201,7 +201,7 @@ public class MedicalEquipmentTableController {
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
-        MedicalEquipmentDBI.deleteNode(table.getSelectionModel().getSelectedItem().getEquipmentID());
+        medicalEquipmentDBI.deleteNode(table.getSelectionModel().getSelectedItem().getEquipmentID());
         loadTable();
     }
 
@@ -212,26 +212,26 @@ public class MedicalEquipmentTableController {
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == MedicalEquipmentTableController.Function.ADD) {
-            MedicalEquipmentDBI.insertNode
+            medicalEquipmentDBI.insertNode
                     (new MedicalEquipment(
                             equipmentIDField.getText(),
                             equipmentNameField.getText(),
                             equipmentTypeField.getText(),
                             manufacturerField.getText(),
-                            new Location(), // TODO: 2/8/2022
+                            locMap.get(LocationChoice.getValue()),
                             statusField.getItems().toString(),
                             colorField.getText(),
                             sizeField.getText(),
                             descriptionField.getText()));
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
-            MedicalEquipmentDBI.updateNode(
+            medicalEquipmentDBI.updateNode(
                     new MedicalEquipment(
                             equipmentIDField.getText(),
                             equipmentNameField.getText(),
                             equipmentTypeField.getText(),
                             manufacturerField.getText(),
-                            new Location(), // TODO: 2/8/2022
+                            locMap.get(LocationChoice.getValue()),
                     statusField.getItems().toString(),
                     colorField.getText(),
                     sizeField.getText(),
@@ -239,7 +239,7 @@ public class MedicalEquipmentTableController {
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
             table.getItems().clear();
-            table.getItems().add(MedicalEquipmentDBI.getNode(equipmentIDField.getText())); // create and add object
+            table.getItems().add(medicalEquipmentDBI.getNode(equipmentIDField.getText())); // create and add object
         }
 
         clearForm(actionEvent);
