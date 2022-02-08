@@ -2,10 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
-import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipment;
-import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipmentDBI;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,10 +55,10 @@ public class MapEditorController {
     List<Location> locationList = locationDBI.getAllNodes();
     MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
     List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
+    CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "3";
     boolean addState = false;
 
-    //TODO Probably needs to be changed to work with jar file vvv
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
     Image lowerLevel2Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
@@ -79,6 +76,9 @@ public class MapEditorController {
 
     @FXML
     private JFXButton modifyButton;
+
+    @FXML
+    private JFXButton loadFromCSV;
 
     @FXML
     private JFXButton submitModifyButton;
@@ -233,15 +233,48 @@ public class MapEditorController {
     }
 
     @FXML public void refresh(){
-        //TODO load from CSV instead of database
         locationList = locationDBI.getAllNodes();
         removeAllPoints();
         addPoints();
     }
 
     @FXML public void loadFromCSV(){
-        //TODO get function from db people
-        refresh();
+        try {
+            DatabaseManager databaseManager = new DatabaseManager();
+            databaseManager.createTable();
+
+            CSVReader2 reader = new CSVReader2();
+
+            List<String> locationList = reader.firstRestore("TowerLocationsB.csv");
+            List<String> employeeList = reader.firstRestore("EmployeeB.csv");
+            List<String> externalTransportList = reader.firstRestore("ExternalTransportSRB.csv");
+            List<String> foodDeliveryList = reader.firstRestore("FoodDeliverySRB.csv");
+            List<String> equipmentList = reader.firstRestore("MedicalEquipmentB.csv");
+            List<String> equipmentSRList = reader.firstRestore("MedicalEquipmentSRB.csv");
+            List<String> medicineDeliveryList = reader.firstRestore("MedicineDeliverySRB.csv");
+
+            LocationParserI locParser = new LocationParserI();
+            EmployeeParserI employeeParserI = new EmployeeParserI();
+            ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
+            FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
+            MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
+            MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
+            MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
+
+            List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
+            List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
+            List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
+            List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
+            List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
+            List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
+            List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
+
+            databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+                    foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+            refresh();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
 
@@ -267,7 +300,13 @@ public class MapEditorController {
     }
 
     @FXML public void saveToCSV(){
-        //TODO get function from db people
+        try {
+            backupper.Backup();
+            System.out.println("wazzzup");
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
+        refresh();
     }
 
     @FXML public void goTo(){
@@ -278,7 +317,7 @@ public class MapEditorController {
         goToL2Button.setStyle("-fx-background-color: #eaeaea");
 
         switch (currentFloor) {
-            case "1":   //TODO Probably needs to be changed to work with jar file vvv
+            case "1":
                 imageView.setImage(firstFloorImage);
                 goTo1Button.setStyle("-fx-background-color: #007fff");
                 break;
@@ -442,6 +481,7 @@ public class MapEditorController {
 
     @FXML
     void loadFromCSV(ActionEvent event) {
+        loadFromCSV();
         //Ben Here's your button it exists now lessssgoooo
         //TODO get it to work
     }
