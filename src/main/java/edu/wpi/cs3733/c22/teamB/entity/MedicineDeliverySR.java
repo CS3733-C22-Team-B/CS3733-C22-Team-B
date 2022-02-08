@@ -136,6 +136,58 @@ public class MedicineDeliverySR extends AbstractSR {
         this.assignedEmployee = assignedEmployee;
     }
 
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public void setDispenseAmount(String dispenseAmount) {
+        this.dispenseAmount = dispenseAmount;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public void setForm(String form) {
+        this.form = form;
+    }
+
+    public void setMgPerDose(String mgPerDose) {
+        this.mgPerDose = mgPerDose;
+    }
+
     // to string
 
     @Override
