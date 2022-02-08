@@ -3,26 +3,38 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="949.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="949.0" style="-fx-background-radius: 10;" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.HomeController">
    <children>
-      <Pane layoutX="73.0" layoutY="368.0" minWidth="-Infinity" prefHeight="200.0" prefWidth="800.0" styleClass="rectangle" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="325.0">
-         <children>
-            <JFXButton layoutX="80.0" layoutY="80.0" onAction="#goToServiceRequestPanel" prefWidth="100.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Start" />
-            <JFXButton layoutX="354.0" layoutY="80.0" prefWidth="100.0" ripplerFill="#3b99eb" text="Help" />
-            <JFXButton layoutX="616.0" layoutY="80.0" onAction="#shutDown" prefWidth="100.0" ripplerFill="#3b99eb" text="Exit" />
-            <JFXButton fx:id="equipmentButton" layoutX="21.0" layoutY="18.0" onAction="#goToEquipmentTable" text="Equipment Manager" />
-            <JFXButton fx:id="locationButton" layoutX="226.0" layoutY="18.0" onAction="#goToLocationTable" text="Location Manager" />
-            <JFXButton fx:id="CSVImportButton" layoutX="430.0" layoutY="18.0" onAction="#goToCSVRestoreBackup" text="CSV Import/Export" />
-         </children>
-      </Pane>
       <Label layoutX="115.0" layoutY="21.0" text="Mass General Brigham" textFill="WHITE">
          <font>
             <Font size="64.0" />
          </font>
       </Label>
-      <JFXButton fx:id="locationButton1" layoutX="421.0" layoutY="322.0" onAction="#goToMapEditor" text="Map Editor" />
+      <GridPane layoutX="102.0" layoutY="351.0" prefHeight="190.0" prefWidth="734.0" styleClass="rectangle" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="75.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXButton onAction="#goToServiceRequestPanel" prefWidth="100.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Start" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <JFXButton fx:id="locationButton1" onAction="#goToMapEditor" text="Map Editor" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <JFXButton prefWidth="100.0" ripplerFill="#3b99eb" text="Help" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <JFXButton onAction="#shutDown" prefWidth="100.0" ripplerFill="#3b99eb" text="Exit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <JFXButton fx:id="equipmentButton" onAction="#goToEquipmentTable" text="Equipment Manager" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <JFXButton fx:id="locationButton" onAction="#goToLocationTable" text="Location Manager" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+            <JFXButton fx:id="CSVImportButton" onAction="#goToCSVRestoreBackup" text="CSV Import/Export" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

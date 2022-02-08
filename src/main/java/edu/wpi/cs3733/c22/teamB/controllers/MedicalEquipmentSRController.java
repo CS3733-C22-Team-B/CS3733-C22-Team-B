@@ -100,7 +100,7 @@ public class MedicalEquipmentSRController implements IController, Initializable 
                         locMap.get(destinationField.getValue()),
                         medEqpMap.get(equipmentNameField.getValue()),
                         employeeMap.get(assignedEmployeeField.getValue())));
-
+        clear();
 //        medSRDB.closeConnection();
     }
 
@@ -108,11 +108,10 @@ public class MedicalEquipmentSRController implements IController, Initializable 
     public void clear() {
         idField.clear();
         requesterNameField.clear();
-        assignedEmployeeField.setValue(
-                employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
-        statusField.setValue("BLANK");
-        destinationField.setValue(locList.get(0).getNodeID() + ' ' + locList.get(0).getLongName());
-        equipmentNameField.setValue(
-                medEqpList.get(0).getEquipmentID() + ' ' + medEqpList.get(0).getEquipmentName());
+        assignedEmployeeField.setValue("");
+        assignedEmployeeField.setValue("");
+        statusField.setValue("");
+        destinationField.setValue("");
+        equipmentNameField.setValue("");
     }
 }

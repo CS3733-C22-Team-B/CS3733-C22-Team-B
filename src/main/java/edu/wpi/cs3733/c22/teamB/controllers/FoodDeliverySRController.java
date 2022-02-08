@@ -85,15 +85,16 @@ public class FoodDeliverySRController implements IController, Initializable {
         FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
         foodDeliverySRDBI.insertNode(
                 new FoodDeliverySR(idField.getText(), statusField.getValue(), locMap.get(destinationField.getValue()), ComboMeals.getValue(), AssigneeName.getText(), employeeMap.get(assignedEmployeeField.getValue())));
+        clear();
     }
 
     @Override
     public void clear() {
         AssigneeName.clear();
         ComboMeals.cancelEdit();
-        assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
-        statusField.setValue("BLANK");
-        destinationField.setValue(locList.get(0).getNodeID() + ' ' + locList.get(0).getLongName());
+        assignedEmployeeField.setValue("");
+        statusField.setValue("");
+        destinationField.setValue("");
         idField.clear();
     }
 }
