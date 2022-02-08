@@ -26,29 +26,8 @@ public class Bapp extends Application {
     public void init() throws IOException {
         log.info("Starting Up");
 
-        LocationDBI locationDBI = new LocationDBI();
-        locationDBI.createTable();
-
-        EmployeeDBI employeeDBI = new EmployeeDBI();
-        employeeDBI.createTable();
-
-        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-        medicalEquipmentDBI.createTable();
-
-        MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
-        medicalEquipmentSRDBI.createTable();
-
-        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
-        giftFloralSRDBI.createTable();
-
-        FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
-        foodDeliverySRDBI.createTable();
-
-        MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
-        medicineDeliverySRDBI.createTable();
-
-        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
-        externalTransportSRDBI.createTable();
+        DatabaseManager databaseManager = new DatabaseManager();
+        databaseManager.createTable();
 
         LocationParserI locParser = new LocationParserI();
         CSVReader2 reader = new CSVReader2();
