@@ -53,6 +53,7 @@ public class FoodDeliveryParserI implements IParser<FoodDeliverySR> {
     @Override
     public List<String> fromObjectsToStrings(List<FoodDeliverySR> listT) {
         List<String> listString = new ArrayList<>();
+        listString.add(FoodDeliverySR.toStringHeader());
         for (FoodDeliverySR foodDeliverySR : listT) {
             listString.add(foodDeliverySR.toStringFields());
         }

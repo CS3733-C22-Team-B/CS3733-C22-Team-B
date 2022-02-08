@@ -50,6 +50,7 @@ public class ExternalTransportSRParserI implements IParser<ExternalTransportSR> 
     @Override
     public List<String> fromObjectsToStrings(List<ExternalTransportSR> listT) {
         List<String> listString = new ArrayList<>();
+        listString.add(ExternalTransportSR.toStringHeader());
         for (ExternalTransportSR externalTransportSR : listT) {
             listString.add(externalTransportSR.toStringFields());
         }

@@ -123,4 +123,20 @@ public class Employee {
                 + ","
                 + phoneNumber;
     }
+
+    public static String toStringHeader() {
+        return "employeeID"
+                + ","
+                + "name"
+                + ","
+                + "position"
+                + ","
+                + "address"
+                + ","
+                + "email"
+                + ","
+                + "phoneNumber";
+    }
+
+
 }

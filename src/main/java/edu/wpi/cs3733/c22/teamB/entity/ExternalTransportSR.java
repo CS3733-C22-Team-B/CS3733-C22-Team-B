@@ -116,4 +116,8 @@ public class ExternalTransportSR extends AbstractSR {
     public String toStringFields() {
         return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + employee.getEmployeeID();
     }
+
+    public static String toStringHeader() {
+        return "srID" + "," + "status" + "," + "pickupLoc" + "," + "destination" + "," + "info" + "," + "date" + "," + "formOfTransport" + "," + "assignedEmployee";
+    }
 }
