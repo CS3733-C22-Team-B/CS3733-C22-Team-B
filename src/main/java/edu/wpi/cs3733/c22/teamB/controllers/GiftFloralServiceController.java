@@ -104,10 +104,11 @@ public class GiftFloralServiceController implements IController, Initializable {
     @Override
     public void clear() {
         confirmLabel.setText(" ");
-        statusField.setValue("BLANK");
-        roomID.setValue(locList.get(0).getNodeID() + ' ' + locList.get(0).getLongName());
+        statusField.setValue("");
+        roomID.setValue("");
         idField.clear();
-        giftOptions.setValue(" ");
-        assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
+        giftOptions.setValue("");
+        assignedEmployeeField.setValue("");
+        dateID.getEditor().clear();
     }
 }
