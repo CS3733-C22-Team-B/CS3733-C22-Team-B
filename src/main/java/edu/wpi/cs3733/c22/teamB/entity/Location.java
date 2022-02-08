@@ -136,4 +136,15 @@ public class Location {
         return nodeID + "," + xcoord + "," + ycoord + "," + floor + "," + building + "," + nodeType
                 + "," + longName + "," + shortName;
     }
+
+    public static String toStringHeader() {
+        return "nodeID"
+                + ",xcoord"
+                + ",ycoord"
+                + ",floor"
+                + ",building"
+                + ",nodeType"
+                + ",longName"
+                + ",shortName";
+    }
 }

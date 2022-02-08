@@ -15,6 +15,7 @@ public class CSVWriter2 {
     }
 
     public void write(String data) {
+//        writer.write("\n");
         writer.write(data);
         writer.flush();
         writer.close();
@@ -37,7 +38,7 @@ public class CSVWriter2 {
         writer.close();
     }
 
-    private void backupDir(String fileName) throws FileNotFoundException {
+    public void backupDir(String fileName) throws FileNotFoundException {
         String pathString = new File("").getAbsolutePath();
         File f = new File(pathString);
 

@@ -28,6 +28,7 @@
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -35,27 +36,30 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
+                <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="7" />
                 <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="6" />
                 <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="5" />
                 <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="4" />
                 <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="3" />
-                <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="2" />
                 <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" />
-                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Pickup Location" GridPane.rowIndex="2" />
-                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Destination Location" GridPane.rowIndex="3" />
-                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Form of Transportation" GridPane.rowIndex="4" />
-                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Date of request" GridPane.rowIndex="5" />
-                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Additional information" GridPane.rowIndex="6" />
+                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Pickup Location" GridPane.rowIndex="3" />
+                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Destination Location" GridPane.rowIndex="4" />
+                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Form of Transportation" GridPane.rowIndex="5" />
+                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Date of request" GridPane.rowIndex="6" />
+                <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Additional information" GridPane.rowIndex="7" />
                 <TextField fx:id="SenderTxt" GridPane.columnIndex="1" />
-                <TextField fx:id="PickupLocTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="DestinationTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <ChoiceBox fx:id="FormOfTransport" prefHeight="25.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <DatePicker fx:id="DateCal" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <TextField fx:id="InfoTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <TextField fx:id="PickupLocTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="DestinationTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <ChoiceBox fx:id="FormOfTransport" prefHeight="25.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <DatePicker fx:id="DateCal" prefHeight="25.0" prefWidth="244.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <TextField fx:id="InfoTxt" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="SR ID" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Employee Assignment" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="EmployeeAssignment" prefHeight="25.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="statusField" prefHeight="25.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#4c98f1" height="40.0" stroke="BLACK" strokeType="INSIDE" width="190.0" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Employee Assignment" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="EmployeeAssignment" prefHeight="25.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="190.0" text="Status" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </children>

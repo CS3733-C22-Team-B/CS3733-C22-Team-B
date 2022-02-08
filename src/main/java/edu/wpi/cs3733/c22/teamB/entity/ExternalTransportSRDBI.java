@@ -69,7 +69,7 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
                 String info = externalTransportSR.getInfo();
                 String date = externalTransportSR.getDate();
                 String formOfTransport = externalTransportSR.getFormOfTransport();
-                String assignedEmployee = externalTransportSR.getAssignedEmployee();
+                String assignedEmployee = externalTransportSR.getEmployee().getEmployeeID();
 
                 PreparedStatement pstmt =
                         conn.prepareStatement(
@@ -108,20 +108,20 @@ public class ExternalTransportSRDBI implements IDatabase<ExternalTransportSR> {
             String info = "";
             String date = "";
             String formOfTransport ="";
-            String employeeID = "";
+            String assignedEmployee = "";
 
             while (rset.next()) {
-                srID = rset.getString("equipmentID");
-                status = rset.getString("equipmentName");
-                pickupLocation = rset.getString("equipmentType");
-                destination = rset.getString("manufacturer");
-                info = rset.getString("locationID");
-                date = rset.getString("status");
+                srID = rset.getString("srID");
+                status = rset.getString("status");
+                pickupLocation = rset.getString("pickupLocation");
+                destination = rset.getString("destination");
+                info = rset.getString("info");
+                date = rset.getString("date");
                 formOfTransport = rset.getString("formOfTransport");
-                employeeID = rset.getString("color");
+                assignedEmployee = rset.getString("assignedEmployee");
 
                 EmployeeDBI employeeDBI = new EmployeeDBI();
-                Employee employee = employeeDBI.getNode(employeeID);
+                Employee employee = employeeDBI.getNode(assignedEmployee);
 
                 externalTransportSRList.add(new ExternalTransportSR(srID,status,pickupLocation,destination,info,date,formOfTransport, employee));
             }

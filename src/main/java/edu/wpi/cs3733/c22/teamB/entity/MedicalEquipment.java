@@ -175,4 +175,8 @@ public class MedicalEquipment {
                 + ","
                 + description;
     }
+
+    public static String toStringHeader() {
+        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description";
+    }
 }

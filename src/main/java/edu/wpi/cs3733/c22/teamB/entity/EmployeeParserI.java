@@ -45,6 +45,7 @@ public class EmployeeParserI implements IParser<Employee> {
     @Override
     public List<String> fromObjectsToStrings(List<Employee> listEmployees) {
         List<String> listString = new ArrayList<>();
+        listString.add(Employee.toStringHeader());
         for (Employee employee : listEmployees) {
             listString.add(employee.toStringFields());
         }
