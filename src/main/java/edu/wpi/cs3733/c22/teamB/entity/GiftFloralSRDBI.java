@@ -13,6 +13,11 @@ public class GiftFloralSRDBI implements IDatabase<GiftFloralSR> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();

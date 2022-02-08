@@ -11,6 +11,17 @@ public class EmployeeDBI implements IDatabase<Employee> {
     public EmployeeDBI() {
         this.conn = DBConnection.getConnection();
     }
+
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE Employee");
+        } catch (SQLException e) {
+            System.out.println("Drop Employee Table: Failed!");
+        }
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -38,12 +49,6 @@ public class EmployeeDBI implements IDatabase<Employee> {
 
     @Override
     public void restore(List<Employee> list) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE Employee");
-        } catch (SQLException e) {
-            System.out.println("Drop Employee Table: Failed!");
-        }
 
         try {
             createTable();

@@ -52,6 +52,10 @@ public class FoodDeliverySR extends AbstractSR {
         this.assignedEmployee = assignedEmployee;
     }
 
+    public void setFoodRecipientName(String foodRecipientName) {
+        this.foodRecipientName = foodRecipientName;
+    }
+
     // to string
 
     @Override
@@ -72,6 +76,8 @@ public class FoodDeliverySR extends AbstractSR {
 
     public String toStringFields() {
         return srID
+                + ","
+                + status
                 + ","
                 + destination.getNodeID()
                 + ","
