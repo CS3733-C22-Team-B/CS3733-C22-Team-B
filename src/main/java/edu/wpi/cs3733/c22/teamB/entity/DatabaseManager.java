@@ -50,14 +50,28 @@ public class DatabaseManager {
         EmployeeDBI employeeDBI = new EmployeeDBI();
         LocationDBI locationDBI = new LocationDBI();
 
-        medicalEquipmentSRDBI.restore(medicalEquipmentSRList);
-        medicineDeliverySRDBI.restore(medicineDeliverySRList);
-//        giftFloralSRDBI.restore(giftFloralSRList);
-        foodDeliverySRDBI.restore(foodDeliverySRList);
-        externalTransportSRDBI.restore(externalTransportSRList);
-        medicalEquipmentDBI.restore(medicalEquipmentList);
-        employeeDBI.restore(employeeList);
+
+        // Drop all Tables in specific order
+        medicalEquipmentSRDBI.drop();
+        medicineDeliverySRDBI.drop();
+//        giftFloralSRDBI.drop();
+        foodDeliverySRDBI.drop();
+        externalTransportSRDBI.drop();
+        medicalEquipmentDBI.drop();
+        employeeDBI.drop();
+        locationDBI.drop();
+
+
+        // Create and populate all Tables in specific order
         locationDBI.restore(locationList);
+        employeeDBI.restore(employeeList);
+        medicalEquipmentDBI.restore(medicalEquipmentList);
+        externalTransportSRDBI.restore(externalTransportSRList);
+        foodDeliverySRDBI.restore(foodDeliverySRList);
+//        giftFloralSRDBI.restore(giftFloralSRList);
+        medicineDeliverySRDBI.restore(medicineDeliverySRList);
+        medicalEquipmentSRDBI.restore(medicalEquipmentSRList);
+
     }
 
     /*

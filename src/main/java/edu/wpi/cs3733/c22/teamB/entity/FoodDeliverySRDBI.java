@@ -12,6 +12,16 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE FoodDeliverySR");
+        } catch (SQLException e) {
+            System.out.println("Drop Employee Table: Failed!");
+        }
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -44,12 +54,6 @@ public class FoodDeliverySRDBI implements IDatabase<FoodDeliverySR> {
 
     @Override
     public void restore(List<FoodDeliverySR> list) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE FoodDeliverySR");
-        } catch (SQLException e) {
-            System.out.println("Drop Employee Table: Failed!");
-        }
 
         try {
             createTable();

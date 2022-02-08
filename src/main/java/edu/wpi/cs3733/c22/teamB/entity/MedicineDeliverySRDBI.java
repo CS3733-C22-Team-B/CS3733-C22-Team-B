@@ -12,6 +12,16 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
         this.conn = DBConnection.getConnection();
     }
 
+    @Override
+    public void drop() {
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("DROP TABLE MEDICINEDELIVERYSR");
+        } catch (SQLException e) {
+            System.out.println("Drop Medicine Delivery SR Table: Failed!");
+        }
+    }
+
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -272,13 +282,6 @@ public class MedicineDeliverySRDBI implements IDatabase<MedicineDeliverySR> {
     }
 
     public void restore(List<MedicineDeliverySR> list) {
-
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE MEDICINEDELIVERYSR");
-        } catch (SQLException e) {
-            System.out.println("Drop Medicine Delivery SR Table: Failed!");
-        }
 
         try {
             createTable();

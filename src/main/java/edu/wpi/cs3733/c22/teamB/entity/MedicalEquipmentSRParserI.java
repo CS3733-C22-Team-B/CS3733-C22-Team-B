@@ -17,20 +17,22 @@ public class MedicalEquipmentSRParserI implements IParser<MedicalEquipmentSR> {
 
         medEqSR.setSrID(data[0]);
 
+        medEqSR.setStatus(data[1]);
+
         // Set Location object nodeID
-        destination.setNodeID(data[1]);
+        destination.setNodeID(data[2]);
 
         // Pass Location object to setLocation
         medEqSR.setDestination(destination);
 
         // Set MedicalEquipment object equipmentID
-        medicalEquipment.setEquipmentID(data[2]);
+        medicalEquipment.setEquipmentID(data[3]);
 
         // Pass MedicalEquipment object to setMedicalEquipment
         medEqSR.setMedicalEquipment(medicalEquipment);
 
         // Set Employee object employeeID
-        employee.setEmployeeID(data[3]);
+        employee.setEmployeeID(data[4]);
 
         // Pass Employee object to setAssignedEmployee
         medEqSR.setAssignedEmployee(employee);
