@@ -25,8 +25,6 @@
                   <Pane prefHeight="15" />
                   <JFXButton onAction="#homeButton" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Home" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Refresh" textAlignment="CENTER" />
-                  <Pane prefHeight="15" />
                   <JFXButton fx:id="addButton" onAction="#add" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Add" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="modifyButton" onAction="#modify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Modify" textAlignment="CENTER" />
@@ -44,6 +42,8 @@
                   <JFXButton onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton onAction="#saveToCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Save to CSV" textAlignment="CENTER" />
                   <Label fx:id="header1" text="Location ID:" prefHeight="15" />
                   <TextField fx:id="idField" promptText="Location ID" />
                   <Label fx:id="header2" text="x Coordinate:" prefHeight="15" />

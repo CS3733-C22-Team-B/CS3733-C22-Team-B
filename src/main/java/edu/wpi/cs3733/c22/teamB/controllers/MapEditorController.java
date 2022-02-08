@@ -4,12 +4,15 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.Location;
 import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
+import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipmentDBI;
 import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +37,14 @@ public class MapEditorController {
     public TextField nodeType;
     public TextField shortName;
     public TextField longName;
+    public Label header1;
+    public Label header2;
+    public Label header3;
+    public Label header4;
+    public Label header5;
+    public Label header6;
+    public Label header7;
+    public Label header8;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -42,6 +53,8 @@ public class MapEditorController {
     double imageWidth;
     LocationDBI locationDBI = new LocationDBI();
     List<Location> locationList = locationDBI.getAllNodes();
+    MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
+    List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
     String currentFloor = "3";
     boolean addState = false;
 
@@ -51,7 +64,7 @@ public class MapEditorController {
     Image lowerLevel2Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
     Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
     Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
-
+    Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/medical.png");
     @FXML
     private AnchorPane anchorPane;
 
@@ -66,23 +79,7 @@ public class MapEditorController {
 
     @FXML
     private JFXButton submitModifyButton;
-
-    @FXML
-    private Label header1;
-    @FXML
-    private Label header2;
-    @FXML
-    private Label header3;
-    @FXML
-    private Label header4;
-    @FXML
-    private Label header5;
-    @FXML
-    private Label header6;
-    @FXML
-    private Label header7;
-    @FXML
-    private Label header8;
+    
 
     void setEditFieldsVisible(boolean isVisible){
         header1.setVisible(isVisible);
@@ -180,6 +177,40 @@ public class MapEditorController {
                 addPoint(ID, x, y, Color.BLACK);
             }
         }
+
+
+
+        for(MedicalEquipment local: medicalList){
+            if(local.getLocation().getFloor().equals(currentFloor)) {
+                String ID = local.getEquipmentID();
+                double x = local.getLocation().getXcoord() -10; //TODO fix for future iterations
+                double y = local.getLocation().getYcoord();
+                addPointMedical(ID, x, y, Color.BLUE);
+            }
+        }
+
+
+    }
+
+    public void addPointMedical(String ID, double x, double y, Color color){
+        //Create the point
+        //getImageX(x),getImageY(y)
+        ImageView testImg = new ImageView(medical);
+        //Add the point to the anchorPane's children
+        anchorPane.getChildren().add(testImg);
+        //Set point ID
+        testImg.idProperty().set(ID);
+        testImg.setX(getImageX(x));
+        testImg.setY(getImageY(y));
+        testImg.setPreserveRatio(true);
+        testImg.setFitWidth(15);
+
+        //Set up onclick events
+//        testImg.setOnMouseClicked(event -> {
+//            modifyButton.setOpacity(1);
+//            modifyButton.setDisable(false);
+//            onPointClick(testImg);
+//        });
     }
 
     void removeAllPoints(){
@@ -198,8 +229,11 @@ public class MapEditorController {
         addPoints();
     }
 
-    @FXML public void loadFromCSV(){}
-    //TODO Backup Button (go to csv)
+    @FXML public void loadFromCSV(){
+        //TODO get function from db people
+        refresh();
+    }
+
 
     @FXML public void goToL2(){
         currentFloor = "L2";
@@ -220,6 +254,10 @@ public class MapEditorController {
     @FXML public void goTo3(){
         currentFloor = "3";
         goTo();
+    }
+
+    @FXML public void saveToCSV(){
+        //TODO get function from db people
     }
 
     @FXML public void goTo(){
@@ -247,24 +285,24 @@ public class MapEditorController {
         refresh();
     }
 
-    public void editNodeDetails (Location location){
-        try {
-            Parent root =
-                        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationDetailsDialog.fxml"));
-            Stage editStage = new Stage();
-            editStage.setTitle("Set Location Details");
-            StackPane stack = new StackPane();
-            Scene editScene = new Scene(stack, 600, 400);
-            editScene.setRoot(root);
-            //editStage.getClass().getResource("views/LocationDetailsDialog.fxml");
-            editStage.setScene(editScene);
-            editStage.show();
-            Bapp.getPrimaryStage().hide();
-            editStage.setResizable(false);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+//    public void editNodeDetails (Location location){
+//        try {
+//            Parent root =
+//                        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationDetailsDialog.fxml"));
+//            Stage editStage = new Stage();
+//            editStage.setTitle("Set Location Details");
+//            StackPane stack = new StackPane();
+//            Scene editScene = new Scene(stack, 600, 400);
+//            editScene.setRoot(root);
+//            //editStage.getClass().getResource("views/LocationDetailsDialog.fxml");
+//            editStage.setScene(editScene);
+//            editStage.show();
+//            Bapp.getPrimaryStage().hide();
+//            editStage.setResizable(false);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
     @FXML public void delete(){
         deleteSelectedNode();
