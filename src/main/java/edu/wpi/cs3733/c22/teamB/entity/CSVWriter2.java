@@ -15,6 +15,7 @@ public class CSVWriter2 {
     }
 
     public void write(String data) {
+//        writer.write("\n");
         writer.write(data);
         writer.flush();
         writer.close();
