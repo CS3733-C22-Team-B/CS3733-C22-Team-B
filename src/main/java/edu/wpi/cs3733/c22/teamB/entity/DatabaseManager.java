@@ -37,13 +37,13 @@ public class DatabaseManager {
     }
 
     public void restoreTables(List<Location> locationList, List<Employee> employeeList, List<ExternalTransportSR> externalTransportSRList,
-                              List<MedicineDeliverySR> medicineDeliverySRList, List<FoodDeliverySR> foodDeliverySRList,
-                              List<GiftFloralSR> giftFloralSRList, List<MedicalEquipmentSR> medicalEquipmentSRList,
+                              List<MedicineDeliverySR> medicineDeliverySRList, List<FoodDeliverySR> foodDeliverySRList
+                              , List<MedicalEquipmentSR> medicalEquipmentSRList,
                               List<MedicalEquipment> medicalEquipmentList) {
-
+//List<GiftFloralSR> giftFloralSRList
         MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
         MedicalEquipmentSRDBI medicalEquipmentSRDBI = new MedicalEquipmentSRDBI();
-        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
+//        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
         FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
@@ -52,7 +52,7 @@ public class DatabaseManager {
 
         medicalEquipmentSRDBI.restore(medicalEquipmentSRList);
         medicineDeliverySRDBI.restore(medicineDeliverySRList);
-        giftFloralSRDBI.restore(giftFloralSRList);
+//        giftFloralSRDBI.restore(giftFloralSRList);
         foodDeliverySRDBI.restore(foodDeliverySRList);
         externalTransportSRDBI.restore(externalTransportSRList);
         medicalEquipmentDBI.restore(medicalEquipmentList);

@@ -34,4 +34,7 @@ public class GiftFloralSR extends AbstractSR {
     public List<GiftType> getListOfGifts() {
         return listOfGifts;
     }
+
+
+
 }

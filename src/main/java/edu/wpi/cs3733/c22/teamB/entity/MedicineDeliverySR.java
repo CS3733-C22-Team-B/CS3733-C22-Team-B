@@ -207,11 +207,37 @@ public class MedicineDeliverySR extends AbstractSR {
     public String toStringFields() {
         return srID
                 + ","
+                + status
+                + ","
                 + destination.getNodeID()
                 + ","
                 + medicine.getMedicationID()
                 + ","
-                + assignedEmployee.getEmployeeID();
+                + assignedEmployee.getEmployeeID()
+                + ","
+                + patientFirstName
+                + ","
+                + patientLastName
+                + ","
+                + patientID
+                + ","
+                + DOB
+                + ","
+                + email
+                + ","
+                + room
+                + ","
+                + dosage
+                + ","
+                + medicineName
+                + ","
+                + dispenseAmount
+                + ","
+                +frequency
+                + ","
+                + form
+                + ","
+                + mgPerDose;
     }
 
 }
