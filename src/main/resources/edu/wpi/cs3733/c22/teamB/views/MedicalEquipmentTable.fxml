@@ -61,8 +61,13 @@
                 <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" style="-fx-background-color: lightblue;" text="Confirm" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
                 <JFXButton fx:id="clearButton" alignment="CENTER" onAction="#clearForm" style="-fx-background-color: lightblue;" text="Clear" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <JFXButton fx:id="cancelButton" alignment="CENTER" onAction="#cancelForm" style="-fx-background-color: lightblue;" text="Cancel" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+<<<<<<< HEAD
                 <JFXComboBox fx:id="LocationChoice" promptText="Location" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                 <JFXComboBox fx:id="statusField" promptText="Status" GridPane.rowIndex="1" />
+=======
+            <JFXComboBox fx:id="LocationChoice" promptText="Location" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <JFXComboBox fx:id="statusField" promptText="Status" GridPane.rowIndex="1" />
+>>>>>>> main
             </children>
         </GridPane>
     </children>

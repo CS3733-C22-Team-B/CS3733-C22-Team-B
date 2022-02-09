@@ -235,10 +235,11 @@ public class MedicalEquipmentTableController {
                             equipmentTypeField.getText(),
                             manufacturerField.getText(),
                             locMap.get(LocationChoice.getValue()),
-                            statusField.getItems().toString(),
-                            colorField.getText(),
-                            sizeField.getText(),
-                            descriptionField.getText()));
+                    statusField.getItems().toString(),
+                    colorField.getText(),
+                    sizeField.getText(),
+                    descriptionField.getText()));
+
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
             table.getItems().clear();
@@ -291,4 +292,7 @@ public class MedicalEquipmentTableController {
 
         func = MedicalEquipmentTableController.Function.IDLOOKUP;
     }
+
 }
+
+

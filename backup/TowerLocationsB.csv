@@ -84,7 +84,6 @@ HDEPT00203,1690,830,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
 HHALL00103,1325,655,3,Tower,HALL,Hallway Connector 1 Floor 3,Hallway H00103
 HHALL00203,1235,985,3,Tower,HALL,Hallway Connector 2 Floor 3,Hallway H00203
 HHALL00303,1325,985,3,Tower,HALL,Hallway Connector 3 Floor 3,Hallway H00303
-HHALL00403,1325,1290,3,Tower,HALL,Hallway Connector 4 Floor 3,Hallway H00403
 HHALL00503,1680,1290,3,Tower,HALL,Hallway Connector 5 Floor 3,Hallway H00502
 HHALL00603,1735,925,3,Tower,HALL,Hallway Connector 6 Floor 3,Hallway H00603
 HHALL00703,1735,900,3,Tower,HALL,Hallway Connector 7 Floor 3,Hallway H00703
@@ -146,4 +145,3 @@ bPATI01403,1560,1150,3,Tower,PATI,Patient Room Hestia,Hestia
 bPATI02003,1580,1130,3,Tower,PATI,Patient Room Dionysus,Dionysus
 bPATI01903,1590,1100,3,Tower,PATI,Patient Room Aether,Aether
 bPATI00903,1480,830,3,Tower,PATI,Patient Room Aphrodite,Aphrodite
-0,2597,1922,3,Building,Node Type,Short Name,Long Name

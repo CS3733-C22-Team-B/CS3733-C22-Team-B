@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 public class MedicalEquipment {
-    private String equipmentID;
+    private String equipmentID; //
     private String equipmentName;
     private String equipmentType;
     private String manufacturer;
