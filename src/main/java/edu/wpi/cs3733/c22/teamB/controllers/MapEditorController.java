@@ -249,6 +249,7 @@ public class MapEditorController {
 
     @FXML public void loadFromCSV(){
         try {
+            System.out.println("yooyoyo");
             String pathString = new File("").getAbsolutePath();
             File f = new File(pathString);
 
@@ -305,7 +306,7 @@ public class MapEditorController {
             List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
             List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
             List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
-
+            System.out.println((locationList1.get(locationList1.size()).getNodeID()));
             databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
                     foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
         } catch (IOException ex){
