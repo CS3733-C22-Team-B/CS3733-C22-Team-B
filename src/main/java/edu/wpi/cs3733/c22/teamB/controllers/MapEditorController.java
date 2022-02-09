@@ -167,7 +167,7 @@ public class MapEditorController {
     }
 
     //Add a point to the map using image coordinates. Set up onclick.
-    public void addPoint(String ID, double x, double y, Color color){
+    public Circle addPoint(String ID, double x, double y, Color color){
         //Create the point
         Circle testPoint = new Circle(getImageX(x),getImageY(y),3);
         //Add the point to the anchorPane's children
@@ -183,6 +183,7 @@ public class MapEditorController {
             deleteButton.setDisable(false);
             onPointClick(testPoint);
         });
+        return testPoint;
     }
 
     //Add points from DB
@@ -470,7 +471,7 @@ public class MapEditorController {
             double xCord = getMapX(event.getSceneX());
             double yCord = getMapY(event.getSceneY());
             //Adds point to the map
-            addPoint(String.valueOf(nextID),xCord,yCord,Color.YELLOW);
+            selectedPnt = addPoint(String.valueOf(nextID),xCord,yCord,Color.YELLOW);
             //Create new location
             Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Building","Node Type","Long Name","Short Name");
             //Add new location to the database
