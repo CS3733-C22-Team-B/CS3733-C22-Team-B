@@ -309,6 +309,7 @@ public class MapEditorController {
             System.out.println(locationList1.get(locationList1.size()-1).getNodeID());
             databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
                     foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+            refresh();
         } catch (IOException ex){
             ex.printStackTrace();
         }
