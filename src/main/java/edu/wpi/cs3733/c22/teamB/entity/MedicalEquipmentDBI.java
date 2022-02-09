@@ -267,7 +267,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             pstmt.setString(8, node.getSize());
             pstmt.setString(9, node.getDescription());
 
-            if(isInTable(node.getEquipmentID())) {
+            if(!isInTable(node.getEquipmentID())) {
                 pstmt.executeUpdate();
             }
 
