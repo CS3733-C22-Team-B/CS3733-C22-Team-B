@@ -152,6 +152,8 @@ Temporary Items
 /build/tmp/
 /build/spotlessJava
 
+/backup/
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
