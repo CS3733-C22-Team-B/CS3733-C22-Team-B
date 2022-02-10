@@ -216,12 +216,6 @@ public class MapEditorController {
         testImg.setPreserveRatio(true);
         testImg.setFitWidth(15);
 
-        //Set up onclick events
-//        testImg.setOnMouseClicked(event -> {
-//            modifyButton.setOpacity(1);
-//            modifyButton.setDisable(false);
-//            onPointClick(testImg);
-//        });
     }
 
     void removeAllPoints(){
@@ -237,16 +231,6 @@ public class MapEditorController {
         locationList = locationDBI.getAllNodes();
         removeAllPoints();
         addPoints();
-    }
-
-
-    @FXML public void loadFromCSV(){
-        try {
-            backupper.Restore();
-            refresh();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
     }
 
 
@@ -274,7 +258,6 @@ public class MapEditorController {
     @FXML public void saveToCSV(){
         try {
             backupper.Backup();
-            System.out.println("wazzzup");
         } catch (IOException ex){
             ex.printStackTrace();
         }
@@ -318,25 +301,6 @@ public class MapEditorController {
         deleteButton.setDisable(true);
         refresh();
     }
-
-//    public void editNodeDetails (Location location){
-//        try {
-//            Parent root =
-//                        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationDetailsDialog.fxml"));
-//            Stage editStage = new Stage();
-//            editStage.setTitle("Set Location Details");
-//            StackPane stack = new StackPane();
-//            Scene editScene = new Scene(stack, 600, 400);
-//            editScene.setRoot(root);
-//            //editStage.getClass().getResource("views/LocationDetailsDialog.fxml");
-//            editStage.setScene(editScene);
-//            editStage.show();
-//            Bapp.getPrimaryStage().hide();
-//            editStage.setResizable(false);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
 
     @FXML public void delete(){
         deleteSelectedNode();
@@ -453,9 +417,12 @@ public class MapEditorController {
 
     @FXML
     void loadFromCSV(ActionEvent event) {
-        loadFromCSV();
-        //Ben Here's your button it exists now lessssgoooo
-        //TODO get it to work
+        try {
+            backupper.Restore();
+            refresh();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
 }
