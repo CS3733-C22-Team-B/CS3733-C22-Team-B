@@ -57,14 +57,6 @@ public class MapEditorController {
     MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
     List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
     CSVRestoreBackupController backupper = new CSVRestoreBackupController();
-    LocationParserI locParser = new LocationParserI();
-    EmployeeParserI employeeParserI = new EmployeeParserI();
-    ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
-    FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
-    MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
-    MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
-    MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
-    DatabaseManager databaseManager = new DatabaseManager();
     String currentFloor = "3";
     boolean addState = false;
 
@@ -250,66 +242,7 @@ public class MapEditorController {
 
     @FXML public void loadFromCSV(){
         try {
-            System.out.println("dat");
-            String pathString = new File("").getAbsolutePath();
-            File f = new File(pathString);
-
-            File backDir = new File(f.getAbsolutePath() + "/backup");
-
-            File filePathLocation = new File(backDir.getAbsolutePath() + "/TowerLocationsB.csv");
-
-            File filePathEmployee = new File(backDir.getAbsolutePath() + "/EmployeeB.csv");
-
-            File filePathExtTrans = new File(backDir.getAbsolutePath() + "/ExternalTransportSRB.csv");
-
-            File filePathFood = new File(backDir.getAbsolutePath() + "/FoodDeliverySRB.csv");
-
-            File filePathEq = new File(backDir.getAbsolutePath() + "/MedicalEquipmentB.csv");
-
-            File filePathEqSR = new File(backDir.getAbsolutePath() + "/MedicalEquipmentSRB.csv");
-
-            File filePathMedSR = new File(backDir.getAbsolutePath() + "/MedicineDeliverySRB.csv");
-
-            CSVReader2 reader = new CSVReader2(filePathLocation);
-
-            // Read Location CSV
-            reader.setFile(filePathLocation);
-            List<String> locationList = reader.read();
-
-            // Read Employee CSV
-            reader.setFile(filePathEmployee);
-            List<String> employeeList = reader.read();
-
-            // Read ExternalTrans CSV
-            reader.setFile(filePathExtTrans);
-            List<String> externalTransportList = reader.read();
-
-            // Read FoodDelivery CSV
-            reader.setFile(filePathFood);
-            List<String> foodDeliveryList = reader.read();
-
-            // Read Equipment CSV
-            reader.setFile(filePathEq);
-            List<String> equipmentList = reader.read();
-
-            // Read EquipmentSR CSV
-            reader.setFile(filePathEqSR);
-            List<String> equipmentSRList = reader.read();
-
-            // Read MedicineDelivery CSV
-            reader.setFile(filePathMedSR);
-            List<String> medicineDeliveryList = reader.read();
-
-            List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
-            List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-            List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
-            List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
-            List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
-            List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
-            List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
-            System.out.println(locationList1.get(locationList1.size()-1).getNodeID());
-            databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-                    foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+            backupper.Restore();
             refresh();
         } catch (IOException ex){
             ex.printStackTrace();
