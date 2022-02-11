@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
@@ -45,8 +47,10 @@ public class MapEditorController{
     public Label header7;
     public Label header8;
     public JFXButton deleteButton;
-    public JFXComboBox statusField;
-    public JFXButton moveButton;
+    public JFXToggleButton moveButton;
+    public JFXCheckBox showLocations;
+    public JFXCheckBox showMedical;
+
     String selectedPoint;
     Circle selectedPnt;
     ImageView selectedImg;
@@ -91,6 +95,178 @@ public class MapEditorController{
     @FXML private JFXButton goTo1Button;
     @FXML private JFXButton goTo2Button;
     @FXML private JFXButton goTo3Button;
+
+
+    @FXML
+    public void initialize(){
+        Bapp.getPrimaryStage().setMaximized(true);
+        Bapp.getPrimaryStage().resizableProperty().set(false);
+        sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
+        sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
+        imageView.setFitHeight(sceneHeight);
+        imageHeight = imageView.getImage().getHeight();
+        imageWidth = imageView.getImage().getWidth();
+        showLocations.setSelected(true);
+        showMedical.setSelected(true);
+        setEditFieldsVisible(false);
+        modifyButton.setOpacity(0.5);
+        modifyButton.setDisable(true);
+        deleteButton.setOpacity(0.5);
+        deleteButton.setDisable(true);
+        goTo3Button.setStyle("-fx-background-color: #007fff");
+        nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
+        floor.getItems().addAll("L2","L1","01","02","03");
+        floor.setValue(currentFloor);
+        addPoint("1",0,0,Color.ORANGE);
+        addPoint("2",imageWidth,imageHeight, Color.RED);
+        addPoints();
+    }
+
+    //Add points from DB
+    public void addPoints(){
+            for (Location local : locationList) {
+                if (local.getFloor().equals(currentFloor)) {
+                    String ID = local.getNodeID();
+                    double x = local.getXcoord();
+                    double y = local.getYcoord();
+                    addPoint(ID, x, y, Color.BLACK);
+                }
+            }
+
+
+            for (MedicalEquipment local : medicalList) {
+                if (local.getLocation().getFloor().equals(currentFloor)) {
+                    String ID = local.getEquipmentID();
+                    double x = local.getLocation().getXcoord(); //TODO fix for future iterations
+                    double y = local.getLocation().getYcoord();
+                    addPointMedical(ID, x, y, Color.BLUE);
+                }
+            }
+
+
+    }
+
+    //Add a point to the map using image coordinates. Set up onclick.
+    public Circle addPoint(String ID, double x, double y, Color color){
+
+        //Create the point
+        Circle testPoint = new Circle(getImageX(x), getImageY(y), 3);
+        //Add the point to the anchorPane's children
+        if(showLocations.isSelected()) {
+            anchorPane.getChildren().add(testPoint);
+            testPoint.setFill(color);
+            //Set point ID
+            testPoint.idProperty().set(ID);
+            //Set up onclick events
+            testPoint.setOnMousePressed(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    orgSceneX = event.getSceneX();
+                    orgSceneY = event.getSceneY();
+                    modifyButton.setOpacity(1);
+                    modifyButton.setDisable(false);
+                    deleteButton.setOpacity(1);
+                    deleteButton.setDisable(false);
+                    onPointClick(testPoint);
+                    event.setDragDetect(true);
+                }
+            });
+
+            testPoint.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    if (moveState) {
+                        Location temp = locationDBI.getNode(selectedPoint);
+                        locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
+                        testPoint.setCenterX((event.getX()));
+                        testPoint.setCenterY((event.getY()));
+
+                    }
+                }
+            });
+
+            testPoint.setOnMouseDragged((t) -> {
+                if (moveState) {
+                    double offsetX = t.getSceneX() - orgSceneX;
+                    double offsetY = t.getSceneY() - orgSceneY;
+
+                    Circle c = (Circle) (t.getSource());
+
+                    c.setCenterX(c.getCenterX() + offsetX);
+                    c.setCenterY(c.getCenterY() + offsetY);
+
+                    orgSceneX = t.getSceneX();
+                    orgSceneY = t.getSceneY();
+                }
+            });
+
+        }
+        return testPoint;
+
+    }
+
+
+    //add a medical point
+    public void addPointMedical(String ID, double x, double y, Color color){
+        if(showMedical.isSelected()) {
+            //Create the point
+            //getImageX(x),getImageY(y)
+            ImageView testImg = new ImageView(medical);
+            //Add the point to the anchorPane's children
+            anchorPane.getChildren().add(testImg);
+            //Set point ID
+            testImg.idProperty().set(ID);
+            testImg.setX(getImageX(x));
+            testImg.setY(getImageY(y));
+            testImg.setPreserveRatio(true);
+            testImg.setFitWidth(15);
+
+            testImg.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    System.out.println("moving medical");
+                    if (moveState) {
+                        Location tempLoc = getClosetLocation(event.getX(), event.getY());
+                        double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
+                        System.out.println(dist);
+                        MedicalEquipment temp = medicalDBI.getNode(selectedImg.getId());
+                        System.out.println(selectedImg.getId());
+                        medicalDBI.updateNode(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription()));
+                        testImg.setX(getImageX(tempLoc.getXcoord()));
+                        testImg.setY(getImageY(tempLoc.getYcoord()));
+                        System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
+                    }
+                }
+            });
+
+            testImg.setOnMousePressed(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    orgSceneX = event.getSceneX();
+                    orgSceneY = event.getSceneY();
+//                modifyButton.setOpacity(1);
+//                modifyButton.setDisable(false);
+//                deleteButton.setOpacity(1);
+//                deleteButton.setDisable(false);
+                    onImgClick(testImg);
+                    event.setDragDetect(true);
+                }
+            });
+
+
+            testImg.setOnMouseDragged((t) -> {
+                if (moveState) {
+                    double offsetX = t.getSceneX() - orgSceneX;
+                    double offsetY = t.getSceneY() - orgSceneY;
+
+                    ImageView c = (ImageView) (t.getSource());
+
+                    c.setX(c.getX() + offsetX);
+                    c.setY(c.getY() + offsetY);
+
+                    orgSceneX = t.getSceneX();
+                    orgSceneY = t.getSceneY();
+                }
+            });
+
+        }
+    }
     
 
     void setEditFieldsVisible(boolean isVisible){
@@ -101,7 +277,6 @@ public class MapEditorController{
         header8.setVisible(isVisible);
         idField.setVisible(isVisible);
         floor.setVisible(isVisible);
-
         nodeType.setVisible(isVisible);
         longName.setVisible(isVisible);
         shortName.setVisible(isVisible);
@@ -167,156 +342,9 @@ public class MapEditorController{
         selectedImg = testImg;
     }
 
-    //Add a point to the map using image coordinates. Set up onclick.
-    public Circle addPoint(String ID, double x, double y, Color color){
-        //Create the point
-        Circle testPoint = new Circle(getImageX(x),getImageY(y),3);
-        //Add the point to the anchorPane's children
-        anchorPane.getChildren().add(testPoint);
-        testPoint.setFill(color);
-        //Set point ID
-        testPoint.idProperty().set(ID);
-        //Set up onclick events
-        testPoint.setOnMousePressed(new EventHandler <MouseEvent>()
-        {
-            public void handle(MouseEvent event)
-            {
-                orgSceneX = event.getSceneX();
-                orgSceneY = event.getSceneY();
-                modifyButton.setOpacity(1);
-                modifyButton.setDisable(false);
-                deleteButton.setOpacity(1);
-                deleteButton.setDisable(false);
-                onPointClick(testPoint);
-                event.setDragDetect(true);
-            }
-        });
-
-        testPoint.setOnMouseReleased(new EventHandler <MouseEvent>()
-        {
-            public void handle(MouseEvent event)
-            {
-                if(moveState) {
-                    Location temp = locationDBI.getNode(selectedPoint);
-                    locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(),temp.getShortName()));
-                    testPoint.setCenterX((event.getX()));
-                    testPoint.setCenterY((event.getY()));
-
-                }
-            }
-        });
-
-        testPoint.setOnMouseDragged((t) -> {
-            if(moveState) {
-                double offsetX = t.getSceneX() - orgSceneX;
-                double offsetY = t.getSceneY() - orgSceneY;
-
-                Circle c = (Circle) (t.getSource());
-
-                c.setCenterX(c.getCenterX() + offsetX);
-                c.setCenterY(c.getCenterY() + offsetY);
-
-                orgSceneX = t.getSceneX();
-                orgSceneY = t.getSceneY();
-            }
-        });
 
 
 
-
-        return testPoint;
-    }
-
-    //Add points from DB
-    public void addPoints(){
-        for(Location local: locationList){
-            if(local.getFloor().equals(currentFloor)) {
-                String ID = local.getNodeID();
-                double x = local.getXcoord();
-                double y = local.getYcoord();
-                addPoint(ID, x, y, Color.BLACK);
-            }
-        }
-
-
-
-        for(MedicalEquipment local: medicalList){
-            if(local.getLocation().getFloor().equals(currentFloor)) {
-                String ID = local.getEquipmentID();
-                double x = local.getLocation().getXcoord(); //TODO fix for future iterations
-                double y = local.getLocation().getYcoord();
-                addPointMedical(ID, x, y, Color.BLUE);
-            }
-        }
-
-
-    }
-
-    public void addPointMedical(String ID, double x, double y, Color color){
-        //Create the point
-        //getImageX(x),getImageY(y)
-        ImageView testImg = new ImageView(medical);
-        //Add the point to the anchorPane's children
-        anchorPane.getChildren().add(testImg);
-        //Set point ID
-        testImg.idProperty().set(ID);
-        testImg.setX(getImageX(x));
-        testImg.setY(getImageY(y));
-        testImg.setPreserveRatio(true);
-        testImg.setFitWidth(15);
-
-        testImg.setOnMouseReleased(new EventHandler <MouseEvent>()
-        {
-            public void handle(MouseEvent event)
-            {
-                System.out.println("moving medical");
-                if(moveState) {
-                    Location tempLoc = getClosetLocation(event.getX(),event.getY());
-                    double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(),tempLoc.getYcoord(), event.getX(), event.getY());
-                    System.out.println(dist);
-                        MedicalEquipment temp = medicalDBI.getNode(selectedImg.getId());
-                        System.out.println(selectedImg.getId());
-                        medicalDBI.updateNode(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription()));
-                        testImg.setX(getImageX(tempLoc.getXcoord()));
-                        testImg.setY(getImageY(tempLoc.getYcoord()));
-                        System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
-                }
-            }
-        });
-
-        testImg.setOnMousePressed(new EventHandler <MouseEvent>()
-        {
-            public void handle(MouseEvent event)
-            {
-                orgSceneX = event.getSceneX();
-                orgSceneY = event.getSceneY();
-//                modifyButton.setOpacity(1);
-//                modifyButton.setDisable(false);
-//                deleteButton.setOpacity(1);
-//                deleteButton.setDisable(false);
-                onImgClick(testImg);
-                event.setDragDetect(true);
-            }
-        });
-
-
-        testImg.setOnMouseDragged((t) -> {
-            if(moveState) {
-                double offsetX = t.getSceneX() - orgSceneX;
-                double offsetY = t.getSceneY() - orgSceneY;
-
-                ImageView c = (ImageView) (t.getSource());
-
-                c.setX(c.getX() + offsetX);
-                c.setY(c.getY() + offsetY);
-
-                orgSceneX = t.getSceneX();
-                orgSceneY = t.getSceneY();
-            }
-        });
-
-
-    }
 
     void removeAllPoints(){
         anchorPane.getChildren().remove(1,anchorPane.getChildren().size());
@@ -407,31 +435,7 @@ public class MapEditorController{
         deleteSelectedNode();
     }
 
-    @FXML
-    public void initialize(){
-        //Bapp.getPrimaryStage().setFullScreen(false);
-        Bapp.getPrimaryStage().setMaximized(true);
-        Bapp.getPrimaryStage().resizableProperty().set(false);
-        sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
-        sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
-        //System.out.println("Scene Width = " + sceneWidth);
-        //System.out.println("Scene Height = " + sceneHeight);
-        imageView.setFitHeight(sceneHeight);
-        imageHeight = imageView.getImage().getHeight();
-        imageWidth = imageView.getImage().getWidth();
-        setEditFieldsVisible(false);
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
-        goTo3Button.setStyle("-fx-background-color: #007fff");
-        nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
-        floor.getItems().addAll("L2","L1","01","02","03");
-        floor.setValue(currentFloor);
-        addPoint("1",0,0,Color.ORANGE);
-        addPoint("2",imageWidth,imageHeight, Color.RED);
-        addPoints();
-    }
+
 
     @FXML public void modify(){
         setEditFieldsVisible(true);
@@ -522,12 +526,10 @@ public class MapEditorController{
     @FXML public void move(){
         if(moveState){
             moveState = false;
-            moveButton.setOpacity(1);
             moveButton.setText("Move");
         } else{
             moveState = true;
-            moveButton.setOpacity(0.5);
-            moveButton.setText("Cancel Moving");
+            moveButton.setText("Cancel");
         }
     }
 
@@ -564,6 +566,10 @@ public class MapEditorController{
             }
         }
         return(locationDBI.getNode(closest.getId()));
+    }
+
+    public void showOrHide(){
+        refresh();
     }
 
 

@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -27,7 +29,7 @@
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="addButton" onAction="#add" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Add" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton fx:id="moveButton" onAction="#move" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" />
+                  <JFXToggleButton fx:id="moveButton" onAction="#move" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="modifyButton" onAction="#modify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Modify" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
@@ -58,6 +60,12 @@
                   <TextField fx:id="longName" promptText="Long Name" />
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXCheckBox fx:id="showLocations" onAction="#showOrHide" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXCheckBox fx:id="showMedical" onAction="#showOrHide" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
+
+
                </children>
             </VBox>
          </children>
