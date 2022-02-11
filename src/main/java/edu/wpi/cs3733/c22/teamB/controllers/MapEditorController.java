@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.beans.InvalidationListener;
@@ -32,9 +33,8 @@ public class MapEditorController {
     public javafx.scene.control.TextField idField;
     public TextField xCoordinate;
     public TextField yCoordinate;
-    public TextField floor;
-    public TextField building;
-    public TextField nodeType;
+    public JFXComboBox floor;
+    public JFXComboBox nodeType;
     public TextField shortName;
     public TextField longName;
     public Label header1;
@@ -46,6 +46,7 @@ public class MapEditorController {
     public Label header7;
     public Label header8;
     public JFXButton deleteButton;
+    public JFXComboBox statusField;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -57,15 +58,7 @@ public class MapEditorController {
     MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
     List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
     CSVRestoreBackupController backupper = new CSVRestoreBackupController();
-    LocationParserI locParser = new LocationParserI();
-    EmployeeParserI employeeParserI = new EmployeeParserI();
-    ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
-    FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
-    MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
-    MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
-    MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
-    DatabaseManager databaseManager = new DatabaseManager();
-    String currentFloor = "3";
+    String currentFloor = "03";
     boolean addState = false;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
@@ -102,7 +95,6 @@ public class MapEditorController {
         header2.setVisible(isVisible);
         header3.setVisible(isVisible);
         header4.setVisible(isVisible);
-        header5.setVisible(isVisible);
         header6.setVisible(isVisible);
         header7.setVisible(isVisible);
         header8.setVisible(isVisible);
@@ -110,7 +102,8 @@ public class MapEditorController {
         xCoordinate.setVisible(isVisible);
         yCoordinate.setVisible(isVisible);
         floor.setVisible(isVisible);
-        building.setVisible(isVisible);
+        //statusField.setVisible(isVisible);
+        //building.setVisible(isVisible);
         nodeType.setVisible(isVisible);
         longName.setVisible(isVisible);
         shortName.setVisible(isVisible);
@@ -224,12 +217,6 @@ public class MapEditorController {
         testImg.setPreserveRatio(true);
         testImg.setFitWidth(15);
 
-        //Set up onclick events
-//        testImg.setOnMouseClicked(event -> {
-//            modifyButton.setOpacity(1);
-//            modifyButton.setDisable(false);
-//            onPointClick(testImg);
-//        });
     }
 
     void removeAllPoints(){
@@ -248,75 +235,6 @@ public class MapEditorController {
     }
 
 
-    @FXML public void loadFromCSV(){
-        try {
-            System.out.println("dat");
-            String pathString = new File("").getAbsolutePath();
-            File f = new File(pathString);
-
-            File backDir = new File(f.getAbsolutePath() + "/backup");
-
-            File filePathLocation = new File(backDir.getAbsolutePath() + "/TowerLocationsB.csv");
-
-            File filePathEmployee = new File(backDir.getAbsolutePath() + "/EmployeeB.csv");
-
-            File filePathExtTrans = new File(backDir.getAbsolutePath() + "/ExternalTransportSRB.csv");
-
-            File filePathFood = new File(backDir.getAbsolutePath() + "/FoodDeliverySRB.csv");
-
-            File filePathEq = new File(backDir.getAbsolutePath() + "/MedicalEquipmentB.csv");
-
-            File filePathEqSR = new File(backDir.getAbsolutePath() + "/MedicalEquipmentSRB.csv");
-
-            File filePathMedSR = new File(backDir.getAbsolutePath() + "/MedicineDeliverySRB.csv");
-
-            CSVReader2 reader = new CSVReader2(filePathLocation);
-
-            // Read Location CSV
-            reader.setFile(filePathLocation);
-            List<String> locationList = reader.read();
-
-            // Read Employee CSV
-            reader.setFile(filePathEmployee);
-            List<String> employeeList = reader.read();
-
-            // Read ExternalTrans CSV
-            reader.setFile(filePathExtTrans);
-            List<String> externalTransportList = reader.read();
-
-            // Read FoodDelivery CSV
-            reader.setFile(filePathFood);
-            List<String> foodDeliveryList = reader.read();
-
-            // Read Equipment CSV
-            reader.setFile(filePathEq);
-            List<String> equipmentList = reader.read();
-
-            // Read EquipmentSR CSV
-            reader.setFile(filePathEqSR);
-            List<String> equipmentSRList = reader.read();
-
-            // Read MedicineDelivery CSV
-            reader.setFile(filePathMedSR);
-            List<String> medicineDeliveryList = reader.read();
-
-            List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
-            List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-            List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
-            List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
-            List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
-            List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
-            List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
-            System.out.println(locationList1.get(locationList1.size()-1).getNodeID());
-            databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-                    foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
-            refresh();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
-    }
-
-
     @FXML public void goToL2(){
         currentFloor = "L2";
         goTo();
@@ -326,22 +244,21 @@ public class MapEditorController {
         goTo();
     }
     @FXML public void goTo1(){
-        currentFloor = "1";
+        currentFloor = "01";
         goTo();
     }
     @FXML public void goTo2(){
-        currentFloor = "2";
+        currentFloor = "02";
         goTo();
     }
     @FXML public void goTo3(){
-        currentFloor = "3";
+        currentFloor = "03";
         goTo();
     }
 
     @FXML public void saveToCSV(){
         try {
             backupper.Backup();
-            System.out.println("wazzzup");
         } catch (IOException ex){
             ex.printStackTrace();
         }
@@ -356,11 +273,11 @@ public class MapEditorController {
         goToL2Button.setStyle("-fx-background-color: #eaeaea");
 
         switch (currentFloor) {
-            case "1":
+            case "01":
                 imageView.setImage(firstFloorImage);
                 goTo1Button.setStyle("-fx-background-color: #007fff");
                 break;
-            case "2":
+            case "02":
                 imageView.setImage(secondFloorImage);
                 goTo2Button.setStyle("-fx-background-color: #007fff");
                 break;
@@ -386,25 +303,6 @@ public class MapEditorController {
         refresh();
     }
 
-//    public void editNodeDetails (Location location){
-//        try {
-//            Parent root =
-//                        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationDetailsDialog.fxml"));
-//            Stage editStage = new Stage();
-//            editStage.setTitle("Set Location Details");
-//            StackPane stack = new StackPane();
-//            Scene editScene = new Scene(stack, 600, 400);
-//            editScene.setRoot(root);
-//            //editStage.getClass().getResource("views/LocationDetailsDialog.fxml");
-//            editStage.setScene(editScene);
-//            editStage.show();
-//            Bapp.getPrimaryStage().hide();
-//            editStage.setResizable(false);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-
     @FXML public void delete(){
         deleteSelectedNode();
     }
@@ -427,8 +325,9 @@ public class MapEditorController {
         deleteButton.setOpacity(0.5);
         deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
-
-
+        nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
+        floor.getItems().addAll("L2","L1","01","02","03");
+        floor.setValue(currentFloor);
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
@@ -440,15 +339,14 @@ public class MapEditorController {
         idField.setText(selectedPoint);
         xCoordinate.setText(String.valueOf(local.getXcoord()));
         yCoordinate.setText(String.valueOf(local.getYcoord()));
-        floor.setText(local.getFloor());
-        building.setText(local.getBuilding());
-        nodeType.setText(local.getNodeType());
+        floor.setValue(local.getFloor());
+        nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
         longName.setText(local.getLongName());
     }
 
     public void submitModify(ActionEvent actionEvent) {
-        Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getText(),building.getText(),nodeType.getText(),shortName.getText(),longName.getText());
+        Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
         locationDBI.updateNode(changedNode);
         refresh();
         setEditFieldsVisible(false);
@@ -520,9 +418,12 @@ public class MapEditorController {
 
     @FXML
     void loadFromCSV(ActionEvent event) {
-        loadFromCSV();
-        //Ben Here's your button it exists now lessssgoooo
-        //TODO get it to work
+        try {
+            backupper.Restore();
+            refresh();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
 }
