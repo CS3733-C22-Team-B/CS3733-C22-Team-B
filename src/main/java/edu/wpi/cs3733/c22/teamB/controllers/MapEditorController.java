@@ -6,10 +6,12 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -47,6 +49,7 @@ public class MapEditorController{
     public JFXButton moveButton;
     String selectedPoint;
     Circle selectedPnt;
+    ImageView selectedImg;
     double sceneWidth;
     double sceneHeight;
     double imageHeight;
@@ -160,6 +163,10 @@ public class MapEditorController{
         longName.setText(local.getLongName());
     }
 
+    public void onImgClick(ImageView testImg){
+        selectedImg = testImg;
+    }
+
     //Add a point to the map using image coordinates. Set up onclick.
     public Circle addPoint(String ID, double x, double y, Color color){
         //Create the point
@@ -215,6 +222,8 @@ public class MapEditorController{
         });
 
 
+
+
         return testPoint;
     }
 
@@ -234,7 +243,7 @@ public class MapEditorController{
         for(MedicalEquipment local: medicalList){
             if(local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getEquipmentID();
-                double x = local.getLocation().getXcoord() -10; //TODO fix for future iterations
+                double x = local.getLocation().getXcoord(); //TODO fix for future iterations
                 double y = local.getLocation().getYcoord();
                 addPointMedical(ID, x, y, Color.BLUE);
             }
@@ -256,6 +265,57 @@ public class MapEditorController{
         testImg.setPreserveRatio(true);
         testImg.setFitWidth(15);
 
+        testImg.setOnMouseReleased(new EventHandler <MouseEvent>()
+        {
+            public void handle(MouseEvent event)
+            {
+                System.out.println("moving medical");
+                if(moveState) {
+                    Location tempLoc = getClosetLocation(event.getX(),event.getY());
+                    double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(),tempLoc.getYcoord(), event.getX(), event.getY());
+                    System.out.println(dist);
+                        MedicalEquipment temp = medicalDBI.getNode(selectedImg.getId());
+                        System.out.println(selectedImg.getId());
+                        medicalDBI.updateNode(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription()));
+                        testImg.setX(getImageX(tempLoc.getXcoord()));
+                        testImg.setY(getImageY(tempLoc.getYcoord()));
+                        System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
+                }
+            }
+        });
+
+        testImg.setOnMousePressed(new EventHandler <MouseEvent>()
+        {
+            public void handle(MouseEvent event)
+            {
+                orgSceneX = event.getSceneX();
+                orgSceneY = event.getSceneY();
+//                modifyButton.setOpacity(1);
+//                modifyButton.setDisable(false);
+//                deleteButton.setOpacity(1);
+//                deleteButton.setDisable(false);
+                onImgClick(testImg);
+                event.setDragDetect(true);
+            }
+        });
+
+
+        testImg.setOnMouseDragged((t) -> {
+            if(moveState) {
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
+
+                ImageView c = (ImageView) (t.getSource());
+
+                c.setX(c.getX() + offsetX);
+                c.setY(c.getY() + offsetY);
+
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+            }
+        });
+
+
     }
 
     void removeAllPoints(){
@@ -269,6 +329,7 @@ public class MapEditorController{
 
     @FXML public void refresh(){
         locationList = locationDBI.getAllNodes();
+        medicalList = medicalDBI.getAllNodes();
         removeAllPoints();
         addPoints();
     }
@@ -478,6 +539,31 @@ public class MapEditorController{
         } catch (IOException ex){
             ex.printStackTrace();
         }
+    }
+
+
+    //credit to https://www.baeldung.com/java-distance-between-two-points
+    public double calculateDistanceBetweenPoints(
+            double x1,
+            double y1,
+            double x2,
+            double y2) {
+        return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
+    }
+
+    public Location getClosetLocation(double x, double y){
+        Circle closest = new Circle();
+        double distance = 5000.0;
+        for (Node child : anchorPane.getChildren()) {
+            if (child instanceof Circle) {
+                double dist = calculateDistanceBetweenPoints(((Circle) child).getCenterX(),((Circle) child).getCenterY(),x,y);
+                if(dist < distance){
+                    closest = (Circle)child;
+                    distance = dist;
+                }
+            }
+        }
+        return(locationDBI.getNode(closest.getId()));
     }
 
 
