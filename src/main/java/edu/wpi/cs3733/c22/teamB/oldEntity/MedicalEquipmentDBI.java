@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.c22.teamB.entity;
+package edu.wpi.cs3733.c22.teamB.oldEntity;
 
 import java.sql.*;
 import java.util.ArrayList;

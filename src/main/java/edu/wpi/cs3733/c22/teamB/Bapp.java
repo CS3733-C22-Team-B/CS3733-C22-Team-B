@@ -1,13 +1,10 @@
 package edu.wpi.cs3733.c22.teamB;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.cs3733.c22.teamB.entity.*;
-import java.util.Locale;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
-import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

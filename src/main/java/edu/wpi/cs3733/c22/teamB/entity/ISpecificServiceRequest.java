@@ -2,8 +2,7 @@ package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.util.List;
 
-public interface IDatabase<T> {
-
+public interface ISpecificServiceRequest<T> extends IDatabase<T> {
     void addValue(T object);
     void deleteValue(String objectID);
     void updateValue(T object);

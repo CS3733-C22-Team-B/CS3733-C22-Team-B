@@ -1,30 +1,16 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.time.LocalDate;
+
 public class LaundrySR extends AbstractSR {
-    String location;
-    String assignedEmployee;
 
-    public LaundrySR(String srID, String location, String assignedEmployee, String status) {
-        super(srID, status);
-        this.location = location;
-        this.assignedEmployee = assignedEmployee;
+    public LaundrySR() {
+        super(null, null, null, null, null, null, null, null);
     }
 
-    public LaundrySR(String srID, String location, String assignedEmployee) {
-        super(srID, "WAITING");
-        this.location = location;
-        this.assignedEmployee = assignedEmployee;
+    public LaundrySR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes) {
+        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
     }
 
-    public String getSrID() {
-        return this.srID;
-    }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public String toStringFields() {
-        return srID + "," + status + "," + location + "," + assignedEmployee;
-    }
 }

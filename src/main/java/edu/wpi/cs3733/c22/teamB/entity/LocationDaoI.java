@@ -4,16 +4,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationDBI implements IDatabase<Location> {
+public class LocationDaoI implements IDatabase<Location> {
 
     private Connection conn;
 
-    public LocationDBI() {
+    public LocationDaoI() {
         this.conn = DBConnection.getConnection();
     }
 
     @Override
-    public void drop() {
+    public void dropTable() {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE Location");
@@ -49,8 +49,8 @@ public class LocationDBI implements IDatabase<Location> {
         }
     }
 
-    @Override
-    public void restore(List<Location> list) {
+
+    public void restoreTable(List<Location> list) {
 
         try {
             createTable();
@@ -102,8 +102,7 @@ public class LocationDBI implements IDatabase<Location> {
         }
     }
 
-    @Override
-    public List<Location> getAllNodes() {
+    public List<Location> getAllValues() {
 
         List<Location> locations = new ArrayList<>();
         try {
@@ -139,8 +138,8 @@ public class LocationDBI implements IDatabase<Location> {
         return locations;
     }
 
-    @Override
-    public Location getNode(String nodeID) {
+
+    public Location getValue(String nodeID) {
         Location location = new Location();
         try {PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
             pstmt.setString(1, nodeID);
@@ -165,19 +164,13 @@ public class LocationDBI implements IDatabase<Location> {
         return location;
     }
 
-    public void deleteNode(String nodeID) {
+    public void deleteValue(String nodeID) {
 
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("DELETE FROM Location WHERE nodeID = ?");
             pstmt.setString(1, nodeID);
-
-            if (isInTable(nodeID)) {
-                pstmt.executeUpdate();
-
-            }
-//            pstmt.executeUpdate();
-
+            pstmt.executeUpdate();
             pstmt.close();
 
         } catch (SQLException e) {
@@ -186,7 +179,7 @@ public class LocationDBI implements IDatabase<Location> {
         }
     }
 
-    public void updateNode(Location node) {
+    public void updateValue(Location node) {
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -210,7 +203,7 @@ public class LocationDBI implements IDatabase<Location> {
         }
     }
 
-    public void insertNode(Location node) {
+    public void addValue(Location node) {
 
         try {
             PreparedStatement pstmt =
@@ -225,33 +218,12 @@ public class LocationDBI implements IDatabase<Location> {
             pstmt.setString(7, node.getLongName());
             pstmt.setString(8, node.getShortName());
 
-            if (!isInTable(node.getNodeID())) {
-                pstmt.executeUpdate();
-
-            }
-//            pstmt.executeUpdate();
+            pstmt.executeUpdate();
             pstmt.close();
 
         } catch (SQLException e) {
             System.out.println("Insert Into Table Using Node ID: Failed!");
             e.printStackTrace();
         }
-    }
-    public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
-        boolean ans = false;
-        try {
-            //search for NodeID
-            PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
-            pstmt.setString(1, nodeID);
-            ResultSet rs = pstmt.executeQuery();
-            ans = rs.next();    //if any ids are found
-            pstmt.close();
-
-        } catch (SQLException e) {
-            System.out.println("Search for NodeID Failed!");
-            e.printStackTrace();
-        }
-        return ans;
     }
 }

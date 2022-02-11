@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.c22.teamB.entity;
+package edu.wpi.cs3733.c22.teamB.oldEntity;
 
 public class ExternalTransportSR extends AbstractSR {
 
@@ -60,7 +60,6 @@ public class ExternalTransportSR extends AbstractSR {
     public String getFormOfTransport() {
         return formOfTransport;
     }
-
 
     public String getSrID() {
         return this.srID;

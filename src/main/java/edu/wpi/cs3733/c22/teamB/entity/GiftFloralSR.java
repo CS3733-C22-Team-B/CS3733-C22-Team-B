@@ -1,32 +1,47 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Objects;
 
 public class GiftFloralSR extends AbstractSR {
 
-    String gift;
-    String deliveryDate;
-    String deliveryRoom;
+    private String giftName;
 
-//    public GiftFloralSR(){}
-
-    public GiftFloralSR(
-            String srID,
-            String statusStr,
-            String gift,
-            String deliveryDate,
-            String deliveryRoom) {
-
-        super(srID, statusStr);
-        this.gift = gift;
-        this.deliveryDate = deliveryDate;
-        this.deliveryRoom = deliveryRoom;
+    public GiftFloralSR(){
+        super(null, null, null, null, null, null, null, null);
+        this.giftName = null;
     }
 
-    public GiftFloralSR(String srID, String statusStr) {
-        super(srID, statusStr);
+    public GiftFloralSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String srType, String giftName) {
+        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+        this.giftName = giftName;
+    }
+
+    public String getGiftName() {
+        return giftName;
+    }
+
+    public void setGiftName(String giftName) {
+        this.giftName = giftName;
+    }
+
+    @Override
+    public String toString() {
+        return "GiftFloralSR{" +
+                "giftName='" + giftName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GiftFloralSR that = (GiftFloralSR) o;
+        return Objects.equals(giftName, that.giftName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(giftName);
     }
 }
-
-

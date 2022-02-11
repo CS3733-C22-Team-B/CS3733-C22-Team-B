@@ -2,8 +2,8 @@ package edu.wpi.cs3733.c22.teamB;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationParserI;
+import edu.wpi.cs3733.c22.teamB.oldEntity.Location;
+import edu.wpi.cs3733.c22.teamB.oldEntity.LocationParserI;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
