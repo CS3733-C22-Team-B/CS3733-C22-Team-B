@@ -4,8 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class MapEditorController {
+public class MapEditorController{
 
     public javafx.scene.control.TextField idField;
     public TextField xCoordinate;
@@ -53,6 +55,7 @@ public class MapEditorController {
     double sceneHeight;
     double imageHeight;
     double imageWidth;
+    double orgSceneX, orgSceneY;
     LocationDBI locationDBI = new LocationDBI();
     List<Location> locationList = locationDBI.getAllNodes();
     MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
@@ -169,13 +172,49 @@ public class MapEditorController {
         //Set point ID
         testPoint.idProperty().set(ID);
         //Set up onclick events
-        testPoint.setOnMouseClicked(event -> {
-            modifyButton.setOpacity(1);
-            modifyButton.setDisable(false);
-            deleteButton.setOpacity(1);
-            deleteButton.setDisable(false);
-            onPointClick(testPoint);
+        testPoint.setOnMousePressed(new EventHandler <MouseEvent>()
+        {
+            public void handle(MouseEvent event)
+            {
+                orgSceneX = event.getSceneX();
+                orgSceneY = event.getSceneY();
+                modifyButton.setOpacity(1);
+                modifyButton.setDisable(false);
+                deleteButton.setOpacity(1);
+                deleteButton.setDisable(false);
+                onPointClick(testPoint);
+                testPoint.setMouseTransparent(true);
+                event.setDragDetect(true);
+            }
         });
+
+        testPoint.setOnMouseReleased(new EventHandler <MouseEvent>()
+        {
+            public void handle(MouseEvent event)
+            {
+                if(selectedPnt == testPoint) {
+                    Location temp = locationDBI.getNode(selectedPoint);
+                    locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getShortName(), temp.getLongName()));
+                    refresh();
+                    testPoint.setMouseTransparent(false);
+                }
+            }
+        });
+
+        testPoint.setOnMouseDragged((t) -> {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+
+            Circle c = (Circle) (t.getSource());
+
+            c.setCenterX(c.getCenterX()+ offsetX);
+            c.setCenterY(c.getCenterY() + offsetY);
+
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+        });
+
+
         return testPoint;
     }
 
@@ -345,6 +384,10 @@ public class MapEditorController {
         longName.setText(local.getLongName());
     }
 
+    public void move(int x, int y){
+
+    }
+
     public void submitModify(ActionEvent actionEvent) {
         Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
         locationDBI.updateNode(changedNode);
@@ -425,5 +468,8 @@ public class MapEditorController {
             ex.printStackTrace();
         }
     }
+
+
+
 
 }
