@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.beans.InvalidationListener;
@@ -32,9 +33,8 @@ public class MapEditorController {
     public javafx.scene.control.TextField idField;
     public TextField xCoordinate;
     public TextField yCoordinate;
-    public TextField floor;
-    public TextField building;
-    public TextField nodeType;
+    public JFXComboBox floor;
+    public JFXComboBox nodeType;
     public TextField shortName;
     public TextField longName;
     public Label header1;
@@ -46,6 +46,7 @@ public class MapEditorController {
     public Label header7;
     public Label header8;
     public JFXButton deleteButton;
+    public JFXComboBox statusField;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -57,7 +58,7 @@ public class MapEditorController {
     MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
     List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
     CSVRestoreBackupController backupper = new CSVRestoreBackupController();
-    String currentFloor = "3";
+    String currentFloor = "03";
     boolean addState = false;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
@@ -94,7 +95,6 @@ public class MapEditorController {
         header2.setVisible(isVisible);
         header3.setVisible(isVisible);
         header4.setVisible(isVisible);
-        header5.setVisible(isVisible);
         header6.setVisible(isVisible);
         header7.setVisible(isVisible);
         header8.setVisible(isVisible);
@@ -102,7 +102,8 @@ public class MapEditorController {
         xCoordinate.setVisible(isVisible);
         yCoordinate.setVisible(isVisible);
         floor.setVisible(isVisible);
-        building.setVisible(isVisible);
+        //statusField.setVisible(isVisible);
+        //building.setVisible(isVisible);
         nodeType.setVisible(isVisible);
         longName.setVisible(isVisible);
         shortName.setVisible(isVisible);
@@ -243,15 +244,15 @@ public class MapEditorController {
         goTo();
     }
     @FXML public void goTo1(){
-        currentFloor = "1";
+        currentFloor = "01";
         goTo();
     }
     @FXML public void goTo2(){
-        currentFloor = "2";
+        currentFloor = "02";
         goTo();
     }
     @FXML public void goTo3(){
-        currentFloor = "3";
+        currentFloor = "03";
         goTo();
     }
 
@@ -272,11 +273,11 @@ public class MapEditorController {
         goToL2Button.setStyle("-fx-background-color: #eaeaea");
 
         switch (currentFloor) {
-            case "1":
+            case "01":
                 imageView.setImage(firstFloorImage);
                 goTo1Button.setStyle("-fx-background-color: #007fff");
                 break;
-            case "2":
+            case "02":
                 imageView.setImage(secondFloorImage);
                 goTo2Button.setStyle("-fx-background-color: #007fff");
                 break;
@@ -324,8 +325,9 @@ public class MapEditorController {
         deleteButton.setOpacity(0.5);
         deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
-
-
+        nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
+        floor.getItems().addAll("L2","L1","01","02","03");
+        floor.setValue(currentFloor);
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
@@ -337,15 +339,14 @@ public class MapEditorController {
         idField.setText(selectedPoint);
         xCoordinate.setText(String.valueOf(local.getXcoord()));
         yCoordinate.setText(String.valueOf(local.getYcoord()));
-        floor.setText(local.getFloor());
-        building.setText(local.getBuilding());
-        nodeType.setText(local.getNodeType());
+        floor.setValue(local.getFloor());
+        nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
         longName.setText(local.getLongName());
     }
 
     public void submitModify(ActionEvent actionEvent) {
-        Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getText(),building.getText(),nodeType.getText(),shortName.getText(),longName.getText());
+        Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
         locationDBI.updateNode(changedNode);
         refresh();
         setEditFieldsVisible(false);

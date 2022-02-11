@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -50,11 +51,9 @@
                   <Label fx:id="header3" prefHeight="15" text="y Coordinate:" />
                   <TextField fx:id="yCoordinate" promptText="y Coordinate" />
                   <Label fx:id="header4" prefHeight="15" text="Floor:" />
-                  <TextField fx:id="floor" promptText="Floor" />
-                  <Label fx:id="header5" prefHeight="15" text="Building:" />
-                  <TextField fx:id="building" promptText="Building" />
+                  <JFXComboBox fx:id="floor" layoutX="29.0" layoutY="233.0" prefHeight="25.0" prefWidth="284.0" />
                   <Label fx:id="header6" prefHeight="15" text="Node Type:" />
-                  <TextField fx:id="nodeType" promptText="Node Type" />
+                  <JFXComboBox fx:id="nodeType" layoutX="29.0" layoutY="233.0" prefHeight="25.0" prefWidth="284.0" />
                   <Label fx:id="header7" prefHeight="15" text="Short Name:" />
                   <TextField fx:id="shortName" promptText="Short Name" />
                   <Label fx:id="header8" prefHeight="15" text="Long Name:" />
