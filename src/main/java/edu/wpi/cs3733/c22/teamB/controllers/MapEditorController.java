@@ -178,7 +178,7 @@ public class MapEditorController{
                         locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
                         testPoint.setCenterX((event.getX()));
                         testPoint.setCenterY((event.getY()));
-
+                        refresh();
                     }
                 }
             });
@@ -447,9 +447,6 @@ public class MapEditorController{
         longName.setText(local.getLongName());
     }
 
-    public void move(int x, int y){
-
-    }
 
     public void submitModify(ActionEvent actionEvent) {
         Location old = locationDBI.getNode(selectedPnt.getId());
