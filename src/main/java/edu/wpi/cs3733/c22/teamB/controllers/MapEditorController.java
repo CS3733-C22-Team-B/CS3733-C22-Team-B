@@ -33,22 +33,18 @@ import java.util.List;
 public class MapEditorController{
 
     public javafx.scene.control.TextField idField;
-    public TextField xCoordinate;
-    public TextField yCoordinate;
     public JFXComboBox floor;
     public JFXComboBox nodeType;
     public TextField shortName;
     public TextField longName;
     public Label header1;
-    public Label header2;
-    public Label header3;
     public Label header4;
-    public Label header5;
     public Label header6;
     public Label header7;
     public Label header8;
     public JFXButton deleteButton;
     public JFXComboBox statusField;
+    public JFXButton moveButton;
     String selectedPoint;
     Circle selectedPnt;
     double sceneWidth;
@@ -63,6 +59,7 @@ public class MapEditorController{
     CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
+    boolean moveState = false;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -95,18 +92,13 @@ public class MapEditorController{
 
     void setEditFieldsVisible(boolean isVisible){
         header1.setVisible(isVisible);
-        header2.setVisible(isVisible);
-        header3.setVisible(isVisible);
         header4.setVisible(isVisible);
         header6.setVisible(isVisible);
         header7.setVisible(isVisible);
         header8.setVisible(isVisible);
         idField.setVisible(isVisible);
-        xCoordinate.setVisible(isVisible);
-        yCoordinate.setVisible(isVisible);
         floor.setVisible(isVisible);
-        //statusField.setVisible(isVisible);
-        //building.setVisible(isVisible);
+
         nodeType.setVisible(isVisible);
         longName.setVisible(isVisible);
         shortName.setVisible(isVisible);
@@ -160,6 +152,12 @@ public class MapEditorController{
         //System.out.println(testPoint.idProperty().get());
         selectedPoint = (testPoint.idProperty().get());
         selectedPnt = testPoint;
+        Location local = locationDBI.getNode(selectedPoint);
+        idField.setText(selectedPoint);
+        floor.setValue(local.getFloor());
+        nodeType.setValue(local.getNodeType());
+        shortName.setText(local.getShortName());
+        longName.setText(local.getLongName());
     }
 
     //Add a point to the map using image coordinates. Set up onclick.
@@ -183,7 +181,6 @@ public class MapEditorController{
                 deleteButton.setOpacity(1);
                 deleteButton.setDisable(false);
                 onPointClick(testPoint);
-                testPoint.setMouseTransparent(true);
                 event.setDragDetect(true);
             }
         });
@@ -192,26 +189,29 @@ public class MapEditorController{
         {
             public void handle(MouseEvent event)
             {
-                if(selectedPnt == testPoint) {
+                if(moveState) {
                     Location temp = locationDBI.getNode(selectedPoint);
-                    locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getShortName(), temp.getLongName()));
-                    refresh();
-                    testPoint.setMouseTransparent(false);
+                    locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(),temp.getShortName()));
+                    testPoint.setCenterX((event.getX()));
+                    testPoint.setCenterY((event.getY()));
+
                 }
             }
         });
 
         testPoint.setOnMouseDragged((t) -> {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
+            if(moveState) {
+                double offsetX = t.getSceneX() - orgSceneX;
+                double offsetY = t.getSceneY() - orgSceneY;
 
-            Circle c = (Circle) (t.getSource());
+                Circle c = (Circle) (t.getSource());
 
-            c.setCenterX(c.getCenterX()+ offsetX);
-            c.setCenterY(c.getCenterY() + offsetY);
+                c.setCenterX(c.getCenterX() + offsetX);
+                c.setCenterY(c.getCenterY() + offsetY);
 
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
+                orgSceneX = t.getSceneX();
+                orgSceneY = t.getSceneY();
+            }
         });
 
 
@@ -376,8 +376,6 @@ public class MapEditorController{
         setEditFieldsVisible(true);
         Location local = locationDBI.getNode(selectedPoint);
         idField.setText(selectedPoint);
-        xCoordinate.setText(String.valueOf(local.getXcoord()));
-        yCoordinate.setText(String.valueOf(local.getYcoord()));
         floor.setValue(local.getFloor());
         nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
@@ -389,7 +387,8 @@ public class MapEditorController{
     }
 
     public void submitModify(ActionEvent actionEvent) {
-        Location changedNode = new Location(idField.getText(),Integer.valueOf(xCoordinate.getText()),Integer.valueOf(yCoordinate.getText()),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
+        Location old = locationDBI.getNode(selectedPnt.getId());
+        Location changedNode = new Location(idField.getText(),old.getXcoord(),old.getYcoord(),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
         locationDBI.updateNode(changedNode);
         refresh();
         setEditFieldsVisible(false);
@@ -456,6 +455,18 @@ public class MapEditorController{
             addState = true;
             addButton.setOpacity(0.5);
             addButton.setText("Cancel Add");
+        }
+    }
+
+    @FXML public void move(){
+        if(moveState){
+            moveState = false;
+            moveButton.setOpacity(1);
+            moveButton.setText("Move");
+        } else{
+            moveState = true;
+            moveButton.setOpacity(0.5);
+            moveButton.setText("Cancel Moving");
         }
     }
 
