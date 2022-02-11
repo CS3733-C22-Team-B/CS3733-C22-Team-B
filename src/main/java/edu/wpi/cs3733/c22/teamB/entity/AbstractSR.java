@@ -1,60 +1,112 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import javafx.collections.FXCollections;
+
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class AbstractSR {
-    public enum SRStatus {
-        BLANK,
-        WAITING,
-        CANCELED,
-        DONE
-    };
 
-    public static Map<String, SRStatus> StringToSRStatus =
-            Map.ofEntries(
-                    Map.entry("BLANK", SRStatus.BLANK),
-                    Map.entry("WAITING", SRStatus.WAITING),
-                    Map.entry("CANCELED", SRStatus.CANCELED),
-                    Map.entry("DONE", SRStatus.DONE));
+    public static String[] SRstatus = {"BLANK", "WAITING", "CANCELED", "DONE"};
 
-    public static Map<SRStatus, String> SRStatusToString =
-            Map.ofEntries(
-                    Map.entry(SRStatus.BLANK, "BLANK"),
-                    Map.entry(SRStatus.WAITING, "WAITING"),
-                    Map.entry(SRStatus.CANCELED, "CANCELED"),
-                    Map.entry(SRStatus.DONE, "DONE"));
+    private String srID;
+    private String status;
+    private Location location;
+    private Employee requestor;
+    private Employee assignedEmployee;
+    private LocalDate dateRequested;
+    private String notes;
+    private String srType;
 
-    protected String srID;
-    protected SRStatus status;
-
-    public AbstractSR(String srID, String statusStr) {
+    public AbstractSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes) {
         this.srID = srID;
-        if (statusStr == null) statusStr = "BLANK";
-        this.status = stringToSRStatus(statusStr);
+        this.srType = srType;
+
+//        if (status == null) status = "BLANK";
+        if (!validateStatus(status)) {
+            System.err.println("WARNING: status is set to BLANK");
+            this.status = "BLANK";
+        }
+        else this.status = status;
+
+        this.location = location;
+        this.requestor = requestor;
+        this.assignedEmployee = assignedEmployee;
+        this.dateRequested = dateRequested;
+        this.notes = notes;
     }
 
-    static SRStatus stringToSRStatus(String s) {
-        if (StringToSRStatus.containsKey(s)) return StringToSRStatus.get(s);
-        else throw new IllegalArgumentException("No SRStatus " + s);
+    private boolean validateStatus(String st) {
+        for (String s : SRstatus)
+            if (st.equals(s)) return true;
+        return false;
     }
 
     public String getSrID() {
-        return this.srID;
-    }
-
-    public SRStatus getStatus() {
-        return status;
-    }
-
-    public String getStatusString() {
-        return SRStatusToString.get(this.status);
+        return srID;
     }
 
     public void setSrID(String srID) {
         this.srID = srID;
     }
 
-    public void setStatus(String statusStr) {
-        this.status = stringToSRStatus(statusStr);
+    public String getStatus() {
+        return status;
     }
+
+    public void setStatus(String statusStr) {
+        this.status = (statusStr);
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Employee getRequestor() {
+        return requestor;
+    }
+
+    public void setRequestor(Employee requestor) {
+        this.requestor = requestor;
+    }
+
+    public Employee getAssignedEmployee() {
+        return assignedEmployee;
+    }
+
+    public void setAssignedEmployee(Employee assignedEmployee) {
+        this.assignedEmployee = assignedEmployee;
+    }
+
+    public LocalDate getDateRequested() {
+        return dateRequested;
+    }
+
+    public void setDateRequested(LocalDate dateRequested) {
+        this.dateRequested = dateRequested;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getSrType() {
+        return srType;
+    }
+
+    public void setSrType(String srType) {
+        this.srType = srType;
+    }
+
+
 }
