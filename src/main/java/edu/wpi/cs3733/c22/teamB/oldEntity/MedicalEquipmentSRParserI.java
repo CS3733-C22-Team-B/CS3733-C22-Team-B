@@ -8,10 +8,49 @@ public class MedicalEquipmentSRParserI implements IParser<MedicalEquipmentSR> {
 
     @Override
     public MedicalEquipmentSR fromStringToObject(String string) {
+
         MedicalEquipmentSR medEqSR = new MedicalEquipmentSR();
         Location destination = new Location();
         MedicalEquipment medicalEquipment = new MedicalEquipment();
         Employee employee = new Employee();
+
+        // main table
+//        AbstractSR sr = Factory.createSR(data[1]); // creates XSR according to srType argument
+//        sr.setSrID();
+//        sr.setStatus();
+//
+//        // Factory.createSR(type) {
+////        if type == "MEdicalEquipmentSR":
+////        return new MedicalEquipmentSR();
+////    }
+//
+//        //
+//        sr = fromStringToObject();
+//        maindb.insert(sr);
+//
+//        // maindb.insert()
+//        getsrID;
+//        getType;
+//        getlocation;
+//
+//        // by this time main table is populated
+//        // now populate medeqpsr table:
+//        // csv: srID,equipment
+//        MedicalEquipmentSR sr = new MedicalEquipmentSR(data[0], data[1]); // new constructor
+//        medeqprsdb.insert(sr);
+//
+//        // restore()
+//        sr.getID();
+//        sr.getMedicalEquipment();
+//
+//        // process: load main.csv -> load xsr.csv
+//        // main csv
+//        // id  status  location
+//        //
+//
+//        // medequipsr table
+//        // id  equipment
+
 
         String[] data = string.split(",");
 
