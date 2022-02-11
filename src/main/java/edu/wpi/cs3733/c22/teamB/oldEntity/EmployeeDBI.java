@@ -52,16 +52,6 @@ public class EmployeeDBI implements IDatabase<Employee> {
 
         try {
             createTable();
-//            Statement stmt = conn.createStatement();
-//            stmt.execute(
-//                    "create table Employee( "
-//                            + "employeeID VARCHAR(50), "
-//                            + "name VARCHAR(50), "
-//                            + "position VARCHAR(50), "
-//                            + "address VARCHAR(50), "
-//                            + "email VARCHAR(50), "
-//                            + "phoneNumber VARCHAR(50)," +
-//                            " PRIMARY KEY (employeeID))");
 
             // For each iteration of location in the list of location
             for (Employee employee : list) {

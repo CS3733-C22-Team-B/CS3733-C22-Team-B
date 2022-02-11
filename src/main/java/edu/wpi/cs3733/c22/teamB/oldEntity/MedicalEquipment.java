@@ -47,6 +47,8 @@ public class MedicalEquipment {
         this.description = description;
     }
 
+
+
     // getters and setters
 
     public String getEquipmentID() {

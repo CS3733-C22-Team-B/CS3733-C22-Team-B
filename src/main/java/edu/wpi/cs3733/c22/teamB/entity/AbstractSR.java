@@ -12,13 +12,24 @@ public abstract class AbstractSR {
     public static String[] SRstatus = {"BLANK", "WAITING", "CANCELED", "DONE"};
 
     private String srID;
+    private String srType;
     private String status;
     private Location location;
     private Employee requestor;
     private Employee assignedEmployee;
     private LocalDate dateRequested;
     private String notes;
-    private String srType;
+
+    public AbstractSR(ConcreteSR csr) {
+        this.srID = csr.getSrID();
+        this.srType = csr.getSrType();
+        this.status = csr.getStatus();
+        this.location = csr.getLocation();
+        this.requestor = csr.getRequestor();
+        this.assignedEmployee = csr.getAssignedEmployee();
+        this.dateRequested = csr.getDateRequested();
+        this.notes = csr.getNotes();
+    }
 
     public AbstractSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes) {
         this.srID = srID;

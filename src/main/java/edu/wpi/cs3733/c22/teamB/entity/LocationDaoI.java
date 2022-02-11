@@ -54,18 +54,6 @@ public class LocationDaoI implements IDatabase<Location> {
 
         try {
             createTable();
-//            Statement stmt = conn.createStatement();
-//            stmt.execute(
-//                    "create table Location( "
-//                            + "nodeID VARCHAR(50), "
-//                            + "xcoord int not null, "
-//                            + "ycoord int not null, "
-//                            + "floor VARCHAR(2), "
-//                            + "building VARCHAR(50), "
-//                            + "nodeType VARCHAR(50), "
-//                            + "longName VARCHAR(50), "
-//                            + "shortName VARCHAR(50)," +
-//                            "PRIMARY KEY (nodeID))");
 
             // For each iteration of location in the list of location
             for (Location location : list) {

@@ -4,17 +4,22 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class MedicalEquipmentSR extends AbstractSR {
-
-
+//    public static String name = "MedicalEquipmentSR";
     private MedicalEquipment medicalEquipment;
 
     public MedicalEquipmentSR() {
-        super(null, null, null, null, null, null, null, null);
+        super(null, "MedicalEquipmentSR", null, null, null, null, null, null);
         this.medicalEquipment = null;
     }
 
-    public MedicalEquipmentSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, MedicalEquipment medicalEquipment) {
-        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+    public MedicalEquipmentSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, MedicalEquipment medicalEquipment) {
+        super(srID, "MedicalEquipmentSR", status, location, requestor, assignedEmployee, dateRequested, notes);
+        this.medicalEquipment = medicalEquipment;
+    }
+
+    public MedicalEquipmentSR(ConcreteSR csr, MedicalEquipment medicalEquipment) {
+        super(csr);
+        this.setSrType("MedicalEquipmentSR"); // important
         this.medicalEquipment = medicalEquipment;
     }
 

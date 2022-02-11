@@ -4,7 +4,7 @@ public class Employee {
 
     private String employeeID;
     private String lastName;
-    private String fistName;
+    private String firstName;
     private String position; // Enum (IT, Doctor, Nurse, Ward Assistant, Building Manager)
     private int accessLevel;
     private String username;
@@ -16,7 +16,7 @@ public class Employee {
     public Employee() {
         this.employeeID = null;
         this.lastName = null;
-        this.fistName = null;
+        this.firstName = null;
         this.position = null;
         this.accessLevel = Integer.parseInt(null);
         this.username = null;
@@ -25,10 +25,10 @@ public class Employee {
         this.phoneNumber = null;
     }
 
-    public Employee(String employeeID, String lastName, String fistName, String position, int accessLevel, String username, String password, String email, String phoneNumber) {
+    public Employee(String employeeID, String lastName, String firstName, String position, int accessLevel, String username, String password, String email, String phoneNumber) {
         this.employeeID = employeeID;
         this.lastName = lastName;
-        this.fistName = fistName;
+        this.firstName = firstName;
         position = position;
         this.accessLevel = accessLevel;
         this.username = username;
@@ -53,12 +53,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setFistName(String fistName) {
-        this.fistName = fistName;
+        this.firstName = fistName;
     }
 
     public String getPosition() {
@@ -114,7 +114,7 @@ public class Employee {
         return "Employee{" +
                 "employeeID='" + employeeID + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", fistName='" + fistName + '\'' +
+                ", fistName='" + firstName + '\'' +
                 ", position='" + position + '\'' +
                 ", accessLevel=" + accessLevel +
                 ", username='" + username + '\'' +
@@ -129,7 +129,7 @@ public class Employee {
                 + ","
                 + lastName
                 + ","
-                + fistName
+                + firstName
                 + ","
                 + position
                 + ","
