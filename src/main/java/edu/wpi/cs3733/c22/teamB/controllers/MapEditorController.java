@@ -568,9 +568,6 @@ public class MapEditorController{
         return(locationDBI.getNode(closest.getId()));
     }
 
-    public void showOrHide(){
-        refresh();
-    }
 
 
 

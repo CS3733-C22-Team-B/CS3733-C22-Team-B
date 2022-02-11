@@ -61,9 +61,9 @@
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXCheckBox fx:id="showLocations" onAction="#showOrHide" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
+                  <JFXCheckBox fx:id="showLocations" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXCheckBox fx:id="showMedical" onAction="#showOrHide" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
+                  <JFXCheckBox fx:id="showMedical" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Medical Equipment" textAlignment="CENTER" />
 
 
                </children>
