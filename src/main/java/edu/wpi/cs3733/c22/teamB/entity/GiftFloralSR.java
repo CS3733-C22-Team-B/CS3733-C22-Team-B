@@ -12,7 +12,7 @@ public class GiftFloralSR extends AbstractSR {
         this.giftName = null;
     }
 
-    public GiftFloralSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String srType, String giftName) {
+    public GiftFloralSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes,  String giftName) {
         super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
         this.giftName = giftName;
     }
