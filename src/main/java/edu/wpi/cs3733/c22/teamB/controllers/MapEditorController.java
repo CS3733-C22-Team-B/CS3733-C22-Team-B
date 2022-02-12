@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,12 +22,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -50,6 +49,7 @@ public class MapEditorController{
     public JFXToggleButton moveButton;
     public JFXCheckBox showLocations;
     public JFXCheckBox showMedical;
+    public VBox modifyPopup;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -165,6 +165,7 @@ public class MapEditorController{
                     deleteButton.setDisable(false);
                     onPointClick(testPoint);
                     event.setDragDetect(true);
+                    updatePopup();
                 }
             });
 
@@ -192,6 +193,7 @@ public class MapEditorController{
 
                     orgSceneX = t.getSceneX();
                     orgSceneY = t.getSceneY();
+                    updatePopup();
                 }
             });
 
@@ -331,7 +333,14 @@ public class MapEditorController{
         selectedImg = testImg;
     }
 
-
+    void updatePopup(){
+        Translate trans = new Translate();
+        Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
+        trans.setX(selectedPnt.getCenterX()-bounds.getMinX());
+        trans.setY(selectedPnt.getCenterY()-(bounds.getMinY()-20));
+        modifyPopup.getTransforms().add(trans);
+        modify();
+    }
 
     void removeAllPoints(){
         anchorPane.getChildren().remove(1,anchorPane.getChildren().size());
@@ -478,6 +487,7 @@ public class MapEditorController{
             addButton.setText("Add");
             //No longer adding a node
             addState = false;
+            updatePopup();
         }
     }
 
