@@ -73,7 +73,7 @@ public class MapEditorController{
     Image lowerLevel2Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
     Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
     Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
-    Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/equipment.png");
+    Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/medical.png");
     @FXML
     private AnchorPane anchorPane;
 
@@ -133,6 +133,7 @@ public class MapEditorController{
                 }
             }
 
+
             for (MedicalEquipment local : medicalList) {
                 if (local.getLocation().getFloor().equals(currentFloor)) {
                     String ID = local.getEquipmentID();
@@ -141,6 +142,8 @@ public class MapEditorController{
                     addPointMedical(ID, x, y, Color.BLUE);
                 }
             }
+
+
     }
 
     //Add a point to the map using image coordinates. Set up onclick.
@@ -221,7 +224,7 @@ public class MapEditorController{
                     System.out.println("moving medical");
                     if (moveState) {
                         Location tempLoc = getClosetLocation(event.getX(), event.getY());
-                        double dist = Math.sqrt((event.getY() - tempLoc.getYcoord()) * (event.getY() - tempLoc.getYcoord()) + (event.getX()- tempLoc.getXcoord()) * (event.getX() - tempLoc.getXcoord()));
+                        double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         System.out.println(dist);
                         MedicalEquipment temp = medicalDBI.getNode(selectedImg.getId());
                         System.out.println(selectedImg.getId());
@@ -237,6 +240,10 @@ public class MapEditorController{
                 public void handle(MouseEvent event) {
                     orgSceneX = event.getSceneX();
                     orgSceneY = event.getSceneY();
+//                modifyButton.setOpacity(1);
+//                modifyButton.setDisable(false);
+//                deleteButton.setOpacity(1);
+//                deleteButton.setDisable(false);
                     onImgClick(testImg);
                     event.setDragDetect(true);
                 }
@@ -311,9 +318,13 @@ public class MapEditorController{
     }
 
     public void onPointClick(Circle testPoint){
-
-        selectedPnt.setFill(Color.BLACK);
-
+        //Deselect previous point, make black
+        for(Location local: locationList){
+            if(local.getNodeID().equals(selectedPoint)){
+                //addPoint(local.getNodeID(),local.getXcoord(),local.getYcoord(),Color.BLACK);
+                selectedPnt.setFill(Color.BLACK);
+            }
+        }
         //Select current point
         testPoint.setFill(Color.RED);
         //System.out.println(testPoint.idProperty().get());
@@ -330,6 +341,8 @@ public class MapEditorController{
     public void onImgClick(ImageView testImg){
         selectedImg = testImg;
     }
+
+
 
 
 
@@ -518,18 +531,31 @@ public class MapEditorController{
     }
 
     @FXML
-    void loadFromCSV(ActionEvent event) throws IOException {
+    void loadFromCSV(ActionEvent event) {
+        try {
             backupper.Restore();
             refresh();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
+
+    //credit to https://www.baeldung.com/java-distance-between-two-points
+    public double calculateDistanceBetweenPoints(
+            double x1,
+            double y1,
+            double x2,
+            double y2) {
+        return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
+    }
 
     public Location getClosetLocation(double x, double y){
         Circle closest = new Circle();
         double distance = 5000.0;
         for (Node child : anchorPane.getChildren()) {
             if (child instanceof Circle) {
-                double dist = Math.sqrt((((Circle) child).getCenterY() - y) * (((Circle) child).getCenterY() - y) + (((Circle) child).getCenterX() - x) * (((Circle) child).getCenterX() - x));
+                double dist = calculateDistanceBetweenPoints(((Circle) child).getCenterX(),((Circle) child).getCenterY(),x,y);
                 if(dist < distance){
                     closest = (Circle)child;
                     distance = dist;
