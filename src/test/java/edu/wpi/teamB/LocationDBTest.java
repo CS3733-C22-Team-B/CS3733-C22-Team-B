@@ -28,7 +28,7 @@ public class LocationDBTest {
                         "C1244T0281",
                         180,
                         84,
-                        "3",
+                        "03",
                         "Towr",
                         "DPT",
                         "Dy Surgery Family Waiting Floor L1",

@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,12 +23,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -46,10 +46,11 @@ public class MapEditorController{
     public Label header6;
     public Label header7;
     public Label header8;
-    public JFXButton deleteButton;
+    //public JFXButton deleteButton;
     public JFXToggleButton moveButton;
     public JFXCheckBox showLocations;
     public JFXCheckBox showMedical;
+    public VBox modifyPopup;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -62,6 +63,7 @@ public class MapEditorController{
     DatabaseWrapper dbWrapper = new DatabaseWrapper();
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
+    List<AbstractSR> srList = dbWrapper.getAllSR();
     //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
@@ -82,8 +84,8 @@ public class MapEditorController{
     @FXML
     private JFXButton addButton;
 
-    @FXML
-    private JFXButton modifyButton;
+//    @FXML
+//    private JFXButton modifyButton;
 
 
 
@@ -108,10 +110,10 @@ public class MapEditorController{
         showLocations.setSelected(true);
         showMedical.setSelected(true);
         setEditFieldsVisible(false);
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+        //modifyButton.setOpacity(0.5);
+        //modifyButton.setDisable(true);
+        //deleteButton.setOpacity(0.5);
+        //deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
         nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
         floor.getItems().addAll("L2","L1","01","02","03");
@@ -119,6 +121,10 @@ public class MapEditorController{
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
+        modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
+        modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
+        modifyPopup.setVisible(false);
+        modifyPopup.setStyle("-fx-padding: 1;");
     }
 
     //Add points from DB
@@ -142,6 +148,17 @@ public class MapEditorController{
                 }
             }
 
+        for (AbstractSR local : srList) {
+            if (local.getLocation().getFloor().equals(currentFloor)) {
+                String ID = local.getSrID();
+                double x = local.getLocation().getXcoord(); //TODO fix for future iterations
+                double y = local.getLocation().getYcoord();
+                addPointSR(ID, x, y, Color.LIME);
+                //System.out.println("add point at: " + x + " , " + y);
+            }
+        }
+
+
 
     }
 
@@ -161,10 +178,10 @@ public class MapEditorController{
                 public void handle(MouseEvent event) {
                     orgSceneX = event.getSceneX();
                     orgSceneY = event.getSceneY();
-                    modifyButton.setOpacity(1);
-                    modifyButton.setDisable(false);
-                    deleteButton.setOpacity(1);
-                    deleteButton.setDisable(false);
+                    //modifyButton.setOpacity(1);
+                    //modifyButton.setDisable(false);
+                    //deleteButton.setOpacity(1);
+                    //deleteButton.setDisable(false);
                     onPointClick(testPoint);
                     event.setDragDetect(true);
                 }
@@ -194,12 +211,29 @@ public class MapEditorController{
 
                     orgSceneX = t.getSceneX();
                     orgSceneY = t.getSceneY();
+                    updatePopup();
                 }
             });
 
         }
         return testPoint;
 
+    }
+
+
+    public void addPointSR(String ID, double x, double y,Color color){
+        if(showMedical.isSelected()) {
+            //Create the point
+            //getImageX(x),getImageY(y)
+            Circle testcircle = new Circle(5);
+            //Add the point to the anchorPane's children
+            anchorPane.getChildren().add(testcircle);
+            //Set point ID
+            testcircle.idProperty().set(ID);
+            testcircle.setCenterX(getImageX(x));
+            testcircle.setCenterY(getImageY(y));
+            testcircle.setFill(color);
+        }
     }
 
 
@@ -223,11 +257,13 @@ public class MapEditorController{
                     System.out.println("moving medical");
                     if (moveState) {
                         Location tempLoc = getClosetLocation(event.getX(), event.getY());
-                        double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
-                        System.out.println(dist);
+                        //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
+                        //System.out.println(dist);
                         MedicalEquipment temp = dbWrapper.getMedicalEquipment(selectedImg.getId());
-                        System.out.println(selectedImg.getId());
-                        dbWrapper.updateMedicalEquipment(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription(),2));
+                        //System.out.println(selectedImg.getId());
+
+                        dbWrapper.updateMedicalEquipment(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription(),1));
+                        System.out.println("new location: " + tempLoc.getNodeID() + "at " + tempLoc.getXcoord());
                         testImg.setX(getImageX(tempLoc.getXcoord()));
                         testImg.setY(getImageY(tempLoc.getYcoord()));
                         //System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
@@ -280,6 +316,7 @@ public class MapEditorController{
         longName.setVisible(isVisible);
         shortName.setVisible(isVisible);
         submitModifyButton.setVisible(isVisible);
+        modifyPopup.setVisible(isVisible);
     }
 
     //Scene x coordinate to image x coordinate
@@ -335,6 +372,8 @@ public class MapEditorController{
         nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
         longName.setText(local.getLongName());
+        modify();
+        updatePopup();
     }
 
     public void onImgClick(ImageView testImg){
@@ -357,6 +396,7 @@ public class MapEditorController{
     @FXML public void refresh(){
         locationList = dbWrapper.getAllLocation();
         medicalList = dbWrapper.getAllMedicalEquipment();
+        srList = dbWrapper.getAllSR();
         removeAllPoints();
         addPoints();
     }
@@ -423,17 +463,21 @@ public class MapEditorController{
         }
         selectedPoint = null;
         selectedPnt = null;
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+//        modifyButton.setOpacity(0.5);
+//        modifyButton.setDisable(true);
+//        deleteButton.setOpacity(0.5);
+//        deleteButton.setDisable(true);
         refresh();
     }
 
     @FXML public void delete(){
         deleteSelectedNode();
+        setEditFieldsVisible(false);
     }
 
+    @FXML public void close(){
+        setEditFieldsVisible(false);
+    }
 
 
     @FXML public void modify(){
@@ -444,6 +488,7 @@ public class MapEditorController{
         nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
         longName.setText(local.getLongName());
+        updatePopup();
     }
 
 
@@ -453,10 +498,10 @@ public class MapEditorController{
         dbWrapper.updateLocation(changedNode);
         refresh();
         setEditFieldsVisible(false);
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+//        modifyButton.setOpacity(0.5);
+//        modifyButton.setDisable(true);
+//        deleteButton.setOpacity(0.5);
+//        deleteButton.setDisable(true);
     }
 
     @FXML
@@ -540,21 +585,13 @@ public class MapEditorController{
     }
 
 
-    //credit to https://www.baeldung.com/java-distance-between-two-points
-    public double calculateDistanceBetweenPoints(
-            double x1,
-            double y1,
-            double x2,
-            double y2) {
-        return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
-    }
-
     public Location getClosetLocation(double x, double y){
         Circle closest = new Circle();
         double distance = 5000.0;
         for (Node child : anchorPane.getChildren()) {
             if (child instanceof Circle) {
-                double dist = calculateDistanceBetweenPoints(((Circle) child).getCenterX(),((Circle) child).getCenterY(),x,y);
+                double dist = Math.sqrt((((Circle) child).getCenterY() - y) * (((Circle) child).getCenterY() - y) + (((Circle) child).getCenterX() - x) * (((Circle) child).getCenterX() - x));
+                //calculateDistanceBetweenPoints(((Circle) child).getCenterX(),((Circle) child).getCenterY(),x,y);
                 if(dist < distance){
                     closest = (Circle)child;
                     distance = dist;
@@ -562,6 +599,14 @@ public class MapEditorController{
             }
         }
         return(dbWrapper.getLocation(closest.getId()));
+    }
+
+    void updatePopup(){
+        Translate trans = new Translate();
+        Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
+        trans.setX(selectedPnt.getCenterX()-bounds.getMinX());
+        trans.setY(selectedPnt.getCenterY()-(bounds.getMinY()-20));
+        modifyPopup.getTransforms().add(trans);
     }
 
 
