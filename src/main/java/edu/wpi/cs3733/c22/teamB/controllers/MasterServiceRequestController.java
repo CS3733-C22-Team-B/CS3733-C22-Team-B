@@ -13,8 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -127,8 +129,15 @@ public class MasterServiceRequestController {
     }
 
     @FXML private void submit(ActionEvent actionEvent) {
-//        MainSR sr = new MainSR(idField.getText(), statusField.getValue())
-//        childController.submit(childSR);
+        MainSR sr = new MainSR(idField.getText(),
+                                childSRType,
+                                statusField.getValue(),
+                locMap.get(locationField.getValue()),
+                assignedEmployeeField.getValue(),
+                assignedEmployeeField.getValue(),
+                LocalDate.now(),
+                notesField.getText());
+        childController.submit(childSR);
     }
 
     @FXML private void clear(ActionEvent actionEvent) {
