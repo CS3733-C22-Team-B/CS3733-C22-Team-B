@@ -16,7 +16,7 @@ public class LocationDaoI implements IDatabase<Location> {
     public void dropTable() {
         try {
             Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE Location");
+            stmt.execute("DROP TABLE LOCATION");
         } catch (SQLException e) {
             System.out.println("Drop Location Table: Failed!");
         }
@@ -213,5 +213,25 @@ public class LocationDaoI implements IDatabase<Location> {
             System.out.println("Insert Into Table Using Node ID: Failed!");
             e.printStackTrace();
         }
+
+
+    }
+
+    public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
+        boolean ans = false;
+        try {
+            //search for NodeID
+            PreparedStatement pstmt =
+                    conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
+            pstmt.setString(1, nodeID);
+            ResultSet rs = pstmt.executeQuery();
+            ans = rs.next();    //if any ids are found
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Search for NodeID Failed!");
+            e.printStackTrace();
+        }
+        return ans;
     }
 }

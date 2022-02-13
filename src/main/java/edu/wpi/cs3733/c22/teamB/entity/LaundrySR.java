@@ -12,9 +12,22 @@ public class LaundrySR extends AbstractSR {
         super(srID, "LaundrySR", status, location, requestor, assignedEmployee, dateRequested, notes);
     }
 
-    public LaundrySR(MainSR csr){
+    public LaundrySR(AbstractSR csr){
         super(csr);
         this.setSrType("LaundrySR");
+    }
+
+    @Override
+    public String toString() {
+        return "LaundrySR {" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' + '}';
     }
 
     public String toStringFields() {

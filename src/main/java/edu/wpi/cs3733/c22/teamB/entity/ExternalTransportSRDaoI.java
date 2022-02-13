@@ -75,30 +75,35 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
         ExternalTransportSR externalTransportSR = new ExternalTransportSR();
 
         try {
-            PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM EXTERNALTRANSPORTSR WHERE srID = ?");
-            pstmt.setString(1, objectID);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM EXTERNALTRANSPORTSR JOIN MAINSR ON EXTERNALTRANSPORTSR.SRID = MAINSR.SRID");
+//            pstmt.setString(1, objectID);
             ResultSet rset = pstmt.executeQuery();
 
             rset.next();
 
+            String status = rset.getString("status");
+            String LocationID = rset.getString("locationID");
+
+            LocationDaoI locationDaoI = new LocationDaoI();
+            Location location = locationDaoI.getValue(LocationID);
+
+            String requestorID = rset.getString("requestorID");
+            String assignedEmployeeID = rset.getString("assignedEmployeeID");
+
+            EmployeeDaoI employeeDaoI = new EmployeeDaoI();
+            Employee requestor = employeeDaoI.getValue(requestorID);
+            Employee assignedEmployee = employeeDaoI.getValue(assignedEmployeeID);
+
+            String dateRequested = rset.getString("dateRequested");
+            LocalDate date = LocalDate.parse(dateRequested);
+            String notes = rset.getString("notes");
             String patientID = rset.getString("patientID");
             String dropOffLocation = rset.getString("dropOffLocation");
             String formOfTransport = rset.getString("formOfTransport");
 
-            MainSRDaoI mainSRDaoI = new MainSRDaoI();
-            AbstractSR mainSR = mainSRDaoI.getValue(objectID);
+            externalTransportSR = new ExternalTransportSR(objectID, status, location, requestor, assignedEmployee, date, notes, patientID, dropOffLocation, formOfTransport);
 
-            String srType = mainSR.getSrType();
-            String status = mainSR.getStatus();
-            Location location = mainSR.getLocation();
-            Employee requestor = mainSR.getRequestor();
-            Employee assignedEmployee = mainSR.getAssignedEmployee();
-            LocalDate dateRequested = mainSR.getDateRequested();
-            String notes = mainSR.getNotes();
-
-            externalTransportSR = new ExternalTransportSR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes, patientID, dropOffLocation, formOfTransport);
-
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println("Get EXTERNALTRANSPORTSR Node Failed");
             e.printStackTrace();
@@ -143,7 +148,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
                         + "dropOffLocation VARCHAR(50), "
                         + "formOfTransport VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_EXTERNALTRANSPORTSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_EXTERNALTRANSPORTSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )"); //ON DELETE SET NULL
             }
         } catch (SQLException e) {
             System.out.println("Create EXTERNALTRANSPORTSR Table: Failed!");

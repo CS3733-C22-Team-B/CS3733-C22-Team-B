@@ -10,14 +10,14 @@ public class ExternalTransportSR extends AbstractSR {
     private String formOfTransport;
 
     public ExternalTransportSR() {
-        super(null, null, null, null, null, null, null, null);
+        super(null, "ExternalTransportSR", null, null, null, null, null, null);
         this.patientID = null;
         this.dropOffLocation = null;
         this.formOfTransport = null;
     }
 
-    public ExternalTransportSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String patientID, String dropOffLocation, String formOfTransport) {
-        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+    public ExternalTransportSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String patientID, String dropOffLocation, String formOfTransport) {
+        super(srID, "ExternalTransportSR", status, location, requestor, assignedEmployee, dateRequested, notes);
         this.patientID = patientID;
         this.dropOffLocation = dropOffLocation;
         this.formOfTransport = formOfTransport;
@@ -50,6 +50,14 @@ public class ExternalTransportSR extends AbstractSR {
     @Override
     public String toString() {
         return "ExternalTranportSR{" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
                 "patientID='" + patientID + '\'' +
                 ", dropOffLocation='" + dropOffLocation + '\'' +
                 ", formOfTransport='" + formOfTransport + '\'' +

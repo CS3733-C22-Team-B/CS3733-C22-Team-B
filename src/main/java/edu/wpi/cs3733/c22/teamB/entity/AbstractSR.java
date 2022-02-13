@@ -16,7 +16,7 @@ public abstract class AbstractSR {
     private LocalDate dateRequested;
     private String notes;
 
-    public AbstractSR(MainSR csr) {
+    public AbstractSR(AbstractSR csr) {
         this.srID = csr.getSrID();
         this.srType = csr.getSrType();
         this.status = csr.getStatus();
@@ -31,7 +31,7 @@ public abstract class AbstractSR {
         this.srID = srID;
         this.srType = srType;
 
-        if (status == null) status = "BLANK";
+//        if (status == null) status = "BLANK";
         if (!validateStatus(status)) {
             System.err.println("WARNING: status is set to BLANK");
             this.status = "BLANK";
@@ -47,7 +47,7 @@ public abstract class AbstractSR {
 
     private boolean validateStatus(String st) {
         for (String s : SRstatus)
-            if (st.equals(s)) return true;
+            if (st != null && st.equals(s)) return true;
         return false;
     }
 

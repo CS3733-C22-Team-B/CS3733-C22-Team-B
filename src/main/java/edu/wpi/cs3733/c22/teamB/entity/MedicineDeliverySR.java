@@ -8,16 +8,17 @@ public class MedicineDeliverySR extends AbstractSR {
     private String patientID;
 
     public MedicineDeliverySR() {
-        super(null, null, null, null, null, null, null, null);
+        super(null, "MedicineDeliverySR", null, null, null, null, null, null);
         this.medicineID = null;
         this.patientID = null;
     }
 
-    public MedicineDeliverySR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String medicineID, String patientID) {
-        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+    public MedicineDeliverySR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String medicineID, String patientID) {
+        super(srID, "MedicineDeliverySR", status, location, requestor, assignedEmployee, dateRequested, notes);
         this.medicineID = medicineID;
         this.patientID = patientID;
     }
+
 
     public String getMedicineID() {
         return medicineID;
@@ -38,6 +39,14 @@ public class MedicineDeliverySR extends AbstractSR {
     @Override
     public String toString() {
         return "MedicineDeliverySR{" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
                 "medicineID='" + medicineID + '\'' +
                 ", patientID='" + patientID + '\'' +
                 '}';

@@ -133,6 +133,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             String phoneNumber = "";
 
             while (rset.next()) {
+                employeeID = rset.getString("employeeID");
                 lastName = rset.getString("lastName");
                 firstName = rset.getString("firstName");
                 position = rset.getString("position");
@@ -188,6 +189,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             stmt.execute("DROP TABLE Employee");
         } catch (SQLException e) {
             System.out.println("Drop Employee Table: Failed!");
+            e.printStackTrace();
         }
     }
 

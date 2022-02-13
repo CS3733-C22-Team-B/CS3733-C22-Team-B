@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
+public class MainSRDaoI implements IDatabase<AbstractSR> {
     Connection conn;
 
     public MainSRDaoI() {
@@ -82,7 +82,7 @@ public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
 
     @Override
     public AbstractSR getValue(String objectID) {
-        MainSR mainSR = new MainSR();
+        AbstractSR mainSR = new MainSR();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM MainSR WHERE srID = ?");
@@ -93,7 +93,7 @@ public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
             String srType = rset.getString("srType");
             String status = rset.getString("status");
             String locationID = rset.getString("locationID");
-            String requestorEmployeeID = rset.getString("requestorEmployeeID");
+            String requestorEmployeeID = rset.getString("requestorID");
             String assignedEmployeeID = rset.getString("assignedEmployeeID");
             String dateRequested = rset.getString("dateRequested");
             String notes = rset.getString("notes");
@@ -186,9 +186,9 @@ public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
                                 + "dateRequested VARCHAR(50), "
                                 + "notes VARCHAR(50), "
                                 + "PRIMARY KEY (srID)," +
-                                "CONSTRAINT FK_MainSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
-                                "CONSTRAINT FK_MainSR_Employee1 FOREIGN KEY (requestorID) REFERENCES Employee (employeeID) ON DELETE SET NULL," +
-                                "CONSTRAINT FK_MainSR_Employee2 FOREIGN KEY (assignedEmployeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
+                                "CONSTRAINT FK_MainSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL ," + //ON DELETE SET NULL
+                                "CONSTRAINT FK_MainSR_Employee1 FOREIGN KEY (requestorID) REFERENCES Employee (employeeID) ON DELETE SET NULL )"); //
+                       //         "CONSTRAINT FK_MainSR_Employee2 FOREIGN KEY (assignedEmployeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
             System.out.println("Create MainSR Table: Failed!");

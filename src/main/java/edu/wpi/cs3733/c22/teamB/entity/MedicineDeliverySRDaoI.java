@@ -94,7 +94,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
 
-            medicineDeliverySR = new MedicineDeliverySR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
+            medicineDeliverySR = new MedicineDeliverySR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");
@@ -140,7 +140,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
                         + "medicineID VARCHAR(50), "
                         + "patientID VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_MEDICINEDELIVERYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_MEDICINEDELIVERYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
             }
         } catch (SQLException e) {
             System.out.println("Create MEDICINEDELIVERYSR Table: Failed!");

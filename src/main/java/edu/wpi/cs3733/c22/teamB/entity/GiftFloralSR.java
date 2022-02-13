@@ -8,12 +8,12 @@ public class GiftFloralSR extends AbstractSR {
     private String giftName;
 
     public GiftFloralSR(){
-        super(null, null, null, null, null, null, null, null);
+        super(null, "GiftFloralSR", null, null, null, null, null, null);
         this.giftName = null;
     }
 
-    public GiftFloralSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes,  String giftName) {
-        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+    public GiftFloralSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes,  String giftName) {
+        super(srID, "GiftFloralSR", status, location, requestor, assignedEmployee, dateRequested, notes);
         this.giftName = giftName;
     }
 
@@ -27,7 +27,15 @@ public class GiftFloralSR extends AbstractSR {
 
     @Override
     public String toString() {
-        return "GiftFloralSR{" +
+        return "GiftFloralSR{ " +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
                 "giftName='" + giftName + '\'' +
                 '}';
     }

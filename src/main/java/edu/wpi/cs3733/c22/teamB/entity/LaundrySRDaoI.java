@@ -16,11 +16,15 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public void addValue(LaundrySR object) {
-        MainSRDaoI mainDao = new MainSRDaoI();
-        mainDao.addValue(object);
+//        MainSRDaoI mainDao = new MainSRDaoI();
+//        mainDao.addValue(object);
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO LaundrySR(srID) VALUES(?)");
+
+            pstmt.setString(1, object.getSrID());
+            pstmt.executeUpdate();
+            pstmt.close();
 
         } catch (SQLException e) {
             System.out.println("Insert Into LaundrySR Table: Failed!");
@@ -105,10 +109,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
                 Statement stmt = conn.createStatement();
                 stmt.execute("CREATE TABLE LaundrySR ( "
                         + "srID VARCHAR(50) , "
-                        + "foodName VARCHAR(50), "
-                        + "drinkName VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_LAUNDRYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_LAUNDRYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
             }
         } catch (SQLException e) {
             System.out.println("Create LaundrySR Table: Failed!");
