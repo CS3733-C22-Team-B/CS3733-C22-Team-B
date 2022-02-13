@@ -12,70 +12,15 @@ public class LocationDBTest {
     @Test
     public void test() {
 
+        DatabaseWrapper databaseWrapper = new DatabaseWrapper();
 
+        databaseWrapper.dropAll();
 
-        MainSRDaoI mainSRDaoI = new MainSRDaoI();
+        databaseWrapper.createTableLocation();
+        databaseWrapper.createTableEmployee();
+        databaseWrapper.createTableMedicalEquipment();
+        databaseWrapper.createTableSR();
 
-        ExternalTransportSRDaoI externalTransportSRDaoI = new ExternalTransportSRDaoI();
-        externalTransportSRDaoI.dropTable();
-
-
-        MedicalEquipmentSRDaoI medicalEquipmentSRDaoI = new MedicalEquipmentSRDaoI();
-        medicalEquipmentSRDaoI.dropTable();
-
-        MedicineDeliverySRDaoI medicineDeliverySRDaoI = new MedicineDeliverySRDaoI();
-        medicineDeliverySRDaoI.dropTable();
-
-        GiftFloralSRDaoI giftFloralSRDaoI = new GiftFloralSRDaoI();
-        giftFloralSRDaoI.dropTable();
-
-        FoodDeliverySRDaoI foodDeliverySRDaoI = new FoodDeliverySRDaoI();
-        foodDeliverySRDaoI.dropTable();
-
-        LaundrySRDaoI laundrySRDaoI = new LaundrySRDaoI();
-        laundrySRDaoI.dropTable();
-//        MedicalEquipmentDaoI medicalEquipmentDaoI = new MedicalEquipmentDaoI();
-//        medicalEquipmentDaoI.dropTable();
-
-//        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-//        medicalEquipmentDBI.drop();
-
-
-        mainSRDaoI.dropTable();
-
-
-
-        LocationDaoI locationDaoI = new LocationDaoI();
-        locationDaoI.dropTable();
-
-
-
-
-        EmployeeDaoI employeeDaoI = new EmployeeDaoI();
-        employeeDaoI.dropTable();
-
-        //        medicalEquipmentSRDBI.drop();
-//        medicineDeliverySRDBI.drop();
-////        giftFloralSRDBI.drop();
-//        foodDeliverySRDBI.drop();
-//        externalTransportSRDBI.drop();
-//        medicalEquipmentDBI.drop();
-//        employeeDBI.drop();
-//        locationDBI.drop();
-
-
-        employeeDaoI.createTable();
-        locationDaoI.createTable();
-        mainSRDaoI.createTable();
-        externalTransportSRDaoI.createTable();
-
-//        FoodDeliverySRDaoI foodDeliverySRDaoI1 = new FoodDeliverySRDaoI();
-
-        foodDeliverySRDaoI.createTable();
-        giftFloralSRDaoI.createTable();
-        laundrySRDaoI.createTable();
-        medicalEquipmentSRDaoI.createTable();
-        medicineDeliverySRDaoI.createTable();
 
 
         Location location2 =
@@ -94,16 +39,15 @@ public class LocationDBTest {
         Employee employee1 = new Employee("14", "n", "n", "1", 1, "n", "n", "n", "n");
         Employee employee2 = new Employee("23", "a", "b", "c", 1, "1", "1", "d", "a");
 
-        locationDaoI.addValue(location2);
+        databaseWrapper.addLocation(location2);
 
-        employeeDaoI.addValue(employee1);
-        employeeDaoI.addValue(employee2);
-
+        databaseWrapper.addEmployee(employee1);
+        databaseWrapper.addEmployee(employee2);
 
 
         LocalDate date = LocalDate.parse("2022-02-12");
 
-        DatabaseWrapper db = new DatabaseWrapper();
+
         AbstractSR ben = new ExternalTransportSR("12", "12", location2, employee1, employee2, date, "Ben", "Ben", "Ben", "Ben");
 
 
@@ -111,17 +55,17 @@ public class LocationDBTest {
 
         AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
 
-        AbstractSR Sits = new LaundrySR("122", "12", location2, employee1, employee2, date, "no");
+        AbstractSR Sits = new LaundrySR("1123123", "12", location2, employee1, employee2, date, "no");
 
-        AbstractSR Duc = new MedicalEquipmentSR("1222", "12", location2, employee1, employee2, date, "no", new MedicalEquipment("Ben", "ben", "ben", "ben", location2, "ben", "ben", "ben", "ben", 2));
+        AbstractSR Duc = new MedicalEquipmentSR("12321321321", "12", location2, employee1, employee2, date, "no", new MedicalEquipment("Ben", "ben", "ben", "ben", location2, "ben", "ben", "ben", "ben", 2));
 
         AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
-        db.addSR(ben);
-        db.addSR(Pushman);
-        db.addSR(Noah);
-//        db.addSR(Sits);
-//        db.addSR(Duc);
-        db.addSR(Nick);
+        databaseWrapper.addSR(ben);
+        databaseWrapper.addSR(Pushman);
+        databaseWrapper.addSR(Noah);
+        databaseWrapper.addSR(Sits);
+        databaseWrapper.addSR(Duc);
+        databaseWrapper.addSR(Nick);
     }
 
     /*

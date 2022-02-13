@@ -15,8 +15,8 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
 
     @Override
     public void addValue(MedicalEquipmentSR object) {
-        MainSRDaoI mainDao = new MainSRDaoI();
-        mainDao.addValue(object);
+//        MainSRDaoI mainDao = new MainSRDaoI();
+//        mainDao.addValue(object);
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
