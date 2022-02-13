@@ -12,9 +12,16 @@ public class LaundrySR extends AbstractSR {
         super(srID, "LaundrySR", status, location, requestor, assignedEmployee, dateRequested, notes);
     }
 
-    public LaundrySR(ConcreteSR csr){
+    public LaundrySR(MainSR csr){
         super(csr);
         this.setSrType("LaundrySR");
     }
 
+    public String toStringFields() {
+        return getSrID();
+    }
+
+    public static String toStringHeader() {
+        return "srID";
+    }
 }

@@ -17,7 +17,7 @@ public class MedicalEquipmentSR extends AbstractSR {
         this.medicalEquipment = medicalEquipment;
     }
 
-    public MedicalEquipmentSR(ConcreteSR csr, MedicalEquipment medicalEquipment) {
+    public MedicalEquipmentSR(MainSR csr, MedicalEquipment medicalEquipment) {
         super(csr);
         this.setSrType("MedicalEquipmentSR"); // important
         this.medicalEquipment = medicalEquipment;
@@ -36,6 +36,18 @@ public class MedicalEquipmentSR extends AbstractSR {
         return "MedicalEquipmentSR{" +
                 "medicalEquipment=" + medicalEquipment +
                 '}';
+    }
+
+    public String toStringFields() {
+        return getSrID()
+                + ","
+                + medicalEquipment;
+    }
+
+    public static String toStringHeader() {
+        return "srID"
+                + ","
+                + "medicalEquipment";
     }
 
     @Override

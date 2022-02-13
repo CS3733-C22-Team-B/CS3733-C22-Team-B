@@ -1,11 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import javafx.collections.FXCollections;
-
-import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Map;
 
 public abstract class AbstractSR {
 
@@ -20,7 +15,7 @@ public abstract class AbstractSR {
     private LocalDate dateRequested;
     private String notes;
 
-    public AbstractSR(ConcreteSR csr) {
+    public AbstractSR(MainSR csr) {
         this.srID = csr.getSrID();
         this.srType = csr.getSrType();
         this.status = csr.getStatus();
@@ -119,5 +114,18 @@ public abstract class AbstractSR {
         this.srType = srType;
     }
 
+    @Override
+    public String toString() {
+        return "AbstractSR{" +
+                "srID='" + srID + '\'' +
+                ", srType='" + srType + '\'' +
+                ", status='" + status + '\'' +
+                ", location=" + location +
+                ", requestor=" + requestor +
+                ", assignedEmployee=" + assignedEmployee +
+                ", dateRequested=" + dateRequested +
+                ", notes='" + notes + '\'' +
+                '}';
+    }
 
 }

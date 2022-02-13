@@ -1,9 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 
-import edu.wpi.cs3733.c22.teamB.Main;
-import edu.wpi.cs3733.c22.teamB.entity.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +66,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
             String equipmentID = rset.getString("equipmentID");
 
             MainSRDaoI mainDao = new MainSRDaoI();
-            ConcreteSR csr = (ConcreteSR) mainDao.getValue(objectID);
+            MainSR csr = (MainSR) mainDao.getValue(objectID);
             MedicalEquipment medEquip = (new MedicalEquipmentDaoI()).getValue(equipmentID);
             ret = new MedicalEquipmentSR(csr, medEquip);
         } catch (SQLException e) {
@@ -94,7 +91,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
                 srID = rset.getString("srID");
                 equipmentID = rset.getString("equipmentID");
 
-                ConcreteSR csr = (ConcreteSR) mainDao.getValue(srID);
+                MainSR csr = (MainSR) mainDao.getValue(srID);
                 medEquipmentSRList.add(
                         new MedicalEquipmentSR(csr, (new MedicalEquipmentDaoI()).getValue(equipmentID)));
             }
