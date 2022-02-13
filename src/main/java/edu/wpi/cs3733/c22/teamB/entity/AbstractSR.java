@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class AbstractSR {
 
@@ -30,7 +31,7 @@ public abstract class AbstractSR {
         this.srID = srID;
         this.srType = srType;
 
-//        if (status == null) status = "BLANK";
+        if (status == null) status = "BLANK";
         if (!validateStatus(status)) {
             System.err.println("WARNING: status is set to BLANK");
             this.status = "BLANK";
@@ -120,10 +121,10 @@ public abstract class AbstractSR {
                 "srID='" + srID + '\'' +
                 ", srType='" + srType + '\'' +
                 ", status='" + status + '\'' +
-                ", location=" + location +
-                ", requestor=" + requestor +
-                ", assignedEmployee=" + assignedEmployee +
-                ", dateRequested=" + dateRequested +
+                ", location=" + location.getNodeID() +
+                ", requestor=" + requestor.getEmployeeID() +
+                ", assignedEmployee=" + assignedEmployee.getEmployeeID() +
+                ", dateRequested=" + dateRequested.format(DateTimeFormatter.ISO_LOCAL_DATE) +
                 ", notes='" + notes + '\'' +
                 '}';
     }
