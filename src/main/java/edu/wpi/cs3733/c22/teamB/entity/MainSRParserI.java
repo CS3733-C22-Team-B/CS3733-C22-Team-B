@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.Main;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class MainSRParserI implements IParser<MainSR> {
@@ -7,7 +10,16 @@ public class MainSRParserI implements IParser<MainSR> {
 
     @Override
     public MainSR fromStringToObject(String string) {
-        return null;
+        MainSR mainSR = new MainSR();
+        Location location = new Location();
+        Employee requestor = new Employee();
+        Employee assignedEmployee = new Employee();
+
+        String[] data = string.split(",");
+
+
+
+        return mainSR;
     }
 
     @Override
