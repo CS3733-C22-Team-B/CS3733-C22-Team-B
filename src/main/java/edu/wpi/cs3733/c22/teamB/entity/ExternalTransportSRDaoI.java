@@ -143,7 +143,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
                         + "dropOffLocation VARCHAR(50), "
                         + "formOfTransport VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_EXTERNALTRANSPORTSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_EXTERNALTRANSPORTSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )"); //ON DELETE SET NULL
             }
         } catch (SQLException e) {
             System.out.println("Create EXTERNALTRANSPORTSR Table: Failed!");

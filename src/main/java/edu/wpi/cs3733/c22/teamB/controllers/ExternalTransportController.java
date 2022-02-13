@@ -36,7 +36,7 @@ public class ExternalTransportController implements IController {
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
 
-    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
+//    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
 
     @FXML
     private void initialize() {
@@ -74,19 +74,19 @@ public class ExternalTransportController implements IController {
 
     @Override
     public void submit() {
-        ExternalTransportSR request =
-                new ExternalTransportSR(
-                        SenderTxt.getText(),
-                        statusField.getValue(),
-                        PickupLocTxt.getText(),
-                        DestinationTxt.getText(),
-                        InfoTxt.getText(),
-                        DateCal.getValue().toString(),
-                        FormOfTransport.getValue().toString(),
-                        employeeMap.get(EmployeeAssignment.getValue()));
-        System.out.println(request.toString());
-        db.insertNode(request);
-        clear();
+//        ExternalTransportSR request =
+//                new ExternalTransportSR(
+//                        SenderTxt.getText(),
+//                        statusField.getValue(),
+//                        PickupLocTxt.getText(),
+//                        DestinationTxt.getText(),
+//                        InfoTxt.getText(),
+//                        DateCal.getValue().toString(),
+//                        FormOfTransport.getValue().toString(),
+//                        employeeMap.get(EmployeeAssignment.getValue()));
+//        System.out.println(request.toString());
+//        db.insertNode(request);
+//        clear();
     }
 
     @Override

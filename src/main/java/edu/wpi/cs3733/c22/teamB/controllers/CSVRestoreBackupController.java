@@ -31,7 +31,7 @@ public class CSVRestoreBackupController {
 
     LocationParserI locParser = new LocationParserI();
     EmployeeParserI employeeParserI = new EmployeeParserI();
-    ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
+//    ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
     FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
     MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
     MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
@@ -45,7 +45,7 @@ public class CSVRestoreBackupController {
 //        GiftFloralSRDBI giftFloralSRDBI = new GiftFloralSRDBI();
         FoodDeliverySRDBI foodDeliverySRDBI = new FoodDeliverySRDBI();
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
-        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
+//        ExternalTransportSRDBI externalTransportSRDBI = new ExternalTransportSRDBI();
         EmployeeDBI employeeDBI = new EmployeeDBI();
         LocationDBI locationDBI = new LocationDBI();
 
@@ -65,7 +65,7 @@ public class CSVRestoreBackupController {
 
         // Backup ExternalTransportSR table
         writer.backupDir("ExternalTransportSRB");
-        writer.writeAll(extTransSRParserI.fromObjectsToStrings(externalTransportSRDBI.getAllNodes()));
+//        writer.writeAll(extTransSRParserI.fromObjectsToStrings(externalTransportSRDBI.getAllNodes()));
 
         // Backup MedicineDeliverySR table
         writer.backupDir("MedicineDeliverySRB");
@@ -134,14 +134,14 @@ public class CSVRestoreBackupController {
 
         List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
         List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-        List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
+//        List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
         List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
         List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
         List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
         List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
 
-        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+//        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+//                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
 
     }
     // Go to the home fxml when the home button is pressed

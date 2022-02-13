@@ -22,8 +22,8 @@ public class Bapp extends Application {
     public void init() throws IOException {
         log.info("Starting Up");
 
-        DatabaseManager databaseManager = new DatabaseManager();
-        databaseManager.createTable();
+//        DatabaseManager databaseManager = new DatabaseManager();
+//        databaseManager.createTable();
 
         CSVReader2 reader = new CSVReader2();
 
@@ -37,7 +37,7 @@ public class Bapp extends Application {
 
         LocationParserI locParser = new LocationParserI();
         EmployeeParserI employeeParserI = new EmployeeParserI();
-        ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
+        //ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
         FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
         MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
         MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
@@ -45,14 +45,14 @@ public class Bapp extends Application {
 
         List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
         List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-        List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
+        //List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
         List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
         List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
         List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
         List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
 
-        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+        //databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+        //        foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
 
 //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }

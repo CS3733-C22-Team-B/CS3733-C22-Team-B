@@ -39,10 +39,16 @@ public class DatabaseWrapper {
     public void addSR(AbstractSR abstractSR){
         //AbstractSR a = new ExternalTransportSR();
         MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
+        System.out.println(abstractSR.getSrType());
         switch(abstractSR.getSrType()) {
-            case "ExternalTransport":
+            case "ExternalTransportSR":
                 ExternalTransportDao.addValue((ExternalTransportSR) abstractSR);
+                break;
+            case "FoodDeliverySR":
+                FoodDeliveryDao.addValue((FoodDeliverySR) abstractSR);
+                break;
         }
+
     }
 
     public void addLocation(Location location) {
@@ -85,7 +91,7 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.updateValue(medicalEquipment);
     }
 
-    public AbstractSR getSR(String srID) {}
+    public AbstractSR getSR(String srID) {return MainSRDao.getValue(srID);}
 
     public Location getLocation(String locationID) {
         return LocationDao.getValue(locationID);
@@ -99,7 +105,7 @@ public class DatabaseWrapper {
         return MedicalEquipmentDao.getValue(medicalEquipmentID);
     }
 
-    public List<AbstractSR> getAllSR() {}
+    //public List<AbstractSR> getAllSR() {}
 
     public List<Location> getAllLocation() {
         return LocationDao.getAllValues();

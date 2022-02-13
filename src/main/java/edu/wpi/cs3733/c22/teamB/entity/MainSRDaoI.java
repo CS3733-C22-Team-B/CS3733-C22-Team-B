@@ -186,9 +186,9 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
                                 + "dateRequested VARCHAR(50), "
                                 + "notes VARCHAR(50), "
                                 + "PRIMARY KEY (srID)," +
-                                "CONSTRAINT FK_MainSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL," +
-                                "CONSTRAINT FK_MainSR_Employee1 FOREIGN KEY (requestorID) REFERENCES Employee (employeeID) ON DELETE SET NULL," +
-                                "CONSTRAINT FK_MainSR_Employee2 FOREIGN KEY (assignedEmployeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
+                                "CONSTRAINT FK_MainSR_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL ," + //ON DELETE SET NULL
+                                "CONSTRAINT FK_MainSR_Employee1 FOREIGN KEY (requestorID) REFERENCES Employee (employeeID) ON DELETE SET NULL )"); //
+                       //         "CONSTRAINT FK_MainSR_Employee2 FOREIGN KEY (assignedEmployeeID) REFERENCES Employee (employeeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
             System.out.println("Create MainSR Table: Failed!");

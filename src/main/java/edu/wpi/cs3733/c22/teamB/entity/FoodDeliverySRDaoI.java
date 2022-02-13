@@ -132,7 +132,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
                         + "foodName VARCHAR(50), "
                         + "drinkName VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_FOODDELIVERYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_FOODDELIVERYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )"); //ON DELETE SET NULL
             }
         } catch (SQLException e) {
             System.out.println("Create Location Table: Failed!");

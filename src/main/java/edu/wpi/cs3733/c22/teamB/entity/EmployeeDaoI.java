@@ -188,6 +188,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             stmt.execute("DROP TABLE Employee");
         } catch (SQLException e) {
             System.out.println("Drop Employee Table: Failed!");
+            e.printStackTrace();
         }
     }
 

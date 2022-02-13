@@ -16,7 +16,7 @@ public class LocationDaoI implements IDatabase<Location> {
     public void dropTable() {
         try {
             Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE Location");
+            stmt.execute("DROP TABLE LOCATION");
         } catch (SQLException e) {
             System.out.println("Drop Location Table: Failed!");
         }

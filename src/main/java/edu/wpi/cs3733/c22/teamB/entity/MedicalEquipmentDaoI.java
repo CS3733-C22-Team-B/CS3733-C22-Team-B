@@ -11,7 +11,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     private Connection conn;
 
-    public void MedicalEquipmentDAOI() {
+    public MedicalEquipmentDaoI() {
         this.conn = DBConnection.getConnection();
     }
 
