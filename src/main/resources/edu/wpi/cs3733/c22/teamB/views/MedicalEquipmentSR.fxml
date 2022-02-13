@@ -2,55 +2,28 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MedicalEquipmentSRController">
+<AnchorPane prefHeight="125.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MedicalEquipmentSRController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#78afe1" height="275.0" layoutX="-1.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Label layoutX="29.0" layoutY="60.0" prefHeight="27.0" prefWidth="284.0" text="Name">
+      <Label layoutY="66.0" prefHeight="27.0" prefWidth="284.0" text="Medical Equipment">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="29.0" layoutY="277.0" prefHeight="27.0" prefWidth="185.0" text="Assign employee">
+      <JFXComboBox fx:id="equipmentNameField" layoutY="93.0" prefHeight="25.0" prefWidth="224.0" />
+      <JFXComboBox fx:id="quantityField" layoutX="249.0" layoutY="94.0" />
+      <Label layoutX="249.0" layoutY="67.0" prefHeight="27.0" prefWidth="56.0" text="Quantity">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="requesterNameField" layoutX="29.0" layoutY="95.0" prefHeight="25.0" prefWidth="284.0" />
-      <Label layoutX="397.0" layoutY="277.0" prefHeight="27.0" prefWidth="94.0" text="Status">
+      <Label prefHeight="27.0" prefWidth="284.0" text="Equipment Type">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="statusField" layoutX="397.0" layoutY="305.0" prefHeight="25.0" prefWidth="94.0" />
-      <Label layoutX="29.0" layoutY="206.0" prefHeight="27.0" prefWidth="284.0" text="Deliver to Location">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="destinationField" layoutX="29.0" layoutY="233.0" prefHeight="25.0" prefWidth="284.0" />
-      <Label layoutX="29.0" layoutY="124.0" prefHeight="27.0" prefWidth="284.0" text="Equipment">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="equipmentNameField" layoutX="29.0" layoutY="151.0" prefHeight="25.0" prefWidth="284.0" />
-      <JFXComboBox layoutX="397.0" layoutY="151.0" />
-      <Label layoutX="394.0" layoutY="124.0" prefHeight="27.0" prefWidth="117.0" text="Amount">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <JFXComboBox fx:id="assignedEmployeeField" layoutX="29.0" layoutY="305.0" prefHeight="25.0" prefWidth="284.0" />
-      <TextField fx:id="idField" layoutX="29.0" layoutY="361.0" />
-      <Label layoutX="29.0" layoutY="330.0" prefHeight="27.0" prefWidth="185.0" text="id">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <JFXComboBox fx:id="equipmentTypeField" layoutY="27.0" prefHeight="25.0" prefWidth="224.0" />
    </children>
 </AnchorPane>

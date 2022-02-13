@@ -51,8 +51,8 @@ public class Bapp extends Application {
         List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
         List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
 
-        //databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-        //        foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+//        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+//                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
 
 //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
@@ -60,7 +60,8 @@ public class Bapp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/Login.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/ServiceRequestMenu.fxml"));
         _primaryStage = primaryStage;
 
         Parent root = loader.load();
