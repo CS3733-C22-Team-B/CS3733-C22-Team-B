@@ -94,6 +94,9 @@ public class MasterServiceRequestController {
 
         // notesField init
 
+        // srLabel (Page title)
+//        srLabel.setText(childSRType); // change this to be more correct
+
         if (childSR == null) {
             clear(null);
             idField.setDisable(true);
