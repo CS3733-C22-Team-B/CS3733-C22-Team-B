@@ -133,7 +133,15 @@ public class DatabaseWrapper {
         return MedicalEquipmentDao.getAllValues();
     }
 
-    public void createTableSR() {}
+    public void createTableSR() {
+        MainSRDao.createTable();
+        LaundrySRDao.createTable();
+        ExternalTransportDao.createTable();
+        FoodDeliveryDao.createTable();
+        GiftFloralSRDao.createTable();
+        MedicineDeliverySRDao.createTable();
+        MedicalEquipmentSRDao.createTable();
+    }
 
     public void createTableLocation() {
         LocationDao.createTable();
@@ -162,6 +170,16 @@ public class DatabaseWrapper {
     }
 
     public void dropAll() {
+        MedicalEquipmentSRDao.dropTable();
+        MedicineDeliverySRDao.dropTable();
+        GiftFloralSRDao.dropTable();
+        FoodDeliveryDao.dropTable();
+        ExternalTransportDao.dropTable();
+        LaundrySRDao.dropTable();
+        MainSRDao.dropTable();
+        MedicalEquipmentDao.dropTable();
+        EmployeeDao.dropTable();
+        LocationDao.dropTable();
     }
 
     public void restoreTableSR() {}

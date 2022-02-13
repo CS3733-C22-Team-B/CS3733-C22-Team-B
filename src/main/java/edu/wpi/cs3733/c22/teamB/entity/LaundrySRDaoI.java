@@ -16,8 +16,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public void addValue(LaundrySR object) {
-        MainSRDaoI mainDao = new MainSRDaoI();
-        mainDao.addValue(object);
+//        MainSRDaoI mainDao = new MainSRDaoI();
+//        mainDao.addValue(object);
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO LaundrySR(srID) VALUES(?)");
