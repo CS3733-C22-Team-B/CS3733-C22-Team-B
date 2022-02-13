@@ -41,13 +41,13 @@ public class MedicalEquipmentSR extends AbstractSR {
     public String toStringFields() {
         return getSrID()
                 + ","
-                + medicalEquipment;
+                + medicalEquipment.getEquipmentID();
     }
 
     public static String toStringHeader() {
         return "srID"
                 + ","
-                + "medicalEquipment";
+                + "medicalEquipmentID";
     }
 
     @Override
