@@ -217,7 +217,7 @@ public class LocationDaoI implements IDatabase<Location> {
 
     }
 
-    public static boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
+    public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
         boolean ans = false;
         try {
             //search for NodeID

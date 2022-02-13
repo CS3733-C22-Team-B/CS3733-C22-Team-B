@@ -289,6 +289,7 @@ public class DatabaseWrapper {
     public void restoreAll() {}
 
     public boolean isInTableLocation(String nodeID){
-        return LocationDaoI.isInTable(nodeID);
+        LocationDaoI test = new LocationDaoI();
+        return test.isInTable(nodeID);
     }
 }
