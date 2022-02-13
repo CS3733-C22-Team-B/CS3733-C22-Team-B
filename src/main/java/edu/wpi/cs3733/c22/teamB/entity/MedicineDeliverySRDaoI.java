@@ -140,7 +140,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
                         + "medicineID VARCHAR(50), "
                         + "patientID VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_MEDICINEDELIVERYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_MEDICINEDELIVERYSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
             }
         } catch (SQLException e) {
             System.out.println("Create MEDICINEDELIVERYSR Table: Failed!");

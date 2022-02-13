@@ -47,6 +47,20 @@ public class DatabaseWrapper {
             case "FoodDeliverySR":
                 FoodDeliveryDao.addValue((FoodDeliverySR) abstractSR);
                 break;
+            case "GiftFloralSR":
+                GiftFloralSRDao.addValue((GiftFloralSR) abstractSR);
+                break;
+            case "LaundrySR":
+                LaundrySRDao.addValue((LaundrySR) abstractSR);
+                break;
+            case "MedicalEquipmentSR":
+                MedicalEquipmentSRDao.addValue((MedicalEquipmentSR) abstractSR);
+                break;
+            case "MedicineDeliverySR":
+            MedicineDeliverySRDao.addValue((MedicineDeliverySR) abstractSR);
+                break;
+            default:
+                System.out.println("Invalid SR Input: " + abstractSR.getSrType());
         }
 
     }

@@ -21,17 +21,19 @@ public class LocationDBTest {
 
 
         MedicalEquipmentSRDaoI medicalEquipmentSRDaoI = new MedicalEquipmentSRDaoI();
-//        medicalEquipmentSRDaoI.dropTable();
+        medicalEquipmentSRDaoI.dropTable();
 
         MedicineDeliverySRDaoI medicineDeliverySRDaoI = new MedicineDeliverySRDaoI();
-//        medicineDeliverySRDaoI.dropTable();
+        medicineDeliverySRDaoI.dropTable();
 
         GiftFloralSRDaoI giftFloralSRDaoI = new GiftFloralSRDaoI();
-//        giftFloralSRDaoI.dropTable();
+        giftFloralSRDaoI.dropTable();
 
         FoodDeliverySRDaoI foodDeliverySRDaoI = new FoodDeliverySRDaoI();
         foodDeliverySRDaoI.dropTable();
 
+        LaundrySRDaoI laundrySRDaoI = new LaundrySRDaoI();
+        laundrySRDaoI.dropTable();
 //        MedicalEquipmentDaoI medicalEquipmentDaoI = new MedicalEquipmentDaoI();
 //        medicalEquipmentDaoI.dropTable();
 
@@ -70,6 +72,10 @@ public class LocationDBTest {
 //        FoodDeliverySRDaoI foodDeliverySRDaoI1 = new FoodDeliverySRDaoI();
 
         foodDeliverySRDaoI.createTable();
+        giftFloralSRDaoI.createTable();
+        laundrySRDaoI.createTable();
+        medicalEquipmentSRDaoI.createTable();
+        medicineDeliverySRDaoI.createTable();
 
 
         Location location2 =
@@ -103,8 +109,19 @@ public class LocationDBTest {
 
         AbstractSR Pushman = new FoodDeliverySR("121", "12", location2, employee1, employee2, date, "no", "Hushmand", "Ben");
 
+        AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
+
+        AbstractSR Sits = new LaundrySR("122", "12", location2, employee1, employee2, date, "no");
+
+        AbstractSR Duc = new MedicalEquipmentSR("1222", "12", location2, employee1, employee2, date, "no", new MedicalEquipment("Ben", "ben", "ben", "ben", location2, "ben", "ben", "ben", "ben", 2));
+
+        AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
         db.addSR(ben);
         db.addSR(Pushman);
+        db.addSR(Noah);
+//        db.addSR(Sits);
+//        db.addSR(Duc);
+        db.addSR(Nick);
     }
 
     /*

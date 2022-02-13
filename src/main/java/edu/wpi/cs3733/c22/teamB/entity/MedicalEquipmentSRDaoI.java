@@ -118,7 +118,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
                                 + "srID VARCHAR(50), "
                                 + "equipmentID VARCHAR(50), "
                                 + "PRIMARY KEY (srID), "
-                                + "CONSTRAINT FK_MedicalEquipmentSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                                + "CONSTRAINT FK_MedicalEquipmentSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
             }
         } catch (SQLException e) {
             System.out.println("Create MedicalEquipmentSR Table: Failed!");

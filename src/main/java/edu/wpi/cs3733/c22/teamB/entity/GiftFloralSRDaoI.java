@@ -135,7 +135,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
                         + "srID VARCHAR(50) , "
                         + "giftName VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_GIFTFLORALSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_GIFTFLORALSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
             }
         } catch (SQLException e) {
             System.out.println("Create Location Table: Failed!");
