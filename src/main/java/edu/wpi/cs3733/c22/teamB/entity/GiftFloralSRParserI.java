@@ -21,7 +21,7 @@ public class GiftFloralSRParserI implements IParser<GiftFloralSR> {
 
     @Override
     public List<GiftFloralSR> fromStringsToObjects(List<String> listString) {
-        List<GiftFloralSR> giftFloralSR =
+        List<GiftFloralSR> giftFloralSRList =
                 listString.stream()
                         .map(
                                 data_str -> {
@@ -29,7 +29,7 @@ public class GiftFloralSRParserI implements IParser<GiftFloralSR> {
                                 })
                         .collect(Collectors.toList());
 
-        return giftFloralSR;
+        return giftFloralSRList;
     }
 
     @Override

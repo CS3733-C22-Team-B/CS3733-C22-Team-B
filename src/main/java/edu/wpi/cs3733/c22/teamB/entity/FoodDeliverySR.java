@@ -15,7 +15,7 @@ public class FoodDeliverySR extends AbstractSR{
         this.drinkName = null;
     }
 
-    public FoodDeliverySR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String foodName, String frinkName) {
+    public FoodDeliverySR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String foodName, String drinkName) {
         super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
         this.foodName = foodName;
         this.drinkName = drinkName;
