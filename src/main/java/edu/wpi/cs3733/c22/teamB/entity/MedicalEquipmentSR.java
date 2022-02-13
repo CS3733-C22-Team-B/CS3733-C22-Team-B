@@ -50,13 +50,19 @@ public class MedicalEquipmentSR extends AbstractSR {
 
     @Override
     public String toString() {
-        return "MedicalEquipmentSR{" +
-                "srID='" + srID + '\'' +
-                ", status=" + status +
-                ", medicalEquipment=" + medicalEquipment +
-                ", destination=" + destination +
-                ", assignedEmployee=" + assignedEmployee +
-                '}';
+        return "MedicalEquipmentSR{"
+                + "srID='"
+                + srID
+                + '\''
+                + ", status="
+                + status
+                + ", medicalEquipment="
+                + medicalEquipment
+                + ", destination="
+                + destination
+                + ", assignedEmployee="
+                + assignedEmployee
+                + '}';
     }
 
     public String toStringFields() {

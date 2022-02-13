@@ -34,18 +34,19 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
-                stmt.execute("CREATE TABLE MedicalEquipment( "
-                        + "equipmentID VARCHAR(50), "
-                        + "equipmentName VARCHAR(255), "
-                        + "equipmentType VARCHAR(255), "
-                        + "manufacturer VARCHAR(255), "
-                        + "locationID VARCHAR(50), "
-                        + "status VARCHAR(255), "
-                        + "color VARCHAR(255), "
-                        + "size VARCHAR(255), "
-                        + "description VARCHAR(255),"
-                        + "PRIMARY KEY (equipmentID),"
-                        + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
+                stmt.execute(
+                        "CREATE TABLE MedicalEquipment( "
+                                + "equipmentID VARCHAR(50), "
+                                + "equipmentName VARCHAR(255), "
+                                + "equipmentType VARCHAR(255), "
+                                + "manufacturer VARCHAR(255), "
+                                + "locationID VARCHAR(50), "
+                                + "status VARCHAR(255), "
+                                + "color VARCHAR(255), "
+                                + "size VARCHAR(255), "
+                                + "description VARCHAR(255),"
+                                + "PRIMARY KEY (equipmentID),"
+                                + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
             }
         } catch (SQLException e) {
             System.out.println("Create MedicalEquipment Table: Failed!");
@@ -58,21 +59,22 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
 
         try {
             createTable();
-//            Statement stmt = conn.createStatement();
-//
-//            stmt.execute(
-//                    "create table MedicalEquipment( "
-//                            + "equipmentID VARCHAR(50), "
-//                            + "equipmentName VARCHAR(255), "
-//                            + "equipmentType VARCHAR(255), "
-//                            + "manufacturer VARCHAR(255), "
-//                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
-//                            + "status VARCHAR(255), "
-//                            + "color VARCHAR(255), "
-//                            + "size VARCHAR(255), "
-//                            + "description VARCHAR(255),"
-//                            + "PRIMARY KEY (equipmentID),"
-//                            + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
+            //            Statement stmt = conn.createStatement();
+            //
+            //            stmt.execute(
+            //                    "create table MedicalEquipment( "
+            //                            + "equipmentID VARCHAR(50), "
+            //                            + "equipmentName VARCHAR(255), "
+            //                            + "equipmentType VARCHAR(255), "
+            //                            + "manufacturer VARCHAR(255), "
+            //                            + "locationID VARCHAR(50) REFERENCES Location (nodeID), "
+            //                            + "status VARCHAR(255), "
+            //                            + "color VARCHAR(255), "
+            //                            + "size VARCHAR(255), "
+            //                            + "description VARCHAR(255),"
+            //                            + "PRIMARY KEY (equipmentID),"
+            //                            + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY
+            // (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
 
             // For each iteration of location in the list of location
             for (MedicalEquipment medEquipment : list) {
@@ -141,7 +143,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
                 description = rset.getString("description");
 
                 LocationDBI locationDBI = new LocationDBI();
-//                locationDBI.initconn("jdbc:derby:bDB;create=true","admin","admin");
+                //                locationDBI.initconn("jdbc:derby:bDB;create=true","admin","admin");
                 Location location = locationDBI.getNode(locationID);
 
                 medEquipments.add(
@@ -183,7 +185,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             String description = rset.getString("description");
 
             LocationDBI locationDBI = new LocationDBI();
-//            locationDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
+            //            locationDBI.initconn("jdbc:derby:bDB;create=true", "admin", "admin");
             Location location = locationDBI.getNode(locationID);
 
             medEquipment =
@@ -213,7 +215,6 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             pstmt.setString(1, nodeID);
             if (isInTable(nodeID)) {
                 pstmt.executeUpdate();
-
             }
 
             pstmt.close();
@@ -267,7 +268,7 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
             pstmt.setString(8, node.getSize());
             pstmt.setString(9, node.getDescription());
 
-            if(!isInTable(node.getEquipmentID())) {
+            if (!isInTable(node.getEquipmentID())) {
                 pstmt.executeUpdate();
             }
 
@@ -279,15 +280,15 @@ public class MedicalEquipmentDBI implements IDatabase<MedicalEquipment> {
         }
     }
 
-    public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
+    public boolean isInTable(String nodeID) { // check if there is a node with given ID in table
         boolean ans = false;
         try {
-            //search for NodeID
+            // search for NodeID
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM MedicalEquipment WHERE EQUIPMENTID = ?");
             pstmt.setString(1, nodeID);
             ResultSet rs = pstmt.executeQuery();
-            ans = rs.next();    //if any ids are found
+            ans = rs.next(); // if any ids are found
             pstmt.close();
 
         } catch (SQLException e) {

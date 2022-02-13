@@ -12,7 +12,6 @@ public class MedicineDeliverySRParserI implements IParser<MedicineDeliverySR> {
         Location destination = new Location();
         Employee assignedEmployee = new Employee();
 
-
         String[] data = string.split(",");
 
         medicineDeliverySR.setSrID(data[0]);

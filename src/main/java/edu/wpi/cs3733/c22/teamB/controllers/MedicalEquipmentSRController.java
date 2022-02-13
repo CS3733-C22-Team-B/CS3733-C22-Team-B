@@ -27,14 +27,14 @@ public class MedicalEquipmentSRController implements IController, Initializable 
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
     private int nextID;
-//    Connection conn = DBConnection.getConnection();
+    //    Connection conn = DBConnection.getConnection();
 
     private MedicalEquipmentSRDBI medSRDB = new MedicalEquipmentSRDBI();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         LocationDBI locationDBI = new LocationDBI();
-//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        //        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
         locList = locationDBI.getAllNodes();
         locMap =
                 IntStream.range(0, locList.size())
@@ -43,10 +43,10 @@ public class MedicalEquipmentSRController implements IController, Initializable 
                                 Collectors.toMap(
                                         i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
                                         i -> locList.get(i)));
-//        locationDBI.closeConnection();
+        //        locationDBI.closeConnection();
 
         MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-//        medicalEquipmentDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        //        medicalEquipmentDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
         medEqpList = medicalEquipmentDBI.getAllNodes();
         medEqpMap =
                 IntStream.range(0, medEqpList.size())
@@ -58,10 +58,10 @@ public class MedicalEquipmentSRController implements IController, Initializable 
                                                         + ' '
                                                         + medEqpList.get(i).getEquipmentName()),
                                         i -> medEqpList.get(i)));
-//        medicalEquipmentDBI.closeConnection();
+        //        medicalEquipmentDBI.closeConnection();
 
         EmployeeDBI employeeDBI = new EmployeeDBI();
-//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        //        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
         employeeList = employeeDBI.getAllNodes();
         employeeMap =
                 IntStream.range(0, employeeList.size())
@@ -71,7 +71,7 @@ public class MedicalEquipmentSRController implements IController, Initializable 
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
-//        employeeDBI.closeConnection();
+        //        employeeDBI.closeConnection();
 
         statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
         statusField.setValue("BLANK");
@@ -83,8 +83,8 @@ public class MedicalEquipmentSRController implements IController, Initializable 
         assignedEmployeeField.getItems().addAll(employeeMap.keySet());
 
         this.nextID = 0;
-        //Generate next unique ID
-        while(medSRDB.isInTable(String.valueOf(nextID))){
+        // Generate next unique ID
+        while (medSRDB.isInTable(String.valueOf(nextID))) {
             this.nextID++;
         }
         idField.setText(Integer.toString(nextID));
@@ -101,7 +101,7 @@ public class MedicalEquipmentSRController implements IController, Initializable 
                         medEqpMap.get(equipmentNameField.getValue()),
                         employeeMap.get(assignedEmployeeField.getValue())));
         clear();
-//        medSRDB.closeConnection();
+        //        medSRDB.closeConnection();
     }
 
     @Override

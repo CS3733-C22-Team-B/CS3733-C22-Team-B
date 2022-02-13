@@ -10,7 +10,7 @@ public class ExternalTransportSR extends AbstractSR {
     private Employee employee;
     //    private Employee assignedEmployee;
 
-    public ExternalTransportSR(){
+    public ExternalTransportSR() {
         super(null, null);
         this.pickupLoc = null;
         this.destination = null;
@@ -41,6 +41,7 @@ public class ExternalTransportSR extends AbstractSR {
     public Employee getEmployee() {
         return employee;
     }
+
     public String getPickupLoc() {
         return pickupLoc;
     }
@@ -60,7 +61,6 @@ public class ExternalTransportSR extends AbstractSR {
     public String getFormOfTransport() {
         return formOfTransport;
     }
-
 
     public String getSrID() {
         return this.srID;
@@ -90,34 +90,78 @@ public class ExternalTransportSR extends AbstractSR {
         this.employee = employee;
     }
 
-//    public String getAssignedEmployee() {
-//        return assignedEmployee;
-//    }
-//
-//    public void setAssignedEmployee(String assignedEmployee) {
-//        this.assignedEmployee = assignedEmployee;
-//    }
+    //    public String getAssignedEmployee() {
+    //        return assignedEmployee;
+    //    }
+    //
+    //    public void setAssignedEmployee(String assignedEmployee) {
+    //        this.assignedEmployee = assignedEmployee;
+    //    }
 
     @Override
     public String toString() {
-        return "ExternalTransportSR{" +
-                "srID='" + srID + '\'' +
-                ", status=" + status +
-                ", pickupLoc='" + pickupLoc + '\'' +
-                ", destination='" + destination + '\'' +
-                ", info='" + info + '\'' +
-                ", date='" + date + '\'' +
-                ", formOfTransport='" + formOfTransport + '\'' +
-                ", employee=" + employee +
-                ", assignedEmployee='" + employee.getEmployeeID() + '\'' +
-                '}';
+        return "ExternalTransportSR{"
+                + "srID='"
+                + srID
+                + '\''
+                + ", status="
+                + status
+                + ", pickupLoc='"
+                + pickupLoc
+                + '\''
+                + ", destination='"
+                + destination
+                + '\''
+                + ", info='"
+                + info
+                + '\''
+                + ", date='"
+                + date
+                + '\''
+                + ", formOfTransport='"
+                + formOfTransport
+                + '\''
+                + ", employee="
+                + employee
+                + ", assignedEmployee='"
+                + employee.getEmployeeID()
+                + '\''
+                + '}';
     }
 
     public String toStringFields() {
-        return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + employee.getEmployeeID();
+        return srID
+                + ","
+                + status
+                + ","
+                + pickupLoc
+                + ","
+                + destination
+                + ","
+                + info
+                + ","
+                + date
+                + ","
+                + formOfTransport
+                + ","
+                + employee.getEmployeeID();
     }
 
     public static String toStringHeader() {
-        return "srID" + "," + "status" + "," + "pickupLoc" + "," + "destination" + "," + "info" + "," + "date" + "," + "formOfTransport" + "," + "assignedEmployee";
+        return "srID"
+                + ","
+                + "status"
+                + ","
+                + "pickupLoc"
+                + ","
+                + "destination"
+                + ","
+                + "info"
+                + ","
+                + "date"
+                + ","
+                + "formOfTransport"
+                + ","
+                + "assignedEmployee";
     }
 }
