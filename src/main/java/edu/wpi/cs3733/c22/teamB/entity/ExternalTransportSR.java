@@ -50,11 +50,21 @@ public class ExternalTransportSR extends AbstractSR {
     @Override
     public String toString() {
         return "ExternalTranportSR{" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
                 "patientID='" + patientID + '\'' +
                 ", dropOffLocation='" + dropOffLocation + '\'' +
                 ", formOfTransport='" + formOfTransport + '\'' +
                 '}';
     }
+
+//
 
     @Override
     public boolean equals(Object o) {

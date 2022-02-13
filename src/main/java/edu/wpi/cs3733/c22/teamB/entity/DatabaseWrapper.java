@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseWrapper {
@@ -77,7 +78,35 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.addValue(medicalEquipment);
     }
 
-    public void deleteSR(String srID) {}
+    public void deleteSR(String srID) {
+
+        AbstractSR abstractSR = getSR(srID);
+        System.out.println(abstractSR.getSrType());
+        switch(abstractSR.getSrType()) {
+            case "ExternalTransportSR":
+                ExternalTransportDao.deleteValue(srID);
+                break;
+            case "FoodDeliverySR":
+                FoodDeliveryDao.deleteValue(srID);
+                break;
+            case "GiftFloralSR":
+                GiftFloralSRDao.deleteValue(srID);
+                break;
+            case "LaundrySR":
+                LaundrySRDao.deleteValue(srID);
+                break;
+            case "MedicalEquipmentSR":
+                MedicalEquipmentSRDao.deleteValue(srID);
+                break;
+            case "MedicineDeliverySR":
+                MedicineDeliverySRDao.deleteValue(srID);
+                break;
+            default:
+                System.out.println("Invalid SRID Input: " + abstractSR.getSrID());
+        }
+        MainSRDao.deleteValue(srID);
+
+    }
 
     public void deleteLocation(String locationID) {
         LocationDao.deleteValue(locationID);
@@ -91,7 +120,32 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.deleteValue(medicalEquipmentID);
     }
 
-    public void updateSR(AbstractSR abstractSR) {}
+    public void updateSR(AbstractSR abstractSR) {
+        MainSRDao.updateValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
+        System.out.println(abstractSR.getSrType());
+        switch(abstractSR.getSrType()) {
+            case "ExternalTransportSR":
+                ExternalTransportDao.updateValue((ExternalTransportSR) abstractSR);
+                break;
+            case "FoodDeliverySR":
+                FoodDeliveryDao.updateValue((FoodDeliverySR) abstractSR);
+                break;
+            case "GiftFloralSR":
+                GiftFloralSRDao.updateValue((GiftFloralSR) abstractSR);
+                break;
+            case "LaundrySR":
+                LaundrySRDao.updateValue((LaundrySR) abstractSR);
+                break;
+            case "MedicalEquipmentSR":
+                MedicalEquipmentSRDao.updateValue((MedicalEquipmentSR) abstractSR);
+                break;
+            case "MedicineDeliverySR":
+                MedicineDeliverySRDao.updateValue((MedicineDeliverySR) abstractSR);
+                break;
+            default:
+                System.out.println("Invalid SR Input: " + abstractSR.getSrType());
+        }
+    }
 
     public void updateLocation(Location location) {
         LocationDao.updateValue(location);
@@ -105,7 +159,36 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.updateValue(medicalEquipment);
     }
 
-    public AbstractSR getSR(String srID) {return MainSRDao.getValue(srID);}
+    public AbstractSR getSR(String srID) {
+
+        AbstractSR abstractSR = MainSRDao.getValue(srID);
+        System.out.println(abstractSR.getSrType());
+
+        switch(abstractSR.getSrType()) {
+            case "ExternalTransportSR":
+                System.out.println(ExternalTransportDao.getValue(srID));
+                return ExternalTransportDao.getValue(srID);
+            case "FoodDeliverySR":
+                System.out.println(FoodDeliveryDao.getValue(srID));
+                return FoodDeliveryDao.getValue(srID);
+            case "GiftFloralSR":
+                System.out.println(GiftFloralSRDao.getValue(srID));
+                return GiftFloralSRDao.getValue(srID);
+            case "LaundrySR":
+                System.out.println(LaundrySRDao.getValue(srID));
+                return LaundrySRDao.getValue(srID);
+            case "MedicalEquipmentSR":
+                System.out.println(MedicalEquipmentSRDao.getValue(srID));
+                return MedicalEquipmentSRDao.getValue(srID);
+            case "MedicineDeliverySR":
+                System.out.println(MedicineDeliverySRDao.getValue(srID));
+                return MedicineDeliverySRDao.getValue(srID);
+            default:
+                System.out.println("Invalid SR Input: " + abstractSR.getSrType());
+        }
+        return null;
+    }
+
 
     public Location getLocation(String locationID) {
         return LocationDao.getValue(locationID);
@@ -119,7 +202,17 @@ public class DatabaseWrapper {
         return MedicalEquipmentDao.getValue(medicalEquipmentID);
     }
 
-    //public List<AbstractSR> getAllSR() {}
+    public List<AbstractSR> getAllSR() {
+        List<AbstractSR> list = MainSRDao.getAllValues();
+
+        for (AbstractSR abstractSR : list) {
+            abstractSR = getSR(abstractSR.getSrID());
+        }
+
+        System.out.println(list);
+        return list;
+    }
+
 
     public List<Location> getAllLocation() {
         return LocationDao.getAllValues();
@@ -155,7 +248,15 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.createTable();
     }
 
-    public void dropTableSR() {}
+    public void dropTableSR() {
+        MedicalEquipmentSRDao.dropTable();
+        MedicineDeliverySRDao.dropTable();
+        GiftFloralSRDao.dropTable();
+        FoodDeliveryDao.dropTable();
+        ExternalTransportDao.dropTable();
+        LaundrySRDao.dropTable();
+        MainSRDao.dropTable();
+    }
 
     public void dropTableLocation() {
         LocationDao.dropTable();
@@ -170,16 +271,11 @@ public class DatabaseWrapper {
     }
 
     public void dropAll() {
-        MedicalEquipmentSRDao.dropTable();
-        MedicineDeliverySRDao.dropTable();
-        GiftFloralSRDao.dropTable();
-        FoodDeliveryDao.dropTable();
-        ExternalTransportDao.dropTable();
-        LaundrySRDao.dropTable();
-        MainSRDao.dropTable();
-        MedicalEquipmentDao.dropTable();
-        EmployeeDao.dropTable();
-        LocationDao.dropTable();
+
+        dropTableSR();
+        dropTableMedicalEquipment();
+        dropTableEmployee();
+        dropTableLocation();
     }
 
     public void restoreTableSR() {}

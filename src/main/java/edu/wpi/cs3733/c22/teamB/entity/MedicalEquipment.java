@@ -27,7 +27,7 @@ public class MedicalEquipment {
         this.color = null;
         this.size = null;
         this.description = null;
-        this.amount = Integer.parseInt(null);
+        this.amount = -1;
     }
 
     public MedicalEquipment(

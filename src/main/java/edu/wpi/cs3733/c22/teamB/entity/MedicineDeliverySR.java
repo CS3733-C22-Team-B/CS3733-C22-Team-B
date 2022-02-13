@@ -39,6 +39,14 @@ public class MedicineDeliverySR extends AbstractSR {
     @Override
     public String toString() {
         return "MedicineDeliverySR{" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
                 "medicineID='" + medicineID + '\'' +
                 ", patientID='" + patientID + '\'' +
                 '}';

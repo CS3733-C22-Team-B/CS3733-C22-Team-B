@@ -18,7 +18,7 @@ public class Employee {
         this.lastName = null;
         this.firstName = null;
         this.position = null;
-        this.accessLevel = Integer.parseInt(null);
+        this.accessLevel = -1;
         this.username = null;
         this.password = null;
         this.email = null;
