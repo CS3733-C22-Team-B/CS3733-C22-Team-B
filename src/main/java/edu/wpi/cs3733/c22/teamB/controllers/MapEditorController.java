@@ -75,6 +75,7 @@ public class MapEditorController{
     Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
     Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
     Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/medical.png");
+    Image clipboard = new Image("/edu/wpi/cs3733/c22/teamB/images/clipboard.png");
     @FXML
     private AnchorPane anchorPane;
 
@@ -151,7 +152,7 @@ public class MapEditorController{
         for (AbstractSR local : srList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getSrID();
-                double x = local.getLocation().getXcoord(); //TODO fix for future iterations
+                double x = local.getLocation().getXcoord() + 20; //TODO fix for future iterations
                 double y = local.getLocation().getYcoord();
                 addPointSR(ID, x, y, Color.LIME);
                 //System.out.println("add point at: " + x + " , " + y);
@@ -225,14 +226,15 @@ public class MapEditorController{
         if(showMedical.isSelected()) {
             //Create the point
             //getImageX(x),getImageY(y)
-            Circle testcircle = new Circle(5);
+            ImageView testImg = new ImageView(clipboard);
             //Add the point to the anchorPane's children
-            anchorPane.getChildren().add(testcircle);
+            anchorPane.getChildren().add(testImg);
             //Set point ID
-            testcircle.idProperty().set(ID);
-            testcircle.setCenterX(getImageX(x));
-            testcircle.setCenterY(getImageY(y));
-            testcircle.setFill(color);
+            testImg.idProperty().set(ID);
+            testImg.setX(getImageX(x));
+            testImg.setY(getImageY(y));
+            testImg.setPreserveRatio(true);
+            testImg.setFitWidth(15);
         }
     }
 
