@@ -82,7 +82,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public AbstractSR getValue(String objectID) {
-        MainSR mainSR = new MainSR();
+        MainSR mainSR = null;
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM MainSR WHERE srID = ?");
@@ -93,7 +93,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
             String srType = rset.getString("srType");
             String status = rset.getString("status");
             String locationID = rset.getString("locationID");
-            String requestorEmployeeID = rset.getString("requestorEmployeeID");
+            String requestorEmployeeID = rset.getString("requestorID");
             String assignedEmployeeID = rset.getString("assignedEmployeeID");
             String dateRequested = rset.getString("dateRequested");
             String notes = rset.getString("notes");

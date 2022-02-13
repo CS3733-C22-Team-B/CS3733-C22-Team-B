@@ -16,7 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 public class MedicalEquipmentSRController implements IController {
-    @FXML JFXComboBox<String> equipmentTypeField;
+    @FXML private JFXComboBox<String> equipmentTypeField;
     @FXML private JFXComboBox<String> equipmentNameField;
 
     private List<MedicalEquipment> medEqpList;
@@ -74,12 +74,13 @@ public class MedicalEquipmentSRController implements IController {
     @Override
     public void clear() {
         equipmentTypeField.setValue("ALL");
-        equipmentNameField.getItems().clear();
+        equipmentNameField.setValue(null);
     }
 
     @FXML private void onEquipmentTypeChange(ActionEvent actionEvent) {
-        equipmentNameField.getItems().clear();
+        equipmentNameField.setValue(null);
         equipmentNameField.getItems().removeAll();
+        equipmentNameField.getItems().clear();
         equipmentNameField.getItems().addAll(medEqpMap.keySet()
                 .stream()
                 .filter(

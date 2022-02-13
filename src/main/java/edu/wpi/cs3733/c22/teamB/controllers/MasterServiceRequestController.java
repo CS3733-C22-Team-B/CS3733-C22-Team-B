@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -92,6 +92,7 @@ public class MasterServiceRequestController {
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
+        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
 
         // floorField init
         floorField.getItems().addAll("ALL", "L1", "L2", "1", "2", "3"); // all floors
@@ -120,7 +121,7 @@ public class MasterServiceRequestController {
         else {
             idField.setText(childSR.getSrID());
             statusField.setValue(childSR.getStatus());
-            assignedEmployeeField.setValue(childSR.getAssignedEmployee().getFirstName() + childSR.getAssignedEmployee().getLastName());
+            assignedEmployeeField.setValue(childSR.getAssignedEmployee().getEmployeeID() + ' ' + childSR.getAssignedEmployee().getName());
             floorField.setValue(childSR.getLocation().getFloor());
             locationField.setValue(childSR.getLocation().getLongName());
             notesField.setText(childSR.getNotes());
@@ -141,7 +142,7 @@ public class MasterServiceRequestController {
     }
 
     @FXML private void submit(ActionEvent actionEvent) {
-        MainSR sr = new MainSR(
+        childSR = new MainSR(
                 idField.getText(),
                 childSRType,
                 statusField.getValue(),
@@ -154,11 +155,11 @@ public class MasterServiceRequestController {
     }
 
     @FXML private void clear(ActionEvent actionEvent) {
-        idField.clear(); // set to correct one
+        idField.setText(SRIDGenerator.generateID());
         statusField.setValue("BLANK");
-        assignedEmployeeField.setValue(""); // set to an employee
+        assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
         floorField.setValue("ALL");
-        locationField.getItems().clear();
+        locationField.setValue(null);
         notesField.clear();
 
         childController.clear();
@@ -169,8 +170,9 @@ public class MasterServiceRequestController {
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
-        locationField.getItems().clear();
+        locationField.setValue(null);
         locationField.getItems().removeAll();
+        locationField.getItems().clear();
         locationField.getItems().addAll(locMap.keySet()
                 .stream()
                 .filter(

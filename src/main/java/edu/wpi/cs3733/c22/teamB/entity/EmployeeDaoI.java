@@ -133,6 +133,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             String phoneNumber = "";
 
             while (rset.next()) {
+                employeeID = rset.getString("employeeID");
                 lastName = rset.getString("lastName");
                 firstName = rset.getString("firstName");
                 position = rset.getString("position");
