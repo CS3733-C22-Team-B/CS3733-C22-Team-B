@@ -2,12 +2,12 @@ package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.time.LocalDate;
 
-public class ConcreteSR extends AbstractSR {
-    public ConcreteSR() {
+public class MainSR extends AbstractSR {
+    public MainSR() {
         super(null, null, null, null, null, null, null, null);
     }
 
-    public ConcreteSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes) {
+    public MainSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes) {
         super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
     }
 }

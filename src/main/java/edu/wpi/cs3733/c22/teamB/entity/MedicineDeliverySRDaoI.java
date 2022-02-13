@@ -94,7 +94,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
 
-            medicineDeliverySR = new MedicineDeliverySR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
+            medicineDeliverySR = new MedicineDeliverySR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");

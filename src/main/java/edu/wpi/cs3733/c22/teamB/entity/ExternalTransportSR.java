@@ -3,21 +3,21 @@ package edu.wpi.cs3733.c22.teamB.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ExternalTranportSR extends AbstractSR {
+public class ExternalTransportSR extends AbstractSR {
 
     private String patientID;
     private String dropOffLocation;
     private String formOfTransport;
 
-    public ExternalTranportSR() {
-        super(null, null, null, null, null, null, null, null);
+    public ExternalTransportSR() {
+        super(null, "ExternalTransportSR", null, null, null, null, null, null);
         this.patientID = null;
         this.dropOffLocation = null;
         this.formOfTransport = null;
     }
 
-    public ExternalTranportSR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String patientID, String dropOffLocation, String formOfTransport) {
-        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+    public ExternalTransportSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String patientID, String dropOffLocation, String formOfTransport) {
+        super(srID, "ExternalTransportSR", status, location, requestor, assignedEmployee, dateRequested, notes);
         this.patientID = patientID;
         this.dropOffLocation = dropOffLocation;
         this.formOfTransport = formOfTransport;
@@ -60,7 +60,7 @@ public class ExternalTranportSR extends AbstractSR {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExternalTranportSR that = (ExternalTranportSR) o;
+        ExternalTransportSR that = (ExternalTransportSR) o;
         return Objects.equals(patientID, that.patientID) && Objects.equals(dropOffLocation, that.dropOffLocation) && Objects.equals(formOfTransport, that.formOfTransport);
     }
 

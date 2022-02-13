@@ -17,7 +17,7 @@ public class MedicalEquipmentSR extends AbstractSR {
         this.medicalEquipment = medicalEquipment;
     }
 
-    public MedicalEquipmentSR(ConcreteSR csr, MedicalEquipment medicalEquipment) {
+    public MedicalEquipmentSR(AbstractSR csr, MedicalEquipment medicalEquipment) {
         super(csr);
         this.setSrType("MedicalEquipmentSR"); // important
         this.medicalEquipment = medicalEquipment;

@@ -10,13 +10,13 @@ public class FoodDeliverySR extends AbstractSR{
 
 
     public FoodDeliverySR() {
-        super(null, null, null, null, null, null, null, null);
+        super(null, "FoodDeliverySR", null, null, null, null, null, null);
         this.foodName = null;
         this.drinkName = null;
     }
 
-    public FoodDeliverySR(String srID, String srType, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String foodName, String frinkName) {
-        super(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+    public FoodDeliverySR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String foodName, String frinkName) {
+        super(srID, "FoodDeliverySR", status, location, requestor, assignedEmployee, dateRequested, notes);
         this.foodName = foodName;
         this.drinkName = drinkName;
     }

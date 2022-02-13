@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
+public class MainSRDaoI implements IDatabase<AbstractSR> {
     Connection conn;
 
     public MainSRDaoI() {
@@ -82,7 +82,7 @@ public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
 
     @Override
     public AbstractSR getValue(String objectID) {
-        ConcreteSR concreteSR = new ConcreteSR();
+        MainSR mainSR = new MainSR();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM MainSR WHERE srID = ?");
@@ -105,13 +105,13 @@ public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
             Employee requestorID = employeeDaoI.getValue(requestorEmployeeID);
             Employee assignedID = employeeDaoI.getValue(assignedEmployeeID);
 
-            concreteSR = new ConcreteSR(objectID, srType, status, location, requestorID, assignedID, LocalDate.parse(dateRequested), notes);
+            mainSR = new MainSR(objectID, srType, status, location, requestorID, assignedID, LocalDate.parse(dateRequested), notes);
 
         } catch (SQLException e) {
             System.out.println("Get MainSR Values: Failed!");
             e.printStackTrace();
         }
-        return concreteSR;
+        return mainSR;
     }
 
     @Override
@@ -156,7 +156,7 @@ public class MainSRDaoI implements ISpecificServiceRequest<AbstractSR> {
 
                 dateRequested = LocalDate.parse(date);
 
-                MainList.add(new ConcreteSR(srID, srType, status, location, requestor, assignedEmployee, dateRequested,notes));
+                MainList.add(new MainSR(srID, srType, status, location, requestor, assignedEmployee, dateRequested,notes));
             }
         } catch (SQLException e) {
             System.out.println("Get All MainSR Values: SQL Failed!");

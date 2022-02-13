@@ -90,7 +90,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
 
-            giftFloralSR = new GiftFloralSR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes, giftName);
+            giftFloralSR = new GiftFloralSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, giftName);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");

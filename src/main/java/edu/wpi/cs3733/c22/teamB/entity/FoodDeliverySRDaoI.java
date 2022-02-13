@@ -88,7 +88,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
             Employee assignedEmployee = mainSR.getAssignedEmployee();
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
-            foodDeliverySR = new FoodDeliverySR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes, foodName, drinkName);
+            foodDeliverySR = new FoodDeliverySR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, foodName, drinkName);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");

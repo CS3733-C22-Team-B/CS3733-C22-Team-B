@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
+public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
     private Connection conn;
 
@@ -14,7 +14,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
     }
 
     @Override
-    public void addValue(ExternalTranportSR object) {
+    public void addValue(ExternalTransportSR object) {
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO EXTERNALTRANSPORTSR (srID, patientID, dropOffLocation, FORMOFTRANSPORT) VALUES(?, ?, ?, ?)");
@@ -48,7 +48,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
     }
 
     @Override
-    public void updateValue(ExternalTranportSR object) {
+    public void updateValue(ExternalTransportSR object) {
 
         try {
             PreparedStatement pstmt =
@@ -71,8 +71,8 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
     }
 
     @Override
-    public ExternalTranportSR getValue(String objectID) {
-        ExternalTranportSR externalTranportSR = new ExternalTranportSR();
+    public ExternalTransportSR getValue(String objectID) {
+        ExternalTransportSR externalTransportSR = new ExternalTransportSR();
 
         try {
             PreparedStatement pstmt =
@@ -97,19 +97,19 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
 
-            externalTranportSR = new ExternalTranportSR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes, patientID, dropOffLocation, formOfTransport);
+            externalTransportSR = new ExternalTransportSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, patientID, dropOffLocation, formOfTransport);
 
         } catch (SQLException e) {
             System.out.println("Get EXTERNALTRANSPORTSR Node Failed");
             e.printStackTrace();
         }
-        return externalTranportSR;
+        return externalTransportSR;
 
     }
 
     @Override
-    public List<ExternalTranportSR> getAllValues() {
-        List<ExternalTranportSR> externalTranportSRList = new ArrayList<>();
+    public List<ExternalTransportSR> getAllValues() {
+        List<ExternalTransportSR> externalTransportSRList = new ArrayList<>();
         try{
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT SRID FROM EXTERNALTRANSPORTSR ");
@@ -117,13 +117,13 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
 
 
             while(rset.next()){
-                externalTranportSRList.add(getValue(rset.getString("SRID")));
+                externalTransportSRList.add(getValue(rset.getString("SRID")));
             }
         } catch (SQLException e) {
             System.out.println("Get EXTERNALTRANSPORTSR Node Failed");
             e.printStackTrace();
         }
-        return externalTranportSRList;
+        return externalTransportSRList;
     }
 
     @Override
@@ -164,12 +164,12 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTranportSR> {
     }
 
     @Override
-    public void restoreTable(List<ExternalTranportSR> list) {
+    public void restoreTable(List<ExternalTransportSR> list) {
 
         createTable();
 
-        for (ExternalTranportSR externalTranportSR : list) {
-            addValue(externalTranportSR);
+        for (ExternalTransportSR externalTransportSR : list) {
+            addValue(externalTransportSR);
         }
 
     }

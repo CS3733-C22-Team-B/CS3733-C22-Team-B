@@ -20,7 +20,7 @@ public abstract class AbstractSR {
     private LocalDate dateRequested;
     private String notes;
 
-    public AbstractSR(ConcreteSR csr) {
+    public AbstractSR(AbstractSR csr) {
         this.srID = csr.getSrID();
         this.srType = csr.getSrType();
         this.status = csr.getStatus();
