@@ -76,12 +76,14 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
                     conn.prepareStatement("SELECT * FROM FoodDeliverySR WHERE srID = ?");
             pstmt.setString(1, objectID);
             ResultSet rset = pstmt.executeQuery();
+
             rset.next();
             String foodName = rset.getString("foodName");
             String drinkName = rset.getString("drinkName");
+
             MainSRDaoI mainSRDaoI = new MainSRDaoI();
             AbstractSR mainSR = mainSRDaoI.getValue(objectID);
-            String srType = mainSR.getSrType();
+
             String status = mainSR.getStatus();
             Location location = mainSR.getLocation();
             Employee requestor = mainSR.getRequestor();
@@ -89,7 +91,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
             foodDeliverySR = new FoodDeliverySR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, foodName, drinkName);
-
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");
             e.printStackTrace();
@@ -128,7 +130,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
                 // Create table
                 Statement stmt = conn.createStatement();
                 stmt.execute("CREATE TABLE FOODDELIVERYSR ( "
-                        + "srID VARCHAR(50) , "
+                        + "srID VARCHAR(50), "
                         + "foodName VARCHAR(50), "
                         + "drinkName VARCHAR(50), "
                         + "PRIMARY KEY (srID),"

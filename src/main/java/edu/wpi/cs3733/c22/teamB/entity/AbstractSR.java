@@ -51,8 +51,22 @@ public abstract class AbstractSR {
 
     private boolean validateStatus(String st) {
         for (String s : SRstatus)
-            if (st.equals(s)) return true;
+            if (st != null && st.equals(s)) return true;
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractSR{" +
+                "srID='" + srID + '\'' +
+                ", srType='" + srType + '\'' +
+                ", status='" + status + '\'' +
+                ", location=" + location +
+                ", requestor=" + requestor +
+                ", assignedEmployee=" + assignedEmployee +
+                ", dateRequested=" + dateRequested +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 
     public String getSrID() {

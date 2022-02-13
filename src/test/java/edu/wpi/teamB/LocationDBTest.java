@@ -28,7 +28,7 @@ public class LocationDBTest {
                         "C1244T0281",
                         180,
                         84,
-                        "L",
+                        "3",
                         "Towr",
                         "DPT",
                         "Dy Surgery Family Waiting Floor L1",
@@ -45,11 +45,15 @@ public class LocationDBTest {
         databaseWrapper.addEmployee(employee2);
 
 
+        MedicalEquipment equipment = new MedicalEquipment("12", "Awdd", "asd", "asd", location2, "asd", "asd", "12", "asd", 12);
+
+        databaseWrapper.addMedicalEquipment(equipment);
         LocalDate date = LocalDate.parse("2022-02-12");
 
 
         AbstractSR ben = new ExternalTransportSR("12", "12", location2, employee1, employee2, date, "Ben", "Ben", "Ben", "Ben");
 
+        AbstractSR kiki = new ExternalTransportSR("asd", "ads", location2, employee1, employee2, date, "kl", "asd", "asd", "asd");
 
         AbstractSR Pushman = new FoodDeliverySR("121", "12", location2, employee1, employee2, date, "no", "Hushmand", "Ben");
 
@@ -57,15 +61,43 @@ public class LocationDBTest {
 
         AbstractSR Sits = new LaundrySR("1123123", "12", location2, employee1, employee2, date, "no");
 
-        AbstractSR Duc = new MedicalEquipmentSR("12321321321", "12", location2, employee1, employee2, date, "no", new MedicalEquipment("Ben", "ben", "ben", "ben", location2, "ben", "ben", "ben", "ben", 2));
+        AbstractSR Duc = new MedicalEquipmentSR("12321321321", "12", location2, employee1, employee2, date, "no", equipment);
 
         AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
+
+        AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
+
         databaseWrapper.addSR(ben);
+        databaseWrapper.addSR(kiki);
         databaseWrapper.addSR(Pushman);
         databaseWrapper.addSR(Noah);
         databaseWrapper.addSR(Sits);
         databaseWrapper.addSR(Duc);
         databaseWrapper.addSR(Nick);
+
+//        databaseWrapper.deleteSR(ben.getSrID());
+//        databaseWrapper.deleteSR(Pushman.getSrID());
+//        databaseWrapper.deleteSR(Noah.getSrID());
+//        databaseWrapper.deleteSR(Sits.getSrID());
+//        databaseWrapper.deleteSR(Duc.getSrID());
+//        databaseWrapper.deleteSR(Nick.getSrID());
+
+        databaseWrapper.updateSR(Andrew);
+
+        databaseWrapper.getSR("12");
+        databaseWrapper.getSR("121");
+
+        FoodDeliverySRDaoI foodDeliverySRDaoI = new FoodDeliverySRDaoI();
+        System.out.println(foodDeliverySRDaoI.getAllValues());
+
+        databaseWrapper.getSR("asd");
+        databaseWrapper.getSR("123");
+        databaseWrapper.getSR("1123123");
+        databaseWrapper.getSR("12321321321");
+        databaseWrapper.getSR("1112");
+
+
+        databaseWrapper.getAllSR();
     }
 
     /*
