@@ -38,7 +38,7 @@ public class GiftFloralSR extends AbstractSR {
                 + giftName;
     }
 
-    public String toStringHeader() {
+    public static String toStringHeader() {
         return "srID"
                 + ","
                 + "giftName";
