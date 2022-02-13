@@ -223,14 +223,16 @@ public class MapEditorController{
                     System.out.println("moving medical");
                     if (moveState) {
                         Location tempLoc = getClosetLocation(event.getX(), event.getY());
-                        double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
-                        System.out.println(dist);
+                        //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
+                        //System.out.println(dist);
                         MedicalEquipment temp = dbWrapper.getMedicalEquipment(selectedImg.getId());
-                        System.out.println(selectedImg.getId());
-                        dbWrapper.updateMedicalEquipment(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription(),2));
+
+                        dbWrapper.updateMedicalEquipment(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), dbWrapper.getLocation(tempLoc.getNodeID()), temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription(),2));
                         testImg.setX(getImageX(tempLoc.getXcoord()));
                         testImg.setY(getImageY(tempLoc.getYcoord()));
                         //System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
+                        System.out.println(tempLoc);
+                        System.out.println(dbWrapper.getMedicalEquipment(selectedImg.getId()));
                     }
                 }
             });

@@ -36,7 +36,7 @@ public class LocationDBTest {
 
         Location location =
                 new Location(
-                        "C1244T081",
+                        "2",
                         280,
                         284,
                         "03",
