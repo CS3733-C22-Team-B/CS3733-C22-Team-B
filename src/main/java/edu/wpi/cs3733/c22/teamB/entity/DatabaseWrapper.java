@@ -222,7 +222,7 @@ public class DatabaseWrapper {
         return EmployeeDao.getAllValues();
     }
 
-    public List<MedicalEquipment> getAllMedicalEquipment(String medicalEquipmentID) {
+    public List<MedicalEquipment> getAllMedicalEquipment() {
         return MedicalEquipmentDao.getAllValues();
     }
 
@@ -287,4 +287,8 @@ public class DatabaseWrapper {
     public void restoreTableMedicalEquipment() {}
 
     public void restoreAll() {}
+
+    public boolean isInTableLocation(String nodeID){
+        return LocationDaoI.isInTable(nodeID);
+    }
 }
