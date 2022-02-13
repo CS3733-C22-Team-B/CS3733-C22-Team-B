@@ -1,13 +1,10 @@
 package edu.wpi.cs3733.c22.teamB;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.cs3733.c22.teamB.entity.*;
-import java.util.Locale;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
-import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,37 +22,37 @@ public class Bapp extends Application {
     public void init() throws IOException {
         log.info("Starting Up");
 
-        DatabaseManager databaseManager = new DatabaseManager();
-        databaseManager.createTable();
+//        DatabaseManager databaseManager = new DatabaseManager();
+//        databaseManager.createTable();
 
-        CSVReader2 reader = new CSVReader2();
+//        CSVReader2 reader = new CSVReader2();
+//
+//        List<String> locationList = reader.firstRestore("TowerLocationsB.csv");
+//        List<String> employeeList = reader.firstRestore("EmployeeB.csv");
+//        List<String> externalTransportList = reader.firstRestore("ExternalTransportSRB.csv");
+//        List<String> foodDeliveryList = reader.firstRestore("FoodDeliverySRB.csv");
+//        List<String> equipmentList = reader.firstRestore("MedicalEquipmentB.csv");
+//        List<String> equipmentSRList = reader.firstRestore("MedicalEquipmentSRB.csv");
+//        List<String> medicineDeliveryList = reader.firstRestore("MedicineDeliverySRB.csv");
+//
+//        LocationParserI locParser = new LocationParserI();
+//        EmployeeParserI employeeParserI = new EmployeeParserI();
+//        //ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
+//        FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
+//        MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
+//        MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
+//        MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
+//
+//        List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
+//        List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
+//        //List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
+//        List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
+//        List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
+//        List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
+//        List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
 
-        List<String> locationList = reader.firstRestore("TowerLocationsB.csv");
-        List<String> employeeList = reader.firstRestore("EmployeeB.csv");
-        List<String> externalTransportList = reader.firstRestore("ExternalTransportSRB.csv");
-        List<String> foodDeliveryList = reader.firstRestore("FoodDeliverySRB.csv");
-        List<String> equipmentList = reader.firstRestore("MedicalEquipmentB.csv");
-        List<String> equipmentSRList = reader.firstRestore("MedicalEquipmentSRB.csv");
-        List<String> medicineDeliveryList = reader.firstRestore("MedicineDeliverySRB.csv");
-
-        LocationParserI locParser = new LocationParserI();
-        EmployeeParserI employeeParserI = new EmployeeParserI();
-        ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
-        FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
-        MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
-        MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
-        MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
-
-        List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
-        List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-        List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
-        List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
-        List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
-        List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
-        List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
-
-        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+        //databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+        //        foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
 
 //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }

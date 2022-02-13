@@ -11,4 +11,5 @@ public interface IParser<T> {
     String fromObjectToString(T object);
 
     List<String> fromObjectsToStrings(List<T> listT);
+
 }

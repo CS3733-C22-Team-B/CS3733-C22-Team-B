@@ -59,11 +59,10 @@ public class MapEditorController{
     double imageHeight;
     double imageWidth;
     double orgSceneX, orgSceneY;
-    LocationDBI locationDBI = new LocationDBI();
-    List<Location> locationList = locationDBI.getAllNodes();
-    MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
-    List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
-    CSVRestoreBackupController backupper = new CSVRestoreBackupController();
+    DatabaseWrapper dbWrapper = new DatabaseWrapper();
+    List<Location> locationList = dbWrapper.getAllLocation();
+    List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
+    //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
     boolean moveState = false;
@@ -174,8 +173,8 @@ public class MapEditorController{
             testPoint.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
                     if (moveState) {
-                        Location temp = locationDBI.getNode(selectedPoint);
-                        locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
+                        Location temp = dbWrapper.getLocation(selectedPoint);
+                        dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
                         testPoint.setCenterX((event.getX()));
                         testPoint.setCenterY((event.getY()));
                         refresh();
@@ -226,12 +225,12 @@ public class MapEditorController{
                         Location tempLoc = getClosetLocation(event.getX(), event.getY());
                         double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         System.out.println(dist);
-                        MedicalEquipment temp = medicalDBI.getNode(selectedImg.getId());
+                        MedicalEquipment temp = dbWrapper.getMedicalEquipment(selectedImg.getId());
                         System.out.println(selectedImg.getId());
-                        medicalDBI.updateNode(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription()));
+                        dbWrapper.updateMedicalEquipment(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription(),2));
                         testImg.setX(getImageX(tempLoc.getXcoord()));
                         testImg.setY(getImageY(tempLoc.getYcoord()));
-                        System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
+                        //System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
                     }
                 }
             });
@@ -330,7 +329,7 @@ public class MapEditorController{
         //System.out.println(testPoint.idProperty().get());
         selectedPoint = (testPoint.idProperty().get());
         selectedPnt = testPoint;
-        Location local = locationDBI.getNode(selectedPoint);
+        Location local = dbWrapper.getLocation(selectedPoint);
         idField.setText(selectedPoint);
         floor.setValue(local.getFloor());
         nodeType.setValue(local.getNodeType());
@@ -352,12 +351,12 @@ public class MapEditorController{
 
     void deleteSelectedNode(){
         anchorPane.getChildren().remove(selectedPnt);
-        locationDBI.deleteNode(selectedPnt.getId());
+        dbWrapper.deleteLocation(selectedPnt.getId());
     }
 
     @FXML public void refresh(){
-        locationList = locationDBI.getAllNodes();
-        medicalList = medicalDBI.getAllNodes();
+        locationList = dbWrapper.getAllLocation();
+        medicalList = dbWrapper.getAllMedicalEquipment();
         removeAllPoints();
         addPoints();
     }
@@ -385,11 +384,11 @@ public class MapEditorController{
     }
 
     @FXML public void saveToCSV(){
-        try {
-            backupper.Backup();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
+//        try {
+//            backupper.Backup();
+//        } catch (IOException ex){
+//            ex.printStackTrace();
+//        }
         refresh();
     }
 
@@ -439,7 +438,7 @@ public class MapEditorController{
 
     @FXML public void modify(){
         setEditFieldsVisible(true);
-        Location local = locationDBI.getNode(selectedPoint);
+        Location local = dbWrapper.getLocation(selectedPoint);
         idField.setText(selectedPoint);
         floor.setValue(local.getFloor());
         nodeType.setValue(local.getNodeType());
@@ -449,9 +448,9 @@ public class MapEditorController{
 
 
     public void submitModify(ActionEvent actionEvent) {
-        Location old = locationDBI.getNode(selectedPnt.getId());
+        Location old = dbWrapper.getLocation(selectedPnt.getId());
         Location changedNode = new Location(idField.getText(),old.getXcoord(),old.getYcoord(),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
-        locationDBI.updateNode(changedNode);
+        dbWrapper.updateLocation(changedNode);
         refresh();
         setEditFieldsVisible(false);
         modifyButton.setOpacity(0.5);
@@ -466,7 +465,7 @@ public class MapEditorController{
             //Set up ID, coordinates, etc
             int nextID = 0;
             //Generate next unique ID
-            while(locationDBI.isInTable(String.valueOf(nextID))){
+            while(dbWrapper.isInTableLocation(String.valueOf(nextID))){
                 nextID++;
             }
             //Get coordinates in the space of the original map
@@ -477,7 +476,7 @@ public class MapEditorController{
             //Create new location
             Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Building","Node Type","Long Name","Short Name");
             //Add new location to the database
-            locationDBI.insertNode(newLoc);
+            dbWrapper.addLocation(newLoc);
 
             selectedPoint = newLoc.getNodeID();
             modify();
@@ -532,12 +531,12 @@ public class MapEditorController{
 
     @FXML
     void loadFromCSV(ActionEvent event) {
-        try {
-            backupper.Restore();
-            refresh();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
+//        try {
+//            backupper.Restore();
+//            refresh();
+//        } catch (IOException ex){
+//            ex.printStackTrace();
+//        }
     }
 
 
@@ -562,7 +561,7 @@ public class MapEditorController{
                 }
             }
         }
-        return(locationDBI.getNode(closest.getId()));
+        return(dbWrapper.getLocation(closest.getId()));
     }
 
 

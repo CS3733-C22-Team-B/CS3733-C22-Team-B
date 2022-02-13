@@ -1,40 +1,41 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 public class Employee {
+
     private String employeeID;
-    private String name;
-    private String position;
-    private String address;
+    private String lastName;
+    private String firstName;
+    private String position; // Enum (IT, Doctor, Nurse, Ward Assistant, Building Manager)
+    private int accessLevel;
+    private String username;
+    private String password;
     private String email;
     private String phoneNumber;
 
-    // constructors
 
     public Employee() {
         this.employeeID = null;
-        this.name = null;
+        this.lastName = null;
+        this.firstName = null;
         this.position = null;
-        this.address = null;
+        this.accessLevel = -1;
+        this.username = null;
+        this.password = null;
         this.email = null;
         this.phoneNumber = null;
     }
 
-    public Employee(
-            String employeeID,
-            String name,
-            String position,
-            String address,
-            String email,
-            String phoneNumber) {
+    public Employee(String employeeID, String lastName, String firstName, String position, int accessLevel, String username, String password, String email, String phoneNumber) {
         this.employeeID = employeeID;
-        this.name = name;
-        this.position = position;
-        this.address = address;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        position = position;
+        this.accessLevel = accessLevel;
+        this.username = username;
+        this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-
-    // getters and setters
 
     public String getEmployeeID() {
         return employeeID;
@@ -44,12 +45,20 @@ public class Employee {
         this.employeeID = employeeID;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFistName(String fistName) {
+        this.firstName = fistName;
     }
 
     public String getPosition() {
@@ -60,12 +69,28 @@ public class Employee {
         this.position = position;
     }
 
-    public String getAddress() {
-        return address;
+    public int getAccessLevel() {
+        return accessLevel;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAccessLevel(int accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -84,40 +109,35 @@ public class Employee {
         this.phoneNumber = phoneNumber;
     }
 
-    // to string
-
     @Override
     public String toString() {
-        return "Employee{"
-                + "employeeID='"
-                + employeeID
-                + '\''
-                + ", name='"
-                + name
-                + '\''
-                + ", position='"
-                + position
-                + '\''
-                + ", address='"
-                + address
-                + '\''
-                + ", email='"
-                + email
-                + '\''
-                + ", phoneNumber='"
-                + phoneNumber
-                + '\''
-                + '}';
+        return "Employee{" +
+                "employeeID='" + employeeID + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fistName='" + firstName + '\'' +
+                ", position='" + position + '\'' +
+                ", accessLevel=" + accessLevel +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 
     public String toStringFields() {
         return employeeID
                 + ","
-                + name
+                + lastName
+                + ","
+                + firstName
                 + ","
                 + position
                 + ","
-                + address
+                + accessLevel
+                + ","
+                + username
+                + ","
+                + password
                 + ","
                 + email
                 + ","
@@ -127,16 +147,22 @@ public class Employee {
     public static String toStringHeader() {
         return "employeeID"
                 + ","
-                + "name"
+                + "lastName"
+                + ","
+                + "fistName"
                 + ","
                 + "position"
                 + ","
-                + "address"
+                + "accessLevel"
+                + ","
+                + "username"
+                + ","
+                + "password"
                 + ","
                 + "email"
                 + ","
                 + "phoneNumber";
     }
 
-
 }
+

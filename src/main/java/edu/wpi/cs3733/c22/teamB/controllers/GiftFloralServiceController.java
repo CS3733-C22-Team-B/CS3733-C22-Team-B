@@ -1,10 +1,9 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
