@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,6 +42,8 @@ public class MasterServiceRequestController {
 
     private List<Location> locList;
     private Map<String, Location> locMap;
+    private List<Employee> employeeList;
+    private Map<String, Employee> employeeMap;
 
     public MasterServiceRequestController() {}
 
@@ -73,19 +76,28 @@ public class MasterServiceRequestController {
     }
 
     @FXML private void initialize() {
+        DatabaseWrapper dw = new DatabaseWrapper();
         // idField
 
         // statusField
         statusField.getItems().addAll(AbstractSR.SRstatus);
 
         // assignedEmployeeField
-        // TODO: populate
+        employeeList = dw.getAllEmployee();
+        employeeMap =
+                IntStream.range(0, employeeList.size())
+                        .boxed()
+                        .collect(
+                                Collectors.toMap(
+                                        i ->
+                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
+                                        i -> employeeList.get(i)));
 
         // floorField init
         floorField.getItems().addAll("ALL", "L1", "L2", "1", "2", "3"); // all floors
 
         // locationField init
-        locList = (new LocationDaoI()).getAllValues();
+        locList = dw.getAllLocation();
         locMap =
                 IntStream.range(0, locList.size())
                         .boxed()
@@ -129,12 +141,13 @@ public class MasterServiceRequestController {
     }
 
     @FXML private void submit(ActionEvent actionEvent) {
-        MainSR sr = new MainSR(idField.getText(),
-                                childSRType,
-                                statusField.getValue(),
+        MainSR sr = new MainSR(
+                idField.getText(),
+                childSRType,
+                statusField.getValue(),
                 locMap.get(locationField.getValue()),
-                assignedEmployeeField.getValue(),
-                assignedEmployeeField.getValue(),
+                employeeMap.get(assignedEmployeeField.getValue()),
+                employeeMap.get(assignedEmployeeField.getValue()),
                 LocalDate.now(),
                 notesField.getText());
         childController.submit(childSR);

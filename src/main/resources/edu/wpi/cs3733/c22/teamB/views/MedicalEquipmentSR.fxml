@@ -12,18 +12,12 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="equipmentNameField" layoutY="93.0" prefHeight="25.0" prefWidth="224.0" />
-      <JFXComboBox fx:id="quantityField" layoutX="249.0" layoutY="94.0" />
-      <Label layoutX="249.0" layoutY="67.0" prefHeight="27.0" prefWidth="56.0" text="Quantity">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <JFXComboBox fx:id="equipmentNameField" layoutY="93.0" prefHeight="25.0" prefWidth="312.0" />
       <Label prefHeight="27.0" prefWidth="284.0" text="Equipment Type">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="equipmentTypeField" layoutY="27.0" prefHeight="25.0" prefWidth="224.0" />
+      <JFXComboBox fx:id="equipmentTypeField" layoutY="27.0" onAction="#onEquipmentTypeChange" prefHeight="25.0" prefWidth="312.0" />
    </children>
 </AnchorPane>

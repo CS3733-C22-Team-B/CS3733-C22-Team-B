@@ -129,7 +129,7 @@ public class DatabaseWrapper {
         return EmployeeDao.getAllValues();
     }
 
-    public List<MedicalEquipment> getAllMedicalEquipment(String medicalEquipmentID) {
+    public List<MedicalEquipment> getAllMedicalEquipment() {
         return MedicalEquipmentDao.getAllValues();
     }
 

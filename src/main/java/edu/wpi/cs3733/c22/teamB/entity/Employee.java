@@ -164,5 +164,8 @@ public class Employee {
                 + "phoneNumber";
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
 
