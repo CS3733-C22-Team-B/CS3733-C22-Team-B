@@ -29,7 +29,7 @@ public class Employee {
         this.employeeID = employeeID;
         this.lastName = lastName;
         this.firstName = firstName;
-        position = position;
+        this.position = position;
         this.accessLevel = accessLevel;
         this.username = username;
         this.password = password;
@@ -57,8 +57,8 @@ public class Employee {
         return firstName;
     }
 
-    public void setFistName(String fistName) {
-        this.firstName = fistName;
+    public void setFistName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getPosition() {
@@ -108,6 +108,8 @@ public class Employee {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+
 
     @Override
     public String toString() {
@@ -164,5 +166,8 @@ public class Employee {
                 + "phoneNumber";
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
 

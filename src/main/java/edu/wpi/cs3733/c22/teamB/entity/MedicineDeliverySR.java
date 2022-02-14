@@ -19,6 +19,12 @@ public class MedicineDeliverySR extends AbstractSR {
         this.patientID = patientID;
     }
 
+    public MedicineDeliverySR(AbstractSR csr, String medicineID, String patientID){
+        super(csr);
+        this.setSrType("MedicineDeliverySR");
+        this.medicineID = medicineID;
+        this.patientID = patientID;
+    }
 
     public String getMedicineID() {
         return medicineID;
@@ -53,9 +59,19 @@ public class MedicineDeliverySR extends AbstractSR {
     }
 
     public String toStringFields() {
-        return getSrID() + ","
-                + medicineID + ","
+        return getSrID()
+                + ","
+                + medicineID
+                + ","
                 + patientID;
+    }
+
+    public static String toStringHeader() {
+        return "srID"
+                + ","
+                + "medicineID"
+                + ","
+                + "patientID";
     }
 
 
