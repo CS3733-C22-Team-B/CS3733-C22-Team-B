@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,8 @@ public class DatabaseWrapper {
     private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
     private IDatabase<AbstractSR> MainSRDao;
 
+    private RestoreBackupWrapper restoreBackupWrapper;
+
     public DatabaseWrapper() {
         LocationDao = new LocationDaoI();
         EmployeeDao = new EmployeeDaoI();
@@ -30,6 +34,8 @@ public class DatabaseWrapper {
         MedicineDeliverySRDao = new MedicineDeliverySRDaoI();
         ComputerServiceSRDao = new ComputerServiceSRDaoI();
         MainSRDao = new MainSRDaoI();
+
+        restoreBackupWrapper = new RestoreBackupWrapper();
     }
 
     // AbstractSR a = new ExternalTransportSR();
@@ -202,7 +208,6 @@ public class DatabaseWrapper {
         return null;
     }
 
-
     public Location getLocation(String locationID) {
         return LocationDao.getValue(locationID);
     }
@@ -225,7 +230,6 @@ public class DatabaseWrapper {
         System.out.println(list);
         return list;
     }
-
 
     public List<Location> getAllLocation() {
         return LocationDao.getAllValues();
@@ -262,6 +266,14 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.createTable();
     }
 
+    public void createAll() {
+
+        createTableLocation();
+        createTableEmployee();
+        createTableMedicalEquipment();
+        createTableSR();
+    }
+
     public void dropTableSR() {
         MedicalEquipmentSRDao.dropTable();
         MedicineDeliverySRDao.dropTable();
@@ -294,16 +306,59 @@ public class DatabaseWrapper {
         dropTableLocation();
     }
 
-    public void restoreTableSR() {}
+    void restoreTableSR() throws IOException {
+        restoreBackupWrapper.restoreMainSR();
+        restoreBackupWrapper.restoreExternalTransportSR();
+        restoreBackupWrapper.restoreFoodDeliverySR();
+        restoreBackupWrapper.restoreGiftFloralSR();
+        restoreBackupWrapper.restoreLaundrySR();
+        restoreBackupWrapper.restoreMedicalEquipmentSR();
+        restoreBackupWrapper.restoreMedicineDeliverySR();
+    }
 
-    public void restoreTableLocation() {}
+    void restoreTableLocation() throws IOException {
+        restoreBackupWrapper.restoreLocation();
+    }
 
-    public void restoreTableEmployee() {}
+    void restoreTableEmployee() throws IOException {
+        restoreBackupWrapper.restoreEmployee();
+    }
 
-    public void restoreTableMedicalEquipment() {}
+    void restoreTableMedicalEquipment() throws IOException {
+        restoreBackupWrapper.restoreMedicalEquipment();
+    }
 
-    public void restoreAll() {}
+    public void restoreAll() throws IOException {
+        dropAll();
+        createAll();
+        restoreBackupWrapper.restoreAll();
+    }
 
+    void backupTableLocation() throws IOException {
+        restoreBackupWrapper.backupLocation();
+    }
+
+    void backupTableEmployee() throws IOException {
+        restoreBackupWrapper.backupEmployee();
+    }
+
+    void backupTableMedicalEquipment() throws IOException{
+        restoreBackupWrapper.backupMedicalEquipment();
+    }
+
+    void backupTableSR() throws FileNotFoundException {
+        restoreBackupWrapper.backupMainSR();
+        restoreBackupWrapper.backupExternalTransportSR();
+        restoreBackupWrapper.backupFoodDeliverySR();
+        restoreBackupWrapper.backupGiftFloralSR();
+        restoreBackupWrapper.backupLaundrySR();
+        restoreBackupWrapper.backupMedicalEquipmentSR();
+        restoreBackupWrapper.backupMedicineDeliverySR();
+    }
+
+    public void backupAll() throws IOException{
+        restoreBackupWrapper.backupAll();
+    }
     public boolean isInTableLocation(String nodeID){
         LocationDaoI test = new LocationDaoI();
         return test.isInTable(nodeID);
