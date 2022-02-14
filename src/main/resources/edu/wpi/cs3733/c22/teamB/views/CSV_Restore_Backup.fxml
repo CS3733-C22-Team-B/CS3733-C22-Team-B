@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.CSVRestoreBackupController">
    <children>
-      <GridPane layoutX="4.0" layoutY="78.0" prefHeight="345.0" prefWidth="500.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <JFXButton fx:id="RestoreB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Restore" prefHeight="300.0" prefWidth="242.0" styleClass="JFXButtonDark" stylesheets="@../styles/style.css" text="Restore Files" />
-            <JFXButton fx:id="BackupB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="355.0" prefWidth="250.0" styleClass="JFXButtonDark" stylesheets="@../styles/style.css" text="Backup Files" GridPane.columnIndex="1" />
-         </children>
-      </GridPane>
-      <JFXButton fx:id="HomeB" layoutX="509.0" layoutY="45.0" onAction="#goToHome" styleClass="JFXButtonLight" stylesheets="@../styles/style.css" text="Home" />
-      <Label alignment="TOP_CENTER" layoutX="97.0" layoutY="14.0" prefHeight="17.0" prefWidth="407.0" styleClass="lightPane" stylesheets="@../styles/style.css" text="CSV File Restoring and Backup">
+      <Label alignment="TOP_CENTER" layoutX="97.0" layoutY="14.0" prefHeight="17.0" prefWidth="407.0" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+      <JFXButton fx:id="RestoreB" layoutX="370.0" layoutY="269.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Restore" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Restore Files" textFill="WHITE" />
+      <JFXButton fx:id="BackupB" layoutX="370.0" layoutY="341.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Backup Files" textFill="WHITE" />
+      <Label layoutX="171.0" layoutY="55.0" prefHeight="70.0" prefWidth="346.0" text=" You are appreciated. Thank you to all healthcare professionals for your hard work." wrapText="true" />
+      <ImageView fitHeight="70.0" fitWidth="109.0" layoutX="45.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="66.0" layoutY="137.0" text="Change password" />
+      <PasswordField layoutX="66.0" layoutY="160.0" />
+      <Label layoutX="66.0" layoutY="192.0" text="Confirm Password" />
+      <PasswordField layoutX="66.0" layoutY="215.0" />
+      <JFXToggleButton layoutX="370.0" layoutY="144.0" prefHeight="58.0" prefWidth="199.0" text="Client Server" />
+      <JFXButton fx:id="RestoreB1" layoutX="63.0" layoutY="269.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Edit User Profile" textFill="WHITE" />
    </children>
 </AnchorPane>
