@@ -77,7 +77,6 @@ public class Bapp extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("Bapp - Home Page");
         Scene scene = new Scene(root);
-        primaryStage.setResizable(false);
         scene.getStylesheets().add("/edu/wpi/cs3733/c22/teamB/styles/style.css");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -47,7 +47,7 @@
     -fx-background-color: #7B94C9;
     -fx-text-fill: white;
     -fx-border-radius: 7;
-    -fx-font-size
+    -fx-font-size: 44px;
 
 }
 
@@ -98,14 +98,9 @@
 /* ----------- TOGGLE-BUTTON -------------- */
 
 
-/* ----------- TOGGLE-NODE -------------- */
-
 
 /* ----------- SLIDER -------------- */
 
-
-
-/* ----------- FLOATING ACTION BUTTON -------------- */
 
 
 /* ----------- TAB PANE -------------- */
@@ -114,4 +109,3 @@
 /* ----------- BASIC COLORS (SVGS) -------------- */
 
 
-/* ----------- SECONDARY COLORS -------------- */
