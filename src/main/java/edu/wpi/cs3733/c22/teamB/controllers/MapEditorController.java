@@ -61,6 +61,12 @@ public class MapEditorController{
     public Label header5;
     public Label header9;
     public JFXComboBox Locations;
+    public Label header10;
+    public JFXComboBox status;
+    public Label header11;
+    public TextField color;
+    public Label header12;
+    public TextField size;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -131,6 +137,7 @@ public class MapEditorController{
         goTo3Button.setStyle("-fx-background-color: #007fff");
         nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
         floor.getItems().addAll("L2","L1","01","02","03");
+        status.getItems().addAll("DONE","CANCELED","WAITING","BLANK");
         floor.setValue(currentFloor);
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
@@ -325,13 +332,13 @@ public class MapEditorController{
 
     void setEditFieldsVisible(boolean isVisible) {
             modifyPopup.setVisible(isVisible);
-            modifyPopup.getChildren().removeAll(new Node[]{Locations,header9,header2,header3,header5,nameField,typeField,manField,header1,header4,header6,header7,header8,idField,floor,nodeType,shortName,longName,submitModifyButton});
+            modifyPopup.getChildren().removeAll(new Node[]{header12,size,header11,color,header10,status,Locations,header9,header2,header3,header5,nameField,typeField,manField,header1,header4,header6,header7,header8,idField,floor,nodeType,shortName,longName,submitModifyButton});
         if (clicked == "location") {
             modifyPopup.getChildren().addAll(new Node[]{header1,idField,header4,floor,header6,nodeType,header7,shortName,header8,longName,submitModifyButton});
             header1.setText("Location ID:");
             header8.setText("Long Name:");
         } else if (clicked == "equipment"){
-            modifyPopup.getChildren().addAll(new Node[]{header1,idField,header2,nameField,header3,typeField,header5,manField,header9,Locations,header8,longName,submitModifyButton});
+            modifyPopup.getChildren().addAll(new Node[]{header1,idField,header2,nameField,header3,typeField,header5,manField,header9,Locations,header10,status,header11,color,header12,size,header8,longName,submitModifyButton});
             header1.setText("Equipment ID:");
             header8.setText("Description:");
         }
@@ -406,6 +413,9 @@ public class MapEditorController{
         manField.setText(local.getManufacturer());
         Locations.setValue(local.getLocation());
         longName.setText(local.getDescription());
+        status.setValue(local.getStatus());
+        color.setText(local.getColor());
+        size.setText(local.getSize());
         modify();
         updatePopup();
 
@@ -546,6 +556,9 @@ public class MapEditorController{
             old.setEquipmentType(typeField.getText());
             old.setManufacturer(manField.getText());
             old.setLocation((Location) Locations.getValue());
+            old.setStatus(status.getValue().toString());
+            old.setColor(color.getText());
+            old.setSize(size.getText());
             old.setDescription(longName.getText());
 
             dbWrapper.updateMedicalEquipment(old);//TODO
