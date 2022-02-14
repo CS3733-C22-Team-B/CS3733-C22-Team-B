@@ -25,8 +25,8 @@ public class MedicalEquipmentSRController implements IController {
 
     private MedicalEquipmentSR sr = null;
 
+    // Important: you MUST have 2 constructors - including the default one
     public MedicalEquipmentSRController() {}
-
     public MedicalEquipmentSRController(MedicalEquipmentSR sr) {
         this.sr = sr;
     }
@@ -65,6 +65,7 @@ public class MedicalEquipmentSRController implements IController {
     public void submit() {
     }
 
+    // Use this submit with argument
     @Override
     public void submit(AbstractSR sr) {
         DatabaseWrapper dw = new DatabaseWrapper();
