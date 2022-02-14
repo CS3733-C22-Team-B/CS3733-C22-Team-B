@@ -1,130 +1,192 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
-import edu.wpi.cs3733.c22.teamB.Bapp;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.SRIDGenerator;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MasterServiceRequestController {
-    @FXML private MedicalEquipmentSRController medicalEquipmentSRController;
-    @FXML private LaundrySRController laundrySRController;
-    @FXML private FoodDeliverySRController foodDeliverySRController;
-    @FXML private GiftFloralServiceController giftFloralSRController;
-    @FXML private ExternalTransportController externalTransportSRController;
-    @FXML private MedicineDeliverySRController medicineDeliverySRController;
+    @FXML private JFXButton submitButton;
+    @FXML private JFXButton clearButton;
+    @FXML private JFXButton backButton;
+    @FXML private TextField idField;
+    @FXML private JFXComboBox<String> statusField;
+    @FXML private JFXComboBox<String> assignedEmployeeField;
+    @FXML private TextArea notesField;
+    @FXML private JFXComboBox<String> floorField;
+    @FXML private JFXComboBox<String> locationField;
+    @FXML private AnchorPane srPane;
+    @FXML private Label srLabel;
 
-    @FXML TabPane tabPane;
-    @FXML private Label serviceRequestTitle;
+    private Pane childPane;
+    private IController childController;
 
-    final String MED_EQUIP = "Medical Equipment Delivery";
-    final String FOOD_DELIV = "Food Delivery";
-    final String MEDI_DELIV = "Medicine Delivery";
-    final String EXTERN_TRANS = "External Transport";
-    final String LAUNDRY = "Laundry Service";
-    final String GIFT_DELIV = "Gift and Floral Delivery";
+    private String childSRType;
+    private AbstractSR childSR = null;
 
-    @FXML
-    private void initialize() {
-        serviceRequestTitle.setText("Medical Equipment Delivery");
-    }
+    private List<Location> locList;
+    private Map<String, Location> locMap;
+    private List<Employee> employeeList;
+    private Map<String, Employee> employeeMap;
 
-    // Go to the home fxml when the home button is pressed
-    @FXML
-    void homeButton(ActionEvent event) {
-        // Try to go home
+    public MasterServiceRequestController() {}
+
+    public MasterServiceRequestController(String srType) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
-            Bapp.getPrimaryStage().getScene().setRoot(root);
-            // Print stack trace if unable to go home
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            childSRType = srType;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
+            childPane = loader.load();
+            childController = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    // Set the Service Request Title to the name of the service request selected
-    @FXML
-    void tabPaneClicked(MouseEvent event) {
-        switch (tabPane.getSelectionModel().getSelectedIndex()) {
-            case 0:
-                serviceRequestTitle.setText(MED_EQUIP);
-                break;
-            case 1:
-                serviceRequestTitle.setText(FOOD_DELIV);
-                break;
-            case 2:
-                serviceRequestTitle.setText(MEDI_DELIV);
-                break;
-            case 3:
-                serviceRequestTitle.setText(EXTERN_TRANS);
-                break;
-            case 4:
-                serviceRequestTitle.setText(LAUNDRY);
-                break;
-            case 5:
-                serviceRequestTitle.setText(GIFT_DELIV);
-                break;
+    public MasterServiceRequestController(String srType, AbstractSR sr) {
+        try {
+            childSR = sr;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
+            loader.setControllerFactory(param -> {
+                if (srType.equals("MedicalEquipmentSR"))
+                     return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                return null;
+            });
+            childPane = loader.load();
+            childController = loader.getController();
+            System.out.println(childController);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    @FXML
-    void submitButton(ActionEvent event) {
-        switch (serviceRequestTitle.getText()) {
-            case MED_EQUIP:
-                medicalEquipmentSRController.submit();
-                break;
-            case FOOD_DELIV:
-                System.out.println("Out of submit");
-                foodDeliverySRController.submit();
-                break;
-            case MEDI_DELIV:
-                medicineDeliverySRController.submit();
-                break;
-            case EXTERN_TRANS:
-                externalTransportSRController.submit();
-                break;
-            case LAUNDRY:
-                laundrySRController.submit();
-                break;
-            case GIFT_DELIV:
-                // Call SRController.submit here
-                giftFloralSRController.submit();
-                break;
+    @FXML private void initialize() {
+        DatabaseWrapper dw = new DatabaseWrapper();
+        // idField
+
+        // statusField
+        statusField.getItems().addAll(AbstractSR.SRstatus);
+
+        // assignedEmployeeField
+        employeeList = dw.getAllEmployee();
+        employeeMap =
+                IntStream.range(0, employeeList.size())
+                        .boxed()
+                        .collect(
+                                Collectors.toMap(
+                                        i ->
+                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
+                                        i -> employeeList.get(i)));
+        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
+
+        // floorField init
+        floorField.getItems().addAll("ALL", "L1", "L2", "1", "2", "3"); // all floors
+
+        // locationField init
+        locList = dw.getAllLocation();
+        locMap =
+                IntStream.range(0, locList.size())
+                        .boxed()
+                        .collect(
+                                Collectors.toMap(
+                                        i -> (locList.get(i).getLongName()), // assuming no dup in long name
+                                        i -> locList.get(i)));
+
+        // notesField init
+
+        // srLabel (Page title)
+//        srLabel.setText(childSRType); // change this to be more correct
+
+        if (childSR == null) {
+            clear(null);
+            idField.setDisable(true);
+            statusField.setDisable(true);
+            assignedEmployeeField.setDisable(true);
+        }
+        else {
+            idField.setText(childSR.getSrID());
+            statusField.setValue(childSR.getStatus());
+            assignedEmployeeField.setValue(childSR.getAssignedEmployee().getEmployeeID() + ' ' + childSR.getAssignedEmployee().getName());
+            floorField.setValue(childSR.getLocation().getFloor());
+            locationField.setValue(childSR.getLocation().getLongName());
+            notesField.setText(childSR.getNotes());
+
+            idField.setDisable(false);
+            statusField.setDisable(false);
+            assignedEmployeeField.setDisable(false);
+        }
+        locationField.getItems().addAll(locMap.keySet()
+                .stream()
+                .filter(
+                        lstr -> floorField.getValue().equals("ALL")
+                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
+                .collect(Collectors.toList()));
+
+        // load specific SR fxml
+        srPane.getChildren().add(childPane);
+    }
+
+    @FXML private void submit(ActionEvent actionEvent) {
+        childSR = new MainSR(
+                idField.getText(),
+                childSRType,
+                statusField.getValue(),
+                locMap.get(locationField.getValue()),
+                employeeMap.get(assignedEmployeeField.getValue()),
+                employeeMap.get(assignedEmployeeField.getValue()),
+                LocalDate.now(),
+                notesField.getText());
+        childController.submit(childSR);
+    }
+
+    @FXML private void clear(ActionEvent actionEvent) {
+        idField.setText(SRIDGenerator.generateID());
+        statusField.setValue("BLANK");
+        assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
+        floorField.setValue("ALL");
+        locationField.setValue(null);
+        notesField.clear();
+
+        childController.clear();
+    }
+
+    @FXML private void back(ActionEvent actionEvent) {
+    }
+
+    @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
+        // change locationField accordingly
+        locationField.setValue(null);
+        locationField.getItems().removeAll();
+        locationField.getItems().clear();
+        locationField.getItems().addAll(locMap.keySet()
+                .stream()
+                .filter(
+                        lstr -> floorField.getValue().equals("ALL")
+                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
+                .collect(Collectors.toList()));
+    }
+
+    private static String srTypeToFXMLPath(String srType) {
+        switch (srType) {
+            case "MedicalEquipmentSR":
+                return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
             default:
-                System.out.println("No case found in submitButton()");
-                break;
-        }
-    }
-
-    public void clearButton(ActionEvent actionEvent) {
-        switch (serviceRequestTitle.getText()) {
-            case MED_EQUIP:
-                medicalEquipmentSRController.clear();
-                break;
-            case FOOD_DELIV:
-                foodDeliverySRController.clear();
-                break;
-            case MEDI_DELIV:
-                medicineDeliverySRController.clear();
-                break;
-            case EXTERN_TRANS:
-                externalTransportSRController.clear();
-                break;
-            case LAUNDRY:
-                laundrySRController.clear();
-                break;
-            case GIFT_DELIV:
-                // Call SRController.submit here
-                giftFloralSRController.clear();
-                break;
-            default:
-                System.out.println("No case found in clearButton()");
-                break;
+                throw new RuntimeException("srType invalid");
         }
     }
 }

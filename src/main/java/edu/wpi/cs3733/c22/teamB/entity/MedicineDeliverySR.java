@@ -53,9 +53,19 @@ public class MedicineDeliverySR extends AbstractSR {
     }
 
     public String toStringFields() {
-        return getSrID() + ","
-                + medicineID + ","
+        return getSrID()
+                + ","
+                + medicineID
+                + ","
                 + patientID;
+    }
+
+    public static String toStringHeader() {
+        return "srID"
+                + ","
+                + "medicineID"
+                + ","
+                + "patientID";
     }
 
 
