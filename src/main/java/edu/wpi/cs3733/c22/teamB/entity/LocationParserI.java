@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 public class LocationParserI implements IParser<Location> {
 
+
     @Override
     public Location fromStringToObject(String string) {
-
         Location location = new Location();
 
         String[] data = string.split(",");
@@ -46,13 +46,14 @@ public class LocationParserI implements IParser<Location> {
     }
 
     @Override
-    public List<String> fromObjectsToStrings(List<Location> listLocations) {
+    public List<String> fromObjectsToStrings(List<Location> listT) {
         List<String> listString = new ArrayList<>();
         listString.add(Location.toStringHeader());
-        for (Location location : listLocations) {
+        for (Location location : listT) {
             listString.add(location.toStringFields());
         }
 
         return listString;
     }
+
 }

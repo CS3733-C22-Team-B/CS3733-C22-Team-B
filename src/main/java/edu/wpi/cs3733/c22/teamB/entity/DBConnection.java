@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-abstract class DBConnection {
+abstract class DBConnection  {
 
     private static Connection conn;
+
 
     public static Connection getConnection() {
         try {
@@ -51,4 +52,5 @@ abstract class DBConnection {
             e.printStackTrace();
         }
     }
+
 }

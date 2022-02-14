@@ -1,12 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.*;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ExternalTransportController implements IController {
 
@@ -35,14 +36,14 @@ public class ExternalTransportController implements IController {
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
 
-    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
+//    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
 
     @FXML
     private void initialize() {
         String st[] = {"Car", "Helicopter", "Ambulance", "Wheelchair", "Plane", "Boat", "Spaceship"};
         FormOfTransport.setItems(FXCollections.observableArrayList(st));
         EmployeeDBI employeeDBI = new EmployeeDBI();
-        //        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
         employeeList = employeeDBI.getAllNodes();
         employeeMap =
                 IntStream.range(0, employeeList.size())
@@ -52,7 +53,8 @@ public class ExternalTransportController implements IController {
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
-        //        employeeDBI.closeConnection();
+//        employeeDBI.closeConnection();
+
 
         statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
         statusField.setValue("BLANK");
@@ -63,8 +65,7 @@ public class ExternalTransportController implements IController {
     @FXML
     private void returnHomeScene() {
         try {
-            Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -73,19 +74,24 @@ public class ExternalTransportController implements IController {
 
     @Override
     public void submit() {
-        ExternalTransportSR request =
-                new ExternalTransportSR(
-                        SenderTxt.getText(),
-                        statusField.getValue(),
-                        PickupLocTxt.getText(),
-                        DestinationTxt.getText(),
-                        InfoTxt.getText(),
-                        DateCal.getValue().toString(),
-                        FormOfTransport.getValue().toString(),
-                        employeeMap.get(EmployeeAssignment.getValue()));
-        System.out.println(request.toString());
-        db.insertNode(request);
-        clear();
+//        ExternalTransportSR request =
+//                new ExternalTransportSR(
+//                        SenderTxt.getText(),
+//                        statusField.getValue(),
+//                        PickupLocTxt.getText(),
+//                        DestinationTxt.getText(),
+//                        InfoTxt.getText(),
+//                        DateCal.getValue().toString(),
+//                        FormOfTransport.getValue().toString(),
+//                        employeeMap.get(EmployeeAssignment.getValue()));
+//        System.out.println(request.toString());
+//        db.insertNode(request);
+//        clear();
+    }
+
+    @Override
+    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
+
     }
 
     @Override

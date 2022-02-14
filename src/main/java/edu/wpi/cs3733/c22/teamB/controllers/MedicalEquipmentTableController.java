@@ -3,12 +3,14 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,14 +43,7 @@ public class MedicalEquipmentTableController {
     private List<Location> locList;
     private Map<String, Location> locMap;
 
-    private enum Function {
-        ADD,
-        MODIFY,
-        DELETE,
-        NOTHING,
-        IDLOOKUP
-    };
-
+    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
     MedicalEquipmentTableController.Function func = MedicalEquipmentTableController.Function.NOTHING;
 
     private boolean initTable = false;
@@ -63,7 +58,7 @@ public class MedicalEquipmentTableController {
         deleteButton.setDisable(true);
 
         LocationDBI locationDBI = new LocationDBI();
-        //        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
         locList = locationDBI.getAllNodes();
         locMap =
                 IntStream.range(0, locList.size())
@@ -72,7 +67,7 @@ public class MedicalEquipmentTableController {
                                 Collectors.toMap(
                                         i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
                                         i -> locList.get(i)));
-        //        locationDBI.closeConnection();
+//        locationDBI.closeConnection();
 
         statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
         statusField.setValue("BLANK");
@@ -81,16 +76,12 @@ public class MedicalEquipmentTableController {
         gridPane.setVisible(false);
         gridPane.setDisable(true);
 
-        table
-                .getSelectionModel()
-                .selectedItemProperty()
-                .addListener(
-                        (obs, oldSelection, newSelection) -> {
-                            if (newSelection != null) {
-                                modifyButton.setDisable(false);
-                                deleteButton.setDisable(false);
-                            }
-                        });
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                modifyButton.setDisable(false);
+                deleteButton.setDisable(false);
+            }
+        });
 
         loadTable();
     }
@@ -98,6 +89,7 @@ public class MedicalEquipmentTableController {
     public void loadTable() throws NullPointerException {
         if (!initTable) {
             initTable = true;
+
 
             TableColumn<MedicalEquipment, String> col1 = new TableColumn<>("equipmentID"); // column names
             TableColumn<MedicalEquipment, String> col2 = new TableColumn<>("equipmentName");
@@ -135,7 +127,7 @@ public class MedicalEquipmentTableController {
         table.getItems().clear();
         listOfMedicalEquipment = medicalEquipmentDBI.getAllNodes();
         table.getItems().addAll(listOfMedicalEquipment); // create and add object
-        // table.getItems().addAll(listMedicalEquipment);
+        //table.getItems().addAll(listMedicalEquipment);
         // table.getItems().addAll(new MedicalEquipment("15", "jeff", "jeffery", "jeff himself", new
         // Location("3", 3 , 4, "floor 3", "This building", " idkman", "longname", "shortname"),
         // "Done","blue","large", "funn"));
@@ -148,15 +140,13 @@ public class MedicalEquipmentTableController {
     void goToHome(ActionEvent event) {
         // Try to go home
         try {
-            Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-
     @FXML
     private void addLocation(ActionEvent actionEvent) {
         gridPane.setVisible(true);
@@ -179,7 +169,6 @@ public class MedicalEquipmentTableController {
         descriptionField.setDisable(false);
         func = MedicalEquipmentTableController.Function.ADD;
     }
-
     @FXML
     private void modifyLocation(ActionEvent actionEvent) {
         gridPane.setVisible(true);
@@ -221,26 +210,23 @@ public class MedicalEquipmentTableController {
         loadTable();
     }
 
-    @FXML
-    private void locationTableClick(MouseEvent mouseEvent) {
+    @FXML private void locationTableClick(MouseEvent mouseEvent) {
         modifyButton.setVisible(true);
         deleteButton.setVisible(true);
     }
 
-    @FXML
-    private void confirm(ActionEvent actionEvent) {
-        if (func == MedicalEquipmentTableController.Function.ADD) {
-            MedicalEquipment m =
-                    new MedicalEquipment(
-                            equipmentIDField.getText(),
-                            equipmentNameField.getText(),
-                            equipmentTypeField.getText(),
-                            manufacturerField.getText(),
-                            locMap.get(LocationChoice.getValue()),
-                            statusField.getValue().toString(),
-                            colorField.getText(),
-                            sizeField.getText(),
-                            descriptionField.getText());
+    @FXML private void confirm(ActionEvent actionEvent) {
+        if(func == MedicalEquipmentTableController.Function.ADD) {
+            MedicalEquipment m = new MedicalEquipment(
+                    equipmentIDField.getText(),
+                    equipmentNameField.getText(),
+                    equipmentTypeField.getText(),
+                    manufacturerField.getText(),
+                    locMap.get(LocationChoice.getValue()),
+                    statusField.getValue().toString(),
+                    colorField.getText(),
+                    sizeField.getText(),
+                    descriptionField.getText());
             System.out.println(m);
             medicalEquipmentDBI.insertNode(m);
             loadTable();
@@ -259,17 +245,14 @@ public class MedicalEquipmentTableController {
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
             table.getItems().clear();
-            table
-                    .getItems()
-                    .add(medicalEquipmentDBI.getNode(equipmentIDField.getText())); // create and add object
+            table.getItems().add(medicalEquipmentDBI.getNode(equipmentIDField.getText())); // create and add object
         }
 
         clearForm(actionEvent);
         func = MedicalEquipmentTableController.Function.NOTHING;
     }
 
-    @FXML
-    private void clearForm(ActionEvent actionEvent) {
+    @FXML private void clearForm(ActionEvent actionEvent) {
         equipmentIDField.clear();
         equipmentNameField.clear();
         equipmentTypeField.clear();
@@ -281,8 +264,7 @@ public class MedicalEquipmentTableController {
         descriptionField.clear();
     }
 
-    @FXML
-    private void cancelForm(ActionEvent actionEvent) {
+    @FXML private void cancelForm(ActionEvent actionEvent) {
         gridPane.setDisable(true);
         gridPane.setVisible(false);
         clearForm(actionEvent);
@@ -298,9 +280,7 @@ public class MedicalEquipmentTableController {
 
         func = MedicalEquipmentTableController.Function.NOTHING;
     }
-
-    @FXML
-    private void idLookup(ActionEvent actionEvent) {
+    @FXML private void idLookup(ActionEvent actionEvent) {
         gridPane.setVisible(true);
         gridPane.setDisable(false);
         equipmentTypeField.setVisible(false);
@@ -315,3 +295,4 @@ public class MedicalEquipmentTableController {
         func = MedicalEquipmentTableController.Function.IDLOOKUP;
     }
 }
+

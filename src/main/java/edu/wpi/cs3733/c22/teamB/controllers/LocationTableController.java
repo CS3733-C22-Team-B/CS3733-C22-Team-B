@@ -2,8 +2,8 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
+import edu.wpi.cs3733.c22.teamB.oldEntity.Location;
+import edu.wpi.cs3733.c22.teamB.oldEntity.LocationDBI;
 import java.io.IOException;
 import java.util.List;
 import javafx.event.ActionEvent;

@@ -1,35 +1,26 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-public class MedicalEquipmentSR extends AbstractSR {
-    private MedicalEquipment medicalEquipment;
-    private Location destination;
-    private Employee assignedEmployee;
+import java.time.LocalDate;
+import java.util.Objects;
 
-    public MedicalEquipmentSR(
-            String srID,
-            String status,
-            Location destination,
-            MedicalEquipment medicalEquipment,
-            Employee assignedEmployee) {
-        super(srID, status);
-        this.destination = destination;
-        this.medicalEquipment = medicalEquipment;
-        this.assignedEmployee = assignedEmployee;
-    }
+public class MedicalEquipmentSR extends AbstractSR {
+//    public static String name = "MedicalEquipmentSR";
+    private MedicalEquipment medicalEquipment;
 
     public MedicalEquipmentSR() {
-        super(null, null);
-        this.destination = null;
+        super(null, "MedicalEquipmentSR", null, null, null, null, null, null);
         this.medicalEquipment = null;
-        this.assignedEmployee = null;
     }
 
-    public Location getDestination() {
-        return destination;
+    public MedicalEquipmentSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, MedicalEquipment medicalEquipment) {
+        super(srID, "MedicalEquipmentSR", status, location, requestor, assignedEmployee, dateRequested, notes);
+        this.medicalEquipment = medicalEquipment;
     }
 
-    public void setDestination(Location destination) {
-        this.destination = destination;
+    public MedicalEquipmentSR(AbstractSR csr, MedicalEquipment medicalEquipment) {
+        super(csr);
+        this.setSrType("MedicalEquipmentSR"); // important
+        this.medicalEquipment = medicalEquipment;
     }
 
     public MedicalEquipment getMedicalEquipment() {
@@ -40,45 +31,43 @@ public class MedicalEquipmentSR extends AbstractSR {
         this.medicalEquipment = medicalEquipment;
     }
 
-    public Employee getAssignedEmployee() {
-        return assignedEmployee;
-    }
-
-    public void setAssignedEmployee(Employee assignedEmployee) {
-        this.assignedEmployee = assignedEmployee;
-    }
-
     @Override
     public String toString() {
-        return "MedicalEquipmentSR{"
-                + "srID='"
-                + srID
-                + '\''
-                + ", status="
-                + status
-                + ", medicalEquipment="
-                + medicalEquipment
-                + ", destination="
-                + destination
-                + ", assignedEmployee="
-                + assignedEmployee
-                + '}';
+        return "MedicalEquipmentSR{" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
+                "medicalEquipment=" + medicalEquipment +
+                '}';
     }
 
     public String toStringFields() {
-        return srID
+        return getSrID()
                 + ","
-                + status
-                + ","
-                + destination.getNodeID()
-                + ","
-                + medicalEquipment.getEquipmentID()
-                + ","
-                + assignedEmployee.getEmployeeID();
+                + medicalEquipment.getEquipmentID();
     }
 
     public static String toStringHeader() {
+        return "srID"
+                + ","
+                + "medicalEquipmentID";
+    }
 
-        return "srID,status,locationID,equipmentID,employeeID";
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MedicalEquipmentSR that = (MedicalEquipmentSR) o;
+        return Objects.equals(medicalEquipment, that.medicalEquipment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(medicalEquipment);
     }
 }

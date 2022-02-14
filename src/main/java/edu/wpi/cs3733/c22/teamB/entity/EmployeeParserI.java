@@ -13,11 +13,14 @@ public class EmployeeParserI implements IParser<Employee> {
         String[] data = string.split(",");
 
         employee.setEmployeeID(data[0]);
-        employee.setName(data[1]);
-        employee.setPosition(data[2]);
-        employee.setAddress(data[3]);
-        employee.setEmail(data[4]);
-        employee.setPhoneNumber(data[5]);
+        employee.setLastName(data[1]);
+        employee.setFistName(data[2]);
+        employee.setPosition(data[3]);
+        employee.setAccessLevel(Integer.parseInt(data[4]));
+        employee.setUsername(data[5]);
+        employee.setPassword(data[6]);
+        employee.setEmail(data[7]);
+        employee.setPhoneNumber(data[8]);
 
         return employee;
     }
@@ -43,10 +46,10 @@ public class EmployeeParserI implements IParser<Employee> {
     }
 
     @Override
-    public List<String> fromObjectsToStrings(List<Employee> listEmployees) {
+    public List<String> fromObjectsToStrings(List<Employee> listT) {
         List<String> listString = new ArrayList<>();
         listString.add(Employee.toStringHeader());
-        for (Employee employee : listEmployees) {
+        for (Employee employee : listT) {
             listString.add(employee.toStringFields());
         }
 
