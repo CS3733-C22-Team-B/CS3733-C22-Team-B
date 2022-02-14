@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXListView;
+import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.oldEntity.LaundrySRDBI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,6 +47,11 @@ public class LaundrySRController implements IController, Initializable {
             roomNumberTextField.clear();
             updateRoomsWithRequest();
         }
+    }
+
+    @Override
+    public void submit(AbstractSR sr) {
+
     }
 
     @Override

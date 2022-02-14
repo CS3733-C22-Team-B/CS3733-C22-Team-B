@@ -53,6 +53,22 @@ public class FoodDeliverySR extends AbstractSR{
                 '}';
     }
 
+    public String toStringFields() {
+        return getSrID()
+                + ","
+                + foodName
+                + ","
+                + drinkName;
+    }
+
+    public static String toStringHeader() {
+        return "srID"
+                + ","
+                + "foodName"
+                + ","
+                + "drinkName";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
