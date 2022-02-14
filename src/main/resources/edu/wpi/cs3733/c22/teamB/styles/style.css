@@ -113,3 +113,16 @@
     -fx-border-width: 1;
     -fx-font-size: 12;
 }
+
+.darkBlueWithBorder{
+    -fx-background-color: #002168;
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-font-size: 12;
+}
+.lightBlueWithBorder{
+    -fx-background-color: #99a6c2;
+    -fx-border-color: #002168;
+    -fx-border-width: 1;
+    -fx-font-size: 12;
+}
