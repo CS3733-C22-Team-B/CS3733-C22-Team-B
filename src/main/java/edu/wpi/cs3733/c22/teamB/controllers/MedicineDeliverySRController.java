@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -104,6 +104,11 @@ public class MedicineDeliverySRController implements IController, Initializable 
         MedicineDeliverySRDBI medicineDeliverySRDBI = new MedicineDeliverySRDBI();
         medicineDeliverySRDBI.insertNode(medicineDeliverySR);
         clear();
+    }
+
+    @Override
+    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
+
     }
 
 

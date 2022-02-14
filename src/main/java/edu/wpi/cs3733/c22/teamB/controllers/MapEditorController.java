@@ -9,24 +9,25 @@ import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -46,10 +47,12 @@ public class MapEditorController{
     public Label header6;
     public Label header7;
     public Label header8;
-    public JFXButton deleteButton;
+    //public JFXButton deleteButton;
     public JFXToggleButton moveButton;
     public JFXCheckBox showLocations;
     public JFXCheckBox showMedical;
+    public VBox modifyPopup;
+    public JFXCheckBox showSR;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -59,11 +62,11 @@ public class MapEditorController{
     double imageHeight;
     double imageWidth;
     double orgSceneX, orgSceneY;
-    LocationDBI locationDBI = new LocationDBI();
-    List<Location> locationList = locationDBI.getAllNodes();
-    MedicalEquipmentDBI medicalDBI = new MedicalEquipmentDBI();
-    List<MedicalEquipment> medicalList = medicalDBI.getAllNodes();
-    CSVRestoreBackupController backupper = new CSVRestoreBackupController();
+    DatabaseWrapper dbWrapper = new DatabaseWrapper();
+    List<Location> locationList = dbWrapper.getAllLocation();
+    List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
+    List<AbstractSR> srList = dbWrapper.getAllSR();
+    //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
     boolean moveState = false;
@@ -74,6 +77,7 @@ public class MapEditorController{
     Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
     Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
     Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/medical.png");
+    Image clipboard = new Image("/edu/wpi/cs3733/c22/teamB/images/clipboard.png");
     @FXML
     private AnchorPane anchorPane;
 
@@ -83,8 +87,8 @@ public class MapEditorController{
     @FXML
     private JFXButton addButton;
 
-    @FXML
-    private JFXButton modifyButton;
+//    @FXML
+//    private JFXButton modifyButton;
 
 
 
@@ -108,11 +112,12 @@ public class MapEditorController{
         imageWidth = imageView.getImage().getWidth();
         showLocations.setSelected(true);
         showMedical.setSelected(true);
+        showSR.setSelected(true);
         setEditFieldsVisible(false);
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+//        modifyButton.setOpacity(0.5);
+//        modifyButton.setDisable(true);
+//        deleteButton.setOpacity(0.5);
+//        deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
         nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
         floor.getItems().addAll("L2","L1","01","02","03");
@@ -120,6 +125,10 @@ public class MapEditorController{
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
+        modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
+        modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
+        modifyPopup.setVisible(false);
+        modifyPopup.setStyle("-fx-padding: 1;");
     }
 
     //Add points from DB
@@ -143,6 +152,16 @@ public class MapEditorController{
                 }
             }
 
+        for (AbstractSR local : srList) {
+            if (local.getLocation().getFloor().equals(currentFloor)) {
+                String ID = local.getSrID();
+                double x = local.getLocation().getXcoord() + 20; //TODO fix for future iterations
+                double y = local.getLocation().getYcoord();
+                addPointSR(ID, x, y, Color.LIME);
+                //System.out.println("add point at: " + x + " , " + y);
+            }
+        }
+
 
     }
 
@@ -162,10 +181,10 @@ public class MapEditorController{
                 public void handle(MouseEvent event) {
                     orgSceneX = event.getSceneX();
                     orgSceneY = event.getSceneY();
-                    modifyButton.setOpacity(1);
-                    modifyButton.setDisable(false);
-                    deleteButton.setOpacity(1);
-                    deleteButton.setDisable(false);
+//                    modifyButton.setOpacity(1);
+//                    modifyButton.setDisable(false);
+//                    deleteButton.setOpacity(1);
+//                    deleteButton.setDisable(false);
                     onPointClick(testPoint);
                     event.setDragDetect(true);
                 }
@@ -174,8 +193,8 @@ public class MapEditorController{
             testPoint.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
                     if (moveState) {
-                        Location temp = locationDBI.getNode(selectedPoint);
-                        locationDBI.updateNode(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
+                        Location temp = dbWrapper.getLocation(selectedPoint);
+                        dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
                         testPoint.setCenterX((event.getX()));
                         testPoint.setCenterY((event.getY()));
                         refresh();
@@ -195,6 +214,7 @@ public class MapEditorController{
 
                     orgSceneX = t.getSceneX();
                     orgSceneY = t.getSceneY();
+                    updatePopup();
                 }
             });
 
@@ -224,14 +244,14 @@ public class MapEditorController{
                     System.out.println("moving medical");
                     if (moveState) {
                         Location tempLoc = getClosetLocation(event.getX(), event.getY());
-                        double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
-                        System.out.println(dist);
-                        MedicalEquipment temp = medicalDBI.getNode(selectedImg.getId());
-                        System.out.println(selectedImg.getId());
-                        medicalDBI.updateNode(new MedicalEquipment(temp.getEquipmentID(), temp.getEquipmentName(), temp.getEquipmentType(), temp.getManufacturer(), tempLoc, temp.getStatus(), temp.getColor(), temp.getSize(), temp.getDescription()));
+                        //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
+                        //System.out.println(dist);
+                        MedicalEquipment temp = dbWrapper.getMedicalEquipment(selectedImg.getId());
+                        temp.setLocation(tempLoc);
+
+                        dbWrapper.updateMedicalEquipment(temp);
                         testImg.setX(getImageX(tempLoc.getXcoord()));
                         testImg.setY(getImageY(tempLoc.getYcoord()));
-                        System.out.println(medicalDBI.getNode(temp.getEquipmentID()));
                     }
                 }
             });
@@ -262,9 +282,27 @@ public class MapEditorController{
 
                     orgSceneX = t.getSceneX();
                     orgSceneY = t.getSceneY();
+
+
                 }
             });
 
+        }
+    }
+
+    public void addPointSR(String ID, double x, double y,Color color){
+        if(showSR.isSelected()) {
+            //Create the point
+            //getImageX(x),getImageY(y)
+            ImageView testImg = new ImageView(clipboard);
+            //Add the point to the anchorPane's children
+            anchorPane.getChildren().add(testImg);
+            //Set point ID
+            testImg.idProperty().set(ID);
+            testImg.setX(getImageX(x));
+            testImg.setY(getImageY(y));
+            testImg.setPreserveRatio(true);
+            testImg.setFitWidth(15);
         }
     }
     
@@ -281,6 +319,7 @@ public class MapEditorController{
         longName.setVisible(isVisible);
         shortName.setVisible(isVisible);
         submitModifyButton.setVisible(isVisible);
+        modifyPopup.setVisible(isVisible);
     }
 
     //Scene x coordinate to image x coordinate
@@ -330,12 +369,14 @@ public class MapEditorController{
         //System.out.println(testPoint.idProperty().get());
         selectedPoint = (testPoint.idProperty().get());
         selectedPnt = testPoint;
-        Location local = locationDBI.getNode(selectedPoint);
+        Location local = dbWrapper.getLocation(selectedPoint);
         idField.setText(selectedPoint);
         floor.setValue(local.getFloor());
         nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
         longName.setText(local.getLongName());
+        modify();
+        updatePopup();
     }
 
     public void onImgClick(ImageView testImg){
@@ -352,12 +393,13 @@ public class MapEditorController{
 
     void deleteSelectedNode(){
         anchorPane.getChildren().remove(selectedPnt);
-        locationDBI.deleteNode(selectedPnt.getId());
+        dbWrapper.deleteLocation(selectedPnt.getId());
     }
 
     @FXML public void refresh(){
-        locationList = locationDBI.getAllNodes();
-        medicalList = medicalDBI.getAllNodes();
+        locationList = dbWrapper.getAllLocation();
+        medicalList = dbWrapper.getAllMedicalEquipment();
+        srList = dbWrapper.getAllSR();
         removeAllPoints();
         addPoints();
     }
@@ -385,11 +427,11 @@ public class MapEditorController{
     }
 
     @FXML public void saveToCSV(){
-        try {
-            backupper.Backup();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
+//        try {
+//            backupper.Backup();
+//        } catch (IOException ex){
+//            ex.printStackTrace();
+//        }
         refresh();
     }
 
@@ -424,40 +466,46 @@ public class MapEditorController{
         }
         selectedPoint = null;
         selectedPnt = null;
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+//        modifyButton.setOpacity(0.5);
+//        modifyButton.setDisable(true);
+//        deleteButton.setOpacity(0.5);
+//        deleteButton.setDisable(true);
         refresh();
     }
 
     @FXML public void delete(){
         deleteSelectedNode();
+        setEditFieldsVisible(false);
+    }
+
+    @FXML public void close(){
+        setEditFieldsVisible(false);
     }
 
 
 
     @FXML public void modify(){
         setEditFieldsVisible(true);
-        Location local = locationDBI.getNode(selectedPoint);
+        Location local = dbWrapper.getLocation(selectedPoint);
         idField.setText(selectedPoint);
         floor.setValue(local.getFloor());
         nodeType.setValue(local.getNodeType());
         shortName.setText(local.getShortName());
         longName.setText(local.getLongName());
+        updatePopup();
     }
 
 
     public void submitModify(ActionEvent actionEvent) {
-        Location old = locationDBI.getNode(selectedPnt.getId());
+        Location old = dbWrapper.getLocation(selectedPnt.getId());
         Location changedNode = new Location(idField.getText(),old.getXcoord(),old.getYcoord(),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
-        locationDBI.updateNode(changedNode);
+        dbWrapper.updateLocation(changedNode);
         refresh();
         setEditFieldsVisible(false);
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+//        modifyButton.setOpacity(0.5);
+//        modifyButton.setDisable(true);
+//        deleteButton.setOpacity(0.5);
+//        deleteButton.setDisable(true);
     }
 
     @FXML
@@ -466,7 +514,7 @@ public class MapEditorController{
             //Set up ID, coordinates, etc
             int nextID = 0;
             //Generate next unique ID
-            while(locationDBI.isInTable(String.valueOf(nextID))){
+            while(dbWrapper.isInTableLocation(String.valueOf(nextID))){
                 nextID++;
             }
             //Get coordinates in the space of the original map
@@ -477,7 +525,7 @@ public class MapEditorController{
             //Create new location
             Location newLoc = new Location(String.valueOf(nextID),(int)xCord,(int)yCord,currentFloor,"Building","Node Type","Long Name","Short Name");
             //Add new location to the database
-            locationDBI.insertNode(newLoc);
+            dbWrapper.addLocation(newLoc);
 
             selectedPoint = newLoc.getNodeID();
             modify();
@@ -532,12 +580,12 @@ public class MapEditorController{
 
     @FXML
     void loadFromCSV(ActionEvent event) {
-        try {
-            backupper.Restore();
-            refresh();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
+//        try {
+//            backupper.Restore();
+//            refresh();
+//        } catch (IOException ex){
+//            ex.printStackTrace();
+//        }
     }
 
 
@@ -562,7 +610,15 @@ public class MapEditorController{
                 }
             }
         }
-        return(locationDBI.getNode(closest.getId()));
+        return(dbWrapper.getLocation(closest.getId()));
+    }
+
+    void updatePopup(){
+        Translate trans = new Translate();
+        Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
+        trans.setX(selectedPnt.getCenterX()-bounds.getMinX());
+        trans.setY(selectedPnt.getCenterY()-(bounds.getMinY()-20));
+        modifyPopup.getTransforms().add(trans);
     }
 
 

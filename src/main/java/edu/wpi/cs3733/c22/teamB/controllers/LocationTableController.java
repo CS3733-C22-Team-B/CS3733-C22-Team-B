@@ -2,10 +2,9 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationDBI;
+import edu.wpi.cs3733.c22.teamB.oldEntity.Location;
+import edu.wpi.cs3733.c22.teamB.oldEntity.LocationDBI;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import org.w3c.dom.Text;
 
 public class LocationTableController {
 

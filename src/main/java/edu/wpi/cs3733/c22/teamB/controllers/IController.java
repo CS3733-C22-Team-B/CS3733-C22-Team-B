@@ -1,11 +1,12 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.Location;
 
 public interface IController {
 
-    public void submit();
+    void submit();
+    void submit(AbstractSR sr);
 
-    public void clear();
+    void clear();
 }

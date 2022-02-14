@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.util.Objects;
+
 public class Location {
+
     private String nodeID; // primary key
     private int xcoord;
     private int ycoord;
@@ -147,4 +150,18 @@ public class Location {
                 + ",longName"
                 + ",shortName";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return xcoord == location.xcoord && ycoord == location.ycoord && Objects.equals(nodeID, location.nodeID) && Objects.equals(floor, location.floor) && Objects.equals(building, location.building) && Objects.equals(nodeType, location.nodeType) && Objects.equals(longName, location.longName) && Objects.equals(shortName, location.shortName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
+    }
+
 }

@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -86,6 +86,11 @@ public class FoodDeliverySRController implements IController, Initializable {
         foodDeliverySRDBI.insertNode(
                 new FoodDeliverySR(idField.getText(), statusField.getValue(), locMap.get(destinationField.getValue()), ComboMeals.getValue(), AssigneeName.getText(), employeeMap.get(assignedEmployeeField.getValue())));
         clear();
+    }
+
+    @Override
+    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
+
     }
 
     @Override

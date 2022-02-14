@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,33 +9,34 @@ public class MedicalEquipmentParserI implements IParser<MedicalEquipment> {
 
     @Override
     public MedicalEquipment fromStringToObject(String string) {
-        MedicalEquipment medEq = new MedicalEquipment();
+        MedicalEquipment medicalEquipment = new MedicalEquipment();
         Location location = new Location();
 
         String[] data = string.split(",");
 
-        medEq.setEquipmentID(data[0]);
-        medEq.setEquipmentName(data[1]);
-        medEq.setEquipmentType(data[2]);
-        medEq.setManufacturer(data[3]);
+        medicalEquipment.setEquipmentID(data[0]);
+        medicalEquipment.setEquipmentName(data[1]);
+        medicalEquipment.setEquipmentType(data[2]);
+        medicalEquipment.setManufacturer(data[3]);
 
         // Set location object nodeID
         location.setNodeID(data[4]);
 
         // Pass location object to setLocation
-        medEq.setLocation(location);
+        medicalEquipment.setLocation(location);
 
-        medEq.setStatus(data[5]);
-        medEq.setColor(data[6]);
-        medEq.setSize(data[7]);
-        medEq.setDescription(data[8]);
+        medicalEquipment.setStatus(data[5]);
+        medicalEquipment.setColor(data[6]);
+        medicalEquipment.setSize(data[7]);
+        medicalEquipment.setDescription(data[8]);
+        medicalEquipment.setAmount(Integer.parseInt(data[9]));
 
-        return medEq;
+        return medicalEquipment;
     }
 
     @Override
     public List<MedicalEquipment> fromStringsToObjects(List<String> listString) {
-        List<MedicalEquipment> medEqList =
+        List<MedicalEquipment> medicalEquipmentList =
                 listString.stream()
                         .map(
                                 data_str -> {
@@ -42,22 +44,22 @@ public class MedicalEquipmentParserI implements IParser<MedicalEquipment> {
                                 })
                         .collect(Collectors.toList());
 
-        return medEqList;
+        return medicalEquipmentList;
     }
 
     @Override
-    public String fromObjectToString(MedicalEquipment medEq) {
-        String str = medEq.toStringFields();
+    public String fromObjectToString(MedicalEquipment medicalEquipment) {
+        String str = medicalEquipment.toStringFields();
 
         return str;
     }
 
     @Override
-    public List<String> fromObjectsToStrings(List<MedicalEquipment> medEqList) {
+    public List<String> fromObjectsToStrings(List<MedicalEquipment> listT) {
         List<String> listString = new ArrayList<>();
         listString.add(MedicalEquipment.toStringHeader());
-        for (MedicalEquipment medEq : medEqList) {
-            listString.add(medEq.toStringFields());
+        for (MedicalEquipment medicalEquipment : listT) {
+            listString.add(medicalEquipment.toStringFields());
         }
 
         return listString;

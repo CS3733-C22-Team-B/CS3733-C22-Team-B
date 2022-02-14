@@ -169,4 +169,14 @@ public class HomeController {
     private void shutDown() {
         Platform.exit();
     }
+
+    public void goToServiceRequestMenu(ActionEvent actionEvent) {
+        try {
+            Parent root =
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

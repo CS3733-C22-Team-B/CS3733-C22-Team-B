@@ -1,123 +1,99 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.time.LocalDate;
+import java.util.Objects;
+
 public class ExternalTransportSR extends AbstractSR {
 
-    private String pickupLoc; //  not location type (outside of building)
-    private String destination; // not location type
-    private String info;
-    private String date; // date type
+    private String patientID;
+    private String dropOffLocation;
     private String formOfTransport;
-    private Employee employee;
-    //    private Employee assignedEmployee;
 
-    public ExternalTransportSR(){
-        super(null, null);
-        this.pickupLoc = null;
-        this.destination = null;
-        this.info = null;
-        this.date = null;
+    public ExternalTransportSR() {
+        super(null, "ExternalTransportSR", null, null, null, null, null, null);
+        this.patientID = null;
+        this.dropOffLocation = null;
         this.formOfTransport = null;
-        this.employee = null;
     }
 
-    public ExternalTransportSR(
-            String srID,
-            String status,
-            String pickupLoc,
-            String destination,
-            String info,
-            String date,
-            String formOfTransport,
-            Employee employee) {
-        super(srID, status);
-        this.destination = destination;
-        this.pickupLoc = pickupLoc;
-        this.info = info;
-        this.date = date;
+    public ExternalTransportSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes, String patientID, String dropOffLocation, String formOfTransport) {
+        super(srID, "ExternalTransportSR", status, location, requestor, assignedEmployee, dateRequested, notes);
+        this.patientID = patientID;
+        this.dropOffLocation = dropOffLocation;
         this.formOfTransport = formOfTransport;
-        this.employee = employee;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-    public String getPickupLoc() {
-        return pickupLoc;
+    public String getPatientID() {
+        return patientID;
     }
 
-    public String getDestination() {
-        return destination;
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
-    public String getInfo() {
-        return info;
+    public String getDropOffLocation() {
+        return dropOffLocation;
     }
 
-    public String getDate() {
-        return date;
+    public void setDropOffLocation(String dropOffLocation) {
+        this.dropOffLocation = dropOffLocation;
     }
 
     public String getFormOfTransport() {
         return formOfTransport;
     }
 
-
-    public String getSrID() {
-        return this.srID;
-    }
-
-    public void setPickupLoc(String pickupLoc) {
-        this.pickupLoc = pickupLoc;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public void setFormOfTransport(String formOfTransport) {
         this.formOfTransport = formOfTransport;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-//    public String getAssignedEmployee() {
-//        return assignedEmployee;
-//    }
-//
-//    public void setAssignedEmployee(String assignedEmployee) {
-//        this.assignedEmployee = assignedEmployee;
-//    }
-
     @Override
     public String toString() {
-        return "ExternalTransportSR{" +
-                "srID='" + srID + '\'' +
-                ", status=" + status +
-                ", pickupLoc='" + pickupLoc + '\'' +
-                ", destination='" + destination + '\'' +
-                ", info='" + info + '\'' +
-                ", date='" + date + '\'' +
+        return "ExternalTranportSR{" +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
+                "patientID='" + patientID + '\'' +
+                ", dropOffLocation='" + dropOffLocation + '\'' +
                 ", formOfTransport='" + formOfTransport + '\'' +
-                ", employee=" + employee +
-                ", assignedEmployee='" + employee.getEmployeeID() + '\'' +
                 '}';
     }
 
     public String toStringFields() {
-        return srID + "," + status + "," + pickupLoc + "," + destination + "," + info + "," + date + "," + formOfTransport + "," + employee.getEmployeeID();
+        return getSrID()
+                + ","
+                + patientID
+                + ","
+                + dropOffLocation
+                + ","
+                + formOfTransport;
     }
 
     public static String toStringHeader() {
-        return "srID" + "," + "status" + "," + "pickupLoc" + "," + "destination" + "," + "info" + "," + "date" + "," + "formOfTransport" + "," + "assignedEmployee";
+        return "srID"
+                + ","
+                + "patientID"
+                + ","
+                + "dropOffLocation"
+                + ","
+                + "formOfTransport";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExternalTransportSR that = (ExternalTransportSR) o;
+        return Objects.equals(patientID, that.patientID) && Objects.equals(dropOffLocation, that.dropOffLocation) && Objects.equals(formOfTransport, that.formOfTransport);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patientID, dropOffLocation, formOfTransport);
     }
 }

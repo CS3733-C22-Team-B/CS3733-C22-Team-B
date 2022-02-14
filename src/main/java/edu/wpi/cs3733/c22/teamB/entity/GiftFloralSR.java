@@ -1,64 +1,67 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Objects;
 
 public class GiftFloralSR extends AbstractSR {
 
-    // maybe?? add employee? but its probably too late
+    private String giftName;
 
-    // things that need to be added in all of these;
-    // srID, status, location, requestor, assignedEmployee, dateRequested,
-    // notes, srType
-
-    String gift;
-    String deliveryDate;
-    String deliveryRoom;
-
-//    public GiftFloralSR(){}
-
-    public GiftFloralSR(
-            String srID,
-            String statusStr,
-            String gift,
-            String deliveryDate,
-            String deliveryRoom) {
-
-        super(srID, statusStr);
-        this.gift = gift;
-        this.deliveryDate = deliveryDate;
-        this.deliveryRoom = deliveryRoom;
+    public GiftFloralSR(){
+        super(null, "GiftFloralSR", null, null, null, null, null, null);
+        this.giftName = null;
     }
 
-    public GiftFloralSR(String srID, String statusStr) {
-        super(srID, statusStr);
-        this.deliveryRoom = null;
+    public GiftFloralSR(String srID, String status, Location location, Employee requestor, Employee assignedEmployee, LocalDate dateRequested, String notes,  String giftName) {
+        super(srID, "GiftFloralSR", status, location, requestor, assignedEmployee, dateRequested, notes);
+        this.giftName = giftName;
     }
 
-    // Getters and Setters
+    public String getGiftName() {
+        return giftName;
+    }
 
-    public String getSRID() { return this.srID; }
-
-    public String getGift() { return gift; }
-    public void setGift(String gift) { this.gift = gift; }
-
-    public String getDeliveryDate() { return deliveryDate; }
-    public void setDeliveryDate(String deliveryDate) { this.deliveryDate = deliveryDate; }
-
-    public String getDeliveryRoom() { return deliveryRoom; }
-    public void setDeliveryRoom(String deliveryRoom) { this.deliveryRoom = deliveryRoom; }
+    public void setGiftName(String giftName) {
+        this.giftName = giftName;
+    }
 
     @Override
-    public String toString(){
-        return "GiftFloralSR{" +
-                "srID='" + srID + '\'' +
-                ", status=" + status + '\'' +
-                ", gift=" + gift + '\'' +
-                ", deliveryDate=" + deliveryDate + '\'' +
-                ", deliveryRoom=" + deliveryRoom + '\'' +
+    public String toString() {
+        return "GiftFloralSR{ " +
+                "srID= " + getSrID() + '\'' +
+                "srType= " + getSrType() + '\'' +
+                "status= " + getStatus() + '\'' +
+                "location= " + getLocation() + '\'' +
+                "requestor= " + getRequestor() + '\'' +
+                "assignedEmployee= " + getAssignedEmployee() + '\'' +
+                "dateRequested= " + getDateRequested() + '\'' +
+                "notes= " + getNotes() + '\'' +
+                "giftName='" + giftName + '\'' +
                 '}';
     }
 
+    public String toStringFields() {
+        return getSrID()
+                + ","
+                + giftName;
+    }
+
+    public static String toStringHeader() {
+        return "srID"
+                + ","
+                + "giftName";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GiftFloralSR that = (GiftFloralSR) o;
+        return Objects.equals(giftName, that.giftName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(giftName);
+    }
 }
-
-

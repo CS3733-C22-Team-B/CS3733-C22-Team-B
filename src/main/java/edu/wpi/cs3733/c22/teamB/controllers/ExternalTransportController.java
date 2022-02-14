@@ -1,11 +1,10 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -13,10 +12,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -39,7 +36,7 @@ public class ExternalTransportController implements IController {
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
 
-    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
+//    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
 
     @FXML
     private void initialize() {
@@ -77,19 +74,24 @@ public class ExternalTransportController implements IController {
 
     @Override
     public void submit() {
-        ExternalTransportSR request =
-                new ExternalTransportSR(
-                        SenderTxt.getText(),
-                        statusField.getValue(),
-                        PickupLocTxt.getText(),
-                        DestinationTxt.getText(),
-                        InfoTxt.getText(),
-                        DateCal.getValue().toString(),
-                        FormOfTransport.getValue().toString(),
-                        employeeMap.get(EmployeeAssignment.getValue()));
-        System.out.println(request.toString());
-        db.insertNode(request);
-        clear();
+//        ExternalTransportSR request =
+//                new ExternalTransportSR(
+//                        SenderTxt.getText(),
+//                        statusField.getValue(),
+//                        PickupLocTxt.getText(),
+//                        DestinationTxt.getText(),
+//                        InfoTxt.getText(),
+//                        DateCal.getValue().toString(),
+//                        FormOfTransport.getValue().toString(),
+//                        employeeMap.get(EmployeeAssignment.getValue()));
+//        System.out.println(request.toString());
+//        db.insertNode(request);
+//        clear();
+    }
+
+    @Override
+    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
+
     }
 
     @Override
