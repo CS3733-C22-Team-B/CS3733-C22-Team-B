@@ -155,21 +155,36 @@ public class MedicalEquipment {
 
     // to string
 
-
     @Override
     public String toString() {
-        return "MedicalEquipment{" +
-                "equipmentID='" + equipmentID + '\'' +
-                ", equipmentName='" + equipmentName + '\'' +
-                ", equipmentType='" + equipmentType + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", location=" + location +
-                ", status='" + status + '\'' +
-                ", color='" + color + '\'' +
-                ", size='" + size + '\'' +
-                ", description='" + description + '\'' +
-                ", amount=" + amount +
-                '}';
+        return "MedicalEquipment{"
+                + "equipmentID='"
+                + equipmentID
+                + '\''
+                + ", equipmentName='"
+                + equipmentName
+                + '\''
+                + ", equipmentType='"
+                + equipmentType
+                + '\''
+                + ", manufacturer='"
+                + manufacturer
+                + '\''
+                + ", location="
+                + location.getNodeID()
+                + ", status='"
+                + status
+                + '\''
+                + ", color='"
+                + color
+                + '\''
+                + ", size='"
+                + size
+                + '\''
+                + ", description='"
+                + description
+                + '\''
+                + '}';
     }
 
     public String toStringFields() {
@@ -190,12 +205,10 @@ public class MedicalEquipment {
                 + ","
                 + size
                 + ","
-                + description
-                + ","
-                + amount;
+                + description;
     }
 
     public static String toStringHeader() {
-        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description,amount";
+        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description";
     }
 }

@@ -1,10 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
-import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
-import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
-import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
 import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -23,44 +19,85 @@ import java.util.stream.IntStream;
 
 public class ExternalTransportController implements IController {
 
-    @FXML TextField patientID;
+    @FXML TextField SenderTxt;
+    @FXML TextField PickupLocTxt;
     @FXML TextField DestinationTxt;
-    @FXML JFXComboBox<String> FormOfTransport;
+    @FXML TextField InfoTxt;
+    @FXML Button SubmitB;
+    @FXML Button HelpB;
+    @FXML DatePicker DateCal;
+    @FXML ChoiceBox<String> FormOfTransport;
+    @FXML Button HomeB;
+    @FXML ChoiceBox<String> EmployeeAssignment;
+    @FXML ChoiceBox<String> statusField;
 
+    boolean isDone;
+    String assignedP;
+    private List<Employee> employeeList;
+    private Map<String, Employee> employeeMap;
 
-    private ExternalTransportSR sr = null;
-
-    public ExternalTransportController() {}
-
-    public ExternalTransportController(ExternalTransportSR sr) {this.sr = sr;}
-
-
+//    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
 
     @FXML
     private void initialize() {
         String st[] = {"Car", "Helicopter", "Ambulance", "Wheelchair", "Plane", "Boat", "Spaceship"};
         FormOfTransport.setItems(FXCollections.observableArrayList(st));
-        DatabaseWrapper dw = new DatabaseWrapper();
+        EmployeeDBI employeeDBI = new EmployeeDBI();
+//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        employeeList = employeeDBI.getAllNodes();
+        employeeMap =
+                IntStream.range(0, employeeList.size())
+                        .boxed()
+                        .collect(
+                                Collectors.toMap(
+                                        i ->
+                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
+                                        i -> employeeList.get(i)));
+//        employeeDBI.closeConnection();
 
+
+        statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
+        statusField.setValue("BLANK");
+
+        EmployeeAssignment.getItems().addAll(employeeMap.keySet());
     }
 
+    @FXML
+    private void returnHomeScene() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     @Override
     public void submit() {
-
-    }
-
-    @Override
-    public void submit(AbstractSR sr) {
-    DatabaseWrapper dw = new DatabaseWrapper();
-    dw.addSR(new ExternalTransportSR(sr,patientID.getText(), DestinationTxt.getText(), FormOfTransport.getValue()));
+//        ExternalTransportSR request =
+//                new ExternalTransportSR(
+//                        SenderTxt.getText(),
+//                        statusField.getValue(),
+//                        PickupLocTxt.getText(),
+//                        DestinationTxt.getText(),
+//                        InfoTxt.getText(),
+//                        DateCal.getValue().toString(),
+//                        FormOfTransport.getValue().toString(),
+//                        employeeMap.get(EmployeeAssignment.getValue()));
+//        System.out.println(request.toString());
+//        db.insertNode(request);
+//        clear();
     }
 
     @Override
     public void clear() {
-        patientID.clear();
+        SenderTxt.clear();
+        PickupLocTxt.clear();
         DestinationTxt.clear();
+        InfoTxt.clear();
+        DateCal.getEditor().clear();
         FormOfTransport.setAccessibleText("");
         FormOfTransport.valueProperty().set(null);
+        EmployeeAssignment.valueProperty().set(null);
     }
 }

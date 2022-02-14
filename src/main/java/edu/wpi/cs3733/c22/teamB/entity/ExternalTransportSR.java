@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class ExternalTransportSR extends AbstractSR {
 
-
     private String patientID;
     private String dropOffLocation;
     private String formOfTransport;
@@ -23,15 +22,6 @@ public class ExternalTransportSR extends AbstractSR {
         this.dropOffLocation = dropOffLocation;
         this.formOfTransport = formOfTransport;
     }
-
-    public ExternalTransportSR(AbstractSR csr, String patientID, String dropOffLocation, String formOfTransport){
-        super(csr);
-        this.setSrType("ExternalTransportSR");
-        this.patientID = patientID;
-        this.dropOffLocation = dropOffLocation;
-        this.formOfTransport = formOfTransport;
-    }
-
 
     public String getPatientID() {
         return patientID;

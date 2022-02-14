@@ -5,19 +5,65 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="125.0" prefWidth="321.0" styleClass="backgroundColor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MedicineDeliverySRController">
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="backgroundColor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MedicineDeliverySRController">
    <children>
-      <TextField fx:id="medicineID" layoutY="93.0" prefHeight="25.0" prefWidth="321.0" />
-      <TextField fx:id="patientID" layoutY="27.0" prefHeight="25.0" prefWidth="321.0" />
-      <Label layoutY="66.0" text="Medicine ID">
+      <TextField fx:id="firstName" alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="60.0" promptText="First Name" style="-fx-border-color: white;" />
+      <TextField fx:id="patientID" layoutX="426.0" layoutY="60.0" promptText="Patient Id" style="-fx-border-color: white;" />
+      <TextField fx:id="lastName" layoutX="220.0" layoutY="60.0" promptText="Last Name" style="-fx-border-color: white;" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="35.0" text="First Name">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font>
       </Label>
-      <Label prefHeight="17.0" prefWidth="75.0" text="Patient ID">
+      <Label alignment="CENTER" layoutX="221.0" layoutY="35.0" text="Last Name" textAlignment="CENTER">
          <font>
-            <Font size="14.0" />
+            <Font size="16.0" />
          </font>
       </Label>
+      <Label layoutX="426.0" layoutY="35.0" text="Patient ID" textAlignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="125.0" text="DOB">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="DOB" layoutX="13.0" layoutY="151.0" promptText="MM/DD/YYYY" style="-fx-border-color: white;" />
+      <Label alignment="CENTER" layoutX="220.0" layoutY="125.0" text="Email">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email" layoutX="220.0" layoutY="151.0" prefHeight="27.0" prefWidth="151.0" promptText="johndoe@email.com" style="-fx-border-color: white;" />
+      <JFXComboBox fx:id="roomNumber" layoutX="439.0" layoutY="201.0" promptText="Choose a Room" style="-fx-background-color: white;" unFocusColor="WHITE" />
+      <JFXCheckBox layoutX="184.0" layoutY="218.0" text="None Known" />
+      <Label layoutX="184.0" layoutY="196.0" text="Medication Allergies" />
+      <JFXCheckBox layoutX="184.0" layoutY="241.0" text="None Known" />
+      <JFXCheckBox layoutX="313.0" layoutY="216.0" text="None Known" />
+      <JFXCheckBox layoutX="313.0" layoutY="239.0" text="None Known" />
+      <TextField fx:id="dosage" alignment="BOTTOM_LEFT" layoutX="23.0" layoutY="293.0" promptText="Dosage" style="-fx-border-color: white;" />
+      <TextField fx:id="dispenseAmount" layoutX="435.0" layoutY="293.0" promptText="Dispense Amount" style="-fx-border-color: white;" />
+      <TextField fx:id="medicineName" layoutX="229.0" layoutY="293.0" promptText="Medicine Name" style="-fx-border-color: white;" />
+      <TextField fx:id="frequency" alignment="BOTTOM_LEFT" layoutX="23.0" layoutY="339.0" promptText="Frequency" style="-fx-border-color: white;" />
+      <TextField fx:id="mgPerDose" layoutX="435.0" layoutY="339.0" promptText="mg per dose" style="-fx-border-color: white;" />
+      <TextField fx:id="form" layoutX="229.0" layoutY="339.0" promptText="Form" style="-fx-border-color: white;" />
+      <TextField fx:id="idField" layoutX="426.0" layoutY="152.0" prefHeight="25.0" prefWidth="151.0" />
+      <Label layoutX="429.0" layoutY="125.0" prefHeight="25.0" prefWidth="46.0" text="SR ID">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="statusField" layoutX="439.0" layoutY="245.0" prefHeight="25.0" prefWidth="126.0" promptText="Status" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="201.0" text="Assigned to whom?">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="assignedEmployeeField" layoutX="13.0" layoutY="224.0" prefHeight="25.0" prefWidth="139.0" />
+      <TextField fx:id="medicineID" layoutX="24.0" layoutY="257.0" promptText="MedicineID" />
    </children>
 </AnchorPane>
