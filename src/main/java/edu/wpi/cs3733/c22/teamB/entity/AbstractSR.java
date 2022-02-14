@@ -3,7 +3,7 @@ package edu.wpi.cs3733.c22.teamB.entity;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public abstract class AbstractSR {
+public abstract class git AbstractSR {
 
     public static String[] SRstatus = {"BLANK", "WAITING", "CANCELED", "DONE"};
 
