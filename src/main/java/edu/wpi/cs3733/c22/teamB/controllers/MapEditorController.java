@@ -9,6 +9,8 @@ import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,13 +18,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Translate;
@@ -45,7 +47,7 @@ public class MapEditorController{
     public Label header6;
     public Label header7;
     public Label header8;
-    public JFXButton deleteButton;
+    //public JFXButton deleteButton;
     public JFXToggleButton moveButton;
     public JFXCheckBox showLocations;
     public JFXCheckBox showMedical;
@@ -82,8 +84,8 @@ public class MapEditorController{
     @FXML
     private JFXButton addButton;
 
-    @FXML
-    private JFXButton modifyButton;
+//    @FXML
+//    private JFXButton modifyButton;
 
 
 
@@ -108,10 +110,10 @@ public class MapEditorController{
         showLocations.setSelected(true);
         showMedical.setSelected(true);
         setEditFieldsVisible(false);
-        modifyButton.setOpacity(0.5);
-        modifyButton.setDisable(true);
-        deleteButton.setOpacity(0.5);
-        deleteButton.setDisable(true);
+//        modifyButton.setOpacity(0.5);
+//        modifyButton.setDisable(true);
+//        deleteButton.setOpacity(0.5);
+//        deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
         nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
         floor.getItems().addAll("L2","L1","01","02","03");
@@ -119,6 +121,10 @@ public class MapEditorController{
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
+        modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
+        modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
+        modifyPopup.setVisible(false);
+        modifyPopup.setStyle("-fx-padding: 1;");
     }
 
     //Add points from DB
