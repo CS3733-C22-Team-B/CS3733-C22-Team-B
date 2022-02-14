@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXListView;
-import edu.wpi.cs3733.c22.teamB.oldEntity.LaundrySRDBI;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,25 +12,19 @@ import java.util.ResourceBundle;
 
 public class LaundrySRController implements IController, Initializable {
 
-    private LaundrySRDBI laundryDBI = new LaundrySRDBI();
+    private LaundrySR sr = null;
 
-    @FXML private TextField roomNumberTextField;
+    public LaundrySRController(){}
 
-    @FXML private JFXListView<String> roomsWithRequest;
-
-    @FXML
-    private void refresh(ActionEvent event) {
-        updateRoomsWithRequest();
+    public LaundrySRController(LaundrySR sr){
+        this.sr = sr;
     }
 
     @FXML
     private void initialize() {
-        updateRoomsWithRequest();
     }
 
-    private void updateRoomsWithRequest() {
-        roomsWithRequest.setItems(laundryDBI.getRooms());
-    }
+
 
 
     @Override
@@ -40,16 +34,15 @@ public class LaundrySRController implements IController, Initializable {
 
     @Override
     public void submit() {
-        String roomNumber = roomNumberTextField.getText();
-        if (!roomNumber.equals("")) {
-            laundryDBI.add(roomNumber, "Facilities", "WAITING");
-            roomNumberTextField.clear();
-            updateRoomsWithRequest();
-        }
+    }
+
+    @Override
+    public void submit(AbstractSR sr) {
+    DatabaseWrapper dw = new DatabaseWrapper();
+    dw.addSR(new LaundrySR(sr));
     }
 
     @Override
     public void clear() {
-        roomNumberTextField.clear();
     }
 }
