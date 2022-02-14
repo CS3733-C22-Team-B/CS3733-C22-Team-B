@@ -25,7 +25,7 @@ public class EmployeeTableController {
     @FXML private TextField lastNameField;
     @FXML private TextField firstNameField;
     @FXML private TextField positionField;
-    @FXML private TextField accessLevelField;
+    @FXML private TextField accessLevel;
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;
     @FXML private TextField emailField;
@@ -127,7 +127,7 @@ public class EmployeeTableController {
         lastNameField.setVisible(true);
         firstNameField.setVisible(true);
         positionField.setVisible(true);
-        accessLevelField.setVisible(true);
+        accessLevel.setVisible(true);
         usernameField.setVisible(true);
         passwordField.setVisible(true);
         emailField.setVisible(true);
@@ -135,7 +135,7 @@ public class EmployeeTableController {
         lastNameField.setDisable(false);
         firstNameField.setDisable(false);
         positionField.setDisable(false);
-        accessLevelField.setDisable(false);
+        accessLevel.setDisable(false);
         usernameField.setDisable(false);
         passwordField.setDisable(false);
         emailField.setDisable(false);
@@ -150,7 +150,7 @@ public class EmployeeTableController {
         lastNameField.setVisible(true);
         firstNameField.setVisible(true);
         positionField.setVisible(true);
-        accessLevelField.setVisible(true);
+        accessLevel.setVisible(true);
         usernameField.setVisible(true);
         passwordField.setVisible(true);
         emailField.setVisible(true);
@@ -158,7 +158,7 @@ public class EmployeeTableController {
         lastNameField.setDisable(false);
         firstNameField.setDisable(false);
         positionField.setDisable(false);
-        accessLevelField.setDisable(false);
+        accessLevel.setDisable(false);
         usernameField.setDisable(false);
         passwordField.setDisable(false);
         emailField.setDisable(false);
@@ -169,7 +169,7 @@ public class EmployeeTableController {
         lastNameField.setText(loc.getLastName());
         firstNameField.setText(loc.getFirstName());
         positionField.setText(loc.getPosition());
-        accessLevelField.setText(String.valueOf(loc.getAccessLevel()));
+        accessLevel.setText(String.valueOf(loc.getAccessLevel()));
         usernameField.setText(loc.getUsername());
         passwordField.setText(loc.getPassword());
         emailField.setText(loc.getEmail());
@@ -191,30 +191,30 @@ public class EmployeeTableController {
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == Function.ADD) {
-            db.addEmployee(new Employee(
-                            employeeIDField.getText(),
-                            lastNameField.getText(),
-                            firstNameField.getText(),
-                            positionField.getText(),
-                            Integer.parseInt(accessLevelField.getText()),
-                            usernameField.getText(),
-                            passwordField.getText(),
-                            emailField.getText(),
-                    phoneNumberField.getText()
-                    ));
-            loadTable();
-        } else if (func == Function.MODIFY) {
-            db.updateEmployee(new Employee(
+            Employee e = new Employee(
                     employeeIDField.getText(),
                     lastNameField.getText(),
                     firstNameField.getText(),
                     positionField.getText(),
-                    Integer.parseInt(accessLevelField.getText()),
+                    Integer.parseInt(accessLevel.getText()),
                     usernameField.getText(),
                     passwordField.getText(),
                     emailField.getText(),
-                    phoneNumberField.getText()
-            ));
+                    phoneNumberField.getText());
+            db.addEmployee(e);
+            loadTable();
+        } else if (func == Function.MODIFY) {
+            Employee n = new Employee(
+                    employeeIDField.getText(),
+                    lastNameField.getText(),
+                    firstNameField.getText(),
+                    positionField.getText(),
+                    Integer.parseInt(accessLevel.getText()),
+                    usernameField.getText(),
+                    passwordField.getText(),
+                    emailField.getText(),
+                    phoneNumberField.getText());
+            db.updateEmployee(n);
 
             loadTable();
         } else if (func == Function.IDLOOKUP) {
@@ -231,7 +231,7 @@ public class EmployeeTableController {
         lastNameField.clear();
         firstNameField.clear();
         positionField.clear();
-        accessLevelField.clear();
+        accessLevel.clear();
         usernameField.clear();
         passwordField.clear();
         emailField.clear();
@@ -260,7 +260,7 @@ public class EmployeeTableController {
         lastNameField.setVisible(false);
         firstNameField.setVisible(false);
         positionField.setVisible(false);
-        accessLevelField.setVisible(false);
+        accessLevel.setVisible(false);
         usernameField.setVisible(false);
         passwordField.setVisible(false);
         emailField.setVisible(false);
