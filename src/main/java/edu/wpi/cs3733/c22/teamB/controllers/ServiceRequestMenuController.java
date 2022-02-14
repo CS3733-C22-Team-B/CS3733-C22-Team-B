@@ -23,4 +23,17 @@ public class ServiceRequestMenuController {
             ex.printStackTrace();
         }
     }
+
+    @FXML private void goToFoodDeliverySR(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MasterServiceRequest.fxml"));
+            loader.setControllerFactory(
+                    param -> new MasterServiceRequestController("FoodDeliverySR"));
+            Parent root = loader.load();
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

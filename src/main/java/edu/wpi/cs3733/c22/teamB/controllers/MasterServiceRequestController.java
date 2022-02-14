@@ -65,6 +65,8 @@ public class MasterServiceRequestController {
             loader.setControllerFactory(param -> {
                 if (srType.equals("MedicalEquipmentSR"))
                      return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                else if(srType.equals("FoodDeliverySR"))
+                    return new FoodDeliverySRController((FoodDeliverySR) sr);
                 return null;
             });
             childPane = loader.load();
@@ -185,6 +187,8 @@ public class MasterServiceRequestController {
         switch (srType) {
             case "MedicalEquipmentSR":
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
+            case "FoodDeliverySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/FoodDeliveryService.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }
