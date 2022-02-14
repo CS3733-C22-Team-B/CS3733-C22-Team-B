@@ -67,7 +67,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
-                            "UPDATE MedicalEquipment SET equipmentName = ?, equipmentType = ?, manufacturer = ?, locationID = ?, status = ?, color = ?, size = ?, description = ?, amount = ?WHERE equipmentID = ? ");
+                            "UPDATE MEDICALEQUIPMENT SET equipmentName = ?, equipmentType = ?, manufacturer = ?, locationID = ?, status = ?, color = ?, size = ?, description = ?, amount = ?WHERE equipmentID = ? ");
 
             pstmt.setString(1, equipment.getEquipmentName());
             pstmt.setString(2, equipment.getEquipmentType());
@@ -79,7 +79,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
             pstmt.setString(8, equipment.getDescription());
             pstmt.setString(9, equipment.getEquipmentID());
             pstmt.setInt(10, equipment.getAmount());
-
+            System.out.println(equipment.getLocation().getNodeID());
             pstmt.executeUpdate();
             pstmt.close();
 

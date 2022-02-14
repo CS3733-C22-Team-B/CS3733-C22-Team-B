@@ -63,18 +63,30 @@ public class MasterServiceRequestController {
             childSR = sr;
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             loader.setControllerFactory(param -> {
+                // Important: add your controller below in an else if
                 if (srType.equals("MedicalEquipmentSR"))
-                     return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                    return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                else if (srType.equals("ComputerServiceSR"))
+                    return new ComputerServiceSRController((ComputerServiceSR) sr);
+                else if(srType.equals("FoodDeliverySR"))
+                    return new FoodDeliverySRController((FoodDeliverySR) sr);
+                else if(srType.equals("ExternalTransportSR"))
+                    return new ExternalTransportController((ExternalTransportSR) sr);
+                else if(srType.equals("MedicineDeliverySR"))
+                    return new MedicineDeliverySRController((MedicineDeliverySR) sr);
+                else if(srType.equals("LaundrySR"))
+                    return new LaundrySRController((LaundrySR) sr);
                 return null;
+
             });
             childPane = loader.load();
             childController = loader.getController();
-            System.out.println(childController);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    // DO NOT TOUCH THIS
     @FXML private void initialize() {
         DatabaseWrapper dw = new DatabaseWrapper();
         // idField
@@ -141,6 +153,7 @@ public class MasterServiceRequestController {
         srPane.getChildren().add(childPane);
     }
 
+    // DO NOT TOUCH THIS
     @FXML private void submit(ActionEvent actionEvent) {
         childSR = new MainSR(
                 idField.getText(),
@@ -154,6 +167,7 @@ public class MasterServiceRequestController {
         childController.submit(childSR);
     }
 
+    // DO NOT TOUCH THIS
     @FXML private void clear(ActionEvent actionEvent) {
         idField.setText(SRIDGenerator.generateID());
         statusField.setValue("BLANK");
@@ -180,11 +194,21 @@ public class MasterServiceRequestController {
                                 || locMap.get(lstr).getFloor().equals(floorField.getValue()))
                 .collect(Collectors.toList()));
     }
-
+    // Important: add your path here
     private static String srTypeToFXMLPath(String srType) {
         switch (srType) {
             case "MedicalEquipmentSR":
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
+            case "ComputerServiceSR":
+                return "/edu/wpi/cs3733/c22/teamB/views/ComputerServiceSR.fxml";
+            case "FoodDeliverySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/FoodDeliveryService.fxml";
+            case "ExternalTransportSR":
+                return "/edu/wpi/cs3733/c22/teamB/views/ExternalTransport.fxml";
+            case "MedicineDeliverySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/MedicineDeliveryService.fxml";
+            case "LaundrySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/LaundryService.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }
