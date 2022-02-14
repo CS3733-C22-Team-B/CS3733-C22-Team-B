@@ -53,6 +53,14 @@ public class MapEditorController{
     public JFXCheckBox showMedical;
     public VBox modifyPopup;
     public JFXCheckBox showSR;
+    public TextField nameField;
+    public TextField typeField;
+    public TextField manField;
+    public Label header2;
+    public Label header3;
+    public Label header5;
+    public Label header9;
+    public JFXComboBox Locations;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -70,6 +78,7 @@ public class MapEditorController{
     String currentFloor = "03";
     boolean addState = false;
     boolean moveState = false;
+    String clicked;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -114,6 +123,7 @@ public class MapEditorController{
         showMedical.setSelected(true);
         showSR.setSelected(true);
         setEditFieldsVisible(false);
+        Locations.getItems().addAll(dbWrapper.getAllLocation());
 //        modifyButton.setOpacity(0.5);
 //        modifyButton.setDisable(true);
 //        deleteButton.setOpacity(0.5);
@@ -179,12 +189,14 @@ public class MapEditorController{
             //Set up onclick events
             testPoint.setOnMousePressed(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
+
                     orgSceneX = event.getSceneX();
                     orgSceneY = event.getSceneY();
 //                    modifyButton.setOpacity(1);
 //                    modifyButton.setDisable(false);
 //                    deleteButton.setOpacity(1);
 //                    deleteButton.setDisable(false);
+                    clicked = "location";
                     onPointClick(testPoint);
                     event.setDragDetect(true);
                 }
@@ -264,6 +276,7 @@ public class MapEditorController{
 //                modifyButton.setDisable(false);
 //                deleteButton.setOpacity(1);
 //                deleteButton.setDisable(false);
+                    clicked = "equipment";
                     onImgClick(testImg);
                     event.setDragDetect(true);
                 }
@@ -305,21 +318,26 @@ public class MapEditorController{
             testImg.setFitWidth(15);
         }
     }
-    
 
-    void setEditFieldsVisible(boolean isVisible){
-        header1.setVisible(isVisible);
-        header4.setVisible(isVisible);
-        header6.setVisible(isVisible);
-        header7.setVisible(isVisible);
-        header8.setVisible(isVisible);
-        idField.setVisible(isVisible);
-        floor.setVisible(isVisible);
-        nodeType.setVisible(isVisible);
-        longName.setVisible(isVisible);
-        shortName.setVisible(isVisible);
-        submitModifyButton.setVisible(isVisible);
-        modifyPopup.setVisible(isVisible);
+//    public TextField nameField;
+//    public TextField typeField;
+//    public TextField manField;
+
+    void setEditFieldsVisible(boolean isVisible) {
+            modifyPopup.setVisible(isVisible);
+            modifyPopup.getChildren().removeAll(new Node[]{Locations,header9,header2,header3,header5,nameField,typeField,manField,header1,header4,header6,header7,header8,idField,floor,nodeType,shortName,longName,submitModifyButton});
+        if (clicked == "location") {
+            modifyPopup.getChildren().addAll(new Node[]{header1,idField,header4,floor,header6,nodeType,header7,shortName,header8,longName,submitModifyButton});
+            header1.setText("Location ID:");
+            header8.setText("Long Name:");
+        } else if (clicked == "equipment"){
+            modifyPopup.getChildren().addAll(new Node[]{header1,idField,header2,nameField,header3,typeField,header5,manField,header9,Locations,header8,longName,submitModifyButton});
+            header1.setText("Equipment ID:");
+            header8.setText("Description:");
+        }
+
+
+
     }
 
     //Scene x coordinate to image x coordinate
@@ -381,6 +399,15 @@ public class MapEditorController{
 
     public void onImgClick(ImageView testImg){
         selectedImg = testImg;
+        MedicalEquipment local = dbWrapper.getMedicalEquipment(selectedImg.getId());
+        idField.setText(local.getEquipmentID());
+        typeField.setText(local.getEquipmentType());
+        nameField.setText(local.getEquipmentName());
+        manField.setText(local.getManufacturer());
+        longName.setText(local.getDescription());
+        modify();
+        updatePopup();
+
     }
 
 
@@ -486,26 +513,39 @@ public class MapEditorController{
 
     @FXML public void modify(){
         setEditFieldsVisible(true);
-        Location local = dbWrapper.getLocation(selectedPoint);
-        idField.setText(selectedPoint);
-        floor.setValue(local.getFloor());
-        nodeType.setValue(local.getNodeType());
-        shortName.setText(local.getShortName());
-        longName.setText(local.getLongName());
+        if(clicked == "location") {
+            Location local = dbWrapper.getLocation(selectedPoint);
+            idField.setText(selectedPoint);
+            floor.setValue(local.getFloor());
+            nodeType.setValue(local.getNodeType());
+            shortName.setText(local.getShortName());
+            longName.setText(local.getLongName());
+        } else if (clicked == "equipment"){
+            MedicalEquipment local = dbWrapper.getMedicalEquipment(selectedImg.getId());
+            idField.setText(local.getEquipmentID());
+            floor.setValue(" ");
+            nodeType.setValue("local.getNodeType()");
+            shortName.setText("local.getShortName()");
+            longName.setText(local.getDescription());
+        }
         updatePopup();
     }
 
 
     public void submitModify(ActionEvent actionEvent) {
-        Location old = dbWrapper.getLocation(selectedPnt.getId());
-        Location changedNode = new Location(idField.getText(),old.getXcoord(),old.getYcoord(),floor.getValue().toString(),"TOWER",nodeType.getValue().toString(),shortName.getText(),longName.getText());
-        dbWrapper.updateLocation(changedNode);
+        if(clicked == "location") {
+            Location old = dbWrapper.getLocation(selectedPnt.getId());
+            Location changedNode = new Location(idField.getText(), old.getXcoord(), old.getYcoord(), floor.getValue().toString(), "TOWER", nodeType.getValue().toString(), shortName.getText(), longName.getText());
+            dbWrapper.updateLocation(changedNode);
+        } else if (clicked == "equipment"){
+            System.out.println(dbWrapper.getMedicalEquipment(selectedImg.getId()));
+            MedicalEquipment old = dbWrapper.getMedicalEquipment(selectedImg.getId());
+            old.setDescription(longName.getText());
+            dbWrapper.updateMedicalEquipment(old);//TODO
+        }
+
         refresh();
         setEditFieldsVisible(false);
-//        modifyButton.setOpacity(0.5);
-//        modifyButton.setDisable(true);
-//        deleteButton.setOpacity(0.5);
-//        deleteButton.setDisable(true);
     }
 
     @FXML
@@ -616,8 +656,13 @@ public class MapEditorController{
     void updatePopup(){
         Translate trans = new Translate();
         Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
-        trans.setX(selectedPnt.getCenterX()-bounds.getMinX());
-        trans.setY(selectedPnt.getCenterY()-(bounds.getMinY()-20));
+        if(clicked == "location") {
+            trans.setX(selectedPnt.getCenterX() - bounds.getMinX());
+            trans.setY(selectedPnt.getCenterY() - (bounds.getMinY() - 20));
+        } else if (clicked == "equipment"){
+            trans.setX(selectedImg.getX() - bounds.getMinX() + 10);
+            trans.setY(selectedImg.getY() - (bounds.getMinY() - 30));
+        }
         modifyPopup.getTransforms().add(trans);
     }
 

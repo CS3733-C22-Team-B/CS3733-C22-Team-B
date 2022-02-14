@@ -47,6 +47,12 @@
                      <Pane prefHeight="200.0" prefWidth="200.0" />
                      <Label fx:id="header1" prefHeight="15" text="Location ID:" />
                      <TextField fx:id="idField" promptText="Location ID" />
+                     <Label fx:id="header2" prefHeight="15" text="Equipment Name:" />
+                     <TextField fx:id="nameField" promptText="Equipment Name" />
+                     <Label fx:id="header3" prefHeight="15" text="Equipment Type:" />
+                     <TextField fx:id="typeField" promptText="Equipment Type" />
+                     <Label fx:id="header5" prefHeight="15" text="Manufacturer:" />
+                     <TextField fx:id="manField" promptText="Manufacturer" />
                      <Label fx:id="header4" prefHeight="15" text="Floor:" />
                      <JFXComboBox fx:id="floor" prefHeight="25.0" prefWidth="284.0" />
                      <Label fx:id="header6" prefHeight="15" text="Node Type:" />
@@ -54,6 +60,8 @@
                      <Label fx:id="header7" prefHeight="15" text="Short Name:" />
                      <TextField fx:id="shortName" promptText="Short Name" />
                      <Label fx:id="header8" prefHeight="15" text="Long Name:" />
+                     <Label fx:id="header9" prefHeight="15" text="Locations:" />
+                     <JFXComboBox fx:id="Locations" prefHeight="25.0" prefWidth="284.0" />
                      <TextField fx:id="longName" promptText="Long Name" />
                      <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
                      <Pane prefHeight="15" />
