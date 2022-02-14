@@ -74,6 +74,8 @@ public class MasterServiceRequestController {
                     return new ExternalTransportController((ExternalTransportSR) sr);
                 else if(srType.equals("MedicineDeliverySR"))
                     return new MedicineDeliverySRController((MedicineDeliverySR) sr);
+                else if(srType.equals("LaundrySR"))
+                    return new LaundrySRController((LaundrySR) sr);
                 return null;
 
             });
@@ -205,6 +207,8 @@ public class MasterServiceRequestController {
                 return "/edu/wpi/cs3733/c22/teamB/views/ExternalTransport.fxml";
             case "MedicineDeliverySR":
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicineDeliveryService.fxml";
+            case "LaundrySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/LaundryService.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }
