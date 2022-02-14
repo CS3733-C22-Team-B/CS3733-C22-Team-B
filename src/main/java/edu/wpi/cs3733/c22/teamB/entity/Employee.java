@@ -29,7 +29,7 @@ public class Employee {
         this.employeeID = employeeID;
         this.lastName = lastName;
         this.firstName = firstName;
-        position = position;
+        this.position = position;
         this.accessLevel = accessLevel;
         this.username = username;
         this.password = password;
@@ -164,5 +164,8 @@ public class Employee {
                 + "phoneNumber";
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
 

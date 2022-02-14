@@ -1,53 +1,40 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
-public class MedicalEquipmentSRController implements IController, Initializable {
-    @FXML private TextField idField;
-    @FXML private TextField requesterNameField;
-    @FXML private JFXComboBox<String> assignedEmployeeField;
-    @FXML private JFXComboBox<String> statusField;
-    @FXML private JFXComboBox<String> destinationField;
+public class MedicalEquipmentSRController implements IController {
+    @FXML private JFXComboBox<String> equipmentTypeField;
     @FXML private JFXComboBox<String> equipmentNameField;
 
-    private List<Location> locList;
-    private Map<String, Location> locMap;
     private List<MedicalEquipment> medEqpList;
     private Map<String, MedicalEquipment> medEqpMap;
-    private List<Employee> employeeList;
-    private Map<String, Employee> employeeMap;
     private int nextID;
-//    Connection conn = DBConnection.getConnection();
 
-    private MedicalEquipmentSRDBI medSRDB = new MedicalEquipmentSRDBI();
+    private MedicalEquipmentSR sr = null;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        LocationDBI locationDBI = new LocationDBI();
-//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        locList = locationDBI.getAllNodes();
-        locMap =
-                IntStream.range(0, locList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
-                                        i -> locList.get(i)));
-//        locationDBI.closeConnection();
+    public MedicalEquipmentSRController() {}
 
-        MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
-//        medicalEquipmentDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        medEqpList = medicalEquipmentDBI.getAllNodes();
+    public MedicalEquipmentSRController(MedicalEquipmentSR sr) {
+        this.sr = sr;
+    }
+
+    @FXML
+    public void initialize() {
+        DatabaseWrapper dw = new DatabaseWrapper();
+        medEqpList = dw.getAllMedicalEquipment();
         medEqpMap =
                 IntStream.range(0, medEqpList.size())
                         .boxed()
@@ -55,63 +42,50 @@ public class MedicalEquipmentSRController implements IController, Initializable 
                                 Collectors.toMap(
                                         i ->
                                                 (medEqpList.get(i).getEquipmentID()
-                                                        + ' '
-                                                        + medEqpList.get(i).getEquipmentName()),
+                                                + ' '
+                                                + medEqpList.get(i).getEquipmentName()),
                                         i -> medEqpList.get(i)));
-//        medicalEquipmentDBI.closeConnection();
-
-        EmployeeDBI employeeDBI = new EmployeeDBI();
-//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        employeeList = employeeDBI.getAllNodes();
-        employeeMap =
-                IntStream.range(0, employeeList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i ->
-                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
-                                        i -> employeeList.get(i)));
-//        employeeDBI.closeConnection();
-
-        statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
-        statusField.setValue("BLANK");
-
-        destinationField.getItems().addAll(locMap.keySet());
-
-        equipmentNameField.getItems().addAll(medEqpMap.keySet());
-
-        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
-
-        this.nextID = 0;
-        //Generate next unique ID
-        while(medSRDB.isInTable(String.valueOf(nextID))){
-            this.nextID++;
+        equipmentTypeField.getItems().add("ALL");
+        equipmentTypeField.getItems().addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
+        if (sr == null) {
+            clear();
+        } else {
+            equipmentTypeField.setValue(sr.getMedicalEquipment().getEquipmentType());
+            equipmentNameField.setValue(sr.getMedicalEquipment().getEquipmentName());
         }
-        idField.setText(Integer.toString(nextID));
+        equipmentNameField.getItems().addAll(medEqpMap.keySet()
+                .stream()
+                .filter(
+                        lstr -> equipmentTypeField.getValue().equals("ALL")
+                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
+                .collect(Collectors.toList()));
     }
 
     @Override
     public void submit() {
+    }
 
-        medSRDB.insertNode(
-                new MedicalEquipmentSR(
-                        String.valueOf(this.nextID),
-                        statusField.getValue(),
-                        locMap.get(destinationField.getValue()),
-                        medEqpMap.get(equipmentNameField.getValue()),
-                        employeeMap.get(assignedEmployeeField.getValue())));
-        clear();
-//        medSRDB.closeConnection();
+    @Override
+    public void submit(AbstractSR sr) {
+        DatabaseWrapper dw = new DatabaseWrapper();
+        dw.addSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
     }
 
     @Override
     public void clear() {
-        idField.clear();
-        requesterNameField.clear();
-        assignedEmployeeField.setValue("");
-        assignedEmployeeField.setValue("");
-        statusField.setValue("");
-        destinationField.setValue("");
-        equipmentNameField.setValue("");
+        equipmentTypeField.setValue("ALL");
+        equipmentNameField.setValue(null);
+    }
+
+    @FXML private void onEquipmentTypeChange(ActionEvent actionEvent) {
+        equipmentNameField.setValue(null);
+        equipmentNameField.getItems().removeAll();
+        equipmentNameField.getItems().clear();
+        equipmentNameField.getItems().addAll(medEqpMap.keySet()
+                .stream()
+                .filter(
+                        lstr -> equipmentTypeField.getValue().equals("ALL")
+                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
+                .collect(Collectors.toList()));
     }
 }
