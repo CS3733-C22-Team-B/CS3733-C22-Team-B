@@ -292,4 +292,10 @@ public class DatabaseWrapper {
         LocationDaoI test = new LocationDaoI();
         return test.isInTable(nodeID);
     }
+
+    public int nodeTypeCountLocation(String nodeType, String floor){
+        LocationDaoI locationDaoI = new LocationDaoI();
+        System.out.println(locationDaoI.nodeTypeCount(nodeType, floor));
+        return locationDaoI.nodeTypeCount(nodeType, floor);
+    }
 }

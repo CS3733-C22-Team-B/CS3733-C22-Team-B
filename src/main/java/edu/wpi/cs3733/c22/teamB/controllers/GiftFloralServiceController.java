@@ -85,10 +85,32 @@ public class GiftFloralServiceController implements IController, Initializable {
 
             assignedEmployeeField.getItems().addAll(employeeMap.keySet());
 
-            giftOptions.getItems().add("Teddy Bears");
-            giftOptions.getItems().add("Rose Bouquet");
+            // Implement it so that when you press "gift" or "floral", it only shows
+            // the drop down for one or the other
+
+            // regular gift options
+            giftOptions.getItems().add("Blanket");
+            giftOptions.getItems().add("Book");
+            giftOptions.getItems().add("Board Game");
+            giftOptions.getItems().add("Chocolate");
+            giftOptions.getItems().add("Cotton Pajamas");
+            giftOptions.getItems().add("Coloring Books");
+            giftOptions.getItems().add("Journal");
+            giftOptions.getItems().add("Socks");
+            giftOptions.getItems().add("Slippers");
+            giftOptions.getItems().add("Sleep Mask");
+            giftOptions.getItems().add("Teddy Bear");
+
+            // Floral options
+            giftOptions.getItems().add("Romantic Bouquet");
+            giftOptions.getItems().add("Red Bouquet");
+            giftOptions.getItems().add("Orange Bouquet");
+            giftOptions.getItems().add("Yellow Bouquet");
+            giftOptions.getItems().add("Blue Bouquet");
+            giftOptions.getItems().add("Purple Bouquet");
+            giftOptions.getItems().add("Pink Bouquet");
+            giftOptions.getItems().add("White Bouquet");
             giftOptions.getItems().add("Floral Wreath");
-            giftOptions.getItems().add("Tulip Bouquet");
         }
 
     @Override
@@ -102,7 +124,7 @@ public class GiftFloralServiceController implements IController, Initializable {
 
     @Override
     public void clear() {
-        confirmLabel.setText(" ");
+        confirmLabel.setText("");
         statusField.setValue("");
         roomID.setValue("");
         idField.clear();
