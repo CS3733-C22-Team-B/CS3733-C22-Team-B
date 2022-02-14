@@ -50,7 +50,7 @@ public class LocationDBTest {
         Employee employee2 = new Employee("23", "a", "b", "c", 1, "1", "1", "d", "a");
 
         databaseWrapper.addLocation(location2);
-<<<<<<< HEAD
+
         databaseWrapper.addLocation(new Location(
                 "C120281",
                 180,
@@ -69,9 +69,9 @@ public class LocationDBTest {
                 "DPT",
                 "Dy Surgery Family Waiting Floor L1",
                 "Deartment C002L1"));
-=======
+
         databaseWrapper.addLocation(location);
->>>>>>> main
+
 
         databaseWrapper.addEmployee(employee1);
         databaseWrapper.addEmployee(employee2);
@@ -131,19 +131,19 @@ public class LocationDBTest {
         databaseWrapper.getSR("1112");
 
 
-<<<<<<< HEAD
+
 //        databaseWrapper.getAllSR();
         System.out.println(databaseWrapper.getAllLocation());
         databaseWrapper.nodeTypeCountLocation("Hall", "03");
         databaseWrapper.nodeTypeCountLocation("DPT", "3");
-=======
+
         databaseWrapper.getAllSR();
 
         assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location2);
         databaseWrapper.updateMedicalEquipment(new MedicalEquipment("12", "Awdd", "asd", "asd", location, "asd", "asd", "12", "asd", 12));
         assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location);
 
->>>>>>> main
+
     }
 
     /*
