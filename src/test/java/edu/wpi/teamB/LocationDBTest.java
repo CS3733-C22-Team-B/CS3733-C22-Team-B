@@ -21,8 +21,6 @@ public class LocationDBTest {
         databaseWrapper.createTableMedicalEquipment();
         databaseWrapper.createTableSR();
 
-
-
         Location location2 =
                 new Location(
                         "C1244T0281",
@@ -100,6 +98,9 @@ public class LocationDBTest {
         AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
 
         AbstractSR Chris = new ComputerServiceSR("chris", "Done", location2, employee1, employee2, date, "as", "asd");
+
+        AbstractSR Calvin = new SanitationSR("calvin", "WAITING", location2, employee1, employee2, date, "bye", "GLASS");
+
         databaseWrapper.addSR(ben);
         databaseWrapper.addSR(kiki);
         databaseWrapper.addSR(Pushman);
@@ -108,6 +109,7 @@ public class LocationDBTest {
         databaseWrapper.addSR(Duc);
         databaseWrapper.addSR(Nick);
         databaseWrapper.addSR(Chris);
+        databaseWrapper.addSR(Calvin);
 
 //        databaseWrapper.deleteSR(ben.getSrID());
 //        databaseWrapper.deleteSR(Pushman.getSrID());
