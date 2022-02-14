@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 
 public class ExternalTransportController implements IController {
 
+    @FXML TextField patientID;
     @FXML TextField SenderTxt;
     @FXML TextField PickupLocTxt;
     @FXML TextField DestinationTxt;

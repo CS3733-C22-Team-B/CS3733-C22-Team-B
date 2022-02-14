@@ -21,6 +21,7 @@ public class FoodDeliverySRController implements IController, Initializable {
     @FXML private JFXComboBox<String> assignedEmployeeField;
     @FXML private JFXComboBox<String> statusField;
     @FXML private JFXComboBox<String> destinationField;
+    @FXML private JFXComboBox<String> drinkmenu;
     @FXML private TextField idField;
 
     List<FoodDeliverySR> srList = new ArrayList<>();
@@ -68,6 +69,9 @@ public class FoodDeliverySRController implements IController, Initializable {
         ComboMeals.getItems().add("Chicken and Potatoes");
         ComboMeals.getItems().add("Salad and Fruits");
         ComboMeals.getItems().add("Soup of The Day");
+        drinkmenu.getItems().add("Water");
+        drinkmenu.getItems().add("Orange Juice");
+        drinkmenu.getItems().add("Apple Juice");
     }
 
     @Override
