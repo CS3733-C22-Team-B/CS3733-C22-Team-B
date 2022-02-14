@@ -47,7 +47,7 @@
     -fx-background-color: #7B94C9;
     -fx-text-fill: white;
     -fx-border-radius: 7;
-    -fx-font-size
+    -fx-font-size: 44px;
 
 }
 
@@ -109,7 +109,17 @@
 
 
 /* ----------- TAB PANE -------------- */
+.tab-pane {
+    -fx-background-color: white;
 
+
+}
+
+.tab {
+    -fx-background-color: #002168;
+    -fx-text-fill: white;
+    -fx-padding: 0px 16px;
+}
 
 /* ----------- BASIC COLORS (SVGS) -------------- */
 
