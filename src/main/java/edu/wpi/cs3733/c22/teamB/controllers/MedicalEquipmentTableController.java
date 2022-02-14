@@ -174,8 +174,11 @@ public class MedicalEquipmentTableController {
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
         amountField.setDisable(false);
-        func = MedicalEquipmentTableController.Function.ADD;
+       // func = MedicalEquipmentTableController.Function.ADD;
+
+        func = Function.ADD;
     }
+
     @FXML
     private void modifyLocation(ActionEvent actionEvent) {
         gridPane.setVisible(true);
@@ -211,13 +214,17 @@ public class MedicalEquipmentTableController {
         descriptionField.setText(loc.getDescription());
         amountField.setText(String.valueOf(loc.getAmount()));
 
-        func = MedicalEquipmentTableController.Function.MODIFY;
+        func = Function.MODIFY;
+        //func = MedicalEquipmentTableController.Function.MODIFY;
     }
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
-        db.deleteLocation(table.getSelectionModel().getSelectedItem().getEquipmentID());
+        String value = table.getSelectionModel().getSelectedItem().getEquipmentID();
+        db.deleteMedicalEquipment(value);
         loadTable();
+
+//        func = Function.DELETE;
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
@@ -242,18 +249,18 @@ public class MedicalEquipmentTableController {
             db.addMedicalEquipment(m);
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
-            db.updateMedicalEquipment(
-                    new MedicalEquipment(
-                            equipmentIDField.getText(),
-                            equipmentNameField.getText(),
-                            equipmentTypeField.getText(),
-                            manufacturerField.getText(),
-                            locMap.get(LocationChoice.getValue()),
-                            statusField.getValue().toString(),
-                            colorField.getText(),
-                            sizeField.getText(),
-                            descriptionField.getText(),
-                            Integer.parseInt(amountField.getText())));
+            MedicalEquipment newEquip = new MedicalEquipment(
+                    equipmentIDField.getText(),
+                    equipmentNameField.getText(),
+                    equipmentTypeField.getText(),
+                    manufacturerField.getText(),
+                    locMap.get(LocationChoice.getValue()),
+                    statusField.getValue().toString(),
+                    colorField.getText(),
+                    sizeField.getText(),
+                    descriptionField.getText(),
+                    Integer.parseInt(amountField.getText()));
+            db.updateMedicalEquipment(newEquip);
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
             table.getItems().clear();
@@ -274,6 +281,7 @@ public class MedicalEquipmentTableController {
         colorField.clear();
         sizeField.clear();
         descriptionField.clear();
+        amountField.clear();
     }
 
     @FXML private void cancelForm(ActionEvent actionEvent) {

@@ -109,6 +109,7 @@ public class LocationDBTest {
         databaseWrapper.getSR("12321321321");
         databaseWrapper.getSR("1112");
 
+//        databaseWrapper.deleteMedicalEquipment("12");
 
         databaseWrapper.getAllSR();
 
