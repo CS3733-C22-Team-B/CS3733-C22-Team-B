@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -67,6 +68,7 @@ public class MapEditorController{
     public TextField color;
     public Label header12;
     public TextField size;
+    public ScrollPane scroll;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -123,6 +125,7 @@ public class MapEditorController{
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
+
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
         showLocations.setSelected(true);
