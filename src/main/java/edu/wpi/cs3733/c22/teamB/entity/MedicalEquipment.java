@@ -48,7 +48,6 @@ public class MedicalEquipment {
         this.manufacturer = manufacturer;
         this.location = location;
         if (!validateStatus(status)) {
-            System.err.println("WARNING: status is set to BLANK");
             this.status = "BLANK";
         }
         else this.status = status;

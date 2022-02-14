@@ -37,7 +37,6 @@ public abstract class AbstractSR {
 
 //        if (status == null) status = "BLANK";
         if (!validateStatus(status)) {
-            System.err.println("WARNING: status is set to BLANK");
             this.status = "BLANK";
         }
         else this.status = status;

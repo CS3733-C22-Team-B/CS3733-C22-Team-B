@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.cs3733.c22.teamB.views.ServiceRequestManager"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestManagerController">
+   <children>
+      <TableView fx:id="srTable" layoutX="66.0" layoutY="81.0" prefHeight="309.0" prefWidth="482.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="71.199951171875" text="ID" />
+          <TableColumn fx:id="typeCol" prefWidth="65.99993896484375" text="Type" />
+            <TableColumn fx:id="requestorCol" prefWidth="75.19996643066406" text="Requestor" />
+            <TableColumn fx:id="timeCol" prefWidth="85.5999755859375" text="Time" />
+            <TableColumn fx:id="employeeCol" prefWidth="84.0" text="Assigned to" />
+            <TableColumn fx:id="statusCol" prefWidth="72.39996337890625" text="Status" />
+            <TableColumn prefWidth="26.39996337890625" />
+            <TableColumn fx:id="deleteCol" prefWidth="26.39996337890625" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>
