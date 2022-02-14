@@ -78,6 +78,7 @@ public class LocationDBTest {
 
         AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
 
+        AbstractSR Chris = new ComputerServiceSR("chris", "Done", location2, employee1, employee2, date, "as", "asd");
         databaseWrapper.addSR(ben);
         databaseWrapper.addSR(kiki);
         databaseWrapper.addSR(Pushman);
@@ -85,6 +86,7 @@ public class LocationDBTest {
         databaseWrapper.addSR(Sits);
         databaseWrapper.addSR(Duc);
         databaseWrapper.addSR(Nick);
+        databaseWrapper.addSR(Chris);
 
 //        databaseWrapper.deleteSR(ben.getSrID());
 //        databaseWrapper.deleteSR(Pushman.getSrID());

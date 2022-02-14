@@ -51,8 +51,8 @@ public class Bapp extends Application {
 //        List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
 //        List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
 
-        //databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-        //        foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
+//        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
+//                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
 
 //        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
