@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MainSRParserI implements IParser<MainSR> {
+public class MainSRParserI implements IParser<AbstractSR> {
 
 
     @Override
-    public MainSR fromStringToObject(String string) {
-        MainSR mainSR = new MainSR();
+    public AbstractSR fromStringToObject(String string) {
+        AbstractSR mainSR = new MainSR();
         Location location = new Location();
         Employee requestor = new Employee();
         Employee assignedEmployee = new Employee();
@@ -39,8 +39,8 @@ public class MainSRParserI implements IParser<MainSR> {
     }
 
     @Override
-    public List<MainSR> fromStringsToObjects(List<String> listString) {
-        List<MainSR> mainSRList =
+    public List<AbstractSR> fromStringsToObjects(List<String> listString) {
+        List<AbstractSR> mainSRList =
                 listString.stream()
                         .map(
                                 data_str -> {
@@ -52,18 +52,18 @@ public class MainSRParserI implements IParser<MainSR> {
     }
 
     @Override
-    public String fromObjectToString(MainSR mainSR) {
-        String str = mainSR.toStringFields();
+    public String fromObjectToString(AbstractSR mainSR) {
+        String str = ((MainSR) mainSR).toStringFields();
 
         return str;
     }
 
     @Override
-    public List<String> fromObjectsToStrings(List<MainSR> listT) {
+    public List<String> fromObjectsToStrings(List<AbstractSR> listT) {
         List<String> listString = new ArrayList<>();
         listString.add(MainSR.toStringHeader());
-        for (MainSR mainSR : listT) {
-            listString.add(mainSR.toStringFields());
+        for (AbstractSR mainSR : listT) {
+            listString.add(((MainSR) mainSR).toStringFields());
         }
 
         return listString;

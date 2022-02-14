@@ -81,27 +81,21 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
             rset.next();
 
-            String status = rset.getString("status");
-            String LocationID = rset.getString("locationID");
+            MainSRDaoI mainSRDaoI = new MainSRDaoI();
+            AbstractSR mainSR = mainSRDaoI.getValue(objectID);
 
-            LocationDaoI locationDaoI = new LocationDaoI();
-            Location location = locationDaoI.getValue(LocationID);
+            String status = mainSR.getStatus();
+            Location location = mainSR.getLocation();
+            Employee requestor = mainSR.getRequestor();
+            Employee assignedEmployee = mainSR.getAssignedEmployee();
+            LocalDate dateRequested = mainSR.getDateRequested();
+            String notes = mainSR.getNotes();
 
-            String requestorID = rset.getString("requestorID");
-            String assignedEmployeeID = rset.getString("assignedEmployeeID");
-
-            EmployeeDaoI employeeDaoI = new EmployeeDaoI();
-            Employee requestor = employeeDaoI.getValue(requestorID);
-            Employee assignedEmployee = employeeDaoI.getValue(assignedEmployeeID);
-
-            String dateRequested = rset.getString("dateRequested");
-            LocalDate date = LocalDate.parse(dateRequested);
-            String notes = rset.getString("notes");
             String patientID = rset.getString("patientID");
             String dropOffLocation = rset.getString("dropOffLocation");
             String formOfTransport = rset.getString("formOfTransport");
 
-            externalTransportSR = new ExternalTransportSR(objectID, status, location, requestor, assignedEmployee, date, notes, patientID, dropOffLocation, formOfTransport);
+            externalTransportSR = new ExternalTransportSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, patientID, dropOffLocation, formOfTransport);
 
             pstmt.close();
         } catch (SQLException e) {

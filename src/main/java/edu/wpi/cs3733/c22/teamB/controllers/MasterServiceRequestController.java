@@ -68,6 +68,14 @@ public class MasterServiceRequestController {
                     return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
                 else if (srType.equals("ComputerServiceSR"))
                     return new ComputerServiceSRController((ComputerServiceSR) sr);
+                else if(srType.equals("FoodDeliverySR"))
+                    return new FoodDeliverySRController((FoodDeliverySR) sr);
+                else if(srType.equals("ExternalTransportSR"))
+                    return new ExternalTransportController((ExternalTransportSR) sr);
+                else if(srType.equals("MedicineDeliverySR"))
+                    return new MedicineDeliverySRController((MedicineDeliverySR) sr);
+                else if(srType.equals("LaundrySR"))
+                    return new LaundrySRController((LaundrySR) sr);
                 return null;
 
             });
@@ -193,6 +201,14 @@ public class MasterServiceRequestController {
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
             case "ComputerServiceSR":
                 return "/edu/wpi/cs3733/c22/teamB/views/ComputerServiceSR.fxml";
+            case "FoodDeliverySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/FoodDeliveryService.fxml";
+            case "ExternalTransportSR":
+                return "/edu/wpi/cs3733/c22/teamB/views/ExternalTransport.fxml";
+            case "MedicineDeliverySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/MedicineDeliveryService.fxml";
+            case "LaundrySR":
+                return "/edu/wpi/cs3733/c22/teamB/views/LaundryService.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }
