@@ -74,7 +74,7 @@ public class MainSRParserITest {
         mainSRListExpected.add(mainSR2);
 
         MainSRParserI mainParser = new MainSRParserI();
-        List<MainSR> mainSRListResult = mainParser.fromStringsToObjects(stringList);
+        List<AbstractSR> mainSRListResult = mainParser.fromStringsToObjects(stringList);
 
         assertEquals(mainSRListExpected.toString(), mainSRListResult.toString());
     }
@@ -140,7 +140,7 @@ public class MainSRParserITest {
                 new MainSR("nodeID1", "MedicalEquipmentSR", "WAITING", location1, requestor1, aEmployee1, dateR1, "shortN1");
         AbstractSR mainSR2 =
                 new MainSR("nodeID2", "MedicalEquipmentSR", "WAITING", location2, requestor2, aEmployee2, dateR2, "shortN2");
-        List<MainSR> mainSRListExpected = new ArrayList<>();
+        List<AbstractSR> mainSRListExpected = new ArrayList<>();
         mainSRListExpected.add((MainSR) mainSR1);
         mainSRListExpected.add((MainSR) mainSR2);
 
