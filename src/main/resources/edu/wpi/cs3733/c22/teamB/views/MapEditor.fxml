@@ -69,10 +69,6 @@
                   <Pane prefHeight="15" />
                   <JFXToggleButton fx:id="moveButton" onAction="#move" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
-                  <JFXButton fx:id="modifyButton" onAction="#modify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Modify" textAlignment="CENTER" />
-                  <Pane prefHeight="15" />
-                  <JFXButton fx:id="deleteButton" onAction="#delete" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Delete" textAlignment="CENTER" />
-                  <Pane prefHeight="15" />
                   <JFXButton fx:id="goToL2Button" onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L2" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="goToL1Button" onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L1" textAlignment="CENTER" />
