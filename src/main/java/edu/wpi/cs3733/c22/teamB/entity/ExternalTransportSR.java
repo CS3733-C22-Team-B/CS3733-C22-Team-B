@@ -64,25 +64,7 @@ public class ExternalTransportSR extends AbstractSR {
                 '}';
     }
 
-    public String toStringFields() {
-        return getSrID()
-                + ","
-                + patientID
-                + ","
-                + dropOffLocation
-                + ","
-                + formOfTransport;
-    }
-
-    public static String toStringHeader() {
-        return "srID"
-                + ","
-                + "patientID"
-                + ","
-                + "dropOffLocation"
-                + ","
-                + "formOfTransport";
-    }
+//
 
     @Override
     public boolean equals(Object o) {

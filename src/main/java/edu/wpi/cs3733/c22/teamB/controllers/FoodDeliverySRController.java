@@ -89,11 +89,6 @@ public class FoodDeliverySRController implements IController, Initializable {
     }
 
     @Override
-    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
-
-    }
-
-    @Override
     public void clear() {
         AssigneeName.clear();
         ComboMeals.cancelEdit();

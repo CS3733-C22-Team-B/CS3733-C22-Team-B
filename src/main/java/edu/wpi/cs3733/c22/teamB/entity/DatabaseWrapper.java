@@ -15,7 +15,6 @@ public class DatabaseWrapper {
     private IDatabase<LaundrySR> LaundrySRDao;
     private IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDao;
     private IDatabase<MedicineDeliverySR> MedicineDeliverySRDao;
-    private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
     private IDatabase<AbstractSR> MainSRDao;
 
     public DatabaseWrapper() {
@@ -28,8 +27,8 @@ public class DatabaseWrapper {
         LaundrySRDao = new LaundrySRDaoI();
         MedicalEquipmentSRDao = new MedicalEquipmentSRDaoI();
         MedicineDeliverySRDao = new MedicineDeliverySRDaoI();
-        ComputerServiceSRDao = new ComputerServiceSRDaoI();
         MainSRDao = new MainSRDaoI();
+
     }
 
     // AbstractSR a = new ExternalTransportSR();
@@ -59,10 +58,7 @@ public class DatabaseWrapper {
                 MedicalEquipmentSRDao.addValue((MedicalEquipmentSR) abstractSR);
                 break;
             case "MedicineDeliverySR":
-                MedicineDeliverySRDao.addValue((MedicineDeliverySR) abstractSR);
-                break;
-            case "ComputerServiceSR":
-                ComputerServiceSRDao.addValue((ComputerServiceSR) abstractSR);
+            MedicineDeliverySRDao.addValue((MedicineDeliverySR) abstractSR);
                 break;
             default:
                 System.out.println("Invalid SR Input: " + abstractSR.getSrType());
@@ -105,9 +101,6 @@ public class DatabaseWrapper {
             case "MedicineDeliverySR":
                 MedicineDeliverySRDao.deleteValue(srID);
                 break;
-            case "ComputerServiceSR":
-                ComputerServiceSRDao.deleteValue(srID);
-                break;
             default:
                 System.out.println("Invalid SRID Input: " + abstractSR.getSrID());
         }
@@ -149,9 +142,6 @@ public class DatabaseWrapper {
             case "MedicineDeliverySR":
                 MedicineDeliverySRDao.updateValue((MedicineDeliverySR) abstractSR);
                 break;
-            case "ComputerServiceSR":
-                ComputerServiceSRDao.updateValue((ComputerServiceSR) abstractSR);
-                break;
             default:
                 System.out.println("Invalid SR Input: " + abstractSR.getSrType());
         }
@@ -172,32 +162,29 @@ public class DatabaseWrapper {
     public AbstractSR getSR(String srID) {
 
         AbstractSR abstractSR = MainSRDao.getValue(srID);
-        if (abstractSR != null) {
-            switch(abstractSR.getSrType()) {
-                case "ExternalTransportSR":
-                    System.out.println(ExternalTransportDao.getValue(srID));
-                    return ExternalTransportDao.getValue(srID);
-                case "FoodDeliverySR":
-                    System.out.println(FoodDeliveryDao.getValue(srID));
-                    return FoodDeliveryDao.getValue(srID);
-                case "GiftFloralSR":
-                    System.out.println(GiftFloralSRDao.getValue(srID));
-                    return GiftFloralSRDao.getValue(srID);
-                case "LaundrySR":
-                    System.out.println(LaundrySRDao.getValue(srID));
-                    return LaundrySRDao.getValue(srID);
-                case "MedicalEquipmentSR":
-                    System.out.println(MedicalEquipmentSRDao.getValue(srID));
-                    return MedicalEquipmentSRDao.getValue(srID);
-                case "MedicineDeliverySR":
-                    System.out.println(MedicineDeliverySRDao.getValue(srID));
-                    return MedicineDeliverySRDao.getValue(srID);
-                case "ComputerServiceSR":
-                    System.out.println(ComputerServiceSRDao.getValue(srID));
-                    return ComputerServiceSRDao.getValue(srID);
-                default:
-                    System.out.println("Invalid SR Input: " + abstractSR.getSrType());
-            }
+        System.out.println(abstractSR.getSrType());
+
+        switch(abstractSR.getSrType()) {
+            case "ExternalTransportSR":
+                System.out.println(ExternalTransportDao.getValue(srID));
+                return ExternalTransportDao.getValue(srID);
+            case "FoodDeliverySR":
+                System.out.println(FoodDeliveryDao.getValue(srID));
+                return FoodDeliveryDao.getValue(srID);
+            case "GiftFloralSR":
+                System.out.println(GiftFloralSRDao.getValue(srID));
+                return GiftFloralSRDao.getValue(srID);
+            case "LaundrySR":
+                System.out.println(LaundrySRDao.getValue(srID));
+                return LaundrySRDao.getValue(srID);
+            case "MedicalEquipmentSR":
+                System.out.println(MedicalEquipmentSRDao.getValue(srID));
+                return MedicalEquipmentSRDao.getValue(srID);
+            case "MedicineDeliverySR":
+                System.out.println(MedicineDeliverySRDao.getValue(srID));
+                return MedicineDeliverySRDao.getValue(srID);
+            default:
+                System.out.println("Invalid SR Input: " + abstractSR.getSrType());
         }
         return null;
     }
@@ -245,7 +232,6 @@ public class DatabaseWrapper {
         ExternalTransportDao.createTable();
         FoodDeliveryDao.createTable();
         GiftFloralSRDao.createTable();
-        ComputerServiceSRDao.createTable();
         MedicineDeliverySRDao.createTable();
         MedicalEquipmentSRDao.createTable();
     }
@@ -268,8 +254,6 @@ public class DatabaseWrapper {
         GiftFloralSRDao.dropTable();
         FoodDeliveryDao.dropTable();
         ExternalTransportDao.dropTable();
-        ComputerServiceSRDao.dropTable();
-
         LaundrySRDao.dropTable();
         MainSRDao.dropTable();
     }

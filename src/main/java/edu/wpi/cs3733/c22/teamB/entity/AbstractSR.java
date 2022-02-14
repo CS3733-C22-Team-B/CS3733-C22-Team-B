@@ -1,7 +1,11 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import javafx.collections.FXCollections;
+
+import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Map;
 
 public abstract class AbstractSR {
 
@@ -49,6 +53,20 @@ public abstract class AbstractSR {
         for (String s : SRstatus)
             if (st != null && st.equals(s)) return true;
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractSR{" +
+                "srID='" + srID + '\'' +
+                ", srType='" + srType + '\'' +
+                ", status='" + status + '\'' +
+                ", location=" + location +
+                ", requestor=" + requestor +
+                ", assignedEmployee=" + assignedEmployee +
+                ", dateRequested=" + dateRequested +
+                ", notes='" + notes + '\'' +
+                '}';
     }
 
     public String getSrID() {
@@ -115,18 +133,5 @@ public abstract class AbstractSR {
         this.srType = srType;
     }
 
-    @Override
-    public String toString() {
-        return "AbstractSR{" +
-                "srID='" + srID + '\'' +
-                ", srType='" + srType + '\'' +
-                ", status='" + status + '\'' +
-                ", location=" + location.getNodeID() +
-                ", requestor=" + requestor.getEmployeeID() +
-                ", assignedEmployee=" + assignedEmployee.getEmployeeID() +
-                ", dateRequested=" + dateRequested.format(DateTimeFormatter.ISO_LOCAL_DATE) +
-                ", notes='" + notes + '\'' +
-                '}';
-    }
 
 }

@@ -106,11 +106,6 @@ public class MedicineDeliverySRController implements IController, Initializable 
         clear();
     }
 
-    @Override
-    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
-
-    }
-
 
     @Override
     public void clear() {

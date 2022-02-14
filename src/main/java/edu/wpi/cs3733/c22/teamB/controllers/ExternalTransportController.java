@@ -90,11 +90,6 @@ public class ExternalTransportController implements IController {
     }
 
     @Override
-    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
-
-    }
-
-    @Override
     public void clear() {
         SenderTxt.clear();
         PickupLocTxt.clear();
