@@ -1,47 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="949.0" style="-fx-background-radius: 10;" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.HomeController">
    <children>
-      <Label layoutX="115.0" layoutY="21.0" text="Mass General Brigham" textFill="WHITE">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="102.0" layoutY="351.0" prefHeight="190.0" prefWidth="734.0" styleClass="rectangle" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="75.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <JFXButton onAction="#goToServiceRequestPanel" prefWidth="100.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Start" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton fx:id="locationButton1" onAction="#goToMapEditor" text="Map Editor" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton prefWidth="100.0" ripplerFill="#3b99eb" text="Help" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton onAction="#shutDown" prefWidth="100.0" ripplerFill="#3b99eb" text="Exit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton fx:id="equipmentButton" onAction="#goToEquipmentTable" text="Equipment Manager" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton fx:id="locationButton" onAction="#goToLocationTable" text="Location Manager" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton fx:id="CSVImportButton" onAction="#goToCSVRestoreBackup" text="CSV Import/Export" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-            <JFXButton alignment="CENTER" onAction="#goToServiceRequestMenu" prefHeight="39.0" prefWidth="225.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Service Requests v2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <ImageView fitHeight="640.0" fitWidth="987.0" layoutX="-20.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="669.0" fitWidth="1118.0" layoutX="-20.0" layoutY="-62.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-146.0" AnchorPane.rightAnchor="-23.0">
          <image>
-            <Image url="@../images/2560px-Healthcare_Building.jpg" />
+            <Image url="@../images/brigham_and_womens.jpg" />
          </image>
       </ImageView>
    </children>
