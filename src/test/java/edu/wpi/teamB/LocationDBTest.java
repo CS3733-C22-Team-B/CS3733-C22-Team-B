@@ -28,18 +28,29 @@ public class LocationDBTest {
                         "C1244T0281",
                         180,
                         84,
-                        "3",
+                        "03",
+                        "Towr",
+                        "DPT",
+                        "Dy Surgery Family Waiting Floor L1",
+                        "Deartment C002L1");
+
+        Location location =
+                new Location(
+                        "2",
+                        280,
+                        284,
+                        "03",
                         "Towr",
                         "DPT",
                         "Dy Surgery Family Waiting Floor L1",
                         "Deartment C002L1");
 
 
-
         Employee employee1 = new Employee("14", "n", "n", "1", 1, "n", "n", "n", "n");
         Employee employee2 = new Employee("23", "a", "b", "c", 1, "1", "1", "d", "a");
 
         databaseWrapper.addLocation(location2);
+        databaseWrapper.addLocation(location);
 
         databaseWrapper.addEmployee(employee1);
         databaseWrapper.addEmployee(employee2);
@@ -100,6 +111,11 @@ public class LocationDBTest {
 
 
         databaseWrapper.getAllSR();
+
+        assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location2);
+        databaseWrapper.updateMedicalEquipment(new MedicalEquipment("12", "Awdd", "asd", "asd", location, "asd", "asd", "12", "asd", 12));
+        assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location);
+
     }
 
     /*
