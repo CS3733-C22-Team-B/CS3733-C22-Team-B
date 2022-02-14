@@ -86,6 +86,8 @@
                   <JFXCheckBox fx:id="showLocations" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXCheckBox fx:id="showMedical" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Medical Equipment" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXCheckBox fx:id="showSR" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Service Requests" textAlignment="CENTER" />
 
 
                </children>

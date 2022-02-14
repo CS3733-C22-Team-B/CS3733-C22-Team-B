@@ -52,6 +52,7 @@ public class MapEditorController{
     public JFXCheckBox showLocations;
     public JFXCheckBox showMedical;
     public VBox modifyPopup;
+    public JFXCheckBox showSR;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -64,6 +65,7 @@ public class MapEditorController{
     DatabaseWrapper dbWrapper = new DatabaseWrapper();
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
+    List<AbstractSR> srList = dbWrapper.getAllSR();
     //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
@@ -75,6 +77,7 @@ public class MapEditorController{
     Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
     Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
     Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/medical.png");
+    Image clipboard = new Image("/edu/wpi/cs3733/c22/teamB/images/clipboard.png");
     @FXML
     private AnchorPane anchorPane;
 
@@ -109,6 +112,7 @@ public class MapEditorController{
         imageWidth = imageView.getImage().getWidth();
         showLocations.setSelected(true);
         showMedical.setSelected(true);
+        showSR.setSelected(true);
         setEditFieldsVisible(false);
 //        modifyButton.setOpacity(0.5);
 //        modifyButton.setDisable(true);
@@ -147,6 +151,16 @@ public class MapEditorController{
                     addPointMedical(ID, x, y, Color.BLUE);
                 }
             }
+
+        for (AbstractSR local : srList) {
+            if (local.getLocation().getFloor().equals(currentFloor)) {
+                String ID = local.getSrID();
+                double x = local.getLocation().getXcoord() + 20; //TODO fix for future iterations
+                double y = local.getLocation().getYcoord();
+                addPointSR(ID, x, y, Color.LIME);
+                //System.out.println("add point at: " + x + " , " + y);
+            }
+        }
 
 
     }
@@ -268,9 +282,27 @@ public class MapEditorController{
 
                     orgSceneX = t.getSceneX();
                     orgSceneY = t.getSceneY();
+
+
                 }
             });
 
+        }
+    }
+
+    public void addPointSR(String ID, double x, double y,Color color){
+        if(showSR.isSelected()) {
+            //Create the point
+            //getImageX(x),getImageY(y)
+            ImageView testImg = new ImageView(clipboard);
+            //Add the point to the anchorPane's children
+            anchorPane.getChildren().add(testImg);
+            //Set point ID
+            testImg.idProperty().set(ID);
+            testImg.setX(getImageX(x));
+            testImg.setY(getImageY(y));
+            testImg.setPreserveRatio(true);
+            testImg.setFitWidth(15);
         }
     }
     
@@ -367,6 +399,7 @@ public class MapEditorController{
     @FXML public void refresh(){
         locationList = dbWrapper.getAllLocation();
         medicalList = dbWrapper.getAllMedicalEquipment();
+        srList = dbWrapper.getAllSR();
         removeAllPoints();
         addPoints();
     }
