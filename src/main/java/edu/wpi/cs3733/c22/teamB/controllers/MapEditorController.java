@@ -387,12 +387,12 @@ public class MapEditorController{
         //System.out.println(testPoint.idProperty().get());
         selectedPoint = (testPoint.idProperty().get());
         selectedPnt = testPoint;
-        Location local = dbWrapper.getLocation(selectedPoint);
-        idField.setText(selectedPoint);
-        floor.setValue(local.getFloor());
-        nodeType.setValue(local.getNodeType());
-        shortName.setText(local.getShortName());
-        longName.setText(local.getLongName());
+//        Location local = dbWrapper.getLocation(selectedPoint);
+//        idField.setText(selectedPoint);
+//        floor.setValue(local.getFloor());
+//        nodeType.setValue(local.getNodeType());
+//        shortName.setText(local.getShortName());
+//        longName.setText(local.getLongName());
         modify();
         updatePopup();
     }
@@ -404,6 +404,7 @@ public class MapEditorController{
         typeField.setText(local.getEquipmentType());
         nameField.setText(local.getEquipmentName());
         manField.setText(local.getManufacturer());
+        Locations.setValue(local.getLocation());
         longName.setText(local.getDescription());
         modify();
         updatePopup();
@@ -512,7 +513,8 @@ public class MapEditorController{
 
 
     @FXML public void modify(){
-        setEditFieldsVisible(true);
+        if(!moveState)
+            setEditFieldsVisible(true);
         if(clicked == "location") {
             Location local = dbWrapper.getLocation(selectedPoint);
             idField.setText(selectedPoint);
@@ -540,7 +542,12 @@ public class MapEditorController{
         } else if (clicked == "equipment"){
             System.out.println(dbWrapper.getMedicalEquipment(selectedImg.getId()));
             MedicalEquipment old = dbWrapper.getMedicalEquipment(selectedImg.getId());
+            old.setEquipmentName(nameField.getText());
+            old.setEquipmentType(typeField.getText());
+            old.setManufacturer(manField.getText());
+            old.setLocation((Location) Locations.getValue());
             old.setDescription(longName.getText());
+
             dbWrapper.updateMedicalEquipment(old);//TODO
         }
 
@@ -613,6 +620,7 @@ public class MapEditorController{
             moveState = false;
             moveButton.setText("Move");
         } else{
+            close();
             moveState = true;
             moveButton.setText("Cancel");
         }
