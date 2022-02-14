@@ -40,6 +40,24 @@ public class LocationDBTest {
         Employee employee2 = new Employee("23", "a", "b", "c", 1, "1", "1", "d", "a");
 
         databaseWrapper.addLocation(location2);
+        databaseWrapper.addLocation(new Location(
+                "C120281",
+                180,
+                84,
+                "3",
+                "Towr",
+                "DPT",
+                "Dy Surgery Family Waiting Floor L1",
+                "Deartment C002L1"));
+        databaseWrapper.addLocation(new Location(
+                "CT0281",
+                180,
+                84,
+                "3",
+                "Towr",
+                "DPT",
+                "Dy Surgery Family Waiting Floor L1",
+                "Deartment C002L1"));
 
         databaseWrapper.addEmployee(employee1);
         databaseWrapper.addEmployee(employee2);
@@ -97,7 +115,10 @@ public class LocationDBTest {
         databaseWrapper.getSR("1112");
 
 
-        databaseWrapper.getAllSR();
+//        databaseWrapper.getAllSR();
+        System.out.println(databaseWrapper.getAllLocation());
+        databaseWrapper.nodeTypeCountLocation("Hall", "03");
+        databaseWrapper.nodeTypeCountLocation("DPT", "3");
     }
 
     /*
