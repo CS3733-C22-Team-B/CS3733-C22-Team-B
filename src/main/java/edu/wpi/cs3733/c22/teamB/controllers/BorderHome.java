@@ -87,31 +87,18 @@ public class BorderHome implements Initializable{
         });
 
         button2.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-//            ImageView image2 = new ImageView("src/main/resources/edu/wpi/cs3733/c22/teamB/images/2560px-Healthcare_Building.jpg");
-
-
-
-//            @FXML
-//            public void handleNextAction() {
-//                try {
-//                    scenePane.getChildren().clear();
-//                    AnchorPane newvalscene = (AnchorPane) FXMLLoader.load(getClass().getResource("ProjectDetails.fxml"));
-//                    scenePane.getChildren().setAll(newvalscene.getChildren());
-//                } catch (IOException ex) {
-//                    Logger.getLogger(NewProjectController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
+//            ImageView image2 = new ImageView("src/main/resources/edu/wpi/cs3733/c22/teamB/images/2560px-Healthcare_Building.jpg")
 
 
             AnchorPane node = null;
             try {
                 node = (AnchorPane) load(getClass().getResource("views/Home.fxml"));
                 anchorPane.getChildren().clear();
-                anchorPane.getChildren().setAll(node.getChildren());
+//                anchorPane.getChildren().setAll(node.getChildren());
+                anchorPane.getChildren().addAll(node.getChildren());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
         });
 
     }

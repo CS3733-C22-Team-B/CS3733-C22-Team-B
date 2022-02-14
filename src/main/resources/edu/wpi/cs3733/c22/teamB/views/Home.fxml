@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -36,5 +38,10 @@
             <JFXButton fx:id="CSVImportButton" onAction="#goToCSVRestoreBackup" text="CSV Import/Export" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
          </children>
       </GridPane>
+      <ImageView fitHeight="640.0" fitWidth="987.0" layoutX="-20.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/2560px-Healthcare_Building.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
