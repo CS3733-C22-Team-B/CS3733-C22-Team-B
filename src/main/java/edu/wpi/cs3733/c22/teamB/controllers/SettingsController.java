@@ -1,4 +1,4 @@
-/* package edu.wpi.cs3733.c22.teamB.controllers;
+package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class CSVRestoreBackupController {
+public class SettingsController {
     @FXML
     JFXButton HomeB;
     @FXML
@@ -160,4 +160,3 @@ public class CSVRestoreBackupController {
     
 
 }
-*/

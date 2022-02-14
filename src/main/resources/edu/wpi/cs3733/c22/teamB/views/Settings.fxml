@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.CSVRestoreBackupController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.CSVSettingsController">
    <children>
       <Label alignment="TOP_CENTER" layoutX="97.0" layoutY="14.0" prefHeight="17.0" prefWidth="407.0" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
          <font>
