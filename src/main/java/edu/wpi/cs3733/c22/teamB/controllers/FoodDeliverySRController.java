@@ -55,7 +55,7 @@ public class FoodDeliverySRController implements IController {
 
     @Override
     public void clear() {
-        comboMeals.cancelEdit();
-        drinkMenu.cancelEdit();
+        comboMeals.setValue(null);
+        drinkMenu.setValue(null);
     }
 }

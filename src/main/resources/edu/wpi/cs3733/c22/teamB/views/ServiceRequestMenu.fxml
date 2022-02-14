@@ -7,5 +7,6 @@
    <children>
       <JFXButton layoutX="70.0" layoutY="41.0" onAction="#goToMedicalEquipmentSR" prefHeight="124.0" prefWidth="128.0" text="Medical Equipment" />
       <JFXButton layoutX="70.0" layoutY="179.0" onAction="#goToFoodDeliverySR" prefHeight="124.0" prefWidth="128.0" text="Food Delivery" />
+      <JFXButton layoutX="227.0" layoutY="179.0" onAction="#goToExternalTransportSR" prefHeight="124.0" prefWidth="128.0" text="External Transport" />
    </children>
 </AnchorPane>

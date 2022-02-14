@@ -63,10 +63,14 @@ public class MasterServiceRequestController {
             childSR = sr;
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             loader.setControllerFactory(param -> {
-                if (srType.equals("MedicalEquipmentSR"))
-                     return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
-                else if(srType.equals("FoodDeliverySR"))
+                if (srType.equals("MedicalEquipmentSR")) {
+                    return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                }
+                else if(srType.equals("FoodDeliverySR")) {
                     return new FoodDeliverySRController((FoodDeliverySR) sr);
+                }
+                else if(srType.equals("ExternalTransportSR"))
+                    return new ExternalTransportController((ExternalTransportSR) sr);
                 return null;
             });
             childPane = loader.load();
@@ -189,6 +193,8 @@ public class MasterServiceRequestController {
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
             case "FoodDeliverySR":
                 return "/edu/wpi/cs3733/c22/teamB/views/FoodDeliveryService.fxml";
+            case "ExternalTransportSR":
+                return "/edu/wpi/cs3733/c22/teamB/views/ExternalTransport.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }
