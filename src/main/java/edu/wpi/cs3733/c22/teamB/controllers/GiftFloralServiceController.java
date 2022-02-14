@@ -18,25 +18,8 @@ import javafx.scene.control.TextField;
 public class GiftFloralServiceController implements IController, Initializable {
 
 
-    @FXML private JFXComboBox<String> roomID;
-    @FXML private DatePicker dateID;
-    private GiftFloralSRDBI giftfloralDatabase = new GiftFloralSRDBI();
-    @FXML private TextField idField;
-    @FXML private JFXComboBox<String> assignedEmployeeField;
-    @FXML private JFXComboBox<String> statusField;
-    @FXML private Label confirmLabel;
     @FXML private JFXComboBox<String> giftOptions;
-
-    @FXML private Label reminderText;
-    @FXML private Label whatGifts;
-    // scroll area
-    // checkboxes
-    @FXML private Label whenGifts;
-    // calendar
-    @FXML private Label whatFloor;
-    // dropdown floor
-    @FXML private Label whatRoom;
-    // dropdown room
+    @FXML private JFXComboBox<String> giftType;
 
     private boolean requestCompleted = false;
     private String assignedToRequest;
