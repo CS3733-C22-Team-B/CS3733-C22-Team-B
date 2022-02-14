@@ -109,6 +109,11 @@ public class LocationDBTest {
 
 
         databaseWrapper.getAllSR();
+
+        assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location2);
+        databaseWrapper.updateMedicalEquipment(new MedicalEquipment("12", "Awdd", "asd", "asd", location, "asd", "asd", "12", "asd", 12));
+        assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location);
+
     }
 
     /*

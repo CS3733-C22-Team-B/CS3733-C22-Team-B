@@ -67,7 +67,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
-                            "UPDATE MedicalEquipment SET equipmentName = ?, equipmentType = ?, manufacturer = ?, locationID = ?, status = ?, color = ?, size = ?, description = ?, amount = ?WHERE equipmentID = ? ");
+                            "UPDATE MEDICALEQUIPMENT SET equipmentName = ?, equipmentType = ?, manufacturer = ?, locationID = ?, status = ?, color = ?, size = ?, description = ?, amount = ?WHERE equipmentID = ? ");
 
             pstmt.setString(1, equipment.getEquipmentName());
             pstmt.setString(2, equipment.getEquipmentType());
