@@ -119,7 +119,7 @@ public class RestoreBackupWrapper {
         reader.setFile(filePath);
 
         List<String> stringList = reader.read();
-        List<Employee> employeeList = new ArrayList<>();
+        List<Employee> employeeList = parser.fromStringsToObjects(stringList);
 
         EmployeeDao.restoreTable(employeeList);
     }
