@@ -86,7 +86,7 @@ public class MapEditorController{
     String currentFloor = "03";
     boolean addState = false;
     boolean moveState = false;
-    String clicked;
+    String clicked = "location";
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
