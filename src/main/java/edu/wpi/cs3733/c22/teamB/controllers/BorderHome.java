@@ -45,6 +45,8 @@ public class BorderHome implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+//
 //        try {
 //           FXMLLoader loader = new FXMLLoader(getClass().getResource("views/toolbar.fxml"));
 //            Parent toolbar = loader.load();
@@ -90,12 +92,13 @@ public class BorderHome implements Initializable{
 //            ImageView image2 = new ImageView("src/main/resources/edu/wpi/cs3733/c22/teamB/images/2560px-Healthcare_Building.jpg")
 
 
-            AnchorPane node = null;
+
+
             try {
-                node = (AnchorPane) load(getClass().getResource("views/Home.fxml"));
-                anchorPane.getChildren().clear();
+                anchorPane = (AnchorPane) load(getClass().getResource("views/Home.fxml"));
+//                anchorPane.getChildren().clear();
 //                anchorPane.getChildren().setAll(node.getChildren());
-                anchorPane.getChildren().addAll(node.getChildren());
+                anchorPane.getChildren().addAll(anchorPane.getChildren());
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
