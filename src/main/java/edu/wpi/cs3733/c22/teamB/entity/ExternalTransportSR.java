@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class ExternalTransportSR extends AbstractSR {
 
-
     private String patientID;
     private String dropOffLocation;
     private String formOfTransport;
@@ -23,15 +22,6 @@ public class ExternalTransportSR extends AbstractSR {
         this.dropOffLocation = dropOffLocation;
         this.formOfTransport = formOfTransport;
     }
-
-    public ExternalTransportSR(AbstractSR csr, String patientID, String dropOffLocation, String formOfTransport){
-        super(csr);
-        this.setSrType("ExternalTransportSR");
-        this.patientID = patientID;
-        this.dropOffLocation = dropOffLocation;
-        this.formOfTransport = formOfTransport;
-    }
-
 
     public String getPatientID() {
         return patientID;
@@ -74,25 +64,7 @@ public class ExternalTransportSR extends AbstractSR {
                 '}';
     }
 
-    public String toStringFields() {
-        return getSrID()
-                + ","
-                + patientID
-                + ","
-                + dropOffLocation
-                + ","
-                + formOfTransport;
-    }
-
-    public static String toStringHeader() {
-        return "srID"
-                + ","
-                + "patientID"
-                + ","
-                + "dropOffLocation"
-                + ","
-                + "formOfTransport";
-    }
+//
 
     @Override
     public boolean equals(Object o) {

@@ -82,7 +82,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public AbstractSR getValue(String objectID) {
-        MainSR mainSR = null;
+        AbstractSR mainSR = new MainSR();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM MainSR WHERE srID = ?");

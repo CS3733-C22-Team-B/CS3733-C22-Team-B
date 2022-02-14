@@ -77,9 +77,8 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
             pstmt.setString(6, equipment.getColor());
             pstmt.setString(7, equipment.getSize());
             pstmt.setString(8, equipment.getDescription());
-            pstmt.setString(9, equipment.getEquipmentID());
-            pstmt.setInt(10, equipment.getAmount());
-            System.out.println(equipment.getLocation().getNodeID());
+            pstmt.setInt(9, equipment.getAmount());
+            pstmt.setString(10, equipment.getEquipmentID());
             pstmt.executeUpdate();
             pstmt.close();
 

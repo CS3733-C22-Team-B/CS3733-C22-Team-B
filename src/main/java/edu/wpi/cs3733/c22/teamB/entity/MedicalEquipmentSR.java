@@ -46,18 +46,6 @@ public class MedicalEquipmentSR extends AbstractSR {
                 '}';
     }
 
-    public String toStringFields() {
-        return getSrID()
-                + ","
-                + medicalEquipment.getEquipmentID();
-    }
-
-    public static String toStringHeader() {
-        return "srID"
-                + ","
-                + "medicalEquipmentID";
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

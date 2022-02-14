@@ -1,12 +1,11 @@
-package edu.wpi.teamB;
+package edu.wpi.cs3733.c22.teamB;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.wpi.cs3733.c22.teamB.oldEntity.Location;
+import edu.wpi.cs3733.c22.teamB.oldEntity.LocationParserI;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationParserI;
 import org.junit.jupiter.api.Test;
 
 public class LocationParserITest {
@@ -60,10 +59,8 @@ public class LocationParserITest {
     @Test
     public void testObjectsToStrings() {
         List<String> stringListExpected = new ArrayList<>();
-        String header = Location.toStringHeader();
         String str1 = "nodeID1,1,1,floor1,building1,nodeType1,longN1,shortN1";
         String str2 = "nodeID2,2,2,floor2,building2,nodeType2,longN2,shortN2";
-        stringListExpected.add(header);
         stringListExpected.add(str1);
         stringListExpected.add(str2);
 

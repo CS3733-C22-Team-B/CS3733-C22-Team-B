@@ -21,12 +21,6 @@ public class FoodDeliverySR extends AbstractSR{
         this.drinkName = drinkName;
     }
 
-    public FoodDeliverySR(AbstractSR csr, String foodName, String drinkName){
-        super(csr);
-        this.setSrType("FoodDeliverySR");
-        this.foodName = foodName;
-        this.drinkName = drinkName;
-    }
     public String getFoodName() {
         return foodName;
     }
@@ -57,22 +51,6 @@ public class FoodDeliverySR extends AbstractSR{
                 "foodName='" + foodName + '\'' +
                 ", drinkName='" + drinkName + '\'' +
                 '}';
-    }
-
-    public String toStringFields() {
-        return getSrID()
-                + ","
-                + foodName
-                + ","
-                + drinkName;
-    }
-
-    public static String toStringHeader() {
-        return "srID"
-                + ","
-                + "foodName"
-                + ","
-                + "drinkName";
     }
 
     @Override

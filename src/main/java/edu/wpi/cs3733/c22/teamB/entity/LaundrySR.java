@@ -30,11 +30,4 @@ public class LaundrySR extends AbstractSR {
                 "notes= " + getNotes() + '\'' + '}';
     }
 
-    public String toStringFields() {
-        return getSrID();
-    }
-
-    public static String toStringHeader() {
-        return "srID";
-    }
 }

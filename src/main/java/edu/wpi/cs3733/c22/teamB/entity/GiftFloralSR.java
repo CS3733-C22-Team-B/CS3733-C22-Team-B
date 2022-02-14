@@ -40,18 +40,6 @@ public class GiftFloralSR extends AbstractSR {
                 '}';
     }
 
-    public String toStringFields() {
-        return getSrID()
-                + ","
-                + giftName;
-    }
-
-    public static String toStringHeader() {
-        return "srID"
-                + ","
-                + "giftName";
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
