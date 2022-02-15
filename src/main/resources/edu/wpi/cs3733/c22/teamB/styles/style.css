@@ -113,8 +113,19 @@
 
 
 /* ----------- TAB PANE -------------- */
+.tab-pane {
+    -fx-background-color: white;
 
+
+}
+
+.tab {
+    -fx-background-color: #002168;
+    -fx-text-fill: white;
+    -fx-padding: 0px 16px;
+}
 
 /* ----------- BASIC COLORS (SVGS) -------------- */
 
 
+/* ----------- SECONDARY COLORS -------------- */
