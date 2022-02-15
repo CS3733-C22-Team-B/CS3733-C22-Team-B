@@ -117,9 +117,9 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "SanitationSR", null);
+            ResultSet rset = dbmd.getTables(null, null, "SANITATIONSR", null);
 
-            if (rset.next() && rset.getString(3).equals("SanitationSR")){
+            if (rset.next() && rset.getString(3).equals("SANITATIONSR")){
                 // table exists
             } else {
                 // Create table
