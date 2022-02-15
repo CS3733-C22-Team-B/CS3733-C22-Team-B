@@ -357,6 +357,7 @@ public class DatabaseWrapper {
         restoreBackupWrapper.backupLaundrySR();
         restoreBackupWrapper.backupMedicalEquipmentSR();
         restoreBackupWrapper.backupMedicineDeliverySR();
+        restoreBackupWrapper.backupComputerServiceSR();
     }
 
     public void backupAll() throws IOException{
