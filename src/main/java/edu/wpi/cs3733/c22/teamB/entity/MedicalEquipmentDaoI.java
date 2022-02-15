@@ -1,8 +1,5 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationDaoI;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +9,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
     private Connection conn;
 
     public MedicalEquipmentDaoI() {
-        this.conn = DBConnection.getConnection();
+        this.conn = EmbeddedConnection.getConnection();
     }
 
     @Override

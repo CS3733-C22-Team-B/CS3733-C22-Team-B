@@ -10,7 +10,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
     private Connection conn;
 
     public ExternalTransportSRDaoI() {
-        this.conn = DBConnection.getConnection();
+        this.conn = EmbeddedConnection.getConnection();
     }
 
     @Override

@@ -1,8 +1,5 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import edu.wpi.cs3733.c22.teamB.oldEntity.EmployeeDBI;
-import edu.wpi.cs3733.c22.teamB.oldEntity.LocationDBI;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
     private Connection conn;
 
     public FoodDeliverySRDaoI() {
-        this.conn = DBConnection.getConnection();
+        this.conn = EmbeddedConnection.getConnection();
     }
 
     @Override

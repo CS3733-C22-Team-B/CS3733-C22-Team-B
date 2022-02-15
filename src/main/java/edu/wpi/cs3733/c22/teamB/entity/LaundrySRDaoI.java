@@ -11,7 +11,7 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
     Connection conn;
 
     public LaundrySRDaoI() {
-        this.conn = DBConnection.getConnection();
+        this.conn = EmbeddedConnection.getConnection();
     }
 
     @Override

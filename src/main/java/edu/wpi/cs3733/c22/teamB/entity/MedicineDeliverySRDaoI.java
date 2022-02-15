@@ -10,7 +10,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
     private Connection conn;
 
     public MedicineDeliverySRDaoI() {
-        this.conn = DBConnection.getConnection();
+        this.conn = EmbeddedConnection.getConnection();
     }
 
 

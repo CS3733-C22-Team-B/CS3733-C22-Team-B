@@ -9,7 +9,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
     Connection conn;
 
     public EmployeeDaoI() {
-        this.conn = DBConnection.getConnection();
+        this.conn = EmbeddedConnection.getConnection();
     }
 
     @Override
