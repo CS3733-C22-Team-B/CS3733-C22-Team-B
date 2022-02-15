@@ -12,7 +12,7 @@ public abstract class AbstractSR {
         DONE
     };
 
-    public static String[] SRstatus = {"BLANK", "WAITING", "CANCELED", "DONE"};
+    public static String[] SRstatus = {"WAITING", "IN PROGRESS", "CANCELLED", "DONE"};
 
     private String srID;
     private String srType;
@@ -38,10 +38,10 @@ public abstract class AbstractSR {
         this.srID = srID;
         this.srType = srType;
 
-//        if (status == null) status = "BLANK";
+//        if (status == null) status = "WAITING";
         if (!validateStatus(status)) {
-            System.err.println("WARNING: status is set to BLANK");
-            this.status = "BLANK";
+            System.err.println("WARNING: status is set to WAITING");
+            this.status = "WAITING";
         }
         else this.status = status;
 

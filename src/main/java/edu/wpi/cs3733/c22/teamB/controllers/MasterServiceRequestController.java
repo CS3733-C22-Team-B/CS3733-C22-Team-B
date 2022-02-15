@@ -78,6 +78,8 @@ public class MasterServiceRequestController {
                     return new LaundrySRController((LaundrySR) sr);
                 else if (srType.equals("GiftFloralSR"))
                     return new GiftFloralServiceController((GiftFloralSR) sr);
+                else if(srType.equals("SanitationSR"))
+                    return new SanitationSRController((SanitationSR) sr);
                 return null;
 
             });
@@ -172,7 +174,7 @@ public class MasterServiceRequestController {
     // DO NOT TOUCH THIS
     @FXML private void clear(ActionEvent actionEvent) {
         idField.setText(SRIDGenerator.generateID());
-        statusField.setValue("BLANK");
+        statusField.setValue("WAITING");
         assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
         floorField.setValue("ALL");
         locationField.setValue(null);
@@ -213,6 +215,8 @@ public class MasterServiceRequestController {
                 return "/edu/wpi/cs3733/c22/teamB/views/LaundryService.fxml";
             case "GiftFloralSR":
                 return "/edu/wpi/cs3733/c22/teamB/views/GiftFloralService.fxml";
+            case "SanitationSR":
+                return "/edu/wpi/cs3733/c22/teamB/views/SanitationSR.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }
