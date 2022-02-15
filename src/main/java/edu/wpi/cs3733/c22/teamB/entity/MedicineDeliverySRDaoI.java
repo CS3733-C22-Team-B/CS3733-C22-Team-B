@@ -86,7 +86,6 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
             MainSRDaoI mainSRDaoI = new MainSRDaoI();
             AbstractSR mainSR = mainSRDaoI.getValue(objectID);
 
-            String srType = "Medicine Delivery";
             String status = mainSR.getStatus();
             Location location = mainSR.getLocation();
             Employee requestor = mainSR.getRequestor();
@@ -97,7 +96,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
             medicineDeliverySR = new MedicineDeliverySR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
 
         } catch (SQLException e) {
-            System.out.println("Get FoodDeliverySR Node Failed");
+            System.out.println("Get MEDICINEDELIVERYSR Node Failed");
             e.printStackTrace();
         }
         return medicineDeliverySR;

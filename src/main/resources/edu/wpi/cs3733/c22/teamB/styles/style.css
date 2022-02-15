@@ -1,137 +1,117 @@
-.anchor {
-    -fx-background-image: url('../images/2560px-Healthcare_Building.jpg');
-    -fx-background-size: cover;
+@font-face {
+    font-family: 'open-sans';
+    src: url('../fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf');
 }
 
-.mapEditor {
-    -fx-background-image: url('../images/thirdFloorMap.png');
-    -fx-background-size: cover;
+.text {
+    -fx-font-family: open-sans;
+    -fx-font-size: 16px;
 }
 
-.anchor:hover {
-    -fx-opacity: 95%;
+.root {
 }
 
-.rectangle {
-    -fx-border-radius: 5;
-    -fx-background-color: rgba(255, 255, 255, 0.8);
+/* ----------- LABEL -------------- */
+.label {
 }
 
+.service-title {
 
-.button {
-    -fx-background-color: FDC500;
-    -fx-font-size: 18px;
+    -fx-font-fill: black;
+    -fx-font-size: 100px;
+
 }
 
-.pane {
-    -fx-background-color: #1e90ff;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #000000;
-    -fx-border-width: 2;
+/* look at me making a comment so that we can have another pull request */
+/* ----------- BUTTON -------------- */
+
+.submit-button {
+
+-fx-background-color: #002168;
+    -fx-text-fill: white;
+    -fx-padding: 0px 16px;
+
 }
 
-.lightPane {
-    -fx-background-color: #93C0EB;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #000000;
-    -fx-border-width: 2;
-}
+.clear-button {
 
-.tab{
-    -fx-background-color: #93C0EB;
-    -fx-background-radius: 20;
-    -fx-border-width: 2;
-    -fx-border-radius: 20;
-    -fx-border-color: #000000;
-}
-
-.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
-    -fx-border-color: transparent;
-}
-
-.tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: white;
-}
-
-.tab-pane .tab:selected {
-    -fx-background-color: #1E90FF;
-    -fx-background-radius: 20 20 0 0;
-    -fx-border-radius: 20 20 0 0;
-}
-
-.tab:hover
-{
-    -fx-background-color: #66b5ff;
-    -fx-border-color: #173049;
-    -fx-border-width: 1;
-}
-
-.JFXButtonLight:hover
-{
-    -fx-background-color: #66b5ff;
-    -fx-border-color: #173049;
-    -fx-border-width: 1;
-}
-
-.JFXButtonLight {
-    -fx-background-color: #93C0EB;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #000000;
-    -fx-border-width: 2;
-}
-
-.JFXButtonDark:hover
-{
-    -fx-background-color: #007fff;
-    -fx-border-color: #99ccff;
-    -fx-border-width: 1;
-}
-
-.JFXButtonDark {
-    -fx-background-color: #1e90ff;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #000000;
-    -fx-border-width: 2;
-}
-
-.JFXButtonMinor:hover
-{
-    -fx-background-color: #b2daff;
-    -fx-border-color: #173049;
-    -fx-border-width: 1;
-}
-
-.JFXButtonMinor {
-    -fx-background-color: #eaeaea;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #000000;
-    -fx-border-width: 1;
-    -fx-font-size: 12;
-}
-
-.darkBlueWithBorder{
-    -fx-background-color: #002168;
-    -fx-border-color: #000000;
-    -fx-border-width: 1;
-    -fx-font-size: 12;
-    -fx-text-fill: #FFFFFF;
-}
-.lightBlueWithBorder{
-    -fx-background-color: #99a6c2;
-    -fx-border-color: #002168;
-    -fx-border-width: 1;
-    -fx-font-size: 12;
-    -fx-text-fill: #000000;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-border-color: black;
 
 }
-.lightBlueBorderless{
-    -fx-background-color: #99a6c2;
-    -fx-font-size: 12;
-    -fx-text-fill: #000000;
+
+.service-button {
+
+    -fx-background-color: #7B94C9;
+    -fx-text-fill: white;
+    -fx-border-radius: 7;
+    -fx-font-size
 
 }
+
+
+/* ----------- COMBO BOX -------------- */
+
+/* ------------- TEXT FIELD  -----------*/
+
+.text-field {
+
+         -fx-text-fill: #023047;
+        -fx-background-color: #a9a9a9 , white , white;
+       	-fx-background-insets: 0, 0 0 1 0;
+       	-fx-background-radius: 0;
+        }
+
+    .text-field:focused {
+        -fx-background-color: #a9a9a9 , white , white;
+       -fx-background-insets: 0, 0 0 1 0;
+    }
+
+
+.service-text-field {
+
+    -fx-text-fill: white;
+    -fx-background-color: #7B94C9 , #7B94C9 ,#7B94C9;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 3;
+    -fx-prompt-text-fill: white;
+}
+
+    .service-text-field:focused {
+           -fx-background-color: #7B94C9 , #7B94C9, #7B94C9;
+           -fx-background-insets: 0, 0 0 1 0;
+        }
+
+
+/* ----------- TEXT FIELD ------------ TEXT AREA -------- PASSWORD FIELD -------------- */
+
+
+/*----------------------- TABLE ---------------*/
+
+/* ----------- CHECK-BOX -------------- */
+
+/* ----------- RADIO-BUTTON -------------- */
+
+
+/* ----------- TOGGLE-BUTTON -------------- */
+
+
+/* ----------- TOGGLE-NODE -------------- */
+
+
+/* ----------- SLIDER -------------- */
+
+
+
+/* ----------- FLOATING ACTION BUTTON -------------- */
+
+
+/* ----------- TAB PANE -------------- */
+
+
+/* ----------- BASIC COLORS (SVGS) -------------- */
+
+
+/* ----------- SECONDARY COLORS -------------- */

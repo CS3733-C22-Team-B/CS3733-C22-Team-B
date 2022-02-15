@@ -234,4 +234,16 @@ public class LocationDaoI implements IDatabase<Location> {
         }
         return ans;
     }
+
+    public int nodeTypeCount(String nodeType, String floor) {
+
+        List<Location> ans = getAllValues();
+        int count = 0;
+        for (Location location : ans) {
+            if ((location.getNodeType().equals(nodeType)) && (location.getFloor().equals(floor))) {
+                count += 1;
+            }
+        }
+        return count;
+    }
 }

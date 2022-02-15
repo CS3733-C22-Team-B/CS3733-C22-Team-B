@@ -3,7 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
+<AnchorPane prefHeight="456.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
    <children>
       <JFXButton layoutX="70.0" layoutY="41.0" onAction="#goToMedicalEquipmentSR" prefHeight="124.0" prefWidth="128.0" text="Medical Equipment" />
       <JFXButton layoutX="236.0" layoutY="41.0" onAction="#goToComputerServiceSR" prefHeight="124.0" prefWidth="128.0" text="Computer Service " />
@@ -11,5 +11,7 @@
       <JFXButton layoutX="236.0" layoutY="179.0" onAction="#goToExternalTransportSR" prefHeight="124.0" prefWidth="128.0" text="External Transport" />
       <JFXButton layoutX="402.0" layoutY="179.0" onAction="#goToMedicineDeliverySR" prefHeight="124.0" prefWidth="128.0" text="Medicine Delivery" />
       <JFXButton layoutX="402.0" layoutY="41.0" onAction="#goToLaundryServiceSR" prefHeight="124.0" prefWidth="128.0" text="Laundry Service" />
+      <JFXButton layoutX="266.0" layoutY="313.0" onAction="#goToGiftFloralSR" prefHeight="66.0" prefWidth="68.0" text="Gift and Floral" />
+      <JFXButton layoutX="70.0" layoutY="318.0" onAction="#goToSanitationSR" prefHeight="124.0" prefWidth="128.0" text="Sanitation" />
    </children>
 </AnchorPane>
