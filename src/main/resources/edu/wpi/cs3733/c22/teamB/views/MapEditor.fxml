@@ -14,16 +14,19 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane onMouseClicked="#imageClicked">
-               <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
-                  <image>
-                     <Image url="@../images/thirdFloorMap.png" />
-                  </image>
-               </ImageView>
+               <ScrollPane fx:id="scroll">
+                  <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../images/thirdFloorMap.png" />
+                     </image>
+                  </ImageView>
+               </ScrollPane>
 
 
                <VBox fx:id="modifyPopup" maxHeight="200.0" maxWidth="250.0">
@@ -47,13 +50,27 @@
                      <Pane prefHeight="200.0" prefWidth="200.0" />
                      <Label fx:id="header1" prefHeight="15" text="Location ID:" />
                      <TextField fx:id="idField" promptText="Location ID" />
+                     <Label fx:id="header2" prefHeight="15" text="Equipment Name:" />
+                     <TextField fx:id="nameField" promptText="Equipment Name" />
+                     <Label fx:id="header3" prefHeight="15" text="Equipment Type:" />
+                     <TextField fx:id="typeField" promptText="Equipment Type" />
+                     <Label fx:id="header5" prefHeight="15" text="Manufacturer:" />
+                     <TextField fx:id="manField" promptText="Manufacturer" />
                      <Label fx:id="header4" prefHeight="15" text="Floor:" />
                      <JFXComboBox fx:id="floor" prefHeight="25.0" prefWidth="284.0" />
                      <Label fx:id="header6" prefHeight="15" text="Node Type:" />
                      <JFXComboBox fx:id="nodeType" prefHeight="25.0" prefWidth="284.0" />
+                     <Label fx:id="header10" prefHeight="15" text="Status:" />
+                     <JFXComboBox fx:id="status" prefHeight="25.0" prefWidth="284.0" />
+                     <Label fx:id="header11" prefHeight="15" text="Color:" />
+                     <TextField fx:id="color" promptText="Color" />
+                     <Label fx:id="header12" prefHeight="15" text="Size:" />
+                     <TextField fx:id="size" promptText="Size" />
                      <Label fx:id="header7" prefHeight="15" text="Short Name:" />
                      <TextField fx:id="shortName" promptText="Short Name" />
                      <Label fx:id="header8" prefHeight="15" text="Long Name:" />
+                     <Label fx:id="header9" prefHeight="15" text="Locations:" />
+                     <JFXComboBox fx:id="Locations" prefHeight="25.0" prefWidth="284.0" />
                      <TextField fx:id="longName" promptText="Long Name" />
                      <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
                      <Pane prefHeight="15" />
@@ -97,3 +114,4 @@
    </children>
 
 </AnchorPane>
+
