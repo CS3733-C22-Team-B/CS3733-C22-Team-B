@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -17,7 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class GiftFloralServiceController implements IController {
-
+    String type[] = {"All", "Floral", "Gift"};
+    String opts[] = {"Teddy Bear", "Pajamas", "Slippers", "Rock", "Coloring Books"};
+    String optsFl[] = {"Red Bouquet", "Orange Bouquet", "Yellow Bouquet"};
 
     @FXML private JFXComboBox<String> giftOptions;
     @FXML private JFXComboBox<String> giftType;
@@ -31,20 +34,16 @@ public class GiftFloralServiceController implements IController {
 
     @FXML
     public void initialize(){
-        DatabaseWrapper dw = new DatabaseWrapper();
-        String type[] = {"Floral", "Gift"};
-        String opts[] = {"Teddy Bear", "Pajamas", "Slippers", "Rock", "Coloring Books"};
-        String optsFl[] = {"Red Bouquet", "Orange Bouquet", "Yellow Bouquet"};
-
         giftType.setItems(FXCollections.observableArrayList(type));
 
-        if (giftType.getValue().equals("Floral")){
-            giftOptions.setItems(FXCollections.observableArrayList(optsFl));
+        giftOptions.getItems().addAll(FXCollections.observableArrayList(optsFl));
+        giftOptions.getItems().addAll(FXCollections.observableArrayList(opts));
+        if (sr == null) {
+            clear();
+        } else {
+            giftType.setValue("All");
+            giftOptions.setValue(sr.getGiftName());
         }
-        else if (giftType.getValue().equals("Gift")){
-            giftOptions.setItems(FXCollections.observableArrayList(opts));
-        }
-
     }
 
 
@@ -91,7 +90,23 @@ public class GiftFloralServiceController implements IController {
 
     @Override
     public void clear() {
-        giftOptions.setValue("");
-        giftType.setValue("");
+        giftOptions.setValue(null);
+        giftType.setValue("All");
+    }
+
+
+    @FXML private void onGiftTypeChange(ActionEvent actionEvent) {
+        giftOptions.getItems().clear();
+        giftOptions.getItems().removeAll();
+        if (giftType.getValue().equals("All")){
+            giftOptions.getItems().addAll(FXCollections.observableArrayList(optsFl));
+            giftOptions.getItems().addAll(FXCollections.observableArrayList(opts));
+        }
+        else if (giftType.getValue().equals("Floral")){
+            giftOptions.setItems(FXCollections.observableArrayList(optsFl));
+        }
+        else if (giftType.getValue().equals("Gift")){
+            giftOptions.setItems(FXCollections.observableArrayList(opts));
+        }
     }
 }
