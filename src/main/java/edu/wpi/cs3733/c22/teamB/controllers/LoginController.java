@@ -33,7 +33,7 @@ public class LoginController {
     void loginButton(ActionEvent event) {
         if(passField.getText().isEmpty() || userField.getText().isEmpty()){
             errorMessage.setText("Enter a username and password");
-        } else if(!passField.getText().equals("admin") || !userField.getText().equals("admin")){
+        } else if((!passField.getText().equals("admin") || !userField.getText().equals("admin")) && (!passField.getText().equals("staff") || !userField.getText().equals("staff"))){
             errorMessage.setText("Incorrect username or password");
         } else{
             String[] args = new String[2];
