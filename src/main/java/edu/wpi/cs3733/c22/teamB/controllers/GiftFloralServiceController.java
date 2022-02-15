@@ -1,7 +1,8 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
+import edu.wpi.cs3733.c22.teamB.entity.*;
+
 
 import java.net.URL;
 import java.util.*;
@@ -19,7 +20,7 @@ public class GiftFloralServiceController implements IController, Initializable {
 
     @FXML private JFXComboBox<String> roomID;
     @FXML private DatePicker dateID;
-    private GiftFloralSRDBI giftfloralDatabase = new GiftFloralSRDBI();
+
     @FXML private TextField idField;
     @FXML private JFXComboBox<String> assignedEmployeeField;
     @FXML private JFXComboBox<String> statusField;
@@ -49,11 +50,12 @@ public class GiftFloralServiceController implements IController, Initializable {
         assignedToRequest = name;
     }
 
+    DatabaseWrapper db = new DatabaseWrapper();
+
     @Override
         public void initialize(URL location, ResourceBundle resources) {
-            LocationDBI locationDBI = new LocationDBI();
-//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-            locList = locationDBI.getAllNodes();
+
+            locList = db.getAllLocation();
             locMap =
                     IntStream.range(0, locList.size())
                             .boxed()
@@ -61,12 +63,8 @@ public class GiftFloralServiceController implements IController, Initializable {
                                     Collectors.toMap(
                                             i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
                                             i -> locList.get(i)));
-//        locationDBI.closeConnection();
 
-
-            EmployeeDBI employeeDBI = new EmployeeDBI();
-//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-            employeeList = employeeDBI.getAllNodes();
+            employeeList = db.getAllEmployee();
             employeeMap =
                     IntStream.range(0, employeeList.size())
                             .boxed()
@@ -75,9 +73,9 @@ public class GiftFloralServiceController implements IController, Initializable {
                                             i ->
                                                     (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                             i -> employeeList.get(i)));
-//        employeeDBI.closeConnection();
 
-            statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
+
+//            statusField.getItems().addAll(AbstractSR.keySet());
             statusField.setValue("BLANK");
 
             roomID.getItems().addAll(locMap.keySet());
@@ -116,9 +114,9 @@ public class GiftFloralServiceController implements IController, Initializable {
     @Override
     public void submit() {
 
-      GiftFloralSR request = new GiftFloralSR(idField.getText(), statusField.getValue(), giftOptions.getValue(), dateID.getValue().toString(), roomID.getValue());
-      System.out.println(request.toString());
-      giftfloralDatabase.insertNode(request);
+//      GiftFloralSR request = new GiftFloralSR(idField.getText(), statusField.getValue(), giftOptions.getValue(), dateID.getValue().toString(), roomID.getValue());
+//      System.out.println(request.toString());
+//      giftfloralDatabase.insertNode(request);
       clear();
     }
 
