@@ -2,8 +2,8 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.oldEntity.Location;
-import edu.wpi.cs3733.c22.teamB.oldEntity.LocationDBI;
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.Location;
 import java.io.IOException;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -42,10 +42,11 @@ public class LocationTableController {
     Function func = Function.NOTHING;
 
     private boolean initTable = false;
-    private LocationDBI locationDBI = new LocationDBI();
     List<Location> listOfLocations;
 
     public LocationTableController() {}
+
+    DatabaseWrapper db = new DatabaseWrapper();
 
     @FXML
     private void initialize() throws NullPointerException {
@@ -100,7 +101,7 @@ public class LocationTableController {
             table.setEditable(true);
         }
         table.getItems().clear();
-        listOfLocations = locationDBI.getAllNodes();
+        listOfLocations = db.getAllLocation();
         table.getItems().addAll(listOfLocations); // create and add object
     }
 
@@ -171,7 +172,7 @@ public class LocationTableController {
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
-        locationDBI.deleteNode(table.getSelectionModel().getSelectedItem().getNodeID());
+        db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
         loadTable();
     }
 
@@ -182,20 +183,7 @@ public class LocationTableController {
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == Function.ADD) {
-            locationDBI.insertNode
-                    (new Location(
-                            nodeIDField.getText(),
-                            Integer.parseInt(xcoordField.getText()),
-                            Integer.parseInt(ycoordField.getText()),
-                            floorField.getText(),
-                            buildingField.getText(),
-                            nodeTypeField.getText(),
-                            longNameField.getText(),
-                            shortNameField.getText()
-            ));
-            loadTable();
-        } else if (func == Function.MODIFY) {
-            locationDBI.updateNode(new Location(
+            Location w = new Location(
                     nodeIDField.getText(),
                     Integer.parseInt(xcoordField.getText()),
                     Integer.parseInt(ycoordField.getText()),
@@ -203,11 +191,24 @@ public class LocationTableController {
                     buildingField.getText(),
                     nodeTypeField.getText(),
                     longNameField.getText(),
-                    shortNameField.getText()));
+                    shortNameField.getText());
+            db.addLocation((w));
+            loadTable();
+        } else if (func == Function.MODIFY) {
+            Location n = new Location(
+                    nodeIDField.getText(),
+                    Integer.parseInt(xcoordField.getText()),
+                    Integer.parseInt(ycoordField.getText()),
+                    floorField.getText(),
+                    buildingField.getText(),
+                    nodeTypeField.getText(),
+                    longNameField.getText(),
+                    shortNameField.getText());
+            db.updateLocation(n);
             loadTable();
         } else if (func == Function.IDLOOKUP) {
             table.getItems().clear();
-            table.getItems().add(locationDBI.getNode(nodeIDField.getText())); // create and add object
+            table.getItems().add(db.getLocation(nodeIDField.getText())); // create and add object
         }
 
         clearForm(actionEvent);
