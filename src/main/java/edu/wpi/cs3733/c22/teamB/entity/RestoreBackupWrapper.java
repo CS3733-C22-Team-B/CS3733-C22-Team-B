@@ -54,6 +54,12 @@ public class RestoreBackupWrapper {
     private final String computerServiceFileNameW = "ComputerServiceSRB";
     private final String sanitationFileNameW = "SanitationSRB";
 
+    // First restore paths
+    private final String locationFileNameF = "TowerLocationsB.csv";
+    private final String employeeFileNameF = "EmployeeB.csv";
+    private final String medicalEquipmentFileNameF = "MedicalEquipmentB.csv";
+
+
     RestoreBackupWrapper() {
          LocationDao = new LocationDaoI();
          EmployeeDao = new EmployeeDaoI();
@@ -104,6 +110,26 @@ public class RestoreBackupWrapper {
         backupMedicineDeliverySR();
         backupComputerServiceSR();
         backupSanitationSR();
+    }
+
+    void firstRestore() throws IOException{
+        CSVReader reader = new CSVReader();
+
+        LocationParserI parserL = new LocationParserI();
+        EmployeeParserI parserE = new EmployeeParserI();
+        MedicalEquipmentParserI parserM = new MedicalEquipmentParserI();
+
+        List<String> locationStringList = reader.firstRestore(locationFileNameF);
+        List<String> employeeStringList = reader.firstRestore(employeeFileNameF);
+        List<String> medicalEquipmentStringList = reader.firstRestore(medicalEquipmentFileNameF);
+
+        List<Location> locationList = parserL.fromStringsToObjects(locationStringList);
+        List<Employee> employeeList = parserE.fromStringsToObjects(employeeStringList);
+        List<MedicalEquipment> medicalEquipmentList = parserM.fromStringsToObjects(medicalEquipmentStringList);
+
+        LocationDao.restoreTable(locationList);
+        EmployeeDao.restoreTable(employeeList);
+        MedicalEquipmentDao.restoreTable(medicalEquipmentList);
     }
 
     void restoreLocation() throws IOException {

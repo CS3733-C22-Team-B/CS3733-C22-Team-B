@@ -365,11 +365,30 @@ public class DatabaseWrapper {
     public void backupAll() throws IOException{
         restoreBackupWrapper.backupAll();
     }
+
+    public void firstRestore() throws IOException {
+        restoreBackupWrapper.firstRestore();
+        createAll();
+    }
+
+    // Clean up for Iteration 3
+    public void isFirstRestore() throws IOException {
+
+        LocationDaoI test = new LocationDaoI();
+        if (test.isFirstRestore()){
+            firstRestore();
+        } else{
+            System.out.println("Not First Restore!");
+        }
+    }
+
+    // Clean up for Iteration 3
     public boolean isInTableLocation(String nodeID){
         LocationDaoI test = new LocationDaoI();
         return test.isInTable(nodeID);
     }
 
+    // Clean up for Iteration 3
     public int nodeTypeCountLocation(String nodeType, String floor){
         LocationDaoI locationDaoI = new LocationDaoI();
         System.out.println(locationDaoI.nodeTypeCount(nodeType, floor));
