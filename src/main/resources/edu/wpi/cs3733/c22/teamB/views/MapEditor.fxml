@@ -20,13 +20,12 @@
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane onMouseClicked="#imageClicked">
-               <ScrollPane fx:id="scroll">
                   <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@../images/thirdFloorMap.png" />
                      </image>
                   </ImageView>
-               </ScrollPane>
+
 
 
                <VBox fx:id="modifyPopup" maxHeight="200.0" maxWidth="250.0">
@@ -95,6 +94,8 @@
                   <JFXButton fx:id="goTo2Button" onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 2" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="goTo3Button" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
+                  <JFXButton fx:id="goToSideViewButton" onAction="#goToSideView" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo SideView" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" />
                   <Pane prefHeight="15" />

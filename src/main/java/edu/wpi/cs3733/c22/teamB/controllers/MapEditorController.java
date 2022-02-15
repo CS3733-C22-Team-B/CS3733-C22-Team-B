@@ -93,6 +93,7 @@ public class MapEditorController{
     Image lowerLevel2Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel2.png");
     Image lowerLevel1Image = new Image("/edu/wpi/cs3733/c22/teamB/images/thelowerlevel1.png");
     Image thirdFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thirdFloorMap.png");
+    Image sideViewImage = new Image("/edu/wpi/cs3733/c22/teamB/images/SideView.png");
     Image medical = new Image("/edu/wpi/cs3733/c22/teamB/images/medical.png");
     Image clipboard = new Image("/edu/wpi/cs3733/c22/teamB/images/clipboard.png");
     @FXML
@@ -116,6 +117,8 @@ public class MapEditorController{
     @FXML private JFXButton goTo1Button;
     @FXML private JFXButton goTo2Button;
     @FXML private JFXButton goTo3Button;
+    @FXML private JFXButton goToSideViewButton;
+
 
 
     @FXML
@@ -187,7 +190,6 @@ public class MapEditorController{
 
     //Add a point to the map using image coordinates. Set up onclick.
     public Circle addPoint(String ID, double x, double y, Color color){
-
         //Create the point
         Circle testPoint = new Circle(getImageX(x), getImageY(y), 3);
         //Add the point to the anchorPane's children
@@ -244,6 +246,8 @@ public class MapEditorController{
         return testPoint;
 
     }
+
+
 
 
     //add a medical point
@@ -450,6 +454,12 @@ public class MapEditorController{
         currentFloor = "L2";
         goTo();
     }
+
+    @FXML public void goToSideView() {
+        currentFloor = "side";
+        goTo();
+    }
+
     @FXML public void goToL1(){
         currentFloor = "L1";
         goTo();
@@ -482,6 +492,7 @@ public class MapEditorController{
         goTo3Button.setStyle("-fx-background-color: #eaeaea");
         goToL1Button.setStyle("-fx-background-color: #eaeaea");
         goToL2Button.setStyle("-fx-background-color: #eaeaea");
+        goToSideViewButton.setStyle("-fx-background-color: #eaeaea");
 
         switch (currentFloor) {
             case "01":
@@ -499,6 +510,10 @@ public class MapEditorController{
             case"L1":
                 imageView.setImage(lowerLevel1Image);
                 goToL1Button.setStyle("-fx-background-color: #007fff");
+                break;
+            case"side":
+                imageView.setImage(sideViewImage);
+                goToSideViewButton.setStyle("-fx-background-color: #007fff");
                 break;
             default:
                 imageView.setImage(thirdFloorImage);
@@ -689,8 +704,6 @@ public class MapEditorController{
         }
         modifyPopup.getTransforms().add(trans);
     }
-
-
 
 
 
