@@ -1,0 +1,4 @@
+equipmentID,equipmentName,equipmentType,manufacturer,location,status,color,size,description,amount
+EQ1,BED,bed,WPI,FHALL00201,WAITING,red,large,yes,1
+EQ2,CHAIR,chair,WPI,FHALL00301,WAITING,yellow,small,no,1
+EQ3,PENCIL,pencil,WPI,FHALL00401,WAITING,brown,XL,maybe,2
