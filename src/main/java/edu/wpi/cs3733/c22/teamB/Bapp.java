@@ -4,7 +4,6 @@ import edu.wpi.cs3733.c22.teamB.entity.*;
 import java.io.IOException;
 import java.util.List;
 
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,8 @@ public class Bapp extends Application {
     @Override
     public void init() throws IOException {
         log.info("Starting Up");
+
+
 
 //        DatabaseManager databaseManager = new DatabaseManager();
 //        databaseManager.createTable();

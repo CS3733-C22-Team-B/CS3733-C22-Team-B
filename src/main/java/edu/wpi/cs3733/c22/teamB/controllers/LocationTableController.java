@@ -2,8 +2,8 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.oldEntity.Location;
-import edu.wpi.cs3733.c22.teamB.oldEntity.LocationDBI;
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.Location;
 import java.io.IOException;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -35,21 +35,18 @@ public class LocationTableController {
     @FXML private TableView<Location> table;
     @FXML private JFXButton loadButton;
 
-    private enum Function {
-        ADD,
-        MODIFY,
-        DELETE,
-        NOTHING,
-        IDLOOKUP
-    };
 
+
+
+    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
     Function func = Function.NOTHING;
 
     private boolean initTable = false;
-    private LocationDBI locationDBI = new LocationDBI();
     List<Location> listOfLocations;
 
     public LocationTableController() {}
+
+    DatabaseWrapper db = new DatabaseWrapper();
 
     @FXML
     private void initialize() throws NullPointerException {
@@ -59,16 +56,12 @@ public class LocationTableController {
         gridPane.setVisible(false);
         gridPane.setDisable(true);
 
-        table
-                .getSelectionModel()
-                .selectedItemProperty()
-                .addListener(
-                        (obs, oldSelection, newSelection) -> {
-                            if (newSelection != null) {
-                                modifyButton.setDisable(false);
-                                deleteButton.setDisable(false);
-                            }
-                        });
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                modifyButton.setDisable(false);
+                deleteButton.setDisable(false);
+            }
+        });
 
         loadTable();
     }
@@ -108,7 +101,7 @@ public class LocationTableController {
             table.setEditable(true);
         }
         table.getItems().clear();
-        listOfLocations = locationDBI.getAllNodes();
+        listOfLocations = db.getAllLocation();
         table.getItems().addAll(listOfLocations); // create and add object
     }
 
@@ -116,8 +109,7 @@ public class LocationTableController {
     void goToHome(ActionEvent event) {
         // Try to go home
         try {
-            Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {
@@ -180,53 +172,50 @@ public class LocationTableController {
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
-        locationDBI.deleteNode(table.getSelectionModel().getSelectedItem().getNodeID());
+        db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
         loadTable();
     }
 
-    @FXML
-    private void locationTableClick(MouseEvent mouseEvent) {
+    @FXML private void locationTableClick(MouseEvent mouseEvent) {
         modifyButton.setVisible(true);
         deleteButton.setVisible(true);
     }
 
-    @FXML
-    private void confirm(ActionEvent actionEvent) {
-        if (func == Function.ADD) {
-            locationDBI.insertNode(
-                    new Location(
-                            nodeIDField.getText(),
-                            Integer.parseInt(xcoordField.getText()),
-                            Integer.parseInt(ycoordField.getText()),
-                            floorField.getText(),
-                            buildingField.getText(),
-                            nodeTypeField.getText(),
-                            longNameField.getText(),
-                            shortNameField.getText()));
+    @FXML private void confirm(ActionEvent actionEvent) {
+        if(func == Function.ADD) {
+            Location w = new Location(
+                    nodeIDField.getText(),
+                    Integer.parseInt(xcoordField.getText()),
+                    Integer.parseInt(ycoordField.getText()),
+                    floorField.getText(),
+                    buildingField.getText(),
+                    nodeTypeField.getText(),
+                    longNameField.getText(),
+                    shortNameField.getText());
+            db.addLocation((w));
             loadTable();
         } else if (func == Function.MODIFY) {
-            locationDBI.updateNode(
-                    new Location(
-                            nodeIDField.getText(),
-                            Integer.parseInt(xcoordField.getText()),
-                            Integer.parseInt(ycoordField.getText()),
-                            floorField.getText(),
-                            buildingField.getText(),
-                            nodeTypeField.getText(),
-                            longNameField.getText(),
-                            shortNameField.getText()));
+            Location n = new Location(
+                    nodeIDField.getText(),
+                    Integer.parseInt(xcoordField.getText()),
+                    Integer.parseInt(ycoordField.getText()),
+                    floorField.getText(),
+                    buildingField.getText(),
+                    nodeTypeField.getText(),
+                    longNameField.getText(),
+                    shortNameField.getText());
+            db.updateLocation(n);
             loadTable();
         } else if (func == Function.IDLOOKUP) {
             table.getItems().clear();
-            table.getItems().add(locationDBI.getNode(nodeIDField.getText())); // create and add object
+            table.getItems().add(db.getLocation(nodeIDField.getText())); // create and add object
         }
 
         clearForm(actionEvent);
         func = Function.NOTHING;
     }
 
-    @FXML
-    private void clearForm(ActionEvent actionEvent) {
+    @FXML private void clearForm(ActionEvent actionEvent) {
         nodeIDField.clear();
         xcoordField.clear();
         ycoordField.clear();
@@ -237,8 +226,7 @@ public class LocationTableController {
         shortNameField.clear();
     }
 
-    @FXML
-    private void cancelForm(ActionEvent actionEvent) {
+    @FXML private void cancelForm(ActionEvent actionEvent) {
         gridPane.setDisable(true);
         gridPane.setVisible(false);
         clearForm(actionEvent);
@@ -254,9 +242,7 @@ public class LocationTableController {
 
         func = Function.NOTHING;
     }
-
-    @FXML
-    private void idLookup(ActionEvent actionEvent) {
+    @FXML private void idLookup(ActionEvent actionEvent) {
         gridPane.setVisible(true);
         gridPane.setDisable(false);
         xcoordField.setVisible(false);
