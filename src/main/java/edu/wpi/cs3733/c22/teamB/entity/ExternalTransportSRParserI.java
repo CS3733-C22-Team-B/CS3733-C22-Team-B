@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import edu.wpi.cs3733.c22.teamB.oldEntity.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

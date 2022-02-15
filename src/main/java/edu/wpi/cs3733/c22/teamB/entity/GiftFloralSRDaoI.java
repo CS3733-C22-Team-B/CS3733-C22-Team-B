@@ -82,15 +82,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
             MainSRDaoI mainSRDaoI = new MainSRDaoI();
             AbstractSR mainSR = mainSRDaoI.getValue(objectID);
 
-            String srType = "Gift";
-            String status = mainSR.getStatus();
-            Location location = mainSR.getLocation();
-            Employee requestor = mainSR.getRequestor();
-            Employee assignedEmployee = mainSR.getAssignedEmployee();
-            LocalDate dateRequested = mainSR.getDateRequested();
-            String notes = mainSR.getNotes();
-
-            giftFloralSR = new GiftFloralSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, giftName);
+            giftFloralSR = new GiftFloralSR(mainSR, giftName);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");
@@ -98,8 +90,6 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
         }
         return giftFloralSR;
     }
-
-
 
     @Override
     public List<GiftFloralSR> getAllValues() {

@@ -3,7 +3,6 @@ package edu.wpi.cs3733.c22.teamB;
 import java.io.IOException;
 import java.util.List;
 
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

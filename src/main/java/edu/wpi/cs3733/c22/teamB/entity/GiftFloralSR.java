@@ -17,6 +17,12 @@ public class GiftFloralSR extends AbstractSR {
         this.giftName = giftName;
     }
 
+    public GiftFloralSR(AbstractSR csr, String giftName){
+        super(csr);
+        this.setSrType("GiftFloralSR");
+        this.giftName = giftName;
+    }
+
     public String getGiftName() {
         return giftName;
     }
