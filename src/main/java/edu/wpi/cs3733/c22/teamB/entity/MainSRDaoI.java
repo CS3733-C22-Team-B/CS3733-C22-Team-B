@@ -9,7 +9,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
     Connection conn;
 
     public MainSRDaoI() {
-        this.conn = EmbeddedConnection.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     @Override

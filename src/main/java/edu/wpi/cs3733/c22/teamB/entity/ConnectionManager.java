@@ -8,28 +8,28 @@ abstract class ConnectionManager {
 
     private static Connection embeddedConnection;
     private static Connection clientConnection;
-    private boolean useRemote = false;
+    private static boolean useClient = false;
 
     public ConnectionManager() throws SQLException {
-        this.embeddedConnection = DriverManager.getConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        this.clientConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/BWDB;create=true", "admin", "admin");
+        embeddedConnection = DriverManager.getConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+        clientConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/BWDB;create=true", "admin", "admin");
     }
 
-    public Connection getConnection() {
-        if (useRemote) {
+    public static Connection getConnection() {
+        if (useClient) {
             return clientConnection;
         } else {
             return embeddedConnection;
         }
     }
 
-    public void setConnectionStrategy(boolean remote) {
-        this.useRemote = remote;
+    public static void setConnectionStrategy(boolean client) {
+        useClient = client;
     }
 
     public void closeConnection() {
         try {
-            if (useRemote){
+            if (useClient){
                 clientConnection.close();
             } else {
                 embeddedConnection.close();

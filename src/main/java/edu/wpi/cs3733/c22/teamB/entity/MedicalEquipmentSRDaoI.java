@@ -10,7 +10,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
     Connection conn;
 
     public MedicalEquipmentSRDaoI() {
-        this.conn = EmbeddedConnection.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     @Override

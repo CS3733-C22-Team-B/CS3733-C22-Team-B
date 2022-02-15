@@ -5,12 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 public abstract class AbstractSR {
-    public enum SRStatus {
-        BLANK,
-        WAITING,
-        CANCELED,
-        DONE
-    };
 
     public static String[] SRstatus = {"WAITING", "IN PROGRESS", "CANCELLED", "DONE"};
 

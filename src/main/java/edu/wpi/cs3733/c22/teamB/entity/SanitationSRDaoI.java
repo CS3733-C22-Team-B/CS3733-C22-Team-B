@@ -10,7 +10,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
     private Connection conn;
 
     public SanitationSRDaoI() {
-        this.conn = EmbeddedConnection.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     @Override

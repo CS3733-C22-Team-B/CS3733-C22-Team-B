@@ -13,7 +13,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
     private Connection conn;
 
     public FoodDeliverySRDaoI() {
-        this.conn = EmbeddedConnection.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     @Override

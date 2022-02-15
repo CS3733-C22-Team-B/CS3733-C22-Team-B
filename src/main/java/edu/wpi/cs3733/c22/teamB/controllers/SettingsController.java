@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.Parent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class SettingsController {
@@ -20,8 +22,14 @@ public class SettingsController {
     JFXButton RestoreB;
     @FXML
     JFXButton BackupB;
+    @FXML
+    JFXToggleButton clientServerToggle;
 
-    DatabaseWrapper db = new DatabaseWrapper();
+    DatabaseWrapper db;
+
+    public SettingsController() throws SQLException {
+        this.db = new DatabaseWrapper();
+    }
 
     public void Backup() throws IOException {
         db.backupAll();
@@ -45,6 +53,16 @@ public class SettingsController {
         }
     }
 
-
-
+    public void onClientToggle(ActionEvent actionEvent) throws IOException{
+        if(clientServerToggle.isSelected()) {
+            db.backupAll();
+            db.initClient();
+            db.restoreAll();
+        }
+        else {
+            db.backupAll();
+            db.initEmbedded();
+            db.restoreAll();
+        }
+    }
 }

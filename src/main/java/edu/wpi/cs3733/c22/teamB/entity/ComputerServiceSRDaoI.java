@@ -10,7 +10,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
     private Connection conn;
 
     public ComputerServiceSRDaoI() {
-        this.conn = EmbeddedConnection.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
 

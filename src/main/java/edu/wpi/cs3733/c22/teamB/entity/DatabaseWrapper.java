@@ -3,6 +3,7 @@ package edu.wpi.cs3733.c22.teamB.entity;
 import javax.swing.table.AbstractTableModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class DatabaseWrapper {
 
     private RestoreBackupWrapper restoreBackupWrapper;
 
-    public DatabaseWrapper() {
+    public DatabaseWrapper() throws SQLException {
         LocationDao = new LocationDaoI();
         EmployeeDao = new EmployeeDaoI();
         MedicalEquipmentDao = new MedicalEquipmentDaoI();
@@ -40,11 +41,13 @@ public class DatabaseWrapper {
         restoreBackupWrapper = new RestoreBackupWrapper();
     }
 
-    // AbstractSR a = new ExternalTransportSR();
-    // a.getPatientID()
-//    public void addSR(ExternalTransportSR abstractSR){
-//        MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
-//    }
+    public void initEmbedded() {
+        ConnectionManager.setConnectionStrategy(false);
+    }
+
+    public void initClient() {
+        ConnectionManager.setConnectionStrategy(true);
+    }
     
     public void addSR(AbstractSR abstractSR){
         MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
