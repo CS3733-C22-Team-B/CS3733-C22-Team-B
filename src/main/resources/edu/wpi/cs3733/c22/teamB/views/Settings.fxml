@@ -23,7 +23,8 @@
       <PasswordField layoutX="66.0" layoutY="160.0" />
       <Label layoutX="66.0" layoutY="192.0" text="Confirm Password" />
       <PasswordField layoutX="66.0" layoutY="215.0" />
-      <JFXToggleButton layoutX="370.0" layoutY="144.0" prefHeight="58.0" prefWidth="199.0" text="Client Server" />
+      <JFXToggleButton layoutX="370.0" layoutY="163.0" prefHeight="58.0" prefWidth="199.0" text="Client Server" />
       <JFXButton fx:id="RestoreB1" layoutX="63.0" layoutY="269.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Edit User Profile" textFill="WHITE" />
+      <Label layoutX="398.0" layoutY="146.0" prefHeight="17.0" prefWidth="143.0" text="Database Loading Type" />
    </children>
 </AnchorPane>
