@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import edu.wpi.cs3733.c22.teamB.oldEntity.EmployeeDBI;
-import edu.wpi.cs3733.c22.teamB.oldEntity.LocationDBI;
+import edu.wpi.cs3733.c22.teamB.entity.*;
+
 
 import java.sql.*;
 import java.time.LocalDate;

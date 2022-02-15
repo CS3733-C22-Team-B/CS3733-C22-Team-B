@@ -183,20 +183,7 @@ public class LocationTableController {
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == Function.ADD) {
-            db.addLocation(
-                    (new Location(
-                            nodeIDField.getText(),
-                            Integer.parseInt(xcoordField.getText()),
-                            Integer.parseInt(ycoordField.getText()),
-                            floorField.getText(),
-                            buildingField.getText(),
-                            nodeTypeField.getText(),
-                            longNameField.getText(),
-                            shortNameField.getText()
-            )));
-            loadTable();
-        } else if (func == Function.MODIFY) {
-            db.updateLocation(new Location(
+            Location w = new Location(
                     nodeIDField.getText(),
                     Integer.parseInt(xcoordField.getText()),
                     Integer.parseInt(ycoordField.getText()),
@@ -204,7 +191,20 @@ public class LocationTableController {
                     buildingField.getText(),
                     nodeTypeField.getText(),
                     longNameField.getText(),
-                    shortNameField.getText()));
+                    shortNameField.getText());
+            db.addLocation((w));
+            loadTable();
+        } else if (func == Function.MODIFY) {
+            Location n = new Location(
+                    nodeIDField.getText(),
+                    Integer.parseInt(xcoordField.getText()),
+                    Integer.parseInt(ycoordField.getText()),
+                    floorField.getText(),
+                    buildingField.getText(),
+                    nodeTypeField.getText(),
+                    longNameField.getText(),
+                    shortNameField.getText());
+            db.updateLocation(n);
             loadTable();
         } else if (func == Function.IDLOOKUP) {
             table.getItems().clear();
