@@ -3,22 +3,15 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.Employee;
-import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-import javax.xml.crypto.Data;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.Map;
-import java.util.PropertyPermission;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -33,6 +26,7 @@ public class ServiceRequestManagerController {
     @FXML private TableColumn<AbstractSR, String> employeeCol;
     @FXML private TableColumn<AbstractSR, String> statusCol;
     @FXML private TableColumn<AbstractSR, String> deleteCol;
+    @FXML private MenuButton visibilityMenu;
 
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
@@ -51,24 +45,22 @@ public class ServiceRequestManagerController {
 
         idCol.setCellValueFactory(new PropertyValueFactory<>("srID"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("srType"));
-        requestorCol.setCellValueFactory(new PropertyValueFactory<>("requestor"));
+        requestorCol.setCellValueFactory(cd -> {
+            AbstractSR sr = cd.getValue();
 
-        timeCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AbstractSR, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractSR, String> cd) {
-                AbstractSR sr = cd.getValue();
-
-                return Bindings.createStringBinding(() -> sr.getDateRequested().toString());
-            }
+            return Bindings.createStringBinding(() -> sr.getRequestor().getEmployeeID() + ' ' + sr.getRequestor().getName());
         });
 
-        employeeCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<AbstractSR, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<AbstractSR, String> cd) {
-                AbstractSR sr = cd.getValue();
+        timeCol.setCellValueFactory(cd -> {
+            AbstractSR sr = cd.getValue();
 
-                return Bindings.createStringBinding(() -> sr.getAssignedEmployee().getEmployeeID() + ' ' + sr.getAssignedEmployee().getName());
-            }
+            return Bindings.createStringBinding(() -> sr.getDateRequested().toString());
+        });
+
+        employeeCol.setCellValueFactory(cd -> {
+            AbstractSR sr = cd.getValue();
+
+            return Bindings.createStringBinding(() -> sr.getAssignedEmployee().getEmployeeID() + ' ' + sr.getAssignedEmployee().getName());
         });
         employeeCol.setCellFactory(tc -> {
             ComboBox<String> combo = new ComboBox<>();
@@ -135,7 +127,7 @@ public class ServiceRequestManagerController {
                             btn.setOnAction(event -> {
                                 AbstractSR sr = getTableView().getItems().get(getIndex());
                                 getTableView().getItems().remove(getIndex());
-                                (new DatabaseWrapper()).deleteSR(sr.getSrID());
+                                dw.deleteSR(sr.getSrID());
                             });
                             setGraphic(btn);
                             setText(null);
@@ -144,6 +136,20 @@ public class ServiceRequestManagerController {
                 };
             }
         });
-        srTable.getItems().addAll((new DatabaseWrapper()).getAllSR());
+        srTable.getItems().addAll(dw.getAllSR());
+
+        // column visibility
+        for (TableColumn<AbstractSR, ?> col : srTable.getColumns()) {
+            if (!col.getId().equals("deleteCol")) {
+                CheckMenuItem item = new CheckMenuItem(col.getText());
+                item.setSelected(true);
+                item.setOnAction(event -> col.setVisible(item.isSelected()));
+                visibilityMenu.getItems().add(item);
+            }
+        }
+    }
+
+    @FXML
+    private void filterSubmit(ActionEvent actionEvent) {
     }
 }
