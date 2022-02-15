@@ -3,7 +3,6 @@ package edu.wpi.teamB;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
-import edu.wpi.cs3733.c22.teamB.oldEntity.MedicalEquipmentDBI;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -54,6 +53,7 @@ public class LocationDBTest {
     AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
     AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
     AbstractSR Chris = new ComputerServiceSR("chris", "Done", location2, employee1, employee2, date, "as", "asd");
+    AbstractSR Calvin = new SanitationSR("calvin", "WAITING", location2, employee1, employee2, date, "bye", "GLASS");
 
     @BeforeAll
     public static void setup() {
@@ -89,6 +89,7 @@ public class LocationDBTest {
         databaseWrapper.addSR(Duc);
         databaseWrapper.addSR(Nick);
         databaseWrapper.addSR(Chris);
+        databaseWrapper.addSR(Calvin);
 
 
 
@@ -106,6 +107,7 @@ public class LocationDBTest {
         databaseWrapper.getSR("12321321321");
         databaseWrapper.getSR("1112");
 
+//        databaseWrapper.deleteMedicalEquipment("12");
 
 
 //        databaseWrapper.getAllSR();
@@ -255,4 +257,4 @@ public class LocationDBTest {
     */
 }
 
-
+                                                                    // assertEquals(expected, actual);
