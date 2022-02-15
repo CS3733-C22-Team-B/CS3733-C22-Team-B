@@ -35,6 +35,7 @@
             <JFXButton fx:id="locationButton" onAction="#goToLocationTable" text="Location Manager" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
             <JFXButton fx:id="CSVImportButton" onAction="#goToCSVRestoreBackup" text="CSV Import/Export" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
             <JFXButton alignment="CENTER" onAction="#goToServiceRequestMenu" prefHeight="39.0" prefWidth="225.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Service Requests v2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <JFXButton fx:id="employeeButton" alignment="CENTER" onAction="#goToEmployeeTable" prefHeight="39.0" prefWidth="225.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Employee Manager" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
