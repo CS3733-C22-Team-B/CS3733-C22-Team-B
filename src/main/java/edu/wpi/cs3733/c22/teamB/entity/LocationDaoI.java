@@ -217,6 +217,31 @@ public class LocationDaoI implements IDatabase<Location> {
 
     }
 
+    // Cleanup for Iteration 3
+    public boolean isFirstRestore() {
+        boolean first = true;
+
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+//            ResultSet rset = dbmd.getTables(null, "ADMIN", "LOCATION", null);
+            ResultSet rset = dbmd.getSchemas(null, "ADMIN");
+
+            if (rset.next() && rset.getString(1).equals("ADMIN")){
+                // table exists
+                first = false;
+            }
+            else
+                first = true;
+
+        } catch (SQLException e) {
+            System.out.println("First Restore check: Failed!");
+            e.printStackTrace();
+        }
+
+        return first;
+    }
+
+    // Cleanup for Iteration 3
     public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
         boolean ans = false;
         try {
@@ -233,5 +258,18 @@ public class LocationDaoI implements IDatabase<Location> {
             e.printStackTrace();
         }
         return ans;
+    }
+
+    // Cleanup for Iteration 3
+    public int nodeTypeCount(String nodeType, String floor) {
+
+        List<Location> ans = getAllValues();
+        int count = 0;
+        for (Location location : ans) {
+            if ((location.getNodeType().equals(nodeType)) && (location.getFloor().equals(floor))) {
+                count += 1;
+            }
+        }
+        return count;
     }
 }

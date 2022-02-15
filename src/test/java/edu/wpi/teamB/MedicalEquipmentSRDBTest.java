@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class MedicalEquipmentSRDBTest {
 
-    String statusTest = new String("BLANK");
+    String statusTest = new String("WAITING");
 
     Location locationTest1 =
             new Location(

@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import javax.swing.table.AbstractTableModel;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,11 @@ public class DatabaseWrapper {
     private IDatabase<LaundrySR> LaundrySRDao;
     private IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDao;
     private IDatabase<MedicineDeliverySR> MedicineDeliverySRDao;
+    private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
+    private IDatabase<SanitationSR> SanitationSRDao;
     private IDatabase<AbstractSR> MainSRDao;
+
+    private RestoreBackupWrapper restoreBackupWrapper;
 
     public DatabaseWrapper() {
         LocationDao = new LocationDaoI();
@@ -27,7 +33,11 @@ public class DatabaseWrapper {
         LaundrySRDao = new LaundrySRDaoI();
         MedicalEquipmentSRDao = new MedicalEquipmentSRDaoI();
         MedicineDeliverySRDao = new MedicineDeliverySRDaoI();
+        ComputerServiceSRDao = new ComputerServiceSRDaoI();
+        SanitationSRDao = new SanitationSRDaoI();
         MainSRDao = new MainSRDaoI();
+
+        restoreBackupWrapper = new RestoreBackupWrapper();
     }
 
     // AbstractSR a = new ExternalTransportSR();
@@ -37,7 +47,6 @@ public class DatabaseWrapper {
 //    }
     
     public void addSR(AbstractSR abstractSR){
-        //AbstractSR a = new ExternalTransportSR();
         MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
         System.out.println(abstractSR.getSrType());
         switch(abstractSR.getSrType()) {
@@ -57,7 +66,13 @@ public class DatabaseWrapper {
                 MedicalEquipmentSRDao.addValue((MedicalEquipmentSR) abstractSR);
                 break;
             case "MedicineDeliverySR":
-            MedicineDeliverySRDao.addValue((MedicineDeliverySR) abstractSR);
+                MedicineDeliverySRDao.addValue((MedicineDeliverySR) abstractSR);
+                break;
+            case "ComputerServiceSR":
+                ComputerServiceSRDao.addValue((ComputerServiceSR) abstractSR);
+                break;
+            case "SanitationSR":
+                SanitationSRDao.addValue((SanitationSR) abstractSR);
                 break;
             default:
                 System.out.println("Invalid SR Input: " + abstractSR.getSrType());
@@ -100,6 +115,11 @@ public class DatabaseWrapper {
             case "MedicineDeliverySR":
                 MedicineDeliverySRDao.deleteValue(srID);
                 break;
+            case "ComputerServiceSR":
+                ComputerServiceSRDao.deleteValue(srID);
+                break;
+            case "SanitationSR":
+                SanitationSRDao.deleteValue(srID);
             default:
                 System.out.println("Invalid SRID Input: " + abstractSR.getSrID());
         }
@@ -141,6 +161,11 @@ public class DatabaseWrapper {
             case "MedicineDeliverySR":
                 MedicineDeliverySRDao.updateValue((MedicineDeliverySR) abstractSR);
                 break;
+            case "ComputerServiceSR":
+                ComputerServiceSRDao.updateValue((ComputerServiceSR) abstractSR);
+                break;
+            case "SanitationSR":
+                SanitationSRDao.updateValue((SanitationSR) abstractSR);
             default:
                 System.out.println("Invalid SR Input: " + abstractSR.getSrType());
         }
@@ -164,30 +189,27 @@ public class DatabaseWrapper {
         if (abstractSR != null) {
             switch(abstractSR.getSrType()) {
                 case "ExternalTransportSR":
-                    System.out.println(ExternalTransportDao.getValue(srID));
                     return ExternalTransportDao.getValue(srID);
                 case "FoodDeliverySR":
-                    System.out.println(FoodDeliveryDao.getValue(srID));
                     return FoodDeliveryDao.getValue(srID);
                 case "GiftFloralSR":
-                    System.out.println(GiftFloralSRDao.getValue(srID));
                     return GiftFloralSRDao.getValue(srID);
                 case "LaundrySR":
-                    System.out.println(LaundrySRDao.getValue(srID));
                     return LaundrySRDao.getValue(srID);
                 case "MedicalEquipmentSR":
-                    System.out.println(MedicalEquipmentSRDao.getValue(srID));
                     return MedicalEquipmentSRDao.getValue(srID);
                 case "MedicineDeliverySR":
-                    System.out.println(MedicineDeliverySRDao.getValue(srID));
                     return MedicineDeliverySRDao.getValue(srID);
+                case "ComputerServiceSR":
+                    return ComputerServiceSRDao.getValue(srID);
+                case "SanitationSR":
+                    return SanitationSRDao.getValue(srID);
                 default:
                     System.out.println("Invalid SR Input: " + abstractSR.getSrType());
             }
         }
         return null;
     }
-
 
     public Location getLocation(String locationID) {
         return LocationDao.getValue(locationID);
@@ -212,7 +234,6 @@ public class DatabaseWrapper {
         return list;
     }
 
-
     public List<Location> getAllLocation() {
         return LocationDao.getAllValues();
     }
@@ -231,6 +252,8 @@ public class DatabaseWrapper {
         ExternalTransportDao.createTable();
         FoodDeliveryDao.createTable();
         GiftFloralSRDao.createTable();
+        ComputerServiceSRDao.createTable();
+        SanitationSRDao.createTable();
         MedicineDeliverySRDao.createTable();
         MedicalEquipmentSRDao.createTable();
     }
@@ -247,11 +270,20 @@ public class DatabaseWrapper {
         MedicalEquipmentDao.createTable();
     }
 
+    public void createAll() {
+        createTableLocation();
+        createTableEmployee();
+        createTableMedicalEquipment();
+        createTableSR();
+    }
+
     public void dropTableSR() {
         MedicalEquipmentSRDao.dropTable();
         MedicineDeliverySRDao.dropTable();
         GiftFloralSRDao.dropTable();
         FoodDeliveryDao.dropTable();
+        SanitationSRDao.dropTable();
+        ComputerServiceSRDao.dropTable();
         ExternalTransportDao.dropTable();
         LaundrySRDao.dropTable();
         MainSRDao.dropTable();
@@ -277,18 +309,89 @@ public class DatabaseWrapper {
         dropTableLocation();
     }
 
-    public void restoreTableSR() {}
+    void restoreTableSR() throws IOException {
+        restoreBackupWrapper.restoreMainSR();
+        restoreBackupWrapper.restoreExternalTransportSR();
+        restoreBackupWrapper.restoreFoodDeliverySR();
+        restoreBackupWrapper.restoreGiftFloralSR();
+        restoreBackupWrapper.restoreLaundrySR();
+        restoreBackupWrapper.restoreMedicalEquipmentSR();
+        restoreBackupWrapper.restoreMedicineDeliverySR();
+        restoreBackupWrapper.restoreSanitationSR();
+    }
 
-    public void restoreTableLocation() {}
+    void restoreTableLocation() throws IOException {
+        restoreBackupWrapper.restoreLocation();
+    }
 
-    public void restoreTableEmployee() {}
+    void restoreTableEmployee() throws IOException {
+        restoreBackupWrapper.restoreEmployee();
+    }
 
-    public void restoreTableMedicalEquipment() {}
+    void restoreTableMedicalEquipment() throws IOException {
+        restoreBackupWrapper.restoreMedicalEquipment();
+    }
 
-    public void restoreAll() {}
+    public void restoreAll() throws IOException {
+        dropAll();
+        createAll();
+        restoreBackupWrapper.restoreAll();
+    }
 
+    void backupTableLocation() throws IOException {
+        restoreBackupWrapper.backupLocation();
+    }
+
+    void backupTableEmployee() throws IOException {
+        restoreBackupWrapper.backupEmployee();
+    }
+
+    void backupTableMedicalEquipment() throws IOException{
+        restoreBackupWrapper.backupMedicalEquipment();
+    }
+
+    void backupTableSR() throws FileNotFoundException {
+        restoreBackupWrapper.backupMainSR();
+        restoreBackupWrapper.backupExternalTransportSR();
+        restoreBackupWrapper.backupFoodDeliverySR();
+        restoreBackupWrapper.backupGiftFloralSR();
+        restoreBackupWrapper.backupLaundrySR();
+        restoreBackupWrapper.backupMedicalEquipmentSR();
+        restoreBackupWrapper.backupMedicineDeliverySR();
+        restoreBackupWrapper.backupComputerServiceSR();
+        restoreBackupWrapper.backupSanitationSR();
+    }
+
+    public void backupAll() throws IOException{
+        restoreBackupWrapper.backupAll();
+    }
+
+    public void firstRestore() throws IOException {
+        restoreBackupWrapper.firstRestore();
+        createAll();
+    }
+
+    // Clean up for Iteration 3
+    public void isFirstRestore() throws IOException {
+
+        LocationDaoI test = new LocationDaoI();
+        if (test.isFirstRestore()){
+            firstRestore();
+        } else{
+            System.out.println("Not First Restore!");
+        }
+    }
+
+    // Clean up for Iteration 3
     public boolean isInTableLocation(String nodeID){
         LocationDaoI test = new LocationDaoI();
         return test.isInTable(nodeID);
+    }
+
+    // Clean up for Iteration 3
+    public int nodeTypeCountLocation(String nodeType, String floor){
+        LocationDaoI locationDaoI = new LocationDaoI();
+        System.out.println(locationDaoI.nodeTypeCount(nodeType, floor));
+        return locationDaoI.nodeTypeCount(nodeType, floor);
     }
 }

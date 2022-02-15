@@ -1,7 +1,10 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
+import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.ExternalTransportSR;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,90 +22,44 @@ import java.util.stream.IntStream;
 
 public class ExternalTransportController implements IController {
 
-    @FXML TextField SenderTxt;
-    @FXML TextField PickupLocTxt;
+    @FXML TextField patientID;
     @FXML TextField DestinationTxt;
-    @FXML TextField InfoTxt;
-    @FXML Button SubmitB;
-    @FXML Button HelpB;
-    @FXML DatePicker DateCal;
-    @FXML ChoiceBox<String> FormOfTransport;
-    @FXML Button HomeB;
-    @FXML ChoiceBox<String> EmployeeAssignment;
-    @FXML ChoiceBox<String> statusField;
+    @FXML JFXComboBox<String> FormOfTransport;
 
-    boolean isDone;
-    String assignedP;
-    private List<Employee> employeeList;
-    private Map<String, Employee> employeeMap;
 
-//    private ExternalTransportSRDBI db = new ExternalTransportSRDBI();
+    private ExternalTransportSR sr = null;
+
+    public ExternalTransportController() {}
+
+    public ExternalTransportController(ExternalTransportSR sr) {this.sr = sr;}
+
+
 
     @FXML
     private void initialize() {
         String st[] = {"Car", "Helicopter", "Ambulance", "Wheelchair", "Plane", "Boat", "Spaceship"};
         FormOfTransport.setItems(FXCollections.observableArrayList(st));
-        EmployeeDBI employeeDBI = new EmployeeDBI();
-//        employeeDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        employeeList = employeeDBI.getAllNodes();
-        employeeMap =
-                IntStream.range(0, employeeList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i ->
-                                                (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
-                                        i -> employeeList.get(i)));
-//        employeeDBI.closeConnection();
+        DatabaseWrapper dw = new DatabaseWrapper();
 
-
-        statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
-        statusField.setValue("BLANK");
-
-        EmployeeAssignment.getItems().addAll(employeeMap.keySet());
     }
 
-    @FXML
-    private void returnHomeScene() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
-            Bapp.getPrimaryStage().getScene().setRoot(root);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     @Override
     public void submit() {
-//        ExternalTransportSR request =
-//                new ExternalTransportSR(
-//                        SenderTxt.getText(),
-//                        statusField.getValue(),
-//                        PickupLocTxt.getText(),
-//                        DestinationTxt.getText(),
-//                        InfoTxt.getText(),
-//                        DateCal.getValue().toString(),
-//                        FormOfTransport.getValue().toString(),
-//                        employeeMap.get(EmployeeAssignment.getValue()));
-//        System.out.println(request.toString());
-//        db.insertNode(request);
-//        clear();
+
     }
 
     @Override
-    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
-
+    public void submit(AbstractSR sr) {
+    DatabaseWrapper dw = new DatabaseWrapper();
+    dw.addSR(new ExternalTransportSR(sr,patientID.getText(), DestinationTxt.getText(), FormOfTransport.getValue()));
     }
 
     @Override
     public void clear() {
-        SenderTxt.clear();
-        PickupLocTxt.clear();
+        patientID.clear();
         DestinationTxt.clear();
-        InfoTxt.clear();
-        DateCal.getEditor().clear();
         FormOfTransport.setAccessibleText("");
         FormOfTransport.valueProperty().set(null);
-        EmployeeAssignment.valueProperty().set(null);
     }
 }

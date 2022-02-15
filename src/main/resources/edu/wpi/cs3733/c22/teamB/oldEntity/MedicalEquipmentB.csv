@@ -1,4 +1,0 @@
-equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description
-E1,bed,type,manufacturer,FHALL01401,status,color,size,description
-E2,new chair,test,test,FHALL01901,yes,wooh,size,desciption
-InsertEquipment,pencil,type,manu,FHALL01901,stat,color,size,des

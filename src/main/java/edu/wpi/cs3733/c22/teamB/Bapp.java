@@ -3,8 +3,8 @@ package edu.wpi.cs3733.c22.teamB;
 import java.io.IOException;
 import java.util.List;
 
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
 
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,47 +23,17 @@ public class Bapp extends Application {
     public void init() throws IOException {
         log.info("Starting Up");
 
-//        DatabaseManager databaseManager = new DatabaseManager();
-//        databaseManager.createTable();
+        DatabaseWrapper db = new DatabaseWrapper();
+        db.isFirstRestore();
 
-//        CSVReader2 reader = new CSVReader2();
-//
-//        List<String> locationList = reader.firstRestore("TowerLocationsB.csv");
-//        List<String> employeeList = reader.firstRestore("EmployeeB.csv");
-//        List<String> externalTransportList = reader.firstRestore("ExternalTransportSRB.csv");
-//        List<String> foodDeliveryList = reader.firstRestore("FoodDeliverySRB.csv");
-//        List<String> equipmentList = reader.firstRestore("MedicalEquipmentB.csv");
-//        List<String> equipmentSRList = reader.firstRestore("MedicalEquipmentSRB.csv");
-//        List<String> medicineDeliveryList = reader.firstRestore("MedicineDeliverySRB.csv");
-//
-//        LocationParserI locParser = new LocationParserI();
-//        EmployeeParserI employeeParserI = new EmployeeParserI();
-//        //ExternalTransportSRParserI extTransSRParserI = new ExternalTransportSRParserI();
-//        FoodDeliveryParserI foodDeliveryParserI = new FoodDeliveryParserI();
-//        MedicalEquipmentSRParserI medicalEquipmentSRParserI = new MedicalEquipmentSRParserI();
-//        MedicalEquipmentParserI medicalEquipmentParserI = new MedicalEquipmentParserI();
-//        MedicineDeliverySRParserI medicineDeliverySRParserI = new MedicineDeliverySRParserI();
-//
-//        List<Location> locationList1 = locParser.fromStringsToObjects(locationList);
-//        List<Employee> employeeList1 = employeeParserI.fromStringsToObjects(employeeList);
-//        //List<ExternalTransportSR> externalTransportSRList1 = extTransSRParserI.fromStringsToObjects(externalTransportList);
-//        List<FoodDeliverySR> foodDeliverySRList1 = foodDeliveryParserI.fromStringsToObjects(foodDeliveryList);
-//        List<MedicalEquipment> medicalEquipmentList1 = medicalEquipmentParserI.fromStringsToObjects(equipmentList);
-//        List<MedicalEquipmentSR> medicalEquipmentSRList1 = medicalEquipmentSRParserI.fromStringsToObjects(equipmentSRList);
-//        List<MedicineDeliverySR> medicineDeliverySRList1 = medicineDeliverySRParserI.fromStringsToObjects(medicineDeliveryList);
-
-//        databaseManager.restoreTables(locationList1, employeeList1, externalTransportSRList1, medicineDeliverySRList1,
-//                foodDeliverySRList1, medicalEquipmentSRList1, medicalEquipmentList1);
-
-//        locationDBI.restore(locParser.fromStringsToObjects(stringList));
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/Login.fxml"));
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/ServiceRequestMenu.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/ServiceRequestManager.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("views/ServiceRequestManager.fxml"));
         _primaryStage = primaryStage;
 
         Parent root = loader.load();

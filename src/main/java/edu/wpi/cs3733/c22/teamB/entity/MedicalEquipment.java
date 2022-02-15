@@ -48,7 +48,7 @@ public class MedicalEquipment {
         this.manufacturer = manufacturer;
         this.location = location;
         if (!validateStatus(status)) {
-            this.status = "BLANK";
+            this.status = "WAITING";
         }
         else this.status = status;
         this.color = color;
@@ -66,10 +66,6 @@ public class MedicalEquipment {
 
     public static String[] getEquipmentStatus() {
         return EquipmentStatus;
-    }
-
-    public static void setEquipmentStatus(String[] equipmentStatus) {
-        EquipmentStatus = equipmentStatus;
     }
 
     public int getAmount() {
@@ -154,36 +150,21 @@ public class MedicalEquipment {
 
     // to string
 
+
     @Override
     public String toString() {
-        return "MedicalEquipment{"
-                + "equipmentID='"
-                + equipmentID
-                + '\''
-                + ", equipmentName='"
-                + equipmentName
-                + '\''
-                + ", equipmentType='"
-                + equipmentType
-                + '\''
-                + ", manufacturer='"
-                + manufacturer
-                + '\''
-                + ", location="
-                + location.getNodeID()
-                + ", status='"
-                + status
-                + '\''
-                + ", color='"
-                + color
-                + '\''
-                + ", size='"
-                + size
-                + '\''
-                + ", description='"
-                + description
-                + '\''
-                + '}';
+        return "MedicalEquipment{" +
+                "equipmentID='" + equipmentID + '\'' +
+                ", equipmentName='" + equipmentName + '\'' +
+                ", equipmentType='" + equipmentType + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", location=" + location +
+                ", status='" + status + '\'' +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 
     public String toStringFields() {
@@ -204,10 +185,12 @@ public class MedicalEquipment {
                 + ","
                 + size
                 + ","
-                + description;
+                + description
+                + ","
+                + amount;
     }
 
     public static String toStringHeader() {
-        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description";
+        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description,amount";
     }
 }

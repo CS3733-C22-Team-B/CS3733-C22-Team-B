@@ -1,0 +1,11 @@
+employeeID,lastName,firstName,position,accessLevel,username,password,email,phoneNumber
+1,E,Hushmand,Ward Assistant,9,admin,admin,hushmand@wpi.edu,1
+2,Y,Sits,Doctor,9,admin,admin,sits@wpi.edu,2
+3,L,Nick,Nurse,9,admin,admin,nick@wpi.edu,3
+4,P,Calvin,Pharmacist,9,admin,admin,calvin@wpi.edu,4
+5,R,Chris,Ward Assistant,9,admin,admin,chris@wpi.edu,5
+6,N,Andrew,IT,9,admin,admin,andrew@wpi.edu,6
+7,G,Ben,Pharmacist,9,admin,admin,ben@wpi.edu,7
+8,L,Noah,Doctor,9,admin,admin,Noah@wpi.edu,8
+9,B,Kiki,Hospital Administrator,9,admin,admin,kiki@wpi.edu,9
+10,T,Duc,Building Manager,9,admin,admin,duc@wpi.edu,10

@@ -3,17 +3,64 @@ package edu.wpi.teamB;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
-import edu.wpi.cs3733.c22.teamB.oldEntity.MedicalEquipmentDBI;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class LocationDBTest {
+    static DatabaseWrapper databaseWrapper;
+
+    Location location2 =
+            new Location(
+                    "C1244T0281",
+                    180,
+                    84,
+                    "03",
+                    "Towr",
+                    "DPT",
+                    "Dy Surgery Family Waiting Floor L1",
+                    "Deartment C002L1");
+
+    Location location =
+            new Location(
+                    "2",
+                    280,
+                    284,
+                    "03",
+                    "Towr",
+                    "DPT",
+                    "restroom",
+                    "Deartment C002L1");
+
+
+    Employee employee1 = new Employee("14", "n", "n", "1", 1, "n", "n", "n", "n");
+    Employee employee2 = new Employee("23", "a", "b", "c", 1, "1", "1", "d", "a");
+
+    MedicalEquipment equipment = new MedicalEquipment("12", "Awdd", "asd", "asd", location2, "asd", "asd", "12", "asd", 12);
+
+    LocalDate date = LocalDate.parse("2022-02-12");
+
+    AbstractSR ben = new ExternalTransportSR("12", "12", location2, employee1, employee2, date, "Ben", "Ben", "Ben", "Ben");
+    AbstractSR kiki = new ExternalTransportSR("asd", "ads", location2, employee1, employee2, date, "kl", "asd", "asd", "asd");
+    AbstractSR Pushman = new FoodDeliverySR("121", "12", location2, employee1, employee2, date, "no", "Hushmand", "Ben");
+    AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
+    AbstractSR Sits = new LaundrySR("1123123", "12", location2, employee1, employee2, date, "no");
+    AbstractSR Duc = new MedicalEquipmentSR("12321321321", "12", location2, employee1, employee2, date, "no", equipment);
+    AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
+    AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
+    AbstractSR Chris = new ComputerServiceSR("chris", "Done", location2, employee1, employee2, date, "as", "asd");
+    AbstractSR Calvin = new SanitationSR("calvin", "IN PROGRESS", location2, employee1, employee2, date, "bye", "GLASS");
+
+    @BeforeAll
+    public static void setup() {
+        databaseWrapper = new DatabaseWrapper();
+    }
     @Test
     public void test() {
-
-        DatabaseWrapper databaseWrapper = new DatabaseWrapper();
-
         databaseWrapper.dropAll();
 
         databaseWrapper.createTableLocation();
@@ -23,49 +70,16 @@ public class LocationDBTest {
 
 
 
-        Location location2 =
-                new Location(
-                        "C1244T0281",
-                        180,
-                        84,
-                        "3",
-                        "Towr",
-                        "DPT",
-                        "Dy Surgery Family Waiting Floor L1",
-                        "Deartment C002L1");
-
-
-
-        Employee employee1 = new Employee("14", "n", "n", "1", 1, "n", "n", "n", "n");
-        Employee employee2 = new Employee("23", "a", "b", "c", 1, "1", "1", "d", "a");
 
         databaseWrapper.addLocation(location2);
+
+
+        databaseWrapper.addLocation(location);
 
         databaseWrapper.addEmployee(employee1);
         databaseWrapper.addEmployee(employee2);
 
-
-        MedicalEquipment equipment = new MedicalEquipment("12", "Awdd", "asd", "asd", location2, "asd", "asd", "12", "asd", 12);
-
         databaseWrapper.addMedicalEquipment(equipment);
-        LocalDate date = LocalDate.parse("2022-02-12");
-
-
-        AbstractSR ben = new ExternalTransportSR("12", "12", location2, employee1, employee2, date, "Ben", "Ben", "Ben", "Ben");
-
-        AbstractSR kiki = new ExternalTransportSR("asd", "ads", location2, employee1, employee2, date, "kl", "asd", "asd", "asd");
-
-        AbstractSR Pushman = new FoodDeliverySR("121", "12", location2, employee1, employee2, date, "no", "Hushmand", "Ben");
-
-        AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
-
-        AbstractSR Sits = new LaundrySR("1123123", "12", location2, employee1, employee2, date, "no");
-
-        AbstractSR Duc = new MedicalEquipmentSR("12321321321", "12", location2, employee1, employee2, date, "no", equipment);
-
-        AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
-
-        AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
 
         databaseWrapper.addSR(ben);
         databaseWrapper.addSR(kiki);
@@ -74,13 +88,10 @@ public class LocationDBTest {
         databaseWrapper.addSR(Sits);
         databaseWrapper.addSR(Duc);
         databaseWrapper.addSR(Nick);
+        databaseWrapper.addSR(Chris);
+        databaseWrapper.addSR(Calvin);
 
-//        databaseWrapper.deleteSR(ben.getSrID());
-//        databaseWrapper.deleteSR(Pushman.getSrID());
-//        databaseWrapper.deleteSR(Noah.getSrID());
-//        databaseWrapper.deleteSR(Sits.getSrID());
-//        databaseWrapper.deleteSR(Duc.getSrID());
-//        databaseWrapper.deleteSR(Nick.getSrID());
+
 
         databaseWrapper.updateSR(Andrew);
 
@@ -96,10 +107,40 @@ public class LocationDBTest {
         databaseWrapper.getSR("12321321321");
         databaseWrapper.getSR("1112");
 
+//        databaseWrapper.deleteMedicalEquipment("12");
+
+
+//        databaseWrapper.getAllSR();
+        System.out.println(databaseWrapper.getAllLocation());
+        databaseWrapper.nodeTypeCountLocation("Hall", "03");
+        databaseWrapper.nodeTypeCountLocation("DPT", "3");
 
         databaseWrapper.getAllSR();
+
+        assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location2);
+        databaseWrapper.updateMedicalEquipment(new MedicalEquipment("12", "Awdd", "asd", "asd", location, "asd", "asd", "12", "asd", 12));
+        assertEquals(databaseWrapper.getMedicalEquipment("12").getLocation(),location);
+
+
     }
 
+    @AfterAll
+    public void cleanUp() {
+        databaseWrapper.deleteLocation(location.getNodeID());
+//        databaseWrapper.deleteLocation(location2.getNodeID());
+
+        databaseWrapper.deleteEmployee(employee1.getEmployeeID());
+//        databaseWrapper.deleteEmployee(employee2.getEmployeeID());
+
+//        databaseWrapper.deleteMedicalEquipment(equipment.getEquipmentID());
+
+        databaseWrapper.deleteSR(ben.getSrID());
+        databaseWrapper.deleteSR(Pushman.getSrID());
+        databaseWrapper.deleteSR(Noah.getSrID());
+        databaseWrapper.deleteSR(Sits.getSrID());
+        databaseWrapper.deleteSR(Duc.getSrID());
+        databaseWrapper.deleteSR(Nick.getSrID());
+    }
     /*
     LocationDBI locationDBI = new LocationDBI();
     Location location1 =
@@ -136,9 +177,9 @@ public class LocationDBTest {
                     "Day Surgery Family Waiting Floor L1",
                     "Department C002L1");
 
-    Location location3 = new Location("InsertTest", 1, 1, "L1", "T", "w", "w", "W");
+    Location location3 = new Location("InsertTest", 1, 1, "L1", "T", "IN PROGRESS", "IN PROGRESS", "IN PROGRESS");
 
-    Location location4 = new Location("UpdateTest", 1, 1, "L1", "T", "w", "w", "W");
+    Location location4 = new Location("UpdateTest", 1, 1, "L1", "T", "IN PROGRESS", "IN PROGRESS", "IN PROGRESS");
     // assertEquals(expected, actual)
     @Test
     public void testGetNode1() {

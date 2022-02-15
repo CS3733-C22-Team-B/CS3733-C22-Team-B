@@ -3,7 +3,8 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.oldEntity.*;
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,6 +41,7 @@ public class MedicalEquipmentTableController {
     @FXML private TableView<MedicalEquipment> table;
     @FXML private JFXComboBox<String> LocationChoice;
     @FXML private JFXButton loadButton;
+    @FXML private TextField amountField;
     private List<Location> locList;
     private Map<String, Location> locMap;
 
@@ -47,8 +49,10 @@ public class MedicalEquipmentTableController {
     MedicalEquipmentTableController.Function func = MedicalEquipmentTableController.Function.NOTHING;
 
     private boolean initTable = false;
-    private MedicalEquipmentDBI medicalEquipmentDBI = new MedicalEquipmentDBI();
+    private IDatabase medicalEquipmentDaoI = new MedicalEquipmentDaoI();
     List<MedicalEquipment> listOfMedicalEquipment;
+
+    DatabaseWrapper db = new DatabaseWrapper();
 
     public MedicalEquipmentTableController() {}
 
@@ -57,9 +61,7 @@ public class MedicalEquipmentTableController {
         modifyButton.setDisable(true);
         deleteButton.setDisable(true);
 
-        LocationDBI locationDBI = new LocationDBI();
-//        locationDBI.initConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        locList = locationDBI.getAllNodes();
+        locList = db.getAllLocation();
         locMap =
                 IntStream.range(0, locList.size())
                         .boxed()
@@ -67,10 +69,10 @@ public class MedicalEquipmentTableController {
                                 Collectors.toMap(
                                         i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
                                         i -> locList.get(i)));
-//        locationDBI.closeConnection();
 
-        statusField.getItems().addAll(AbstractSR.StringToSRStatus.keySet());
-        statusField.setValue("BLANK");
+
+        statusField.getItems().addAll(MedicalEquipment.getEquipmentStatus());
+        statusField.setValue("WAITING");
 
         LocationChoice.getItems().addAll(locMap.keySet());
         gridPane.setVisible(false);
@@ -100,6 +102,7 @@ public class MedicalEquipmentTableController {
             TableColumn<MedicalEquipment, String> col7 = new TableColumn<>("color");
             TableColumn<MedicalEquipment, String> col8 = new TableColumn<>("size");
             TableColumn<MedicalEquipment, String> col9 = new TableColumn<>("description");
+            TableColumn<MedicalEquipment, String> col10 = new TableColumn<>("amount");
 
             col1.setCellValueFactory(
                     new PropertyValueFactory<>("equipmentID")); // MedicalEquipmentSR fields
@@ -111,6 +114,7 @@ public class MedicalEquipmentTableController {
             col7.setCellValueFactory(new PropertyValueFactory<>("color"));
             col8.setCellValueFactory(new PropertyValueFactory<>("size"));
             col9.setCellValueFactory(new PropertyValueFactory<>("description"));
+            col10.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
             table.getColumns().add(col1); // adding columns to setup table
             table.getColumns().add(col2);
@@ -121,11 +125,12 @@ public class MedicalEquipmentTableController {
             table.getColumns().add(col7);
             table.getColumns().add(col8);
             table.getColumns().add(col9);
+            table.getColumns().add(col10);
 
             table.setEditable(true);
         }
         table.getItems().clear();
-        listOfMedicalEquipment = medicalEquipmentDBI.getAllNodes();
+        listOfMedicalEquipment = db.getAllMedicalEquipment();
         table.getItems().addAll(listOfMedicalEquipment); // create and add object
         //table.getItems().addAll(listMedicalEquipment);
         // table.getItems().addAll(new MedicalEquipment("15", "jeff", "jeffery", "jeff himself", new
@@ -159,6 +164,7 @@ public class MedicalEquipmentTableController {
         colorField.setVisible(true);
         sizeField.setVisible(true);
         descriptionField.setVisible(true);
+        amountField.setVisible(true);
         equipmentNameField.setDisable(false);
         equipmentTypeField.setDisable(false);
         manufacturerField.setDisable(false);
@@ -167,8 +173,12 @@ public class MedicalEquipmentTableController {
         colorField.setDisable(false);
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
-        func = MedicalEquipmentTableController.Function.ADD;
+        amountField.setDisable(false);
+       // func = MedicalEquipmentTableController.Function.ADD;
+
+        func = Function.ADD;
     }
+
     @FXML
     private void modifyLocation(ActionEvent actionEvent) {
         gridPane.setVisible(true);
@@ -181,6 +191,7 @@ public class MedicalEquipmentTableController {
         colorField.setVisible(true);
         sizeField.setVisible(true);
         descriptionField.setVisible(true);
+        amountField.setVisible(true);
         equipmentNameField.setDisable(false);
         equipmentTypeField.setDisable(false);
         manufacturerField.setDisable(false);
@@ -189,6 +200,7 @@ public class MedicalEquipmentTableController {
         colorField.setDisable(false);
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
+        amountField.setDisable(false);
 
         MedicalEquipment loc = table.getSelectionModel().getSelectedItem();
         equipmentIDField.setText(loc.getEquipmentID());
@@ -200,14 +212,19 @@ public class MedicalEquipmentTableController {
         colorField.setText(loc.getColor());
         sizeField.setText(loc.getDescription());
         descriptionField.setText(loc.getDescription());
+        amountField.setText(String.valueOf(loc.getAmount()));
 
-        func = MedicalEquipmentTableController.Function.MODIFY;
+        func = Function.MODIFY;
+        //func = MedicalEquipmentTableController.Function.MODIFY;
     }
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
-        medicalEquipmentDBI.deleteNode(table.getSelectionModel().getSelectedItem().getEquipmentID());
+        String value = table.getSelectionModel().getSelectedItem().getEquipmentID();
+        db.deleteMedicalEquipment(value);
         loadTable();
+
+//        func = Function.DELETE;
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
@@ -226,26 +243,28 @@ public class MedicalEquipmentTableController {
                     statusField.getValue().toString(),
                     colorField.getText(),
                     sizeField.getText(),
-                    descriptionField.getText());
+                    descriptionField.getText(),
+                    Integer.parseInt(amountField.getText()));
             System.out.println(m);
-            medicalEquipmentDBI.insertNode(m);
+            db.addMedicalEquipment(m);
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
-            medicalEquipmentDBI.updateNode(
-                    new MedicalEquipment(
-                            equipmentIDField.getText(),
-                            equipmentNameField.getText(),
-                            equipmentTypeField.getText(),
-                            manufacturerField.getText(),
-                            locMap.get(LocationChoice.getValue()),
-                            statusField.getValue().toString(),
-                            colorField.getText(),
-                            sizeField.getText(),
-                            descriptionField.getText()));
+            MedicalEquipment newEquip = new MedicalEquipment(
+                    equipmentIDField.getText(),
+                    equipmentNameField.getText(),
+                    equipmentTypeField.getText(),
+                    manufacturerField.getText(),
+                    locMap.get(LocationChoice.getValue()),
+                    statusField.getValue().toString(),
+                    colorField.getText(),
+                    sizeField.getText(),
+                    descriptionField.getText(),
+                    Integer.parseInt(amountField.getText()));
+            db.updateMedicalEquipment(newEquip);
             loadTable();
         } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
             table.getItems().clear();
-            table.getItems().add(medicalEquipmentDBI.getNode(equipmentIDField.getText())); // create and add object
+            table.getItems().add(db.getMedicalEquipment(equipmentIDField.getText())); // create and add object
         }
 
         clearForm(actionEvent);
@@ -262,6 +281,7 @@ public class MedicalEquipmentTableController {
         colorField.clear();
         sizeField.clear();
         descriptionField.clear();
+        amountField.clear();
     }
 
     @FXML private void cancelForm(ActionEvent actionEvent) {
