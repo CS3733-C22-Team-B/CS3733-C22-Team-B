@@ -22,6 +22,8 @@ public class Bapp extends Application {
     public void init() throws IOException {
         log.info("Starting Up");
 
+
+
 //        DatabaseManager databaseManager = new DatabaseManager();
 //        databaseManager.createTable();
 
