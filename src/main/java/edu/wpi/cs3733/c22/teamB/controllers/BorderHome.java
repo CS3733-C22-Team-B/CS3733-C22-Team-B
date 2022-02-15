@@ -72,6 +72,7 @@ public class BorderHome implements Initializable{
         JFXButton button2 = new JFXButton("Map");
         JFXButton button3 = new JFXButton("Request");
         JFXButton button4 = new JFXButton("Dashboard");
+        JFXButton button5 = new JFXButton("Settings");
 
 
 
@@ -81,6 +82,7 @@ public class BorderHome implements Initializable{
         leftDrawerPane.getChildren().add(button2);
         leftDrawerPane.getChildren().add(button3);
         leftDrawerPane.getChildren().add(button4);
+        leftDrawerPane.getChildren().add(button5);
 
         leftDrawerPane.setAlignment(Pos.CENTER);
         leftDrawerPane.prefHeightProperty().bind(anchorPane.heightProperty());
@@ -181,6 +183,22 @@ public class BorderHome implements Initializable{
                 ex.printStackTrace();
             }
         });
+
+        button5.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
+
+            try {
+                childPane = loader.load();
+                anchorPane.getChildren().clear();
+                anchorPane.getChildren().add(childPane);
+                anchorPane.toBack();
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
 
     }
 
