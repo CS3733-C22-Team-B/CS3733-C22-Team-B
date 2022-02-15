@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Bapp extends Application {
     private static Stage _primaryStage;
+    public static Parent _root;
 
     public static Stage getPrimaryStage() { return _primaryStage; }
 
@@ -66,6 +67,7 @@ public class Bapp extends Application {
         _primaryStage = primaryStage;
 
         Parent root = loader.load();
+        _root = root;
         primaryStage.setTitle("Bapp - Home Page");
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);
