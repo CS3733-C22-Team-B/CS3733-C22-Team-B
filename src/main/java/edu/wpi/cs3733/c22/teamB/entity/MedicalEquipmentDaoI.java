@@ -6,15 +6,12 @@ import java.util.List;
 
 public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
-    private Connection conn;
-
     public MedicalEquipmentDaoI() {
-        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override
     public void addValue(MedicalEquipment equipment) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -43,7 +40,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public void deleteValue(String equipmentID) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("DELETE FROM MedicalEquipment WHERE equipmentID = ?");
@@ -61,6 +58,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public void updateValue(MedicalEquipment equipment) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -90,6 +88,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public MedicalEquipment getValue(String equipmentID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         MedicalEquipment medEquipment = new MedicalEquipment();
         try {
             PreparedStatement pstmt =
@@ -132,6 +131,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public List<MedicalEquipment> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         List<MedicalEquipment> medEquipments = new ArrayList<>();
         try {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MedicalEquipment");
@@ -185,6 +185,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "MEDICALEQUIPMENT", null);
@@ -217,6 +218,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
 
@@ -229,7 +231,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
 
     @Override
     public void restoreTable(List<MedicalEquipment> list) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             createTable();
 

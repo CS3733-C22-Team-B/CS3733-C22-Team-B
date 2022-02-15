@@ -7,14 +7,13 @@ import java.util.List;
 
 public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
-    private Connection conn;
 
     public GiftFloralSRDaoI() {
-        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override
     public void addValue(GiftFloralSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO GIFTFLORALSR (srID, giftName) VALUES(?, ?)");
             pstmt.setString(1, object.getSrID());
@@ -32,6 +31,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM GIFTFLORALSR WHERE srID = ?");
@@ -47,6 +47,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
     @Override
     public void updateValue(GiftFloralSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -67,8 +68,9 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
     @Override
     public GiftFloralSR getValue(String objectID) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         GiftFloralSR giftFloralSR = new GiftFloralSR();
+
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM GIFTFLORALSR WHERE srID = ?");
@@ -93,7 +95,9 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
     @Override
     public List<GiftFloralSR> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         List<GiftFloralSR> giftFloralSRList = new ArrayList<>();
+
         try{
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT SRID FROM GIFTFLORALSR ");
@@ -112,6 +116,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "GIFTFLORALSR", null);
@@ -136,6 +141,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             Statement stmt = conn.createStatement();

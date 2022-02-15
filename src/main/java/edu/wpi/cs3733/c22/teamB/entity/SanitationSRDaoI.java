@@ -7,14 +7,12 @@ import java.util.List;
 
 public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
-    private Connection conn;
-
     public SanitationSRDaoI() {
-        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override
     public void addValue(SanitationSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SanitationSR (srID, condition) VALUES(?, ?)");
             pstmt.setString(1, object.getSrID());
@@ -31,6 +29,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM SanitationSR WHERE srID = ?");
             pstmt.setString(1, objectID);
@@ -45,6 +44,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     @Override
     public void updateValue(SanitationSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -64,6 +64,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     @Override
     public SanitationSR getValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         SanitationSR sanitationSR = new SanitationSR();
         try {
             PreparedStatement pstmt =
@@ -96,6 +97,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     @Override
     public List<SanitationSR> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         List<SanitationSR> sanitationSRList = new ArrayList<>();
         try{
             PreparedStatement pstmt =
@@ -115,6 +117,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "SANITATIONSR", null);
@@ -138,6 +141,7 @@ public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE SanitationSR");

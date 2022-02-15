@@ -11,7 +11,7 @@ class ConnectionManager {
     private Connection clientConnection;
     private boolean useClient = false;
 
-    ConnectionManager() {
+    private ConnectionManager() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 
@@ -62,9 +62,9 @@ class ConnectionManager {
     public Connection getConnection() {
         if (useClient) {
             System.out.println("Initializing Client!");
-            return clientConnection;
+            return this.clientConnection;
         } else {
-            return embeddedConnection;
+            return this.embeddedConnection;
         }
     }
 

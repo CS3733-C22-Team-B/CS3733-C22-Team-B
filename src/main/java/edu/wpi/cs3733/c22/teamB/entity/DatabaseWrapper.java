@@ -39,7 +39,7 @@ public class DatabaseWrapper {
         SanitationSRDao = new SanitationSRDaoI();
         MainSRDao = new MainSRDaoI();
 
-        connectionManager = new ConnectionManager();
+        connectionManager = ConnectionManager.getInstance();
         restoreBackupWrapper = new RestoreBackupWrapper();
     }
 

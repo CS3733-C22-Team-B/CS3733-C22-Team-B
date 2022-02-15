@@ -10,14 +10,12 @@ import java.util.List;
 
 public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
 
-    private Connection conn;
-
     public FoodDeliverySRDaoI() {
-        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override
     public void addValue(FoodDeliverySR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO FoodDeliverySR (srID, foodName, drinkName) VALUES(?, ?, ?)");
             pstmt.setString(1, object.getSrID());
@@ -36,6 +34,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM FoodDeliverySR WHERE srID = ?");
@@ -51,6 +50,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
 
     @Override
     public void updateValue(FoodDeliverySR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -70,6 +70,8 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
 
     @Override
     public FoodDeliverySR getValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         FoodDeliverySR foodDeliverySR = new FoodDeliverySR();
         try {
             PreparedStatement pstmt =
@@ -102,6 +104,8 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
     @Override
     public List<FoodDeliverySR> getAllValues() {
         List<FoodDeliverySR> foodDeliverySRList = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try{
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT SRID FROM FoodDeliverySR ");
@@ -121,6 +125,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "FOODDELIVERYSR", null);
@@ -144,6 +149,7 @@ public class FoodDeliverySRDaoI implements IDatabase<FoodDeliverySR> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE FOODDELIVERYSR");
