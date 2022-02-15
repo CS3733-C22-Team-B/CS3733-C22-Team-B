@@ -45,7 +45,6 @@ public class DatabaseWrapper {
 //    }
     
     public void addSR(AbstractSR abstractSR){
-        //AbstractSR a = new ExternalTransportSR();
         MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
         System.out.println(abstractSR.getSrType());
         switch(abstractSR.getSrType()) {
