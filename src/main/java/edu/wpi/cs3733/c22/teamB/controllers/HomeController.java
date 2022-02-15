@@ -159,7 +159,7 @@ public class HomeController {
     private void goToCSVRestoreBackup(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/CSV_Restore_Backup.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Settings.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();

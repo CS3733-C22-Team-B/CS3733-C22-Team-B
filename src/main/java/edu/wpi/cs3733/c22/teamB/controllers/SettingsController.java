@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class CSVRestoreBackupController {
+public class SettingsController {
     @FXML
     JFXButton HomeB;
     @FXML
@@ -45,6 +45,6 @@ public class CSVRestoreBackupController {
         }
     }
 
-    
+
 
 }
