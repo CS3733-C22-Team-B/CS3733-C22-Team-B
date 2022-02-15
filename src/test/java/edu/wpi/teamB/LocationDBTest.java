@@ -3,7 +3,6 @@ package edu.wpi.teamB;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
-import edu.wpi.cs3733.c22.teamB.oldEntity.MedicalEquipmentDBI;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

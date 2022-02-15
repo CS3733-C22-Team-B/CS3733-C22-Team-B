@@ -1,87 +1,54 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.*;
-
 
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class GiftFloralServiceController implements IController, Initializable {
+public class GiftFloralServiceController implements IController {
+    String type[] = {"All", "Floral", "Gift"};
+    String opts[] = {"Teddy Bear", "Pajamas", "Slippers", "Rock", "Coloring Books"};
+    String optsFl[] = {"Red Bouquet", "Orange Bouquet", "Yellow Bouquet"};
 
-
-    @FXML private JFXComboBox<String> roomID;
-    @FXML private DatePicker dateID;
-
-    @FXML private TextField idField;
-    @FXML private JFXComboBox<String> assignedEmployeeField;
-    @FXML private JFXComboBox<String> statusField;
-    @FXML private Label confirmLabel;
     @FXML private JFXComboBox<String> giftOptions;
+    @FXML private JFXComboBox<String> giftType;
 
-    @FXML private Label reminderText;
-    @FXML private Label whatGifts;
-    // scroll area
-    // checkboxes
-    @FXML private Label whenGifts;
-    // calendar
-    @FXML private Label whatFloor;
-    // dropdown floor
-    @FXML private Label whatRoom;
-    // dropdown room
+    private GiftFloralSR sr = null;
 
-    private boolean requestCompleted = false;
-    private String assignedToRequest;
-
-    private List<Employee> employeeList;
-    private Map<String, Employee> employeeMap;
-    private List<Location> locList;
-    private Map<String, Location> locMap;
-
-    private void requestAssigned(String name) {
-        assignedToRequest = name;
+    public GiftFloralServiceController(){}
+    public GiftFloralServiceController(GiftFloralSR sr){
+        this.sr = sr;
     }
 
-    DatabaseWrapper db = new DatabaseWrapper();
+    @FXML
+    public void initialize(){
+        giftType.setItems(FXCollections.observableArrayList(type));
 
-    @Override
+        giftOptions.getItems().addAll(FXCollections.observableArrayList(optsFl));
+        giftOptions.getItems().addAll(FXCollections.observableArrayList(opts));
+        if (sr == null) {
+            clear();
+        } else {
+            giftType.setValue("All");
+            giftOptions.setValue(sr.getGiftName());
+        }
+    }
+
+
+   /* @Override
         public void initialize(URL location, ResourceBundle resources) {
-
-            locList = db.getAllLocation();
-            locMap =
-                    IntStream.range(0, locList.size())
-                            .boxed()
-                            .collect(
-                                    Collectors.toMap(
-                                            i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()),
-                                            i -> locList.get(i)));
-
-            employeeList = db.getAllEmployee();
-            employeeMap =
-                    IntStream.range(0, employeeList.size())
-                            .boxed()
-                            .collect(
-                                    Collectors.toMap(
-                                            i ->
-                                                    (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
-                                            i -> employeeList.get(i)));
-
-
-//            statusField.getItems().addAll(AbstractSR.keySet());
-            statusField.setValue("BLANK");
-
-            roomID.getItems().addAll(locMap.keySet());
-
-
-            assignedEmployeeField.getItems().addAll(employeeMap.keySet());
 
             // Implement it so that when you press "gift" or "floral", it only shows
             // the drop down for one or the other
@@ -110,29 +77,36 @@ public class GiftFloralServiceController implements IController, Initializable {
             giftOptions.getItems().add("White Bouquet");
             giftOptions.getItems().add("Floral Wreath");
         }
-
+*/
     @Override
     public void submit() {
-
-//      GiftFloralSR request = new GiftFloralSR(idField.getText(), statusField.getValue(), giftOptions.getValue(), dateID.getValue().toString(), roomID.getValue());
-//      System.out.println(request.toString());
-//      giftfloralDatabase.insertNode(request);
-      clear();
     }
 
     @Override
-    public void submit(edu.wpi.cs3733.c22.teamB.entity.AbstractSR sr) {
-
+    public void submit(AbstractSR sr) {
+        DatabaseWrapper dw = new DatabaseWrapper();
+        dw.addSR(new GiftFloralSR(sr, giftOptions.getValue()));
     }
 
     @Override
     public void clear() {
-        confirmLabel.setText("");
-        statusField.setValue("");
-        roomID.setValue("");
-        idField.clear();
-        giftOptions.setValue("");
-        assignedEmployeeField.setValue("");
-        dateID.getEditor().clear();
+        giftOptions.setValue(null);
+        giftType.setValue("All");
+    }
+
+
+    @FXML private void onGiftTypeChange(ActionEvent actionEvent) {
+        giftOptions.getItems().clear();
+        giftOptions.getItems().removeAll();
+        if (giftType.getValue().equals("All")){
+            giftOptions.getItems().addAll(FXCollections.observableArrayList(optsFl));
+            giftOptions.getItems().addAll(FXCollections.observableArrayList(opts));
+        }
+        else if (giftType.getValue().equals("Floral")){
+            giftOptions.setItems(FXCollections.observableArrayList(optsFl));
+        }
+        else if (giftType.getValue().equals("Gift")){
+            giftOptions.setItems(FXCollections.observableArrayList(opts));
+        }
     }
 }

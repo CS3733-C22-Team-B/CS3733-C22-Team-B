@@ -2,8 +2,15 @@ package edu.wpi.cs3733.c22.teamB.entity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 public abstract class AbstractSR {
+    public enum SRStatus {
+        BLANK,
+        WAITING,
+        CANCELED,
+        DONE
+    };
 
     public static String[] SRstatus = {"WAITING", "IN PROGRESS", "CANCELLED", "DONE"};
 
