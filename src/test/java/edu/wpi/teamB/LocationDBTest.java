@@ -126,20 +126,20 @@ public class LocationDBTest {
 
     @AfterAll
     public void cleanUp() {
-        databaseWrapper.deleteLocation(location.getNodeID());
-//        databaseWrapper.deleteLocation(location2.getNodeID());
-
-        databaseWrapper.deleteEmployee(employee1.getEmployeeID());
-//        databaseWrapper.deleteEmployee(employee2.getEmployeeID());
-
-//        databaseWrapper.deleteMedicalEquipment(equipment.getEquipmentID());
-
-        databaseWrapper.deleteSR(ben.getSrID());
-        databaseWrapper.deleteSR(Pushman.getSrID());
-        databaseWrapper.deleteSR(Noah.getSrID());
-        databaseWrapper.deleteSR(Sits.getSrID());
-        databaseWrapper.deleteSR(Duc.getSrID());
-        databaseWrapper.deleteSR(Nick.getSrID());
+//        databaseWrapper.deleteLocation(location.getNodeID());
+////        databaseWrapper.deleteLocation(location2.getNodeID());
+//
+//        databaseWrapper.deleteEmployee(employee1.getEmployeeID());
+////        databaseWrapper.deleteEmployee(employee2.getEmployeeID());
+//
+////        databaseWrapper.deleteMedicalEquipment(equipment.getEquipmentID());
+//
+//        databaseWrapper.deleteSR(ben.getSrID());
+//        databaseWrapper.deleteSR(Pushman.getSrID());
+//        databaseWrapper.deleteSR(Noah.getSrID());
+//        databaseWrapper.deleteSR(Sits.getSrID());
+//        databaseWrapper.deleteSR(Duc.getSrID());
+//        databaseWrapper.deleteSR(Nick.getSrID());
     }
     /*
     LocationDBI locationDBI = new LocationDBI();

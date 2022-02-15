@@ -121,7 +121,7 @@ public class MapEditorController{
     @FXML
     public void initialize(){
         Bapp.getPrimaryStage().setMaximized(true);
-        Bapp.getPrimaryStage().resizableProperty().set(false);
+//        Bapp.getPrimaryStage().resizableProperty().set(false);
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);

@@ -78,11 +78,13 @@ public class BorderHome implements Initializable{
 
 
         VBox leftDrawerPane = new VBox();
+        VBox DrawerPane = new VBox();
         leftDrawerPane.getChildren().add(button1);
         leftDrawerPane.getChildren().add(button2);
         leftDrawerPane.getChildren().add(button3);
         leftDrawerPane.getChildren().add(button4);
         leftDrawerPane.getChildren().add(button5);
+
 
         leftDrawerPane.setAlignment(Pos.CENTER);
         leftDrawerPane.prefHeightProperty().bind(anchorPane.heightProperty());
