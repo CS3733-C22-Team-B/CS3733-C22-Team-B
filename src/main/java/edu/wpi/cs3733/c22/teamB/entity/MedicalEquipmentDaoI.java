@@ -9,7 +9,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
     private Connection conn;
 
     public MedicalEquipmentDaoI() {
-        this.conn = ConnectionManager.getConnection();
+        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override

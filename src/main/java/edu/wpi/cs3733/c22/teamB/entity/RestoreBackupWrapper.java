@@ -79,16 +79,31 @@ public class RestoreBackupWrapper {
     }
 
     void backupAll() throws FileNotFoundException {
-        backupLocation();
-        backupEmployee();
-        backupMedicalEquipment();
-        backupMainSR();
-        backupExternalTransportSR();
-        backupFoodDeliverySR();
-        backupGiftFloralSR();
-        backupLaundrySR();
-        backupMedicalEquipmentSR();
+
         backupMedicineDeliverySR();
+        backupMedicalEquipmentSR();
+        backupLaundrySR();
+        backupGiftFloralSR();
+        backupFoodDeliverySR();
+        backupExternalTransportSR();
+        backupMainSR();
+        backupMedicalEquipment();
+        backupEmployee();
+        backupLocation();
+
+
+
+
+//        backupLocation();
+//        backupEmployee();
+//        backupMedicalEquipment();
+//        backupMainSR();
+//        backupExternalTransportSR();
+//        backupFoodDeliverySR();
+//        backupGiftFloralSR();
+//        backupLaundrySR();
+//        backupMedicalEquipmentSR();
+//        backupMedicineDeliverySR();
     }
 
     void restoreLocation() throws IOException {

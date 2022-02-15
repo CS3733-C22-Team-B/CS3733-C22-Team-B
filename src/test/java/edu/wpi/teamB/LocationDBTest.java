@@ -10,7 +10,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
 public class LocationDBTest {
     static DatabaseWrapper databaseWrapper;
 
@@ -63,11 +63,7 @@ public class LocationDBTest {
     public void test() {
         databaseWrapper.dropAll();
 
-        databaseWrapper.createTableLocation();
-        databaseWrapper.createTableEmployee();
-        databaseWrapper.createTableMedicalEquipment();
-        databaseWrapper.createTableSR();
-
+        databaseWrapper.createAll();
 
 
 
@@ -124,22 +120,21 @@ public class LocationDBTest {
 
     }
 
-    @AfterAll
-    public void cleanUp() {
-        databaseWrapper.deleteLocation(location.getNodeID());
+//    public void cleanUp() {
+////        databaseWrapper.deleteLocation(location.getNodeID());
 //        databaseWrapper.deleteLocation(location2.getNodeID());
-
-        databaseWrapper.deleteEmployee(employee1.getEmployeeID());
-//        databaseWrapper.deleteEmployee(employee2.getEmployeeID());
-
-//        databaseWrapper.deleteMedicalEquipment(equipment.getEquipmentID());
-
-        databaseWrapper.deleteSR(ben.getSrID());
-        databaseWrapper.deleteSR(Pushman.getSrID());
-        databaseWrapper.deleteSR(Noah.getSrID());
-        databaseWrapper.deleteSR(Sits.getSrID());
-        databaseWrapper.deleteSR(Duc.getSrID());
-        databaseWrapper.deleteSR(Nick.getSrID());
+//
+//        databaseWrapper.deleteEmployee(employee1.getEmployeeID());
+////        databaseWrapper.deleteEmployee(employee2.getEmployeeID());
+//
+////        databaseWrapper.deleteMedicalEquipment(equipment.getEquipmentID());
+//
+//        databaseWrapper.deleteSR(ben.getSrID());
+//        databaseWrapper.deleteSR(Pushman.getSrID());
+//        databaseWrapper.deleteSR(Noah.getSrID());
+//        databaseWrapper.deleteSR(Sits.getSrID());
+//        databaseWrapper.deleteSR(Duc.getSrID());
+//        databaseWrapper.deleteSR(Nick.getSrID());
     }
     /*
     LocationDBI locationDBI = new LocationDBI();
@@ -252,9 +247,9 @@ public class LocationDBTest {
         locationDBI.deleteNode("UpdateTest");
 
         locationDBI.closeConnection();
-    }
+//    }
 
     */
-}
+
 
                                                                     // assertEquals(expected, actual);

@@ -21,10 +21,11 @@ public class DatabaseWrapper {
     private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
     private IDatabase<SanitationSR> SanitationSRDao;
     private IDatabase<AbstractSR> MainSRDao;
+    private ConnectionManager connectionManager;
 
     private RestoreBackupWrapper restoreBackupWrapper;
 
-    public DatabaseWrapper() throws SQLException {
+    public DatabaseWrapper() {
         LocationDao = new LocationDaoI();
         EmployeeDao = new EmployeeDaoI();
         MedicalEquipmentDao = new MedicalEquipmentDaoI();
@@ -42,11 +43,11 @@ public class DatabaseWrapper {
     }
 
     public void initEmbedded() {
-        ConnectionManager.setConnectionStrategy(false);
+        connectionManager.setConnectionStrategy(false);
     }
 
     public void initClient() {
-        ConnectionManager.setConnectionStrategy(true);
+        connectionManager.setConnectionStrategy(true);
     }
     
     public void addSR(AbstractSR abstractSR){

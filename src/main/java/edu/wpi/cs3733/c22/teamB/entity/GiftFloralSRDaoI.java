@@ -10,7 +10,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
     private Connection conn;
 
     public GiftFloralSRDaoI() {
-        this.conn = ConnectionManager.getConnection();
+        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override

@@ -9,7 +9,7 @@ public class LocationDaoI implements IDatabase<Location> {
     private Connection conn;
 
     public LocationDaoI() {
-        this.conn = ConnectionManager.getConnection();
+        this.conn = ConnectionManager.getInstance().getConnection();
     }
 
     @Override

@@ -72,7 +72,7 @@ public class MedicalEquipmentTableController {
 
 
         statusField.getItems().addAll(MedicalEquipment.getEquipmentStatus());
-        statusField.setValue("BLANK");
+        statusField.setValue("WAITING");
 
         LocationChoice.getItems().addAll(locMap.keySet());
         gridPane.setVisible(false);
