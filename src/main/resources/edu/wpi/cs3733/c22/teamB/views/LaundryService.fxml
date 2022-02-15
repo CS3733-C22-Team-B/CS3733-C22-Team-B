@@ -12,8 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.LaundrySRController">
-   <children>
+
       <HBox layoutX="410.0" layoutY="151.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="200.0" prefWidth="300.0" />
@@ -72,5 +73,4 @@
             <Pane prefHeight="200.0" prefWidth="300.0" />
          </children>
       </HBox>
-   </children>
-</AnchorPane>
+   </AnchorPane>

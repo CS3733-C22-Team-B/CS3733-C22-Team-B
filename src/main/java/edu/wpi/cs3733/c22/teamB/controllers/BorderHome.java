@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -31,7 +32,6 @@ public class BorderHome implements Initializable{
     private BorderPane borderPane;
 
     private Pane childPane;
-    private IController childController;
 
     public BorderHome() {
         try {
@@ -54,17 +54,41 @@ public class BorderHome implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Home")));
+            childPane = loader.load();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
 
-        JFXButton button1 = new JFXButton("Button 1");
-        JFXButton button2 = new JFXButton("Button 2");
-        JFXButton button3 = new JFXButton("Button 3");
-        JFXButton button4 = new JFXButton("Button 4");
+
+            AnchorPane.setRightAnchor(childPane, 0.0);
+            AnchorPane.setLeftAnchor(childPane, 0.0);
+            AnchorPane.setTopAnchor(childPane, 0.0);
+            AnchorPane.setBottomAnchor(childPane, 0.0);
+
+
+            childPane.setPrefHeight(anchorPane.getHeight());
+            childPane.setPrefWidth(anchorPane.getWidth());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JFXButton button1 = new JFXButton("Home");
+        JFXButton button2 = new JFXButton("Map");
+        JFXButton button3 = new JFXButton("Request");
+        JFXButton button4 = new JFXButton("Dashboard");
+
+
 
 
         VBox leftDrawerPane = new VBox();
         leftDrawerPane.getChildren().add(button1);
         leftDrawerPane.getChildren().add(button2);
         leftDrawerPane.getChildren().add(button3);
+        leftDrawerPane.getChildren().add(button4);
+
         leftDrawerPane.setAlignment(Pos.CENTER);
         leftDrawerPane.prefHeightProperty().bind(anchorPane.heightProperty());
 
@@ -86,28 +110,81 @@ public class BorderHome implements Initializable{
 
         });
 
-        button2.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+        button1.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Home")));
 
             try {
                 childPane = loader.load();
+                AnchorPane.setRightAnchor(childPane, 0.0);
+                AnchorPane.setLeftAnchor(childPane, 0.0);
+                AnchorPane.setTopAnchor(childPane, 0.0);
+                AnchorPane.setBottomAnchor(childPane, 0.0);
+
+
+                childPane.setPrefHeight(anchorPane.getHeight());
+                childPane.setPrefWidth(anchorPane.getWidth());
+
+
                 anchorPane.getChildren().clear();
                 anchorPane.getChildren().add(childPane);
+                anchorPane.toBack();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
         });
 
-        button1.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Login")));
+        button2.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
+
+            try {
+                childPane = loader.load();
+
+                AnchorPane.setRightAnchor(childPane, 0.0);
+                AnchorPane.setLeftAnchor(childPane, 0.0);
+                AnchorPane.setTopAnchor(childPane, 0.0);
+                AnchorPane.setBottomAnchor(childPane, 0.0);
+
+
+                childPane.setPrefHeight(borderPane.getHeight());
+                childPane.setPrefWidth(borderPane.getWidth());
+
+                anchorPane.getChildren().clear();
+                anchorPane.getChildren().add(childPane);
+                anchorPane.toBack();
+
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        button3.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("ServiceRequestDirectory")));
 
             try {
                 childPane = loader.load();
                 anchorPane.getChildren().clear();
                 anchorPane.getChildren().add(childPane);
+                anchorPane.toBack();
 
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        button4.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
+
+            try {
+                childPane = loader.load();
+                anchorPane.getChildren().clear();
+                anchorPane.getChildren().add(childPane);
+                anchorPane.toBack();
 
 
             } catch (IOException ex) {
