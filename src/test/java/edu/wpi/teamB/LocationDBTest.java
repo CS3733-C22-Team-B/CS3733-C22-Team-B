@@ -87,7 +87,7 @@ public class LocationDBTest {
 
         AbstractSR Pushman = new FoodDeliverySR("121", "12", location2, employee1, employee2, date, "no", "Hushmand", "Ben");
 
-        AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
+        AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no", "no");
 
         AbstractSR Sits = new LaundrySR("1123123", "12", location2, employee1, employee2, date, "no");
 

@@ -16,9 +16,10 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
     @Override
     public void addValue(GiftFloralSR object) {
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO GIFTFLORALSR (srID, giftName) VALUES(?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO GIFTFLORALSR (srID, giftType, giftName) VALUES(?, ?, ?)");
             pstmt.setString(1, object.getSrID());
-            pstmt.setString(2, object.getGiftName());
+            pstmt.setString(2, object.getGiftType());
+            pstmt.setString(3, object.getGiftName());
 
             pstmt.executeUpdate();
 
@@ -77,12 +78,12 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
 
             rset.next();
 
+            String giftType = rset.getString("giftType");
             String giftName = rset.getString("giftName");
 
             MainSRDaoI mainSRDaoI = new MainSRDaoI();
             AbstractSR mainSR = mainSRDaoI.getValue(objectID);
 
-            String srType = "Gift";
             String status = mainSR.getStatus();
             Location location = mainSR.getLocation();
             Employee requestor = mainSR.getRequestor();
@@ -90,7 +91,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
 
-            giftFloralSR = new GiftFloralSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, giftName);
+            giftFloralSR = new GiftFloralSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, giftType, giftName);
 
         } catch (SQLException e) {
             System.out.println("Get FoodDeliverySR Node Failed");
@@ -133,6 +134,7 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
                 Statement stmt = conn.createStatement();
                 stmt.execute("CREATE TABLE GIFTFLORALSR ( "
                         + "srID VARCHAR(50) , "
+                        + "giftType VARCHAR(50), "
                         + "giftName VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
                         + "CONSTRAINT FK_GIFTFLORALSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");

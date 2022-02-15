@@ -190,28 +190,20 @@ public class DatabaseWrapper {
         if (abstractSR != null) {
             switch(abstractSR.getSrType()) {
                 case "ExternalTransportSR":
-                    System.out.println(ExternalTransportDao.getValue(srID));
                     return ExternalTransportDao.getValue(srID);
                 case "FoodDeliverySR":
-                    System.out.println(FoodDeliveryDao.getValue(srID));
                     return FoodDeliveryDao.getValue(srID);
                 case "GiftFloralSR":
-                    System.out.println(GiftFloralSRDao.getValue(srID));
                     return GiftFloralSRDao.getValue(srID);
                 case "LaundrySR":
-                    System.out.println(LaundrySRDao.getValue(srID));
                     return LaundrySRDao.getValue(srID);
                 case "MedicalEquipmentSR":
-                    System.out.println(MedicalEquipmentSRDao.getValue(srID));
                     return MedicalEquipmentSRDao.getValue(srID);
                 case "MedicineDeliverySR":
-                    System.out.println(MedicineDeliverySRDao.getValue(srID));
                     return MedicineDeliverySRDao.getValue(srID);
                 case "ComputerServiceSR":
-                    System.out.println(ComputerServiceSRDao.getValue(srID));
                     return ComputerServiceSRDao.getValue(srID);
                 case "SanitationSR":
-                    System.out.println(SanitationSRDao.getValue(srID));
                     return SanitationSRDao.getValue(srID);
                 default:
                     System.out.println("Invalid SR Input: " + abstractSR.getSrType());
