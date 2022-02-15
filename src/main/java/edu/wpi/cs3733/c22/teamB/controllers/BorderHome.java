@@ -184,7 +184,7 @@ public class BorderHome implements Initializable{
 
     }
 
-    void changeNode(FXMLLoader loader, String controllerName) throws IOException {
+    void changeNode(FXMLLoader loader) throws IOException {
         try {
             childPane = loader.load();
             anchorPane.getChildren().clear();

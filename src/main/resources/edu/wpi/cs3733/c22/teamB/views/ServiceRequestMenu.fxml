@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -113,14 +114,14 @@
          </image>
       </ImageView>
       <Label layoutX="72.0" layoutY="28.0" prefHeight="66.0" prefWidth="498.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Service Request Systems" />
-      <Label layoutX="122.0" layoutY="103.0" text="Duc" />
-      <Label layoutX="236.0" layoutY="103.0" text="Nic" />
-      <Label layoutX="342.0" layoutY="103.0" text="Calvin" />
-      <Label layoutX="437.0" layoutY="103.0" text="Kateri &quot;Kiki&quot;" />
-      <Label layoutX="112.0" layoutY="347.0" text="Andrew" />
-      <Label layoutX="231.0" layoutY="347.0" text="Noah" />
-      <Label layoutX="348.0" layoutY="347.0" text="Cris" />
-      <Label layoutX="458.0" layoutY="347.0" text="Sits" />
+      <Label fx:id="name1" layoutX="122.0" layoutY="103.0" text="Duc" />
+      <Label fx:id="name2" layoutX="236.0" layoutY="103.0" text="Nic" />
+      <Label fx:id="name3" layoutX="342.0" layoutY="103.0" text="Calvin" />
+      <Label fx:id="name4" layoutX="437.0" layoutY="103.0" text="Kateri &quot;Kiki&quot;" />
+      <Label fx:id="name5" layoutX="112.0" layoutY="347.0" text="Andrew" />
+      <Label fx:id="name6" layoutX="231.0" layoutY="347.0" text="Noah" />
+      <Label fx:id="name7" layoutX="348.0" layoutY="347.0" text="Cris" />
+      <Label fx:id="name8" layoutX="458.0" layoutY="347.0" text="Sits" />
       <StackPane layoutX="420.0" layoutY="238.0" prefHeight="100.0" prefWidth="100.0">
          <children>
             <JFXButton onAction="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true" />
@@ -136,5 +137,6 @@
             </Label>
          </children>
       </StackPane>
+      <JFXToggleButton fx:id="toggleName" layoutX="479.0" layoutY="359.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" text="Show Names" wrapText="true" />
    </children>
 </AnchorPane>
