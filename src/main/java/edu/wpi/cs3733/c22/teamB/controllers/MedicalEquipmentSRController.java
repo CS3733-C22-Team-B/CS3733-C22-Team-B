@@ -52,7 +52,7 @@ public class MedicalEquipmentSRController implements IController {
             clear();
         } else {
             equipmentTypeField.setValue(sr.getMedicalEquipment().getEquipmentType());
-            equipmentNameField.setValue(sr.getMedicalEquipment().getEquipmentName());
+            equipmentNameField.setValue(sr.getMedicalEquipment().getEquipmentID() + ' ' + sr.getMedicalEquipment().getEquipmentName());
         }
         equipmentNameField.getItems().addAll(medEqpMap.keySet()
                 .stream()
@@ -70,7 +70,10 @@ public class MedicalEquipmentSRController implements IController {
     @Override
     public void submit(AbstractSR sr) {
         DatabaseWrapper dw = new DatabaseWrapper();
-        dw.addSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
+        if (this.sr == null)
+            dw.addSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
+        else
+            dw.updateSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
     }
 
     @Override

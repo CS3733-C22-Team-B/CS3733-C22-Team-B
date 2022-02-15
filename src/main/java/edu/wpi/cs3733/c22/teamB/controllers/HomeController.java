@@ -191,4 +191,14 @@ public class HomeController {
             ex.printStackTrace();
         }
     }
+
+    public void goToSRManager(ActionEvent actionEvent) {
+        try {
+            Parent root =
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestManager.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

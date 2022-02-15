@@ -10,13 +10,16 @@ import edu.wpi.cs3733.c22.teamB.entity.Employee;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -50,6 +53,7 @@ public class ServiceRequestManagerController {
 
     @FXML
     private void initialize() {
+        // get employee list from db
         employeeList = dw.getAllEmployee();
         employeeMap =
                 IntStream.range(0, employeeList.size())
@@ -60,6 +64,7 @@ public class ServiceRequestManagerController {
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
 
+        // setup table
         idCol.setCellValueFactory(new PropertyValueFactory<>("srID"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("srType"));
         requestorCol.setCellValueFactory(cd -> {
@@ -153,6 +158,29 @@ public class ServiceRequestManagerController {
                 };
             }
         });
+        // setup table row
+        srTable.setRowFactory( tv -> {
+            TableRow<AbstractSR> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+                    AbstractSR sr = row.getItem();
+                    System.out.println(sr.getSrType());
+
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MasterServiceRequest.fxml"));
+                        loader.setControllerFactory(
+                                param -> new MasterServiceRequestController(sr.getSrType(), dw.getSR(sr.getSrID())));
+                        Parent root = loader.load();
+                        Bapp.getPrimaryStage().getScene().setRoot(root);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+
+                    }
+                }
+            });
+            return row;
+        });
         // add data to table
         srTable.getItems().addAll(dw.getAllSR());
 
@@ -221,7 +249,7 @@ public class ServiceRequestManagerController {
         }
         textFilterField.setOnKeyPressed(event -> {
             if (event.getCode().equals(KeyCode.ENTER)) {
-                System.out.println(textFilterField.getText());
+                filterSubmit(null);
             }
         });
     }
@@ -242,7 +270,7 @@ public class ServiceRequestManagerController {
 
     @FXML
     private void onFilterByButton(ActionEvent actionEvent) {
-        filterDialog.show((StackPane) Bapp._root);
+        filterDialog.show((StackPane) Bapp.getPrimaryStage().getScene().getRoot());
     }
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {

@@ -25,6 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <JFXButton onAction="#goToServiceRequestPanel" prefWidth="100.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Start" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
@@ -36,6 +37,7 @@
             <JFXButton fx:id="CSVImportButton" onAction="#goToCSVRestoreBackup" text="Settings" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
             <JFXButton alignment="CENTER" onAction="#goToServiceRequestMenu" prefHeight="39.0" prefWidth="225.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Service Requests v2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <JFXButton fx:id="employeeButton" alignment="CENTER" onAction="#goToEmployeeTable" prefHeight="39.0" prefWidth="225.0" ripplerFill="#3b99eb" styleClass="rectangle" text="Employee Manager" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <JFXButton onAction="#goToSRManager" prefHeight="33.0" prefWidth="268.0" ripplerFill="#3b99eb" text="Service Request Manager" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

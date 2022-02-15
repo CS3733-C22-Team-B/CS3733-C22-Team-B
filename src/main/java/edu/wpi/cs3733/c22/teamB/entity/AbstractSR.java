@@ -6,7 +6,7 @@ import java.util.Map;
 
 public abstract class AbstractSR {
 
-    public static String[] SRstatus = {"IN PROGRESS", "IN PROGRESS", "CANCELLED", "DONE"};
+    public static String[] SRstatus = {"WAITING", "IN PROGRESS", "CANCELLED", "DONE"};
 
     private String srID;
     private String srType;

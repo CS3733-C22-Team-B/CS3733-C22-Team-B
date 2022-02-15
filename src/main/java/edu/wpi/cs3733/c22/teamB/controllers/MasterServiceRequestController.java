@@ -209,7 +209,7 @@ public class MasterServiceRequestController {
                 .collect(Collectors.toList()));
     }
     // Important: add your path here
-    private static String srTypeToFXMLPath(String srType) {
+    public static String srTypeToFXMLPath(String srType) {
         switch (srType) {
             case "MedicalEquipmentSR":
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
