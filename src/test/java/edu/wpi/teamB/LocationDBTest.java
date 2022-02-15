@@ -47,7 +47,7 @@ public class LocationDBTest {
     AbstractSR ben = new ExternalTransportSR("12", "12", location2, employee1, employee2, date, "Ben", "Ben", "Ben", "Ben");
     AbstractSR kiki = new ExternalTransportSR("asd", "ads", location2, employee1, employee2, date, "kl", "asd", "asd", "asd");
     AbstractSR Pushman = new FoodDeliverySR("121", "12", location2, employee1, employee2, date, "no", "Hushmand", "Ben");
-    //AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
+    AbstractSR Noah = new GiftFloralSR("123", "12", location2, employee1, employee2, date, "no", "no");
     AbstractSR Sits = new LaundrySR("1123123", "12", location2, employee1, employee2, date, "no");
     AbstractSR Duc = new MedicalEquipmentSR("12321321321", "12", location2, employee1, employee2, date, "no", equipment);
     AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
@@ -84,7 +84,7 @@ public class LocationDBTest {
         databaseWrapper.addSR(ben);
         databaseWrapper.addSR(kiki);
         databaseWrapper.addSR(Pushman);
-       // databaseWrapper.addSR(Noah);
+        databaseWrapper.addSR(Noah);
         databaseWrapper.addSR(Sits);
         databaseWrapper.addSR(Duc);
         databaseWrapper.addSR(Nick);
@@ -136,7 +136,7 @@ public class LocationDBTest {
 
         databaseWrapper.deleteSR(ben.getSrID());
         databaseWrapper.deleteSR(Pushman.getSrID());
-        //databaseWrapper.deleteSR(Noah.getSrID());
+        databaseWrapper.deleteSR(Noah.getSrID());
         databaseWrapper.deleteSR(Sits.getSrID());
         databaseWrapper.deleteSR(Duc.getSrID());
         databaseWrapper.deleteSR(Nick.getSrID());
