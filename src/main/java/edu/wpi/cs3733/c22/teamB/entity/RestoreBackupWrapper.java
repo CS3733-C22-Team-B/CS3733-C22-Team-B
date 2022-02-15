@@ -17,12 +17,16 @@ public class RestoreBackupWrapper {
     private IDatabase<LaundrySR> LaundrySRDao;
     private IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDao;
     private IDatabase<MedicineDeliverySR> MedicineDeliverySRDao;
+    private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
+    private IDatabase<SanitationSR> SanitationSRDao;
     private IDatabase<AbstractSR> MainSRDao;
 
     private CSVReader reader;
     private CSVWriter writer;
 
     private File backDir;
+
+    // Read paths
     private final String locationFileName = "/TowerLocationsB.csv";
     private final String employeeFileName = "/EmployeeB.csv";
     private final String medicalEquipmentFileName = "/MedicalEquipmentB.csv";
@@ -33,7 +37,10 @@ public class RestoreBackupWrapper {
     private final String laundryFileName = "/LaundrySRB.csv";
     private final String medicalEquipmentSRFileName = "/MedicalEquipmentSRB.csv";
     private final String medicineDeliveryFileName = "/MedicineDeliverySRB.csv";
+    private final String computerServiceFileName = "/ComputerServiceSRB.csv";
+    private final String sanitationFileName = "/SanitationSRB.csv";
 
+    // Write file names
     private final String locationFileNameW = "TowerLocationsB";
     private final String employeeFileNameW = "EmployeeB";
     private final String medicalEquipmentFileNameW = "MedicalEquipmentB";
@@ -44,6 +51,8 @@ public class RestoreBackupWrapper {
     private final String laundryFileNameW = "LaundrySRB";
     private final String medicalEquipmentSRFileNameW = "MedicalEquipmentSRB";
     private final String medicineDeliveryFileNameW = "MedicineDeliverySRB";
+    private final String computerServiceFileNameW = "ComputerServiceSRB";
+    private final String sanitationFileNameW = "SanitationSRB";
 
     RestoreBackupWrapper() {
          LocationDao = new LocationDaoI();
@@ -55,6 +64,8 @@ public class RestoreBackupWrapper {
          LaundrySRDao = new LaundrySRDaoI();
          MedicalEquipmentSRDao = new MedicalEquipmentSRDaoI();
          MedicineDeliverySRDao = new MedicineDeliverySRDaoI();
+         ComputerServiceSRDao = new ComputerServiceSRDaoI();
+         SanitationSRDao = new SanitationSRDaoI();
          MainSRDao = new MainSRDaoI();
          reader = new CSVReader();
          writer = new CSVWriter();
@@ -76,6 +87,8 @@ public class RestoreBackupWrapper {
         restoreLaundrySR();
         restoreMedicalEquipmentSR();
         restoreMedicineDeliverySR();
+        restoreComputerServiceSR();
+        restoreSanitationSR();
     }
 
     void backupAll() throws FileNotFoundException {
@@ -89,6 +102,8 @@ public class RestoreBackupWrapper {
         backupLaundrySR();
         backupMedicalEquipmentSR();
         backupMedicineDeliverySR();
+        backupComputerServiceSR();
+        backupSanitationSR();
     }
 
     void restoreLocation() throws IOException {
@@ -289,6 +304,44 @@ public class RestoreBackupWrapper {
 
         writer.backupDir(medicineDeliveryFileNameW);
         writer.writeAll(parser.fromObjectsToStrings(MedicineDeliverySRDao.getAllValues()));
+    }
+
+    void restoreComputerServiceSR() throws IOException {
+        ComputerServiceSRParserI parser = new ComputerServiceSRParserI();
+
+        File filePath = new File(backDir.getAbsolutePath() + computerServiceFileName);
+        reader.setFile(filePath);
+
+        List<String> stringList = reader.read();
+        List<ComputerServiceSR> computerServiceSRList = parser.fromStringsToObjects(stringList);
+
+        ComputerServiceSRDao.restoreTable(computerServiceSRList);
+    }
+
+    void backupComputerServiceSR() throws FileNotFoundException {
+        ComputerServiceSRParserI parser = new ComputerServiceSRParserI();
+
+        writer.backupDir(computerServiceFileNameW);
+        writer.writeAll(parser.fromObjectsToStrings(ComputerServiceSRDao.getAllValues()));
+    }
+
+    void restoreSanitationSR() throws IOException {
+        SanitationSRParserI parser = new SanitationSRParserI();
+
+        File filePath = new File(backDir.getAbsolutePath() + sanitationFileName);
+        reader.setFile(filePath);
+
+        List<String> stringList = reader.read();
+        List<SanitationSR> sanitationSRList = parser.fromStringsToObjects(stringList);
+
+        SanitationSRDao.restoreTable(sanitationSRList);
+    }
+
+    void backupSanitationSR() throws FileNotFoundException {
+        SanitationSRParserI parser = new SanitationSRParserI();
+
+        writer.backupDir(sanitationFileNameW);
+        writer.writeAll(parser.fromObjectsToStrings(SanitationSRDao.getAllValues()));
     }
 
 }
