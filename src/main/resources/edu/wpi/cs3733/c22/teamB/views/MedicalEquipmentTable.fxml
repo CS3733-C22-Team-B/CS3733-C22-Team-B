@@ -44,6 +44,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.79998779296875" minWidth="10.0" prefWidth="186.79998779296875" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.79995117187497" minWidth="10.0" prefWidth="139.79995117187497" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.20001220703125" minWidth="10.0" prefWidth="107.800048828125" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.20001220703125" minWidth="10.0" prefWidth="107.800048828125" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.20001220703125" minWidth="10.0" prefWidth="107.800048828125" />
             </columnConstraints>
             <rowConstraints>
@@ -58,11 +59,12 @@
                 <TextField fx:id="colorField" prefHeight="25.0" prefWidth="99.0" promptText="color" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="sizeField" prefHeight="25.0" prefWidth="255.0" promptText="size" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <TextField fx:id="descriptionField" prefHeight="25.0" prefWidth="145.0" promptText="description" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" style="-fx-background-color: lightblue;" text="Confirm" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
-                <JFXButton fx:id="clearButton" alignment="CENTER" onAction="#clearForm" style="-fx-background-color: lightblue;" text="Clear" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <JFXButton fx:id="cancelButton" alignment="CENTER" onAction="#cancelForm" style="-fx-background-color: lightblue;" text="Cancel" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
-            <JFXComboBox fx:id="LocationChoice" promptText="Location" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" style="-fx-background-color: lightblue;" text="Confirm" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
+                <JFXButton fx:id="clearButton" alignment="CENTER" onAction="#clearForm" style="-fx-background-color: lightblue;" text="Clear" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <JFXButton fx:id="cancelButton" alignment="CENTER" onAction="#cancelForm" style="-fx-background-color: lightblue;" text="Cancel" GridPane.columnIndex="6" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+            <JFXComboBox fx:id="LocationChoice" promptText="Location" GridPane.columnIndex="4" />
             <JFXComboBox fx:id="statusField" promptText="Status" GridPane.rowIndex="1" />
+            <TextField fx:id="amountField" prefHeight="25.0" prefWidth="145.0" promptText="amount" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </children>
