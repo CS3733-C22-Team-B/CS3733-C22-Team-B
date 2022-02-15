@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javax.swing.border.Border;
 import java.io.IOException;
 
 public class ServiceRequestMenuController {
@@ -30,8 +31,8 @@ public class ServiceRequestMenuController {
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MasterServiceRequest.fxml"));
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("FoodDeliverySR"));
-            Parent root = loader.load();
-            Bapp.getPrimaryStage().getScene().setRoot(root);
+
+            BorderHome.curBorderHome.changeNode(loader,"FoodDeliverySR");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

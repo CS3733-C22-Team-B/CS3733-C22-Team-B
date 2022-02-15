@@ -6,8 +6,6 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
@@ -18,7 +16,7 @@ import java.util.ResourceBundle;
 import static javafx.fxml.FXMLLoader.load;
 
 public class BorderHome implements Initializable{
-
+    public static BorderHome curBorderHome;
     @FXML
     private AnchorPane anchorPane;
 
@@ -34,17 +32,12 @@ public class BorderHome implements Initializable{
     private Pane childPane;
 
     public BorderHome() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Home")));
-            childPane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        curBorderHome = this;
     }
 
-    private String pageToFXMLPath(String pageType) {
+    private String pageToFXMLPath(String pageName) {
         try {
-            return "/edu/wpi/cs3733/c22/teamB/views/" + pageType +".fxml";
+            return "/edu/wpi/cs3733/c22/teamB/views/" + pageName +".fxml";
         } catch(Exception e) {
             throw new RuntimeException("Page Does not exist");
         }
@@ -162,16 +155,13 @@ public class BorderHome implements Initializable{
         });
 
         button3.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("ServiceRequestDirectory")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("ServiceRequestMenu")));
 
             try {
                 childPane = loader.load();
                 anchorPane.getChildren().clear();
                 anchorPane.getChildren().add(childPane);
                 anchorPane.toBack();
-
-
-
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -191,6 +181,18 @@ public class BorderHome implements Initializable{
                 ex.printStackTrace();
             }
         });
+
+    }
+
+    void changeNode(FXMLLoader loader, String controllerName) throws IOException {
+        try {
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
 
     }
 }
