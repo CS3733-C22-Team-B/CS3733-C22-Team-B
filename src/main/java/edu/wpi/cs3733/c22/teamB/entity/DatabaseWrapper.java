@@ -317,6 +317,7 @@ public class DatabaseWrapper {
         restoreBackupWrapper.restoreLaundrySR();
         restoreBackupWrapper.restoreMedicalEquipmentSR();
         restoreBackupWrapper.restoreMedicineDeliverySR();
+        restoreBackupWrapper.restoreSanitationSR();
     }
 
     void restoreTableLocation() throws IOException {
@@ -358,6 +359,7 @@ public class DatabaseWrapper {
         restoreBackupWrapper.backupMedicalEquipmentSR();
         restoreBackupWrapper.backupMedicineDeliverySR();
         restoreBackupWrapper.backupComputerServiceSR();
+        restoreBackupWrapper.backupSanitationSR();
     }
 
     public void backupAll() throws IOException{
