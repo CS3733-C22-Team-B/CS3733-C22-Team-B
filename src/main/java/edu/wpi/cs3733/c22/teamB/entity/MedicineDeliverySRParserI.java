@@ -9,34 +9,12 @@ public class MedicineDeliverySRParserI implements IParser<MedicineDeliverySR> {
     @Override
     public MedicineDeliverySR fromStringToObject(String string) {
         MedicineDeliverySR medicineDeliverySR = new MedicineDeliverySR();
-        Location destination = new Location();
-        Employee assignedEmployee = new Employee();
-
 
         String[] data = string.split(",");
 
         medicineDeliverySR.setSrID(data[0]);
-        medicineDeliverySR.setStatus(data[1]);
-
-        destination.setNodeID(data[2]);
-        medicineDeliverySR.setDestination(destination);
-
-        medicineDeliverySR.setMedicineID(data[3]);
-
-        assignedEmployee.setEmployeeID(data[4]);
-        medicineDeliverySR.setAssignedEmployee(assignedEmployee);
-
-        medicineDeliverySR.setPatientFirstName(data[5]);
-        medicineDeliverySR.setPatientLastName(data[6]);
-        medicineDeliverySR.setPatientID(data[7]);
-        medicineDeliverySR.setDOB(data[8]);
-        medicineDeliverySR.setEmail(data[9]);
-        medicineDeliverySR.setDosage(data[10]);
-        medicineDeliverySR.setMedicineName(data[11]);
-        medicineDeliverySR.setDispenseAmount(data[12]);
-        medicineDeliverySR.setFrequency(data[13]);
-        medicineDeliverySR.setForm(data[14]);
-        medicineDeliverySR.setMgPerDose(data[15]);
+        medicineDeliverySR.setMedicineID(data[1]);
+        medicineDeliverySR.setPatientID(data[2]);
 
         return medicineDeliverySR;
     }

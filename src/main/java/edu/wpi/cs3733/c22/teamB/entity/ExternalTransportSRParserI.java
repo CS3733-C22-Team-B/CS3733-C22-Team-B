@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.oldEntity.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,20 +11,13 @@ public class ExternalTransportSRParserI implements IParser<ExternalTransportSR> 
     @Override
     public ExternalTransportSR fromStringToObject(String string) {
         ExternalTransportSR externalTransportSR = new ExternalTransportSR();
-        Employee employee = new Employee();
 
         String[] data = string.split(",");
 
         externalTransportSR.setSrID(data[0]);
-        externalTransportSR.setStatus(data[1]);
-        externalTransportSR.setPickupLoc(data[2]);
-        externalTransportSR.setDestination(data[3]);
-        externalTransportSR.setInfo(data[4]);
-        externalTransportSR.setDate(data[5]);
-        externalTransportSR.setFormOfTransport(data[6]);
-
-        employee.setEmployeeID(data[7]);
-        externalTransportSR.setEmployee(employee);
+        externalTransportSR.setPatientID(data[1]);
+        externalTransportSR.setDropOffLocation(data[2]);
+        externalTransportSR.setFormOfTransport(data[3]);
 
         return externalTransportSR;
     }

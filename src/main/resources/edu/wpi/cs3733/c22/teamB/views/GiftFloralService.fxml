@@ -1,37 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXBadge?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="459.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.GiftFloralServiceController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="8.0" layoutY="9.0" prefHeight="459.0" prefWidth="582.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="9.0">
-         <children>
-            <DatePicker fx:id="dateID" layoutY="179.0" prefHeight="25.0" prefWidth="386.0" />
-            <Label layoutX="5.0" layoutY="224.0" prefHeight="18.0" prefWidth="446.0" text="What room does the patient reside in?" />
-            <JFXComboBox fx:id="roomID" layoutY="242.0" prefHeight="26.0" prefWidth="531.0" promptText="Select the patient's room." />
-            <Label layoutX="5.0" layoutY="154.0" prefHeight="18.0" prefWidth="320.0" text="When should these gifts be delivered by?" />
-            <JFXComboBox fx:id="giftOptions" layoutX="9.0" layoutY="107.0" prefHeight="25.0" prefWidth="531.0" />
-            <Label layoutY="298.0" text="Assignned Employee" />
-            <JFXComboBox fx:id="statusField" layoutX="423.0" layoutY="315.0" prefHeight="25.0" prefWidth="110.0" />
-            <Label layoutY="358.0" text="Service Request ID" />
-            <JFXComboBox fx:id="assignedEmployeeField" layoutX="5.0" layoutY="315.0" prefHeight="25.0" prefWidth="386.0" />
-         </children>
-      </Pane>
-      <Label layoutX="22.0" layoutY="14.0" prefHeight="75.0" prefWidth="554.0" text="Reminder: This form will only fulfill a single service request to a single patient. If you wish to deliver gifts to multiple patients, please make multiple service requests." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="23.600000000000023" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="23.0" layoutY="83.0" prefHeight="18.0" prefWidth="554.0" text="What gifts are being delivered?" AnchorPane.leftAnchor="20.0">
+      <JFXComboBox fx:id="giftType" layoutX="-1.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
+      <JFXComboBox fx:id="giftOptions" layoutX="-1.0" layoutY="91.0" prefHeight="26.0" prefWidth="320.0" />
+      <Label layoutY="14.0" prefHeight="20.0" prefWidth="90.0" text="Gift Type">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font size="14.0" />
          </font>
       </Label>
-      <JFXBadge layoutX="38.0" layoutY="191.0" />
-      <Label fx:id="confirmLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="427.0" prefHeight="26.0" prefWidth="554.0" text="  " AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="427.0" />
-      <TextField fx:id="idField" layoutX="8.0" layoutY="381.0" prefHeight="25.0" prefWidth="386.0" />
+      <Label layoutY="71.0" prefHeight="20.0" prefWidth="90.0" text="Gift Options">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

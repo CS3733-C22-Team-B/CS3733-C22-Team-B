@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 public class MedicalEquipment {
+
+    public static String[] EquipmentStatus = {"CLEAN", "IN USE", "DIRTY"};
+
     private String equipmentID; //
     private String equipmentName;
     private String equipmentType;
@@ -10,6 +13,7 @@ public class MedicalEquipment {
     private String color;
     private String size;
     private String description;
+    private int amount;
 
     // constructors
 
@@ -23,6 +27,7 @@ public class MedicalEquipment {
         this.color = null;
         this.size = null;
         this.description = null;
+        this.amount = -1;
     }
 
     public MedicalEquipment(
@@ -34,20 +39,47 @@ public class MedicalEquipment {
             String status,
             String color,
             String size,
-            String description) {
+            String description,
+            int amount) {
 
         this.equipmentID = equipmentID;
         this.equipmentName = equipmentName;
         this.equipmentType = equipmentType;
         this.manufacturer = manufacturer;
         this.location = location;
-        this.status = status;
+        if (!validateStatus(status)) {
+            System.err.println("WARNING: status is set to BLANK");
+            this.status = "BLANK";
+        }
+        else this.status = status;
         this.color = color;
         this.size = size;
         this.description = description;
+        this.amount = amount;
+    }
+    private boolean validateStatus(String st) {
+        for (String s : EquipmentStatus)
+            if (st.equals(s)) return true;
+        return false;
     }
 
     // getters and setters
+
+    public static String[] getEquipmentStatus() {
+        return EquipmentStatus;
+    }
+
+    public static void setEquipmentStatus(String[] equipmentStatus) {
+        EquipmentStatus = equipmentStatus;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public String getEquipmentID() {
         return equipmentID;
@@ -123,36 +155,21 @@ public class MedicalEquipment {
 
     // to string
 
+
     @Override
     public String toString() {
-        return "MedicalEquipment{"
-                + "equipmentID='"
-                + equipmentID
-                + '\''
-                + ", equipmentName='"
-                + equipmentName
-                + '\''
-                + ", equipmentType='"
-                + equipmentType
-                + '\''
-                + ", manufacturer='"
-                + manufacturer
-                + '\''
-                + ", location="
-                + location.getNodeID()
-                + ", status='"
-                + status
-                + '\''
-                + ", color='"
-                + color
-                + '\''
-                + ", size='"
-                + size
-                + '\''
-                + ", description='"
-                + description
-                + '\''
-                + '}';
+        return "MedicalEquipment{" +
+                "equipmentID='" + equipmentID + '\'' +
+                ", equipmentName='" + equipmentName + '\'' +
+                ", equipmentType='" + equipmentType + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", location=" + location +
+                ", status='" + status + '\'' +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 
     public String toStringFields() {
@@ -173,10 +190,12 @@ public class MedicalEquipment {
                 + ","
                 + size
                 + ","
-                + description;
+                + description
+                + ","
+                + amount;
     }
 
     public static String toStringHeader() {
-        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description";
+        return "equipmentID,equipmentName,equipmentType,manufacturer,locationID,status,color,size,description,amount";
     }
 }

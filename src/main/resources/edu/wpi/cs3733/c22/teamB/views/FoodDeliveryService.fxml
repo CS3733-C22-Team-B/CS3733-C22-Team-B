@@ -2,47 +2,18 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.FoodDeliverySRController">
+<AnchorPane prefHeight="125.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.FoodDeliverySRController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="20.0" fill="#93c0eb" height="373.0" layoutX="12.0" layoutY="14.0" stroke="BLACK" strokeType="OUTSIDE" width="577.0" />
-        <Label layoutX="93.0" layoutY="268.0" prefHeight="50.0" prefWidth="450.0" text="Please choose a meal to be delivered" textAlignment="CENTER" wrapText="true">
+        <Label prefHeight="27.0" prefWidth="284.0" text="Meal">
             <font>
-                <Font size="24.0" />
+                <Font size="14.0" />
             </font>
         </Label>
-        <Label layoutX="40.0" layoutY="84.0">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="31.0" layoutY="38.0" text="Name">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <TextField fx:id="AssigneeName" layoutX="31.0" layoutY="65.0" prefHeight="39.0" prefWidth="540.0">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </TextField>
-        <JFXComboBox fx:id="ComboMeals" layoutX="40.0" layoutY="313.0" prefHeight="30.0" prefWidth="540.0" promptText="Meal" />
-      <JFXComboBox id="destinationField" fx:id="destinationField" layoutX="31.0" layoutY="123.0" prefHeight="25.0" prefWidth="540.0" promptText="Deliver to Location" />
-      <JFXComboBox fx:id="assignedEmployeeField" layoutX="31.0" layoutY="170.0" prefHeight="25.0" prefWidth="417.0" promptText="Assign employee" />
-      <JFXComboBox fx:id="statusField" layoutX="480.0" layoutY="173.0" prefHeight="25.0" prefWidth="91.0" promptText="Status" />
-      <TextField fx:id="idField" layoutX="28.0" layoutY="229.0" prefHeight="39.0" prefWidth="540.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <Label layoutX="31.0" layoutY="202.0" text="ID">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+        <JFXComboBox fx:id="comboMeals" layoutY="27.0" prefHeight="25.0" prefWidth="312.0" />
+      <JFXComboBox fx:id="drinkMenu" layoutY="93.0" prefHeight="25.0" prefWidth="312.0" />
+      <Label layoutY="66.0" text="Drinks" />
     </children>
 </AnchorPane>

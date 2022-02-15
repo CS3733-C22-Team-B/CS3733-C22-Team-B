@@ -6,43 +6,26 @@ import java.util.stream.Collectors;
 
 public class MedicalEquipmentSRParserI implements IParser<MedicalEquipmentSR> {
 
+
     @Override
     public MedicalEquipmentSR fromStringToObject(String string) {
-        MedicalEquipmentSR medEqSR = new MedicalEquipmentSR();
-        Location destination = new Location();
-        MedicalEquipment medicalEquipment = new MedicalEquipment();
-        Employee employee = new Employee();
+        MedicalEquipmentSR medicalEquipmentSR = new MedicalEquipmentSR();
 
         String[] data = string.split(",");
 
-        medEqSR.setSrID(data[0]);
+        medicalEquipmentSR.setSrID(data[0]);
 
-        medEqSR.setStatus(data[1]);
+        MedicalEquipment medicalEquipment = new MedicalEquipment();
+        medicalEquipment.setEquipmentID(data[1]);
 
-        // Set Location object nodeID
-        destination.setNodeID(data[2]);
+        medicalEquipmentSR.setMedicalEquipment(medicalEquipment);
 
-        // Pass Location object to setLocation
-        medEqSR.setDestination(destination);
-
-        // Set MedicalEquipment object equipmentID
-        medicalEquipment.setEquipmentID(data[3]);
-
-        // Pass MedicalEquipment object to setMedicalEquipment
-        medEqSR.setMedicalEquipment(medicalEquipment);
-
-        // Set Employee object employeeID
-        employee.setEmployeeID(data[4]);
-
-        // Pass Employee object to setAssignedEmployee
-        medEqSR.setAssignedEmployee(employee);
-
-        return medEqSR;
+        return medicalEquipmentSR;
     }
 
     @Override
     public List<MedicalEquipmentSR> fromStringsToObjects(List<String> listString) {
-        List<MedicalEquipmentSR> medEqSRList =
+        List<MedicalEquipmentSR> medicalEquipmentSRList =
                 listString.stream()
                         .map(
                                 data_str -> {
@@ -50,22 +33,22 @@ public class MedicalEquipmentSRParserI implements IParser<MedicalEquipmentSR> {
                                 })
                         .collect(Collectors.toList());
 
-        return medEqSRList;
+        return medicalEquipmentSRList;
     }
 
     @Override
-    public String fromObjectToString(MedicalEquipmentSR medEqSR) {
-        String str = medEqSR.toStringFields();
+    public String fromObjectToString(MedicalEquipmentSR medicalEquipmentSR) {
+        String str = medicalEquipmentSR.toStringFields();
 
         return str;
     }
 
     @Override
-    public List<String> fromObjectsToStrings(List<MedicalEquipmentSR> medEqSRList) {
+    public List<String> fromObjectsToStrings(List<MedicalEquipmentSR> listT) {
         List<String> listString = new ArrayList<>();
         listString.add(MedicalEquipmentSR.toStringHeader());
-        for (MedicalEquipmentSR medEqSR : medEqSRList) {
-            listString.add(medEqSR.toStringFields());
+        for (MedicalEquipmentSR medicalEquipmentSR : listT) {
+            listString.add(medicalEquipmentSR.toStringFields());
         }
 
         return listString;
