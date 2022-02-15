@@ -5,81 +5,75 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
+public class SanitationSRDaoI implements IDatabase<SanitationSR> {
 
     private Connection conn;
 
-    public GiftFloralSRDaoI() {
+    public SanitationSRDaoI() {
         this.conn = DBConnection.getConnection();
     }
 
     @Override
-    public void addValue(GiftFloralSR object) {
+    public void addValue(SanitationSR object) {
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO GIFTFLORALSR (srID, giftType, giftName) VALUES(?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SanitationSR (srID, condition) VALUES(?, ?)");
             pstmt.setString(1, object.getSrID());
-            pstmt.setString(2, object.getGiftType());
-            pstmt.setString(3, object.getGiftName());
+            pstmt.setString(2, object.getCondition());
 
             pstmt.executeUpdate();
-
             pstmt.close();
 
         } catch (SQLException e) {
-            System.out.println("Insert Into GIFTFLORALSR Table: Failed!");
+            System.out.println("Insert Into SanitationSR Table: Failed!");
             e.printStackTrace();
         }
     }
 
     @Override
     public void deleteValue(String objectID) {
-
         try {
-            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM GIFTFLORALSR WHERE srID = ?");
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM SanitationSR WHERE srID = ?");
             pstmt.setString(1, objectID);
             pstmt.executeUpdate();
 
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println("Delete From GIFTFLORALSR Table Using SR ID: Failed!");
+            System.out.println("Delete From SanitationSR Table Using SR ID: Failed!");
             e.printStackTrace();
         }
     }
 
     @Override
-    public void updateValue(GiftFloralSR object) {
-
+    public void updateValue(SanitationSR object) {
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
-                            "UPDATE GIFTFLORALSR SET giftName = ? WHERE srID = ?");
+                            "UPDATE SanitationSR SET condition = ? WHERE srID = ?");
 
-            pstmt.setString(1, object.getGiftName());
+            pstmt.setString(1, object.getCondition());
             pstmt.setString(2, object.getSrID());
 
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println("Update GIFTFLORALSR Node: Failed!");
+            System.out.println("Update SanitationSR Node: Failed!");
             e.printStackTrace();
             return;
         }
     }
 
     @Override
-    public GiftFloralSR getValue(String objectID) {
-
-        GiftFloralSR giftFloralSR = new GiftFloralSR();
+    public SanitationSR getValue(String objectID) {
+        SanitationSR sanitationSR = new SanitationSR();
         try {
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT * FROM GIFTFLORALSR WHERE srID = ?");
+                    conn.prepareStatement("SELECT * FROM SanitationSR WHERE srID = ?");
             pstmt.setString(1, objectID);
             ResultSet rset = pstmt.executeQuery();
 
             rset.next();
 
-            String giftType = rset.getString("giftType");
-            String giftName = rset.getString("giftName");
+            String condition = rset.getString("condition");
 
             MainSRDaoI mainSRDaoI = new MainSRDaoI();
             AbstractSR mainSR = mainSRDaoI.getValue(objectID);
@@ -91,80 +85,73 @@ public class GiftFloralSRDaoI implements IDatabase<GiftFloralSR> {
             LocalDate dateRequested = mainSR.getDateRequested();
             String notes = mainSR.getNotes();
 
-            giftFloralSR = new GiftFloralSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, giftType, giftName);
+            sanitationSR = new SanitationSR(objectID, status, location, requestor, assignedEmployee, dateRequested, notes, condition);
 
         } catch (SQLException e) {
-            System.out.println("Get FoodDeliverySR Node Failed");
+            System.out.println("Get SanitationSR Node Failed");
             e.printStackTrace();
         }
-        return giftFloralSR;
+        return sanitationSR;
     }
 
-
-
     @Override
-    public List<GiftFloralSR> getAllValues() {
-        List<GiftFloralSR> giftFloralSRList = new ArrayList<>();
+    public List<SanitationSR> getAllValues() {
+        List<SanitationSR> sanitationSRList = new ArrayList<>();
         try{
             PreparedStatement pstmt =
-                    conn.prepareStatement("SELECT SRID FROM GIFTFLORALSR ");
+                    conn.prepareStatement("SELECT SRID FROM SanitationSR ");
             ResultSet rset = pstmt.executeQuery();
 
 
             while(rset.next()){
-                giftFloralSRList.add(getValue(rset.getString("SRID")));
+                sanitationSRList.add(getValue(rset.getString("SRID")));
             }
         } catch (SQLException e) {
-            System.out.println("Get GIFTFLORALSR Node Failed");
+            System.out.println("Get SanitationSR Node Failed");
             e.printStackTrace();
         }
-        return giftFloralSRList;
+        return sanitationSRList;
     }
 
     @Override
     public void createTable() {
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet rset = dbmd.getTables(null, null, "GIFTFLORALSR", null);
+            ResultSet rset = dbmd.getTables(null, null, "SanitationSR", null);
 
-            if (rset.next() && rset.getString(3).equals("GIFTFLORALSR")){
+            if (rset.next() && rset.getString(3).equals("SanitationSR")){
                 // table exists
             } else {
                 // Create table
                 Statement stmt = conn.createStatement();
-                stmt.execute("CREATE TABLE GIFTFLORALSR ( "
+                stmt.execute("CREATE TABLE SanitationSR ( "
                         + "srID VARCHAR(50) , "
-                        + "giftType VARCHAR(50), "
-                        + "giftName VARCHAR(50), "
+                        + "condition VARCHAR(50), "
                         + "PRIMARY KEY (srID),"
-                        + "CONSTRAINT FK_GIFTFLORALSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
+                        + "CONSTRAINT FK_SanitationSR_MainSR FOREIGN KEY (srID) REFERENCES MainSR (srID) )");
             }
         } catch (SQLException e) {
-            System.out.println("Create Location Table: Failed!");
+            System.out.println("Create SanitationSR Table: Failed!");
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void dropTable() {
-
         try {
             Statement stmt = conn.createStatement();
-            stmt.execute("DROP TABLE GIFTFLORALSR");
+            stmt.execute("DROP TABLE SanitationSR");
         } catch (SQLException e) {
-            System.out.println("Drop GIFTFLORALSR Table: Failed!");
+            System.out.println("Drop SanitationSR Table: Failed!");
         }
     }
 
     @Override
-    public void restoreTable(List<GiftFloralSR> list) {
-
+    public void restoreTable(List<SanitationSR> list) {
         createTable();
 
-        for (GiftFloralSR giftFloralSR : list) {
-            addValue(giftFloralSR);
+        for (SanitationSR sanitationSR : list) {
+            addValue(sanitationSR);
         }
-
     }
 }
