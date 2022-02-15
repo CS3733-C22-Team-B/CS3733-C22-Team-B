@@ -120,7 +120,7 @@ public class MasterServiceRequestController {
                         .boxed()
                         .collect(
                                 Collectors.toMap(
-                                        i -> (locList.get(i).getLongName()), // assuming no dup in long name
+                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
                                         i -> locList.get(i)));
 
         // notesField init
