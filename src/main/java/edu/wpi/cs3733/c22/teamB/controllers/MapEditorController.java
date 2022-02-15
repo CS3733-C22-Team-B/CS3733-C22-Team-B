@@ -125,6 +125,11 @@ public class MapEditorController{
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
+        scroll.setPrefViewportWidth(2000);
+        scroll.setMinViewportWidth(1000);
+
+        scroll.setPrefViewportHeight(2000);
+        scroll.setMinViewportHeight(1000);
 
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
