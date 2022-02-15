@@ -11,17 +11,45 @@ class ConnectionManager {
     private Connection clientConnection;
     private boolean useClient = false;
 
-    private ConnectionManager() {
+    ConnectionManager() {
         try {
-            embeddedConnection = DriverManager.getConnection("jdbc:derby:bDB;create=true", "admin", "admin");
-        } catch (SQLException e) {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+
+            try {
+                embeddedConnection = DriverManager.getConnection("jdbc:derby:bDB;create=true", "admin", "admin");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("Embedded Apache Derby Driver not found. Add the classpath to your module.");
+            System.out.println("For IntelliJ do the following:");
+            System.out.println("File | Project Structure, Modules, Dependency tab");
+            System.out.println("Add by clicking on the green plus icon on the right of the window");
+            System.out.println("Select JARs or directories. Go to the folder where the database JAR is located");
+            System.out.println("Click OK, now you can compile your program and run it.");
             e.printStackTrace();
         }
+        System.out.println("Embedded Apache Derby JDBC Driver Registered!");
+
         try {
-            clientConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/BWDB;create=true", "admin", "admin");
-        } catch (SQLException e) {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+
+            try{
+                clientConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/BWDB;create=true", "admin", "admin");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("Client Apache Derby Driver not found. Add the classpath to your module.");
+            System.out.println("For IntelliJ do the following:");
+            System.out.println("File | Project Structure, Modules, Dependency tab");
+            System.out.println("Add by clicking on the green plus icon on the right of the window");
+            System.out.println("Select JARs or directories. Go to the folder where the database JAR is located");
+            System.out.println("Click OK, now you can compile your program and run it.");
             e.printStackTrace();
         }
+        System.out.println("Client Apache Derby JDBC Driver Registered!");
     }
 
     public static ConnectionManager getInstance(){
