@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LaundrySRController implements IController, Initializable {
+public class LaundrySRController implements IController {
 
     private LaundrySR sr = null;
 
@@ -22,14 +22,6 @@ public class LaundrySRController implements IController, Initializable {
 
     @FXML
     private void initialize() {
-    }
-
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @Override
