@@ -54,6 +54,7 @@ public class MasterServiceRequestController {
             childSRType = srType;
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             childPane = loader.load();
+            System.out.println(childPane);
             childController = loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,7 +83,7 @@ public class MasterServiceRequestController {
                     case "GiftFloralSR":
                         return new GiftFloralServiceController((GiftFloralSR) sr);
                     case "SanitationSR":
-                        srLabel.setText("Sanitation Service");
+//                        srLabel.setText("Sanitation Service");
                         return new SanitationSRController((SanitationSR) sr);
                 }
                 return null;
