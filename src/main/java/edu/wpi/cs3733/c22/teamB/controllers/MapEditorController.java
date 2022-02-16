@@ -69,7 +69,6 @@ public class MapEditorController{
     public TextField color;
     public Label header12;
     public TextField size;
-    public ScrollPane scroll;
     public Label summary1Location;
     public Label summary2Location;
     public Label summary3Location;
@@ -143,11 +142,6 @@ public class MapEditorController{
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
-        scroll.setPrefViewportWidth(2000);
-        scroll.setMinViewportWidth(1000);
-
-        scroll.setPrefViewportHeight(2000);
-        scroll.setMinViewportHeight(1000);
 
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
