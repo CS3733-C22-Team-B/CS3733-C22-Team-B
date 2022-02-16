@@ -53,7 +53,7 @@ public class LocationDBTest {
     AbstractSR Nick = new MedicineDeliverySR("1112", "as", location2, employee1, employee2, date, "sad", "sad", "sad");
     AbstractSR Andrew = new MedicineDeliverySR("1112", "DONE", location2, employee2, employee1, date, "asd", "asd", "asd");
     AbstractSR Chris = new ComputerServiceSR("chris", "Done", location2, employee1, employee2, date, "as", "asd");
-    AbstractSR Calvin = new SanitationSR("calvin", "WAITING", location2, employee1, employee2, date, "bye", "GLASS");
+    AbstractSR Calvin = new SanitationSR("calvin", "IN PROGRESS", location2, employee1, employee2, date, "bye", "GLASS");
 
     @BeforeAll
     public static void setup() {
@@ -177,9 +177,9 @@ public class LocationDBTest {
                     "Day Surgery Family Waiting Floor L1",
                     "Department C002L1");
 
-    Location location3 = new Location("InsertTest", 1, 1, "L1", "T", "w", "w", "W");
+    Location location3 = new Location("InsertTest", 1, 1, "L1", "T", "IN PROGRESS", "IN PROGRESS", "IN PROGRESS");
 
-    Location location4 = new Location("UpdateTest", 1, 1, "L1", "T", "w", "w", "W");
+    Location location4 = new Location("UpdateTest", 1, 1, "L1", "T", "IN PROGRESS", "IN PROGRESS", "IN PROGRESS");
     // assertEquals(expected, actual)
     @Test
     public void testGetNode1() {

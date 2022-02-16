@@ -145,7 +145,7 @@ public class MapEditorController{
         goTo3Button.setStyle("-fx-background-color: #007fff");
         nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
         floor.getItems().addAll("L2","L1","01","02","03");
-        status.getItems().addAll("DONE","CANCELED","WAITING","BLANK");
+        status.getItems().addAll("DONE","CANCELLED","IN PROGRESS","WAITING");
         floor.setValue(currentFloor);
         addPoint("1",0,0,Color.ORANGE);
         addPoint("2",imageWidth,imageHeight, Color.RED);
