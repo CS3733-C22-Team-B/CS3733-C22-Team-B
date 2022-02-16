@@ -171,6 +171,7 @@ public class MasterServiceRequestController {
                 LocalDate.now(),
                 notesField.getText());
         childController.submit(childSR);
+        this.clear(null);
     }
 
     // DO NOT TOUCH THIS

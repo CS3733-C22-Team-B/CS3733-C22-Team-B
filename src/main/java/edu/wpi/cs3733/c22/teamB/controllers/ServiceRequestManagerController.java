@@ -259,12 +259,12 @@ public class ServiceRequestManagerController {
         srTable.getItems().removeAll();
         srTable.getItems().addAll(dw.getAllSR().stream().filter(sr -> {
             String input = textFilterField.getText().toLowerCase(Locale.ROOT);
-            return  (filterFields.contains("ID") && sr.getSrID().contains(input)) ||
-                    (filterFields.contains("Type") && sr.getSrType().contains(input)) ||
-                    (filterFields.contains("Requestor") && sr.getRequestor().getName().contains(input)) ||
-                    (filterFields.contains("Date") && sr.getDateRequested().toString().contains(input)) ||
-                    (filterFields.contains("Assigned to") && sr.getAssignedEmployee().getName().contains(input)) ||
-                    (filterFields.contains("Status") && sr.getStatus().contains(input));
+            return  (filterFields.contains("ID") && sr.getSrID().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Type") && sr.getSrType().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Requestor") && sr.getRequestor().getName().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Date") && sr.getDateRequested().toString().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Assigned to") && sr.getAssignedEmployee().getName().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Status") && sr.getStatus().toLowerCase(Locale.ROOT).contains(input));
         }).collect(Collectors.toList()));
     }
 
