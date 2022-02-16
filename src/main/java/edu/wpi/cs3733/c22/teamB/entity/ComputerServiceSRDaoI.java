@@ -7,15 +7,14 @@ import java.util.List;
 
 public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
-    private Connection conn;
-
     public ComputerServiceSRDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
 
     @Override
     public void addValue(ComputerServiceSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO COMPUTERSERVICESR (srID, helpType) VALUES(?, ?)");
             pstmt.setString(1, object.getSrID());
@@ -34,6 +33,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM COMPUTERSERVICESR WHERE srID = ?");
@@ -49,6 +49,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
     @Override
     public void updateValue(ComputerServiceSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -70,6 +71,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
     @Override
     public ComputerServiceSR getValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         ComputerServiceSR computerServiceSR = new ComputerServiceSR();
 
@@ -106,6 +108,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
     @Override
     public List<ComputerServiceSR> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         List<ComputerServiceSR> computerServiceSRList = new ArrayList<>();
 
@@ -127,6 +130,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -151,6 +155,7 @@ public class ComputerServiceSRDaoI implements IDatabase<ComputerServiceSR>{
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             Statement stmt = conn.createStatement();

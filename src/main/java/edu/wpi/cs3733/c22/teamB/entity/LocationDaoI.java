@@ -6,14 +6,12 @@ import java.util.List;
 
 public class LocationDaoI implements IDatabase<Location> {
 
-    private Connection conn;
-
     public LocationDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE LOCATION");
@@ -23,6 +21,7 @@ public class LocationDaoI implements IDatabase<Location> {
     }
 
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "LOCATION", null);
@@ -51,6 +50,7 @@ public class LocationDaoI implements IDatabase<Location> {
 
 
     public void restoreTable(List<Location> list) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             createTable();
@@ -91,6 +91,7 @@ public class LocationDaoI implements IDatabase<Location> {
     }
 
     public List<Location> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         List<Location> locations = new ArrayList<>();
         try {
@@ -128,6 +129,7 @@ public class LocationDaoI implements IDatabase<Location> {
 
 
     public Location getValue(String nodeID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         Location location = new Location();
         try {PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Location WHERE nodeID = ?");
             pstmt.setString(1, nodeID);
@@ -153,6 +155,7 @@ public class LocationDaoI implements IDatabase<Location> {
     }
 
     public void deleteValue(String nodeID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -168,6 +171,7 @@ public class LocationDaoI implements IDatabase<Location> {
     }
 
     public void updateValue(Location node) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -192,6 +196,7 @@ public class LocationDaoI implements IDatabase<Location> {
     }
 
     public void addValue(Location node) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -220,6 +225,7 @@ public class LocationDaoI implements IDatabase<Location> {
     // Cleanup for Iteration 3
     public boolean isFirstRestore() {
         boolean first = true;
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -244,6 +250,7 @@ public class LocationDaoI implements IDatabase<Location> {
     // Cleanup for Iteration 3
     public boolean isInTable(String nodeID) {    //check if there is a node with given ID in table
         boolean ans = false;
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             //search for NodeID
             PreparedStatement pstmt =

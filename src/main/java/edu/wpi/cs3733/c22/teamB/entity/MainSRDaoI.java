@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainSRDaoI implements IDatabase<AbstractSR> {
-    Connection conn;
 
     public MainSRDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
     @Override
     public void addValue(AbstractSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -37,6 +36,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("DELETE FROM MainSR WHERE srID = ?");
@@ -54,6 +54,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public void updateValue(AbstractSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -83,6 +84,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
     @Override
     public AbstractSR getValue(String objectID) {
         MainSR mainSR = null;
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT * FROM MainSR WHERE srID = ?");
@@ -116,7 +118,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public List<AbstractSR> getAllValues() {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         List<AbstractSR> MainList = new ArrayList<>();
 
         try {
@@ -167,6 +169,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "MAINSR", null);
@@ -200,7 +203,7 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
 
     @Override
     public void dropTable() {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE MainSR");

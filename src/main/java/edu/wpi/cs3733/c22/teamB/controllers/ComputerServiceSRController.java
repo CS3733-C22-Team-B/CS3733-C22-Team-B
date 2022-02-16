@@ -16,6 +16,8 @@ public class ComputerServiceSRController implements IController {
 
     private ComputerServiceSR sr = null;
 
+
+
     public ComputerServiceSRController() {}
 
     public ComputerServiceSRController(ComputerServiceSR sr) {
@@ -29,10 +31,8 @@ public class ComputerServiceSRController implements IController {
 
     @Override
     public void submit(AbstractSR sr) {
-
         DatabaseWrapper dw = new DatabaseWrapper();
         dw.addSR(new ComputerServiceSR(sr, helpTypeField.getValue()));
-
     }
 
     @Override

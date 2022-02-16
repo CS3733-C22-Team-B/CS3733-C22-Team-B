@@ -7,16 +7,13 @@ import java.util.List;
 
 public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
-    private Connection conn;
-
     public MedicineDeliverySRDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
 
     @Override
     public void addValue(MedicineDeliverySR object) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO MEDICINEDELIVERYSR (srID, medicineID, patientID) VALUES(?, ?, ?)");
             pstmt.setString(1, object.getSrID());
@@ -35,7 +32,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public void deleteValue(String objectID) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM MEDICINEDELIVERYSR WHERE srID = ?");
             pstmt.setString(1, objectID);
@@ -50,7 +47,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public void updateValue(MedicineDeliverySR object) {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -71,6 +68,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public MedicineDeliverySR getValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         MedicineDeliverySR medicineDeliverySR = new MedicineDeliverySR();
         try {
             PreparedStatement pstmt =
@@ -104,6 +102,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public List<MedicineDeliverySR> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         List<MedicineDeliverySR> medicineDeliverySRList = new ArrayList<>();
         try{
             PreparedStatement pstmt =
@@ -124,7 +123,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public void createTable() {
-
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "MEDICINEDELIVERYSR", null);
@@ -149,6 +148,7 @@ public class MedicineDeliverySRDaoI implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE MEDICINEDELIVERYSR");
