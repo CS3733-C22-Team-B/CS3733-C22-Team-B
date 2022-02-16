@@ -3,6 +3,7 @@ package edu.wpi.cs3733.c22.teamB.entity;
 import javax.swing.table.AbstractTableModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -338,9 +339,11 @@ public class DatabaseWrapper {
     }
 
     public void restoreAll() throws IOException {
+        System.out.println("Restore" + ConnectionManager.getInstance().getConnection());
         dropAll();
         createAll();
         restoreBackupWrapper.restoreAll();
+
     }
 
     void backupTableLocation() throws IOException {
@@ -369,6 +372,7 @@ public class DatabaseWrapper {
 
     public void backupAll() throws IOException{
         restoreBackupWrapper.backupAll();
+        System.out.println(ConnectionManager.getInstance().getConnection());
     }
 
     public void firstRestore() throws IOException {
@@ -398,5 +402,9 @@ public class DatabaseWrapper {
         LocationDaoI locationDaoI = new LocationDaoI();
         System.out.println(locationDaoI.nodeTypeCount(nodeType, floor));
         return locationDaoI.nodeTypeCount(nodeType, floor);
+    }
+
+    public Connection getConnection() {
+        return ConnectionManager.getInstance().getConnection();
     }
 }

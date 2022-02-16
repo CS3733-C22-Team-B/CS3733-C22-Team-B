@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="85.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="54.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/Brigham_and_Womens_Hospital_logo.svg.png" />
+         </image>
+      </ImageView>
+      <Separator prefHeight="13.0" prefWidth="226.0" />
+      <JFXButton prefHeight="38.0" prefWidth="226.0" text="Search" />
+      <JFXButton prefHeight="38.0" prefWidth="348.0" text="User" />
+      <JFXButton prefHeight="38.0" prefWidth="348.0" text="Request" />
+   </children>
+</VBox>
