@@ -29,7 +29,12 @@ public class MedicineDeliverySRController implements IController, Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if (sr == null) {
+            clear();
+        } else {
+            patientID.setText(sr.getPatientID());
+            medicineID.setText(sr.getMedicineID());
+        }
     }
 
 
@@ -41,7 +46,10 @@ public class MedicineDeliverySRController implements IController, Initializable 
     @Override
     public void submit(AbstractSR sr) {
         DatabaseWrapper dw = new DatabaseWrapper();
-        dw.addSR(new MedicineDeliverySR(sr, medicineID.getText(), patientID.getText()));
+        if (this.sr == null)
+            dw.addSR(new MedicineDeliverySR(sr, medicineID.getText(), patientID.getText()));
+        else
+            dw.updateSR(new MedicineDeliverySR(sr, medicineID.getText(), patientID.getText()));
     }
 
     @Override

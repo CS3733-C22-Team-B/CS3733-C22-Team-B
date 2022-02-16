@@ -88,6 +88,13 @@
            -fx-background-insets: 0, 0 0 1 0;
         }
 
+    .button-table-view {
+        -fx-background-color: #7B94C9;
+        -fx-text-fill: white;
+        -fx-border-radius: 1;
+        -fx-font-size: 10;
+    }
+
 
 /* ----------- TEXT FIELD ------------ TEXT AREA -------- PASSWORD FIELD -------------- */
 

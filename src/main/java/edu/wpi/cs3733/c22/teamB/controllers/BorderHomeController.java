@@ -243,5 +243,9 @@ public class BorderHomeController implements Initializable{
         }
 
     }
+
+    public AnchorPane getAnchorPane() {
+        return this.anchorPane;
+    }
 }
 

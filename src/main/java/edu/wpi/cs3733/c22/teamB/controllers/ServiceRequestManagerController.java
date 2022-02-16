@@ -175,7 +175,6 @@ public class ServiceRequestManagerController {
                         Bapp.getPrimaryStage().getScene().setRoot(root);
                     } catch (IOException ex) {
                         ex.printStackTrace();
-
                     }
                 }
             });
@@ -258,19 +257,20 @@ public class ServiceRequestManagerController {
     private void filterSubmit(ActionEvent actionEvent) {
         srTable.getItems().clear();
         srTable.getItems().removeAll();
-        srTable.getItems().addAll(dw.getAllSR().stream().filter(sr ->
-            (filterFields.contains("ID") && sr.getSrID().contains(textFilterField.getText())) ||
-            (filterFields.contains("Type") && sr.getSrType().contains(textFilterField.getText())) ||
-            (filterFields.contains("Requestor") && sr.getRequestor().getName().contains(textFilterField.getText())) ||
-            (filterFields.contains("Date") && sr.getDateRequested().toString().contains(textFilterField.getText())) ||
-            (filterFields.contains("Assigned to") && sr.getAssignedEmployee().getName().contains(textFilterField.getText())) ||
-            (filterFields.contains("Status") && sr.getStatus().contains(textFilterField.getText()))
-        ).collect(Collectors.toList()));
+        srTable.getItems().addAll(dw.getAllSR().stream().filter(sr -> {
+            String input = textFilterField.getText().toLowerCase(Locale.ROOT);
+            return  (filterFields.contains("ID") && sr.getSrID().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Type") && sr.getSrType().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Requestor") && sr.getRequestor().getName().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Date") && sr.getDateRequested().toString().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Assigned to") && sr.getAssignedEmployee().getName().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("Status") && sr.getStatus().toLowerCase(Locale.ROOT).contains(input));
+        }).collect(Collectors.toList()));
     }
 
     @FXML
     private void onFilterByButton(ActionEvent actionEvent) {
-        filterDialog.show((StackPane) Bapp.getPrimaryStage().getScene().getRoot());
+        filterDialog.show((StackPane) BorderHomeController.curBorderHomeController.getAnchorPane().getChildren().get(0));
     }
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {

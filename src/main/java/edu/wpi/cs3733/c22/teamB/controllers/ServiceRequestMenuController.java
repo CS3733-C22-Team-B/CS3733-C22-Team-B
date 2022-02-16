@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ServiceRequestMenuController implements Initializable {
+public class ServiceRequestMenuController {
     @FXML private JFXToggleButton toggleName;
     @FXML private Label name1;
     @FXML private Label name2;
@@ -23,28 +23,15 @@ public class ServiceRequestMenuController implements Initializable {
     @FXML private Label name7;
     @FXML private Label name8;
 
-
-
     @FXML private void toggleName(ActionEvent event) {
-        if (toggleName.isSelected()) {
-            name1.setVisible(true);
-            name2.setVisible(true);
-            name3.setVisible(true);
-            name4.setVisible(true);
-            name5.setVisible(true);
-            name6.setVisible(true);
-            name7.setVisible(true);
-            name8.setVisible(true);
-        } else {
-            name1.setVisible(false);
-            name2.setVisible(false);
-            name3.setVisible(false);
-            name4.setVisible(false);
-            name5.setVisible(false);
-            name6.setVisible(false);
-            name7.setVisible(false);
-            name8.setVisible(false);
-        }
+        name1.setVisible(toggleName.isSelected());
+        name2.setVisible(toggleName.isSelected());
+        name3.setVisible(toggleName.isSelected());
+        name4.setVisible(toggleName.isSelected());
+        name5.setVisible(toggleName.isSelected());
+        name6.setVisible(toggleName.isSelected());
+        name7.setVisible(toggleName.isSelected());
+        name8.setVisible(toggleName.isSelected());
     }
 
     @FXML
@@ -158,8 +145,8 @@ public class ServiceRequestMenuController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         name1.setVisible(false);
         name2.setVisible(false);
         name3.setVisible(false);
