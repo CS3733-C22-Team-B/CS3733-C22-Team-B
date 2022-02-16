@@ -7,14 +7,12 @@ import java.util.List;
 
 public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
-    private Connection conn;
-
     public ExternalTransportSRDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
     @Override
     public void addValue(ExternalTransportSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO EXTERNALTRANSPORTSR (srID, patientID, dropOffLocation, FORMOFTRANSPORT) VALUES(?, ?, ?, ?)");
@@ -34,6 +32,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM EXTERNALTRANSPORTSR WHERE srID = ?");
@@ -49,6 +48,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
     @Override
     public void updateValue(ExternalTransportSR object) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -73,6 +73,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
     @Override
     public ExternalTransportSR getValue(String objectID) {
         ExternalTransportSR externalTransportSR = new ExternalTransportSR();
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM EXTERNALTRANSPORTSR JOIN MAINSR ON EXTERNALTRANSPORTSR.SRID = MAINSR.SRID");
@@ -109,6 +110,8 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
     @Override
     public List<ExternalTransportSR> getAllValues() {
         List<ExternalTransportSR> externalTransportSRList = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try{
             PreparedStatement pstmt =
                     conn.prepareStatement("SELECT SRID FROM EXTERNALTRANSPORTSR ");
@@ -127,6 +130,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "EXTERNALTRANSPORTSR", null);
@@ -153,6 +157,7 @@ public class ExternalTransportSRDaoI implements IDatabase<ExternalTransportSR> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE EXTERNALTRANSPORTSR");

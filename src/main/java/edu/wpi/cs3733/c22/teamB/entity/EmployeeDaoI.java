@@ -6,14 +6,13 @@ import java.util.List;
 
 public class EmployeeDaoI implements IDatabase<Employee> {
 
-    Connection conn;
-
     public EmployeeDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
     @Override
     public void addValue(Employee employee) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -28,8 +27,6 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             pstmt.setString(8, employee.getEmail());
             pstmt.setString(9, employee.getPhoneNumber());
 
-
-
             pstmt.executeUpdate();
             pstmt.close();
 
@@ -41,6 +38,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
 
     @Override
     public void deleteValue(String employeeID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -59,6 +57,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
 
     @Override
     public void updateValue(Employee employee) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt =
@@ -88,6 +87,8 @@ public class EmployeeDaoI implements IDatabase<Employee> {
 
 
     public Employee getValue(String employeeID){
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         Employee employee = new Employee();
         try {
             PreparedStatement pstmt =
@@ -117,6 +118,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
     @Override
     public List<Employee> getAllValues() {
         List<Employee> EmployeeList = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM Employee");
@@ -153,6 +155,8 @@ public class EmployeeDaoI implements IDatabase<Employee> {
     }
 
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "EMPLOYEE", null);
@@ -184,6 +188,8 @@ public class EmployeeDaoI implements IDatabase<Employee> {
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE Employee");
@@ -195,6 +201,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
 
     @Override
     public void restoreTable(List<Employee> list) {
+
         createTable();
 
         // For each iteration of location in the list of location

@@ -22,7 +22,7 @@
 
 }
 
-/* look at me making a comment so that we can have another pull request */
+
 /* ----------- BUTTON -------------- */
 
 .submit-button {
@@ -48,6 +48,10 @@
     -fx-text-fill: white;
     -fx-border-radius: 7;
     -fx-font-size: 44px;
+
+}
+
+.toggle-button {
 
 }
 
@@ -95,6 +99,8 @@
 /* ----------- TEXT FIELD ------------ TEXT AREA -------- PASSWORD FIELD -------------- */
 
 
+/*-------------------------- DRAWER -----------------*/
+
 /*----------------------- TABLE ---------------*/
 
 /* ----------- CHECK-BOX -------------- */
@@ -105,8 +111,6 @@
 /* ----------- TOGGLE-BUTTON -------------- */
 
 
-/* ----------- TOGGLE-NODE -------------- */
-
 
 /* ----------- SLIDER -------------- */
 
@@ -116,7 +120,17 @@
 
 
 /* ----------- TAB PANE -------------- */
+.tab-pane {
+    -fx-background-color: white;
 
+
+}
+
+.tab {
+    -fx-background-color: #002168;
+    -fx-text-fill: white;
+    -fx-padding: 0px 16px;
+}
 
 /* ----------- BASIC COLORS (SVGS) -------------- */
 

@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamB.entity;
 import javax.swing.table.AbstractTableModel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class DatabaseWrapper {
     private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
     private IDatabase<SanitationSR> SanitationSRDao;
     private IDatabase<AbstractSR> MainSRDao;
+    private ConnectionManager connectionManager;
 
     private RestoreBackupWrapper restoreBackupWrapper;
 
@@ -37,14 +40,17 @@ public class DatabaseWrapper {
         SanitationSRDao = new SanitationSRDaoI();
         MainSRDao = new MainSRDaoI();
 
+        connectionManager = ConnectionManager.getInstance();
         restoreBackupWrapper = new RestoreBackupWrapper();
     }
 
-    // AbstractSR a = new ExternalTransportSR();
-    // a.getPatientID()
-//    public void addSR(ExternalTransportSR abstractSR){
-//        MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
-//    }
+    public void initEmbedded() {
+        connectionManager.setConnectionStrategy(false);
+    }
+
+    public void initClient() {
+        connectionManager.setConnectionStrategy(true);
+    }
     
     public void addSR(AbstractSR abstractSR){
         MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
@@ -333,9 +339,11 @@ public class DatabaseWrapper {
     }
 
     public void restoreAll() throws IOException {
+        System.out.println("Restore" + ConnectionManager.getInstance().getConnection());
         dropAll();
         createAll();
         restoreBackupWrapper.restoreAll();
+
     }
 
     void backupTableLocation() throws IOException {
@@ -364,6 +372,7 @@ public class DatabaseWrapper {
 
     public void backupAll() throws IOException{
         restoreBackupWrapper.backupAll();
+        System.out.println(ConnectionManager.getInstance().getConnection());
     }
 
     public void firstRestore() throws IOException {
@@ -393,5 +402,9 @@ public class DatabaseWrapper {
         LocationDaoI locationDaoI = new LocationDaoI();
         System.out.println(locationDaoI.nodeTypeCount(nodeType, floor));
         return locationDaoI.nodeTypeCount(nodeType, floor);
+    }
+
+    public Connection getConnection() {
+        return ConnectionManager.getInstance().getConnection();
     }
 }

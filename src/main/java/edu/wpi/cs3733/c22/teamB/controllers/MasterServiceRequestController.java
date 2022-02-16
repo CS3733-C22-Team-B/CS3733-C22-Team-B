@@ -3,6 +3,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.event.ActionEvent;
@@ -15,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -97,6 +97,9 @@ public class MasterServiceRequestController {
         DatabaseWrapper dw = new DatabaseWrapper();
         // idField
 
+        srLabel.setText(getLabel());
+
+
         // statusField
         statusField.getItems().addAll(AbstractSR.SRstatus);
 
@@ -122,7 +125,7 @@ public class MasterServiceRequestController {
                         .boxed()
                         .collect(
                                 Collectors.toMap(
-                                        i -> (locList.get(i).getLongName()), // assuming no dup in long name
+                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
                                         i -> locList.get(i)));
 
         // notesField init
@@ -157,6 +160,37 @@ public class MasterServiceRequestController {
 
         // load specific SR fxml
         srPane.getChildren().add(childPane);
+
+    }
+
+    private String getLabel() {
+        String name = "";
+        if (childSRType.equals("ExternalTransportSR")){
+            name =  "External Patient Transport Service Request";
+        }
+        if (childSRType.equals("ComputerServiceSR")){
+            return "Computer Service Request";
+        }
+        if (childSRType.equals("FoodDeliverySR")){
+            return "Food Delivery Service Request";
+        }
+        if (childSRType.equals("GiftFloralSR")){
+            return "Gift and Floral Service Request";
+        }
+        if (childSRType.equals("LaundrySR")){
+            return "Laundry Service Request";
+        }
+        if (childSRType.equals("MedicalEquipmentSR")){
+            return "Medical Equipment Service Request";
+        }
+        if (childSRType.equals("MedicineDeliverySr")){
+            return "Medicine Delivery Request";
+        }
+        if (childSRType.equals("SanitationSR")){
+            return "Sanitation Service Request";
+        }
+
+        return name;
     }
 
     // DO NOT TOUCH THIS
