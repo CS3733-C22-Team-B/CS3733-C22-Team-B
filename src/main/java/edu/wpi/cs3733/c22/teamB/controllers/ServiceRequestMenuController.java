@@ -4,12 +4,15 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class ServiceRequestMenuController {
+public class ServiceRequestMenuController implements Initializable {
     @FXML private JFXToggleButton toggleName;
     @FXML private Label name1;
     @FXML private Label name2;
@@ -24,15 +27,6 @@ public class ServiceRequestMenuController {
 
     @FXML private void toggleName(ActionEvent event) {
         if (toggleName.isSelected()) {
-            name1.setVisible(false);
-            name2.setVisible(false);
-            name3.setVisible(false);
-            name4.setVisible(false);
-            name5.setVisible(false);
-            name6.setVisible(false);
-            name7.setVisible(false);
-            name8.setVisible(false);
-        } else {
             name1.setVisible(true);
             name2.setVisible(true);
             name3.setVisible(true);
@@ -41,6 +35,16 @@ public class ServiceRequestMenuController {
             name6.setVisible(true);
             name7.setVisible(true);
             name8.setVisible(true);
+        } else {
+
+            name1.setVisible(false);
+            name2.setVisible(false);
+            name3.setVisible(false);
+            name4.setVisible(false);
+            name5.setVisible(false);
+            name6.setVisible(false);
+            name7.setVisible(false);
+            name8.setVisible(false);
         }
     }
 
@@ -153,5 +157,17 @@ public class ServiceRequestMenuController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        name1.setVisible(false);
+        name2.setVisible(false);
+        name3.setVisible(false);
+        name4.setVisible(false);
+        name5.setVisible(false);
+        name6.setVisible(false);
+        name7.setVisible(false);
+        name8.setVisible(false);
     }
 }
