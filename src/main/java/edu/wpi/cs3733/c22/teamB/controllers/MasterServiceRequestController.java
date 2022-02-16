@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.event.ActionEvent;
@@ -64,23 +65,32 @@ public class MasterServiceRequestController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             loader.setControllerFactory(param -> {
                 // Important: add your controller below in an else if
-                if (srType.equals("MedicalEquipmentSR"))
+                if (srType.equals("MedicalEquipmentSR")) {
+                    srLabel.setText("Medical Equipment Service");
                     return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
-                else if (srType.equals("ComputerServiceSR"))
+                } else if (srType.equals("ComputerServiceSR")) {
+                    srLabel.setText("Computer Service");
                     return new ComputerServiceSRController((ComputerServiceSR) sr);
-                else if(srType.equals("FoodDeliverySR"))
+                } else if(srType.equals("FoodDeliverySR")) {
+                    srLabel.setText("Food Delivery Service");
                     return new FoodDeliverySRController((FoodDeliverySR) sr);
-                else if(srType.equals("ExternalTransportSR"))
+                } else if(srType.equals("ExternalTransportSR")) {
+                    srLabel.setText("External Transportation Service");
                     return new ExternalTransportController((ExternalTransportSR) sr);
-                else if(srType.equals("MedicineDeliverySR"))
+                } else if(srType.equals("MedicineDeliverySR")) {
+                    srLabel.setText("Medicine Delivery Service");
                     return new MedicineDeliverySRController((MedicineDeliverySR) sr);
-                else if(srType.equals("LaundrySR"))
+                } else if(srType.equals("LaundrySR")) {
+                    srLabel.setText("Laundry Service");
                     return new LaundrySRController((LaundrySR) sr);
-                else if (srType.equals("GiftFloralSR"))
+                } else if (srType.equals("GiftFloralSR")) {
+                    srLabel.setText("Gift & Floral Service");
                     return new GiftFloralServiceController((GiftFloralSR) sr);
-                else if(srType.equals("SanitationSR"))
+                } else if(srType.equals("SanitationSR")) {
+                    System.out.println("Sanitation Service");
+                    srLabel.setText("Sanitation Service");
                     return new SanitationSRController((SanitationSR) sr);
-                return null;
+                } return null;
 
             });
             childPane = loader.load();
@@ -94,6 +104,9 @@ public class MasterServiceRequestController {
     @FXML private void initialize() {
         DatabaseWrapper dw = new DatabaseWrapper();
         // idField
+
+        srLabel.setText(getLabel());
+
 
         // statusField
         statusField.getItems().addAll(AbstractSR.SRstatus);
@@ -120,7 +133,7 @@ public class MasterServiceRequestController {
                         .boxed()
                         .collect(
                                 Collectors.toMap(
-                                        i -> (locList.get(i).getLongName()), // assuming no dup in long name
+                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
                                         i -> locList.get(i)));
 
         // notesField init
@@ -155,6 +168,37 @@ public class MasterServiceRequestController {
 
         // load specific SR fxml
         srPane.getChildren().add(childPane);
+
+    }
+
+    private String getLabel() {
+        String name = "";
+        if (childSRType == "ExternalTransportSR"){
+            name =  "External Patient Transport Service Request";
+        }
+        if (childSRType == "ComputerServiceSR"){
+            return "Computer Service Request";
+        }
+        if (childSRType == "FoodDeliverySR"){
+            return "Food Delivery Service Request";
+        }
+        if (childSRType == "GiftFloralSR"){
+            return "Gift and Floral Service Request";
+        }
+        if (childSRType == "LaundrySR"){
+            return "Laundry Service Request";
+        }
+        if (childSRType == "MedicalEquipmentSR"){
+            return "Medical Equipment Service Request";
+        }
+        if (childSRType == "MedicineDeliverySr"){
+            return "Medicine Delivery Request";
+        }
+        if (childSRType == "SanitationSR"){
+            return "Sanitation Service Request";
+        }
+
+        return name;
     }
 
     // DO NOT TOUCH THIS

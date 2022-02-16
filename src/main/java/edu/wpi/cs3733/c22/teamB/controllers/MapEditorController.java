@@ -121,10 +121,15 @@ public class MapEditorController{
     @FXML
     public void initialize(){
         Bapp.getPrimaryStage().setMaximized(true);
-        Bapp.getPrimaryStage().resizableProperty().set(false);
+//        Bapp.getPrimaryStage().resizableProperty().set(false);
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
+        scroll.setPrefViewportWidth(2000);
+        scroll.setMinViewportWidth(1000);
+
+        scroll.setPrefViewportHeight(2000);
+        scroll.setMinViewportHeight(1000);
 
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
@@ -433,8 +438,13 @@ public class MapEditorController{
     }
 
     void deleteSelectedNode(){
-        anchorPane.getChildren().remove(selectedPnt);
-        dbWrapper.deleteLocation(selectedPnt.getId());
+        if(clicked == "location") {
+            anchorPane.getChildren().remove(selectedPnt);
+            dbWrapper.deleteLocation(selectedPnt.getId());
+        } else if (clicked == "equipment"){
+            anchorPane.getChildren().remove(selectedImg);
+            dbWrapper.deleteMedicalEquipment(selectedImg.getId());
+        }
     }
 
     @FXML public void refresh(){
@@ -611,7 +621,7 @@ public class MapEditorController{
         // Try to go home
         try {
             Bapp.getPrimaryStage().resizableProperty().set(true);
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/borderHome.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {
