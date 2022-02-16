@@ -270,7 +270,7 @@ public class ServiceRequestManagerController {
 
     @FXML
     private void onFilterByButton(ActionEvent actionEvent) {
-        filterDialog.show((StackPane) Bapp.getPrimaryStage().getScene().getRoot());
+        filterDialog.show((StackPane) BorderHomeController.curBorderHomeController.getAnchorPane().getChildren().get(0));
     }
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {

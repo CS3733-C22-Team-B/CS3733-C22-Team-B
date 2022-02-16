@@ -38,4 +38,14 @@ public class TableController {
             ex.printStackTrace();
         }
     }
+
+    public void goToSRTable(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestManager.fxml"));
+            BorderHomeController.curBorderHomeController.changeNode(loader);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
