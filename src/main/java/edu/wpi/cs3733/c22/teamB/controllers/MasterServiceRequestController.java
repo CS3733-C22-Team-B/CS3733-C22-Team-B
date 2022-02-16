@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -169,28 +168,28 @@ public class MasterServiceRequestController {
 
     private String getLabel() {
         String name = "";
-        if (childSRType == "ExternalTransportSR"){
+        if (childSRType.equals("ExternalTransportSR")){
             name =  "External Patient Transport Service Request";
         }
-        if (childSRType == "ComputerServiceSR"){
+        if (childSRType.equals("ComputerServiceSR")){
             return "Computer Service Request";
         }
-        if (childSRType == "FoodDeliverySR"){
+        if (childSRType.equals("FoodDeliverySR")){
             return "Food Delivery Service Request";
         }
-        if (childSRType == "GiftFloralSR"){
+        if (childSRType.equals("GiftFloralSR")){
             return "Gift and Floral Service Request";
         }
-        if (childSRType == "LaundrySR"){
+        if (childSRType.equals("LaundrySR")){
             return "Laundry Service Request";
         }
-        if (childSRType == "MedicalEquipmentSR"){
+        if (childSRType.equals("MedicalEquipmentSR")){
             return "Medical Equipment Service Request";
         }
-        if (childSRType == "MedicineDeliverySr"){
+        if (childSRType.equals("MedicineDeliverySr")){
             return "Medicine Delivery Request";
         }
-        if (childSRType == "SanitationSR"){
+        if (childSRType.equals("SanitationSR")){
             return "Sanitation Service Request";
         }
 
@@ -209,6 +208,7 @@ public class MasterServiceRequestController {
                 LocalDate.now(),
                 notesField.getText());
         childController.submit(childSR);
+        this.clear(null);
     }
 
     // DO NOT TOUCH THIS

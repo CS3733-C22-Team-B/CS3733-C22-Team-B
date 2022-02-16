@@ -115,7 +115,7 @@
       </ImageView>
       <Label layoutX="72.0" layoutY="28.0" prefHeight="66.0" prefWidth="498.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Service Request Systems" />
       <Label fx:id="name1" layoutX="122.0" layoutY="103.0" text="Duc" />
-      <Label fx:id="name2" layoutX="236.0" layoutY="103.0" text="Nic" />
+      <Label fx:id="name2" layoutX="236.0" layoutY="103.0" text="Nich" />
       <Label fx:id="name3" layoutX="342.0" layoutY="103.0" text="Calvin" />
       <Label fx:id="name4" layoutX="437.0" layoutY="103.0" text="Kateri &quot;Kiki&quot;" />
       <Label fx:id="name5" layoutX="112.0" layoutY="347.0" text="Andrew" />
@@ -137,6 +137,6 @@
             </Label>
          </children>
       </StackPane>
-      <JFXToggleButton fx:id="toggleName" layoutX="479.0" layoutY="359.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" text="Show Names" wrapText="true" />
+      <JFXToggleButton fx:id="toggleName" layoutX="479.0" layoutY="359.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" wrapText="true" />
    </children>
 </AnchorPane>

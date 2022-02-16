@@ -21,7 +21,6 @@ public class SanitationSRController implements IController {
 
     @FXML
     public void initialize() {
-        DatabaseWrapper dw = new DatabaseWrapper();
         conditionField.getItems().addAll("DRY","WET","GLASS");
         if (sr == null) {
             clear();
@@ -37,7 +36,10 @@ public class SanitationSRController implements IController {
     @Override
     public void submit(AbstractSR sr) {
         DatabaseWrapper dw = new DatabaseWrapper();
-        dw.addSR(new SanitationSR(sr, conditionField.getValue()));
+        if (this.sr == null)
+            dw.addSR(new SanitationSR(sr, conditionField.getValue()));
+        else
+            dw.updateSR(new SanitationSR(sr, conditionField.getValue()));
     }
 
     @Override

@@ -38,8 +38,11 @@ public class LaundrySRController implements IController, Initializable {
 
     @Override
     public void submit(AbstractSR sr) {
-    DatabaseWrapper dw = new DatabaseWrapper();
-    dw.addSR(new LaundrySR(sr));
+        DatabaseWrapper dw = new DatabaseWrapper();
+        if (this.sr == null)
+            dw.addSR(new LaundrySR(sr));
+        else
+            dw.updateSR(new LaundrySR(sr));
     }
 
     @Override
