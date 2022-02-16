@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.text.Text?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane onMouseClicked="#imageClicked">
-               <ScrollPane fx:id="scroll" fitToWidth="true" prefViewportWidth="1000.0">
-                  <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
-                     <image>
-                        <Image url="@../images/thirdFloorMap.png" />
-                     </image>
-                  </ImageView>
-               </ScrollPane>
+               <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                  <image>
+                     <Image url="@../images/thirdFloorMap.png" />
+                  </image>
+               </ImageView>
 
+               <Label fx:id="summary3Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary2Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary1Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL2Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL1Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary3Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary2Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary1Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL1Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL2Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary3SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary2SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary1SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL1SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL2SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
 
                <VBox fx:id="modifyPopup" maxHeight="200.0" maxWidth="250.0">
                   <children>
@@ -96,6 +110,8 @@
                   <Pane prefHeight="15" />
                   <JFXButton fx:id="goTo3Button" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
+                  <JFXButton fx:id="goToSideViewButton" onAction="#goToSideView" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo SideView" textAlignment="CENTER" />
+                  <Pane prefHeight="15" />
                   <JFXButton onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" />
                   <Pane prefHeight="15" />
                   <JFXButton onAction="#saveToCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Save to CSV" textAlignment="CENTER" />
@@ -114,3 +130,4 @@
    </children>
 
 </AnchorPane>
+
