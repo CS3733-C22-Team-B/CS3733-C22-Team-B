@@ -2,12 +2,14 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -65,32 +67,26 @@ public class MasterServiceRequestController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             loader.setControllerFactory(param -> {
                 // Important: add your controller below in an else if
-                if (srType.equals("MedicalEquipmentSR")) {
-                    srLabel.setText("Medical Equipment Service");
-                    return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
-                } else if (srType.equals("ComputerServiceSR")) {
-                    srLabel.setText("Computer Service");
-                    return new ComputerServiceSRController((ComputerServiceSR) sr);
-                } else if(srType.equals("FoodDeliverySR")) {
-                    srLabel.setText("Food Delivery Service");
-                    return new FoodDeliverySRController((FoodDeliverySR) sr);
-                } else if(srType.equals("ExternalTransportSR")) {
-                    srLabel.setText("External Transportation Service");
-                    return new ExternalTransportController((ExternalTransportSR) sr);
-                } else if(srType.equals("MedicineDeliverySR")) {
-                    srLabel.setText("Medicine Delivery Service");
-                    return new MedicineDeliverySRController((MedicineDeliverySR) sr);
-                } else if(srType.equals("LaundrySR")) {
-                    srLabel.setText("Laundry Service");
-                    return new LaundrySRController((LaundrySR) sr);
-                } else if (srType.equals("GiftFloralSR")) {
-                    srLabel.setText("Gift & Floral Service");
-                    return new GiftFloralServiceController((GiftFloralSR) sr);
-                } else if(srType.equals("SanitationSR")) {
-                    System.out.println("Sanitation Service");
-                    srLabel.setText("Sanitation Service");
-                    return new SanitationSRController((SanitationSR) sr);
-                } return null;
+                switch (srType) {
+                    case "MedicalEquipmentSR":
+                        return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                    case "ComputerServiceSR":
+                        return new ComputerServiceSRController((ComputerServiceSR) sr);
+                    case "FoodDeliverySR":
+                        return new FoodDeliverySRController((FoodDeliverySR) sr);
+                    case "ExternalTransportSR":
+                        return new ExternalTransportController((ExternalTransportSR) sr);
+                    case "MedicineDeliverySR":
+                        return new MedicineDeliverySRController((MedicineDeliverySR) sr);
+                    case "LaundrySR":
+                        return new LaundrySRController((LaundrySR) sr);
+                    case "GiftFloralSR":
+                        return new GiftFloralServiceController((GiftFloralSR) sr);
+                    case "SanitationSR":
+                        srLabel.setText("Sanitation Service");
+                        return new SanitationSRController((SanitationSR) sr);
+                }
+                return null;
 
             });
             childPane = loader.load();
@@ -228,6 +224,13 @@ public class MasterServiceRequestController {
     }
 
     @FXML private void back(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
+            BorderHomeController.curBorderHomeController.changeNode(loader);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
@@ -243,7 +246,7 @@ public class MasterServiceRequestController {
                 .collect(Collectors.toList()));
     }
     // Important: add your path here
-    private static String srTypeToFXMLPath(String srType) {
+    public static String srTypeToFXMLPath(String srType) {
         switch (srType) {
             case "MedicalEquipmentSR":
                 return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";

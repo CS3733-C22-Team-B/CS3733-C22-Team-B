@@ -34,7 +34,6 @@ public abstract class AbstractSR {
 
 //        if (status == null) status = "WAITING";
         if (!validateStatus(status)) {
-            System.err.println("WARNING: status is set to WAITING");
             this.status = "WAITING";
         }
         else this.status = status;

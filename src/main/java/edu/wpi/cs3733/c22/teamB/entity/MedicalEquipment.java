@@ -48,8 +48,7 @@ public class MedicalEquipment {
         this.manufacturer = manufacturer;
         this.location = location;
         if (!validateStatus(status)) {
-            System.err.println("WARNING: status is set to BLANK");
-            this.status = "BLANK";
+            this.status = "WAITING";
         }
         else this.status = status;
         this.color = color;
@@ -67,10 +66,6 @@ public class MedicalEquipment {
 
     public static String[] getEquipmentStatus() {
         return EquipmentStatus;
-    }
-
-    public static void setEquipmentStatus(String[] equipmentStatus) {
-        EquipmentStatus = equipmentStatus;
     }
 
     public int getAmount() {

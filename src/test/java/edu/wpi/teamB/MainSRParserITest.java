@@ -27,7 +27,7 @@ public class MainSRParserITest {
         LocalDate dateR1 = LocalDate.parse("2022-05-05");
 
         AbstractSR mainSRExpected =
-                new MainSR("nodeID1", "MedicalEquipmentSR", "WAITING", location1, requestor1, aEmployee1, dateR1, "shortN1");
+                new MainSR("nodeID1", "MedicalEquipmentSR", "IN PROGRESS", location1, requestor1, aEmployee1, dateR1, "shortN1");
 
         MainSRParserI mainParser = new MainSRParserI();
         AbstractSR mainSRResult = mainParser.fromStringToObject(str);
@@ -66,9 +66,9 @@ public class MainSRParserITest {
         LocalDate dateR2 = LocalDate.parse("2022-05-05");
 
         AbstractSR mainSR1 =
-                new MainSR("nodeID1", "MedicalEquipmentSR", "WAITING", location1, requestor1, aEmployee1, dateR1, "shortN1");
+                new MainSR("nodeID1", "MedicalEquipmentSR", "IN PROGRESS", location1, requestor1, aEmployee1, dateR1, "shortN1");
         AbstractSR mainSR2 =
-                new MainSR("nodeID2", "MedicalEquipmentSR", "WAITING", location2, requestor2, aEmployee2, dateR2, "shortN2");
+                new MainSR("nodeID2", "MedicalEquipmentSR", "IN PROGRESS", location2, requestor2, aEmployee2, dateR2, "shortN2");
         List<AbstractSR> mainSRListExpected = new ArrayList<>();
         mainSRListExpected.add(mainSR1);
         mainSRListExpected.add(mainSR2);
@@ -95,7 +95,7 @@ public class MainSRParserITest {
         LocalDate dateR1 = LocalDate.parse("2022-05-05");
 
         AbstractSR mainSRExpected =
-                new MainSR("nodeID1", "MedicalEquipmentSR", "WAITING", location1, requestor1, aEmployee1, dateR1, "shortN1");
+                new MainSR("nodeID1", "MedicalEquipmentSR", "IN PROGRESS", location1, requestor1, aEmployee1, dateR1, "shortN1");
 
         MainSRParserI mainParser = new MainSRParserI();
         String stringResult = mainParser.fromObjectToString((MainSR) mainSRExpected);
@@ -137,9 +137,9 @@ public class MainSRParserITest {
         LocalDate dateR2 = LocalDate.parse("2022-05-05");
 
         AbstractSR mainSR1 =
-                new MainSR("nodeID1", "MedicalEquipmentSR", "WAITING", location1, requestor1, aEmployee1, dateR1, "shortN1");
+                new MainSR("nodeID1", "MedicalEquipmentSR", "IN PROGRESS", location1, requestor1, aEmployee1, dateR1, "shortN1");
         AbstractSR mainSR2 =
-                new MainSR("nodeID2", "MedicalEquipmentSR", "WAITING", location2, requestor2, aEmployee2, dateR2, "shortN2");
+                new MainSR("nodeID2", "MedicalEquipmentSR", "IN PROGRESS", location2, requestor2, aEmployee2, dateR2, "shortN2");
         List<AbstractSR> mainSRListExpected = new ArrayList<>();
         mainSRListExpected.add((MainSR) mainSR1);
         mainSRListExpected.add((MainSR) mainSR2);
