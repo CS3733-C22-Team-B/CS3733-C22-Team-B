@@ -691,8 +691,11 @@ public class MapEditorController{
     void homeButton(ActionEvent event) {
         // Try to go home
         try {
+            Bapp.getPrimaryStage().setWidth(725);
+            Bapp.getPrimaryStage().setHeight(450);
             Bapp.getPrimaryStage().resizableProperty().set(true);
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/borderHome.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
             Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {

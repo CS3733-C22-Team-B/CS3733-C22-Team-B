@@ -36,7 +36,6 @@ public class ServiceRequestMenuController implements Initializable {
             name7.setVisible(true);
             name8.setVisible(true);
         } else {
-
             name1.setVisible(false);
             name2.setVisible(false);
             name3.setVisible(false);

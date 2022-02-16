@@ -58,7 +58,7 @@
                 <TextField fx:id="passwordField" prefHeight="25.0" prefWidth="99.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="emailField" prefHeight="25.0" prefWidth="255.0" promptText="email" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <TextField fx:id="phoneNumberField" prefHeight="25.0" prefWidth="145.0" promptText="phoneNumber" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Confirm" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Confirm" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <JFXButton fx:id="clearButton" alignment="CENTER" onAction="#clearForm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Clear" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
                 <JFXButton fx:id="cancelButton" alignment="CENTER" onAction="#cancelForm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Cancel" GridPane.columnIndex="6" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
             <TextField fx:id="accessLevel" promptText="accessLevel" GridPane.columnIndex="4" />
