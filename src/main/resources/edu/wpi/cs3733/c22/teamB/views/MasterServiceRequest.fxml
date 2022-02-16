@@ -24,7 +24,7 @@
       <Label layoutX="51.0" layoutY="255.0" text="Notes" />
       <AnchorPane fx:id="srPane" layoutX="51.0" layoutY="54.0" prefHeight="127.0" prefWidth="324.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="54.0" />
       <Line endX="424.79998779296875" endY="1.1444091796875E-5" layoutX="130.0" layoutY="42.0" startX="-84.8000259399414" startY="1.1444091796875E-5" style="-fx-fill: #002168;" />
-      <Label fx:id="srLabel" layoutX="45.0" layoutY="14.0" text="Label" />
+      <Label fx:id="srLabel" layoutX="45.0" layoutY="14.0" prefHeight="17.0" prefWidth="511.0" text="Label" />
       <JFXButton fx:id="backButton" layoutX="409.0" layoutY="341.0" onAction="#back" prefHeight="25.0" prefWidth="149.0" style="-fx-border-color: #002168; -fx-background-color: #99a6c2;" text="Back" AnchorPane.rightAnchor="41.799999999999955" />
       <JFXComboBox fx:id="assignedEmployeeField" layoutX="409.0" layoutY="219.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" AnchorPane.rightAnchor="41.80000000000001" />
       <JFXComboBox fx:id="statusField" layoutX="409.0" layoutY="156.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" AnchorPane.rightAnchor="41.80000000000001" />
