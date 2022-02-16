@@ -29,8 +29,6 @@ public class FoodDeliverySRController implements IController {
 
     @FXML
     public void initialize() {
-        DatabaseWrapper dw = new DatabaseWrapper();
-
         comboMeals.getItems().add("Chicken and Potatoes");
         comboMeals.getItems().add("Salad and Fruits");
         comboMeals.getItems().add("Soup of The Day");
@@ -38,6 +36,13 @@ public class FoodDeliverySRController implements IController {
         drinkMenu.getItems().add("Orange Juice");
         drinkMenu.getItems().add("Apple Juice");
         drinkMenu.getItems().add("1% milk");
+
+        if (sr == null)
+            clear();
+        else {
+            comboMeals.setValue(sr.getFoodName());
+            drinkMenu.setValue(sr.getDrinkName());
+        }
     }
 
 
@@ -50,7 +55,10 @@ public class FoodDeliverySRController implements IController {
     @Override
     public void submit(AbstractSR sr) {
         DatabaseWrapper dw = new DatabaseWrapper();
-        dw.addSR(new FoodDeliverySR(sr, comboMeals.getValue(), drinkMenu.getValue()));
+        if (this.sr == null)
+            dw.addSR(new FoodDeliverySR(sr, comboMeals.getValue(), drinkMenu.getValue()));
+        else
+            dw.updateSR(new FoodDeliverySR(sr, comboMeals.getValue(), drinkMenu.getValue()));
     }
 
     @Override

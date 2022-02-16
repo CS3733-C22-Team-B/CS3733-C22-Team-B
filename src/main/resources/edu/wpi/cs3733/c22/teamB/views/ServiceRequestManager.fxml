@@ -48,6 +48,7 @@
                </children>
             </JFXDialog>
             <TableView fx:id="srTable" layoutX="66.0" layoutY="101.0" prefHeight="471.0" prefWidth="756.0">
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="77.19998931884766" text="ID" />
                 <TableColumn fx:id="typeCol" prefWidth="132.39996337890625" text="Type" />

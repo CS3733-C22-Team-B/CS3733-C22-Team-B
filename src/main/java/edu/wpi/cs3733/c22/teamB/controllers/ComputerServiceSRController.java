@@ -24,15 +24,15 @@ public class ComputerServiceSRController implements IController {
 
     @Override
     public void submit() {
-
     }
 
     @Override
     public void submit(AbstractSR sr) {
-
         DatabaseWrapper dw = new DatabaseWrapper();
-        dw.addSR(new ComputerServiceSR(sr, helpTypeField.getValue()));
-
+        if (this.sr == null)
+            dw.addSR(new ComputerServiceSR(sr, helpTypeField.getValue()));
+        else
+            dw.updateSR(new ComputerServiceSR(sr, helpTypeField.getValue()));
     }
 
     @Override
@@ -44,6 +44,9 @@ public class ComputerServiceSRController implements IController {
     @FXML public void initialize() {
         String st[] = {"Hardware", "Software"};
         helpTypeField.setItems(FXCollections.observableArrayList(st));
-
+        if (sr == null)
+            clear();
+        else
+            helpTypeField.setValue(sr.getHelpType());
     }
 }
