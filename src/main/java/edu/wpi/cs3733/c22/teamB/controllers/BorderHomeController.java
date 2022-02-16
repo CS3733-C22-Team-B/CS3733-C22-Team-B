@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXDrawer;
@@ -15,8 +16,8 @@ import java.util.ResourceBundle;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class BorderHome implements Initializable{
-    public static BorderHome curBorderHome;
+public class BorderHomeController implements Initializable{
+    public static BorderHomeController curBorderHomeController;
     @FXML
     private AnchorPane anchorPane;
 
@@ -31,8 +32,8 @@ public class BorderHome implements Initializable{
 
     private Pane childPane;
 
-    public BorderHome() {
-        curBorderHome = this;
+    public BorderHomeController() {
+        curBorderHomeController = this;
     }
 
     private String pageToFXMLPath(String pageName) {
@@ -73,6 +74,9 @@ public class BorderHome implements Initializable{
         JFXButton button3 = new JFXButton("Request");
         JFXButton button4 = new JFXButton("Dashboard");
         JFXButton button5 = new JFXButton("Settings");
+        JFXButton button6 = new JFXButton("Tables");
+        JFXButton button7 = new JFXButton("Exit");
+
 
 
 
@@ -83,7 +87,10 @@ public class BorderHome implements Initializable{
         leftDrawerPane.getChildren().add(button2);
         leftDrawerPane.getChildren().add(button3);
         leftDrawerPane.getChildren().add(button4);
+        leftDrawerPane.getChildren().add(button6);
         leftDrawerPane.getChildren().add(button5);
+        leftDrawerPane.getChildren().add(button7);
+
 
 
         leftDrawerPane.setAlignment(Pos.CENTER);
@@ -185,6 +192,8 @@ public class BorderHome implements Initializable{
                 ex.printStackTrace();
             }
         });
+        
+
 
         button5.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
@@ -199,6 +208,25 @@ public class BorderHome implements Initializable{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        });
+
+        button6.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Tables")));
+
+            try {
+                childPane = loader.load();
+                anchorPane.getChildren().clear();
+                anchorPane.getChildren().add(childPane);
+                anchorPane.toBack();
+
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        button7.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            Platform.exit();
         });
 
 
