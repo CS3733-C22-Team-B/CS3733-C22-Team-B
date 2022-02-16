@@ -227,8 +227,7 @@ public class MasterServiceRequestController {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            Parent root = loader.load();
-            Bapp.getPrimaryStage().getScene().setRoot(root);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
