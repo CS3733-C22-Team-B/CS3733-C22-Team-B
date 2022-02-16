@@ -539,11 +539,11 @@ public class MapEditorController{
     }
 
     @FXML public void saveToCSV(){
-//        try {
-//            backupper.Backup();
-//        } catch (IOException ex){
-//            ex.printStackTrace();
-//        }
+        try {
+            dbWrapper.backupAll();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
         refresh();
     }
 
@@ -725,12 +725,12 @@ public class MapEditorController{
 
     @FXML
     void loadFromCSV(ActionEvent event) {
-//        try {
-//            backupper.Restore();
-//            refresh();
-//        } catch (IOException ex){
-//            ex.printStackTrace();
-//        }
+        try {
+            dbWrapper.restoreAll();
+            refresh();
+        } catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
 
