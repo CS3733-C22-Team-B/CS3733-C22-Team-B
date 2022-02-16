@@ -438,8 +438,13 @@ public class MapEditorController{
     }
 
     void deleteSelectedNode(){
-        anchorPane.getChildren().remove(selectedPnt);
-        dbWrapper.deleteLocation(selectedPnt.getId());
+        if(clicked == "location") {
+            anchorPane.getChildren().remove(selectedPnt);
+            dbWrapper.deleteLocation(selectedPnt.getId());
+        } else if (clicked == "equipment"){
+            anchorPane.getChildren().remove(selectedImg);
+            dbWrapper.deleteMedicalEquipment(selectedImg.getId());
+        }
     }
 
     @FXML public void refresh(){
