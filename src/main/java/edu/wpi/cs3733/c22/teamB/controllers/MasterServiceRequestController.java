@@ -66,22 +66,25 @@ public class MasterServiceRequestController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             loader.setControllerFactory(param -> {
                 // Important: add your controller below in an else if
-                if (srType.equals("MedicalEquipmentSR"))
-                    return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
-                else if (srType.equals("ComputerServiceSR"))
-                    return new ComputerServiceSRController((ComputerServiceSR) sr);
-                else if(srType.equals("FoodDeliverySR"))
-                    return new FoodDeliverySRController((FoodDeliverySR) sr);
-                else if(srType.equals("ExternalTransportSR"))
-                    return new ExternalTransportController((ExternalTransportSR) sr);
-                else if(srType.equals("MedicineDeliverySR"))
-                    return new MedicineDeliverySRController((MedicineDeliverySR) sr);
-                else if(srType.equals("LaundrySR"))
-                    return new LaundrySRController((LaundrySR) sr);
-                else if (srType.equals("GiftFloralSR"))
-                    return new GiftFloralServiceController((GiftFloralSR) sr);
-                else if(srType.equals("SanitationSR"))
-                    return new SanitationSRController((SanitationSR) sr);
+                switch (srType) {
+                    case "MedicalEquipmentSR":
+                        return new MedicalEquipmentSRController((MedicalEquipmentSR) sr);
+                    case "ComputerServiceSR":
+                        return new ComputerServiceSRController((ComputerServiceSR) sr);
+                    case "FoodDeliverySR":
+                        return new FoodDeliverySRController((FoodDeliverySR) sr);
+                    case "ExternalTransportSR":
+                        return new ExternalTransportController((ExternalTransportSR) sr);
+                    case "MedicineDeliverySR":
+                        return new MedicineDeliverySRController((MedicineDeliverySR) sr);
+                    case "LaundrySR":
+                        return new LaundrySRController((LaundrySR) sr);
+                    case "GiftFloralSR":
+                        return new GiftFloralServiceController((GiftFloralSR) sr);
+                    case "SanitationSR":
+                        srLabel.setText("Sanitation Service");
+                        return new SanitationSRController((SanitationSR) sr);
+                }
                 return null;
 
             });
@@ -224,8 +227,7 @@ public class MasterServiceRequestController {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            Parent root = loader.load();
-            Bapp.getPrimaryStage().getScene().setRoot(root);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

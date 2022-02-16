@@ -1,19 +1,15 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
-import edu.wpi.cs3733.c22.teamB.Bapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-import javax.swing.border.Border;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class ServiceRequestMenuController {
@@ -46,7 +42,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("MedicalEquipmentSR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -60,7 +56,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("FoodDeliverySR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -73,7 +69,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("ExternalTransportSR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -88,7 +84,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("ComputerServiceSR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -102,7 +98,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("MedicineDeliverySR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -116,7 +112,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("LaundrySR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -130,7 +126,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("GiftFloralSR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -143,9 +139,21 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("SanitationSR"));
 
-            BorderHome.curBorderHome.changeNode(loader);
+            BorderHomeController.curBorderHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void initialize() {
+        name1.setVisible(false);
+        name2.setVisible(false);
+        name3.setVisible(false);
+        name4.setVisible(false);
+        name5.setVisible(false);
+        name6.setVisible(false);
+        name7.setVisible(false);
+        name8.setVisible(false);
     }
 }
