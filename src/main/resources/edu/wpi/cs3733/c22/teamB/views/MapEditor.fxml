@@ -15,6 +15,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.text.Text?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -26,7 +27,21 @@
                      </image>
                   </ImageView>
 
-
+               <Label fx:id="summary3Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary2Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary1Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL2Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL1Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary3Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary2Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary1Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL1Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL2Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary3SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary2SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summary1SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL1SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+               <Label fx:id="summaryL2SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
 
                <VBox fx:id="modifyPopup" maxHeight="200.0" maxWidth="250.0">
                   <children>

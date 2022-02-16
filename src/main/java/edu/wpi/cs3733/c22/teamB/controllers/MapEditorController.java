@@ -28,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
@@ -69,6 +70,21 @@ public class MapEditorController{
     public Label header12;
     public TextField size;
     public ScrollPane scroll;
+    public Label summary1Location;
+    public Label summary2Location;
+    public Label summary3Location;
+    public Label summaryL1Location;
+    public Label summaryL2Location;
+    public Label summary1Equipment;
+    public Label summary2Equipment;
+    public Label summary3Equipment;
+    public Label summaryL2Equipment;
+    public Label summaryL1Equipment;
+    public Label summary1SR;
+    public Label summary2SR;
+    public Label summary3SR;
+    public Label summaryL2SR;
+    public Label summaryL1SR;
 
     String selectedPoint;
     Circle selectedPnt;
@@ -120,7 +136,6 @@ public class MapEditorController{
     @FXML private JFXButton goToSideViewButton;
 
 
-
     @FXML
     public void initialize(){
         Bapp.getPrimaryStage().setMaximized(true);
@@ -151,7 +166,49 @@ public class MapEditorController{
         modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
         modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
         modifyPopup.setVisible(false);
+        setTextVisible(false);
+        //updateText(summary3Location,getImageX(1000),getImageX(877));
+        setTextPos();
         modifyPopup.setStyle("-fx-padding: 1;");
+        //1000
+        //877
+    }
+
+    public void setTextPos(){
+        summaryL1Location.setTranslateX(getImageX(300));
+        summaryL1Location.setTranslateY(getImageY(-175));
+        summaryL2Location.setTranslateX(getImageX(300));
+        summaryL2Location.setTranslateY(getImageY(-325));
+        summary1Location.setTranslateX(getImageX(300));
+        summary1Location.setTranslateY(getImageY(-25));
+        summary2Location.setTranslateX(getImageX(300));
+        summary2Location.setTranslateY(getImageY(125));
+        summary3Location.setTranslateX(getImageX(300));
+        summary3Location.setTranslateY(getImageY(275));
+
+        summaryL2Equipment.setTranslateX(getImageX(400));
+        summaryL2Equipment.setTranslateY(getImageY(-175));
+        summaryL1Equipment.setTranslateX(getImageX(400));
+        summaryL1Equipment.setTranslateY(getImageY(-325));
+        summary1Equipment.setTranslateX(getImageX(400));
+        summary1Equipment.setTranslateY(getImageY(-25));
+        summary2Equipment.setTranslateX(getImageX(400));
+        summary2Equipment.setTranslateY(getImageY(125));
+        summary3Equipment.setTranslateX(getImageX(400));
+        summary3Equipment.setTranslateY(getImageY(275));
+
+        summaryL2SR.setTranslateX(getImageX(500));
+        summaryL2SR.setTranslateY(getImageY(-175));
+        summaryL1SR.setTranslateX(getImageX(500));
+        summaryL1SR.setTranslateY(getImageY(-325));
+        summary1SR.setTranslateX(getImageX(500));
+        summary1SR.setTranslateY(getImageY(-25));
+        summary2SR.setTranslateX(getImageX(500));
+        summary2SR.setTranslateY(getImageY(125));
+        summary3SR.setTranslateX(getImageX(500));
+        summary3SR.setTranslateY(getImageY(275));
+
+
     }
 
     //Add points from DB
@@ -493,6 +550,7 @@ public class MapEditorController{
         goToL1Button.setStyle("-fx-background-color: #eaeaea");
         goToL2Button.setStyle("-fx-background-color: #eaeaea");
         goToSideViewButton.setStyle("-fx-background-color: #eaeaea");
+        setTextVisible(false);
 
         switch (currentFloor) {
             case "01":
@@ -512,6 +570,8 @@ public class MapEditorController{
                 goToL1Button.setStyle("-fx-background-color: #007fff");
                 break;
             case"side":
+                setTextVisible(true);
+                setText();
                 imageView.setImage(sideViewImage);
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
                 break;
@@ -560,6 +620,8 @@ public class MapEditorController{
         }
         updatePopup();
     }
+
+
 
 
     public void submitModify(ActionEvent actionEvent) {
@@ -704,6 +766,70 @@ public class MapEditorController{
         }
         modifyPopup.getTransforms().add(trans);
     }
+
+    int locationCount(String floor){
+        locationList = dbWrapper.getAllLocation();
+        int count = 0;
+        for (Location local : locationList){
+            if (local.getFloor().equals(floor)) count++;
+        }
+        return count;
+    }
+
+    int equipmentCount(String floor){
+        medicalList = dbWrapper.getAllMedicalEquipment();
+        int count = 0;
+        for (MedicalEquipment equip : medicalList){
+            if (equip.getLocation().getFloor().equals(floor)) count++;
+        }
+        return count;
+    }
+
+    int SRCount(String floor){
+        srList = dbWrapper.getAllSR();
+        int count = 0;
+        for (AbstractSR sr : srList){
+            if (sr.getLocation().getFloor().equals(floor)) count++;
+        }
+        return count;
+    }
+
+    public void setTextVisible(boolean isVisible){
+        summary1Location.setVisible(isVisible);
+        summary2Location.setVisible(isVisible);
+        summary3Location.setVisible(isVisible);
+        summaryL1Location.setVisible(isVisible);
+        summaryL2Location.setVisible(isVisible);
+        summary1Equipment.setVisible(isVisible);
+        summary2Equipment.setVisible(isVisible);
+        summary3Equipment.setVisible(isVisible);
+        summaryL1Equipment.setVisible(isVisible);
+        summaryL2Equipment.setVisible(isVisible);
+        summary1SR.setVisible(isVisible);
+        summary2SR.setVisible(isVisible);
+        summary3SR.setVisible(isVisible);
+        summaryL1SR.setVisible(isVisible);
+        summaryL2SR.setVisible(isVisible);
+    }
+
+    public void setText(){
+        summaryL2Location.setText(String.valueOf(locationCount("L2")));
+        summaryL1Location.setText(String.valueOf(locationCount("L1")));
+        summary1Location.setText(String.valueOf(locationCount("01")));
+        summary2Location.setText(String.valueOf(locationCount("02")));
+        summary3Location.setText(String.valueOf(locationCount("03")));
+        summaryL2Equipment.setText(String.valueOf(equipmentCount("L2")));
+        summaryL1Equipment.setText(String.valueOf(equipmentCount("L1")));
+        summary1Equipment.setText(String.valueOf(equipmentCount("01")));
+        summary2Equipment.setText(String.valueOf(equipmentCount("02")));
+        summary3Equipment.setText(String.valueOf(equipmentCount("03")));
+        summaryL2SR.setText(String.valueOf(SRCount("L2")));
+        summaryL1SR.setText(String.valueOf(SRCount("L1")));
+        summary1SR.setText(String.valueOf(SRCount("01")));
+        summary2SR.setText(String.valueOf(SRCount("02")));
+        summary3SR.setText(String.valueOf(SRCount("03")));
+    }
+
 
 
 
