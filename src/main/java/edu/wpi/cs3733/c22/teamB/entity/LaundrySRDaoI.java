@@ -8,16 +8,12 @@ import java.sql.*;
 
 public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
-    Connection conn;
-
     public LaundrySRDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
     @Override
     public void addValue(LaundrySR object) {
-//        MainSRDaoI mainDao = new MainSRDaoI();
-//        mainDao.addValue(object);
+        Connection conn = ConnectionManager.getInstance().getConnection();
 
         try {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO LaundrySR(srID) VALUES(?)");
@@ -35,6 +31,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("DELETE FROM LaundrySR WHERE srID = ?");
@@ -54,6 +52,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public LaundrySR getValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         LaundrySR LaundrySR = new LaundrySR();
         try {
             PreparedStatement pstmt =
@@ -80,6 +80,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public List<LaundrySR> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         List<LaundrySR> LaundrySRList = new ArrayList<>();
         try{
             PreparedStatement pstmt =
@@ -99,6 +101,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "LAUNDRYSR", null);
@@ -120,6 +124,8 @@ public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE LaundrySR");

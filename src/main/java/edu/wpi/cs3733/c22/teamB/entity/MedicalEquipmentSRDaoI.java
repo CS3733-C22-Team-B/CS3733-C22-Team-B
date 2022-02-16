@@ -7,16 +7,12 @@ import java.util.List;
 
 public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEquipmentSR> {
 
-    Connection conn;
-
     public MedicalEquipmentSRDaoI() {
-        this.conn = DBConnection.getConnection();
     }
 
     @Override
     public void addValue(MedicalEquipmentSR object) {
-//        MainSRDaoI mainDao = new MainSRDaoI();
-//        mainDao.addValue(object);
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -34,6 +30,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
 
     @Override
     public void deleteValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement("DELETE FROM MedicalEquipmentSR WHERE srID = ?");
@@ -55,6 +52,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
 
     @Override
     public MedicalEquipmentSR getValue(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         MedicalEquipmentSR ret = null;
         try {
             PreparedStatement pstmt =
@@ -78,6 +76,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
 
     @Override
     public List<MedicalEquipmentSR> getAllValues() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         List<MedicalEquipmentSR> medEquipmentSRList = new ArrayList<>();
 
         try {
@@ -104,6 +103,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
 
     @Override
     public void createTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             DatabaseMetaData dbmd = conn.getMetaData();
             ResultSet rset = dbmd.getTables(null, null, "MEDICALEQUIPMENTSR", null);
@@ -128,6 +128,7 @@ public class MedicalEquipmentSRDaoI implements ISpecificServiceRequest<MedicalEq
 
     @Override
     public void dropTable() {
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             Statement stmt = conn.createStatement();
             stmt.execute("DROP TABLE MedicalEquipmentSR");
