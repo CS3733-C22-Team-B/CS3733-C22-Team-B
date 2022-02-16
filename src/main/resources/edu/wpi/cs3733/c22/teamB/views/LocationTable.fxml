@@ -57,7 +57,7 @@
             <TextField fx:id="nodeTypeField" prefHeight="25.0" prefWidth="99.0" promptText="nodeType" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="longNameField" prefHeight="25.0" prefWidth="255.0" promptText="longName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="shortNameField" prefHeight="25.0" prefWidth="145.0" promptText="shortName" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Confirm" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
+            <JFXButton fx:id="confirmButton" alignment="CENTER" onAction="#confirm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Confirm" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
             <JFXButton fx:id="clearButton" alignment="CENTER" onAction="#clearForm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Clear" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <JFXButton fx:id="cancelButton" alignment="CENTER" onAction="#cancelForm" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Cancel" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
          </children>
