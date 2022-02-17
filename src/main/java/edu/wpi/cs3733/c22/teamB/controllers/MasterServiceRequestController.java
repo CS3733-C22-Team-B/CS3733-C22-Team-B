@@ -64,6 +64,7 @@ public class MasterServiceRequestController {
     public MasterServiceRequestController(String srType, AbstractSR sr) {
         try {
             childSR = sr;
+            childSRType = srType;
             FXMLLoader loader = new FXMLLoader(getClass().getResource(srTypeToFXMLPath(srType)));
             loader.setControllerFactory(param -> {
                 // Important: add your controller below in an else if
@@ -148,7 +149,7 @@ public class MasterServiceRequestController {
             statusField.setValue(childSR.getStatus());
             assignedEmployeeField.setValue(childSR.getAssignedEmployee().getEmployeeID() + ' ' + childSR.getAssignedEmployee().getName());
             floorField.setValue(childSR.getLocation().getFloor());
-            locationField.setValue(childSR.getLocation().getLongName());
+            locationField.setValue(childSR.getLocation().getNodeID() + ' ' + childSR.getLocation().getLongName());
             notesField.setText(childSR.getNotes());
 
             idField.setDisable(false);
