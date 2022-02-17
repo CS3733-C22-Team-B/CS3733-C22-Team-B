@@ -171,8 +171,9 @@ public class ServiceRequestManagerController {
                                 getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MasterServiceRequest.fxml"));
                         loader.setControllerFactory(
                                 param -> new MasterServiceRequestController(sr.getSrType(), dw.getSR(sr.getSrID())));
-                        Parent root = loader.load();
-                        Bapp.getPrimaryStage().getScene().setRoot(root);
+//                        Parent root = loader.load();
+//                        Bapp.getPrimaryStage().getScene().setRoot(root);
+                        BorderHomeController.curBorderHomeController.changeNode(loader);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

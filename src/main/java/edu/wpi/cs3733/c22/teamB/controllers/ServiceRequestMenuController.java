@@ -147,6 +147,7 @@ public class ServiceRequestMenuController {
 
     @FXML
     public void initialize() {
+        toggleName.setSelected(false);
         name1.setVisible(false);
         name2.setVisible(false);
         name3.setVisible(false);
