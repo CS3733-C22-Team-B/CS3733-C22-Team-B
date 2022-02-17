@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,7 +98,7 @@ public class MedicalEquipmentTableController {
             TableColumn<MedicalEquipment, String> col2 = new TableColumn<>("equipmentName");
             TableColumn<MedicalEquipment, String> col3 = new TableColumn<>("equipmentType");
             TableColumn<MedicalEquipment, String> col4 = new TableColumn<>("manufacturer");
-            TableColumn<MedicalEquipment, Location> col5 = new TableColumn<>("location");
+            TableColumn<MedicalEquipment, String> col5 = new TableColumn<>("location");
             TableColumn<MedicalEquipment, String> col6 = new TableColumn<>("status"); // column names
             TableColumn<MedicalEquipment, String> col7 = new TableColumn<>("color");
             TableColumn<MedicalEquipment, String> col8 = new TableColumn<>("size");
@@ -109,7 +110,11 @@ public class MedicalEquipmentTableController {
             col2.setCellValueFactory(new PropertyValueFactory<>("equipmentName"));
             col3.setCellValueFactory(new PropertyValueFactory<>("equipmentType"));
             col4.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-            col5.setCellValueFactory(new PropertyValueFactory<>("location"));
+//            col5.setCellValueFactory(new PropertyValueFactory<>("location"));
+            col5.setCellValueFactory(cd -> {
+                Location loc = cd.getValue().getLocation();
+                return Bindings.createStringBinding(() -> loc.getNodeID() + ' ' + loc.getLongName());
+            });
             col6.setCellValueFactory(new PropertyValueFactory<>("status"));
             col7.setCellValueFactory(new PropertyValueFactory<>("color"));
             col8.setCellValueFactory(new PropertyValueFactory<>("size"));
