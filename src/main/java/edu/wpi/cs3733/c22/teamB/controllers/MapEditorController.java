@@ -696,6 +696,7 @@ public class MapEditorController{
             Bapp.getPrimaryStage().resizableProperty().set(true);
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/borderHome.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
+            Bapp.getPrimaryStage().getScene().setRoot(root);
             // Print stack trace if unable to go home
         } catch (IOException ex) {
             ex.printStackTrace();
