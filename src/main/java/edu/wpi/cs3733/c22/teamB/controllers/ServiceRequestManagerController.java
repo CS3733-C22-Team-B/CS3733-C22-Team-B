@@ -2,6 +2,9 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXToggleButton;
+import com.sun.javafx.sg.prism.EffectFilter;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
@@ -41,8 +44,10 @@ public class ServiceRequestManagerController {
     @FXML private JFXCheckBox assignedToFilterCheckBox;
     @FXML private JFXCheckBox requestorFilterCheckBox;
     @FXML private JFXCheckBox statusFilterCheckBox;
+    @FXML private JFXToggleButton incompleteToggle;
 
     private Set<String> filterFields = new HashSet<>();
+
 
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
@@ -155,10 +160,10 @@ public class ServiceRequestManagerController {
             }
         });
         // setup table row
-        srTable.setRowFactory( tv -> {
+        srTable.setRowFactory(tv -> {
             TableRow<AbstractSR> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     AbstractSR sr = row.getItem();
                     System.out.println(sr.getSrType());
 
@@ -187,6 +192,7 @@ public class ServiceRequestManagerController {
                 item.setSelected(true);
                 item.setOnAction(event -> col.setVisible(item.isSelected()));
                 visibilityMenu.getItems().add(item);
+//                showMenu.getItems().add(item);
             }
         }
 
@@ -268,6 +274,54 @@ public class ServiceRequestManagerController {
     @FXML
     private void onFilterByButton(ActionEvent actionEvent) {
         filterDialog.show((StackPane) BorderHomeController.curBorderHomeController.getAnchorPane().getChildren().get(0));
+    }
+
+    @FXML
+    private void OnIncompletedButton(ActionEvent actionEvent) {
+        srTable.getItems().clear();
+        srTable.getItems().removeAll();
+        srTable.getItems().addAll(dw.getAllSR().stream().filter(sr -> {
+            String input = "done";
+            return (/*filterFields.contains("Status") && */ sr.getStatus().toLowerCase(Locale.ROOT).contains(input));
+        }).collect(Collectors.toList()));
+
+    }
+
+    @FXML
+    private void OnCompletedButton(ActionEvent actionEvent) {
+        srTable.getItems().clear();
+            srTable.getItems().removeAll();
+            srTable.getItems().addAll(dw.getAllSR().stream().filter(sr -> {
+                String input1 = "waiting";
+                String input2 = "in progress";
+                String input3 = "cancelled"; //filterFields.contains("Status") &&
+                return ((sr.getStatus().toLowerCase(Locale.ROOT).contains(input1)) || (sr.getStatus().toLowerCase(Locale.ROOT).contains(input2)) || (sr.getStatus().toLowerCase(Locale.ROOT).contains(input3)));
+            }).collect(Collectors.toList()));
+    }
+
+    @FXML
+    private void onShowIncompleted(ActionEvent actionEvent) {
+        if (incompleteToggle.isSelected()) {
+            srTable.getItems().clear();
+            srTable.getItems().removeAll();
+            srTable.getItems().addAll(dw.getAllSR().stream().filter(sr -> {
+                String input1 = "waiting";
+                String input2 = "in progress";
+                String input3 = "cancelled"; //filterFields.contains("Status") &&
+                return ((sr.getStatus().toLowerCase(Locale.ROOT).contains(input1)) || (sr.getStatus().toLowerCase(Locale.ROOT).contains(input2)) || (sr.getStatus().toLowerCase(Locale.ROOT).contains(input3)));
+            }).collect(Collectors.toList()));
+        } else {
+            srTable.getItems().clear();
+            srTable.getItems().removeAll();
+            srTable.getItems().addAll(dw.getAllSR().stream().filter(sr -> {
+                String input = "done";
+                String input1 = "waiting";
+                String input2 = "in progress";
+                String input3 = "cancelled";
+                return ((sr.getStatus().toLowerCase(Locale.ROOT).contains(input1)) || (sr.getStatus().toLowerCase(Locale.ROOT).contains(input2)) || (sr.getStatus().toLowerCase(Locale.ROOT).contains(input3)) || sr.getStatus().toLowerCase(Locale.ROOT).contains(input));
+            }).collect(Collectors.toList()));
+
+        }
     }
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {
