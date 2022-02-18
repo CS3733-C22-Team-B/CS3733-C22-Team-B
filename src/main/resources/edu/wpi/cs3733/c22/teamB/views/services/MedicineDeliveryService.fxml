@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="125.0" prefWidth="321.0" styleClass="backgroundColor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.services.MedicineDeliverySRController">
+   <children>
+      <TextField fx:id="medicineID" layoutY="93.0" prefHeight="25.0" prefWidth="321.0" />
+      <TextField fx:id="patientID" layoutY="27.0" prefHeight="25.0" prefWidth="321.0" />
+      <Label layoutY="66.0" text="Medicine ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label prefHeight="17.0" prefWidth="75.0" text="Patient ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

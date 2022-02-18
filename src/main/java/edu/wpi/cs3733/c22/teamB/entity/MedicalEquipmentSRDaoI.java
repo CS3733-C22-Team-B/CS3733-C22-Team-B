@@ -1,6 +1,11 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.ISpecificServiceRequest;
+import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.MainSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

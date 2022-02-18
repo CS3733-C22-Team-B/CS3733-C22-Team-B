@@ -2,14 +2,16 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.c22.teamB.Bapp;
-import com.jfoenix.controls.JFXToggleButton;
-import edu.wpi.cs3733.c22.teamB.SRIDGenerator;
+import edu.wpi.cs3733.c22.teamB.controllers.services.*;
+import edu.wpi.cs3733.c22.teamB.entity.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -251,21 +253,21 @@ public class MasterServiceRequestController {
     public static String srTypeToFXMLPath(String srType) {
         switch (srType) {
             case "MedicalEquipmentSR":
-                return "/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentSR.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/MedicalEquipmentSR.fxml";
             case "ComputerServiceSR":
-                return "/edu/wpi/cs3733/c22/teamB/views/ComputerServiceSR.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/ComputerServiceSR.fxml";
             case "FoodDeliverySR":
-                return "/edu/wpi/cs3733/c22/teamB/views/FoodDeliveryService.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/FoodDeliveryService.fxml";
             case "ExternalTransportSR":
-                return "/edu/wpi/cs3733/c22/teamB/views/ExternalTransport.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/ExternalTransport.fxml";
             case "MedicineDeliverySR":
-                return "/edu/wpi/cs3733/c22/teamB/views/MedicineDeliveryService.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/MedicineDeliveryService.fxml";
             case "LaundrySR":
-                return "/edu/wpi/cs3733/c22/teamB/views/LaundryService.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/LaundryService.fxml";
             case "GiftFloralSR":
-                return "/edu/wpi/cs3733/c22/teamB/views/GiftFloralService.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/GiftFloralService.fxml";
             case "SanitationSR":
-                return "/edu/wpi/cs3733/c22/teamB/views/SanitationSR.fxml";
+                return "/edu/wpi/cs3733/c22/teamB/views/services/SanitationSR.fxml";
             default:
                 throw new RuntimeException("srType invalid");
         }

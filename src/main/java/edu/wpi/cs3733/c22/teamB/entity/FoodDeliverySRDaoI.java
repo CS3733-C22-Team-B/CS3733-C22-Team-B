@@ -1,6 +1,10 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
 
 
 import java.sql.*;
