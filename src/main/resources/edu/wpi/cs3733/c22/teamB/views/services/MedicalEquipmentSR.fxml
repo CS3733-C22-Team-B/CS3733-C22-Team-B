@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="125.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.services.MedicalEquipmentSRController">
+   <children>
+      <Label layoutY="66.0" prefHeight="27.0" prefWidth="284.0" text="Medical Equipment">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="equipmentNameField" layoutY="93.0" prefHeight="25.0" prefWidth="312.0" />
+      <Label prefHeight="27.0" prefWidth="284.0" text="Equipment Type">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="equipmentTypeField" layoutY="27.0" onAction="#onEquipmentTypeChange" prefHeight="25.0" prefWidth="312.0" />
+   </children>
+</AnchorPane>

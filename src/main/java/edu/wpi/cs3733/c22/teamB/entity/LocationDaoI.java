@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.services.GiftFloralServiceController">
+   <children>
+      <JFXComboBox fx:id="giftType" layoutX="-1.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" onAction="#onGiftTypeChange" />
+      <JFXComboBox fx:id="giftOptions" layoutX="-1.0" layoutY="91.0" prefHeight="26.0" prefWidth="320.0" />
+      <Label layoutY="14.0" prefHeight="20.0" prefWidth="90.0" text="Gift Type">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutY="71.0" prefHeight="20.0" prefWidth="90.0" text="Gift Options">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
