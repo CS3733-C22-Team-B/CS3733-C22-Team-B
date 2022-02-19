@@ -84,6 +84,7 @@ public class MapEditorController{
     public Label summary3SR;
     public Label summaryL2SR;
     public Label summaryL1SR;
+    //bruh
 
     String selectedPoint;
     Circle selectedPnt;
