@@ -1,8 +1,10 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
-import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
+//import edu.wpi.cs3733.c22.teamB.entity.objects.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
-import edu.wpi.cs3733.c22.teamB.entity.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
