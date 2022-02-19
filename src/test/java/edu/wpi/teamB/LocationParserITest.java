@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.LocationParserI;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.parsers.LocationParserI;
 import org.junit.jupiter.api.Test;
 
 public class LocationParserITest {

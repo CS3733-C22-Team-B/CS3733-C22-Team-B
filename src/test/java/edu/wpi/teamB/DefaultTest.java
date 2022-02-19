@@ -5,8 +5,8 @@
 package edu.wpi.teamB;
 
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
-import edu.wpi.cs3733.c22.teamB.entity.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.PasswordHashing;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

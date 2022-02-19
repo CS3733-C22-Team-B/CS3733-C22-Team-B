@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.services.ExternalTransportController">
+   <children>
+      <TextField fx:id="patientID" layoutY="27.0" prefHeight="25.0" prefWidth="160.5" />
+      <Label prefHeight="27.0" prefWidth="161.0" text="Patient ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="DestinationTxt" layoutY="93.0" prefHeight="25.0" prefWidth="321.0" />
+      <JFXComboBox fx:id="FormOfTransport" layoutX="180.0" layoutY="27.0" prefHeight="25.0" prefWidth="140.0" />
+      <Label layoutX="180.0" prefHeight="27.0" prefWidth="140.0" text="Form of Transport">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutY="66.0" prefHeight="27.0" prefWidth="284.0" text="Destination">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

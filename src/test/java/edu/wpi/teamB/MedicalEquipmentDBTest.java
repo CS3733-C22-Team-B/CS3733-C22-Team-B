@@ -2,8 +2,8 @@
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import edu.wpi.cs3733.c22.teamB.entity.Location;
-import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.MedicalEquipmentDBI;
 import org.junit.jupiter.api.Test;
 

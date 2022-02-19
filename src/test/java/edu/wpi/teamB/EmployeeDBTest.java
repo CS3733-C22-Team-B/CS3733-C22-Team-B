@@ -3,7 +3,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import edu.wpi.cs3733.c22.teamB.entity.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.EmployeeDBI;
 import org.junit.jupiter.api.Test;
 

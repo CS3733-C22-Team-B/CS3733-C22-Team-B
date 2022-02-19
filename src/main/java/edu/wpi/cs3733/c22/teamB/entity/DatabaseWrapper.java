@@ -1,11 +1,15 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import javax.swing.table.AbstractTableModel;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseWrapper {
