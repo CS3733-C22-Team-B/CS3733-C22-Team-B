@@ -147,6 +147,6 @@
             </Label>
          </children>
       </StackPane>
-      <JFXToggleButton fx:id="toggleName" layoutX="479.0" layoutY="359.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" wrapText="true" />
+      <JFXToggleButton fx:id="toggleName" layoutX="479.0" layoutY="359.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" toggleColor="#050753" toggleLineColor="#7878c2" wrapText="true" />
    </children>
 </AnchorPane>
