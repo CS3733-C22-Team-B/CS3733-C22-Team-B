@@ -31,7 +31,7 @@
                </font>
             </Label>
             <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="58.0" prefHeight="17.0" prefWidth="165.0" style="-fx-text-fill: #ff0000;" textAlignment="CENTER" />
-            <TextField fx:id="userField" layoutX="16.0" layoutY="81.0" prefHeight="27.0" prefWidth="141.0" promptText="Username" styleClass="service-text-field" stylesheets="@../styles/style.css" />
+            <TextField fx:id="userField" layoutX="16.0" layoutY="81.0" prefHeight="27.0" prefWidth="141.0" promptText="Username" styleClass="text-field" stylesheets="@../styles/style.css" />
             <PasswordField fx:id="passField" layoutX="16.0" layoutY="112.0" prefHeight="27.0" prefWidth="141.0" promptText="Password" stylesheets="@../styles/style.css" />
             <JFXButton layoutX="14.0" layoutY="149.0" onAction="#loginButton" prefHeight="23.0" prefWidth="148.0" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign In">
                <font>
@@ -43,11 +43,7 @@
                   <Image url="@../images/Brigham_and_Womens_Hospital_logo.svg.png" />
                </image>
             </ImageView>
-            <Label alignment="TOP_CENTER" layoutX="13.0" layoutY="20.0" prefHeight="41.0" prefWidth="121.0" text="Brigham and Women's Hospital" textOverrun="CLIP" wrapText="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <Label alignment="TOP_CENTER" layoutX="13.0" layoutY="20.0" prefHeight="43.0" prefWidth="118.0" text="Brigham and Women's Hospital" textOverrun="CLIP" wrapText="true" />
          </children>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" offsetX="3.0" offsetY="3.0" spread="0.5">
