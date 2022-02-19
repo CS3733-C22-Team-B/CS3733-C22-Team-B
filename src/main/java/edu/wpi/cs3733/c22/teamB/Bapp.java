@@ -6,6 +6,7 @@ import java.util.List;
 
 
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.MongoDB.MongoDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +23,7 @@ public class Bapp extends Application {
     @Override
     public void init() throws IOException {
         log.info("Starting Up");
+        MongoDB.getConnection();
 
         DatabaseWrapper db = new DatabaseWrapper();
         db.isFirstRestore();
