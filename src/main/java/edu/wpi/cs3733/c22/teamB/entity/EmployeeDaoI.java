@@ -26,7 +26,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             pstmt.setString(4, employee.getPosition());
             pstmt.setInt(5, employee.getAccessLevel());
             pstmt.setString(6, employee.getUsername());
-            pstmt.setString(7, employee.getLastName());
+            pstmt.setString(7, PasswordHashing.hashPassword(employee.getPassword()));
             pstmt.setString(8, employee.getEmail());
             pstmt.setString(9, employee.getPhoneNumber());
 
@@ -72,7 +72,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             pstmt.setString(3, employee.getPosition());
             pstmt.setInt(4, employee.getAccessLevel());
             pstmt.setString(5, employee.getUsername());
-            pstmt.setString(6, employee.getPassword());
+            pstmt.setString(6, PasswordHashing.hashPassword(employee.getPassword()));
             pstmt.setString(7, employee.getEmail());
             pstmt.setString(8, employee.getPhoneNumber());
             pstmt.setString(9, employee.getEmployeeID());
