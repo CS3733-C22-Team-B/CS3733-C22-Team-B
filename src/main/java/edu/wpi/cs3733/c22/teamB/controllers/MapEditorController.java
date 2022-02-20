@@ -362,8 +362,9 @@ public class MapEditorController{
                     if (moveState) {
                         Location temp = dbWrapper.getLocation(selectedPoint);
                         dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) getMapX(event.getX()), (int) getMapY(event.getY()), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
-                        testPoint.setCenterX((event.getX()));
-                        testPoint.setCenterY((event.getY()));
+                        Point2D nodeCoords = coordTrans.imageToNode(event);
+                        testPoint.setCenterX(nodeCoords.getX());
+                        testPoint.setCenterY(nodeCoords.getY());
                         refresh();
                     }
                 }
