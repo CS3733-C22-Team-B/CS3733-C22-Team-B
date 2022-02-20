@@ -30,10 +30,10 @@
           <JFXButton fx:id="loadButton" layoutX="495.0" layoutY="99.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
         <GridPane fx:id="gridPane" layoutX="8.0" layoutY="298.0" prefHeight="68.0" prefWidth="582.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.79998779296875" minWidth="10.0" prefWidth="186.79998779296875" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.79995117187497" minWidth="10.0" prefWidth="139.79995117187497" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.79998779296875" minWidth="10.0" prefWidth="106.79998779296875" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="107.99998779296875" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.79998779296875" minWidth="10.0" prefWidth="141.79996337890628" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.79995117187497" minWidth="10.0" prefWidth="126.60003662109375" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.20001220703125" minWidth="10.0" prefWidth="107.800048828125" />
             </columnConstraints>
             <rowConstraints>
@@ -41,16 +41,16 @@
                 <RowConstraints maxHeight="76.79996337890626" minHeight="10.0" prefHeight="11.000024414062494" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TextField fx:id="equipmentIDField" prefHeight="25.0" prefWidth="99.0" promptText="equipmentID" />
-                <TextField fx:id="equipmentNameField" prefWidth="94.0" promptText="EquipmentName" GridPane.columnIndex="1" />
-                <TextField fx:id="equipmentTypeField" prefHeight="15.0" prefWidth="149.0" promptText="EquipmentType" GridPane.columnIndex="2" />
-                <TextField fx:id="manufacturerField" prefHeight="25.0" prefWidth="99.0" promptText="Manufacturer" GridPane.columnIndex="3" />
-                <TextField fx:id="colorField" prefHeight="25.0" prefWidth="99.0" promptText="Color" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="sizeField" prefHeight="25.0" prefWidth="255.0" promptText="Size" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <TextField fx:id="descriptionField" prefHeight="25.0" prefWidth="145.0" promptText="Description" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <JFXComboBox fx:id="LocationChoice" prefHeight="26.0" prefWidth="99.0" promptText="Location" style="-fx-background-color: #b1c5f6;" GridPane.columnIndex="4" />
-            <JFXComboBox fx:id="statusField" prefHeight="26.0" prefWidth="89.0" promptText="Status" style="-fx-background-color: #b1c5f6;" GridPane.rowIndex="1" />
-            <TextField fx:id="amountField" prefHeight="26.0" prefWidth="81.0" promptText="Amount" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <TextField fx:id="equipmentIDField" prefHeight="25.0" prefWidth="99.0" promptText="equipmentID" styleClass="text-field" stylesheets="@../../styles/style.css" />
+                <TextField fx:id="equipmentNameField" prefWidth="94.0" promptText="EquipmentName" styleClass="text-field" stylesheets="@../../styles/style.css" GridPane.columnIndex="1" />
+                <TextField fx:id="equipmentTypeField" prefHeight="15.0" prefWidth="149.0" promptText="EquipmentType" stylesheets="@../../styles/style.css" GridPane.columnIndex="2" />
+                <TextField fx:id="manufacturerField" prefHeight="25.0" prefWidth="99.0" promptText="Manufacturer" stylesheets="@../../styles/style.css" GridPane.columnIndex="3" />
+                <TextField fx:id="colorField" prefHeight="25.0" prefWidth="99.0" promptText="Color" stylesheets="@../../styles/style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="sizeField" prefHeight="25.0" prefWidth="255.0" promptText="Size" stylesheets="@../../styles/style.css" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="descriptionField" prefHeight="25.0" prefWidth="145.0" promptText="Description" stylesheets="@../../styles/style.css" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <JFXComboBox fx:id="LocationChoice" prefHeight="26.0" prefWidth="110.0" promptText="Location" style="-fx-background-color: #b1c5f6;" GridPane.columnIndex="4" />
+            <JFXComboBox fx:id="statusField" prefHeight="26.0" prefWidth="106.0" promptText="Status" style="-fx-background-color: #b1c5f6;" GridPane.rowIndex="1" />
+            <TextField fx:id="amountField" prefHeight="26.0" prefWidth="81.0" promptText="Amount" stylesheets="@../../styles/style.css" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             </children>
         </GridPane>
           <JFXButton fx:id="confirmButton" alignment="CENTER" layoutX="501.0" layoutY="382.0" onAction="#confirm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm">
@@ -75,9 +75,9 @@
           <JFXButton fx:id="cancelButton" alignment="CENTER" layoutX="414.0" layoutY="382.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
       <ScrollPane layoutX="27.0" layoutY="138.0" prefHeight="160.0" prefWidth="546.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="172.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="table" layoutX="-4.0" prefHeight="166.0" prefWidth="554.0" />
+                  <TableView fx:id="table" layoutX="-4.0" prefHeight="166.0" prefWidth="554.0" style="-fx-background-color: #b1c5f6;" stylesheets="@../../styles/style.css" />
                </children>
             </AnchorPane>
         </content>
@@ -88,7 +88,7 @@
             <Image url="@../../images/icons/MedicalEquipment.png" />
          </image>
       </ImageView>
-      <Label layoutX="99.0" layoutY="24.0" prefHeight="57.0" prefWidth="462.0" text="Equipment Database">
+      <Label layoutX="99.0" layoutY="24.0" prefHeight="58.0" prefWidth="466.0" text="Equipment Database">
          <font>
             <Font size="30.0" />
          </font>

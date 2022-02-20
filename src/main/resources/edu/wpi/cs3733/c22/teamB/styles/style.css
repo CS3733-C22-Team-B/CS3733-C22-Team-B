@@ -103,6 +103,15 @@
 
 /*----------------------- TABLE ---------------*/
 
+.table-view .column-header-background .filler (
+    fx-background-color: #08246c;
+)
+
+
+.table-view .corner {
+
+}
+
 /* ----------- CHECK-BOX -------------- */
 
 /* ----------- RADIO-BUTTON -------------- */
@@ -122,8 +131,6 @@
 /* ----------- TAB PANE -------------- */
 .tab-pane {
     -fx-background-color: white;
-
-
 }
 
 .tab {
