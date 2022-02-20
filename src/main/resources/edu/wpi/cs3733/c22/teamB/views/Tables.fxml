@@ -8,53 +8,62 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.TableController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.TableController">
     <children>
-        <StackPane layoutX="136.0" layoutY="120.0" prefHeight="108.0" prefWidth="104.0">
-            <children>
-                <JFXButton onAction="#goToEquipmentTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true" />
-                <ImageView fitHeight="41.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="-13.0">
-                    <image>
-                        <Image url="@../images/icons/MedicalEquipment2.png" />
-                    </image>
-                </ImageView>
-                <Label prefHeight="47.0" prefWidth="91.0" text="Equipment Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
-            </children>
-        </StackPane>
-        <StackPane layoutX="247.0" layoutY="125.0" prefHeight="100.0" prefWidth="104.0">
-            <children>
-                <JFXButton onAction="#goToLocationTable" prefHeight="107.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="   " textAlignment="CENTER" wrapText="true" />
-                <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateY="-12.0">
-                    <image>
-                        <Image url="@../images/icons/Computer2.png" />
-                    </image>
-                </ImageView>
-                <Label prefHeight="47.0" prefWidth="91.0" text="Location Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
-            </children>
-        </StackPane>
-        <StackPane layoutX="361.0" layoutY="127.0" prefHeight="100.0" prefWidth="104.0">
-            <children>
-                <JFXButton onAction="#goToEmployeeTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true" />
-                <Label prefHeight="34.0" prefWidth="87.0" text="Employee Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
-                <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateY="-12.0">
-                    <image>
-                        <Image url="@../images/icons/PatientTransport2.png" />
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-        <Pane layoutX="29.0" layoutY="90.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-        <Label layoutX="72.0" layoutY="28.0" prefHeight="66.0" prefWidth="498.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
-      <StackPane layoutX="136.0" layoutY="244.0" prefHeight="100.0" prefWidth="104.0">
+      <Pane fx:id="contentPane" layoutX="24.0" layoutY="28.0">
          <children>
-            <JFXButton onAction="#goToSRTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true" />
-            <Label prefHeight="34.0" prefWidth="87.0" text="Service Request Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
-            <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateY="-12.0">
+              <StackPane layoutX="112.0" layoutY="92.0" onMouseClicked="#goToEquipmentTable" prefHeight="108.0" prefWidth="104.0">
+                  <children>
+                      <JFXButton onAction="#goToEquipmentTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true" />
+                      <ImageView fitHeight="41.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateY="-13.0">
+                          <image>
+                              <Image url="@../images/icons/MedicalEquipment2.png" />
+                          </image>
+                      </ImageView>
+                      <Label prefHeight="47.0" prefWidth="76.0" text="Equipment Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
+                  </children>
+              </StackPane>
+              <StackPane layoutX="223.0" layoutY="97.0" onMouseClicked="#goToLocationTable" prefHeight="100.0" prefWidth="104.0">
+                  <children>
+                      <JFXButton onAction="#goToLocationTable" prefHeight="107.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="   " textAlignment="CENTER" wrapText="true" />
+                      <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateY="-12.0">
+                          <image>
+                              <Image url="@../images/icons/Location2.png" />
+                          </image>
+                      </ImageView>
+                      <Label prefHeight="47.0" prefWidth="79.0" text="Location Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
+                  </children>
+              </StackPane>
+              <StackPane layoutX="335.0" layoutY="97.0" onMouseClicked="#goToEmployeeTable" prefHeight="100.0" prefWidth="104.0">
+                  <children>
+                      <JFXButton onAction="#goToEmployeeTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true" />
+                      <Label prefHeight="34.0" prefWidth="75.0" text="Employee Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
+                      <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateY="-12.0">
+                          <image>
+                              <Image url="@../images/icons/Employee2.png" />
+                          </image>
+                      </ImageView>
+                  </children>
+              </StackPane>
+              <Pane layoutX="5.0" layoutY="62.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
+              <Label layoutX="57.0" prefHeight="66.0" prefWidth="489.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
+            <StackPane layoutX="223.0" layoutY="214.0" onMouseClicked="#goToSRTable" prefHeight="100.0" prefWidth="104.0">
+               <children>
+                  <JFXButton onAction="#goToSRTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true" />
+                  <Label prefHeight="34.0" prefWidth="87.0" text="Service Request Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
+                  <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateY="-12.0">
+                     <image>
+                        <Image url="@../images/hand%20hold%20heart2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <ImageView fitHeight="43.0" fitWidth="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/icons/PatientTransport2.png" />
+                  <Image url="@../images/icons/Table.png" />
                </image>
             </ImageView>
          </children>
-      </StackPane>
+      </Pane>
     </children>
 </AnchorPane>

@@ -20,6 +20,9 @@ repositories {
 dependencies {
     String javaFxVersion = '17'
 
+    //MongoDB
+    compile 'org.mongodb:mongo-java-driver:2.12.3'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -46,6 +49,8 @@ dependencies {
 
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
+
+
     )
 
     testCompile(

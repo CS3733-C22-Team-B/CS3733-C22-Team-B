@@ -5,7 +5,7 @@
 
 .text {
     -fx-font-family: open-sans;
-    -fx-font-size: 16px;
+    -fx-font-size: 13px;
 }
 
 .root {
@@ -16,10 +16,8 @@
 }
 
 .service-title {
-
     -fx-font-fill: black;
     -fx-font-size: 100px;
-
 }
 
 
@@ -137,6 +135,6 @@
 
 /* ----------- SECONDARY COLORS -------------- */
 
-.home {
-    -fx-background-image: url("../images/brigham_and_womens.jpg") ;
+.anchor {
+    -fx-background-color: white;
 }

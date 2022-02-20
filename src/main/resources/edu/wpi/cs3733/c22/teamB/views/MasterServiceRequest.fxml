@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MasterServiceRequestController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MasterServiceRequestController">
    <children>
       <Pane fx:id="contentPane" layoutX="44.699974060058594" layoutY="14.0">
          <children>
@@ -26,7 +26,7 @@
             <JFXButton fx:id="clearButton" layoutX="364.50003814697266" layoutY="297.0" onAction="#clear" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Clear" />
             <Label layoutX="6.300025939941406" layoutY="241.0" text="Notes" />
             <AnchorPane fx:id="srPane" layoutX="6.300025939941406" layoutY="40.0" prefHeight="127.0" prefWidth="324.0" />
-            <Line endX="424.79998779296875" endY="1.1444091796875E-5" layoutY="27.500011444091797" startX="-84.8000259399414" startY="1.1444091796875E-5" style="-fx-fill: #002168;" />
+            <Line endX="424.79998779296875" endY="1.1444091796875E-5" layoutX="57.0" layoutY="25.0" startX="-84.8000259399414" startY="1.1444091796875E-5" style="-fx-fill: #002168;" />
             <Label fx:id="srLabel" layoutX="0.30002593994140625" prefHeight="17.0" prefWidth="511.0" text="Label" />
             <JFXButton fx:id="backButton" layoutX="364.50003814697266" layoutY="327.0" onAction="#back" prefHeight="25.0" prefWidth="149.0" style="-fx-border-color: #002168; -fx-background-color: #99a6c2;" text="Back" />
             <JFXComboBox fx:id="assignedEmployeeField" layoutX="364.50003814697266" layoutY="205.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />

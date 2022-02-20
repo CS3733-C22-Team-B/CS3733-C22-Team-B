@@ -19,13 +19,6 @@ public class HomeController implements IPage{
 
     @FXML
     private void initialize(){
-        Bapp.getPrimaryStage().setResizable(true);
-//        Bapp.getPrimaryStage().setY(0);
-//        Bapp.getPrimaryStage().setWidth(Screen.getPrimary().getVisualBounds().getWidth());
-//        Bapp.getPrimaryStage().setHeight(Screen.getPrimary().getVisualBounds().getHeight());
-        Bapp.getPrimaryStage().setMinHeight(600);
-        Bapp.getPrimaryStage().setMinWidth(900);
-
         resize();
         namePage();
     }

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
    <children>
       <Pane fx:id="contentPane" layoutX="29.0" layoutY="28.0">
          <children>
@@ -118,26 +117,26 @@
             </ImageView>
             <Label layoutX="43.0" prefHeight="66.0" prefWidth="498.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Service Request Systems" />
             <Label fx:id="name1" layoutX="93.0" layoutY="75.0" text="Duc" />
-            <Label fx:id="name2" layoutX="207.0" layoutY="75.0" text="Nich" />
+            <Label fx:id="name2" layoutX="207.0" layoutY="75.0" text="Nick" />
             <Label fx:id="name3" layoutX="313.0" layoutY="75.0" text="Calvin" />
             <Label fx:id="name4" layoutX="408.0" layoutY="75.0" text="Kateri &quot;Kiki&quot;" />
             <Label fx:id="name5" layoutX="83.0" layoutY="319.0" text="Andrew" />
             <Label fx:id="name6" layoutX="202.0" layoutY="319.0" text="Noah" />
             <Label fx:id="name7" layoutX="319.0" layoutY="319.0" text="Cris" />
             <Label fx:id="name8" layoutX="429.0" layoutY="319.0" text="Sits" />
-            <StackPane layoutX="391.0" layoutY="210.0" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="405.0" layoutY="209.0" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton onAction="#goToSanitationSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true" />
-                  <ImageView fitHeight="47.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateY="-18.0">
-                     <image>
-                        <Image url="@../images/icons/Sanitation2.png" />
-                     </image>
-                  </ImageView>
                   <Label text="Sanitation Request" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="47.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateY="-18.0">
+                     <image>
+                        <Image url="@../images/icons/Sanitation2.png" />
+                     </image>
+                  </ImageView>
                </children>
             </StackPane>
             <JFXToggleButton fx:id="toggleName" layoutX="450.0" layoutY="331.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" wrapText="true" />

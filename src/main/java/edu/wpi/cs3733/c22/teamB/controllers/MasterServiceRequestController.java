@@ -38,6 +38,7 @@ public class MasterServiceRequestController implements IPage {
     @FXML private JFXComboBox<String> locationField;
     @FXML private AnchorPane srPane;
     @FXML private Label srLabel;
+    @FXML private Pane anchorPane;
     @FXML private Pane contentPane;
 
     private Pane childPane;
@@ -169,7 +170,8 @@ public class MasterServiceRequestController implements IPage {
 
         // load specific SR fxml
         srPane.getChildren().add(childPane);
-
+        resize();
+        namePage();
     }
 
     private String getLabel() {
@@ -233,7 +235,7 @@ public class MasterServiceRequestController implements IPage {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -278,7 +280,14 @@ public class MasterServiceRequestController implements IPage {
 
     @Override
     public void resize() {
+        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - 50);
+        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - 50);
+
         Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
+            anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
             contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
             contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
         });

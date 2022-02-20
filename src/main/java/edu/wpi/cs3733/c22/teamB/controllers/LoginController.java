@@ -30,10 +30,15 @@ public class LoginController implements IPage {
     private ImageView picture;
 
     @FXML private Pane logInBox;
+    @FXML private Pane contentPane;
 
     @FXML
     public void initialize(){
         Bapp.getPrimaryStage().setFullScreen(true);
+        contentPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()+100);
+        contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
+        picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
+        picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
         resize();
     }
 
@@ -61,6 +66,8 @@ public class LoginController implements IPage {
         Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
             picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
             picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
+            contentPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()+100);
+            contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
         });
     }
 

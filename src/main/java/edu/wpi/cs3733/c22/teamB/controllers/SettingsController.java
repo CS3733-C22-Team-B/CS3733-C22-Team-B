@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SettingsController implements Initializable {
+public class SettingsController implements Initializable, IPage{
     @FXML
     JFXButton HomeB;
     @FXML
@@ -27,6 +28,11 @@ public class SettingsController implements Initializable {
     JFXButton BackupB;
     @FXML
     JFXToggleButton clientServerToggle;
+    @FXML
+    Pane anchorPane;
+    @FXML
+    Pane contentPane;
+
 
 
     DatabaseWrapper db;
@@ -80,5 +86,31 @@ public class SettingsController implements Initializable {
         } else {
             clientServerToggle.setSelected(false);
         }
+
+        initResize();
+        resize();
+        namePage();
+    }
+
+    private void initResize() {
+        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - 50);
+        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - 50);
+    }
+
+    @Override
+    public void resize() {
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
+            anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
+            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        });
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText("Settings");
     }
 }

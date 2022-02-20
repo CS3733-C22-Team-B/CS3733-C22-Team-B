@@ -26,6 +26,7 @@ public class ServiceRequestMenuController implements IPage{
     @FXML private Label name8;
 
     @FXML private Pane contentPane;
+    @FXML private Pane anchorPane;
 
     @FXML private void toggleName(ActionEvent event) {
         name1.setVisible(toggleName.isSelected());
@@ -46,7 +47,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("MedicalEquipmentSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -60,7 +61,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("FoodDeliverySR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -73,7 +74,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("ExternalTransportSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -88,7 +89,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("ComputerServiceSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -102,7 +103,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("MedicineDeliverySR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -116,7 +117,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("LaundrySR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -130,7 +131,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("GiftFloralSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -143,7 +144,7 @@ public class ServiceRequestMenuController implements IPage{
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("SanitationSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -160,10 +161,18 @@ public class ServiceRequestMenuController implements IPage{
         name6.setVisible(false);
         name7.setVisible(false);
         name8.setVisible(false);
+
+        initResize();
         resize();
         namePage();
     }
 
+    public void initResize() {
+        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - 50);
+        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - 50);
+    }
     @Override
     public void resize() {
         Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {

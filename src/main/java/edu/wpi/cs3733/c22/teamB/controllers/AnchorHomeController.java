@@ -24,6 +24,10 @@ public class AnchorHomeController implements Initializable {
         curAnchorHomeController = this;
     }
 
+    public AnchorPane getAnchorPane() {
+        return this.anchorPane;
+    }
+
     private String pageToFXMLPath(String pageName) {
         try {
             return "/edu/wpi/cs3733/c22/teamB/views/" + pageName + ".fxml";
@@ -32,6 +36,9 @@ public class AnchorHomeController implements Initializable {
         }
     }
 
+    public void setPageName(String name) {
+        pageName.setText(name);
+    }
     void changeNode(FXMLLoader loader) throws IOException {
         try {
             childPane = loader.load();
@@ -43,10 +50,6 @@ public class AnchorHomeController implements Initializable {
             ex.printStackTrace();
         }
 
-    }
-
-    public AnchorPane getAnchorPane() {
-        return this.anchorPane;
     }
 
     @Override
@@ -117,5 +120,30 @@ public class AnchorHomeController implements Initializable {
         }
     }
 
+    @FXML
+    void goToDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void goToSettings() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
