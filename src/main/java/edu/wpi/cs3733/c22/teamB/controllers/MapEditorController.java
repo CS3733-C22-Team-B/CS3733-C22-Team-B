@@ -31,7 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Translate;
-
+import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.util.List;
 
@@ -82,7 +82,7 @@ public class MapEditorController{
     public Label summary3SR;
     public Label summaryL2SR;
     public Label summaryL1SR;
-
+    public GesturePane gesturePane;
     String selectedPoint;
     Circle selectedPnt;
     ImageView selectedImg;
@@ -141,6 +141,7 @@ public class MapEditorController{
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
+        gesturePane.setGestureEnabled(true);
         coordTrans = new CoordTransformer(imageView);
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
