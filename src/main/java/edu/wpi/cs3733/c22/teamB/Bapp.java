@@ -23,7 +23,7 @@ public class Bapp extends Application {
     @Override
     public void init() throws IOException {
         log.info("Starting Up");
-        MongoDB.getConnection();
+//        MongoDB.getConnection();
 
         DatabaseWrapper db = new DatabaseWrapper();
         db.isFirstRestore();
