@@ -1,5 +1,9 @@
 package edu.wpi.cs3733.c22.teamB.entity.objects;
 
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+
+import java.util.List;
+
 public class Employee {
 
     private String employeeID;
@@ -35,6 +39,19 @@ public class Employee {
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.employeeID = getUniqueID();
+    }
+
+    private String getUniqueID(){
+        DatabaseWrapper db = new DatabaseWrapper();
+        List<Employee> employeeList = db.getAllEmployee();
+        int emloyeeCount = 0;
+        for (Employee employee : employeeList) {
+            if( employee.getLastName() == lastName) {
+                emloyeeCount++;
+            }
+        }
+        return "b" + lastName.toUpperCase() +  String.format("%03d",emloyeeCount+ 1) + String.format("%02d", position);
     }
 
     public String getEmployeeID() {
