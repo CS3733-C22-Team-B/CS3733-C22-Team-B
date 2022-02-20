@@ -29,6 +29,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.transform.Translate;
 import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
+import java.io.IOException;
 import java.util.List;
 
 public class MapEditorController{
@@ -79,6 +80,7 @@ public class MapEditorController{
     public Label summaryL2SR;
     public Label summaryL1SR;
     public GesturePane gesturePane;
+    public StackPane stackPane;
     String selectedPoint;
     Circle selectedPnt;
     ImageView selectedImg;
@@ -133,14 +135,16 @@ public class MapEditorController{
     @FXML
     public void initialize(){
         Bapp.getPrimaryStage().setMaximized(true);
-//        Bapp.getPrimaryStage().resizableProperty().set(false);
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
-        imageView.setFitHeight(sceneHeight);
-        gesturePane.setGestureEnabled(true);
-        coordTrans = new CoordTransformer(imageView);
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
+        gesturePane.setMinHeight(sceneHeight);
+        gesturePane.setMinWidth(sceneHeight*(imageWidth/imageHeight));
+//        Bapp.getPrimaryStage().resizableProperty().set(false);
+        imageView.setFitHeight(gesturePane.getWidth());
+        gesturePane.setGestureEnabled(true);
+        coordTrans = new CoordTransformer(imageView);
         showLocations.setSelected(true);
         showMedical.setSelected(true);
         showSR.setSelected(true);
@@ -300,9 +304,9 @@ public class MapEditorController{
         //Create the point
         Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
         Circle testPoint = new Circle(nodeCoords.getX(),nodeCoords.getY(), 3);
-        //Add the point to the anchorPane's children
+        //Add the point to the stackPane's children
         if(showLocations.isSelected()) {
-            anchorPane.getChildren().add(testPoint);
+            stackPane.getChildren().add(testPoint);
             testPoint.setFill(color);
             //Set point ID
             testPoint.idProperty().set(ID);
@@ -364,8 +368,8 @@ public class MapEditorController{
             //Create the point
             //getImageX(x),getImageY(y)
             ImageView testImg = new ImageView(medical);
-            //Add the point to the anchorPane's children
-            anchorPane.getChildren().add(testImg);
+            //Add the point to the stackPane's children
+            stackPane.getChildren().add(testImg);
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
@@ -430,7 +434,7 @@ public class MapEditorController{
             //Create the point
             ImageView testImg = new ImageView(clipboard);
             //Add the point to the anchorPane's children
-            anchorPane.getChildren().add(testImg);
+            stackPane.getChildren().add(testImg);
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
@@ -507,15 +511,15 @@ public class MapEditorController{
 
 
     void removeAllPoints(){
-        anchorPane.getChildren().remove(1,anchorPane.getChildren().size());
+        stackPane.getChildren().remove(1,stackPane.getChildren().size());
     }
 
     void deleteSelectedNode(){
         if(clicked == "location") {
-            anchorPane.getChildren().remove(selectedPnt);
+            stackPane.getChildren().remove(selectedPnt);
             dbWrapper.deleteLocation(selectedPnt.getId());
         } else if (clicked == "equipment"){
-            anchorPane.getChildren().remove(selectedImg);
+            stackPane.getChildren().remove(selectedImg);
             dbWrapper.deleteMedicalEquipment(selectedImg.getId());
         }
     }
@@ -768,7 +772,7 @@ public class MapEditorController{
     public Location getClosestLocation(double nodeX, double nodeY){
         Circle closest = new Circle();
         double distance = 5000.0;
-        for (Node child : anchorPane.getChildren()) {
+        for (Node child : stackPane.getChildren()) {
             if (child instanceof Circle) {
                 double dist = calculateDistanceBetweenPoints(((Circle) child).getCenterX(),((Circle) child).getCenterY(),nodeX,nodeY);
                 if(dist < distance){

@@ -53,7 +53,7 @@ dependencies {
 
     )
 
-    implementation(files("build/resources/main/edu/wpi/cs3733/c22/teamB/gesturefx-0.7.1.jar"))
+    implementation(files("src/main/resources/gesturefx-0.7.1.jar"))
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",

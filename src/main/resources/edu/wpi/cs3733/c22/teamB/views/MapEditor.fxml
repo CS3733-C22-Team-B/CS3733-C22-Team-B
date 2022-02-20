@@ -20,7 +20,7 @@
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <GesturePane fx:id="gesturePane">
-               <StackPane onMouseClicked="#imageClicked">
+               <StackPane fx:id="stackPane" onMouseClicked="#imageClicked">
                   <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@../images/thirdFloorMap.png" />
