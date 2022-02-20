@@ -80,7 +80,6 @@ public class MapEditorController{
     public Label summaryL2SR;
     public Label summaryL1SR;
     public GesturePane gesturePane;
-    public StackPane stackPane;
     String selectedPoint;
     Circle selectedPnt;
     ImageView selectedImg;
@@ -109,6 +108,9 @@ public class MapEditorController{
     Image clipboard = new Image("/edu/wpi/cs3733/c22/teamB/images/clipboard.png");
     @FXML
     private AnchorPane anchorPane;
+
+    @FXML
+    public StackPane stackPane;
 
     @FXML
     private ImageView imageView;
@@ -145,6 +147,7 @@ public class MapEditorController{
         imageView.setFitHeight(gesturePane.getWidth());
         gesturePane.setGestureEnabled(true);
         coordTrans = new CoordTransformer(imageView);
+        coordTrans.setStackPane(stackPane);
         showLocations.setSelected(true);
         showMedical.setSelected(true);
         showSR.setSelected(true);
@@ -159,8 +162,8 @@ public class MapEditorController{
         floor.getItems().addAll("L2","L1","01","02","03");
         status.getItems().addAll("DONE","CANCELLED","IN PROGRESS","WAITING");
         floor.setValue(currentFloor);
-        addPoint("1",0,0,Color.ORANGE);
-        addPoint("2",imageWidth,imageHeight, Color.RED);
+        //addPoint("1",0,0,Color.ORANGE);
+        //addPoint("2",imageWidth,imageHeight, Color.RED);
         addPoints();
         modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
         modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
@@ -303,7 +306,10 @@ public class MapEditorController{
     public Circle addPoint(String ID, double imageX, double imageY, Color color){
         //Create the point
         Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-        Circle testPoint = new Circle(nodeCoords.getX(),nodeCoords.getY(), 3);
+        Circle testPoint = new Circle();
+        testPoint.setRadius(3);
+        testPoint.setTranslateX(nodeCoords.getX());
+        testPoint.setTranslateY(nodeCoords.getY());
         //Add the point to the stackPane's children
         if(showLocations.isSelected()) {
             stackPane.getChildren().add(testPoint);
@@ -741,10 +747,12 @@ public class MapEditorController{
     @FXML public void move(){
         if(moveState){
             moveState = false;
+            gesturePane.setGestureEnabled(true);
             moveButton.setText("Move");
         } else{
             close();
             moveState = true;
+            gesturePane.setGestureEnabled(false);
             moveButton.setText("Cancel");
         }
     }
