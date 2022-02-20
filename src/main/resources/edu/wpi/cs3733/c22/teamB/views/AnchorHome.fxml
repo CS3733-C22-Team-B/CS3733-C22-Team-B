@@ -18,7 +18,7 @@
                <children>
                   <Label fx:id="pageName" layoutX="68.0" layoutY="29.0" text="Label" textFill="WHITE" />
                </children></Pane>
-            <HBox VBox.vgrow="ALWAYS">
+            <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
                <children>
                   <VBox alignment="TOP_CENTER" prefWidth="70.0" spacing="17.0" style="-fx-background-color: #ffffff;">
                      <children>
@@ -26,7 +26,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-home-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-home-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -35,7 +35,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-map-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-map-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -44,7 +44,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-hospital-wagon-without-a-siren-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-hospital-wagon-without-a-siren-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -53,7 +53,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-user-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-user-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -62,7 +62,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-location-100.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-search-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -71,7 +71,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-search-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-location-100.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -80,7 +80,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../../Downloads/icons8-help-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -90,7 +90,7 @@
                         <Insets top="17.0" />
                      </padding>
                   </VBox>
-                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: #c4c4c4;" HBox.hgrow="ALWAYS" />
+                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
