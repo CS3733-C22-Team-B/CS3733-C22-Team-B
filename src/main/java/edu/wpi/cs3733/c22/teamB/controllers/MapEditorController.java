@@ -15,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -87,7 +86,7 @@ public class MapEditorController{
     double sceneHeight;
     double imageHeight;
     double imageWidth;
-    double orgSceneX, orgSceneY;
+    Point2D orgNodePoint;
     DatabaseWrapper dbWrapper = new DatabaseWrapper();
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
@@ -253,9 +252,7 @@ public class MapEditorController{
             //Set up onclick events
             testPoint.setOnMousePressed(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
-
-                    orgSceneX = event.getSceneX();
-                    orgSceneY = event.getSceneY();
+                    orgNodePoint = coordTrans.imageToNode(event);
 //                    modifyButton.setOpacity(1);
 //                    modifyButton.setDisable(false);
 //                    deleteButton.setOpacity(1);
@@ -280,16 +277,15 @@ public class MapEditorController{
 
             testPoint.setOnMouseDragged((t) -> {
                 if (moveState) {
-                    double offsetX = t.getSceneX() - orgSceneX;
-                    double offsetY = t.getSceneY() - orgSceneY;
+                    double offsetX = t.getSceneX() - orgNodePoint.getX();
+                    double offsetY = t.getSceneY() - orgNodePoint.getY();
                     System.out.println("offsetX" + offsetX);
                     Circle c = (Circle) (t.getSource());
 
                     c.setCenterX(c.getCenterX() + offsetX);
                     c.setCenterY(c.getCenterY() + offsetY);
 
-                    orgSceneX = t.getSceneX();
-                    orgSceneY = t.getSceneY();
+                    orgNodePoint = coordTrans.imageToNode(t);
                     updatePopup();
                 }
             });
@@ -336,8 +332,7 @@ public class MapEditorController{
 
             testImg.setOnMousePressed(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
-                    orgSceneX = event.getSceneX();
-                    orgSceneY = event.getSceneY();
+                    orgNodePoint = coordTrans.imageToNode(event);
 //                modifyButton.setOpacity(1);
 //                modifyButton.setDisable(false);
 //                deleteButton.setOpacity(1);
@@ -352,16 +347,15 @@ public class MapEditorController{
             testImg.setOnMouseDragged((t) -> {
                 if (moveState) {
                     Point2D nodeCoords = coordTrans.imageToNode(t);
-                    double nodeXOffset = nodeCoords.getX() - orgSceneX;
-                    double nodeYOffset = nodeCoords.getY() - orgSceneY;
+                    double nodeXOffset = nodeCoords.getX() - orgNodePoint.getX();
+                    double nodeYOffset = nodeCoords.getY() - orgNodePoint.getY();
 
                     ImageView c = (ImageView) (t.getSource());
 
                     c.setX(c.getX() + nodeXOffset);
                     c.setY(c.getY() + nodeYOffset);
 
-                    orgSceneX = nodeCoords.getX();
-                    orgSceneY = nodeCoords.getY();
+                    orgNodePoint = coordTrans.imageToNode(t);
                 }
             });
 
