@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.services.*;
 import edu.wpi.cs3733.c22.teamB.entity.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
@@ -25,7 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MasterServiceRequestController {
+public class MasterServiceRequestController implements IPage {
     @FXML private JFXButton submitButton;
     @FXML private JFXButton clearButton;
     @FXML private JFXButton backButton;
@@ -37,6 +38,7 @@ public class MasterServiceRequestController {
     @FXML private JFXComboBox<String> locationField;
     @FXML private AnchorPane srPane;
     @FXML private Label srLabel;
+    @FXML private Pane contentPane;
 
     private Pane childPane;
     private IController childController;
@@ -271,5 +273,19 @@ public class MasterServiceRequestController {
             default:
                 throw new RuntimeException("srType invalid");
         }
+    }
+
+
+    @Override
+    public void resize() {
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        });
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText(getLabel());
     }
 }

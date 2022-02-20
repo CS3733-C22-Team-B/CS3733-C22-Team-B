@@ -136,3 +136,7 @@
 
 
 /* ----------- SECONDARY COLORS -------------- */
+
+.home {
+    -fx-background-image: url("../images/brigham_and_womens.jpg") ;
+}

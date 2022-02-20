@@ -1,18 +1,20 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ServiceRequestMenuController {
+public class ServiceRequestMenuController implements IPage{
     @FXML private JFXToggleButton toggleName;
     @FXML private Label name1;
     @FXML private Label name2;
@@ -22,6 +24,8 @@ public class ServiceRequestMenuController {
     @FXML private Label name6;
     @FXML private Label name7;
     @FXML private Label name8;
+
+    @FXML private Pane contentPane;
 
     @FXML private void toggleName(ActionEvent event) {
         name1.setVisible(toggleName.isSelected());
@@ -156,5 +160,20 @@ public class ServiceRequestMenuController {
         name6.setVisible(false);
         name7.setVisible(false);
         name8.setVisible(false);
+        resize();
+        namePage();
+    }
+
+    @Override
+    public void resize() {
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        });
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText("Service Request Systems");
     }
 }

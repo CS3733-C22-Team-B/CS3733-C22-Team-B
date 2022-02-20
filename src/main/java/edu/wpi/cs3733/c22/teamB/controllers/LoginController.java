@@ -10,10 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class LoginController {
+public class LoginController implements IPage {
 
     @FXML
     private PasswordField passField;
@@ -25,8 +27,14 @@ public class LoginController {
     private Label errorMessage;
 
     @FXML
+    private ImageView picture;
+
+    @FXML private Pane logInBox;
+
+    @FXML
     public void initialize(){
-        Bapp.getPrimaryStage().setResizable(false);
+        Bapp.getPrimaryStage().setFullScreen(true);
+        resize();
     }
 
     @FXML
@@ -40,7 +48,7 @@ public class LoginController {
             args[0] = userField.getText();
             args[1] = passField.getText();
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/borderHome.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/AnchorHome.fxml"));
                 Bapp.getPrimaryStage().getScene().setRoot(root);
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -48,4 +56,15 @@ public class LoginController {
         }
     }
 
+    @Override
+    public void resize() {
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
+            picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
+        });
+    }
+
+    @Override
+    public void namePage() {
+    }
 }

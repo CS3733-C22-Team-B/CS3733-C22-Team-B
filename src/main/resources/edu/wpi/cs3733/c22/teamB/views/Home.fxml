@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-
-
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-      <ImageView fitHeight="536.0" fitWidth="709.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../images/brigham_and_womens.jpg" />
-         </image>
-      </ImageView>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.HomeController">
+   <HBox BorderPane.alignment="CENTER">
+      <children>
+         <VBox>
+            <children>
+               <HBox>
+                  <children>
+                        <ImageView fx:id="picture" fitHeight="946.0" fitWidth="1371.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                           <image>
+                              <Image url="@../images/brigham_and_womens.jpg" />
+                           </image>
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                        </ImageView>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </HBox>
 </AnchorPane>
