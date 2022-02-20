@@ -12,9 +12,9 @@ public class EquipmentMongo implements IMongo<MedicalEquipment> {
 
     private DB conn;
     private DBCollection MedicalEquipmentTable;
-    private LocationMongo LocationTable;
+    private IMongo<Location> LocationTable;
 
-    public EquipmentMongo(LocationMongo LocationTable) throws UnknownHostException {
+    public EquipmentMongo(IMongo<Location> LocationTable) throws UnknownHostException {
         this.LocationTable = LocationTable;
         conn = MongoDB.getBDBMongo();
     }

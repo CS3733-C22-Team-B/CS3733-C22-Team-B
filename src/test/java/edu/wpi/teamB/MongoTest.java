@@ -1,9 +1,6 @@
 package edu.wpi.teamB;
 
-import edu.wpi.cs3733.c22.teamB.entity.MongoDB.EmployeeMongo;
-import edu.wpi.cs3733.c22.teamB.entity.MongoDB.EquipmentMongo;
-import edu.wpi.cs3733.c22.teamB.entity.MongoDB.LocationMongo;
-import edu.wpi.cs3733.c22.teamB.entity.MongoDB.MongoDB;
+import edu.wpi.cs3733.c22.teamB.entity.MongoDB.*;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
@@ -101,6 +98,59 @@ public class MongoTest {
         equipmentMongo.getAllValues();
 
         assertEquals(equipmentMongo.getValue(equipment2.getEquipmentID()).getLocation(),location3);
+
+    }
+
+    @Test
+    public void testMongoWrapper() throws UnknownHostException {
+        MongoDB.getConnection();
+
+        MongoWrapper mongoWrapper = new MongoWrapper();
+
+        mongoWrapper.dropAll();
+        mongoWrapper.createAll();
+
+
+        Location location1 = new Location("12", 12, 12, "12", "123", "123", "21e", "q2e");
+        Location location2 = new Location("123", 13, 13, "12", "123", "123", "123", "123");
+        Location location3 = new Location("123", 1000, 13, "12", "123", "123", "123", "123");
+
+
+        mongoWrapper.addLocation(location1);
+        mongoWrapper.addLocation(location2);
+        mongoWrapper.updateLocation(location3);
+        mongoWrapper.deleteLocation(location1.getNodeID());
+        mongoWrapper.getLocation(location3.getNodeID());
+        mongoWrapper.getAllLocation();
+
+        MedicalEquipment equipment1 = new MedicalEquipment("1", "12", "13", "12",location2, "123", "123", "123", "123",1);
+        MedicalEquipment equipment2 = new MedicalEquipment("2", "12", "13", "12",location2, "123", "123", "123", "123",1);
+        MedicalEquipment equipment3 = new MedicalEquipment("1", "12", "13", "12",location2, "123", "123", "123", "123",1);
+
+
+        mongoWrapper.addMedicalEquipment(equipment1);
+        mongoWrapper.addMedicalEquipment(equipment2);
+        mongoWrapper.updateMedicalEquipment(equipment3);
+        mongoWrapper.deleteMedicalEquipment(equipment1.getEquipmentID());
+        mongoWrapper.getMedicalEquipment(equipment2.getEquipmentID());
+        mongoWrapper.getAllMedicalEquipment();
+
+        assertEquals(mongoWrapper.getMedicalEquipment(equipment2.getEquipmentID()).getLocation(),location3);
+
+
+        Employee employee1 = new Employee("123", "123", "123", "123", 12, "123", "123", "213", "123");
+        Employee employee2 = new Employee("223", "123", "123", "123", 12, "123", "123", "213", "123");
+        Employee employee3 = new Employee("323", "123", "Ben", "123", 12, "123", "123", "213", "123");
+        Employee employee12 = new Employee("123", "123", "Hushmand", "123", 12, "123", "123", "213", "123");
+
+        mongoWrapper.addEmployee(employee1);
+        mongoWrapper.addEmployee(employee2);
+        mongoWrapper.addEmployee(employee3);
+        mongoWrapper.updateEmployee(employee12);
+        mongoWrapper.deleteEmployee(employee3.getEmployeeID());
+
+        mongoWrapper.getEmployee(employee2.getEmployeeID());
+        mongoWrapper.getAllEmployee();
 
     }
 
