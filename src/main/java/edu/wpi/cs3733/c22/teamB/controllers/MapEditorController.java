@@ -376,7 +376,8 @@ public class MapEditorController{
                     System.out.println("moving medical");
                     if (moveState) {
                         Point2D releasedImageCoords = coordTrans.eventToImage(event);
-                        Location tempLoc = getClosestLocation(releasedImageCoords.getX(), releasedImageCoords.getY());
+                        Point2D releasedNodeCoords = coordTrans.eventToNode(event);
+                        Location tempLoc = getClosestLocation(releasedNodeCoords.getX(), releasedNodeCoords.getY());
                         //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         //System.out.println(dist);
                         MedicalEquipment temp = dbWrapper.getMedicalEquipment(selectedImg.getId());
