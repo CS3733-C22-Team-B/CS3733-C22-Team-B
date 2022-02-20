@@ -27,7 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Translate;
-
+import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class MapEditorController{
     public Label summary3SR;
     public Label summaryL2SR;
     public Label summaryL1SR;
-
+    public GesturePane gesturePane;
     String selectedPoint;
     Circle selectedPnt;
     ImageView selectedImg;
@@ -137,6 +137,7 @@ public class MapEditorController{
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
+        gesturePane.setGestureEnabled(true);
         coordTrans = new CoordTransformer(imageView);
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
@@ -161,6 +162,7 @@ public class MapEditorController{
         modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
         modifyPopup.setVisible(false);
         setTextVisible(false);
+        //updateText(summary3Location,getImageX(1000),getImageX(877));
         setTextPos();
         modifyPopup.setStyle("-fx-padding: 1;");
         //1000
@@ -360,6 +362,7 @@ public class MapEditorController{
     public void addPointMedical(String ID, double imageX, double imageY, Color color){
         if(showMedical.isSelected()) {
             //Create the point
+            //getImageX(x),getImageY(y)
             ImageView testImg = new ImageView(medical);
             //Add the point to the anchorPane's children
             anchorPane.getChildren().add(testImg);
