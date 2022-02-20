@@ -4,7 +4,6 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
-import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -12,7 +11,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MakeAccountController implements IController, Initializable {
+public class SignUpController implements IController, Initializable {
 
     @FXML private TextField employeeID;
     @FXML private TextField lastName;
@@ -25,7 +24,7 @@ public class MakeAccountController implements IController, Initializable {
     @FXML private TextField phoneNumber;
     @FXML private Button submitButton;
 
-    public MakeAccountController(){};
+    public SignUpController(){};
 
     @Override
     public void submit() {
