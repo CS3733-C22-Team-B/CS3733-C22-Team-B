@@ -69,4 +69,12 @@ public class LoginController {
         }
     }
 
+    public void signupButton(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/SignUp.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
