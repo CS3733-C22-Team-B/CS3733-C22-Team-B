@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -8,89 +11,87 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXToggleButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.text.Text?>
+<?import net.kurobako.gesturefx.GesturePane?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane onMouseClicked="#imageClicked">
-               <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
-                  <image>
-                     <Image url="@../images/thirdFloorMap.png" />
-                  </image>
-               </ImageView>
+            <GesturePane fx:id="gesturePane">
+               <StackPane onMouseClicked="#imageClicked">
+                  <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../images/thirdFloorMap.png" />
+                     </image>
+                  </ImageView>
 
-               <Label fx:id="summary3Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary2Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary1Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summaryL2Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summaryL1Location" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary3Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary2Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary1Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summaryL1Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summaryL2Equipment" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary3SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary2SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summary1SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summaryL1SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
-               <Label fx:id="summaryL2SR" layoutX="279.0" layoutY="223.0" text="bruh moment" />
+                  <Label fx:id="summary3Location" text="bruh moment" />
+                  <Label fx:id="summary2Location" text="bruh moment" />
+                  <Label fx:id="summary1Location" text="bruh moment" />
+                  <Label fx:id="summaryL2Location" text="bruh moment" />
+                  <Label fx:id="summaryL1Location" text="bruh moment" />
+                  <Label fx:id="summary3Equipment" text="bruh moment" />
+                  <Label fx:id="summary2Equipment" text="bruh moment" />
+                  <Label fx:id="summary1Equipment" text="bruh moment" />
+                  <Label fx:id="summaryL1Equipment" text="bruh moment" />
+                  <Label fx:id="summaryL2Equipment" text="bruh moment" />
+                  <Label fx:id="summary3SR" text="bruh moment" />
+                  <Label fx:id="summary2SR" text="bruh moment" />
+                  <Label fx:id="summary1SR" text="bruh moment" />
+                  <Label fx:id="summaryL1SR" text="bruh moment" />
+                  <Label fx:id="summaryL2SR" text="bruh moment" />
 
-               <VBox fx:id="modifyPopup" maxHeight="200.0" maxWidth="250.0">
-                  <children>
-                     <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                        <children>
-                           <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@../images/trash.png" />
-                              </image>
-                           </ImageView>
-                        </children>
-                        <children>
-                           <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@../images/close.png" />
-                              </image>
-                           </ImageView>
-                        </children>
-                     </HBox>
-                     <Pane prefHeight="200.0" prefWidth="200.0" />
-                     <Label fx:id="header1" prefHeight="15" text="Location ID:" />
-                     <TextField fx:id="idField" promptText="Location ID" />
-                     <Label fx:id="header2" prefHeight="15" text="Equipment Name:" />
-                     <TextField fx:id="nameField" promptText="Equipment Name" />
-                     <Label fx:id="header3" prefHeight="15" text="Equipment Type:" />
-                     <TextField fx:id="typeField" promptText="Equipment Type" />
-                     <Label fx:id="header5" prefHeight="15" text="Manufacturer:" />
-                     <TextField fx:id="manField" promptText="Manufacturer" />
-                     <Label fx:id="header4" prefHeight="15" text="Floor:" />
-                     <JFXComboBox fx:id="floor" prefHeight="25.0" prefWidth="284.0" />
-                     <Label fx:id="header6" prefHeight="15" text="Node Type:" />
-                     <JFXComboBox fx:id="nodeType" prefHeight="25.0" prefWidth="284.0" />
-                     <Label fx:id="header10" prefHeight="15" text="Status:" />
-                     <JFXComboBox fx:id="status" prefHeight="25.0" prefWidth="284.0" />
-                     <Label fx:id="header11" prefHeight="15" text="Color:" />
-                     <TextField fx:id="color" promptText="Color" />
-                     <Label fx:id="header12" prefHeight="15" text="Size:" />
-                     <TextField fx:id="size" promptText="Size" />
-                     <Label fx:id="header7" prefHeight="15" text="Short Name:" />
-                     <TextField fx:id="shortName" promptText="Short Name" />
-                     <Label fx:id="header8" prefHeight="15" text="Long Name:" />
-                     <Label fx:id="header9" prefHeight="15" text="Locations:" />
-                     <JFXComboBox fx:id="Locations" prefHeight="25.0" prefWidth="284.0" />
-                     <TextField fx:id="longName" promptText="Long Name" />
-                     <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
-                     <Pane prefHeight="15" />
-                  </children>
-               </VBox>
-            </StackPane>
+                  <VBox fx:id="modifyPopup" maxHeight="200.0" maxWidth="250.0">
+                     <children>
+                        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/trash.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#close" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/close.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                        <Label fx:id="header1" prefHeight="15" text="Location ID:" />
+                        <TextField fx:id="idField" promptText="Location ID" />
+                        <Label fx:id="header2" prefHeight="15" text="Equipment Name:" />
+                        <TextField fx:id="nameField" promptText="Equipment Name" />
+                        <Label fx:id="header3" prefHeight="15" text="Equipment Type:" />
+                        <TextField fx:id="typeField" promptText="Equipment Type" />
+                        <Label fx:id="header5" prefHeight="15" text="Manufacturer:" />
+                        <TextField fx:id="manField" promptText="Manufacturer" />
+                        <Label fx:id="header4" prefHeight="15" text="Floor:" />
+                        <JFXComboBox fx:id="floor" prefHeight="25.0" prefWidth="284.0" />
+                        <Label fx:id="header6" prefHeight="15" text="Node Type:" />
+                        <JFXComboBox fx:id="nodeType" prefHeight="25.0" prefWidth="284.0" />
+                        <Label fx:id="header10" prefHeight="15" text="Status:" />
+                        <JFXComboBox fx:id="status" prefHeight="25.0" prefWidth="284.0" />
+                        <Label fx:id="header11" prefHeight="15" text="Color:" />
+                        <TextField fx:id="color" promptText="Color" />
+                        <Label fx:id="header12" prefHeight="15" text="Size:" />
+                        <TextField fx:id="size" promptText="Size" />
+                        <Label fx:id="header7" prefHeight="15" text="Short Name:" />
+                        <TextField fx:id="shortName" promptText="Short Name" />
+                        <Label fx:id="header8" prefHeight="15" text="Long Name:" />
+                        <Label fx:id="header9" prefHeight="15" text="Locations:" />
+                        <JFXComboBox fx:id="Locations" prefHeight="25.0" prefWidth="284.0" />
+                        <TextField fx:id="longName" promptText="Long Name" />
+                        <JFXButton fx:id="submitModifyButton" onAction="#submitModify" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Submit" textAlignment="CENTER" />
+                        <Pane prefHeight="15" />
+                     </children>
+                  </VBox>
+               </StackPane>
+            </GesturePane>
             <VBox prefWidth="500">
                <children>
                   <Pane prefHeight="15" />
@@ -130,4 +131,3 @@
    </children>
 
 </AnchorPane>
-
