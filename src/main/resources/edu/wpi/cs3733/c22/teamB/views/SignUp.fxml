@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.views.MakeAccount">
+   <children>
+      <VBox layoutX="104.0" layoutY="321.0" prefHeight="200.0" prefWidth="100.0" />
+      <HBox layoutX="93.0" layoutY="131.0" prefHeight="100.0" prefWidth="429.0">
+         <children>
+            <TextField fx:id="employeeID" promptText="EmployeeID" />
+            <TextField fx:id="lastName" promptText="Last Name" />
+            <TextField fx:id="firstName" promptText="First Name" />
+         </children>
+      </HBox>
+      <HBox layoutX="93.0" layoutY="198.0" prefHeight="100.0" prefWidth="429.0">
+         <children>
+            <TextField fx:id="position" promptText="position" />
+            <TextField fx:id="accessLevel" promptText="Access Level" />
+            <TextField fx:id="username" promptText="Username" />
+         </children>
+      </HBox>
+      <HBox layoutX="93.0" layoutY="265.0" prefHeight="100.0" prefWidth="429.0">
+         <children>
+            <TextField fx:id="password" promptText="Password" />
+            <TextField fx:id="email" promptText="Email" />
+            <TextField fx:id="phoneNumber" promptText="Phone Number" />
+         </children>
+      </HBox>
+      <Label layoutX="166.0" layoutY="54.0" text="Employee Sign Up" />
+      <Button fx:id="submitButton" layoutX="274.0" layoutY="389.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+   </children>
+</AnchorPane>

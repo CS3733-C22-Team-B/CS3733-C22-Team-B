@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
-import edu.wpi.cs3733.c22.teamB.entity.csv.CSVReader;
-import edu.wpi.cs3733.c22.teamB.entity.csv.CSVWriter;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
