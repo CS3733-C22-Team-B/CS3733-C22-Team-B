@@ -16,6 +16,14 @@ public class EmployeeDaoI implements IDatabase<Employee> {
     public void addValue(Employee employee) {
         Connection conn = ConnectionManager.getInstance().getConnection();
 
+        String pass = employee.getPassword();
+
+        // if pass is already hashed, do nothing; else hash it
+        if (pass == PasswordHashing.hashPassword(employee.getPassword())) {
+        } else {
+            pass = PasswordHashing.hashPassword(employee.getPassword());
+        }
+
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -26,7 +34,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             pstmt.setString(4, employee.getPosition());
             pstmt.setInt(5, employee.getAccessLevel());
             pstmt.setString(6, employee.getUsername());
-            pstmt.setString(7, PasswordHashing.hashPassword(employee.getPassword()));
+            pstmt.setString(7, pass);
             pstmt.setString(8, employee.getEmail());
             pstmt.setString(9, employee.getPhoneNumber());
 
