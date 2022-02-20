@@ -38,13 +38,13 @@ public class MedicalEquipment {
     private String getUniqueID(){
         DatabaseWrapper db = new DatabaseWrapper();
         List<MedicalEquipment> medicalEquipmentList = db.getAllMedicalEquipment();
-        int equipmentcount = 0;
+        int equipmentCount = 0;
         for (MedicalEquipment medicalEquipment : medicalEquipmentList) {
-            if( medicalEquipment.getEquipmentType() == equipmentType) {
-                equipmentcount++;
+            if(medicalEquipment.getEquipmentType().equals(this.equipmentType)) {
+                equipmentCount++;
             }
         }
-        return "b" + equipmentType.toUpperCase() +  String.format("%03d",equipmentcount+ 1) + String.format("%02d", amount);
+        return "b" + equipmentType.toUpperCase() +  String.format("%03d",equipmentCount+ 1) + String.format("%02d", amount);
     }
 
     public MedicalEquipment(
@@ -60,6 +60,31 @@ public class MedicalEquipment {
             int amount) {
 
         this.equipmentID = equipmentID;
+        this.equipmentName = equipmentName;
+        this.equipmentType = equipmentType;
+        this.manufacturer = manufacturer;
+        this.location = location;
+        if (!validateStatus(status)) {
+            this.status = "WAITING";
+        }
+        else this.status = status;
+        this.color = color;
+        this.size = size;
+        this.description = description;
+        this.amount = amount;
+    }
+
+    public MedicalEquipment(
+            String equipmentName,
+            String equipmentType,
+            String manufacturer,
+            Location location,
+            String status,
+            String color,
+            String size,
+            String description,
+            int amount) {
+
         this.equipmentName = equipmentName;
         this.equipmentType = equipmentType;
         this.manufacturer = manufacturer;
