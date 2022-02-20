@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity.parsers;
 
+import edu.wpi.cs3733.c22.teamB.entity.PasswordHashing;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IParser;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 
