@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 
 
-public class HomeController implements IPage{
+public class HomeController extends AbsPage{
 
     @FXML private ImageView picture;
     @FXML private AnchorPane anchor;
@@ -21,20 +21,6 @@ public class HomeController implements IPage{
     private void initialize(){
         resize();
         namePage();
-    }
-
-    @FXML
-    private void shutDown() {
-        Platform.exit();
-    }
-
-//    gets children of fxml page and resizes them accordingly
-    @Override
-    public void resize() {
-        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
-            picture.setFitWidth(Bapp.getPrimaryStage().getWidth() - 50);
-            picture.setFitHeight(Bapp.getPrimaryStage().getHeight()-50);
-        });
     }
 
     @Override

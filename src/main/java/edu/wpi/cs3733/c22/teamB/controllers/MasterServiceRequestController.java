@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MasterServiceRequestController implements IPage {
+public class MasterServiceRequestController extends AbsPage {
     @FXML private JFXButton submitButton;
     @FXML private JFXButton clearButton;
     @FXML private JFXButton backButton;
@@ -170,6 +170,7 @@ public class MasterServiceRequestController implements IPage {
 
         // load specific SR fxml
         srPane.getChildren().add(childPane);
+        initResize();
         resize();
         namePage();
     }
@@ -277,21 +278,6 @@ public class MasterServiceRequestController implements IPage {
         }
     }
 
-
-    @Override
-    public void resize() {
-        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
-        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
-        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - 50);
-        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - 50);
-
-        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
-            anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
-            anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
-            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
-            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
-        });
-    }
 
     @Override
     public void namePage() {

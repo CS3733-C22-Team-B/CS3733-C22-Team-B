@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ServiceRequestMenuController implements IPage{
+public class ServiceRequestMenuController extends AbsPage{
     @FXML private JFXToggleButton toggleName;
     @FXML private Label name1;
     @FXML private Label name2;
@@ -165,20 +165,6 @@ public class ServiceRequestMenuController implements IPage{
         initResize();
         resize();
         namePage();
-    }
-
-    public void initResize() {
-        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
-        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
-        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - 50);
-        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - 50);
-    }
-    @Override
-    public void resize() {
-        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
-            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
-            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
-        });
     }
 
     @Override
