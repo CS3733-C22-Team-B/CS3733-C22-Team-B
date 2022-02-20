@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
@@ -117,6 +118,7 @@ public class MapEditorController{
 
     @FXML
     private ImageView imageView;
+    CoordTransformer coordTrans;
 
     @FXML
     private JFXButton addButton;
@@ -143,7 +145,7 @@ public class MapEditorController{
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageView.setFitHeight(sceneHeight);
-
+        coordTrans = new CoordTransformer(imageView);
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
         showLocations.setSelected(true);
@@ -216,9 +218,9 @@ public class MapEditorController{
         for (Location local : locationList) {
             if (local.getFloor().equals(currentFloor)) {
                 String ID = local.getNodeID();
-                double x = local.getXcoord();
-                double y = local.getYcoord();
-                addPoint(ID, x, y, Color.BLACK);
+                double imageX = local.getXcoord();
+                double imageY = local.getYcoord();
+                addPoint(ID, imageX, imageY, Color.BLACK);
             }
         }
 
@@ -226,19 +228,18 @@ public class MapEditorController{
         for (MedicalEquipment local : medicalList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getEquipmentID();
-                double x = local.getLocation().getXcoord(); //TODO fix for future iterations
-                double y = local.getLocation().getYcoord();
-                addPointMedical(ID, x, y, Color.BLUE);
+                double imageX = local.getLocation().getXcoord(); //TODO fix for future iterations
+                double imageY = local.getLocation().getYcoord();
+                addPointMedical(ID, imageX, imageY, Color.BLUE);
             }
         }
 
         for (AbstractSR local : srList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getSrID();
-                double x = local.getLocation().getXcoord() + 20; //TODO fix for future iterations
-                double y = local.getLocation().getYcoord();
-                addPointSR(ID, x, y, Color.LIME);
-                //System.out.println("add point at: " + x + " , " + y);
+                double imageX = local.getLocation().getXcoord() + 20; //TODO fix for future iterations
+                double imageY = local.getLocation().getYcoord();
+                addPointSR(ID, imageX, imageY, Color.LIME);
             }
         }
 
@@ -246,9 +247,10 @@ public class MapEditorController{
     }
 
     //Add a point to the map using image coordinates. Set up onclick.
-    public Circle addPoint(String ID, double x, double y, Color color){
+    public Circle addPoint(String ID, double imageX, double imageY, Color color){
         //Create the point
-        Circle testPoint = new Circle(getImageX(x), getImageY(y), 3);
+        Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
+        Circle testPoint = new Circle(nodeCoords.getX(),nodeCoords.getY(), 3);
         //Add the point to the anchorPane's children
         if(showLocations.isSelected()) {
             anchorPane.getChildren().add(testPoint);
@@ -287,7 +289,7 @@ public class MapEditorController{
                 if (moveState) {
                     double offsetX = t.getSceneX() - orgSceneX;
                     double offsetY = t.getSceneY() - orgSceneY;
-
+                    System.out.println("offsetX" + offsetX);
                     Circle c = (Circle) (t.getSource());
 
                     c.setCenterX(c.getCenterX() + offsetX);
@@ -356,18 +358,17 @@ public class MapEditorController{
 
             testImg.setOnMouseDragged((t) -> {
                 if (moveState) {
-                    double offsetX = t.getSceneX() - orgSceneX;
-                    double offsetY = t.getSceneY() - orgSceneY;
+                    Point2D nodeCoords = coordTrans.imageToNode(t);
+                    double nodeXOffset = nodeCoords.getX() - orgSceneX;
+                    double nodeYOffset = nodeCoords.getY() - orgSceneY;
 
                     ImageView c = (ImageView) (t.getSource());
 
-                    c.setX(c.getX() + offsetX);
-                    c.setY(c.getY() + offsetY);
+                    c.setX(c.getX() + nodeXOffset);
+                    c.setY(c.getY() + nodeYOffset);
 
-                    orgSceneX = t.getSceneX();
-                    orgSceneY = t.getSceneY();
-
-
+                    orgSceneX = nodeCoords.getX();
+                    orgSceneY = nodeCoords.getY();
                 }
             });
 
@@ -406,9 +407,6 @@ public class MapEditorController{
             header1.setText("Equipment ID:");
             header8.setText("Description:");
         }
-
-
-
     }
 
     //Scene x coordinate to image x coordinate
