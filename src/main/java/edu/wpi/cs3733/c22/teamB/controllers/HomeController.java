@@ -36,7 +36,7 @@ public class HomeController {
     private void goToLaundryScene(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LaundryService.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/services/LaundryService.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -47,7 +47,7 @@ public class HomeController {
     private void goToFoodDeliveryService(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/FoodDeliveryService.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/services/FoodDeliveryService.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -59,7 +59,7 @@ public class HomeController {
         try {
             Parent root =
                     FXMLLoader.load(
-                            getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MedicineDeliveryService.fxml"));
+                            getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/services/MedicineDeliveryService.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -70,7 +70,7 @@ public class HomeController {
     private void goToExternalTransportService(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ExternalTransport.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/services/ExternalTransport.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -81,7 +81,7 @@ public class HomeController {
     private void goToGiftFloralService(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/GiftFloralService.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/services/GiftFloralService.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -114,7 +114,7 @@ public class HomeController {
         try {
             Parent root =
                     FXMLLoader.load(
-                            getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentTable.fxml"));
+                            getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tables/MedicalEquipmentTable.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -125,7 +125,7 @@ public class HomeController {
     private void goToLocationTable(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationTable.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tables/LocationTable.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -136,7 +136,7 @@ public class HomeController {
     private void goToEmployeeTable(ActionEvent actionEvent) {
         try {
             Parent root =
-                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/EmployeeTable.fxml"));
+                    FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tables/EmployeeTable.fxml"));
             Bapp.getPrimaryStage().getScene().setRoot(root);
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
-import edu.wpi.cs3733.c22.teamB.entity.AbstractSR;
-import edu.wpi.cs3733.c22.teamB.entity.Location;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 
 public interface IController {
 

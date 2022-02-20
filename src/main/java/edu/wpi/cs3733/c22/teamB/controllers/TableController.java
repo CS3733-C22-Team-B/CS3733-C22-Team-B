@@ -9,7 +9,7 @@ public class TableController {
     public void goToEquipmentTable(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/MedicalEquipmentTable.fxml"));
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tables/MedicalEquipmentTable.fxml"));
             BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {
@@ -20,7 +20,7 @@ public class TableController {
     public void goToLocationTable(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/LocationTable.fxml"));
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tables/LocationTable.fxml"));
             BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {
@@ -31,7 +31,7 @@ public class TableController {
     public void goToEmployeeTable(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/EmployeeTable.fxml"));
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tables/EmployeeTable.fxml"));
             BorderHomeController.curBorderHomeController.changeNode(loader);
 
         } catch (IOException ex) {

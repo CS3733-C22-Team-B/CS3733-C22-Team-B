@@ -1,12 +1,18 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.ISpecificServiceRequest;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.LaundrySR;
+
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR>{
+public class LaundrySRDaoI implements ISpecificServiceRequest<LaundrySR> {
 
     public LaundrySRDaoI() {
     }
