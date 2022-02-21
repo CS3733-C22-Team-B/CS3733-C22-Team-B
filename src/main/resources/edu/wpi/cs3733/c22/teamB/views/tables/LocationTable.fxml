@@ -56,12 +56,12 @@
             <JFXButton fx:id="confirmButton" alignment="CENTER" layoutX="501.0" layoutY="382.0" onAction="#confirm" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
             <JFXButton fx:id="cancelButton" alignment="CENTER" layoutX="414.0" layoutY="382.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
             <JFXButton fx:id="clearButton" alignment="CENTER" layoutX="327.0" layoutY="382.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
-            <JFXButton fx:id="loadButton" layoutX="534.0" layoutY="106.0" onAction="#loadTable" styleClass="lightBlueWithBorder" stylesheets="@../../styles/style.css" text="Refresh" />
+            <JFXButton fx:id="loadButton" layoutX="495.0" layoutY="99.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
+            <JFXButton fx:id="deleteButton" layoutX="408.0" layoutY="99.0" minWidth="75.0" onAction="#deleteLocation" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
+            <JFXButton fx:id="modifyButton" layoutX="321.0" layoutY="99.0" minWidth="75.0" onAction="#modifyLocation" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Modify" />
+            <JFXButton fx:id="idLookupButton" layoutX="125.0" layoutY="99.0" minWidth="75.0" onAction="#idLookup" prefHeight="26.0" prefWidth="96.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="ID Lookup" />
+            <JFXButton fx:id="addButton" layoutX="233.0" layoutY="99.0" minWidth="75.0" onAction="#addLocation" prefHeight="26.0" prefWidth="75.0" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add" />
          </children>
       </AnchorPane>
-      <JFXButton fx:id="idLookupButton" onAction="#idLookup" styleClass="lightBlueWithBorder" stylesheets="@../../styles/style.css" text="ID Lookup" />
-      <JFXButton fx:id="addButton" onAction="#addLocation" styleClass="lightBlueWithBorder" stylesheets="@../../styles/style.css" text="Add" />
-      <JFXButton fx:id="modifyButton" onAction="#modifyLocation" styleClass="lightBlueWithBorder" stylesheets="@../../styles/style.css" text="Modify" />
-      <JFXButton fx:id="deleteButton" onAction="#deleteLocation" styleClass="lightBlueWithBorder" stylesheets="@../../styles/style.css" text="Delete" />
    </children>
 </AnchorPane>
