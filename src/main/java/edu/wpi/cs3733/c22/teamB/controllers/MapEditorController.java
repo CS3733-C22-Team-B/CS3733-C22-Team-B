@@ -148,7 +148,7 @@ public class MapEditorController{
 //        Bapp.getPrimaryStage().resizableProperty().set(false);
         imageView.setFitHeight(gesturePane.getWidth());
         gesturePane.setGestureEnabled(true);
-        coordTrans = new CoordTransformer(imageView);
+        coordTrans = new CoordTransformer(imageView, gesturePane);
         coordTrans.setStackPane(stackPane);
         showLocations.setSelected(true);
         showMedical.setSelected(true);
@@ -180,6 +180,7 @@ public class MapEditorController{
             public void handle(ScrollEvent event) {
                 System.out.println("new stackpane");
                 coordTrans.setStackPane(stackPane);
+                coordTrans.setGesturePane(gesturePane);
             }
         });
     }
@@ -351,8 +352,9 @@ public class MapEditorController{
             testPoint.setOnMouseDragged((t) -> {
                 if (moveState) {
                     Point2D nodeOffset = coordTrans.eventToNode(t);
-                    double offsetX = nodeOffset.getX() - orgNodePoint.getX();
-                    double offsetY = nodeOffset.getY() - orgNodePoint.getY();
+                    coordTrans.setGesturePane(gesturePane);
+                    double offsetX = coordTrans.scaleNodeMovement(nodeOffset.getX() - orgNodePoint.getX());
+                    double offsetY = coordTrans.scaleNodeMovement(nodeOffset.getY() - orgNodePoint.getY());
                     System.out.println("offsetX" + offsetX);
                     Circle c = (Circle) (t.getSource());
 
@@ -368,8 +370,6 @@ public class MapEditorController{
         return testPoint;
 
     }
-
-
 
 
     //add a medical point

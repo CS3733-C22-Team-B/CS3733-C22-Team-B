@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import net.kurobako.gesturefx.GesturePane;
 
 public class CoordTransformer {
 
@@ -13,6 +14,7 @@ public class CoordTransformer {
     //Divide to go the other way (Node -> image)
     private double nodeScaleCoeff;
     private StackPane stackPane;
+    private GesturePane gesturePane;
 
     private void recalcScaleCoeff(){
         nodeScaleCoeff = imageView.getImage().getHeight()/stackPane.getHeight();
@@ -23,8 +25,14 @@ public class CoordTransformer {
         recalcScaleCoeff();
     }
 
-    public CoordTransformer(ImageView imageView){
+    public void setGesturePane(GesturePane gesturePane){
+        this.gesturePane = gesturePane;
+        recalcScaleCoeff();
+    }
+
+    public CoordTransformer(ImageView imageView, GesturePane gesturePane){
         this.imageView = imageView;
+        this.gesturePane = gesturePane;
     }
 
     //Image coordinate system:
@@ -71,5 +79,10 @@ public class CoordTransformer {
         recalcScaleCoeff();
         Point2D temp = eventToNode(event);
         return nodeToImage(temp.getX(),temp.getY());
+    }
+
+    //Gets node movement and scales it depending on zoom
+    public double scaleNodeMovement(double nodeDelta){
+        return nodeDelta/gesturePane.getCurrentScale();
     }
 }
