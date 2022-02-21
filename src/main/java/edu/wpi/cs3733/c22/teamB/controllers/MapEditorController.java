@@ -220,61 +220,61 @@ public class MapEditorController{
 //        summaryL2Equipment.setTranslateX(getImageX(400));
 //        summaryL2Equipment.setTranslateY(getImageY(-175));
         summaryL2Equipment.setTranslateX(sum2LEqPoint.getX());
-        summaryL2Equipment.setTranslateX(sum2LEqPoint.getY());
+        summaryL2Equipment.setTranslateY(sum2LEqPoint.getY());
 
         Point2D sumL1EqPoint = coordTrans.imageToNode(400,-325);
 //        summaryL1Equipment.setTranslateX(getImageX(400));
 //        summaryL1Equipment.setTranslateY(getImageY(-325));
         summaryL1Equipment.setTranslateX(sumL1EqPoint.getX());
-        summaryL1Equipment.setTranslateX(sumL1EqPoint.getY());
+        summaryL1Equipment.setTranslateY(sumL1EqPoint.getY());
 
         Point2D sum1EqPoint = coordTrans.imageToNode(400,-25);
 //        summary1Equipment.setTranslateX(getImageX(400));
 //        summary1Equipment.setTranslateY(getImageY(-25));
         summary1Equipment.setTranslateX(sum1EqPoint.getX());
-        summary1Equipment.setTranslateX(sum1EqPoint.getY());
+        summary1Equipment.setTranslateY(sum1EqPoint.getY());
 
         Point2D sum2EqPoint = coordTrans.imageToNode(400,125);
         //summary2Equipment.setTranslateX(getImageX(400));
         //summary2Equipment.setTranslateY(getImageY(125));
         summary2Equipment.setTranslateX(sum2EqPoint.getX());
-        summary2Equipment.setTranslateX(sum2EqPoint.getY());
+        summary2Equipment.setTranslateY(sum2EqPoint.getY());
 
         Point2D sum3EqPoint = coordTrans.imageToNode(400,275);
 //        summary3Equipment.setTranslateX(getImageX(400));
 //        summary3Equipment.setTranslateY(getImageY(275));
         summary2Equipment.setTranslateX(sum3EqPoint.getX());
-        summary2Equipment.setTranslateX(sum3EqPoint.getY());
+        summary2Equipment.setTranslateY(sum3EqPoint.getY());
 
         Point2D sumL2SRPoint = coordTrans.imageToNode(500,-175);
 //        summaryL2SR.setTranslateX(getImageX(500));
 //        summaryL2SR.setTranslateY(getImageY(-175));
         summaryL2SR.setTranslateX(sumL2SRPoint.getX());
-        summaryL2SR.setTranslateX(sumL2SRPoint.getY());
+        summaryL2SR.setTranslateY(sumL2SRPoint.getY());
 
         Point2D sumL1SRPoint = coordTrans.imageToNode(500,-325);
  //       summaryL1SR.setTranslateX(getImageX(500));
  //       summaryL1SR.setTranslateY(getImageY(-325));
         summaryL1SR.setTranslateX(sumL1SRPoint.getX());
-        summaryL1SR.setTranslateX(sumL1SRPoint.getY());
+        summaryL1SR.setTranslateY(sumL1SRPoint.getY());
 
         Point2D sum1SRPoint = coordTrans.imageToNode(500,-25);
        // summary1SR.setTranslateX(getImageX(500));
        // summary1SR.setTranslateY(getImageY(-25));
         summary1SR.setTranslateX(sum1SRPoint.getX());
-        summary1SR.setTranslateX(sum1SRPoint.getY());
+        summary1SR.setTranslateY(sum1SRPoint.getY());
 
         Point2D sum2SRPoint = coordTrans.imageToNode(500,125);
 //        summary2SR.setTranslateX(getImageX(500));
  //       summary2SR.setTranslateY(getImageY(125));
         summary2SR.setTranslateX(sum2SRPoint.getX());
-        summary2SR.setTranslateX(sum2SRPoint.getY());
+        summary2SR.setTranslateY(sum2SRPoint.getY());
 
         Point2D sum3SRPoint = coordTrans.imageToNode(500,275);
 //        summary3SR.setTranslateX(getImageX(500));
  //       summary3SR.setTranslateY(getImageY(275));
-        summary3SR.setTranslateX(sum2SRPoint.getX());
-        summary3SR.setTranslateX(sum2SRPoint.getY());
+        summary3SR.setTranslateX(sum3SRPoint.getX());
+        summary3SR.setTranslateY(sum3SRPoint.getY());
     }
 
     //Add points from DB
@@ -328,10 +328,6 @@ public class MapEditorController{
             testPoint.setOnMousePressed(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
                     orgNodePoint = coordTrans.eventToNode(event);
-//                    modifyButton.setOpacity(1);
-//                    modifyButton.setDisable(false);
-//                    deleteButton.setOpacity(1);
-//                    deleteButton.setDisable(false);
                     clicked = "location";
                     onPointClick(testPoint);
                     event.setDragDetect(true);
@@ -342,11 +338,11 @@ public class MapEditorController{
                 public void handle(MouseEvent event) {
                     if (moveState) {
                         Location temp = dbWrapper.getLocation(selectedPoint);
-                        Point2D releasedImageCoords = coordTrans.eventToImage(event);
-                        Point2D releasedNodeCoords = coordTrans.eventToNode(event);
+                        Circle c = (Circle) (event.getSource());
+                        Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(),c.getTranslateY());
                         dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
-                        testPoint.setTranslateX(releasedNodeCoords.getX());
-                        testPoint.setTranslateY(releasedNodeCoords.getY());
+                        testPoint.setTranslateX(c.getTranslateX());
+                        testPoint.setTranslateY(c.getTranslateY());
                         refresh();
                     }
                 }
