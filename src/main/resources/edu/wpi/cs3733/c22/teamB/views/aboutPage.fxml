@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AboutPageController">
    <children>
-      <Label layoutX="27.0" layoutY="47.0" text="A Special Thank You To..." />
+      <Label layoutX="59.0" layoutY="129.0" text="A Special Thank You To..." />
       <GridPane layoutX="271.0" layoutY="55.0" prefHeight="337.0" prefWidth="315.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,7 +43,7 @@
             <Label text="Calvin Page" GridPane.rowIndex="7" />
             <Label text="Documentation Analyst, Software Feature Engineer" wrapText="true" GridPane.columnIndex="1" />
             <Label text="Assistant Lead Software Engineer" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Assistant Lead Software engineer, Algorithms Specialist" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Assistant Lead Software engineer" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Lead Software Engineer" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Backend Database Engineer" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Project Owner, Software Feature Engineer" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -71,5 +74,15 @@
       </GridPane>
       <Label alignment="CENTER" layoutX="271.0" layoutY="27.0" prefHeight="17.0" prefWidth="315.0" text="The Burgundy Bellerophons" textAlignment="CENTER" />
       <Label layoutX="14.0" layoutY="137.0" prefHeight="103.0" prefWidth="194.0" text="Brigham and Women's Hospital: Especially their representative Andrew Shinn for their time and input." textAlignment="CENTER" wrapText="true" />
+      <ImageView fitHeight="103.0" fitWidth="169.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/hand%20hold%20heart.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="125.0" layoutY="14.0" prefHeight="103.0" prefWidth="114.0" text="Credits and Special Thanks" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
