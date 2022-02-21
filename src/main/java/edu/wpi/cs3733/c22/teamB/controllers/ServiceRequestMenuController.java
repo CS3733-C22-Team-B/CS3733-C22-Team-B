@@ -1,18 +1,20 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ServiceRequestMenuController {
+public class ServiceRequestMenuController extends AbsPage{
     @FXML private JFXToggleButton toggleName;
     @FXML private Label name1;
     @FXML private Label name2;
@@ -22,6 +24,9 @@ public class ServiceRequestMenuController {
     @FXML private Label name6;
     @FXML private Label name7;
     @FXML private Label name8;
+
+    @FXML private Pane contentPane;
+    @FXML private Pane anchorPane;
 
     @FXML private void toggleName(ActionEvent event) {
         name1.setVisible(toggleName.isSelected());
@@ -42,7 +47,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("MedicalEquipmentSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -56,7 +61,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("FoodDeliverySR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -69,7 +74,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("ExternalTransportSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -84,7 +89,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("ComputerServiceSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -98,7 +103,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("MedicineDeliverySR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -112,7 +117,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("LaundrySR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -126,7 +131,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("GiftFloralSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -139,7 +144,7 @@ public class ServiceRequestMenuController {
             loader.setControllerFactory(
                     param -> new MasterServiceRequestController("SanitationSR"));
 
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -156,5 +161,14 @@ public class ServiceRequestMenuController {
         name6.setVisible(false);
         name7.setVisible(false);
         name8.setVisible(false);
+
+        initResize();
+        resize();
+        namePage();
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText("Service Request Systems");
     }
 }

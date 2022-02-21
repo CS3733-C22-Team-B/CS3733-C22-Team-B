@@ -3,6 +3,8 @@ package edu.wpi.cs3733.c22.teamB.controllers.tables;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
+import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 
@@ -27,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class MedicalEquipmentTableController {
+public class MedicalEquipmentTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
@@ -48,6 +50,11 @@ public class MedicalEquipmentTableController {
     @FXML private TextField amountField;
     private List<Location> locList;
     private Map<String, Location> locMap;
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.setPageName("Medical Equipment Table");
+    }
 
     private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
     MedicalEquipmentTableController.Function func = MedicalEquipmentTableController.Function.NOTHING;
@@ -90,6 +97,9 @@ public class MedicalEquipmentTableController {
         });
 
         loadTable();
+        initResize();
+        resize();
+        namePage();
     }
 
     public void loadTable() throws NullPointerException {

@@ -2,6 +2,8 @@ package edu.wpi.cs3733.c22.teamB.controllers.tables;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
+import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class LocationTableController {
+public class LocationTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
@@ -35,7 +37,10 @@ public class LocationTableController {
     @FXML private TableView<Location> table;
     @FXML private JFXButton loadButton;
 
-
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.setPageName("Location Table");
+    }
 
 
     private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
@@ -64,6 +69,9 @@ public class LocationTableController {
         });
 
         loadTable();
+        initResize();
+        resize();
+        namePage();
     }
 
     @FXML

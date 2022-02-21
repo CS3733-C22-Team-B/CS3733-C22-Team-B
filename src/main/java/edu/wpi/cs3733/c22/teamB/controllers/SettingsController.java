@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SettingsController implements Initializable {
+public class SettingsController extends AbsPage implements Initializable{
     @FXML
     JFXButton HomeB;
     @FXML
@@ -27,6 +28,11 @@ public class SettingsController implements Initializable {
     JFXButton BackupB;
     @FXML
     JFXToggleButton clientServerToggle;
+    @FXML
+    Pane anchorPane;
+    @FXML
+    Pane contentPane;
+
 
 
     DatabaseWrapper db;
@@ -80,5 +86,14 @@ public class SettingsController implements Initializable {
         } else {
             clientServerToggle.setSelected(false);
         }
+
+        initResize();
+        resize();
+        namePage();
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText("Settings");
     }
 }

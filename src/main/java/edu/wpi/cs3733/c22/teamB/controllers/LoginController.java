@@ -2,7 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.Main;
-import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.PasswordHashing;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.application.Platform;
@@ -13,14 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.List;
 
-public class LoginController {
+public class LoginController implements IPage {
     String employeeUser;
     String employeePass;
-
     @FXML
     private PasswordField passField;
 
@@ -31,8 +32,20 @@ public class LoginController {
     private Label errorMessage;
 
     @FXML
+    private ImageView picture;
+
+    @FXML private Pane logInBox;
+    @FXML private Pane contentPane;
+
+    @FXML
     public void initialize(){
-        Bapp.getPrimaryStage().setResizable(false);
+        Bapp.getPrimaryStage().setFullScreen(true);
+        contentPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()+100);
+        contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
+        picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
+        picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
+        resize();
+
         DatabaseWrapper db = new DatabaseWrapper();
         List<Employee> employeeList = db.getAllEmployee();
         for(Employee employee : employeeList){
@@ -60,13 +73,26 @@ public class LoginController {
                 args[0] = userField.getText();
                 args[1] = passField.getText();
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/borderHome.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/AnchorHome.fxml"));
                     Bapp.getPrimaryStage().getScene().setRoot(root);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
         }
+    }
+
+    @Override
+    public void resize() {
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
+            picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
+            contentPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()+100);
+            contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
+        });
+    }
+    @Override
+    public void namePage() {
     }
 
     public void signupButton(ActionEvent actionEvent) {
