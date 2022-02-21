@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.services.*;
 import edu.wpi.cs3733.c22.teamB.entity.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
@@ -25,7 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MasterServiceRequestController {
+public class MasterServiceRequestController extends AbsPage {
     @FXML private JFXButton submitButton;
     @FXML private JFXButton clearButton;
     @FXML private JFXButton backButton;
@@ -37,6 +38,8 @@ public class MasterServiceRequestController {
     @FXML private JFXComboBox<String> locationField;
     @FXML private AnchorPane srPane;
     @FXML private Label srLabel;
+    @FXML private Pane anchorPane;
+    @FXML private Pane contentPane;
 
     private Pane childPane;
     private IController childController;
@@ -167,7 +170,9 @@ public class MasterServiceRequestController {
 
         // load specific SR fxml
         srPane.getChildren().add(childPane);
-
+        initResize();
+        resize();
+        namePage();
     }
 
     private String getLabel() {
@@ -231,7 +236,7 @@ public class MasterServiceRequestController {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            BorderHomeController.curBorderHomeController.changeNode(loader);
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -271,5 +276,11 @@ public class MasterServiceRequestController {
             default:
                 throw new RuntimeException("srType invalid");
         }
+    }
+
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText(getLabel());
     }
 }
