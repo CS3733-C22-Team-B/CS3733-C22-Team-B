@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.c22.teamB.entity.objects;
 
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+
+import java.util.List;
 
 public class MedicalEquipment {
 
@@ -32,6 +35,18 @@ public class MedicalEquipment {
         this.amount = -1;
     }
 
+    private String getUniqueID(){
+        DatabaseWrapper db = new DatabaseWrapper();
+        List<MedicalEquipment> medicalEquipmentList = db.getAllMedicalEquipment();
+        int equipmentCount = 0;
+        for (MedicalEquipment medicalEquipment : medicalEquipmentList) {
+            if(medicalEquipment.getEquipmentType().equals(this.equipmentType)) {
+                equipmentCount++;
+            }
+        }
+        return "b" + equipmentType.toUpperCase() +  String.format("%03d",equipmentCount+ 1) + String.format("%02d", amount);
+    }
+
     public MedicalEquipment(
             String equipmentID,
             String equipmentName,
@@ -57,6 +72,32 @@ public class MedicalEquipment {
         this.size = size;
         this.description = description;
         this.amount = amount;
+    }
+
+    public MedicalEquipment(
+            String equipmentName,
+            String equipmentType,
+            String manufacturer,
+            Location location,
+            String status,
+            String color,
+            String size,
+            String description,
+            int amount) {
+
+        this.equipmentName = equipmentName;
+        this.equipmentType = equipmentType;
+        this.manufacturer = manufacturer;
+        this.location = location;
+        if (!validateStatus(status)) {
+            this.status = "WAITING";
+        }
+        else this.status = status;
+        this.color = color;
+        this.size = size;
+        this.description = description;
+        this.amount = amount;
+        this.equipmentID = getUniqueID();
     }
     private boolean validateStatus(String st) {
         for (String s : EquipmentStatus)

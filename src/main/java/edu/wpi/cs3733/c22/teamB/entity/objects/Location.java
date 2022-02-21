@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.c22.teamB.entity.objects;
 
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+
+import java.util.Locale;
 import java.util.Objects;
 
 public class Location {
@@ -41,6 +44,29 @@ public class Location {
         this.nodeType = nodeType;
         this.longName = longName;
         this.shortName = shortName;
+    }
+
+    public Location(
+            int xcoord,
+            int ycoord,
+            String floor,
+            String building,
+            String nodeType,
+            String longName,
+            String shortName) {
+        this.xcoord = xcoord;
+        this.ycoord = ycoord;
+        this.floor = floor;
+        this.building = building;
+        this.nodeType = nodeType;
+        this.longName = longName;
+        this.shortName = shortName;
+        this.nodeID = getUniqueID();
+    }
+
+    private String getUniqueID(){
+        DatabaseWrapper db = new DatabaseWrapper();
+        return "b" + nodeType.toUpperCase() +  String.format("%03d",db.nodeTypeCountLocation(nodeType,floor) + 1)+ floor;
     }
 
     public String getNodeID() {
