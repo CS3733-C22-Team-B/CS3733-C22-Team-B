@@ -63,7 +63,5 @@ public class SignUpController implements Initializable {
         phoneNumber.clear();
     }
     public void initialize(URL location, ResourceBundle resources) {
-//        employeeID.setText(.generateID());
     }
-
 }
