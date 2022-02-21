@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
 import edu.wpi.cs3733.c22.teamB.entity.PasswordHashing;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 
@@ -9,7 +10,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeMongo implements IMongo<Employee> {
+public class EmployeeMongo implements IDatabase<Employee> {
 
     private DB conn;
     private DBCollection EmployeeTable;

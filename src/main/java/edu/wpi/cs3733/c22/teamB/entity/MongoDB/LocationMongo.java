@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 
 import java.net.UnknownHostException;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LocationMongo implements IMongo<Location> {
+public class LocationMongo implements IDatabase<Location> {
 
     private DB conn;
     private DBCollection LocationTable;

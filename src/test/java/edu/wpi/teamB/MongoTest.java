@@ -1,17 +1,23 @@
 package edu.wpi.teamB;
 
 import edu.wpi.cs3733.c22.teamB.entity.MongoDB.*;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.MainSR;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
 import java.net.UnknownHostException;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MongoTest {
+
+
 
 
     public MongoTest() {
@@ -152,6 +158,75 @@ public class MongoTest {
         mongoWrapper.getEmployee(employee2.getEmployeeID());
         mongoWrapper.getAllEmployee();
 
+    }
+
+    @Test public void MainSRMongo() throws UnknownHostException {
+        MongoDB.getConnection();
+        IDatabase<Location> locationMongo = new LocationMongo();
+        IDatabase<Employee> employeeMongo = new EmployeeMongo();
+
+//        MongoDB.getConnection();
+
+        MainSRMongo mainSRMongo = new MainSRMongo(locationMongo, employeeMongo);
+        mainSRMongo.dropTable();
+        mainSRMongo.createTable();
+
+
+//        LocationMongo locationMongo = new LocationMongo();
+
+        locationMongo.dropTable();
+        locationMongo.createTable();
+
+        Location location1 = new Location("12", 12, 12, "12", "123", "123", "21e", "q2e");
+        Location location2 = new Location("123", 13, 13, "12", "123", "123", "123", "123");
+        Location location3 = new Location("123", 1000, 13, "12", "123", "123", "123", "123");
+
+
+        locationMongo.addValue(location1);
+        locationMongo.addValue(location2);
+        locationMongo.updateValue(location3);
+        locationMongo.deleteValue(location1.getNodeID());
+        locationMongo.getValue(location3.getNodeID());
+        locationMongo.getAllValues();
+
+        MongoDB.getConnection();
+
+        employeeMongo.dropTable();
+        employeeMongo.createTable();
+
+        Employee employee1 = new Employee("123", "123", "123", "123", 12, "123", "123", "213", "123");
+        Employee employee2 = new Employee("223", "123", "123", "123", 12, "123", "123", "213", "123");
+        Employee employee3 = new Employee("323", "123", "Ben", "123", 12, "123", "123", "213", "123");
+        Employee employee12 = new Employee("123", "123", "Hushmand", "123", 12, "123", "123", "213", "123");
+
+        employeeMongo.addValue(employee1);
+        employeeMongo.addValue(employee2);
+        employeeMongo.addValue(employee3);
+        employeeMongo.updateValue(employee12);
+        employeeMongo.deleteValue(employee3.getEmployeeID());
+
+
+
+//        Location location3 = new Location("123", 1000, 13, "12", "123", "123", "123", "123");
+//        Employee employee2 = new Employee("223", "123", "123", "123", 12, "123", "123", "213", "123");
+
+        LocalDate date = LocalDate.parse("2022-12-12");
+        AbstractSR main1 = new MainSR("123", "123", "123", location3, employee2, employee2, date, "213");
+        AbstractSR main2 = new MainSR("223", "123", "123", location3, employee2, employee2, date, "213");
+        AbstractSR main3 = new MainSR("123", "1222222", "123", location3, employee2, employee2, date, "213");
+
+
+//        locationMongo.deleteValue(main1.getLocation().getNodeID());
+//        employeeMongo.deleteValue(main1.getRequestor().getEmployeeID());
+//        employeeMongo.deleteValue(main1.getAssignedEmployee().getEmployeeID());
+
+
+        mainSRMongo.addValue(main1);
+        mainSRMongo.addValue(main2);
+        mainSRMongo.updateValue(main3);
+        mainSRMongo.getValue(main3.getSrID());
+        mainSRMongo.deleteValue(main1.getSrID());
+        mainSRMongo.getAllValues();
     }
 
 
