@@ -782,6 +782,13 @@ public class MapEditorController{
         return count;
     }
 
+    int equipmentCount(String floor, String status) {
+        medicalList = dbWrapper.getAllMedicalEquipment();
+        return (int) medicalList.stream().filter(e ->
+                (e.getLocation().getFloor().equals(floor) && e.getStatus().equals(status))
+        ).count();
+    }
+
     int SRCount(String floor){
         srList = dbWrapper.getAllSR();
         int count = 0;
@@ -815,11 +822,35 @@ public class MapEditorController{
         summary1Location.setText(String.valueOf(locationCount("01")));
         summary2Location.setText(String.valueOf(locationCount("02")));
         summary3Location.setText(String.valueOf(locationCount("03")));
-        summaryL2Equipment.setText(String.valueOf(equipmentCount("L2")));
-        summaryL1Equipment.setText(String.valueOf(equipmentCount("L1")));
-        summary1Equipment.setText(String.valueOf(equipmentCount("01")));
-        summary2Equipment.setText(String.valueOf(equipmentCount("02")));
-        summary3Equipment.setText(String.valueOf(equipmentCount("03")));
+        summaryL2Equipment.setText("Clean: " +
+                String.valueOf(equipmentCount("L2", "CLEAN")) +
+                "\n" +
+                "Dirty: " +
+                String.valueOf(equipmentCount("L2", "DIRTY")));
+        summaryL1Equipment.setText("Clean: " +
+                String.valueOf(equipmentCount("L1", "CLEAN")) +
+                "\n" +
+                "Dirty: " +
+                String.valueOf(equipmentCount("L1", "DIRTY")));
+        summary1Equipment.setText("Clean: " +
+                String.valueOf(equipmentCount("01", "CLEAN")) +
+                "\n" +
+                "Dirty: " +
+                String.valueOf(equipmentCount("01", "DIRTY")));
+        summary2Equipment.setText("Clean: " +
+                String.valueOf(equipmentCount("02", "CLEAN")) +
+                "\n" +
+                "Dirty: " +
+                String.valueOf(equipmentCount("02", "DIRTY")));
+        summary3Equipment.setText("Clean: " +
+                String.valueOf(equipmentCount("03", "CLEAN")) +
+                "\n" +
+                "Dirty: " +
+                String.valueOf(equipmentCount("03", "DIRTY")));
+//        summaryL1Equipment.setText(String.valueOf(equipmentCount("L1")));
+//        summary1Equipment.setText(String.valueOf(equipmentCount("01")));
+//        summary2Equipment.setText(String.valueOf(equipmentCount("02")));
+//        summary3Equipment.setText(String.valueOf(equipmentCount("03")));
         summaryL2SR.setText(String.valueOf(SRCount("L2")));
         summaryL1SR.setText(String.valueOf(SRCount("L1")));
         summary1SR.setText(String.valueOf(SRCount("01")));
