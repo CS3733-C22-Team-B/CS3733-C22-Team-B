@@ -7,8 +7,8 @@ public class SRIDGenerator {
         DatabaseWrapper dw = new DatabaseWrapper();
         int i = 0;
         String ret;
-        while (dw.getSR(ret = ("SR" + i)) != null)
-            ++i;
+        while (dw.srIsInTable(ret = ("SR" + i)))
+            System.out.println(++i);
         return ret;
     }
 }
