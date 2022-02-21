@@ -424,8 +424,9 @@ public class MapEditorController{
             testImg.setOnMouseDragged((t) -> {
                 if (moveState) {
                     Point2D draggedNodeCoords = coordTrans.eventToNode(t);
-                    double nodeXOffset = draggedNodeCoords.getX() - orgNodePoint.getX();
-                    double nodeYOffset = draggedNodeCoords.getY() - orgNodePoint.getY();
+                    coordTrans.setGesturePane(gesturePane);
+                    double nodeXOffset = coordTrans.scaleNodeMovement(draggedNodeCoords.getX() - orgNodePoint.getX());
+                    double nodeYOffset = coordTrans.scaleNodeMovement(draggedNodeCoords.getY() - orgNodePoint.getY());
 
                     ImageView c = (ImageView) (t.getSource());
 
