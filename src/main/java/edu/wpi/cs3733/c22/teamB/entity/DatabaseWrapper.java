@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.Main;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
@@ -410,5 +411,9 @@ public class DatabaseWrapper {
 
     public Connection getConnection() {
         return ConnectionManager.getInstance().getConnection();
+    }
+
+    public boolean srIsInTable(String srID) {
+        return ((MainSRDaoI) MainSRDao).isInTable(srID);
     }
 }

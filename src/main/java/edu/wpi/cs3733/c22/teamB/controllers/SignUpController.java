@@ -6,6 +6,8 @@ import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
 import java.awt.*;
 import java.net.URL;

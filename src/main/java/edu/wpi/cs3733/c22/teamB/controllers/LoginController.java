@@ -2,6 +2,9 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.Main;
+import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.PasswordHashing;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LoginController implements IPage {
-
+    String employeeUser;
+    String employeePass;
     @FXML
     private PasswordField passField;
 
@@ -40,23 +45,39 @@ public class LoginController implements IPage {
         picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
         picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
         resize();
+
+        DatabaseWrapper db = new DatabaseWrapper();
+        List<Employee> employeeList = db.getAllEmployee();
+        for(Employee employee : employeeList){
+            employeeUser = employee.getUsername();
+            employeePass = employee.getPassword();
+        }
+
     }
 
     @FXML
     void loginButton(ActionEvent event) {
-        if(passField.getText().isEmpty() || userField.getText().isEmpty()){
-            errorMessage.setText("Enter a username and password");
-        } else if((!passField.getText().equals("admin") || !userField.getText().equals("admin")) && (!passField.getText().equals("staff") || !userField.getText().equals("staff"))){
-            errorMessage.setText("Incorrect username or password");
-        } else{
-            String[] args = new String[2];
-            args[0] = userField.getText();
-            args[1] = passField.getText();
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/AnchorHome.fxml"));
-                Bapp.getPrimaryStage().getScene().setRoot(root);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+        DatabaseWrapper db = new DatabaseWrapper();
+        List<Employee> employeeList = db.getAllEmployee();
+        String pass = PasswordHashing.hashPassword(passField.getText());
+        for (Employee employee : employeeList) {
+            employeeUser = employee.getUsername();
+            employeePass = employee.getPassword();
+
+            if (passField.getText().isEmpty() || userField.getText().isEmpty()) {
+                errorMessage.setText("Enter a username and password"); //(!passField.getText().equals("admin") || !userField.getText().equals("admin")) && (!passField.getText().equals("staff") || !userField.getText().equals("staff")) &&
+            } else if ((!pass.equals(employeePass) || !userField.getText().equals(employeeUser))) {
+                errorMessage.setText("Incorrect username or password");
+            } else {
+                String[] args = new String[2];
+                args[0] = userField.getText();
+                args[1] = passField.getText();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/AnchorHome.fxml"));
+                    Bapp.getPrimaryStage().getScene().setRoot(root);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
@@ -70,8 +91,16 @@ public class LoginController implements IPage {
             contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
         });
     }
-
     @Override
     public void namePage() {
+    }
+
+    public void signupButton(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/SignUp.fxml"));
+            Bapp.getPrimaryStage().getScene().setRoot(root);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
