@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -17,6 +19,16 @@ public class AnchorHomeController implements Initializable {
     private AnchorPane anchorPane;
     @FXML
     Label pageName;
+    @FXML
+    JFXButton homeButton;
+    @FXML JFXButton mapButton;
+    @FXML JFXButton srButton;
+    @FXML JFXButton tableButton;
+    @FXML JFXButton dashButton;
+    @FXML JFXButton settingsButton;
+    @FXML JFXButton helpButton;
+
+
 
     private Pane childPane;
 
@@ -55,6 +67,26 @@ public class AnchorHomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            Tooltip tooltip1 = new Tooltip("Home");
+            homeButton.setTooltip(tooltip1);
+
+            Tooltip tooltip2 = new Tooltip("Map Editor");
+            mapButton.setTooltip(tooltip2);
+
+            Tooltip tooltip3 = new Tooltip("Service Requests");
+            srButton.setTooltip(tooltip3);
+
+            Tooltip tooltip4 = new Tooltip("Tables");
+            tableButton.setTooltip(tooltip4);
+
+            Tooltip tooltip5 = new Tooltip("Dashboard");
+            dashButton.setTooltip(tooltip5);
+
+            Tooltip tooltip6 = new Tooltip("Settings");
+            settingsButton.setTooltip(tooltip6);
+
+            Tooltip tooltip7 = new Tooltip("Help");
+            helpButton.setTooltip(tooltip7);
 
 //            anchorPane.setStyle("");
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Home")));
