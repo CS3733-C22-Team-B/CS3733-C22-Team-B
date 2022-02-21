@@ -38,6 +38,7 @@ public class CoordTransformer {
     //Image to Node is good for getting points in the DB and making them appear
     //This top one exists because MouseEvent can do this for us
     public Point2D eventToNode(MouseEvent event){
+        recalcScaleCoeff();
         double nodeX = event.getSceneX()-(0.5*imageView.getImage().getWidth()/nodeScaleCoeff);
         double nodeY = event.getSceneY()-(0.5*imageView.getImage().getHeight()/nodeScaleCoeff);
         Point2D point = new Point2D(nodeX,nodeY);
@@ -67,6 +68,7 @@ public class CoordTransformer {
         return point;
     }
     public Point2D eventToImage(MouseEvent event){
+        recalcScaleCoeff();
         Point2D temp = eventToNode(event);
         return nodeToImage(temp.getX(),temp.getY());
     }

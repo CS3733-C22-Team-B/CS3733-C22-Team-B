@@ -18,6 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -174,6 +176,12 @@ public class MapEditorController{
         modifyPopup.setStyle("-fx-padding: 1;");
         //1000
         //877
+        gesturePane.setOnScroll(new EventHandler<ScrollEvent>() {
+            public void handle(ScrollEvent event) {
+                System.out.println("new stackpane");
+                coordTrans.setStackPane(stackPane);
+            }
+        });
     }
 
     public void setTextPos(){
@@ -337,8 +345,8 @@ public class MapEditorController{
                         Point2D releasedImageCoords = coordTrans.eventToImage(event);
                         Point2D releasedNodeCoords = coordTrans.eventToNode(event);
                         dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
-                        testPoint.setCenterX(releasedNodeCoords.getX());
-                        testPoint.setCenterY(releasedNodeCoords.getY());
+                        testPoint.setTranslateX(releasedNodeCoords.getX());
+                        testPoint.setTranslateY(releasedNodeCoords.getY());
                         refresh();
                     }
                 }
@@ -352,8 +360,8 @@ public class MapEditorController{
                     System.out.println("offsetX" + offsetX);
                     Circle c = (Circle) (t.getSource());
 
-                    c.setCenterX(c.getCenterX() + offsetX);
-                    c.setCenterY(c.getCenterY() + offsetY);
+                    c.setTranslateX(c.getTranslateX() + offsetX);
+                    c.setTranslateY(c.getTranslateY() + offsetY);
 
                     orgNodePoint = coordTrans.eventToNode(t);
                     updatePopup();
@@ -379,8 +387,8 @@ public class MapEditorController{
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-            testImg.setX(nodeCoords.getX());
-            testImg.setY(nodeCoords.getY());
+            testImg.setTranslateX(nodeCoords.getX());
+            testImg.setTranslateY(nodeCoords.getY());
             testImg.setPreserveRatio(true);
             testImg.setFitWidth(15);
 
@@ -397,8 +405,8 @@ public class MapEditorController{
                         temp.setLocation(tempLoc);
                         dbWrapper.updateMedicalEquipment(temp);
                         Point2D imageCoords = coordTrans.imageToNode(tempLoc.getXcoord(),tempLoc.getYcoord());
-                        testImg.setX(imageCoords.getX());
-                        testImg.setY(imageCoords.getY());
+                        testImg.setTranslateX(imageCoords.getX());
+                        testImg.setTranslateY(imageCoords.getY());
                     }
                 }
             });
@@ -425,8 +433,8 @@ public class MapEditorController{
 
                     ImageView c = (ImageView) (t.getSource());
 
-                    c.setX(c.getX() + nodeXOffset);
-                    c.setY(c.getY() + nodeYOffset);
+                    c.setTranslateX(c.getTranslateX() + nodeXOffset);
+                    c.setTranslateY(c.getTranslateY() + nodeYOffset);
 
                     orgNodePoint = coordTrans.eventToNode(t);
                 }
@@ -444,8 +452,8 @@ public class MapEditorController{
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-            testImg.setX(nodeCoords.getX());
-            testImg.setY(nodeCoords.getY());
+            testImg.setTranslateX(nodeCoords.getX());
+            testImg.setTranslateY(nodeCoords.getY());
             testImg.setPreserveRatio(true);
             testImg.setFitWidth(15);
         }
@@ -782,7 +790,7 @@ public class MapEditorController{
         double distance = 5000.0;
         for (Node child : stackPane.getChildren()) {
             if (child instanceof Circle) {
-                double dist = calculateDistanceBetweenPoints(((Circle) child).getCenterX(),((Circle) child).getCenterY(),nodeX,nodeY);
+                double dist = calculateDistanceBetweenPoints(((Circle) child).getTranslateX(),((Circle) child).getTranslateY(),nodeX,nodeY);
                 if(dist < distance){
                     closest = (Circle)child;
                     distance = dist;
@@ -794,13 +802,19 @@ public class MapEditorController{
 
     void updatePopup(){
         Translate trans = new Translate();
-        Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
+//        Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
+        Bounds nodeBounds = modifyPopup.getBoundsInParent();
+
         if(clicked == "location") {
-            trans.setX(selectedPnt.getCenterX() - bounds.getMinX());
-            trans.setY(selectedPnt.getCenterY() - (bounds.getMinY() - 20));
+//            modifyPopup.translateXProperty().set(selectedPnt.getTranslateX() - bounds.getMinX());
+//            modifyPopup.translateYProperty().set(selectedPnt.getTranslateY() - (bounds.getMinY() - 20));
+            trans.setX(selectedPnt.getTranslateX() - nodeBounds.getMinX());
+            trans.setY(selectedPnt.getTranslateY() - (nodeBounds.getMinY() - 20));
         } else if (clicked == "equipment"){
-            trans.setX(selectedImg.getX() - bounds.getMinX() + 10);
-            trans.setY(selectedImg.getY() - (bounds.getMinY() - 30));
+//            modifyPopup.translateXProperty().set(selectedImg.getTranslateX() - bounds.getMinX() + 10);
+//            modifyPopup.translateYProperty().set(selectedImg.getTranslateY() - (bounds.getMinY() - 30));
+            trans.setX(selectedImg.getTranslateX() - nodeBounds.getMinX() + 10);
+            trans.setY(selectedImg.getTranslateY() - (nodeBounds.getMinY() - 30));
         }
         modifyPopup.getTransforms().add(trans);
     }
