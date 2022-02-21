@@ -15,7 +15,7 @@ import javafx.stage.Screen;
 public class HomeController extends AbsPage{
 
     @FXML private ImageView picture;
-    @FXML private AnchorPane anchor;
+    @FXML private AnchorPane anchorPane;
 
     @FXML
     private void initialize(){
