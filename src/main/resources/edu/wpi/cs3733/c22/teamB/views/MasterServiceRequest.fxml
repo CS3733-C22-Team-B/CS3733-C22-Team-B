@@ -13,7 +13,7 @@
       <TextField fx:id="idField" layoutX="409.0" layoutY="92.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" AnchorPane.rightAnchor="41.799999999999955" />
       <TextArea fx:id="notesField" layoutX="51.0" layoutY="281.0" prefHeight="86.0" prefWidth="324.0" style="-fx-background-color: #99a0c2; -fx-border-color: #001268;" />
       <JFXComboBox fx:id="floorField" layoutX="51.0" layoutY="219.0" onAction="#onFloorFieldChange" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
-      <JFXComboBox fx:id="locationField" layoutX="138.0" layoutY="219.0" prefHeight="25.0" prefWidth="236.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
+      <JFXComboBox fx:id="locationField" editable="true" layoutX="138.0" layoutY="219.0" prefHeight="25.0" prefWidth="236.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
       <Label layoutX="409.0" layoutY="63.0" text="ID" AnchorPane.rightAnchor="179.0" />
       <Label layoutX="409.0" layoutY="126.0" text="Status" AnchorPane.rightAnchor="158.2" />
       <Label layoutX="409.0" layoutY="192.0" text="Assign Employee" AnchorPane.rightAnchor="101.0" />

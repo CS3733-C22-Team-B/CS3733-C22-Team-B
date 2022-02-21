@@ -103,9 +103,9 @@
 
 /*----------------------- TABLE ---------------*/
 
-.table-view .column-header-background .filler (
+.table-view .column-header-background .filler {
     fx-background-color: #08246c;
-)
+}
 
 
 .table-view .corner {
