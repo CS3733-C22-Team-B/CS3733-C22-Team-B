@@ -232,16 +232,6 @@ public class MasterServiceRequestController extends AbsPage {
         childController.clear();
     }
 
-    @FXML private void back(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            AnchorHomeController.curAnchorHomeController.changeNode(loader);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
         locationField.setValue(null);
@@ -282,5 +272,15 @@ public class MasterServiceRequestController extends AbsPage {
     @Override
     public void namePage() {
         AnchorHomeController.curAnchorHomeController.pageName.setText(getLabel());
+    }
+
+    public void goToSRTable(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestManager.fxml"));
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
