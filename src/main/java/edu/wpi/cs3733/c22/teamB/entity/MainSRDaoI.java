@@ -173,6 +173,18 @@ public class MainSRDaoI implements IDatabase<AbstractSR> {
         return MainList;
     }
 
+    public boolean isInTable(String objectID) {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PreparedStatement pstmt =
+                    conn.prepareStatement("SELECT * FROM MainSR WHERE srID = ?");
+            pstmt.setString(1, objectID);
+            return pstmt.executeQuery().next();
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
     @Override
     public void createTable() {
         Connection conn = ConnectionManager.getInstance().getConnection();
