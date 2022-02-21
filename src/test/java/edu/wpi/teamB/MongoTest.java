@@ -227,6 +227,8 @@ public class MongoTest {
         mainSRMongo.getValue(main3.getSrID());
         mainSRMongo.deleteValue(main1.getSrID());
         mainSRMongo.getAllValues();
+
+        locationMongo.deleteValue(location3.getNodeID());
     }
 
 
