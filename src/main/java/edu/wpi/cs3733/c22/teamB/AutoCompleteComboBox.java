@@ -36,10 +36,7 @@ public class AutoCompleteComboBox<T> {
                 event.consume();
             } else if (event.getCode() == KeyCode.ENTER) {
                 event.consume();
-                if (box.isShowing())
-                    boxSkin.hide();
-                else
-                    boxSkin.show();
+                boxSkin.hide();
             }
         });
         box.setSkin(boxSkin);
