@@ -29,7 +29,7 @@ public class LoginController implements IPage {
     @FXML private Pane logInBox;
     @FXML private Pane contentPane;
     private String employeeID;
-    private Employee loggedInEmployee;
+    private static Employee loggedInEmployee;
 
     @FXML
     public void initialize(){
@@ -76,6 +76,10 @@ public class LoginController implements IPage {
                 }
             }
         }
+    }
+
+    public static Employee getLoggedInEmployee() {
+        return loggedInEmployee;
     }
 
     @Override
