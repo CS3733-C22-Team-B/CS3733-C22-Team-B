@@ -36,7 +36,10 @@ public class AutoCompleteComboBox<T> {
                 event.consume();
             } else if (event.getCode() == KeyCode.ENTER) {
                 event.consume();
-                boxSkin.hide();
+                if (box.isShowing())
+                    boxSkin.hide();
+                else
+                    boxSkin.show();
             }
         });
         box.setSkin(boxSkin);
@@ -57,8 +60,6 @@ public class AutoCompleteComboBox<T> {
                         return t.toString().toLowerCase().contains(s);
                     }).collect(Collectors.toList()));
                     boxSkin.show();
-                } else {
-                    boxSkin.hide();
                 }
 
         });
