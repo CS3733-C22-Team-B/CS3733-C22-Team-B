@@ -279,6 +279,7 @@ public class LocationDaoI implements IDatabase<Location> {
             if ((location.getNodeType().equals(nodeType)) && (location.getFloor().equals(floor))) {
                 count += 1;
             }
+
         }
         return count;
     }
