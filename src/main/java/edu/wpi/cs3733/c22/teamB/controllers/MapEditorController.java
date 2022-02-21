@@ -321,7 +321,9 @@ public class MapEditorController{
         testPoint.setTranslateY(nodeCoords.getY());
         //Add the point to the stackPane's children
         if(showLocations.isSelected()) {
+            stackPane.getChildren().remove(modifyPopup);
             stackPane.getChildren().add(testPoint);
+            stackPane.getChildren().add(modifyPopup);
             testPoint.setFill(color);
             //Set point ID
             testPoint.idProperty().set(ID);
@@ -522,7 +524,8 @@ public class MapEditorController{
 
 
     void removeAllPoints(){
-        stackPane.getChildren().remove(1,stackPane.getChildren().size());
+        stackPane.getChildren().remove(16,stackPane.getChildren().size());
+        stackPane.getChildren().add(modifyPopup);
     }
 
     void deleteSelectedNode(){
@@ -548,6 +551,7 @@ public class MapEditorController{
         currentFloor = "L2";
         goTo();
     }
+
 
     @FXML public void goToSideView() {
         currentFloor = "side";
@@ -633,6 +637,7 @@ public class MapEditorController{
 
     @FXML public void close(){
         setEditFieldsVisible(false);
+        selectedPnt.setFill(Color.BLACK);
     }
 
 
@@ -810,7 +815,9 @@ public class MapEditorController{
             trans.setX(selectedImg.getTranslateX() - nodeBounds.getMinX() + 10);
             trans.setY(selectedImg.getTranslateY() - (nodeBounds.getMinY() - 30));
         }
-        modifyPopup.getTransforms().add(trans);
+        //modifyPopup.getTransforms().add(trans);
+        modifyPopup.setTranslateX(selectedPnt.getTranslateX() + modifyPopup.getWidth()/2);
+        modifyPopup.setTranslateY(selectedPnt.getTranslateY() + modifyPopup.getHeight()/2);
     }
 
     int locationCount(String floor){
