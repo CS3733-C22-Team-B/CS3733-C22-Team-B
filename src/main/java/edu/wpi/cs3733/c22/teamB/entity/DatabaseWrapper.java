@@ -109,10 +109,10 @@ public class DatabaseWrapper {
         this.LaundrySRMongo = new LaundrySRMongo(this.MainSRMongo);
         this.LaundrySRDao = LaundrySRDerby;
 
-//        this.MedicalEquipmentSRDerby = new MedicalEquipmentSRDaoI();
-//        this.MedicalEquipmentMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
-//        this
-//
+        this.MedicalEquipmentSRDerby = new MedicalEquipmentSRDaoI();
+        this.MedicalEquipmentSRMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
+        this.MedicalEquipmentSRDao = MedicalEquipmentSRDerby;
+
         this.MedicineDeliverySRDerby = new MedicineDeliverySRDaoI();
         this.MedicineDeliverySRMongo = new MedicineDeliverySRMongo(this.MainSRMongo);
         this.MedicineDeliverySRDao = MedicineDeliverySRDerby;
@@ -138,6 +138,7 @@ public class DatabaseWrapper {
         this.FoodDeliveryDao = this.FoodDeliveryDerby;
         this.GiftFloralSRDao = this.GiftFloralSRDerby;
         this.LaundrySRDao = this.LaundrySRDerby;
+        this.MedicalEquipmentSRDao = this.MedicalEquipmentSRDerby;
         this.MedicineDeliverySRDao = this.MedicineDeliverySRDerby;
         this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
         this.SanitationSRDao = this.SanitationSRDerby;
@@ -154,6 +155,7 @@ public class DatabaseWrapper {
         this.FoodDeliveryDao = this.FoodDeliveryDerby;
         this.GiftFloralSRDao = this.GiftFloralSRDerby;
         this.LaundrySRDao = this.LaundrySRDerby;
+        this.MedicalEquipmentSRDao = this.MedicalEquipmentSRDerby;
         this.MedicineDeliverySRDao = this.MedicineDeliverySRDerby;
         this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
         this.SanitationSRDao = this.SanitationSRDerby;
@@ -170,6 +172,7 @@ public class DatabaseWrapper {
         this.FoodDeliveryDao = this.FoodDeliveryMongo;
         this.GiftFloralSRDao = this.GiftFloralSRMongo;
         this.LaundrySRDao = this.LaundrySRMongo;
+        this.MedicalEquipmentSRDao = this.MedicalEquipmentSRMongo;
         this.MedicineDeliverySRDao = this.MedicineDeliverySRMongo;
         this.ComputerServiceSRDao = this.ComputerServiceSRMongo;
         this.SanitationSRDao = this.SanitationSRMongo;

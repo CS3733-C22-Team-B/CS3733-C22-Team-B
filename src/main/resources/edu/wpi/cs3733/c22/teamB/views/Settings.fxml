@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.image.ImageView?>
@@ -26,5 +27,8 @@
       <JFXToggleButton fx:id="clientServerToggle" layoutX="370.0" layoutY="163.0" onAction="#onClientToggle" prefHeight="58.0" prefWidth="199.0" text="Client Server" />
       <JFXButton fx:id="RestoreB1" layoutX="63.0" layoutY="269.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Edit User Profile" textFill="WHITE" />
       <Label layoutX="398.0" layoutY="146.0" prefHeight="17.0" prefWidth="143.0" text="Database Loading Type" />
+      <Button layoutX="333.0" layoutY="215.0" mnemonicParsing="false" onAction="#onEmbedded" text="Embedded" />
+      <Button layoutX="407.0" layoutY="215.0" mnemonicParsing="false" onAction="#onClient" text="Client-Server" />
+      <Button layoutX="492.0" layoutY="215.0" mnemonicParsing="false" onAction="#onRemote" text="Remote" />
    </children>
 </AnchorPane>

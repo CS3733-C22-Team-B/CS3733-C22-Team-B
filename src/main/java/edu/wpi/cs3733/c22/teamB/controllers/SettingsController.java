@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -70,6 +71,16 @@ public class SettingsController implements Initializable {
             db.initEmbedded();
             db.restoreAll();
         }
+    }
+
+    public void onEmbedded(ActionEvent actionEvent) {
+        db.engageEmbedded();
+    }
+    public void onClient(ActionEvent actionEvent) {
+        db.engageClient();
+    }
+    public void onRemote(ActionEvent actionEvent) {
+        db.engageRemote();
     }
 
     @Override
