@@ -228,4 +228,5 @@
 }
 .content-pane {
     -fx-background-color: #ffffff;
+    -fx-background-radius: 7;
 }
