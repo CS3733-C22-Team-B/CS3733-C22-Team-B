@@ -6,6 +6,7 @@ import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.GiftFloralSR;
 import org.junit.jupiter.api.Test;
 
 import java.net.UnknownHostException;
@@ -71,5 +72,28 @@ public class MongoTest2 {
         foodDeliverySRMongo.deleteValue(foodDeliverySR32.getSrID());
         foodDeliverySRMongo.getValue(foodDeliverySR.getSrID());
         foodDeliverySRMongo.getAllValues();
+
+        //Gift
+
+        GiftFloralSRMongo giftFloralSRMongo = new GiftFloralSRMongo(mainSRMongo);
+        giftFloralSRMongo.dropTable();
+        giftFloralSRMongo.createTable();
+
+        GiftFloralSR giftFloralSR = new GiftFloralSR("Gift1", "123", location1, employee1, employee2, date, "13", "123");
+        GiftFloralSR giftFloralSR2 = new GiftFloralSR("Gift2", "123", location1, employee1, employee2, date, "13", "123");
+        GiftFloralSR giftFloralSR3 = new GiftFloralSR("Gift3", "1232", location1, employee1, employee2, date, "13", "123");
+        GiftFloralSR giftFloralSR32 = new GiftFloralSR("Gift3", "3", location1, employee1, employee2, date, "14333334343434343434343433", "123");
+
+        mainSRMongo.addValue(giftFloralSR);
+        mainSRMongo.addValue(giftFloralSR2);
+        mainSRMongo.addValue(giftFloralSR3);
+
+        giftFloralSRMongo.addValue(giftFloralSR);
+        giftFloralSRMongo.addValue(giftFloralSR2);
+        giftFloralSRMongo.addValue(giftFloralSR3);
+        giftFloralSRMongo.updateValue(giftFloralSR32);
+        giftFloralSRMongo.deleteValue(giftFloralSR3.getSrID());
+        giftFloralSRMongo.getValue(giftFloralSR.getSrID());
+        giftFloralSRMongo.getAllValues();
     }
 }
