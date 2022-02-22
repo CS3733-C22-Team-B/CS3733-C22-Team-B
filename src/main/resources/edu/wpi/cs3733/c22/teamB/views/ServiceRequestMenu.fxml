@@ -13,103 +13,52 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
    <children>
-      <Pane fx:id="contentPane" layoutX="29.0" layoutY="28.0">
+      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <StackPane layoutX="53.0" layoutY="92.0" onMouseClicked="#goToMedicalEquipmentSR" prefHeight="108.0" prefWidth="104.0">
+            <StackPane layoutX="25.0" layoutY="90.0" onMouseClicked="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <JFXButton onAction="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="41.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-13.0">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
                               <Image url="@../images/icons/MedicalEquipment2.png" />
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Medical Equipment" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
+                  <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Medical Equipment" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="164.0" layoutY="97.0" onMouseClicked="#goToComputerServiceSR" prefHeight="100.0" prefWidth="104.0">
+            <StackPane layoutX="175.0" layoutY="90.0" onMouseClicked="#goToComputerServiceSR" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <JFXButton onAction="#goToComputerServiceSR" prefHeight="107.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="   " textAlignment="CENTER" wrapText="true">
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToComputerServiceSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="   " textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateX="8.0" translateY="-14.0">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
                               <Image url="@../images/icons/Computer2.png" />
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Computer Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
+                  <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Computer" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="53.0" layoutY="209.0" onMouseClicked="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="104.0">
+            <StackPane layoutX="325.0" layoutY="90.0" onMouseClicked="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <JFXButton onAction="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                  <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateX="3.0" translateY="-12.0">
-                           <image>
-                              <Image url="@../images/icons/FoodDelivery2.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></JFXButton>
-                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Food Delivery" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="4.0" translateY="25.0" wrapText="true">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-            <StackPane layoutX="165.0" layoutY="211.0" onMouseClicked="#goToExternalTransportSR" prefHeight="100.0" prefWidth="104.0">
-               <children>
-                  <JFXButton onAction="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <ImageView fitHeight="42.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" translateY="-12.0">
-                           <image>
-                              <Image url="@../images/icons/PatientTransport2.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></JFXButton>
-                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="External Patient Transport" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="2.0" translateY="23.0" wrapText="true" />
-               </children>
-            </StackPane>
-            <StackPane layoutX="276.0" layoutY="206.0" onMouseClicked="#goToMedicineDeliverySR" prefHeight="106.0" prefWidth="104.0">
-               <children>
-                  <JFXButton onAction="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-15.0">
-                           <image>
-                              <Image url="@../images/icons/Medicine2.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="Medicine Delivery Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="23.0" wrapText="true">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-            <StackPane layoutX="278.0" layoutY="99.0" onMouseClicked="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="104.0">
-               <children>
-                  <JFXButton onAction="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true">
-                     <graphic>
-                        <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-13.0">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
                               <Image url="@../images/icons/Laundry2.png" />
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label mouseTransparent="true" prefHeight="34.0" prefWidth="87.0" text="Laundry Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
+                  <Label alignment="CENTER" mouseTransparent="true" prefHeight="34.0" prefWidth="87.0" text="Laundry" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="389.0" layoutY="97.0" onMouseClicked="#goToGiftFloralSR" prefHeight="103.0" prefWidth="104.0">
+            <StackPane layoutX="475.0" layoutY="90.0" onMouseClicked="#goToGiftFloralSR" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <JFXButton onAction="#goToGiftFloralSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToGiftFloralSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="47.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-12.0">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
                               <Image url="@../images/icons/giftnfloral2.png" />
                            </image>
@@ -123,38 +72,90 @@
                   </Label>
                </children>
             </StackPane>
-            <Pane layoutY="62.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-            <ImageView fitHeight="47.0" fitWidth="60.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/hand%20hold%20heart.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="57.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Service Request Systems" />
-            <Label fx:id="name1" layoutX="93.0" layoutY="75.0" text="Duc" />
-            <Label fx:id="name2" layoutX="207.0" layoutY="75.0" text="Nick" />
-            <Label fx:id="name3" layoutX="313.0" layoutY="75.0" text="Calvin" />
-            <Label fx:id="name4" layoutX="408.0" layoutY="75.0" text="Kateri &quot;Kiki&quot;" />
-            <Label fx:id="name5" layoutX="83.0" layoutY="319.0" text="Andrew" />
-            <Label fx:id="name6" layoutX="202.0" layoutY="319.0" text="Noah" />
-            <Label fx:id="name7" layoutX="319.0" layoutY="319.0" text="Cris" />
-            <Label fx:id="name8" layoutX="429.0" layoutY="319.0" text="Sits" />
-            <StackPane layoutX="392.0" layoutY="209.0" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="25.0" layoutY="211.0" onMouseClicked="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <JFXButton onAction="#goToSanitationSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="47.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" translateX="4.0" translateY="-12.0">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
+                           <image>
+                              <Image url="@../images/icons/FoodDelivery2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Food Delivery" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="4.0" translateY="25.0" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="175.0" layoutY="211.0" onMouseClicked="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
+                           <image>
+                              <Image url="@../images/icons/PatientTransport2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="External Patient Transportation" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="2.0" translateY="23.0" wrapText="true" />
+               </children>
+            </StackPane>
+            <StackPane layoutX="325.0" layoutY="211.0" onMouseClicked="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
+                           <image>
+                              <Image url="@../images/icons/Medicine2.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="Medicine Delivery" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="23.0" wrapText="true">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="475.0" layoutY="211.0" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToSanitationSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
                               <Image url="@../images/icons/Sanitation2.png" />
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label mouseTransparent="true" text="Sanitation Request" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
+                  <Label mouseTransparent="true" text="Sanitation" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                </children>
             </StackPane>
+            <Pane layoutX="15.0" layoutY="65.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
+            <ImageView fitHeight="47.0" fitWidth="60.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/hand%20hold%20heart.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="70.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Service Request Systems" />
+            <Label fx:id="name1" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="70.0" text="Duc" />
+            <Label fx:id="name2" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="70.0" text="Nick" />
+            <Label fx:id="name3" alignment="CENTER" contentDisplay="CENTER" layoutX="359.0" layoutY="70.0" text="Calvin" />
+            <Label fx:id="name4" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="70.0" text="Kiki" />
+            <Label fx:id="name5" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="315.0" text="Andrew" />
+            <Label fx:id="name6" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="315.0" text="Noah" />
+            <Label fx:id="name7" alignment="CENTER" contentDisplay="CENTER" layoutX="365.0" layoutY="315.0" text="Cris" />
+            <Label fx:id="name8" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="315.0" text="Sits" />
+
             <JFXToggleButton fx:id="toggleName" layoutX="450.0" layoutY="331.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" toggleColor="#0c094e" toggleLineColor="#897ec1" wrapText="true" />
          </children>
       </Pane>

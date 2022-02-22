@@ -3,14 +3,12 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.c22.teamB.AutoCompleteComboBox;
-import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.services.*;
 import edu.wpi.cs3733.c22.teamB.entity.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
-import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -18,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -248,9 +245,9 @@ public class MasterServiceRequestController extends AbsPage {
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
-        locationField.getItems().clear();
-        locationField.getItems().removeAll();
-        locationField.getItems().addAll(locMap.keySet()
+//        ladminocationField.getItems().clear();
+//        locationField.getItems().removeAll();
+        locationAC.updateData(locMap.keySet()
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
