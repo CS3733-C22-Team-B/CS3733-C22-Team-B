@@ -11,6 +11,7 @@ import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -29,11 +31,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MasterServiceRequestController extends AbsPage {
+    @FXML public Label assignEmployeeLabel;
+    @FXML public Label floorLabel;
+    @FXML public Label locLabel;
+    @FXML public Label notesLabel;
     @FXML private JFXButton submitButton;
     @FXML private JFXButton clearButton;
     @FXML private JFXButton backButton;
-    @FXML private TextField idField;
-    @FXML private JFXComboBox<String> statusField;
+    @FXML private JFXButton srTableButton;
     @FXML private JFXComboBox<String> assignedEmployeeField;
     private AutoCompleteComboBox<String> assignedEmployeeAC;
     @FXML private TextArea notesField;
@@ -55,6 +60,9 @@ public class MasterServiceRequestController extends AbsPage {
     private Map<String, Location> locMap;
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
+
+    //popup
+    @FXML private Pane popup;
 
     public MasterServiceRequestController() {}
 
@@ -109,13 +117,7 @@ public class MasterServiceRequestController extends AbsPage {
     // DO NOT TOUCH THIS
     @FXML private void initialize() {
         DatabaseWrapper dw = new DatabaseWrapper();
-        // idField
-
         srLabel.setText(getLabel());
-
-
-        // statusField
-        statusField.getItems().addAll(AbstractSR.SRstatus);
 
         // assignedEmployeeField
         employeeList = dw.getAllEmployee();
@@ -127,7 +129,6 @@ public class MasterServiceRequestController extends AbsPage {
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
-//        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
         assignedEmployeeAC = new AutoCompleteComboBox<String>(assignedEmployeeField, new ArrayList<>(employeeMap.keySet()));
 
         // floorField init
@@ -145,25 +146,14 @@ public class MasterServiceRequestController extends AbsPage {
 
         // notesField init
 
-        // srLabel (Page title)
-//        srLabel.setText(childSRType); // change this to be more correct
-
         if (childSR == null) {
             clear(null);
-            idField.setDisable(true);
-            statusField.setDisable(true);
-            assignedEmployeeField.setDisable(true);
         }
         else {
-            idField.setText(childSR.getSrID());
-            statusField.setValue(childSR.getStatus());
             assignedEmployeeField.setValue(childSR.getAssignedEmployee().getEmployeeID() + ' ' + childSR.getAssignedEmployee().getName());
             floorField.setValue(childSR.getLocation().getFloor());
             locationField.setValue(childSR.getLocation().getNodeID() + ' ' + childSR.getLocation().getLongName());
             notesField.setText(childSR.getNotes());
-
-            idField.setDisable(false);
-            statusField.setDisable(false);
             assignedEmployeeField.setDisable(false);
         }
 //        locationField.getItems().addAll(locMap.keySet()
@@ -219,28 +209,37 @@ public class MasterServiceRequestController extends AbsPage {
     // DO NOT TOUCH THIS
     @FXML private void submit(ActionEvent actionEvent) {
         childSR = new MainSR(
-                idField.getText(),
+                SRIDGenerator.generateID(),
                 childSRType,
-                statusField.getValue(),
+                "WAITING",
                 locMap.get(locationField.getValue()),
-                employeeMap.get(assignedEmployeeField.getValue()),
+                LoginController.getLoggedInEmployee(),
                 employeeMap.get(assignedEmployeeField.getValue()),
                 LocalDate.now(),
                 notesField.getText());
         childController.submit(childSR);
+
         this.clear(null);
+
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     // DO NOT TOUCH THIS
     @FXML private void clear(ActionEvent actionEvent) {
-        idField.setText(SRIDGenerator.generateID());
-        statusField.setValue("WAITING");
-        assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
         floorField.setValue("ALL");
         locationField.setValue(null);
         notesField.clear();
-
+        assignedEmployeeField.setValue(null);
         childController.clear();
+        popup.setVisible(false);
     }
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
