@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
@@ -10,9 +11,9 @@ import java.util.List;
 
 public class MongoWrapper {
 
-    IMongo<Location> locationMongo;
-    IMongo<Employee> employeeMongo;
-    IMongo<MedicalEquipment> equipmentMongo;
+    IDatabase<Location> locationMongo;
+    IDatabase<Employee> employeeMongo;
+    IDatabase<MedicalEquipment> equipmentMongo;
 
     public MongoWrapper() throws UnknownHostException {
         locationMongo= new LocationMongo();
