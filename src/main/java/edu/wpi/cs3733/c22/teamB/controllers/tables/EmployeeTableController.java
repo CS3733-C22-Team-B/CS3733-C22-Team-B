@@ -75,6 +75,11 @@ public class EmployeeTableController extends AbsPage {
 //        initResize();
         resize();
         namePage();
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            table.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
+            table.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
+        });
+
     }
 
     @FXML

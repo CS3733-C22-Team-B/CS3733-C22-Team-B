@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import com.sun.javafx.sg.prism.EffectFilter;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
-import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;

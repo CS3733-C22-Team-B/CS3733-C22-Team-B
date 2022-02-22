@@ -16,7 +16,7 @@
          <children>
             <Pane minHeight="75.0" prefHeight="75.0" style="-fx-background-color: #002168;">
                <children>
-                  <Label fx:id="pageName" layoutX="68.0" layoutY="29.0" text="Label" textFill="WHITE" />
+                  <Label fx:id="pageName" layoutX="66.0" layoutY="23.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Label" textFill="WHITE" />
                </children></Pane>
             <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
                <children>
