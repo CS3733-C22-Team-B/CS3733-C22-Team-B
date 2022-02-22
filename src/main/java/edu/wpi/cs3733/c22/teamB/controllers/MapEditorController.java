@@ -375,7 +375,9 @@ public class MapEditorController{
             //getImageX(x),getImageY(y)
             ImageView testImg = new ImageView(medical);
             //Add the point to the stackPane's children
+            stackPane.getChildren().remove(modifyPopup);
             stackPane.getChildren().add(testImg);
+            stackPane.getChildren().add(modifyPopup);
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
@@ -440,7 +442,9 @@ public class MapEditorController{
             //Create the point
             ImageView testImg = new ImageView(clipboard);
             //Add the point to the anchorPane's children
+            stackPane.getChildren().remove(modifyPopup);
             stackPane.getChildren().add(testImg);
+            stackPane.getChildren().add(modifyPopup);
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
