@@ -630,6 +630,7 @@ public class MapEditorController{
 //        deleteButton.setOpacity(0.5);
 //        deleteButton.setDisable(true);
         refresh();
+        close();
     }
 
     @FXML public void delete(){
