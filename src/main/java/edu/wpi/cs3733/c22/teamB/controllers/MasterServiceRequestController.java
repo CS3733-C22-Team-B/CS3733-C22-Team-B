@@ -10,6 +10,7 @@ import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -105,7 +106,6 @@ public class MasterServiceRequestController extends AbsPage {
                         return new SanitationSRController((SanitationSR) sr);
                 }
                 return null;
-
             });
             childPane = loader.load();
             childController = loader.getController();
@@ -116,6 +116,7 @@ public class MasterServiceRequestController extends AbsPage {
 
     // DO NOT TOUCH THIS
     @FXML private void initialize() {
+        popup.setVisible(false);
         DatabaseWrapper dw = new DatabaseWrapper();
         srLabel.setText(getLabel());
 
@@ -131,9 +132,6 @@ public class MasterServiceRequestController extends AbsPage {
                                         i -> employeeList.get(i)));
         assignedEmployeeAC = new AutoCompleteComboBox<String>(assignedEmployeeField, new ArrayList<>(employeeMap.keySet()));
 
-        // floorField init
-        floorField.getItems().addAll("ALL", "L1", "L2", "1", "2", "3"); // all floors
-
         // locationField init
         locList = dw.getAllLocation();
         locMap =
@@ -143,6 +141,12 @@ public class MasterServiceRequestController extends AbsPage {
                                 Collectors.toMap(
                                         i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
                                         i -> locList.get(i)));
+
+        // floorField init
+        List<String> floorList = new ArrayList<>();
+        floorList.add("ALL");
+        floorList.addAll(locMap.values().stream().map(Location::getFloor).collect(Collectors.toSet())); // all floors
+        floorField.getItems().addAll(floorList);
 
         // notesField init
 
@@ -244,15 +248,16 @@ public class MasterServiceRequestController extends AbsPage {
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
-        locationField.setValue(null);
-        locationField.getItems().removeAll();
         locationField.getItems().clear();
+        locationField.getItems().removeAll();
         locationField.getItems().addAll(locMap.keySet()
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
                                 || locMap.get(lstr).getFloor().equals(floorField.getValue()))
                 .collect(Collectors.toList()));
+        locationField.setValue(null);
+        locationField.getEditor().setText(null);
     }
     // Important: add your path here
     public static String srTypeToFXMLPath(String srType) {
