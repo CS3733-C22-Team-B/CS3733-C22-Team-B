@@ -17,7 +17,8 @@ public class CoordTransformer {
     private GesturePane gesturePane;
 
     private void recalcScaleCoeff(){
-        nodeScaleCoeff = imageView.getImage().getHeight()/stackPane.getHeight();
+//        nodeScaleCoeff = imageView.getImage().getHeight()/stackPane.getHeight();
+        nodeScaleCoeff = 1.0;
     }
 
     public void setStackPane(StackPane stackpane){

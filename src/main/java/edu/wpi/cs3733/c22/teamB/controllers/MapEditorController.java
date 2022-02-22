@@ -149,7 +149,6 @@ public class MapEditorController{
         imageView.setFitHeight(gesturePane.getWidth());
         gesturePane.setGestureEnabled(true);
         coordTrans = new CoordTransformer(imageView, gesturePane);
-        coordTrans.setStackPane(stackPane);
         showLocations.setSelected(true);
         showMedical.setSelected(true);
         showSR.setSelected(true);
@@ -166,13 +165,11 @@ public class MapEditorController{
         floor.setValue(currentFloor);
         //addPoint("1",0,0,Color.ORANGE);
         //addPoint("2",imageWidth,imageHeight, Color.RED);
-        addPoints();
         modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
         modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
         modifyPopup.setVisible(false);
         setTextVisible(false);
         //updateText(summary3Location,getImageX(1000),getImageX(877));
-        setTextPos();
         modifyPopup.setStyle("-fx-padding: 1;");
         //1000
         //877
@@ -385,8 +382,8 @@ public class MapEditorController{
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-            testImg.setTranslateX(nodeCoords.getX());
-            testImg.setTranslateY(nodeCoords.getY());
+            testImg.setTranslateX(nodeCoords.getX()+10);
+            testImg.setTranslateY(nodeCoords.getY()+10);
             testImg.setPreserveRatio(true);
             testImg.setFitWidth(15);
 
@@ -542,7 +539,10 @@ public class MapEditorController{
         locationList = dbWrapper.getAllLocation();
         medicalList = dbWrapper.getAllMedicalEquipment();
         srList = dbWrapper.getAllSR();
+
+        coordTrans.setStackPane(stackPane);
         removeAllPoints();
+        setTextPos();
         addPoints();
     }
 
