@@ -22,20 +22,14 @@ import java.util.List;
 public class LoginController implements IPage {
     String employeeUser;
     String employeePass;
-    @FXML
-    private PasswordField passField;
-
-    @FXML
-    private TextField userField;
-
-    @FXML
-    private Label errorMessage;
-
-    @FXML
-    private ImageView picture;
-
+    @FXML private PasswordField passField;
+    @FXML private TextField userField;
+    @FXML private Label errorMessage;
+    @FXML private ImageView picture;
     @FXML private Pane logInBox;
     @FXML private Pane contentPane;
+    private String employeeID;
+    private static Employee loggedInEmployee;
 
     @FXML
     public void initialize(){
@@ -61,6 +55,7 @@ public class LoginController implements IPage {
         List<Employee> employeeList = db.getAllEmployee();
         String pass = PasswordHashing.hashPassword(passField.getText());
         for (Employee employee : employeeList) {
+            employeeID = employee.getEmployeeID();
             employeeUser = employee.getUsername();
             employeePass = employee.getPassword();
 
@@ -72,6 +67,7 @@ public class LoginController implements IPage {
                 String[] args = new String[2];
                 args[0] = userField.getText();
                 args[1] = passField.getText();
+                loggedInEmployee = db.getEmployee(employeeID);
                 try {
                     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/AnchorHome.fxml"));
                     Bapp.getPrimaryStage().getScene().setRoot(root);
@@ -80,6 +76,10 @@ public class LoginController implements IPage {
                 }
             }
         }
+    }
+
+    public static Employee getLoggedInEmployee() {
+        return loggedInEmployee;
     }
 
     @Override

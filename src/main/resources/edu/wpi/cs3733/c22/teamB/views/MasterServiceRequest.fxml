@@ -28,7 +28,7 @@
             <AnchorPane fx:id="srPane" layoutX="6.300025939941406" layoutY="40.0" prefHeight="127.0" prefWidth="324.0" />
             <Line endX="424.79998779296875" endY="1.1444091796875E-5" layoutX="57.0" layoutY="25.0" startX="-84.8000259399414" startY="1.1444091796875E-5" style="-fx-fill: #002168;" />
             <Label fx:id="srLabel" layoutX="0.30002593994140625" prefHeight="17.0" prefWidth="511.0" text="Label" />
-            <JFXButton fx:id="backButton" layoutX="364.50003814697266" layoutY="327.0" onAction="#back" prefHeight="25.0" prefWidth="149.0" style="-fx-border-color: #002168; -fx-background-color: #99a6c2;" text="Back" />
+            <JFXButton layoutX="364.50003814697266" layoutY="327.0" onAction="#goToSRTable" prefHeight="25.0" prefWidth="149.0" style="-fx-border-color: #002168; -fx-background-color: #99a6c2;" text="Service Request Table" textFill="WHITE" />
             <JFXComboBox fx:id="assignedEmployeeField" layoutX="364.50003814697266" layoutY="205.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
             <JFXComboBox fx:id="statusField" layoutX="364.50003814697266" layoutY="142.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
          </children>

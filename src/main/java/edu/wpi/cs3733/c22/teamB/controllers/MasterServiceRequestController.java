@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.AutoCompleteComboBox;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.services.*;
 import edu.wpi.cs3733.c22.teamB.entity.SRIDGenerator;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,9 +35,11 @@ public class MasterServiceRequestController extends AbsPage {
     @FXML private TextField idField;
     @FXML private JFXComboBox<String> statusField;
     @FXML private JFXComboBox<String> assignedEmployeeField;
+    private AutoCompleteComboBox<String> assignedEmployeeAC;
     @FXML private TextArea notesField;
     @FXML private JFXComboBox<String> floorField;
     @FXML private JFXComboBox<String> locationField;
+    private AutoCompleteComboBox<String> locationAC;
     @FXML private AnchorPane srPane;
     @FXML private Label srLabel;
     @FXML private Pane anchorPane;
@@ -123,7 +127,8 @@ public class MasterServiceRequestController extends AbsPage {
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
-        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
+//        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
+        assignedEmployeeAC = new AutoCompleteComboBox<String>(assignedEmployeeField, new ArrayList<>(employeeMap.keySet()));
 
         // floorField init
         floorField.getItems().addAll("ALL", "L1", "L2", "1", "2", "3"); // all floors
@@ -161,7 +166,13 @@ public class MasterServiceRequestController extends AbsPage {
             statusField.setDisable(false);
             assignedEmployeeField.setDisable(false);
         }
-        locationField.getItems().addAll(locMap.keySet()
+//        locationField.getItems().addAll(locMap.keySet()
+//                .stream()
+//                .filter(
+//                        lstr -> floorField.getValue().equals("ALL")
+//                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
+//                .collect(Collectors.toList()));
+        locationAC = new AutoCompleteComboBox<String>(locationField, locMap.keySet()
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
@@ -232,16 +243,6 @@ public class MasterServiceRequestController extends AbsPage {
         childController.clear();
     }
 
-    @FXML private void back(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            AnchorHomeController.curAnchorHomeController.changeNode(loader);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
         locationField.setValue(null);
@@ -282,5 +283,15 @@ public class MasterServiceRequestController extends AbsPage {
     @Override
     public void namePage() {
         AnchorHomeController.curAnchorHomeController.pageName.setText(getLabel());
+    }
+
+    public void goToSRTable(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestManager.fxml"));
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
