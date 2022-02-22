@@ -342,8 +342,6 @@ public class MapEditorController{
                         Circle c = (Circle) (event.getSource());
                         Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(),c.getTranslateY());
                         dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
-                        testPoint.setTranslateX(c.getTranslateX());
-                        testPoint.setTranslateY(c.getTranslateY());
                         refresh();
                     }
                 }
@@ -352,7 +350,6 @@ public class MapEditorController{
             testPoint.setOnMouseDragged((t) -> {
                 if (moveState) {
                     Point2D nodeOffset = coordTrans.eventToNode(t);
-                    coordTrans.setGesturePane(gesturePane);
                     double offsetX = coordTrans.scaleNodeMovement(nodeOffset.getX() - orgNodePoint.getX());
                     double offsetY = coordTrans.scaleNodeMovement(nodeOffset.getY() - orgNodePoint.getY());
                     System.out.println("offsetX" + offsetX);
@@ -362,7 +359,6 @@ public class MapEditorController{
                     c.setTranslateY(c.getTranslateY() + offsetY);
 
                     orgNodePoint = coordTrans.eventToNode(t);
-                    updatePopup();
                 }
             });
 
@@ -392,17 +388,17 @@ public class MapEditorController{
                 public void handle(MouseEvent event) {
                     System.out.println("moving medical");
                     if (moveState) {
-                        Point2D releasedImageCoords = coordTrans.eventToImage(event);
-                        Point2D releasedNodeCoords = coordTrans.eventToNode(event);
-                        Location tempLoc = getClosestLocation(releasedNodeCoords.getX(), releasedNodeCoords.getY());
+                        ImageView imgView = (ImageView) event.getSource();
+                        Location tempLoc = getClosestLocation(imgView.getTranslateX(), imgView.getTranslateY());
                         //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         //System.out.println(dist);
-                        MedicalEquipment temp = dbWrapper.getMedicalEquipment(selectedImg.getId());
+                        MedicalEquipment temp = dbWrapper.getMedicalEquipment(imgView.getId());
                         temp.setLocation(tempLoc);
                         dbWrapper.updateMedicalEquipment(temp);
-                        Point2D imageCoords = coordTrans.imageToNode(tempLoc.getXcoord(),tempLoc.getYcoord());
-                        testImg.setTranslateX(imageCoords.getX());
-                        testImg.setTranslateY(imageCoords.getY());
+                        Point2D nodeCoords = coordTrans.imageToNode(tempLoc.getXcoord(),tempLoc.getYcoord());
+//                        System.out.println("newImgNode x: " + nodeCoords.getX());
+//                        System.out.println("newImgNode y: " + nodeCoords.getY());
+                        refresh();
                     }
                 }
             });
@@ -423,15 +419,14 @@ public class MapEditorController{
 
             testImg.setOnMouseDragged((t) -> {
                 if (moveState) {
-                    Point2D draggedNodeCoords = coordTrans.eventToNode(t);
-                    coordTrans.setGesturePane(gesturePane);
-                    double nodeXOffset = coordTrans.scaleNodeMovement(draggedNodeCoords.getX() - orgNodePoint.getX());
-                    double nodeYOffset = coordTrans.scaleNodeMovement(draggedNodeCoords.getY() - orgNodePoint.getY());
-
+                    Point2D nodeOffset = coordTrans.eventToNode(t);
+                    double offsetX = coordTrans.scaleNodeMovement(nodeOffset.getX() - orgNodePoint.getX());
+                    double offsetY = coordTrans.scaleNodeMovement(nodeOffset.getY() - orgNodePoint.getY());
+                    System.out.println("offsetX" + offsetX);
                     ImageView c = (ImageView) (t.getSource());
 
-                    c.setTranslateX(c.getTranslateX() + nodeXOffset);
-                    c.setTranslateY(c.getTranslateY() + nodeYOffset);
+                    c.setTranslateX(c.getTranslateX() + offsetX);
+                    c.setTranslateY(c.getTranslateY() + offsetY);
 
                     orgNodePoint = coordTrans.eventToNode(t);
                 }
@@ -472,9 +467,6 @@ public class MapEditorController{
             header1.setText("Equipment ID:");
             header8.setText("Description:");
         }
-
-
-
     }
 
     public void onPointClick(Circle testPoint){
@@ -638,14 +630,18 @@ public class MapEditorController{
 
     @FXML public void close(){
         setEditFieldsVisible(false);
-        selectedPnt.setFill(Color.BLACK);
+        if(selectedPnt!=null){
+            selectedPnt.setFill(Color.BLACK);
+        }
     }
 
 
 
     @FXML public void modify(){
-        if(!moveState)
+        if(!moveState){
             setEditFieldsVisible(true);
+            updatePopup();
+        }
         if(clicked == "location") {
             Location local = dbWrapper.getLocation(selectedPoint);
             idField.setText(selectedPoint);
@@ -661,7 +657,6 @@ public class MapEditorController{
             shortName.setText("local.getShortName()");
             longName.setText(local.getDescription());
         }
-        updatePopup();
     }
 
 
@@ -753,7 +748,7 @@ public class MapEditorController{
     }
 
     @FXML public void move(){
-        if(moveState){
+        if(!moveButton.isSelected()){
             moveState = false;
             gesturePane.setGestureEnabled(true);
             moveButton.setText("Move");
@@ -797,28 +792,22 @@ public class MapEditorController{
                 }
             }
         }
-        return(dbWrapper.getLocation(closest.getId()));
+        Point2D pnt = coordTrans.imageToNode(dbWrapper.getLocation(closest.getId()).getXcoord(),dbWrapper.getLocation(closest.getId()).getYcoord());
+        System.out.println("new location node X" + pnt.getX());
+        System.out.println("drag x: " + nodeX);
+        System.out.println("new location node Y" + pnt.getY());
+        System.out.println("drag y: " + nodeY);
+        return dbWrapper.getLocation(closest.getId());
     }
 
     void updatePopup(){
-        Translate trans = new Translate();
-//        Bounds bounds = modifyPopup.localToScreen(modifyPopup.getBoundsInLocal());
-        Bounds nodeBounds = modifyPopup.getBoundsInParent();
-
-        if(clicked == "location") {
-//            modifyPopup.translateXProperty().set(selectedPnt.getTranslateX() - bounds.getMinX());
-//            modifyPopup.translateYProperty().set(selectedPnt.getTranslateY() - (bounds.getMinY() - 20));
-            trans.setX(selectedPnt.getTranslateX() - nodeBounds.getMinX());
-            trans.setY(selectedPnt.getTranslateY() - (nodeBounds.getMinY() - 20));
-        } else if (clicked == "equipment"){
-//            modifyPopup.translateXProperty().set(selectedImg.getTranslateX() - bounds.getMinX() + 10);
-//            modifyPopup.translateYProperty().set(selectedImg.getTranslateY() - (bounds.getMinY() - 30));
-            trans.setX(selectedImg.getTranslateX() - nodeBounds.getMinX() + 10);
-            trans.setY(selectedImg.getTranslateY() - (nodeBounds.getMinY() - 30));
+        if(clicked.equals("location")){
+            modifyPopup.setTranslateX(selectedPnt.getTranslateX() + modifyPopup.getWidth()/2);
+            modifyPopup.setTranslateY(selectedPnt.getTranslateY() + modifyPopup.getHeight()/2);
+        } else{
+            modifyPopup.setTranslateX(selectedImg.getTranslateX() + modifyPopup.getWidth()/2);
+            modifyPopup.setTranslateY(selectedImg.getTranslateY() + modifyPopup.getHeight()/2);
         }
-        //modifyPopup.getTransforms().add(trans);
-        modifyPopup.setTranslateX(selectedPnt.getTranslateX() + modifyPopup.getWidth()/2);
-        modifyPopup.setTranslateY(selectedPnt.getTranslateY() + modifyPopup.getHeight()/2);
     }
 
     int locationCount(String floor){
