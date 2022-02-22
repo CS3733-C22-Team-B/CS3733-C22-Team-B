@@ -9,11 +9,11 @@
    <children>
       <TextField fx:id="firstName" layoutX="40.0" layoutY="146.0" promptText="First Name" stylesheets="@../styles/style.css" />
       <TextField fx:id="lastName" layoutX="220.0" layoutY="146.0" prefHeight="18.0" prefWidth="144.0" promptText="Last Name" stylesheets="@../styles/style.css" />
-      <TextField fx:id="position" layoutX="220.0" layoutY="260.0" promptText="Position" stylesheets="@../styles/style.css" />
+      <TextField fx:id="email" layoutX="400.0" layoutY="146.0" promptText="Email" stylesheets="@../styles/style.css" />
       <TextField fx:id="username" layoutX="40.0" layoutY="200.0" promptText="Username" stylesheets="@../styles/style.css" />
       <TextField fx:id="password" layoutX="220.0" layoutY="200.0" promptText="Password" stylesheets="@../styles/style.css" />
-      <TextField fx:id="email" layoutX="400.0" layoutY="146.0" promptText="Email" stylesheets="@../styles/style.css" />
       <TextField fx:id="phoneNumber" layoutX="400.0" layoutY="200.0" promptText="Phone Number" stylesheets="@../styles/style.css" />
+      <TextField fx:id="position" layoutX="220.0" layoutY="260.0" promptText="Position" stylesheets="@../styles/style.css" />
 
       <Label layoutX="104.0" layoutY="31.0" prefHeight="59.0" prefWidth="242.0" text="Employee Sign Up">
          <font>
