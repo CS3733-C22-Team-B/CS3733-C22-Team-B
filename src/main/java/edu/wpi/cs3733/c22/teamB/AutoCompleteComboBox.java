@@ -15,6 +15,7 @@ public class AutoCompleteComboBox<T> {
     private int minCharsToTrigger = 3;
     private T prevSelection;
 
+    private boolean fullData = true;
 
     public AutoCompleteComboBox(JFXComboBox<T> box, List<T> data) {
         this.box = box;
@@ -57,7 +58,13 @@ public class AutoCompleteComboBox<T> {
                         String s = box.getEditor().getText().toLowerCase();
                         return t.toString().toLowerCase().contains(s);
                     }).collect(Collectors.toList()));
+                    fullData = false;
                     boxSkin.show();
+                } else if (box.getEditor().getText().length() == 0 && !fullData) {
+                    box.getItems().clear();
+                    box.getItems().removeAll();
+                    box.getItems().addAll(data);
+                    fullData = true;
                 }
 
         });
@@ -67,6 +74,7 @@ public class AutoCompleteComboBox<T> {
         box.getItems().clear();
         box.getItems().removeAll();
         box.getItems().addAll(data);
+        fullData = true;
         boxSkin.hide();
     }
 }
