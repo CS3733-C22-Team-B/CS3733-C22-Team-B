@@ -51,8 +51,6 @@
                       <Label alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="35.0" prefWidth="75.0" text="Employee" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                   </children>
               </StackPane>
-              <Pane layoutX="15.0" layoutY="65.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-              <Label layoutX="70.0" prefHeight="66.0" prefWidth="489.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
             <StackPane layoutX="300.0" layoutY="200.0" onMouseClicked="#goToSRTable" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToSRTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true">
@@ -67,8 +65,8 @@
                </children>
             </StackPane>
               <Pane layoutX="15.0" layoutY="70.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-              <Label layoutX="65.0" prefHeight="66.0" prefWidth="489.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
-            <ImageView fitHeight="43.0" fitWidth="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+              <Label layoutX="70.0" prefHeight="66.0" prefWidth="489.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
+            <ImageView fitHeight="43.0" fitWidth="48.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons/Table.png" />
                </image>
