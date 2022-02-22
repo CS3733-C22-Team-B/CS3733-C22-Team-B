@@ -11,9 +11,9 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.SettingsController">
    <children>
-      <Pane fx:id="contentPane" layoutX="45.0" layoutY="14.0">
+      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <Label alignment="TOP_CENTER" layoutX="52.0" prefHeight="17.0" prefWidth="407.0" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
+            <Label alignment="TOP_CENTER" layoutX="52.0" layoutY="15.0" prefHeight="17.0" prefWidth="407.0" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
                <font>
                   <Font size="18.0" />
                </font>
@@ -22,12 +22,12 @@
             <JFXButton fx:id="BackupB" layoutX="325.0" layoutY="327.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Backup Files" textFill="WHITE" />
             <Label layoutX="126.0" layoutY="41.0" prefHeight="70.0" prefWidth="346.0" text=" You are appreciated. Thank you to all healthcare professionals for your hard work." wrapText="true" />
             <ImageView fitHeight="70.0" fitWidth="109.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="21.0" layoutY="123.0" text="Change password" />
-            <PasswordField layoutX="21.0" layoutY="146.0" />
-            <Label layoutX="21.0" layoutY="178.0" text="Confirm Password" />
-            <PasswordField layoutX="21.0" layoutY="201.0" />
+            <Label layoutX="25.0" layoutY="123.0" text="Change password" />
+            <PasswordField layoutX="25.0" layoutY="146.0" />
+            <Label layoutX="25.0" layoutY="178.0" text="Confirm Password" />
+            <PasswordField layoutX="25.0" layoutY="201.0" />
             <JFXToggleButton fx:id="clientServerToggle" layoutX="325.0" layoutY="149.0" onAction="#onClientToggle" prefHeight="58.0" prefWidth="199.0" text="Client Server" />
-            <JFXButton fx:id="RestoreB1" layoutX="18.0" layoutY="255.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Edit User Profile" textFill="WHITE" />
+            <JFXButton fx:id="RestoreB1" layoutX="22.0" layoutY="255.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Edit User Profile" textFill="WHITE" />
             <Label layoutX="353.0" layoutY="132.0" prefHeight="17.0" prefWidth="143.0" text="Database Loading Type" />
          </children>
       </Pane>
