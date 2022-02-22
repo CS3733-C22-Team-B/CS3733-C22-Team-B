@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -24,7 +25,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label prefHeight="47.0" prefWidth="91.0" text="Medical Equipment" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Medical Equipment" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
                </children>
             </StackPane>
             <StackPane layoutX="164.0" layoutY="97.0" onMouseClicked="#goToComputerServiceSR" prefHeight="100.0" prefWidth="104.0">
@@ -37,7 +38,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label prefHeight="47.0" prefWidth="91.0" text="Computer Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Computer Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
                </children>
             </StackPane>
             <StackPane layoutX="53.0" layoutY="209.0" onMouseClicked="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="104.0">
@@ -50,7 +51,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label prefHeight="47.0" prefWidth="91.0" text="Food Delivery" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="4.0" translateY="25.0" wrapText="true">
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Food Delivery" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="4.0" translateY="25.0" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -67,7 +68,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label prefHeight="47.0" prefWidth="102.0" text="External Patient Transport" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="2.0" translateY="23.0" wrapText="true" />
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="External Patient Transport" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="2.0" translateY="23.0" wrapText="true" />
                </children>
             </StackPane>
             <StackPane layoutX="276.0" layoutY="206.0" onMouseClicked="#goToMedicineDeliverySR" prefHeight="106.0" prefWidth="104.0">
@@ -78,10 +79,13 @@
                            <image>
                               <Image url="@../images/icons/Medicine2.png" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <Label prefHeight="47.0" prefWidth="102.0" text="Medicine Delivery Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="23.0" wrapText="true">
+                  <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="Medicine Delivery Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="23.0" wrapText="true">
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -98,7 +102,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label prefHeight="34.0" prefWidth="87.0" text="Laundry Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
+                  <Label mouseTransparent="true" prefHeight="34.0" prefWidth="87.0" text="Laundry Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                </children>
             </StackPane>
             <StackPane layoutX="389.0" layoutY="97.0" onMouseClicked="#goToGiftFloralSR" prefHeight="103.0" prefWidth="104.0">
@@ -112,7 +116,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <Label text="Gift &amp; Floral" textAlignment="CENTER" textFill="WHITE" translateY="27.0" wrapText="true">
+                  <Label mouseTransparent="true" text="Gift &amp; Floral" textAlignment="CENTER" textFill="WHITE" translateY="27.0" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -144,7 +148,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label text="Sanitation Request" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
+                  <Label mouseTransparent="true" text="Sanitation Request" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
