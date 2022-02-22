@@ -22,7 +22,7 @@
                                 </image>
                             </ImageView>
                      </graphic></JFXButton>
-                      <Label prefHeight="47.0" prefWidth="76.0" text="Equipment Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
+                      <Label mouseTransparent="true" prefHeight="47.0" prefWidth="76.0" text="Equipment Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
                   </children>
               </StackPane>
               <StackPane layoutX="223.0" layoutY="97.0" onMouseClicked="#goToLocationTable" prefHeight="100.0" prefWidth="104.0">
@@ -35,7 +35,7 @@
                                 </image>
                             </ImageView>
                      </graphic></JFXButton>
-                      <Label prefHeight="47.0" prefWidth="79.0" text="Location Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
+                      <Label mouseTransparent="true" prefHeight="47.0" prefWidth="79.0" text="Location Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
                   </children>
               </StackPane>
               <StackPane layoutX="335.0" layoutY="97.0" onMouseClicked="#goToEmployeeTable" prefHeight="100.0" prefWidth="104.0">
@@ -48,7 +48,7 @@
                                 </image>
                             </ImageView>
                      </graphic></JFXButton>
-                      <Label prefHeight="34.0" prefWidth="75.0" text="Employee Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
+                      <Label mouseTransparent="true" prefHeight="34.0" prefWidth="75.0" text="Employee Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                   </children>
               </StackPane>
               <Pane layoutX="5.0" layoutY="62.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
@@ -63,7 +63,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <Label prefHeight="34.0" prefWidth="87.0" text="Service Request Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
+                  <Label mouseTransparent="true" prefHeight="34.0" prefWidth="87.0" text="Service Request Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                </children>
             </StackPane>
             <ImageView fitHeight="43.0" fitWidth="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
