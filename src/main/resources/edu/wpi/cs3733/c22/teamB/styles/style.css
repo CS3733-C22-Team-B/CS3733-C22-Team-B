@@ -62,6 +62,10 @@
 
 
 /* ----------- COMBO BOX -------------- */
+.combo-box .combo-box-popup > .list-view {
+    -fx-min-height: 200;
+}
+
 
 /* ------------- TEXT FIELD  -----------*/
 
