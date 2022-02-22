@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.TableController">
     <children>
-      <Pane fx:id="contentPane" layoutX="24.0" layoutY="28.0">
+      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
               <StackPane layoutX="112.0" layoutY="92.0" onMouseClicked="#goToEquipmentTable" prefHeight="108.0" prefWidth="104.0">
                   <children>
@@ -51,8 +51,8 @@
                       <Label mouseTransparent="true" prefHeight="34.0" prefWidth="75.0" text="Employee Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                   </children>
               </StackPane>
-              <Pane layoutX="5.0" layoutY="62.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-              <Label layoutX="57.0" prefHeight="66.0" prefWidth="489.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
+              <Pane layoutX="15.0" layoutY="65.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
+              <Label layoutX="70.0" prefHeight="66.0" prefWidth="489.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Tables" />
             <StackPane layoutX="223.0" layoutY="214.0" onMouseClicked="#goToSRTable" prefHeight="100.0" prefWidth="104.0">
                <children>
                   <JFXButton onAction="#goToSRTable" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true">
@@ -66,7 +66,7 @@
                   <Label mouseTransparent="true" prefHeight="34.0" prefWidth="87.0" text="Service Request Table" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                </children>
             </StackPane>
-            <ImageView fitHeight="43.0" fitWidth="48.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="43.0" fitWidth="48.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons/Table.png" />
                </image>

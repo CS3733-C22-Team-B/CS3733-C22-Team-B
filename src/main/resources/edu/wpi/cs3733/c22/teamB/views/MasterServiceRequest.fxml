@@ -9,33 +9,33 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MasterServiceRequestController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MasterServiceRequestController">
    <children>
-      <Pane fx:id="contentPane" layoutX="44.699974060058594" layoutY="14.0">
+      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <TextArea fx:id="notesField" layoutX="6.300025939941406" layoutY="267.0" prefHeight="86.0" prefWidth="324.0" style="-fx-background-color: #99a0c2; -fx-border-color: #001268;" />
-            <JFXComboBox fx:id="floorField" layoutX="6.300025939941406" layoutY="205.0" onAction="#onFloorFieldChange" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
-            <JFXComboBox fx:id="locationField" layoutX="93.3000259399414" layoutY="205.0" prefHeight="25.0" prefWidth="236.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
+            <TextArea fx:id="notesField" layoutX="15.0" layoutY="267.0" prefHeight="86.0" prefWidth="324.0" style="-fx-background-color: #99a0c2; -fx-border-color: #001268;" />
+            <JFXComboBox fx:id="floorField" layoutX="15.0" layoutY="205.0" onAction="#onFloorFieldChange" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
+            <JFXComboBox fx:id="locationField" layoutX="103.0" layoutY="205.0" prefHeight="25.0" prefWidth="236.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
             <Label fx:id="assignEmployeeLabel" layoutX="360.3000259399414" layoutY="178.0" text="Assign Employee" />
-            <Label fx:id="floorLabel" layoutX="6.300025939941406" layoutY="178.0" text="Floor" />
-            <Label fx:id="locLabel" layoutX="93.3000259399414" layoutY="178.0" text="Location" />
+            <Label fx:id="floorLabel" layoutX="15.0" layoutY="178.0" text="Floor" />
+            <Label fx:id="locLabel" layoutX="103.0" layoutY="178.0" text="Location" />
             <JFXButton fx:id="submitButton" layoutX="364.50003814697266" layoutY="267.0" onAction="#submit" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #002168; -fx-border-color: #000000;" text="Submit" textFill="WHITE" />
             <JFXButton fx:id="clearButton" layoutX="364.50003814697266" layoutY="297.0" onAction="#clear" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueWithBorder" stylesheets="@../styles/style.css" text="Clear" />
-            <Label fx:id="notesLabel" layoutX="6.300025939941406" layoutY="241.0" text="Notes" />
-            <AnchorPane fx:id="srPane" layoutX="6.300025939941406" layoutY="40.0" prefHeight="127.0" prefWidth="324.0" />
-            <Line endX="424.79998779296875" endY="1.1444091796875E-5" layoutX="57.0" layoutY="25.0" startX="-84.8000259399414" startY="1.1444091796875E-5" style="-fx-fill: #002168;" />
-            <Label fx:id="srLabel" layoutX="0.30002593994140625" prefHeight="17.0" prefWidth="511.0" text="Label" />
+            <Label fx:id="notesLabel" layoutX="15.0" layoutY="241.0" text="Notes" />
+            <AnchorPane fx:id="srPane" layoutX="15.0" layoutY="36.0" prefHeight="127.0" prefWidth="324.0" />
+            <Line endX="424.79998779296875" endY="1.1444091796875E-5" layoutX="70.0" layoutY="35.0" startX="-57.000022888183594" style="-fx-fill: #002168;" />
+            <Label fx:id="srLabel" layoutX="15.0" layoutY="15.0" prefHeight="17.0" prefWidth="511.0" text="Label" />
             <JFXButton fx:id="srTableButton" layoutX="364.50003814697266" layoutY="327.0" onAction="#goToSRTable" prefHeight="25.0" prefWidth="149.0" style="-fx-border-color: #002168; -fx-background-color: #99a6c2;" text="Service Request Table" textFill="WHITE" />
             <JFXComboBox fx:id="assignedEmployeeField" layoutX="364.50003814697266" layoutY="205.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
-            <Pane fx:id="popup" layoutX="126.0" layoutY="123.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
-               <children>
-                  <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white;" text="Submitted!">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="popup" layoutX="323.0" layoutY="-154.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white;" text="Submitted!">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
