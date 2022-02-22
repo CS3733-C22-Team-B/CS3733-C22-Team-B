@@ -183,6 +183,12 @@ public class DatabaseWrapper {
         }    }
 
     public void engageRemote() {
+
+        try {
+            backupAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.LocationDao = this.LocationMongo;
         this.EmployeeDao = this.EmployeeMongo;
         this.MedicalEquipmentDao = this.MedicalEquipmentMongo;
@@ -196,10 +202,6 @@ public class DatabaseWrapper {
         this.ComputerServiceSRDao = this.ComputerServiceSRMongo;
         this.SanitationSRDao = this.SanitationSRMongo;
         try {
-            backupAll();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }try {
             restoreAll();
         } catch (IOException e) {
             e.printStackTrace();

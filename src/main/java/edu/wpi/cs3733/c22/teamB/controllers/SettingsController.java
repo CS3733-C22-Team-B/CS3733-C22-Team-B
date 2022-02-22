@@ -29,6 +29,8 @@ public class SettingsController extends AbsPage implements Initializable{
     JFXButton BackupB;
     @FXML
     JFXToggleButton clientServerToggle;
+    @FXML JFXToggleButton embeddedToggle;
+    @FXML JFXToggleButton remoteToggle;
     @FXML
     Pane anchorPane;
     @FXML
@@ -66,33 +68,41 @@ public class SettingsController extends AbsPage implements Initializable{
         }
     }
 
+    public void onEmbeddedToggle(ActionEvent actionEvent) throws IOException {
+        if (embeddedToggle.isSelected()) {
+            clientServerToggle.setSelected(false);
+            remoteToggle.setSelected(false);
+            db.backupAll();
+            db.engageEmbedded();
+            db.restoreAll();
+        }
+    }
     public void onClientToggle(ActionEvent actionEvent) throws IOException {
         if (clientServerToggle.isSelected()) {
-            embeddedToggle.setSeletc
+            embeddedToggle.setSelected(false);
+            remoteToggle.setSelected(false);
             db.backupAll();
             db.engageClient();
-            db.restoreAll();
-
-        } else {
-            db.backupAll();
-            db.initEmbedded();
             db.restoreAll();
         }
     }
 
-    public void onEmbedded(ActionEvent actionEvent) {
-        db.engageEmbedded();
+
+
+    public void onRemoteToggle(ActionEvent actionEvent) throws IOException {
+        if (remoteToggle.isSelected()){
+            clientServerToggle.setSelected(false);
+            embeddedToggle.setSelected(false);
+            db.backupAll();
+            db.engageRemote();
+            db.restoreAll();
+        }
     }
-    public void onClient(ActionEvent actionEvent) {
-//        db.engageClient();
-    }
-    public void onRemote(ActionEvent actionEvent) {
-        db.engageRemote();
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clientServerToggle.setSelected(true);
+        embeddedToggle.setSelected(true);
 
 //        if (db.getConnection() instanceof org.apache.derby.client.net.NetConnection) {
 //            clientServerToggle.setSelected(true);
