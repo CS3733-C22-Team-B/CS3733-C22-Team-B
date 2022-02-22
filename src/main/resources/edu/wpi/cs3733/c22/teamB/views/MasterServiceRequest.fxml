@@ -29,7 +29,7 @@
             <JFXComboBox fx:id="assignedEmployeeField" layoutX="364.50003814697266" layoutY="205.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
             <Pane fx:id="popup" layoutX="126.0" layoutY="123.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
                <children>
-                  <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white;" text="Submitted!">
+                  <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white; -fx-font-size: 30;" text="Submitted!">
                      <font>
                         <Font size="30.0" />
                      </font>
