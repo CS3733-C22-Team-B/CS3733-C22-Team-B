@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class AutoCompleteComboBox<T> {
     private JFXComboBox<T> box;
+    private JFXComboBoxListViewSkin<T> boxSkin;
     private List<T> data;
     private int minCharsToTrigger = 3;
     private T prevSelection;
@@ -30,7 +31,7 @@ public class AutoCompleteComboBox<T> {
     public void init() {
         box.setEditable(true);
         box.getItems().addAll(data);
-        JFXComboBoxListViewSkin<T> boxSkin = new JFXComboBoxListViewSkin<T>(box);
+        boxSkin = new JFXComboBoxListViewSkin<T>(box);
         boxSkin.getPopupContent().addEventFilter(KeyEvent.ANY, (event) -> {
             if(event.getCode() == KeyCode.SPACE) {
                 event.consume();
@@ -61,5 +62,11 @@ public class AutoCompleteComboBox<T> {
 
         });
     }
-
+    public void updateData(List<T> newData) {
+        this.data = newData;
+        box.getItems().clear();
+        box.getItems().removeAll();
+        box.getItems().addAll(data);
+        boxSkin.hide();
+    }
 }

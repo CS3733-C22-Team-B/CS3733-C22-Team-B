@@ -248,9 +248,9 @@ public class MasterServiceRequestController extends AbsPage {
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
-        locationField.getItems().clear();
-        locationField.getItems().removeAll();
-        locationField.getItems().addAll(locMap.keySet()
+//        locationField.getItems().clear();
+//        locationField.getItems().removeAll();
+        locationAC.updateData(locMap.keySet()
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
