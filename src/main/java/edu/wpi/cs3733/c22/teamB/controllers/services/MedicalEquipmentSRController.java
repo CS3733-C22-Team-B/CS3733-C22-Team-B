@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.c22.teamB.controllers.services;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.AutoCompleteComboBox;
 import edu.wpi.cs3733.c22.teamB.controllers.IController;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +19,9 @@ import javafx.fxml.FXML;
 
 public class MedicalEquipmentSRController implements IController {
     @FXML private JFXComboBox<String> equipmentTypeField;
+    private AutoCompleteComboBox<String> equipmentTypeAC;
     @FXML private JFXComboBox<String> equipmentNameField;
+    private AutoCompleteComboBox<String> equipmentNameAC;
 
     private List<MedicalEquipment> medEqpList;
     private Map<String, MedicalEquipment> medEqpMap;
@@ -46,8 +50,13 @@ public class MedicalEquipmentSRController implements IController {
                                                 + ' '
                                                 + medEqpList.get(i).getEquipmentName()),
                                         i -> medEqpList.get(i)));
-        equipmentTypeField.getItems().add("ALL");
-        equipmentTypeField.getItems().addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
+//        equipmentTypeField.getItems().add("ALL");
+//        equipmentTypeField.getItems().addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
+        List<String> equipmentTypeFieldList = new ArrayList<>();
+        equipmentTypeFieldList.add("ALL");
+        equipmentTypeFieldList.addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
+        equipmentTypeAC = new AutoCompleteComboBox<>(equipmentTypeField, equipmentTypeFieldList);
+
         if (sr == null) {
             clear();
         } else {
@@ -55,6 +64,12 @@ public class MedicalEquipmentSRController implements IController {
             equipmentNameField.setValue(sr.getMedicalEquipment().getEquipmentID() + ' ' + sr.getMedicalEquipment().getEquipmentName());
         }
         equipmentNameField.getItems().addAll(medEqpMap.keySet()
+                .stream()
+                .filter(
+                        lstr -> equipmentTypeField.getValue().equals("ALL")
+                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
+                .collect(Collectors.toList()));
+        equipmentNameAC = new AutoCompleteComboBox<>(equipmentNameField, medEqpMap.keySet()
                 .stream()
                 .filter(
                         lstr -> equipmentTypeField.getValue().equals("ALL")
