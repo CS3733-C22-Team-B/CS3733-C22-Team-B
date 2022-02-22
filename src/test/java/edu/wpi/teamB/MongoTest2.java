@@ -6,10 +6,7 @@ import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
-import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
-import edu.wpi.cs3733.c22.teamB.entity.objects.services.GiftFloralSR;
-import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
-import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicineDeliverySR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 import org.junit.jupiter.api.Test;
 
 import java.net.UnknownHostException;
@@ -159,5 +156,29 @@ public class MongoTest2 {
         medicineDeliverySRMongo.deleteValue(medicineSR32.getSrID());
         medicineDeliverySRMongo.getValue(medicineSR.getSrID());
         medicineDeliverySRMongo.getAllValues();
+
+
+        // Sanitation
+
+        SanitationSRMongo sanitationSRMongo = new SanitationSRMongo(mainSRMongo);
+        sanitationSRMongo.dropTable();
+        sanitationSRMongo.createTable();
+
+        SanitationSR sanitationSR = new SanitationSR("Sanitation1", "13", location1, employee1, employee2, date, "132", "123");
+        SanitationSR sanitationSR2 = new SanitationSR("Sanitation2", "13", location1, employee1, employee2, date, "132", "123");
+        SanitationSR sanitationSR3 = new SanitationSR("Sanitation3", "13", location1, employee1, employee2, date, "132", "123");
+        SanitationSR sanitationSR32 = new SanitationSR("Sanitation3", "13", location1, employee1, employee2, date, "132", "123");
+
+        mainSRMongo.addValue(sanitationSR);
+        mainSRMongo.addValue(sanitationSR2);
+        mainSRMongo.addValue(sanitationSR3);
+
+        sanitationSRMongo.addValue(sanitationSR);
+        sanitationSRMongo.addValue(sanitationSR2);
+        sanitationSRMongo.addValue(sanitationSR3);
+        sanitationSRMongo.updateValue(sanitationSR32);
+        sanitationSRMongo.deleteValue(sanitationSR32.getSrID());
+        sanitationSRMongo.getValue(sanitationSR.getSrID());
+        sanitationSRMongo.getAllValues();
     }
 }
