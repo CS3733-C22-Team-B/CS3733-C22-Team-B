@@ -700,6 +700,8 @@ public class MapEditorController{
                 nextID++;
             }
             //Get coordinates in the space of the original map
+            coordTrans.setGesturePane(gesturePane);
+            coordTrans.setAnchorPane(anchorPane);
             Point2D imageCoords = coordTrans.eventToImage(event);
             double imageX = imageCoords.getX();
             double imageY = imageCoords.getY();

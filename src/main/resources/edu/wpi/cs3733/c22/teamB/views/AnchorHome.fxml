@@ -14,7 +14,7 @@
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane minHeight="75.0" prefHeight="75.0" style="-fx-background-color: #002168;">
+            <Pane minHeight="75.0" maxHeight="75.0" style="-fx-background-color: #002168;">
                <children>
                   <Label fx:id="pageName" layoutX="68.0" layoutY="29.0" text="Label" textFill="WHITE" />
                </children></Pane>

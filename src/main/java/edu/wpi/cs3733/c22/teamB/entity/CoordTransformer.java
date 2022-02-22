@@ -4,6 +4,7 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import net.kurobako.gesturefx.GesturePane;
 
@@ -15,6 +16,7 @@ public class CoordTransformer {
     private double nodeScaleCoeff;
     private StackPane stackPane;
     private GesturePane gesturePane;
+    private AnchorPane anchorPane;
 
     private void recalcScaleCoeff(){
 //        nodeScaleCoeff = imageView.getImage().getHeight()/stackPane.getHeight();
@@ -29,6 +31,10 @@ public class CoordTransformer {
     public void setGesturePane(GesturePane gesturePane){
         this.gesturePane = gesturePane;
         recalcScaleCoeff();
+    }
+
+    public void setAnchorPane(AnchorPane anchorPane){
+        this.anchorPane = anchorPane;
     }
 
     public CoordTransformer(ImageView imageView, GesturePane gesturePane){
@@ -78,8 +84,11 @@ public class CoordTransformer {
     }
     public Point2D eventToImage(MouseEvent event){
         recalcScaleCoeff();
-        Point2D temp = eventToNode(event);
-        return nodeToImage(temp.getX(),temp.getY());
+        double scale = gesturePane.getCurrentScale();
+        double yOffset = 75; //Height of top bar
+        double imageX = (event.getSceneX()/scale) - gesturePane.getCurrentX();
+        double imageY = (event.getSceneY()- yOffset)/scale - gesturePane.getCurrentY();
+        return new Point2D(imageX,imageY);
     }
 
     //Gets node movement and scales it depending on zoom
