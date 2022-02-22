@@ -180,6 +180,7 @@ public class MapEditorController{
                 coordTrans.setGesturePane(gesturePane);
             }
         });
+        refresh();
     }
 
     public void setTextPos(){
