@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.c22.teamB.AutoCompleteComboBox;
 import edu.wpi.cs3733.c22.teamB.controllers.services.*;
 import edu.wpi.cs3733.c22.teamB.entity.SRIDGenerator;
 import edu.wpi.cs3733.c22.teamB.entity.*;
@@ -9,34 +10,43 @@ import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MasterServiceRequestController {
+public class MasterServiceRequestController extends AbsPage {
+    @FXML public Label assignEmployeeLabel;
+    @FXML public Label floorLabel;
+    @FXML public Label locLabel;
+    @FXML public Label notesLabel;
     @FXML private JFXButton submitButton;
     @FXML private JFXButton clearButton;
     @FXML private JFXButton backButton;
-    @FXML private TextField idField;
-    @FXML private JFXComboBox<String> statusField;
+    @FXML private JFXButton srTableButton;
     @FXML private JFXComboBox<String> assignedEmployeeField;
+    private AutoCompleteComboBox<String> assignedEmployeeAC;
     @FXML private TextArea notesField;
     @FXML private JFXComboBox<String> floorField;
     @FXML private JFXComboBox<String> locationField;
+    private AutoCompleteComboBox<String> locationAC;
     @FXML private AnchorPane srPane;
     @FXML private Label srLabel;
+    @FXML private Pane anchorPane;
+    @FXML private Pane contentPane;
 
     private Pane childPane;
     private IController childController;
@@ -48,6 +58,9 @@ public class MasterServiceRequestController {
     private Map<String, Location> locMap;
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
+
+    //popup
+    @FXML private Pane popup;
 
     public MasterServiceRequestController() {}
 
@@ -90,7 +103,6 @@ public class MasterServiceRequestController {
                         return new SanitationSRController((SanitationSR) sr);
                 }
                 return null;
-
             });
             childPane = loader.load();
             childController = loader.getController();
@@ -101,14 +113,9 @@ public class MasterServiceRequestController {
 
     // DO NOT TOUCH THIS
     @FXML private void initialize() {
+        popup.setVisible(false);
         DatabaseWrapper dw = new DatabaseWrapper();
-        // idField
-
         srLabel.setText(getLabel());
-
-
-        // statusField
-        statusField.getItems().addAll(AbstractSR.SRstatus);
 
         // assignedEmployeeField
         employeeList = dw.getAllEmployee();
@@ -120,10 +127,7 @@ public class MasterServiceRequestController {
                                         i ->
                                                 (employeeList.get(i).getEmployeeID() + ' ' + employeeList.get(i).getName()),
                                         i -> employeeList.get(i)));
-        assignedEmployeeField.getItems().addAll(employeeMap.keySet());
-
-        // floorField init
-        floorField.getItems().addAll("ALL", "L1", "L2", "1", "2", "3"); // all floors
+        assignedEmployeeAC = new AutoCompleteComboBox<String>(assignedEmployeeField, new ArrayList<>(employeeMap.keySet()));
 
         // locationField init
         locList = dw.getAllLocation();
@@ -135,30 +139,31 @@ public class MasterServiceRequestController {
                                         i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
                                         i -> locList.get(i)));
 
-        // notesField init
+        // floorField init
+        List<String> floorList = new ArrayList<>();
+        floorList.add("ALL");
+        floorList.addAll(locMap.values().stream().map(Location::getFloor).collect(Collectors.toSet())); // all floors
+        floorField.getItems().addAll(floorList);
 
-        // srLabel (Page title)
-//        srLabel.setText(childSRType); // change this to be more correct
+        // notesField init
 
         if (childSR == null) {
             clear(null);
-            idField.setDisable(true);
-            statusField.setDisable(true);
-            assignedEmployeeField.setDisable(true);
         }
         else {
-            idField.setText(childSR.getSrID());
-            statusField.setValue(childSR.getStatus());
             assignedEmployeeField.setValue(childSR.getAssignedEmployee().getEmployeeID() + ' ' + childSR.getAssignedEmployee().getName());
             floorField.setValue(childSR.getLocation().getFloor());
             locationField.setValue(childSR.getLocation().getNodeID() + ' ' + childSR.getLocation().getLongName());
             notesField.setText(childSR.getNotes());
-
-            idField.setDisable(false);
-            statusField.setDisable(false);
             assignedEmployeeField.setDisable(false);
         }
-        locationField.getItems().addAll(locMap.keySet()
+//        locationField.getItems().addAll(locMap.keySet()
+//                .stream()
+//                .filter(
+//                        lstr -> floorField.getValue().equals("ALL")
+//                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
+//                .collect(Collectors.toList()));
+        locationAC = new AutoCompleteComboBox<String>(locationField, locMap.keySet()
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
@@ -167,7 +172,9 @@ public class MasterServiceRequestController {
 
         // load specific SR fxml
         srPane.getChildren().add(childPane);
-
+        initResize();
+        resize();
+        namePage();
     }
 
     private String getLabel() {
@@ -203,51 +210,51 @@ public class MasterServiceRequestController {
     // DO NOT TOUCH THIS
     @FXML private void submit(ActionEvent actionEvent) {
         childSR = new MainSR(
-                idField.getText(),
+                SRIDGenerator.generateID(),
                 childSRType,
-                statusField.getValue(),
+                "WAITING",
                 locMap.get(locationField.getValue()),
-                employeeMap.get(assignedEmployeeField.getValue()),
+                LoginController.getLoggedInEmployee(),
                 employeeMap.get(assignedEmployeeField.getValue()),
                 LocalDate.now(),
                 notesField.getText());
         childController.submit(childSR);
+
         this.clear(null);
+
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     // DO NOT TOUCH THIS
     @FXML private void clear(ActionEvent actionEvent) {
-        idField.setText(SRIDGenerator.generateID());
-        statusField.setValue("WAITING");
-        assignedEmployeeField.setValue(employeeList.get(0).getEmployeeID() + ' ' + employeeList.get(0).getName());
         floorField.setValue("ALL");
         locationField.setValue(null);
         notesField.clear();
-
+        assignedEmployeeField.setValue(null);
         childController.clear();
-    }
-
-    @FXML private void back(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestMenu.fxml"));
-            BorderHomeController.curBorderHomeController.changeNode(loader);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        popup.setVisible(false);
     }
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
-        locationField.setValue(null);
-        locationField.getItems().removeAll();
-        locationField.getItems().clear();
-        locationField.getItems().addAll(locMap.keySet()
+//        ladminocationField.getItems().clear();
+//        locationField.getItems().removeAll();
+        locationAC.updateData(locMap.keySet()
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
                                 || locMap.get(lstr).getFloor().equals(floorField.getValue()))
                 .collect(Collectors.toList()));
+        locationField.setValue(null);
+        locationField.getEditor().setText(null);
     }
     // Important: add your path here
     public static String srTypeToFXMLPath(String srType) {
@@ -270,6 +277,22 @@ public class MasterServiceRequestController {
                 return "/edu/wpi/cs3733/c22/teamB/views/services/SanitationSR.fxml";
             default:
                 throw new RuntimeException("srType invalid");
+        }
+    }
+
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText(getLabel());
+    }
+
+    public void goToSRTable(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/ServiceRequestManager.fxml"));
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

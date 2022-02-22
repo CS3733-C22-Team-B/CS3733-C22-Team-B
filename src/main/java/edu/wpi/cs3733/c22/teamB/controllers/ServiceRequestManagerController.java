@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import com.sun.javafx.sg.prism.EffectFilter;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
-import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -174,7 +174,7 @@ public class ServiceRequestManagerController {
                                 param -> new MasterServiceRequestController(sr.getSrType(), dw.getSR(sr.getSrID())));
 //                        Parent root = loader.load();
 //                        Bapp.getPrimaryStage().getScene().setRoot(root);
-                        BorderHomeController.curBorderHomeController.changeNode(loader);
+                        AnchorHomeController.curAnchorHomeController.changeNode(loader);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -273,7 +273,7 @@ public class ServiceRequestManagerController {
 
     @FXML
     private void onFilterByButton(ActionEvent actionEvent) {
-        filterDialog.show((StackPane) BorderHomeController.curBorderHomeController.getAnchorPane().getChildren().get(0));
+        filterDialog.show((StackPane) AnchorHomeController.curAnchorHomeController.getAnchorPane().getChildren().get(0));
     }
 
     @FXML

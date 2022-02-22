@@ -2,7 +2,9 @@ package edu.wpi.cs3733.c22.teamB.controllers.tables;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
-import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
+import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
+import edu.wpi.cs3733.c22.teamB.entity.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class EmployeeTableController {
+public class EmployeeTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
@@ -38,7 +40,10 @@ public class EmployeeTableController {
     @FXML private TableView<Employee> table;
     @FXML private JFXButton loadButton;
 
-
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.setPageName("Employee Table");
+    }
 
 
     private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
@@ -66,6 +71,15 @@ public class EmployeeTableController {
         });
 
         loadTable();
+//        TODO fix initResize bug
+//        initResize();
+        resize();
+        namePage();
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            table.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
+            table.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
+        });
+
     }
 
     @FXML
