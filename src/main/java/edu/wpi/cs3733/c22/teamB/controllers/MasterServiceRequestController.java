@@ -103,7 +103,6 @@ public class MasterServiceRequestController extends AbsPage {
                         return new SanitationSRController((SanitationSR) sr);
                 }
                 return null;
-
             });
             childPane = loader.load();
             childController = loader.getController();
@@ -114,6 +113,7 @@ public class MasterServiceRequestController extends AbsPage {
 
     // DO NOT TOUCH THIS
     @FXML private void initialize() {
+        popup.setVisible(false);
         DatabaseWrapper dw = new DatabaseWrapper();
         srLabel.setText(getLabel());
 
