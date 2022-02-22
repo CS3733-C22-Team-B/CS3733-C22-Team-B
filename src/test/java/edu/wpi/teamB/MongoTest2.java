@@ -5,8 +5,10 @@ import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.GiftFloralSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
 import org.junit.jupiter.api.Test;
 
 import java.net.UnknownHostException;
@@ -95,5 +97,43 @@ public class MongoTest2 {
         giftFloralSRMongo.deleteValue(giftFloralSR3.getSrID());
         giftFloralSRMongo.getValue(giftFloralSR.getSrID());
         giftFloralSRMongo.getAllValues();
+
+        //MedicalEquipment
+
+        EquipmentMongo equipmentMongo = new EquipmentMongo(locationMongo);
+        equipmentMongo.dropTable();
+        equipmentMongo.createTable();
+
+        MedicalEquipment equipment1 = new MedicalEquipment("1", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment2 = new MedicalEquipment("2", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment3 = new MedicalEquipment("3", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment32 = new MedicalEquipment("3", "1122132", "13", "12", location2, "123", "123", "123", "123", 1);
+
+        equipmentMongo.addValue(equipment1);
+        equipmentMongo.addValue(equipment2);
+        equipmentMongo.addValue(equipment3);
+
+        //MedicalEquipmentSR
+
+        MedicalEquipmentSRMongo medicalEquipmentSRMongo = new MedicalEquipmentSRMongo(mainSRMongo, equipmentMongo);
+        medicalEquipmentSRMongo.dropTable();
+        medicalEquipmentSRMongo.createTable();
+
+        MedicalEquipmentSR medicalEquipmentSR = new MedicalEquipmentSR("medSR1", "123", location1, employee1, employee2, date, "123", equipment1);
+        MedicalEquipmentSR medicalEquipmentSR2 = new MedicalEquipmentSR("medSR2", "123", location1, employee1, employee2, date, "123", equipment1);
+        MedicalEquipmentSR medicalEquipmentSR3 = new MedicalEquipmentSR("medSR3", "123", location1, employee1, employee2, date, "123", equipment2);
+        MedicalEquipmentSR medicalEquipmentSR32 = new MedicalEquipmentSR("medSR3", "123", location1, employee1, employee2, date, "123", equipment1);
+
+        mainSRMongo.addValue(medicalEquipmentSR);
+        mainSRMongo.addValue(medicalEquipmentSR2);
+        mainSRMongo.addValue(medicalEquipmentSR3);
+
+        medicalEquipmentSRMongo.addValue(medicalEquipmentSR);
+        medicalEquipmentSRMongo.addValue(medicalEquipmentSR2);
+        medicalEquipmentSRMongo.addValue(medicalEquipmentSR3);
+        medicalEquipmentSRMongo.updateValue(medicalEquipmentSR32);
+        medicalEquipmentSRMongo.deleteValue(medicalEquipmentSR32.getSrID());
+        medicalEquipmentSRMongo.getValue(medicalEquipmentSR.getSrID());
+        medicalEquipmentSRMongo.getAllValues();
     }
 }
