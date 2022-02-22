@@ -143,7 +143,17 @@ public class DatabaseWrapper {
         this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
         this.SanitationSRDao = this.SanitationSRDerby;
 
+        try {
+            backupAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         initEmbedded();
+        try {
+            restoreAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void engageClient() {
@@ -160,8 +170,17 @@ public class DatabaseWrapper {
         this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
         this.SanitationSRDao = this.SanitationSRDerby;
 
+        try {
+            backupAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         initClient();
-    }
+        try {
+            restoreAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    }
 
     public void engageRemote() {
         this.LocationDao = this.LocationMongo;
@@ -176,6 +195,15 @@ public class DatabaseWrapper {
         this.MedicineDeliverySRDao = this.MedicineDeliverySRMongo;
         this.ComputerServiceSRDao = this.ComputerServiceSRMongo;
         this.SanitationSRDao = this.SanitationSRMongo;
+        try {
+            backupAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }try {
+            restoreAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initEmbedded() {

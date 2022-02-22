@@ -68,8 +68,9 @@ public class SettingsController extends AbsPage implements Initializable{
 
     public void onClientToggle(ActionEvent actionEvent) throws IOException {
         if (clientServerToggle.isSelected()) {
+            embeddedToggle.setSeletc
             db.backupAll();
-            db.initClient();
+            db.engageClient();
             db.restoreAll();
 
         } else {
@@ -83,7 +84,7 @@ public class SettingsController extends AbsPage implements Initializable{
         db.engageEmbedded();
     }
     public void onClient(ActionEvent actionEvent) {
-        db.engageClient();
+//        db.engageClient();
     }
     public void onRemote(ActionEvent actionEvent) {
         db.engageRemote();
@@ -91,12 +92,13 @@ public class SettingsController extends AbsPage implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        clientServerToggle.setSelected(true);
 
-        if (db.getConnection() instanceof org.apache.derby.client.net.NetConnection) {
-            clientServerToggle.setSelected(true);
-        } else {
-            clientServerToggle.setSelected(false);
-        }
+//        if (db.getConnection() instanceof org.apache.derby.client.net.NetConnection) {
+//            clientServerToggle.setSelected(true);
+//        } else {
+//            clientServerToggle.setSelected(false);
+//        }
 
         initResize();
         resize();
