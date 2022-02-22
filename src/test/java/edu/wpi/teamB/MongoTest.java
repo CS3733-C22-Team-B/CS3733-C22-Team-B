@@ -7,6 +7,7 @@ import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.ComputerServiceSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.ExternalTransportSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MainSR;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,6 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MongoTest {
-
-
 
 
     public MongoTest() {
@@ -91,10 +90,9 @@ public class MongoTest {
         equipmentMongo.dropTable();
         equipmentMongo.createTable();
 
-        MedicalEquipment equipment1 = new MedicalEquipment("1", "12", "13", "12",location2, "123", "123", "123", "123",1);
-        MedicalEquipment equipment2 = new MedicalEquipment("2", "12", "13", "12",location2, "123", "123", "123", "123",1);
-        MedicalEquipment equipment3 = new MedicalEquipment("1", "12", "13", "12",location2, "123", "123", "123", "123",1);
-
+        MedicalEquipment equipment1 = new MedicalEquipment("1", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment2 = new MedicalEquipment("2", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment3 = new MedicalEquipment("1", "12", "13", "12", location2, "123", "123", "123", "123", 1);
 
 
         equipmentMongo.addValue(equipment1);
@@ -104,7 +102,7 @@ public class MongoTest {
         equipmentMongo.getValue(equipment2.getEquipmentID());
         equipmentMongo.getAllValues();
 
-        assertEquals(equipmentMongo.getValue(equipment2.getEquipmentID()).getLocation(),location3);
+        assertEquals(equipmentMongo.getValue(equipment2.getEquipmentID()).getLocation(), location3);
 
     }
 
@@ -130,9 +128,9 @@ public class MongoTest {
         mongoWrapper.getLocation(location3.getNodeID());
         mongoWrapper.getAllLocation();
 
-        MedicalEquipment equipment1 = new MedicalEquipment("1", "12", "13", "12",location2, "123", "123", "123", "123",1);
-        MedicalEquipment equipment2 = new MedicalEquipment("2", "12", "13", "12",location2, "123", "123", "123", "123",1);
-        MedicalEquipment equipment3 = new MedicalEquipment("1", "12", "13", "12",location2, "123", "123", "123", "123",1);
+        MedicalEquipment equipment1 = new MedicalEquipment("1", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment2 = new MedicalEquipment("2", "12", "13", "12", location2, "123", "123", "123", "123", 1);
+        MedicalEquipment equipment3 = new MedicalEquipment("1", "12", "13", "12", location2, "123", "123", "123", "123", 1);
 
 
         mongoWrapper.addMedicalEquipment(equipment1);
@@ -142,7 +140,7 @@ public class MongoTest {
         mongoWrapper.getMedicalEquipment(equipment2.getEquipmentID());
         mongoWrapper.getAllMedicalEquipment();
 
-        assertEquals(mongoWrapper.getMedicalEquipment(equipment2.getEquipmentID()).getLocation(),location3);
+        assertEquals(mongoWrapper.getMedicalEquipment(equipment2.getEquipmentID()).getLocation(), location3);
 
 
         Employee employee1 = new Employee("123", "123", "123", "123", 12, "123", "123", "213", "123");
@@ -161,7 +159,8 @@ public class MongoTest {
 
     }
 
-    @Test public void MainSRMongo() throws UnknownHostException {
+    @Test
+    public void MainSRMongo() throws UnknownHostException {
         MongoDB.getConnection();
         IDatabase<Location> locationMongo = new LocationMongo();
         IDatabase<Employee> employeeMongo = new EmployeeMongo();
@@ -171,6 +170,7 @@ public class MongoTest {
         IDatabase<AbstractSR> mainSRMongo = new MainSRMongo(locationMongo, employeeMongo);
 
         ComputerServiceSRMongo computerServiceSRMongo = new ComputerServiceSRMongo(mainSRMongo);
+        ExternalTransportSRMongo externalTransportSRMongo = new ExternalTransportSRMongo(mainSRMongo);
 
         mainSRMongo.dropTable();
         mainSRMongo.createTable();
@@ -210,7 +210,6 @@ public class MongoTest {
         employeeMongo.deleteValue(employee3.getEmployeeID());
 
 
-
 //        Location location3 = new Location("123", 1000, 13, "12", "123", "123", "123", "123");
 //        Employee employee2 = new Employee("223", "123", "123", "123", 12, "123", "123", "213", "123");
 
@@ -218,6 +217,9 @@ public class MongoTest {
         AbstractSR main1 = new MainSR("123", "123", "123", location3, employee2, employee2, date, "213");
         AbstractSR main2 = new MainSR("223", "123", "123", location3, employee2, employee2, date, "213");
         AbstractSR main3 = new MainSR("123", "1222222", "123", location3, employee2, employee2, date, "213");
+        ExternalTransportSR externalTransportSR = new ExternalTransportSR("External1", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
+        ExternalTransportSR externalTransportSR2 = new ExternalTransportSR("External2", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
+        ExternalTransportSR externalTransportSR3 = new ExternalTransportSR("External1", "13123", location2, employee2, employee2, date, "123", "123", "123", "231");
 
 
 //        locationMongo.deleteValue(main1.getLocation().getNodeID());
@@ -227,6 +229,9 @@ public class MongoTest {
 
         mainSRMongo.addValue(main1);
         mainSRMongo.addValue(main2);
+//        mainSRMongo.addValue(externalTransportSR);
+//        mainSRMongo.addValue(externalTransportSR2);
+//        mainSRMongo.addValue(externalTransportSR3);
         mainSRMongo.updateValue(main3);
         mainSRMongo.getValue(main3.getSrID());
 //        mainSRMongo.deleteValue(main1.getSrID());
@@ -234,10 +239,10 @@ public class MongoTest {
 
 //        MongoDB.getConnection();
 
-
+        //ComputerServiceSR
         ComputerServiceSR computerServiceSR = new ComputerServiceSR("123", "123", location2, employee2, employee2, date, "123", "123");
         ComputerServiceSR computerServiceSR2 = new ComputerServiceSR("223", "123", location2, employee2, employee2, date, "123", "123");
-        ComputerServiceSR computerServiceSR3 = new ComputerServiceSR("123", "123", location2, employee2, employee2, date, "123", "123");
+        ComputerServiceSR computerServiceSR3 = new ComputerServiceSR("123", "122323", location2, employee2, employee2, date, "123", "123");
 
         computerServiceSRMongo.dropTable();
         computerServiceSRMongo.createTable();
@@ -249,6 +254,26 @@ public class MongoTest {
 
         computerServiceSRMongo.getValue(computerServiceSR2.getSrID());
         computerServiceSRMongo.getAllValues();
+
+
+        //ExternalTransportSR
+//        ExternalTransportSR externalTransportSR = new ExternalTransportSR("External1", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
+//        ExternalTransportSR externalTransportSR2 = new ExternalTransportSR("External2", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
+//        ExternalTransportSR externalTransportSR3 = new ExternalTransportSR("External3", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
+
+        externalTransportSRMongo.dropTable();
+//        externalTransportSRMongo.createTable();
+
+//        externalTransportSRMongo.addValue(externalTransportSR);
+//        externalTransportSRMongo.addValue(externalTransportSR2);
+//        externalTransportSRMongo.updateValue(externalTransportSR3);
+//        externalTransportSRMongo.deleteValue(computerServiceSR3.getSrID());
+//
+//        externalTransportSRMongo.getValue(computerServiceSR2.getSrID());
+//        externalTransportSRMongo.getAllValues();
+//    }
+
+
     }
 
 

@@ -90,7 +90,7 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
             computerServiceSRList.add(getValue(srID));
         }
 
-        return null;
+        return computerServiceSRList;
     }
 
     @Override
