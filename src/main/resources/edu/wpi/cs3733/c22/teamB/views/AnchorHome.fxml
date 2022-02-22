@@ -6,13 +6,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="808.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController">
+<AnchorPane prefHeight="808.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane minHeight="75.0" prefHeight="75.0" style="-fx-background-color: #002168;">
                <children>
-                  <Label fx:id="pageName" layoutX="68.0" layoutY="29.0" prefHeight="17.0" prefWidth="799.0" text="Label" textFill="WHITE" />
+                  <Label fx:id="pageName" layoutX="66.0" layoutY="23.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Label" textFill="WHITE" />
                </children></Pane>
             <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
                <children>

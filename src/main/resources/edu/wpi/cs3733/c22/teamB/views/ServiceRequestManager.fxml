@@ -46,7 +46,7 @@
                         </ImageView>
                     </graphic></JFXButton>
                 <MenuButton fx:id="visibilityMenu" layoutX="285.0" layoutY="73.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9;" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
-                <JFXButton layoutX="120.0" layoutY="73.0" onAction="#onFilterByButton" styleClass="service-button" stylesheets="@../styles/style.css" text="Filter by" />
+                <JFXButton layoutX="120.0" layoutY="74.0" onAction="#onFilterByButton" styleClass="service-button1" stylesheets="@../styles/style.css" text="Filter by" />
                 <JFXDialog fx:id="filterDialog" layoutX="500.0" prefHeight="594.0" prefWidth="455.0">
                     <children>
                         <GridPane alignment="CENTER" layoutX="100.0">
