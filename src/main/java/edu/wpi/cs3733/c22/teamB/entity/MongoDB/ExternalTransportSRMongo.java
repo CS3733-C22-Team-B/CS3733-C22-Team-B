@@ -35,7 +35,7 @@ public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> 
 
     @Override
     public void addValue(ExternalTransportSR object) {
-        conn.getCollection("ExternalServiceSR").insert(convertExternalTransportSR(object));
+        conn.getCollection("ExternalTransportSR").insert(convertExternalTransportSR(object));
     }
 
     @Override

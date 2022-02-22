@@ -229,8 +229,8 @@ public class MongoTest {
 
         mainSRMongo.addValue(main1);
         mainSRMongo.addValue(main2);
-//        mainSRMongo.addValue(externalTransportSR);
-//        mainSRMongo.addValue(externalTransportSR2);
+        mainSRMongo.addValue(externalTransportSR);
+        mainSRMongo.addValue(externalTransportSR2);
 //        mainSRMongo.addValue(externalTransportSR3);
         mainSRMongo.updateValue(main3);
         mainSRMongo.getValue(main3.getSrID());
@@ -261,16 +261,17 @@ public class MongoTest {
 //        ExternalTransportSR externalTransportSR2 = new ExternalTransportSR("External2", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
 //        ExternalTransportSR externalTransportSR3 = new ExternalTransportSR("External3", "13", location2, employee2, employee2, date, "123", "123", "123", "231");
 
-        externalTransportSRMongo.dropTable();
-//        externalTransportSRMongo.createTable();
 
-//        externalTransportSRMongo.addValue(externalTransportSR);
-//        externalTransportSRMongo.addValue(externalTransportSR2);
-//        externalTransportSRMongo.updateValue(externalTransportSR3);
-//        externalTransportSRMongo.deleteValue(computerServiceSR3.getSrID());
-//
-//        externalTransportSRMongo.getValue(computerServiceSR2.getSrID());
-//        externalTransportSRMongo.getAllValues();
+        externalTransportSRMongo.dropTable();
+        externalTransportSRMongo.createTable();
+
+        externalTransportSRMongo.addValue(externalTransportSR);
+        externalTransportSRMongo.addValue(externalTransportSR2);
+        externalTransportSRMongo.updateValue(externalTransportSR3);
+        externalTransportSRMongo.deleteValue(externalTransportSR3.getSrID());
+
+        externalTransportSRMongo.getValue(externalTransportSR2.getSrID());
+        externalTransportSRMongo.getAllValues();
 //    }
 
 
