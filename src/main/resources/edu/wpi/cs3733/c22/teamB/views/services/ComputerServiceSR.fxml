@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="125.0" prefWidth="312.0" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.services.ComputerServiceSRController">
+<AnchorPane prefHeight="125.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.services.ComputerServiceSRController">
    <children>
       <Label layoutY="66.0" prefHeight="27.0" prefWidth="284.0" text="Help Type" />
       <JFXComboBox fx:id="helpTypeField" layoutY="93.0" prefHeight="25.0" prefWidth="312.0" styleClass="lightBlueBorderless" stylesheets="@../../styles/style.css" />
