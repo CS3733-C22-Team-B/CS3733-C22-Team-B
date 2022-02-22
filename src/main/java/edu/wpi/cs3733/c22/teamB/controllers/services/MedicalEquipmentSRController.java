@@ -63,12 +63,12 @@ public class MedicalEquipmentSRController implements IController {
             equipmentTypeField.setValue(sr.getMedicalEquipment().getEquipmentType());
             equipmentNameField.setValue(sr.getMedicalEquipment().getEquipmentID() + ' ' + sr.getMedicalEquipment().getEquipmentName());
         }
-        equipmentNameField.getItems().addAll(medEqpMap.keySet()
-                .stream()
-                .filter(
-                        lstr -> equipmentTypeField.getValue().equals("ALL")
-                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
-                .collect(Collectors.toList()));
+//        equipmentNameField.getItems().addAll(medEqpMap.keySet()
+//                .stream()
+//                .filter(
+//                        lstr -> equipmentTypeField.getValue().equals("ALL")
+//                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
+//                .collect(Collectors.toList()));
         equipmentNameAC = new AutoCompleteComboBox<>(equipmentNameField, medEqpMap.keySet()
                 .stream()
                 .filter(
@@ -95,17 +95,19 @@ public class MedicalEquipmentSRController implements IController {
     public void clear() {
         equipmentTypeField.setValue("ALL");
         equipmentNameField.setValue(null);
+        equipmentNameField.getEditor().setText(null);
     }
 
     @FXML private void onEquipmentTypeChange(ActionEvent actionEvent) {
-        equipmentNameField.setValue(null);
-        equipmentNameField.getItems().removeAll();
         equipmentNameField.getItems().clear();
+        equipmentNameField.getItems().removeAll();
         equipmentNameField.getItems().addAll(medEqpMap.keySet()
                 .stream()
                 .filter(
                         lstr -> equipmentTypeField.getValue().equals("ALL")
                                 || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
                 .collect(Collectors.toList()));
+        equipmentNameField.setValue(null);
+        equipmentNameField.getEditor().setText(null);
     }
 }
