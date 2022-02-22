@@ -12,8 +12,13 @@ public class MongoDB {
     public static DB BDBMongo;
     public static DBCollection LocationMongo;
 
-    public static void getConnection() throws UnknownHostException {
-        mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+    public static void getConnection()  {
+
+        try {
+            mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
 //        BDBMongo = mongoClient.getDB("BDBMongo");
 
     }

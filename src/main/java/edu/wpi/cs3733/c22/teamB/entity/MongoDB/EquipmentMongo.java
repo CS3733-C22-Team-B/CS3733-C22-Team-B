@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 
@@ -8,13 +9,13 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipmentMongo implements IMongo<MedicalEquipment> {
+public class EquipmentMongo implements IDatabase<MedicalEquipment> {
 
     private DB conn;
     private DBCollection MedicalEquipmentTable;
-    private IMongo<Location> LocationTable;
+    private IDatabase<Location> LocationTable;
 
-    public EquipmentMongo(IMongo<Location> LocationTable) throws UnknownHostException {
+    public EquipmentMongo(IDatabase<Location> LocationTable) {
         this.LocationTable = LocationTable;
         conn = MongoDB.getBDBMongo();
     }
