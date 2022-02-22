@@ -15,9 +15,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -41,8 +44,8 @@ public class MasterServiceRequestController extends AbsPage {
     private AutoCompleteComboBox<String> assignedEmployeeAC;
     @FXML private TextArea notesField;
     @FXML private JFXComboBox<String> floorField;
-    @FXML private JFXComboBox<String> locationField;
-    private AutoCompleteComboBox<String> locationAC;
+    @FXML private JFXComboBox<Location> locationField;
+    private AutoCompleteComboBox<Location> locationAC;
     @FXML private AnchorPane srPane;
     @FXML private Label srLabel;
     @FXML private Pane anchorPane;
@@ -55,7 +58,7 @@ public class MasterServiceRequestController extends AbsPage {
     private AbstractSR childSR = null;
 
     private List<Location> locList;
-    private Map<String, Location> locMap;
+//    private Map<String, Location> locMap;
     private List<Employee> employeeList;
     private Map<String, Employee> employeeMap;
 
@@ -131,18 +134,36 @@ public class MasterServiceRequestController extends AbsPage {
 
         // locationField init
         locList = dw.getAllLocation();
-        locMap =
-                IntStream.range(0, locList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
-                                        i -> locList.get(i)));
+//        locMap =
+//                IntStream.range(0, locList.size())
+//                        .boxed()
+//                        .collect(
+//                                Collectors.toMap(
+//                                        i -> (locList.get(i).getNodeID() + ' ' + locList.get(i).getLongName()), // assuming no dup in long name
+//                                        i -> locList.get(i)));
+        Callback<ListView<Location>, ListCell<Location>> cellFactory = new Callback<ListView<Location>, ListCell<Location>>() {
+            @Override
+            public ListCell<Location> call(ListView<Location> l) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(Location item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            setText(item.getLongName());
+                        }
+                    }
+                };
+            }
+        };
 
+        locationField.setButtonCell(cellFactory.call(null));
+        locationField.setCellFactory(cellFactory);
         // floorField init
         List<String> floorList = new ArrayList<>();
         floorList.add("ALL");
-        floorList.addAll(locMap.values().stream().map(Location::getFloor).collect(Collectors.toSet())); // all floors
+        floorList.addAll(locList.stream().map(Location::getFloor).collect(Collectors.toSet())); // all floors
         floorField.getItems().addAll(floorList);
 
         // notesField init
@@ -153,7 +174,7 @@ public class MasterServiceRequestController extends AbsPage {
         else {
             assignedEmployeeField.setValue(childSR.getAssignedEmployee().getEmployeeID() + ' ' + childSR.getAssignedEmployee().getName());
             floorField.setValue(childSR.getLocation().getFloor());
-            locationField.setValue(childSR.getLocation().getNodeID() + ' ' + childSR.getLocation().getLongName());
+            locationField.setValue(childSR.getLocation());
             notesField.setText(childSR.getNotes());
             assignedEmployeeField.setDisable(false);
         }
@@ -163,11 +184,18 @@ public class MasterServiceRequestController extends AbsPage {
 //                        lstr -> floorField.getValue().equals("ALL")
 //                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
 //                .collect(Collectors.toList()));
-        locationAC = new AutoCompleteComboBox<String>(locationField, locMap.keySet()
+//        locationAC = new AutoCompleteComboBox<>(locationField, locList
+//                .stream()
+//                .filter(
+//                        lstr -> floorField.getValue().equals("ALL")
+//                                || lstr.getFloor().equals(floorField.getValue()))
+//                .collect(Collectors.toList()),
+//                Location::getLongName);
+        locationField.getItems().addAll(locList
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
-                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
+                                || lstr.getFloor().equals(floorField.getValue()))
                 .collect(Collectors.toList()));
 
         // load specific SR fxml
@@ -213,7 +241,7 @@ public class MasterServiceRequestController extends AbsPage {
                 SRIDGenerator.generateID(),
                 childSRType,
                 "WAITING",
-                locMap.get(locationField.getValue()),
+                locationField.getValue(),
                 LoginController.getLoggedInEmployee(),
                 employeeMap.get(assignedEmployeeField.getValue()),
                 LocalDate.now(),
@@ -245,14 +273,20 @@ public class MasterServiceRequestController extends AbsPage {
 
     @FXML private void onFloorFieldChange(ActionEvent actionEvent) {
         // change locationField accordingly
-//        ladminocationField.getItems().clear();
-//        locationField.getItems().removeAll();
-        locationAC.updateData(locMap.keySet()
+        locationField.getItems().clear();
+        locationField.getItems().removeAll();
+        locationField.getItems().addAll(locList
                 .stream()
                 .filter(
                         lstr -> floorField.getValue().equals("ALL")
-                                || locMap.get(lstr).getFloor().equals(floorField.getValue()))
+                                || lstr.getFloor().equals(floorField.getValue()))
                 .collect(Collectors.toList()));
+//        locationAC.updateData(locList
+//                .stream()
+//                .filter(
+//                        lstr -> floorField.getValue().equals("ALL")
+//                                || lstr.getFloor().equals(floorField.getValue()))
+//                .collect(Collectors.toList()));
         locationField.setValue(null);
         locationField.getEditor().setText(null);
     }
