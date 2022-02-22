@@ -6,6 +6,7 @@ import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.ComputerServiceSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MainSR;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -167,7 +168,10 @@ public class MongoTest {
 
 //        MongoDB.getConnection();
 
-        MainSRMongo mainSRMongo = new MainSRMongo(locationMongo, employeeMongo);
+        IDatabase<AbstractSR> mainSRMongo = new MainSRMongo(locationMongo, employeeMongo);
+
+        ComputerServiceSRMongo computerServiceSRMongo = new ComputerServiceSRMongo(mainSRMongo);
+
         mainSRMongo.dropTable();
         mainSRMongo.createTable();
 
@@ -225,10 +229,26 @@ public class MongoTest {
         mainSRMongo.addValue(main2);
         mainSRMongo.updateValue(main3);
         mainSRMongo.getValue(main3.getSrID());
-        mainSRMongo.deleteValue(main1.getSrID());
+//        mainSRMongo.deleteValue(main1.getSrID());
         mainSRMongo.getAllValues();
 
-        locationMongo.deleteValue(location3.getNodeID());
+//        MongoDB.getConnection();
+
+
+        ComputerServiceSR computerServiceSR = new ComputerServiceSR("123", "123", location2, employee2, employee2, date, "123", "123");
+        ComputerServiceSR computerServiceSR2 = new ComputerServiceSR("223", "123", location2, employee2, employee2, date, "123", "123");
+        ComputerServiceSR computerServiceSR3 = new ComputerServiceSR("123", "123", location2, employee2, employee2, date, "123", "123");
+
+        computerServiceSRMongo.dropTable();
+        computerServiceSRMongo.createTable();
+
+        computerServiceSRMongo.addValue(computerServiceSR);
+        computerServiceSRMongo.addValue(computerServiceSR2);
+        computerServiceSRMongo.updateValue(computerServiceSR3);
+//        computerServiceSRMongo.deleteValue(computerServiceSR3.getSrID());
+
+        computerServiceSRMongo.getValue(computerServiceSR2.getSrID());
+        computerServiceSRMongo.getAllValues();
     }
 
 

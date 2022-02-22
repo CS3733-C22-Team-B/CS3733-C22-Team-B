@@ -61,12 +61,6 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
     @Override
     public AbstractSR getValue(String objectID){
 
-//        LocationMongo LocationTable;
-//
-//
-//        EmployeeMongo EmployeeTable;
-
-
         MainSR mainSR;
         DBObject query = new BasicDBObject("_id", objectID);
         DBCursor cursor = MainSRTable.find(query);
@@ -79,22 +73,9 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
         String srType = mainSRObj.getString("srType");
         String status = mainSRObj.getString("status");
         String locationID = mainSRObj.getString("locationID");
-//        try {
-//            LocationTable = new LocationMongo();
-//            location = LocationTable.getValue(locationID);
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        }
         location = LocationTable.getValue(locationID);
         String requestorID = mainSRObj.getString("requestorID");
         String assignedEmployeeID = mainSRObj.getString("assignedEmployeeID");
-//        try {
-//            EmployeeTable = new EmployeeMongo();
-//            requestor = EmployeeTable.getValue(requestorID);
-//            assignedEmployee = EmployeeTable.getValue(assignedEmployeeID);
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        }
         requestor = EmployeeTable.getValue(requestorID);
         assignedEmployee = EmployeeTable.getValue(assignedEmployeeID);
         String date = mainSRObj.getString("dateRequested");
