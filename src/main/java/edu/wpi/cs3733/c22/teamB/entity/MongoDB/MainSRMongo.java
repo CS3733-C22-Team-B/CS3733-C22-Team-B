@@ -19,7 +19,7 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
     private IDatabase<Location> LocationTable;
     private IDatabase<Employee> EmployeeTable;
 
-    public MainSRMongo(IDatabase<Location> LocationTable, IDatabase<Employee> EmployeeTable) throws UnknownHostException {
+    public MainSRMongo(IDatabase<Location> LocationTable, IDatabase<Employee> EmployeeTable) {
         this.LocationTable = LocationTable;
         this.EmployeeTable = EmployeeTable;
         conn = MongoDB.getBDBMongo();

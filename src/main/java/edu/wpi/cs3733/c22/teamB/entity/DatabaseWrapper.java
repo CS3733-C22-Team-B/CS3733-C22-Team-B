@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
 import edu.wpi.cs3733.c22.teamB.Main;
+import edu.wpi.cs3733.c22.teamB.entity.MongoDB.*;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
@@ -10,43 +11,168 @@ import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.List;
 
 public class DatabaseWrapper {
 
     private IDatabase<Location> LocationDao;
+    private IDatabase<Location> LocationDerby;
+    private IDatabase<Location> LocationMongo;
+
     private IDatabase<Employee> EmployeeDao;
+    private IDatabase<Employee> EmployeeDerby;
+    private IDatabase<Employee> EmployeeMongo;
+
     private IDatabase<MedicalEquipment> MedicalEquipmentDao;
+    private IDatabase<MedicalEquipment> MedicalEquipmentDerby;
+    private IDatabase<MedicalEquipment> MedicalEquipmentMongo;
+
     private IDatabase<ExternalTransportSR> ExternalTransportDao;
+    private IDatabase<ExternalTransportSR> ExternalTransportDerby;
+    private IDatabase<ExternalTransportSR> ExternalTransportMongo;
+
     private IDatabase<FoodDeliverySR> FoodDeliveryDao;
+    private IDatabase<FoodDeliverySR> FoodDeliveryDerby;
+    private IDatabase<FoodDeliverySR> FoodDeliveryMongo;
+
     private IDatabase<GiftFloralSR> GiftFloralSRDao;
+    private IDatabase<GiftFloralSR> GiftFloralSRDerby;
+    private IDatabase<GiftFloralSR> GiftFloralSRMongo;
+
     private IDatabase<LaundrySR> LaundrySRDao;
+    private IDatabase<LaundrySR> LaundrySRDerby;
+    private IDatabase<LaundrySR> LaundrySRMongo;
+
     private IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDao;
+    private IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDerby;
+    private IDatabase<MedicalEquipmentSR> MedicalEquipmentSRMongo;
+
     private IDatabase<MedicineDeliverySR> MedicineDeliverySRDao;
+    private IDatabase<MedicineDeliverySR> MedicineDeliverySRDerby;
+    private IDatabase<MedicineDeliverySR> MedicineDeliverySRMongo;
+
     private IDatabase<ComputerServiceSR> ComputerServiceSRDao;
+    private IDatabase<ComputerServiceSR> ComputerServiceSRDerby;
+    private IDatabase<ComputerServiceSR> ComputerServiceSRMongo;
+
     private IDatabase<SanitationSR> SanitationSRDao;
+    private IDatabase<SanitationSR> SanitationSRDerby;
+    private IDatabase<SanitationSR> SanitationSRMongo;
+
+
     private IDatabase<AbstractSR> MainSRDao;
+    private IDatabase<AbstractSR> MainSRDerby;
+    private IDatabase<AbstractSR> MainSRMongo;
+
+
+
+
     private ConnectionManager connectionManager;
 
     private RestoreBackupWrapper restoreBackupWrapper;
 
     public DatabaseWrapper() {
-        LocationDao = new LocationDaoI();
-        EmployeeDao = new EmployeeDaoI();
-        MedicalEquipmentDao = new MedicalEquipmentDaoI();
-        ExternalTransportDao = new ExternalTransportSRDaoI();
-        FoodDeliveryDao = new FoodDeliverySRDaoI();
-        GiftFloralSRDao = new GiftFloralSRDaoI();
-        LaundrySRDao = new LaundrySRDaoI();
-        MedicalEquipmentSRDao = new MedicalEquipmentSRDaoI();
-        MedicineDeliverySRDao = new MedicineDeliverySRDaoI();
-        ComputerServiceSRDao = new ComputerServiceSRDaoI();
-        SanitationSRDao = new SanitationSRDaoI();
-        MainSRDao = new MainSRDaoI();
+
+        MongoDB.getConnection();
+
+        this.LocationDerby = new LocationDaoI();
+        this.LocationMongo = new LocationMongo();
+        this.LocationDao = LocationDerby;
+
+        this.EmployeeDerby = new EmployeeDaoI();
+        this.EmployeeMongo = new EmployeeMongo();
+        this.EmployeeDao = EmployeeDerby;
+
+        this.MedicalEquipmentDerby = new MedicalEquipmentDaoI();
+        this.MedicalEquipmentMongo = new EquipmentMongo(this.LocationMongo);
+        this.MedicalEquipmentDao = MedicalEquipmentDerby;
+
+        this.MainSRDerby = new MainSRDaoI();
+        this.MainSRMongo = new MainSRMongo(this.LocationMongo, this.EmployeeMongo);
+        this.MainSRDao = MainSRDerby;
+
+        this.ExternalTransportDerby = new ExternalTransportSRDaoI();
+        this.ExternalTransportMongo = new ExternalTransportSRMongo(this.MainSRMongo);
+        this.ExternalTransportDao = ExternalTransportDerby;
+
+        this.FoodDeliveryDerby = new FoodDeliverySRDaoI();
+        this.FoodDeliveryMongo = new FoodDeliverySRMongo(this.MainSRMongo);
+        this.FoodDeliveryDao = FoodDeliveryDerby;
+
+        this.GiftFloralSRDerby = new GiftFloralSRDaoI();
+        this.GiftFloralSRMongo = new GiftFloralSRMongo(this.MainSRMongo);
+        this.GiftFloralSRDao = GiftFloralSRDerby;
+
+        this.LaundrySRDerby = new LaundrySRDaoI();
+        this.LaundrySRMongo = new LaundrySRMongo(this.MainSRMongo);
+        this.LaundrySRDao = LaundrySRDerby;
+
+//        this.MedicalEquipmentSRDerby = new MedicalEquipmentSRDaoI();
+//        this.MedicalEquipmentMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
+//        this
+//
+        this.MedicineDeliverySRDerby = new MedicineDeliverySRDaoI();
+        this.MedicineDeliverySRMongo = new MedicineDeliverySRMongo(this.MainSRMongo);
+        this.MedicineDeliverySRDao = MedicineDeliverySRDerby;
+
+        this.ComputerServiceSRDerby = new ComputerServiceSRDaoI();
+        this.ComputerServiceSRMongo = new ComputerServiceSRMongo(this.MainSRDao);
+        this.ComputerServiceSRDao = ComputerServiceSRDerby;
+
+        this.SanitationSRDerby = new SanitationSRDaoI();
+        this.SanitationSRMongo = new SanitationSRMongo(this.MainSRMongo);
+        this.SanitationSRDao = SanitationSRDerby;
 
         connectionManager = ConnectionManager.getInstance();
         restoreBackupWrapper = new RestoreBackupWrapper();
+    }
+
+    public void engageEmbedded() {
+        this.LocationDao = this.LocationDerby;
+        this.EmployeeDao = this.EmployeeDerby;
+        this.MedicalEquipmentDao = this.MedicalEquipmentDerby;
+        this.MainSRDao = this.MainSRDerby;
+        this.ExternalTransportDao = this.ExternalTransportDerby;
+        this.FoodDeliveryDao = this.FoodDeliveryDerby;
+        this.GiftFloralSRDao = this.GiftFloralSRDerby;
+        this.LaundrySRDao = this.LaundrySRDerby;
+        this.MedicineDeliverySRDao = this.MedicineDeliverySRDerby;
+        this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
+        this.SanitationSRDao = this.SanitationSRDerby;
+
+        initEmbedded();
+    }
+
+    public void engageClient() {
+        this.LocationDao = this.LocationDerby;
+        this.EmployeeDao = this.EmployeeDerby;
+        this.MedicalEquipmentDao = this.MedicalEquipmentDerby;
+        this.MainSRDao = this.MainSRDerby;
+        this.ExternalTransportDao = this.ExternalTransportDerby;
+        this.FoodDeliveryDao = this.FoodDeliveryDerby;
+        this.GiftFloralSRDao = this.GiftFloralSRDerby;
+        this.LaundrySRDao = this.LaundrySRDerby;
+        this.MedicineDeliverySRDao = this.MedicineDeliverySRDerby;
+        this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
+        this.SanitationSRDao = this.SanitationSRDerby;
+
+        initClient();
+    }
+
+    public void engageRemote() {
+        this.LocationDao = this.LocationMongo;
+        this.EmployeeDao = this.EmployeeMongo;
+        this.MedicalEquipmentDao = this.MedicalEquipmentMongo;
+        this.MainSRDao = this.MainSRMongo;
+        this.ExternalTransportDao = this.ExternalTransportMongo;
+        this.FoodDeliveryDao = this.FoodDeliveryMongo;
+        this.GiftFloralSRDao = this.GiftFloralSRMongo;
+        this.LaundrySRDao = this.LaundrySRMongo;
+        this.MedicineDeliverySRDao = this.MedicineDeliverySRMongo;
+        this.ComputerServiceSRDao = this.ComputerServiceSRMongo;
+        this.SanitationSRDao = this.SanitationSRMongo;
     }
 
     public void initEmbedded() {

@@ -15,7 +15,7 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
     private DBCollection MedicalEquipmentTable;
     private IDatabase<Location> LocationTable;
 
-    public EquipmentMongo(IDatabase<Location> LocationTable) throws UnknownHostException {
+    public EquipmentMongo(IDatabase<Location> LocationTable) {
         this.LocationTable = LocationTable;
         conn = MongoDB.getBDBMongo();
     }

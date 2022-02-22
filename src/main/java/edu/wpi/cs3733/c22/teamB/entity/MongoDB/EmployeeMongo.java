@@ -15,7 +15,7 @@ public class EmployeeMongo implements IDatabase<Employee> {
     private DB conn;
     private DBCollection EmployeeTable;
 
-    public EmployeeMongo() throws UnknownHostException {
+    public EmployeeMongo(){
         conn = MongoDB.getBDBMongo();
     }
 

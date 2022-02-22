@@ -14,7 +14,7 @@ public class LocationMongo implements IDatabase<Location> {
     private DB conn;
     private DBCollection LocationTable;
 
-    public LocationMongo() throws UnknownHostException {
+    public LocationMongo(){
         conn = MongoDB.getBDBMongo();
     }
 
