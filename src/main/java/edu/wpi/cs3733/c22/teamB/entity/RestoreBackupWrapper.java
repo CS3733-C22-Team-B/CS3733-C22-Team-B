@@ -67,27 +67,42 @@ public class RestoreBackupWrapper {
     private final String medicalEquipmentFileNameF = "MedicalEquipmentB.csv";
 
 
-    RestoreBackupWrapper() {
-         LocationDao = new LocationDaoI();
-         EmployeeDao = new EmployeeDaoI();
-         MedicalEquipmentDao = new MedicalEquipmentDaoI();
-         ExternalTransportDao = new ExternalTransportSRDaoI();
-         FoodDeliveryDao = new FoodDeliverySRDaoI();
-         GiftFloralSRDao = new GiftFloralSRDaoI();
-         LaundrySRDao = new LaundrySRDaoI();
-         MedicalEquipmentSRDao = new MedicalEquipmentSRDaoI();
-         MedicineDeliverySRDao = new MedicineDeliverySRDaoI();
-         ComputerServiceSRDao = new ComputerServiceSRDaoI();
-         SanitationSRDao = new SanitationSRDaoI();
-         MainSRDao = new MainSRDaoI();
-         reader = new CSVReader();
-         writer = new CSVWriter();
+    RestoreBackupWrapper(IDatabase<Location> LocationDao, IDatabase<Employee> EmployeeDao, IDatabase<MedicalEquipment> MedicalEquipmentDao,
+                         IDatabase<AbstractSR> MainSRDao, IDatabase<ExternalTransportSR> ExternalTransportDao, IDatabase<FoodDeliverySR> FoodDeliveryDao,
+                         IDatabase<GiftFloralSR> GiftFloralSRDao, IDatabase<LaundrySR> LaundrySRDao, IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDao,
+                         IDatabase<MedicineDeliverySR> MedicineDeliverySRDao, IDatabase<ComputerServiceSR> ComputerServiceSRDao, IDatabase<SanitationSR> SanitationSRDao) {
 
-         String pathString = new File("").getAbsolutePath();
-         File f = new File(pathString);
+        setDao(LocationDao, EmployeeDao, MedicalEquipmentDao, MainSRDao, ExternalTransportDao, FoodDeliveryDao, GiftFloralSRDao, LaundrySRDao, MedicalEquipmentSRDao, MedicineDeliverySRDao, ComputerServiceSRDao, SanitationSRDao);
 
-         backDir = new File(f.getAbsolutePath() + "/backup");
+        reader = new CSVReader();
+        writer = new CSVWriter();
+
+        String pathString = new File("").getAbsolutePath();
+        File f = new File(pathString);
+
+        backDir = new File(f.getAbsolutePath() + "/backup");
     }
+
+    public void setDao(IDatabase<Location> LocationDao, IDatabase<Employee> EmployeeDao, IDatabase<MedicalEquipment> MedicalEquipmentDao,
+                       IDatabase<AbstractSR> MainSRDao, IDatabase<ExternalTransportSR> ExternalTransportDao, IDatabase<FoodDeliverySR> FoodDeliveryDao,
+                       IDatabase<GiftFloralSR> GiftFloralSRDao, IDatabase<LaundrySR> LaundrySRDao, IDatabase<MedicalEquipmentSR> MedicalEquipmentSRDao,
+                       IDatabase<MedicineDeliverySR> MedicineDeliverySRDao, IDatabase<ComputerServiceSR> ComputerServiceSRDao, IDatabase<SanitationSR> SanitationSRDao) {
+
+        this.LocationDao = LocationDao;
+        this.EmployeeDao = EmployeeDao;
+        this.MedicalEquipmentDao = MedicalEquipmentDao;
+        this.MainSRDao = MainSRDao;
+        this.ExternalTransportDao = ExternalTransportDao;
+        this.FoodDeliveryDao = FoodDeliveryDao;
+        this.GiftFloralSRDao = GiftFloralSRDao;
+        this.LaundrySRDao = LaundrySRDao;
+        this.MedicalEquipmentSRDao = MedicalEquipmentSRDao;
+        this.MedicineDeliverySRDao = MedicineDeliverySRDao;
+        this.ComputerServiceSRDao = ComputerServiceSRDao;
+        this.SanitationSRDao = SanitationSRDao;
+    }
+
+
 
     void restoreAll() throws IOException {
         restoreLocation();

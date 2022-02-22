@@ -126,7 +126,9 @@ public class DatabaseWrapper {
         this.SanitationSRDao = SanitationSRDerby;
 
         connectionManager = ConnectionManager.getInstance();
-        restoreBackupWrapper = new RestoreBackupWrapper();
+        restoreBackupWrapper = new RestoreBackupWrapper(LocationDao, EmployeeDao, MedicalEquipmentDao, MainSRDao,
+                ExternalTransportDao, FoodDeliveryDao, GiftFloralSRDao, LaundrySRDao, MedicalEquipmentSRDao,
+                MedicineDeliverySRDao, ComputerServiceSRDao, SanitationSRDao);
     }
 
     public void engageEmbedded() {
@@ -142,6 +144,8 @@ public class DatabaseWrapper {
         this.MedicineDeliverySRDao = this.MedicineDeliverySRDerby;
         this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
         this.SanitationSRDao = this.SanitationSRDerby;
+
+        setRestoreBackupDao();
 
         try {
             backupAll();
@@ -170,6 +174,8 @@ public class DatabaseWrapper {
         this.ComputerServiceSRDao = this.ComputerServiceSRDerby;
         this.SanitationSRDao = this.SanitationSRDerby;
 
+        setRestoreBackupDao();
+
         try {
             backupAll();
         } catch (IOException e) {
@@ -180,7 +186,8 @@ public class DatabaseWrapper {
             restoreAll();
         } catch (IOException e) {
             e.printStackTrace();
-        }    }
+        }
+    }
 
     public void engageRemote() {
 
@@ -201,6 +208,9 @@ public class DatabaseWrapper {
         this.MedicineDeliverySRDao = this.MedicineDeliverySRMongo;
         this.ComputerServiceSRDao = this.ComputerServiceSRMongo;
         this.SanitationSRDao = this.SanitationSRMongo;
+
+        setRestoreBackupDao();
+
         try {
             restoreAll();
         } catch (IOException e) {
@@ -214,6 +224,12 @@ public class DatabaseWrapper {
 
     public void initClient() {
         connectionManager.setConnectionStrategy(true);
+    }
+
+    private void setRestoreBackupDao() {
+        restoreBackupWrapper.setDao(LocationDao, EmployeeDao, MedicalEquipmentDao, MainSRDao,
+                ExternalTransportDao, FoodDeliveryDao, GiftFloralSRDao, LaundrySRDao, MedicalEquipmentSRDao,
+                MedicineDeliverySRDao, ComputerServiceSRDao, SanitationSRDao);
     }
     
     public void addSR(AbstractSR abstractSR){
