@@ -21,7 +21,6 @@ public class MongoTest {
 
 
     public MongoTest() {
-
     }
 
     @Test
