@@ -9,6 +9,7 @@ import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.GiftFloralSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicineDeliverySR;
 import org.junit.jupiter.api.Test;
 
 import java.net.UnknownHostException;
@@ -135,5 +136,28 @@ public class MongoTest2 {
         medicalEquipmentSRMongo.deleteValue(medicalEquipmentSR32.getSrID());
         medicalEquipmentSRMongo.getValue(medicalEquipmentSR.getSrID());
         medicalEquipmentSRMongo.getAllValues();
+
+        //MedicineDelivery
+
+        MedicineDeliverySRMongo medicineDeliverySRMongo = new MedicineDeliverySRMongo(mainSRMongo);
+        medicineDeliverySRMongo.dropTable();
+        medicineDeliverySRMongo.createTable();
+
+        MedicineDeliverySR medicineSR = new MedicineDeliverySR("Medicine1", "123",location1, employee1, employee2, date, "123", "123" ,"123" );
+        MedicineDeliverySR medicineSR2 = new MedicineDeliverySR("Medicine2", "123",location1, employee1, employee2, date, "123", "123" ,"123" );
+        MedicineDeliverySR medicineSR3 = new MedicineDeliverySR("Medicine3", "123",location1, employee1, employee2, date, "123", "123" ,"123" );
+        MedicineDeliverySR medicineSR32 = new MedicineDeliverySR("Medicine3", "123",location1, employee1, employee2, date, "123", "123" ,"uiasjdbakjsfsb" );
+
+        mainSRMongo.addValue(medicineSR);
+        mainSRMongo.addValue(medicineSR2);
+        mainSRMongo.addValue(medicineSR3);
+
+        medicineDeliverySRMongo.addValue(medicineSR);
+        medicineDeliverySRMongo.addValue(medicineSR2);
+        medicineDeliverySRMongo.addValue(medicineSR3);
+        medicineDeliverySRMongo.updateValue(medicineSR32);
+        medicineDeliverySRMongo.deleteValue(medicineSR32.getSrID());
+        medicineDeliverySRMongo.getValue(medicineSR.getSrID());
+        medicineDeliverySRMongo.getAllValues();
     }
 }
