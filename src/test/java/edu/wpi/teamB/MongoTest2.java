@@ -180,5 +180,28 @@ public class MongoTest2 {
         sanitationSRMongo.deleteValue(sanitationSR32.getSrID());
         sanitationSRMongo.getValue(sanitationSR.getSrID());
         sanitationSRMongo.getAllValues();
+
+        //Laundry
+
+        LaundrySRMongo laundrySRMongo = new LaundrySRMongo(mainSRMongo);
+        laundrySRMongo.dropTable();
+        laundrySRMongo.createTable();
+
+        AbstractSR laundrySR = new LaundrySR("Laundry1", "123", location1, employee1, employee2, date, "123");
+        AbstractSR laundrySR2 = new LaundrySR("Laundry2", "123", location1, employee1, employee2, date, "123");
+        AbstractSR laundrySR3 = new LaundrySR("Laundry3", "123", location1, employee1, employee2, date, "123");
+        AbstractSR laundrySR32 = new LaundrySR("Laundry3", "123", location1, employee1, employee2, date, "123awdeqe");
+
+        mainSRMongo.addValue(laundrySR);
+        mainSRMongo.addValue(laundrySR2);
+        mainSRMongo.addValue(laundrySR3);
+
+        laundrySRMongo.addValue((LaundrySR) laundrySR);
+        laundrySRMongo.addValue((LaundrySR) laundrySR2);
+        laundrySRMongo.addValue((LaundrySR) laundrySR3);
+        laundrySRMongo.updateValue((LaundrySR) laundrySR32);
+        laundrySRMongo.deleteValue(laundrySR32.getSrID());
+        laundrySRMongo.getValue(laundrySR.getSrID());
+        laundrySRMongo.getAllValues();
     }
 }
