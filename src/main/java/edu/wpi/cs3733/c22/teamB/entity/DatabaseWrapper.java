@@ -109,10 +109,10 @@ public class DatabaseWrapper {
         this.LaundrySRMongo = new LaundrySRMongo(this.MainSRMongo);
         this.LaundrySRDao = LaundrySRDerby;
 
-//        this.MedicalEquipmentSRDerby = new MedicalEquipmentSRDaoI();
-//        this.MedicalEquipmentMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
-//        this
-//
+        this.MedicalEquipmentSRDerby = new MedicalEquipmentSRDaoI();
+        this.MedicalEquipmentSRMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
+        this.MedicalEquipmentSRDao = MedicalEquipmentSRDerby;
+
         this.MedicineDeliverySRDerby = new MedicineDeliverySRDaoI();
         this.MedicineDeliverySRMongo = new MedicineDeliverySRMongo(this.MainSRMongo);
         this.MedicineDeliverySRDao = MedicineDeliverySRDerby;
