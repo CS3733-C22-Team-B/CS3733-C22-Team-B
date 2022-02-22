@@ -25,7 +25,6 @@ public class MedicalEquipmentSRController implements IController {
 
     private List<MedicalEquipment> medEqpList;
     private Map<String, MedicalEquipment> medEqpMap;
-    private int nextID;
 
     // Important: 3 lines below are necessary
     private MedicalEquipmentSR sr = null;
@@ -50,12 +49,11 @@ public class MedicalEquipmentSRController implements IController {
                                                 + ' '
                                                 + medEqpList.get(i).getEquipmentName()),
                                         i -> medEqpList.get(i)));
-//        equipmentTypeField.getItems().add("ALL");
-//        equipmentTypeField.getItems().addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
         List<String> equipmentTypeFieldList = new ArrayList<>();
         equipmentTypeFieldList.add("ALL");
         equipmentTypeFieldList.addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
-        equipmentTypeAC = new AutoCompleteComboBox<>(equipmentTypeField, equipmentTypeFieldList);
+        equipmentTypeField.getItems().addAll(equipmentTypeFieldList);
+//        equipmentTypeAC = new AutoCompleteComboBox<>(equipmentTypeField, equipmentTypeFieldList);
 
         if (sr == null) {
             clear();
@@ -95,13 +93,12 @@ public class MedicalEquipmentSRController implements IController {
     public void clear() {
         equipmentTypeField.setValue("ALL");
         equipmentNameField.setValue(null);
-        equipmentNameField.getEditor().setText(null);
     }
 
     @FXML private void onEquipmentTypeChange(ActionEvent actionEvent) {
-        equipmentNameField.getItems().clear();
-        equipmentNameField.getItems().removeAll();
-        equipmentNameField.getItems().addAll(medEqpMap.keySet()
+//        equipmentNameField.getItems().clear();
+//        equipmentNameField.getItems().removeAll();
+        equipmentNameAC.updateData(medEqpMap.keySet()
                 .stream()
                 .filter(
                         lstr -> equipmentTypeField.getValue().equals("ALL")
