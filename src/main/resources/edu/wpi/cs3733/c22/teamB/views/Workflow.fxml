@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.workflow.WorkflowController">
+    <children>
+        <AnchorPane prefHeight="594.0" prefWidth="1658.0">
+            <children>
+                <TableView fx:id="srTable" layoutX="120.0" layoutY="146.0" prefHeight="316.0" prefWidth="756.0" stylesheets="@../styles/style.css">
+                    <columns>
+                        <TableColumn fx:id="idCol" prefWidth="77.19998931884766" text="ID" />
+                        <TableColumn fx:id="typeCol" prefWidth="132.39996337890625" text="Type" />
+                        <TableColumn fx:id="requestorCol" minWidth="0.0" prefWidth="144.0" text="Requestor" />
+                        <TableColumn fx:id="timeCol" prefWidth="105.59994506835938" text="Date" />
+                        <TableColumn fx:id="employeeCol" prefWidth="147.60003662109375" text="Assigned to" />
+                        <TableColumn fx:id="statusCol" prefWidth="97.60003662109375" text="Status" />
+                        <TableColumn fx:id="startCol" prefWidth="49.5999755859375" />
+                    </columns>
+                </TableView>
+                <TextField fx:id="textFilterField" layoutX="114.0" layoutY="107.0" prefHeight="25.0" prefWidth="724.0" style="-fx-font-family: open-sans;">
+                    <contextMenu>
+                        <ContextMenu fx:id="filterMenu" />
+                    </contextMenu>
+                </TextField>
+                <JFXButton fx:id="filterSubmitButton" layoutX="838.0" layoutY="107.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#filterSubmit" prefHeight="25.0" prefWidth="43.0" styleClass="button-table-view" stylesheets="@../styles/style.css" text=" ">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true" translateX="4.0">
+                            <image>
+                                <Image url="@../images/Search2.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="490.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="102.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
+                <JFXButton layoutX="114.0" layoutY="490.0" onAction="#onFilterByButton" prefHeight="40.0" prefWidth="88.0" style="-fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Filter by" />
+                <JFXDialog fx:id="filterDialog" layoutX="870.0" prefHeight="594.0" prefWidth="410.0">
+                    <children>
+                        <GridPane alignment="CENTER" layoutX="100.0" prefWidth="306.0">
+                            <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                            </rowConstraints>
+                            <children>
+                                <JFXButton onAction="#onCloseFilterDialog" prefHeight="25.0" prefWidth="93.0" styleClass="submit-button" stylesheets="@../styles/style.css" text="Close" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                <JFXCheckBox fx:id="idFilterCheckBox" selected="true" style="-jfx-checked-color: #002168; -jfx-unchecked-color: #667aa4;" text="ID" GridPane.columnIndex="3" />
+                                <JFXCheckBox fx:id="typeFilterCheckBox" selected="true" style="-jfx-checked-color: #002168; -jfx-unchecked-color: #667aa4;" text="Type" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                <JFXCheckBox fx:id="requestorFilterCheckBox" selected="true" style="-jfx-checked-color: #002168; -jfx-unchecked-color: #667aa4;" text="Requestor" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                <JFXCheckBox fx:id="dateFilterCheckBox" selected="true" style="-jfx-checked-color: #002168; -jfx-unchecked-color: #667aa4;" text="Date" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                <JFXCheckBox fx:id="assignedToFilterCheckBox" selected="true" style="-jfx-checked-color: #002168; -jfx-unchecked-color: #667aa4;" text="Assigned to" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                <JFXCheckBox fx:id="statusFilterCheckBox" selected="true" style="-jfx-checked-color: #002168; -jfx-unchecked-color: #667aa4;" text="Status" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </JFXDialog>
+            <JFXToggleButton fx:id="incompleteToggle" layoutX="606.0" layoutY="481.0" onAction="#onShowIncompleted" prefHeight="58.0" prefWidth="269.0" text="Show Only Incompleted" toggleColor="#0d0a5e" toggleLineColor="#788bc2" />
+            <Pane layoutX="92.0" layoutY="92.0" prefHeight="1.0" prefWidth="812.0" style="-fx-background-color: #002168;" />
+            <Label layoutX="184.0" layoutY="13.0" prefHeight="70.0" prefWidth="706.0" text="Service Requests">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="81.0" fitWidth="81.0" layoutX="93.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons/ServiceRequest.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
