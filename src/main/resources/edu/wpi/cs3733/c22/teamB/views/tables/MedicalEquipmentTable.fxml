@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -17,27 +16,27 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.MedicalEquipmentTableController">
     <children>
-        <AnchorPane fx:id="contentPane" layoutX="8.0" layoutY="21.0" prefHeight="423.0" prefWidth="600.0">
+        <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
             <children>
-                <JFXButton fx:id="addButton" layoutX="231.0" layoutY="94.0" minWidth="75.0" onAction="#addLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add">
+                <JFXButton fx:id="addButton" layoutX="522.0" layoutY="101.0" minWidth="75.0" onAction="#addLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add">
                     <font>
                         <Font size="11.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="modifyButton" layoutX="319.0" layoutY="94.0" minWidth="75.0" onAction="#modifyLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Modify" />
-                <JFXButton fx:id="deleteButton" layoutX="406.0" layoutY="94.0" minWidth="75.0" onAction="#deleteLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
-                <JFXButton fx:id="loadButton" layoutX="493.0" layoutY="94.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
-                <GridPane fx:id="gridPane" layoutY="291.0" prefHeight="70.0" prefWidth="582.0">
+                <JFXButton fx:id="modifyButton" layoutX="610.0" layoutY="101.0" minWidth="75.0" onAction="#modifyLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Modify" />
+                <JFXButton fx:id="deleteButton" layoutX="697.0" layoutY="101.0" minWidth="75.0" onAction="#deleteLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
+                <JFXButton fx:id="loadButton" layoutX="784.0" layoutY="101.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
+                <GridPane fx:id="gridPane" layoutX="45.0" layoutY="423.0" prefHeight="72.0" prefWidth="822.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="33.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.79998779296875" minWidth="10.0" prefWidth="106.79998779296875" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.20001220703125" minWidth="10.0" prefWidth="107.99998779296875" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.79998779296875" minWidth="10.0" prefWidth="141.79996337890628" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.79995117187497" minWidth="10.0" prefWidth="126.60003662109375" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.20001220703125" minWidth="10.0" prefWidth="107.800048828125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="146.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="163.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" prefWidth="214.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="0.0" prefWidth="170.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints maxHeight="77.60001220703126" minHeight="10.0" prefHeight="70.9999755859375" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="76.79996337890626" minHeight="10.0" prefHeight="11.000024414062494" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="77.60001220703126" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <TextField fx:id="equipmentIDField" prefHeight="25.0" prefWidth="99.0" promptText="equipmentID" styleClass="text-field" stylesheets="@../../styles/style.css" />
@@ -52,15 +51,23 @@
                         <TextField fx:id="amountField" prefHeight="26.0" prefWidth="81.0" promptText="Amount" stylesheets="@../../styles/style.css" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                     </children>
                 </GridPane>
-                <ScrollPane layoutX="19.0" layoutY="132.0" prefHeight="163.0" prefWidth="546.0">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="172.0" prefWidth="200.0">
-                            <children>
-                                <TableView fx:id="table" layoutX="-4.0" prefHeight="166.0" prefWidth="554.0" style="-fx-background-color: #b1c5f6;" stylesheets="@../../styles/style.css" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </ScrollPane>
+                <GridPane alignment="CENTER" layoutX="32.0" layoutY="139.0" prefHeight="153.0" prefWidth="548.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="137.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TableView fx:id="table" onMouseClicked="#locationTableClick" prefHeight="286.0" prefWidth="598.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                            <columns>
+                            </columns>
+                        </TableView>
+                    </children>
+                </GridPane>
                 <Pane layoutX="19.0" layoutY="67.0" prefHeight="1.0" prefWidth="546.0" style="-fx-background-color: #08246c;" />
                 <ImageView fitHeight="61.0" fitWidth="59.0" layoutX="19.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -72,9 +79,9 @@
                         <Font size="30.0" />
                     </font>
                 </Label>
-            <JFXButton fx:id="clearButton" layoutX="313.0" layoutY="382.0" minWidth="75.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
-            <JFXButton fx:id="cancelButton" layoutX="400.0" layoutY="382.0" minWidth="75.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
-            <JFXButton fx:id="confirmButton" layoutX="487.0" layoutY="382.0" minWidth="75.0" onAction="#confirm" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
+            <JFXButton fx:id="clearButton" layoutX="617.0" layoutY="551.0" minWidth="75.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
+            <JFXButton fx:id="cancelButton" layoutX="704.0" layoutY="551.0" minWidth="75.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
+            <JFXButton fx:id="confirmButton" layoutX="791.0" layoutY="551.0" minWidth="75.0" onAction="#confirm" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
             </children>
         </AnchorPane>
     </children>
