@@ -197,7 +197,7 @@ public class LocationTableController extends AbsPage {
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
         deleteButton.setVisible(true);
 
-        if (table.getSelectionModel() != null){
+        if (table.getSelectionModel().getSelectedItem().getNodeID() != null){
             modifyLocation(null);
         }
     }

@@ -44,7 +44,6 @@ public class MedicalEquipmentTableController extends AbsPage {
     @FXML private TextField sizeField;
     @FXML private TextField descriptionField;
     @FXML private JFXButton addButton;
-    @FXML private JFXButton modifyButton;
     @FXML private JFXButton deleteButton;
     @FXML private TableView<MedicalEquipment> table;
     @FXML private JFXComboBox<String> LocationChoice;
@@ -72,7 +71,6 @@ public class MedicalEquipmentTableController extends AbsPage {
 
     @FXML
     private void initialize() throws NullPointerException {
-        modifyButton.setDisable(true);
         deleteButton.setDisable(true);
         popup.setVisible(false);
 
@@ -95,7 +93,6 @@ public class MedicalEquipmentTableController extends AbsPage {
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                modifyButton.setDisable(false);
                 deleteButton.setDisable(false);
             }
         });
@@ -199,9 +196,9 @@ public class MedicalEquipmentTableController extends AbsPage {
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
         amountField.setDisable(false);
-       // func = MedicalEquipmentTableController.Function.ADD;
 
         func = Function.ADD;
+        clearForm(null);
     }
 
     @FXML
@@ -247,6 +244,7 @@ public class MedicalEquipmentTableController extends AbsPage {
         String value = table.getSelectionModel().getSelectedItem().getEquipmentID();
         db.deleteMedicalEquipment(value);
         loadTable();
+        cancelForm(null);
 
         // submitted confirmation popup
         popup.setVisible(true);
@@ -262,7 +260,7 @@ public class MedicalEquipmentTableController extends AbsPage {
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
         deleteButton.setVisible(true);
 
-        if (table.getSelectionModel() != null){
+        if (table.getSelectionModel().getSelectedItem().getEquipmentID() != null){
             modifyLocation(null);
         }
     }
@@ -292,6 +290,8 @@ public class MedicalEquipmentTableController extends AbsPage {
                     event -> popup.setVisible(false)
             );
             visiblePause.play();
+
+            clearForm(actionEvent);
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
             MedicalEquipment newEquip = new MedicalEquipment(
                     table.getSelectionModel().getSelectedItem().getEquipmentID(),
@@ -316,10 +316,9 @@ public class MedicalEquipmentTableController extends AbsPage {
                     event -> popup.setVisible(false)
             );
             visiblePause.play();
-        }
 
-        clearForm(actionEvent);
-        func = MedicalEquipmentTableController.Function.NOTHING;
+            cancelForm(actionEvent);
+        }
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
@@ -341,9 +340,6 @@ public class MedicalEquipmentTableController extends AbsPage {
 
         addButton.setVisible(true);
         addButton.setDisable(false);
-
-        modifyButton.setVisible(true);
-        modifyButton.setDisable(false);
 
         deleteButton.setVisible(true);
         deleteButton.setDisable(false);
