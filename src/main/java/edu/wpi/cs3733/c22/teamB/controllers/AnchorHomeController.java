@@ -51,7 +51,7 @@ public class AnchorHomeController implements Initializable {
     public void setPageName(String name) {
         pageName.setText(name);
     }
-    void changeNode(FXMLLoader loader) throws IOException {
+    public void changeNode(FXMLLoader loader) throws IOException {
         try {
             childPane = loader.load();
             anchorPane.getChildren().clear();
