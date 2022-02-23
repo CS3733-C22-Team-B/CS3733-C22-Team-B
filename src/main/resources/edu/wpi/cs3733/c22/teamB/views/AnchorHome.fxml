@@ -131,7 +131,7 @@
                         <Insets top="17.0" />
                      </padding>
                   </VBox>
-                  <AnchorPane fx:id="anchorPane" prefWidth="872.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
+                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: #b3bcd2;" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

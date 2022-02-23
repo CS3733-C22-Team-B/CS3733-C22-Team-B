@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity.inheritance;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public interface IDatabase<T> {
