@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +45,7 @@ public class Bapp extends Application {
         scene.getStylesheets().add("/edu/wpi/cs3733/c22/teamB/styles/style.css");
         Bapp.getPrimaryStage().setMinHeight(600);
         Bapp.getPrimaryStage().setMinWidth(900);
+        Bapp.getPrimaryStage().getIcons().add(new Image("/edu/wpi/cs3733/c22/teamB/images/icon.png"));
         primaryStage.setScene(scene);
         primaryStage.show();
     }

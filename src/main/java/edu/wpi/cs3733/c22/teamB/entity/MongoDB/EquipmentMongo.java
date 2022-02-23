@@ -21,6 +21,7 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
     }
 
     public static DBObject convertEquipment(MedicalEquipment equipment){
+
         BasicDBObject document = new BasicDBObject();
         document.put("_id", equipment.getEquipmentID());
         document.put("equipmentName", equipment.getEquipmentName());
