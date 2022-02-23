@@ -1,8 +1,20 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
+import javafx.fxml.FXML;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class AboutPageController extends AbsPage{
     @Override
     public void namePage() {
         AnchorHomeController.curAnchorHomeController.pageName.setText("About Page");
+    }
+
+    @FXML
+    private void initialize() {
+        initResize();
+        resize();
+        namePage();
     }
 }

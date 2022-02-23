@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AboutPageController">
    <children>
-      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
+      <Pane fx:id="contentPane" layoutX="45.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
              <Pane layoutX="34.0" layoutY="115.0" prefHeight="2.0" prefWidth="230.0" style="-fx-background-color: #052265;" />
              <Label layoutX="53.0" layoutY="157.0" prefHeight="85.0" prefWidth="174.0" text="Brigham and Women's Hospital: Especially their representative Andrew Shinn for their time and input." textAlignment="CENTER" wrapText="true" />
@@ -51,55 +51,55 @@
                   <Label text="Nicholas Li" GridPane.rowIndex="4" />
                   <Label text="Andrew Nguyen" GridPane.rowIndex="6" />
                   <Label text="Calvin Page" GridPane.rowIndex="7" />
-                   <Label text="Documentation Analyst, Software Feature Engineer" wrapText="true" GridPane.columnIndex="2">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Documentation Analyst" wrapText="true" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Assistant Lead Software Engineer" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Assistant Lead Software Engineer" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Assistant Lead Software engineer" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Assistant Lead Software Engineer" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Lead Software Engineer" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Lead Software Engineer" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Backend Database Engineer" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Backend Database Engineer" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Project Owner, Software Feature Engineer" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Project Owner" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Scrum Master, Software Feature Engineer" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Scrum Master" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Software Feature Engineer" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Software Feature Engineer" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Software Feature Engineer" GridPane.columnIndex="2" GridPane.rowIndex="8">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Software Feature Engineer" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
-                   <Label text="Project Manager" GridPane.columnIndex="2" GridPane.rowIndex="9">
-                       <font>
-                           <Font size="10.0" />
-                       </font>
+                   <Label style="-fx-font-size: 9;" text="Project Manager" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
                </children>
             </GridPane>
