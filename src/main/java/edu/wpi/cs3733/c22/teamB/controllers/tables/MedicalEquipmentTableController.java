@@ -60,7 +60,7 @@ public class MedicalEquipmentTableController extends AbsPage {
         AnchorHomeController.curAnchorHomeController.setPageName("Medical Equipment Table");
     }
 
-    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
+    private enum Function {ADD, MODIFY, DELETE, NOTHING};
     MedicalEquipmentTableController.Function func = MedicalEquipmentTableController.Function.NOTHING;
 
     private boolean initTable = false;
@@ -316,9 +316,6 @@ public class MedicalEquipmentTableController extends AbsPage {
                     event -> popup.setVisible(false)
             );
             visiblePause.play();
-        } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
-            table.getItems().clear();
-            table.getItems().add(db.getMedicalEquipment(equipmentIDField.getText())); // create and add object
         }
 
         clearForm(actionEvent);
@@ -354,19 +351,6 @@ public class MedicalEquipmentTableController extends AbsPage {
 
         func = MedicalEquipmentTableController.Function.NOTHING;
     }
-    @FXML private void idLookup(ActionEvent actionEvent) {
-        gridPane.setVisible(true);
-        gridPane.setDisable(false);
-        equipmentTypeField.setVisible(false);
-        equipmentNameField.setVisible(false);
-        manufacturerField.setVisible(false);
-        statusField.setVisible(false);
-        LocationChoice.setVisible(false);
-        colorField.setVisible(false);
-        sizeField.setVisible(false);
-        descriptionField.setVisible(false);
 
-        func = MedicalEquipmentTableController.Function.IDLOOKUP;
-    }
 }
 
