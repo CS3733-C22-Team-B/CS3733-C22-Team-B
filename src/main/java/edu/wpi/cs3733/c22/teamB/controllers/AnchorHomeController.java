@@ -189,19 +189,6 @@ public class AnchorHomeController implements Initializable {
     }
 
     @FXML
-    void goAbout() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("aboutPage")));
-            childPane = loader.load();
-            anchorPane.getChildren().clear();
-            anchorPane.getChildren().add(childPane);
-            anchorPane.toBack();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
     void logOut() {
         try {
             popup.setAutoHide(true);
