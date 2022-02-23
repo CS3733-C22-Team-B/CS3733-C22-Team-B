@@ -28,6 +28,7 @@ public class LoginController implements IPage {
     @FXML private ImageView picture;
     @FXML private Pane logInBox;
     @FXML private Pane contentPane;
+
     private String employeeID;
     private static Employee loggedInEmployee;
 
@@ -38,6 +39,9 @@ public class LoginController implements IPage {
         contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
         picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
         picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
+
+        logInBox.setMinHeight(300);
+        logInBox.setMinWidth(225);
         resize();
 
         DatabaseWrapper db = new DatabaseWrapper();

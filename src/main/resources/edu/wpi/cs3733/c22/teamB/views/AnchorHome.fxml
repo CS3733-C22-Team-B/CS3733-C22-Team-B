@@ -21,7 +21,7 @@
                </children></Pane>
             <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox alignment="TOP_CENTER" prefWidth="130.0" spacing="17.0" style="-fx-background-color: #ffffff;">
+                  <VBox fx:id="sidebar" alignment="TOP_CENTER" prefWidth="130.0" spacing="17.0" style="-fx-background-color: #ffffff;">
                      <children>
                         <HBox alignment="CENTER">
                            <children>
@@ -121,7 +121,7 @@
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
+                                    <Image url="@../images/icons/thin-icons/icons8-open-door-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>

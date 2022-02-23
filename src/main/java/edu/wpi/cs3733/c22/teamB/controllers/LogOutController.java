@@ -14,7 +14,6 @@ public class LogOutController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Login.fxml"));
             AnchorHomeController.curAnchorHomeController.popup.hide();
-
             Bapp.getPrimaryStage().getScene().setRoot(root);
 
             } catch (IOException ex) {
