@@ -134,7 +134,7 @@ public class ServiceRequestManagerController {
             return cell;
         });
 
-        deleteCol.setCellFactory(new Callback<TableColumn<AbstractSR, String>, TableCell<AbstractSR, String>>() {
+        deleteCol.setCellFactory(new Callback<>() {
             @Override
             public TableCell<AbstractSR, String> call(TableColumn<AbstractSR, String> param) {
                 return new TableCell<AbstractSR, String>() {
