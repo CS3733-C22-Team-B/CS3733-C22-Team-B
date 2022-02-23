@@ -10,6 +10,7 @@ import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton dashButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
+    @FXML VBox sidebar;
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -92,6 +94,8 @@ public class AnchorHomeController implements Initializable {
 
             Tooltip tooltip7 = new Tooltip("Help");
             helpButton.setTooltip(tooltip7);
+
+            sidebar.setMinWidth(130);
 
             popup.getContent().add(popUpMessage);
 //            anchorPane.setStyle("");

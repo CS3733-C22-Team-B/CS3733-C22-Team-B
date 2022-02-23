@@ -22,8 +22,8 @@ public class HomeController extends AbsPage{
 
     @FXML
     private void initialize(){
-        picture.setFitWidth(Bapp.getPrimaryStage().getWidth()-50);
-        picture.setFitHeight(Bapp.getPrimaryStage().getHeight()-50);
+        picture.setFitWidth(Bapp.getPrimaryStage().getWidth()-30);
+        picture.setFitHeight(Bapp.getPrimaryStage().getHeight()-30);
         resize();
         namePage();
     }
