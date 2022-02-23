@@ -58,7 +58,7 @@ public class AnchorHomeController implements Initializable {
     public void setPageName(String name) {
         pageName.setText(name);
     }
-    void changeNode(FXMLLoader loader) throws IOException {
+    public void changeNode(FXMLLoader loader) throws IOException {
         try {
             childPane = loader.load();
             anchorPane.getChildren().clear();
@@ -166,6 +166,18 @@ public class AnchorHomeController implements Initializable {
     void goToDashboard() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void goToAboutPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("aboutPage")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
