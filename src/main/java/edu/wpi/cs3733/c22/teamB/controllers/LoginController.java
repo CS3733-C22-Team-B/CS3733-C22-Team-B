@@ -15,18 +15,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.List;
 
 public class LoginController implements IPage {
+    public Label errorMessage;
     String employeeUser;
     String employeePass;
     @FXML private PasswordField passField;
     @FXML private TextField userField;
-    @FXML private Label errorMessage;
     @FXML private ImageView picture;
-    @FXML private Pane logInBox;
     @FXML private Pane contentPane;
 
     private String employeeID;
@@ -39,12 +39,9 @@ public class LoginController implements IPage {
         contentPane.setPrefHeight(Bapp.getPrimaryStage().getHeight()+100);
         picture.setFitWidth(Bapp.getPrimaryStage().getWidth()+100);
         picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
-
-        logInBox.setMinHeight(300);
-        logInBox.setMinWidth(225);
         resize();
 
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<Employee> employeeList = db.getAllEmployee();
         for(Employee employee : employeeList){
             employeeUser = employee.getUsername();
@@ -55,7 +52,7 @@ public class LoginController implements IPage {
 
     @FXML
     void loginButton(ActionEvent event) {
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<Employee> employeeList = db.getAllEmployee();
         String pass = PasswordHashing.hashPassword(passField.getText());
         for (Employee employee : employeeList) {
@@ -64,8 +61,10 @@ public class LoginController implements IPage {
             employeePass = employee.getPassword();
 
             if (passField.getText().isEmpty() || userField.getText().isEmpty()) {
+                errorMessage.setTextFill(Color.RED);
                 errorMessage.setText("Enter a username and password"); //(!passField.getText().equals("admin") || !userField.getText().equals("admin")) && (!passField.getText().equals("staff") || !userField.getText().equals("staff")) &&
             } else if ((!pass.equals(employeePass) || !userField.getText().equals(employeeUser))) {
+                errorMessage.setTextFill(Color.RED);
                 errorMessage.setText("Incorrect username or password");
             } else {
                 String[] args = new String[2];

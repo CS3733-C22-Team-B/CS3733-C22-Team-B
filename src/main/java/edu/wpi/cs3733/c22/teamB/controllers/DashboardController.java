@@ -19,9 +19,9 @@ public class DashboardController {
 
     @FXML
     public void initialize() {
-        cb = new AutoCompleteComboBox<>(testComboBox, (new DatabaseWrapper()).getAllLocation().stream().map(location -> location.getLongName()).collect(Collectors.toList()));
+        cb = new AutoCompleteComboBox<>(testComboBox, (DatabaseWrapper.getInstance()).getAllLocation().stream().map(location -> location.getLongName()).collect(Collectors.toList()));
 
-        cmb.getItems().addAll((new DatabaseWrapper()).getAllLocation().stream().map(location -> location.getLongName()).collect(Collectors.toList()));
+        cmb.getItems().addAll((DatabaseWrapper.getInstance()).getAllLocation().stream().map(location -> location.getLongName()).collect(Collectors.toList()));
         cb2 = new ComboBoxAutoComplete(cmb);
     }
 }

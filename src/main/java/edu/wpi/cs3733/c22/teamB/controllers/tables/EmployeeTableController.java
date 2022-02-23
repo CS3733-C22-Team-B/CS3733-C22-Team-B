@@ -55,7 +55,7 @@ public class EmployeeTableController extends AbsPage {
 
     private boolean initTable = false;
 
-    DatabaseWrapper db = new DatabaseWrapper();
+    DatabaseWrapper db = DatabaseWrapper.getInstance();
 
     public EmployeeTableController() {}
 

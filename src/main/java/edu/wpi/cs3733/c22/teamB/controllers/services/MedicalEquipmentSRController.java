@@ -38,7 +38,7 @@ public class MedicalEquipmentSRController implements IController {
 
     @FXML
     public void initialize() {
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         medEqpList = dw.getAllMedicalEquipment();
 
         List<String> equipmentTypeFieldList = new ArrayList<>();
@@ -78,7 +78,7 @@ public class MedicalEquipmentSRController implements IController {
     // Use this submit with argument
     @Override
     public void submit(AbstractSR sr) {
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         if (this.sr == null)
             dw.addSR(new MedicalEquipmentSR(sr, equipmentNameField.getValue()));
         else

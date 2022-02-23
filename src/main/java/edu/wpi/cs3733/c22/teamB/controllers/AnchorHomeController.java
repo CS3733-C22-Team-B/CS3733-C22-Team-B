@@ -2,6 +2,8 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -175,6 +177,18 @@ public class AnchorHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    void goToAboutPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("aboutPage")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void goToSettings() {
@@ -208,6 +222,10 @@ public class AnchorHomeController implements Initializable {
             System.out.println("uh oh. pop up did not work");
 
         }
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }
 
