@@ -51,7 +51,7 @@ public class LocationTableController extends AbsPage {
 
     public LocationTableController() {}
 
-    DatabaseWrapper db = new DatabaseWrapper();
+    DatabaseWrapper db = DatabaseWrapper.getInstance();
 
     @FXML
     private void initialize() throws NullPointerException {

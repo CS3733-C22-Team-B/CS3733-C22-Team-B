@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ServiceRequestManagerController {
-    DatabaseWrapper dw = new DatabaseWrapper();
+    DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
     @FXML private TableView<AbstractSR> srTable;
     @FXML private TableColumn<AbstractSR, String> idCol;

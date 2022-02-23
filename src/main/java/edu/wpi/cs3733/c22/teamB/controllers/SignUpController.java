@@ -40,7 +40,7 @@ public class SignUpController implements Initializable {
     public SignUpController(){};
 
     @FXML private void submit(ActionEvent actionEvent) {
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         db.addEmployee(new Employee(lastName.getText(), firstName.getText(), position.getText(), 1, username.getText(), password.getText(), email.getText(), phoneNumber.getText()));
 
         // account confirmation popup

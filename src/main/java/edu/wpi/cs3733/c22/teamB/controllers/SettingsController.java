@@ -41,7 +41,7 @@ public class SettingsController extends AbsPage implements Initializable{
     DatabaseWrapper db;
 
     public SettingsController() throws SQLException {
-        this.db = new DatabaseWrapper();
+        this.db = DatabaseWrapper.getInstance();
     }
 
     public void Backup() throws IOException {
@@ -77,6 +77,7 @@ public class SettingsController extends AbsPage implements Initializable{
             db.restoreAll();
         }
     }
+
     public void onClientToggle(ActionEvent actionEvent) throws IOException {
         if (clientServerToggle.isSelected()) {
             embeddedToggle.setSelected(false);
@@ -87,28 +88,36 @@ public class SettingsController extends AbsPage implements Initializable{
         }
     }
 
-
-
     public void onRemoteToggle(ActionEvent actionEvent) throws IOException {
-        if (remoteToggle.isSelected()){
+        if (remoteToggle.isSelected()) {
             clientServerToggle.setSelected(false);
             embeddedToggle.setSelected(false);
             db.backupAll();
             db.engageRemote();
             db.restoreAll();
+            System.out.println(db.isRemote());
         }
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        embeddedToggle.setSelected(true);
-
-//        if (db.getConnection() instanceof org.apache.derby.client.net.NetConnection) {
-//            clientServerToggle.setSelected(true);
-//        } else {
-//            clientServerToggle.setSelected(false);
-//        }
+        System.out.println("Initialize is" + db.isRemote());
+        if (db.isRemote()) {
+            remoteToggle.setSelected(true);
+            clientServerToggle.setSelected(false);
+            embeddedToggle.setSelected(false);
+            System.out.println("Remote");
+        } else if (db.isClient()) {
+            remoteToggle.setSelected(false);
+            clientServerToggle.setSelected(true);
+            embeddedToggle.setSelected(false);
+            System.out.println("Client");
+        } else {
+            remoteToggle.setSelected(false);
+            clientServerToggle.setSelected(false);
+            embeddedToggle.setSelected(true);
+            System.out.println("Embedded");
+        }
 
         initResize();
         resize();

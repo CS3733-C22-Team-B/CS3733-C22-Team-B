@@ -13,9 +13,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseWrapper {
+
+    private static DatabaseWrapper DatabaseWrapperInstance;
 
     private IDatabase<Location> LocationDao;
     private IDatabase<Location> LocationDerby;
@@ -61,19 +64,15 @@ public class DatabaseWrapper {
     private IDatabase<SanitationSR> SanitationSRDerby;
     private IDatabase<SanitationSR> SanitationSRMongo;
 
-
     private IDatabase<AbstractSR> MainSRDao;
     private IDatabase<AbstractSR> MainSRDerby;
     private IDatabase<AbstractSR> MainSRMongo;
-
-
-
 
     private ConnectionManager connectionManager;
 
     private RestoreBackupWrapper restoreBackupWrapper;
 
-    public DatabaseWrapper() {
+    private DatabaseWrapper() {
 
         MongoDB.getConnection();
 
@@ -129,6 +128,14 @@ public class DatabaseWrapper {
         restoreBackupWrapper = new RestoreBackupWrapper(LocationDao, EmployeeDao, MedicalEquipmentDao, MainSRDao,
                 ExternalTransportDao, FoodDeliveryDao, GiftFloralSRDao, LaundrySRDao, MedicalEquipmentSRDao,
                 MedicineDeliverySRDao, ComputerServiceSRDao, SanitationSRDao);
+    }
+
+    public static DatabaseWrapper getInstance() {
+        if (DatabaseWrapperInstance == null) {
+            DatabaseWrapperInstance = new DatabaseWrapper();
+        }
+
+        return DatabaseWrapperInstance;
     }
 
     public void engageEmbedded() {
@@ -231,11 +238,11 @@ public class DatabaseWrapper {
                 ExternalTransportDao, FoodDeliveryDao, GiftFloralSRDao, LaundrySRDao, MedicalEquipmentSRDao,
                 MedicineDeliverySRDao, ComputerServiceSRDao, SanitationSRDao);
     }
-    
-    public void addSR(AbstractSR abstractSR){
+
+    public void addSR(AbstractSR abstractSR) {
         MainSRDao.addValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
         System.out.println(abstractSR.getSrType());
-        switch(abstractSR.getSrType()) {
+        switch (abstractSR.getSrType()) {
             case "ExternalTransportSR":
                 ExternalTransportDao.addValue((ExternalTransportSR) abstractSR);
                 break;
@@ -282,7 +289,7 @@ public class DatabaseWrapper {
 
         AbstractSR abstractSR = getSR(srID);
         System.out.println(abstractSR.getSrType());
-        switch(abstractSR.getSrType()) {
+        switch (abstractSR.getSrType()) {
             case "ExternalTransportSR":
                 ExternalTransportDao.deleteValue(srID);
                 break;
@@ -328,7 +335,7 @@ public class DatabaseWrapper {
     public void updateSR(AbstractSR abstractSR) {
         MainSRDao.updateValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
         System.out.println(abstractSR.getSrType());
-        switch(abstractSR.getSrType()) {
+        switch (abstractSR.getSrType()) {
             case "ExternalTransportSR":
                 ExternalTransportDao.updateValue((ExternalTransportSR) abstractSR);
                 break;
@@ -373,7 +380,7 @@ public class DatabaseWrapper {
 
         AbstractSR abstractSR = MainSRDao.getValue(srID);
         if (abstractSR != null) {
-            switch(abstractSR.getSrType()) {
+            switch (abstractSR.getSrType()) {
                 case "ExternalTransportSR":
                     return ExternalTransportDao.getValue(srID);
                 case "FoodDeliverySR":
@@ -416,7 +423,6 @@ public class DatabaseWrapper {
             abstractSR = getSR(abstractSR.getSrID());
         }
 
-        System.out.println(list);
         return list;
     }
 
@@ -534,7 +540,7 @@ public class DatabaseWrapper {
         restoreBackupWrapper.backupEmployee();
     }
 
-    void backupTableMedicalEquipment() throws IOException{
+    void backupTableMedicalEquipment() throws IOException {
         restoreBackupWrapper.backupMedicalEquipment();
     }
 
@@ -550,7 +556,7 @@ public class DatabaseWrapper {
         restoreBackupWrapper.backupSanitationSR();
     }
 
-    public void backupAll() throws IOException{
+    public void backupAll() throws IOException {
         restoreBackupWrapper.backupAll();
         System.out.println(ConnectionManager.getInstance().getConnection());
     }
@@ -564,31 +570,59 @@ public class DatabaseWrapper {
     public void isFirstRestore() throws IOException {
 
         LocationDaoI test = new LocationDaoI();
-        if (test.isFirstRestore()){
+        if (test.isFirstRestore()) {
             firstRestore();
-        } else{
+        } else {
             System.out.println("Not First Restore!");
         }
     }
 
     // Clean up for Iteration 3
-    public boolean isInTableLocation(String nodeID){
+    public boolean isInTableLocation(String nodeID) {
         LocationDaoI test = new LocationDaoI();
         return test.isInTable(nodeID);
     }
 
     // Clean up for Iteration 3
-    public int nodeTypeCountLocation(String nodeType, String floor){
+    public int nodeTypeCountLocation(String nodeType, String floor) {
         LocationDaoI locationDaoI = new LocationDaoI();
         System.out.println(locationDaoI.nodeTypeCount(nodeType, floor));
         return locationDaoI.nodeTypeCount(nodeType, floor);
     }
 
-    public Connection getConnection() {
+    private Connection getConnection() {
         return ConnectionManager.getInstance().getConnection();
     }
 
+    public boolean isEmbedded() {
+        return (getConnection() instanceof org.apache.derby.impl.jdbc.EmbedConnection);
+    }
+
+    public boolean isClient() {
+        return (getConnection() instanceof org.apache.derby.client.net.NetConnection);
+    }
+
+    public boolean isRemote() {
+        return (this.LocationDao instanceof LocationMongo);
+    }
+
     public boolean srIsInTable(String srID) {
-        return ((MainSRDaoI) MainSRDao).isInTable(srID);
+
+        List<AbstractSR> mainSRList = MainSRDao.getAllValues();
+
+        for (AbstractSR mainSR : mainSRList) {
+            String mainSRID = mainSR.getSrID();
+            if (mainSRID.equals(srID)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
+
+//     return (mainSRList.contains(getSR(srID)));
+//            return true;
+//        } else {
+//            return false;
+// return ((MainSRDaoI) MainSRDao).isInTable(srID);
+//        }

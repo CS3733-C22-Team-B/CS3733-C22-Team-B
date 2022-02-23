@@ -120,18 +120,77 @@ public class RestoreBackupWrapper {
     }
 
     void backupAll() throws FileNotFoundException {
-        backupLocation();
-        backupEmployee();
-        backupMedicalEquipment();
-        backupMainSR();
-        backupExternalTransportSR();
-        backupFoodDeliverySR();
-        backupGiftFloralSR();
-        backupLaundrySR();
-        backupMedicalEquipmentSR();
-        backupMedicineDeliverySR();
-        backupComputerServiceSR();
-        backupSanitationSR();
+        try {
+            backupLocation();
+        } catch (NullPointerException e) {
+            System.out.println("Location Table/Collection is empty");
+        }
+
+        try {
+            backupEmployee();
+        } catch (NullPointerException e) {
+            System.out.println("Employee Table/Collection is empty");
+        }
+
+        try {
+            backupMedicalEquipment();;
+        } catch (NullPointerException e) {
+            System.out.println("MedicalEquipment Table/Collection is empty");
+        }
+
+        try {
+            backupMainSR();
+        } catch (NullPointerException e) {
+            System.out.println("MainSR Table/Collection is empty");
+        }
+
+        try {
+            backupExternalTransportSR();
+        } catch (NullPointerException e) {
+            System.out.println("ExternalTransport Table/Collection is empty");
+        }
+
+        try {
+            backupFoodDeliverySR();
+        } catch (NullPointerException e) {
+            System.out.println("FoodDeliverySR Table/Collection is empty");
+        }
+
+        try {
+            backupGiftFloralSR();
+        } catch (NullPointerException e) {
+            System.out.println("GiftFloralSR Table/Collection is empty");
+        }
+
+        try {
+            backupLaundrySR();
+        } catch (NullPointerException e) {
+            System.out.println("LaundrySR Table/Collection is empty");
+        }
+
+        try {
+            backupMedicalEquipmentSR();
+        } catch (NullPointerException e) {
+            System.out.println("MedicalEquipmentSR Table/Collection is empty");
+        }
+
+        try {
+            backupMedicineDeliverySR();
+        } catch (NullPointerException e) {
+            System.out.println("MedicineDeliverySR Table/Collection is empty");
+        }
+
+        try {
+            backupComputerServiceSR();
+        } catch (NullPointerException e) {
+            System.out.println("ComputerServiceSR Table/Collection is empty");
+        }
+
+        try {
+            backupSanitationSR();
+        } catch (NullPointerException e) {
+            System.out.println("SanitationSR Table/Collection is empty");
+        }
     }
 
     void firstRestore() throws IOException{

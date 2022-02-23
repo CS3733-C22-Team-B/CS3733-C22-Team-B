@@ -25,7 +25,7 @@ public class Bapp extends Application {
         log.info("Starting Up");
 //        MongoDB.getConnection();
 
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         db.isFirstRestore();
 
     }

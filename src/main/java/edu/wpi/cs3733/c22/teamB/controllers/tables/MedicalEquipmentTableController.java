@@ -63,7 +63,7 @@ public class MedicalEquipmentTableController extends AbsPage {
     private IDatabase medicalEquipmentDaoI = new MedicalEquipmentDaoI();
     List<MedicalEquipment> listOfMedicalEquipment;
 
-    DatabaseWrapper db = new DatabaseWrapper();
+    DatabaseWrapper db = DatabaseWrapper.getInstance();
 
     public MedicalEquipmentTableController() {}
 

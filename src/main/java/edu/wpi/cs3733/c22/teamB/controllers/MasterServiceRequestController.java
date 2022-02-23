@@ -114,7 +114,7 @@ public class MasterServiceRequestController extends AbsPage {
     // DO NOT TOUCH THIS
     @FXML private void initialize() {
         popup.setVisible(false);
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         srLabel.setText(getLabel());
 
         // assignedEmployeeField

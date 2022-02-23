@@ -110,7 +110,6 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
     @Override
     public void createTable() {
         MainSRTable = conn.getCollection("MainSR");
-
     }
 
     @Override
