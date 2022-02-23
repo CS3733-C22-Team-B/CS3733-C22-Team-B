@@ -108,9 +108,9 @@
                            </children>
                         </HBox>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="262.0" prefWidth="2.0" />
-                        <JFXButton fx:id="helpButton" onAction="#goHome" text=" ">
+                        <JFXButton fx:id="helpButton" onAction="#goToAboutPage" text=" ">
                            <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
                                  </image>
