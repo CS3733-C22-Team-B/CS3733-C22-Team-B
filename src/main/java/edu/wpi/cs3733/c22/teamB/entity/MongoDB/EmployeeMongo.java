@@ -20,6 +20,13 @@ public class EmployeeMongo implements IDatabase<Employee> {
     }
 
     public static DBObject convertEmployee(Employee employee){
+        String pass = employee.getPassword();
+
+        // if pass is already hashed, do nothing; else hash it
+        if (pass.length() > 20) {
+        } else {
+            pass = PasswordHashing.hashPassword(employee.getPassword());
+        }
         BasicDBObject document = new BasicDBObject();
         document.put("_id", employee.getEmployeeID());
         document.put("lastName", employee.getLastName());
@@ -27,7 +34,7 @@ public class EmployeeMongo implements IDatabase<Employee> {
         document.put("position", employee.getPosition());
         document.put("accessLevel", employee.getAccessLevel());
         document.put("username", employee.getUsername());
-        document.put("password", /*PasswordHashing.hashPassword*/(employee.getPassword()));
+        document.put("password", pass);
         document.put("email", employee.getEmail());
         document.put("phoneNumber", employee.getPhoneNumber());
 
