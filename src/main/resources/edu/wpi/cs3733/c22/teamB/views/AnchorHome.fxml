@@ -107,7 +107,7 @@
                               <Label text="Settings" />
                            </children>
                         </HBox>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="262.0" prefWidth="2.0" />
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="222.0" prefWidth="6.0" />
                         <JFXButton fx:id="helpButton" onAction="#goToAboutPage" text=" ">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
@@ -122,6 +122,15 @@
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/icons/thin-icons/icons8-open-door-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="exitButton" onAction="#exit" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
