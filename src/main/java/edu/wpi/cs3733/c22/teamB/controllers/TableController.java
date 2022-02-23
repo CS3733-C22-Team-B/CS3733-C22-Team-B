@@ -71,3 +71,4 @@ public class TableController extends AbsPage {
         AnchorHomeController.curAnchorHomeController.setPageName("Tables");
     }
 }
+
