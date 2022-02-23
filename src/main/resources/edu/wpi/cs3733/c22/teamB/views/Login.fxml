@@ -14,41 +14,46 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.LoginController">
    <children>
-      <ImageView fx:id="picture" fitHeight="413.0" fitWidth="700.0" layoutX="-57.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="picture" fitHeight="459.0" fitWidth="751.0" layoutX="-57.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/brigham_and_womens.jpg" />
+            <Image url="@../images/Brigham-Womens-TO-USE.jpg" />
          </image>
          <effect>
             <DropShadow height="23.34" radius="11.754999999999999" width="25.68" />
          </effect>
       </ImageView>
       <Pane fx:id="contentPane" layoutX="-5.0" layoutY="-7.0" opacity="0.31" prefHeight="418.0" prefWidth="625.0" style="-fx-background-color: black;" />
-      <Pane fx:id="logInBox" layoutX="45.0" layoutY="100.0" prefHeight="274.0" prefWidth="207.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+      <Pane fx:id="logInBox" layoutX="45.0" layoutY="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 5;">
          <children>
-            <Label layoutX="16.0" layoutY="145.0" text="Forgot your log in?">
-               <font>
-                  <Font name="System Italic" size="10.0" />
-               </font>
-            </Label>
-            <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="58.0" prefHeight="17.0" prefWidth="165.0" style="-fx-text-fill: #ff0000;" textAlignment="CENTER" />
-            <TextField fx:id="userField" layoutX="16.0" layoutY="81.0" prefHeight="27.0" prefWidth="141.0" promptText="Username" styleClass="text-field" stylesheets="@../styles/style.css" />
-            <PasswordField fx:id="passField" layoutX="16.0" layoutY="112.0" prefHeight="27.0" prefWidth="141.0" promptText="Password" stylesheets="@../styles/style.css" />
-            <JFXButton layoutX="14.0" layoutY="168.0" onAction="#loginButton" prefHeight="23.0" prefWidth="148.0" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign In">
-               <font>
-                  <Font name="System Bold" size="11.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="43.0" fitWidth="82.0" layoutX="142.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/Brigham_and_Womens_Hospital_logo.svg.png" />
-               </image>
-            </ImageView>
-            <Label alignment="TOP_CENTER" layoutX="13.0" layoutY="20.0" prefHeight="43.0" prefWidth="118.0" text="Brigham and Women's Hospital" textOverrun="CLIP" wrapText="true" />
-            <JFXButton layoutX="14.0" layoutY="201.0" onAction="#signupButton" prefHeight="23.0" prefWidth="148.0" style="-fx-background-color: #526598;" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign Up">
-               <font>
-                  <Font name="System Bold" size="11.0" />
-               </font>
-            </JFXButton>
+            <Pane fx:id="info" layoutX="5.0" layoutY="14.0">
+               <children>
+                  <Label layoutX="11.0" layoutY="131.0" text="Forgot your log in?">
+                     <font>
+                        <Font name="System Italic" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="44.0" prefHeight="17.0" prefWidth="165.0" style="-fx-text-fill: #ff0000;" textAlignment="CENTER" />
+                  <TextField fx:id="userField" layoutX="11.0" layoutY="67.0" prefHeight="27.0" prefWidth="141.0" promptText="Username" styleClass="text-field" stylesheets="@../styles/style.css" />
+                  <PasswordField fx:id="passField" layoutX="11.0" layoutY="98.0" prefHeight="27.0" prefWidth="141.0" promptText="Password" stylesheets="@../styles/style.css" />
+                  <JFXButton layoutX="9.0" layoutY="154.0" onAction="#loginButton" prefHeight="23.0" prefWidth="148.0" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign In">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="43.0" fitWidth="82.0" layoutX="137.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Brigham_and_Womens_Hospital_logo.svg.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="TOP_CENTER" layoutX="8.0" layoutY="6.0" prefHeight="43.0" prefWidth="118.0" text="Brigham and Women's Hospital" textOverrun="CLIP" wrapText="true" />
+                  <JFXButton layoutX="9.0" layoutY="187.0" onAction="#signupButton" prefHeight="23.0" prefWidth="148.0" style="-fx-background-color: #526598;" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign Up">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="93.0" layoutY="218.0" text=" " />
+               </children>
+            </Pane>
          </children>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" offsetX="3.0" offsetY="3.0" spread="0.5">
