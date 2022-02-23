@@ -139,6 +139,12 @@ public class DatabaseWrapper {
     }
 
     public void engageEmbedded() {
+        try {
+            backupAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         this.LocationDao = this.LocationDerby;
         this.EmployeeDao = this.EmployeeDerby;
         this.MedicalEquipmentDao = this.MedicalEquipmentDerby;
@@ -154,11 +160,6 @@ public class DatabaseWrapper {
 
         setRestoreBackupDao();
 
-        try {
-            backupAll();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         initEmbedded();
         try {
             restoreAll();
@@ -168,6 +169,12 @@ public class DatabaseWrapper {
     }
 
     public void engageClient() {
+        try {
+            backupAll();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         this.LocationDao = this.LocationDerby;
         this.EmployeeDao = this.EmployeeDerby;
         this.MedicalEquipmentDao = this.MedicalEquipmentDerby;
@@ -183,11 +190,6 @@ public class DatabaseWrapper {
 
         setRestoreBackupDao();
 
-        try {
-            backupAll();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         initClient();
         try {
             restoreAll();
@@ -558,7 +560,6 @@ public class DatabaseWrapper {
 
     public void backupAll() throws IOException {
         restoreBackupWrapper.backupAll();
-        System.out.println(ConnectionManager.getInstance().getConnection());
     }
 
     public void firstRestore() throws IOException {
