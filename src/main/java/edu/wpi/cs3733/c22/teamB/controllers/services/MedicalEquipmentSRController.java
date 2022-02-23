@@ -12,20 +12,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.util.StringConverter;
 
 public class MedicalEquipmentSRController implements IController {
     @FXML private JFXComboBox<String> equipmentTypeField;
     private AutoCompleteComboBox<String> equipmentTypeAC;
-    @FXML private JFXComboBox<String> equipmentNameField;
-    private AutoCompleteComboBox<String> equipmentNameAC;
+    @FXML private JFXComboBox<MedicalEquipment> equipmentNameField;
+    private AutoCompleteComboBox<MedicalEquipment> equipmentNameAC;
 
     private List<MedicalEquipment> medEqpList;
-    private Map<String, MedicalEquipment> medEqpMap;
-    private int nextID;
 
     // Important: 3 lines below are necessary
     private MedicalEquipmentSR sr = null;
@@ -40,40 +40,34 @@ public class MedicalEquipmentSRController implements IController {
     public void initialize() {
         DatabaseWrapper dw = new DatabaseWrapper();
         medEqpList = dw.getAllMedicalEquipment();
-        medEqpMap =
-                IntStream.range(0, medEqpList.size())
-                        .boxed()
-                        .collect(
-                                Collectors.toMap(
-                                        i ->
-                                                (medEqpList.get(i).getEquipmentID()
-                                                + ' '
-                                                + medEqpList.get(i).getEquipmentName()),
-                                        i -> medEqpList.get(i)));
-//        equipmentTypeField.getItems().add("ALL");
-//        equipmentTypeField.getItems().addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
+
         List<String> equipmentTypeFieldList = new ArrayList<>();
         equipmentTypeFieldList.add("ALL");
-        equipmentTypeFieldList.addAll(medEqpMap.values().stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
-        equipmentTypeAC = new AutoCompleteComboBox<>(equipmentTypeField, equipmentTypeFieldList);
+        equipmentTypeFieldList.addAll(medEqpList.stream().map(MedicalEquipment::getEquipmentType).collect(Collectors.toSet()));
+        equipmentTypeField.getItems().addAll(equipmentTypeFieldList);
+
+        equipmentNameField.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(MedicalEquipment object) {
+                return object != null ? (object.getEquipmentID() + ' ' + object.getEquipmentName()) : "";
+            }
+            @Override
+            public MedicalEquipment fromString(String string) {
+                return null;
+            }
+        });
 
         if (sr == null) {
             clear();
         } else {
             equipmentTypeField.setValue(sr.getMedicalEquipment().getEquipmentType());
-            equipmentNameField.setValue(sr.getMedicalEquipment().getEquipmentID() + ' ' + sr.getMedicalEquipment().getEquipmentName());
+            equipmentNameField.setValue(sr.getMedicalEquipment());
         }
-//        equipmentNameField.getItems().addAll(medEqpMap.keySet()
-//                .stream()
-//                .filter(
-//                        lstr -> equipmentTypeField.getValue().equals("ALL")
-//                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
-//                .collect(Collectors.toList()));
-        equipmentNameAC = new AutoCompleteComboBox<>(equipmentNameField, medEqpMap.keySet()
+        equipmentNameAC = new AutoCompleteComboBox<>(equipmentNameField, medEqpList
                 .stream()
                 .filter(
                         lstr -> equipmentTypeField.getValue().equals("ALL")
-                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
+                                || lstr.getEquipmentType().equals(equipmentTypeField.getValue()))
                 .collect(Collectors.toList()));
     }
 
@@ -86,26 +80,25 @@ public class MedicalEquipmentSRController implements IController {
     public void submit(AbstractSR sr) {
         DatabaseWrapper dw = new DatabaseWrapper();
         if (this.sr == null)
-            dw.addSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
+            dw.addSR(new MedicalEquipmentSR(sr, equipmentNameField.getValue()));
         else
-            dw.updateSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
+            dw.updateSR(new MedicalEquipmentSR(sr, equipmentNameField.getValue()));
     }
 
     @Override
     public void clear() {
         equipmentTypeField.setValue("ALL");
         equipmentNameField.setValue(null);
-        equipmentNameField.getEditor().setText(null);
     }
 
     @FXML private void onEquipmentTypeChange(ActionEvent actionEvent) {
-        equipmentNameField.getItems().clear();
-        equipmentNameField.getItems().removeAll();
-        equipmentNameField.getItems().addAll(medEqpMap.keySet()
+//        equipmentNameField.getItems().clear();
+//        equipmentNameField.getItems().removeAll();
+        equipmentNameAC.updateData(medEqpList
                 .stream()
                 .filter(
                         lstr -> equipmentTypeField.getValue().equals("ALL")
-                                || medEqpMap.get(lstr).getEquipmentType().equals(equipmentTypeField.getValue()))
+                                || lstr.getEquipmentType().equals(equipmentTypeField.getValue()))
                 .collect(Collectors.toList()));
         equipmentNameField.setValue(null);
         equipmentNameField.getEditor().setText(null);

@@ -1,77 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="808.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane minHeight="75.0" maxHeight="75.0" style="-fx-background-color: #002168;">
+            <Pane minHeight="75.0" prefHeight="75.0" style="-fx-background-color: #002168;">
                <children>
-                  <Label fx:id="pageName" layoutX="66.0" layoutY="23.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Label" textFill="WHITE" />
+                  <Label fx:id="pageName" layoutX="35.0" layoutY="27.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Label" textFill="WHITE" />
                </children></Pane>
             <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox alignment="TOP_CENTER" prefWidth="70.0" spacing="17.0" style="-fx-background-color: #ffffff;">
+                  <VBox alignment="TOP_CENTER" prefWidth="130.0" spacing="17.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <JFXButton fx:id="homeButton" onAction="#goHome" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-home-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="mapButton" onAction="#goToMap" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-map-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="srButton" onAction="#goToServiceRequest" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-hospital-wagon-without-a-siren-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="tableButton" onAction="#goToTables" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-user-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="dashButton" onAction="#goToDashboard" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-search-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="settingsButton" onAction="#goToSettings" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-location-100.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="homeButton" onAction="#goHome" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-home-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label text="Home" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="mapButton" onAction="#goToMap" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-map-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label text="Map" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="srButton" onAction="#goToServiceRequest" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-hospital-wagon-without-a-siren-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label alignment="CENTER" text="Service" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="tableButton" onAction="#goToTables" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-table-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label alignment="CENTER" text="Tables" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="dashButton" onAction="#goToDashboard" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-web-analytics-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label text="Dashboard" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="settingsButton" onAction="#goToSettings" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-automation-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Label text="Settings" />
+                           </children>
+                        </HBox>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="262.0" prefWidth="2.0" />
                         <JFXButton fx:id="helpButton" onAction="#goHome" text=" ">
                            <graphic>
                               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -81,12 +117,21 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton fx:id="helpButton1" onAction="#logOut" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                      </children>
                      <padding>
                         <Insets top="17.0" />
                      </padding>
                   </VBox>
-                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
+                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: #b3bcd2;" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
@@ -59,15 +58,15 @@
                   <TextField fx:id="accessLevel" promptText="accessLevel" GridPane.columnIndex="4" />
                   </children>
               </GridPane>
-                <JFXButton fx:id="clearButton" alignment="CENTER" layoutX="327.0" layoutY="382.0" minWidth="75.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
-                <JFXButton fx:id="confirmButton" alignment="CENTER" layoutX="501.0" layoutY="382.0" minWidth="75.0" onAction="#confirm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
-                <JFXButton fx:id="cancelButton" alignment="CENTER" layoutX="414.0" layoutY="382.0" minWidth="75.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
-                <JFXButton fx:id="idLookupButton" layoutX="125.0" layoutY="101.0" minWidth="75.0" onAction="#idLookup" prefHeight="26.0" prefWidth="96.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="ID Lookup" />
-            <JFXButton fx:id="addButton" layoutX="233.0" layoutY="101.0" minWidth="75.0" onAction="#addEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add" />
-                <JFXButton fx:id="modifyButton" layoutX="321.0" layoutY="101.0" minWidth="75.0" onAction="#modifyEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Modify" />
-                <JFXButton fx:id="deleteButton" layoutX="408.0" layoutY="101.0" minWidth="75.0" onAction="#deleteEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
-                <JFXButton fx:id="loadButton" layoutX="495.0" layoutY="101.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
-            <Pane layoutX="27.0" layoutY="88.0" prefHeight="1.0" prefWidth="546.0" style="-fx-background-color: #08246c;" />
+                <JFXButton fx:id="clearButton" alignment="CENTER" layoutX="617.0" layoutY="551.0" minWidth="75.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
+                <JFXButton fx:id="confirmButton" alignment="CENTER" layoutX="791.0" layoutY="551.0" minWidth="75.0" onAction="#confirm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
+                <JFXButton fx:id="cancelButton" alignment="CENTER" layoutX="704.0" layoutY="551.0" minWidth="75.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
+                <JFXButton fx:id="idLookupButton" layoutX="414.0" layoutY="101.0" minWidth="75.0" onAction="#idLookup" prefHeight="26.0" prefWidth="96.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="ID Lookup" />
+            <JFXButton fx:id="addButton" layoutX="522.0" layoutY="101.0" minWidth="75.0" onAction="#addEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add" />
+                <JFXButton fx:id="modifyButton" layoutX="610.0" layoutY="101.0" minWidth="75.0" onAction="#modifyEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Modify" />
+                <JFXButton fx:id="deleteButton" layoutX="697.0" layoutY="101.0" minWidth="75.0" onAction="#deleteEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
+                <JFXButton fx:id="loadButton" layoutX="784.0" layoutY="101.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
+            <Pane layoutX="39.0" layoutY="88.0" prefHeight="1.0" prefWidth="825.0" style="-fx-background-color: #08246c;" />
             <ImageView fitHeight="71.0" fitWidth="79.0" layoutX="25.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/icons/Employee.png" />
