@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 
@@ -23,7 +25,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ServiceRequestManagerController {
+public class ServiceRequestManagerController extends AbsPage{
     DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
     @FXML private TableView<AbstractSR> srTable;
@@ -45,6 +47,9 @@ public class ServiceRequestManagerController {
     @FXML private JFXCheckBox requestorFilterCheckBox;
     @FXML private JFXCheckBox statusFilterCheckBox;
     @FXML private JFXToggleButton incompleteToggle;
+    @FXML private Pane contentPane;
+    @FXML private AnchorPane anchorPane;
+    @FXML private StackPane stackPane;
 
     private Set<String> filterFields = new HashSet<>();
 
@@ -54,6 +59,7 @@ public class ServiceRequestManagerController {
 
     @FXML
     private void initialize() {
+        initResize();
         // get employee list from db
         employeeList = dw.getAllEmployee();
         employeeMap =
@@ -277,7 +283,8 @@ public class ServiceRequestManagerController {
 
     @FXML
     private void onFilterByButton(ActionEvent actionEvent) {
-        filterDialog.show((StackPane) AnchorHomeController.curAnchorHomeController.getAnchorPane().getChildren().get(0));
+
+        filterDialog.show(stackPane);
     }
 
     @FXML
@@ -327,7 +334,13 @@ public class ServiceRequestManagerController {
 
         }
     }
-
+    @Override
+    public void initResize() {
+        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/8);
+        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/12);
+        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
+        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
+    }
     public void onCloseFilterDialog(ActionEvent actionEvent) {
         filterDialog.close();
     }
