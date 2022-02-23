@@ -17,6 +17,7 @@ import java.util.stream.IntStream;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,12 +29,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class MedicalEquipmentTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
-    @FXML private TextField equipmentIDField;
     @FXML private TextField equipmentTypeField;
     @FXML private TextField equipmentNameField;
     @FXML private TextField manufacturerField;
@@ -42,7 +44,6 @@ public class MedicalEquipmentTableController extends AbsPage {
     @FXML private TextField sizeField;
     @FXML private TextField descriptionField;
     @FXML private JFXButton addButton;
-    @FXML private JFXButton modifyButton;
     @FXML private JFXButton deleteButton;
     @FXML private TableView<MedicalEquipment> table;
     @FXML private JFXComboBox<String> LocationChoice;
@@ -50,13 +51,14 @@ public class MedicalEquipmentTableController extends AbsPage {
     @FXML private TextField amountField;
     private List<Location> locList;
     private Map<String, Location> locMap;
+    @FXML private Pane popup;
 
     @Override
     public void namePage() {
         AnchorHomeController.curAnchorHomeController.setPageName("Medical Equipment Table");
     }
 
-    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
+    private enum Function {ADD, MODIFY, DELETE, NOTHING};
     MedicalEquipmentTableController.Function func = MedicalEquipmentTableController.Function.NOTHING;
 
     private boolean initTable = false;
@@ -69,8 +71,8 @@ public class MedicalEquipmentTableController extends AbsPage {
 
     @FXML
     private void initialize() throws NullPointerException {
-        modifyButton.setDisable(true);
         deleteButton.setDisable(true);
+        popup.setVisible(false);
 
         locList = db.getAllLocation();
         locMap =
@@ -91,7 +93,6 @@ public class MedicalEquipmentTableController extends AbsPage {
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                modifyButton.setDisable(false);
                 deleteButton.setDisable(false);
             }
         });
@@ -100,6 +101,9 @@ public class MedicalEquipmentTableController extends AbsPage {
         initResize();
         resize();
         namePage();
+
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     public void loadTable() throws NullPointerException {
@@ -192,9 +196,9 @@ public class MedicalEquipmentTableController extends AbsPage {
         sizeField.setDisable(false);
         descriptionField.setDisable(false);
         amountField.setDisable(false);
-       // func = MedicalEquipmentTableController.Function.ADD;
 
         func = Function.ADD;
+        clearForm(null);
     }
 
     @FXML
@@ -221,7 +225,6 @@ public class MedicalEquipmentTableController extends AbsPage {
         amountField.setDisable(false);
 
         MedicalEquipment loc = table.getSelectionModel().getSelectedItem();
-        equipmentIDField.setText(loc.getEquipmentID());
         equipmentNameField.setText(loc.getEquipmentName());
         equipmentTypeField.setText(loc.getEquipmentType());
         manufacturerField.setText(loc.getManufacturer());
@@ -241,19 +244,30 @@ public class MedicalEquipmentTableController extends AbsPage {
         String value = table.getSelectionModel().getSelectedItem().getEquipmentID();
         db.deleteMedicalEquipment(value);
         loadTable();
+        cancelForm(null);
 
-//        func = Function.DELETE;
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
-        modifyButton.setVisible(true);
         deleteButton.setVisible(true);
+
+        if (table.getSelectionModel().getSelectedItem().getEquipmentID() != null){
+            modifyLocation(null);
+        }
     }
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == MedicalEquipmentTableController.Function.ADD) {
             MedicalEquipment m = new MedicalEquipment(
-                    equipmentIDField.getText(),
                     equipmentNameField.getText(),
                     equipmentTypeField.getText(),
                     manufacturerField.getText(),
@@ -266,9 +280,21 @@ public class MedicalEquipmentTableController extends AbsPage {
             System.out.println(m);
             db.addMedicalEquipment(m);
             loadTable();
+
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
+
+            clearForm(actionEvent);
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
             MedicalEquipment newEquip = new MedicalEquipment(
-                    equipmentIDField.getText(),
+                    table.getSelectionModel().getSelectedItem().getEquipmentID(),
                     equipmentNameField.getText(),
                     equipmentTypeField.getText(),
                     manufacturerField.getText(),
@@ -280,17 +306,22 @@ public class MedicalEquipmentTableController extends AbsPage {
                     Integer.parseInt(amountField.getText()));
             db.updateMedicalEquipment(newEquip);
             loadTable();
-        } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
-            table.getItems().clear();
-            table.getItems().add(db.getMedicalEquipment(equipmentIDField.getText())); // create and add object
-        }
 
-        clearForm(actionEvent);
-        func = MedicalEquipmentTableController.Function.NOTHING;
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
+
+            cancelForm(actionEvent);
+        }
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
-        equipmentIDField.clear();
         equipmentNameField.clear();
         equipmentTypeField.clear();
         manufacturerField.clear();
@@ -310,27 +341,11 @@ public class MedicalEquipmentTableController extends AbsPage {
         addButton.setVisible(true);
         addButton.setDisable(false);
 
-        modifyButton.setVisible(true);
-        modifyButton.setDisable(false);
-
         deleteButton.setVisible(true);
         deleteButton.setDisable(false);
 
         func = MedicalEquipmentTableController.Function.NOTHING;
     }
-    @FXML private void idLookup(ActionEvent actionEvent) {
-        gridPane.setVisible(true);
-        gridPane.setDisable(false);
-        equipmentTypeField.setVisible(false);
-        equipmentNameField.setVisible(false);
-        manufacturerField.setVisible(false);
-        statusField.setVisible(false);
-        LocationChoice.setVisible(false);
-        colorField.setVisible(false);
-        sizeField.setVisible(false);
-        descriptionField.setVisible(false);
 
-        func = MedicalEquipmentTableController.Function.IDLOOKUP;
-    }
 }
 

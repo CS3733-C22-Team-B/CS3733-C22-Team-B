@@ -8,6 +8,8 @@ import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import java.io.IOException;
 import java.util.List;
+
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,24 +20,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class LocationTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
-    @FXML private TextField nodeIDField;
     @FXML private TextField ycoordField;
     @FXML private TextField xcoordField;
     @FXML private TextField floorField;
-    @FXML private TextField buildingField;
     @FXML private TextField nodeTypeField;
     @FXML private TextField longNameField;
     @FXML private TextField shortNameField;
     @FXML private JFXButton addButton;
-    @FXML private JFXButton modifyButton;
     @FXML private JFXButton deleteButton;
     @FXML private TableView<Location> table;
     @FXML private JFXButton loadButton;
+    @FXML private Pane popup;
 
     @Override
     public void namePage() {
@@ -43,7 +45,7 @@ public class LocationTableController extends AbsPage {
     }
 
 
-    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
+    private enum Function {ADD, MODIFY, DELETE, NOTHING};
     Function func = Function.NOTHING;
 
     private boolean initTable = false;
@@ -55,15 +57,14 @@ public class LocationTableController extends AbsPage {
 
     @FXML
     private void initialize() throws NullPointerException {
-        modifyButton.setDisable(true);
         deleteButton.setDisable(true);
+        popup.setVisible(false);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                modifyButton.setDisable(false);
                 deleteButton.setDisable(false);
             }
         });
@@ -72,6 +73,9 @@ public class LocationTableController extends AbsPage {
         initResize();
         resize();
         namePage();
+
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     @FXML
@@ -132,18 +136,17 @@ public class LocationTableController extends AbsPage {
         xcoordField.setVisible(true);
         ycoordField.setVisible(true);
         floorField.setVisible(true);
-        buildingField.setVisible(true);
         nodeTypeField.setVisible(true);
         longNameField.setVisible(true);
         shortNameField.setVisible(true);
         xcoordField.setDisable(false);
         ycoordField.setDisable(false);
         floorField.setDisable(false);
-        buildingField.setDisable(false);
         nodeTypeField.setDisable(false);
         longNameField.setDisable(false);
         shortNameField.setDisable(false);
         func = Function.ADD;
+        clearForm(null);
     }
 
     @FXML
@@ -153,24 +156,20 @@ public class LocationTableController extends AbsPage {
         xcoordField.setVisible(true);
         ycoordField.setVisible(true);
         floorField.setVisible(true);
-        buildingField.setVisible(true);
         nodeTypeField.setVisible(true);
         longNameField.setVisible(true);
         shortNameField.setVisible(true);
         xcoordField.setDisable(false);
         ycoordField.setDisable(false);
         floorField.setDisable(false);
-        buildingField.setDisable(false);
         nodeTypeField.setDisable(false);
         longNameField.setDisable(false);
         shortNameField.setDisable(false);
 
         Location loc = table.getSelectionModel().getSelectedItem();
-        nodeIDField.setText(loc.getNodeID());
         xcoordField.setText(Integer.toString(loc.getXcoord()));
         ycoordField.setText(Integer.toString(loc.getYcoord()));
         floorField.setText(loc.getFloor());
-        buildingField.setText(loc.getBuilding());
         nodeTypeField.setText(loc.getNodeType());
         longNameField.setText(loc.getLongName());
         shortNameField.setText(loc.getShortName());
@@ -182,53 +181,83 @@ public class LocationTableController extends AbsPage {
     private void deleteLocation(ActionEvent actionEvent) {
         db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
         loadTable();
+        cancelForm(null);
+
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
-        modifyButton.setVisible(true);
         deleteButton.setVisible(true);
+
+        if (table.getSelectionModel().getSelectedItem().getNodeID() != null){
+            modifyLocation(null);
+        }
     }
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == Function.ADD) {
             Location w = new Location(
-                    nodeIDField.getText(),
                     Integer.parseInt(xcoordField.getText()),
                     Integer.parseInt(ycoordField.getText()),
                     floorField.getText(),
-                    buildingField.getText(),
+                    "Tower",
                     nodeTypeField.getText(),
                     longNameField.getText(),
                     shortNameField.getText());
             db.addLocation((w));
             loadTable();
+
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
+
+            clearForm(actionEvent);
+
         } else if (func == Function.MODIFY) {
             Location n = new Location(
-                    nodeIDField.getText(),
+                    table.getSelectionModel().getSelectedItem().getNodeID(),
                     Integer.parseInt(xcoordField.getText()),
                     Integer.parseInt(ycoordField.getText()),
                     floorField.getText(),
-                    buildingField.getText(),
+                    "Tower",
                     nodeTypeField.getText(),
                     longNameField.getText(),
                     shortNameField.getText());
             db.updateLocation(n);
             loadTable();
-        } else if (func == Function.IDLOOKUP) {
-            table.getItems().clear();
-            table.getItems().add(db.getLocation(nodeIDField.getText())); // create and add object
-        }
 
-        clearForm(actionEvent);
-        func = Function.NOTHING;
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
+
+            cancelForm(actionEvent);
+        }
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
-        nodeIDField.clear();
         xcoordField.clear();
         ycoordField.clear();
         floorField.clear();
-        buildingField.clear();
         nodeTypeField.clear();
         longNameField.clear();
         shortNameField.clear();
@@ -242,25 +271,9 @@ public class LocationTableController extends AbsPage {
         addButton.setVisible(true);
         addButton.setDisable(false);
 
-        modifyButton.setVisible(true);
-        modifyButton.setDisable(false);
-
         deleteButton.setVisible(true);
         deleteButton.setDisable(false);
 
         func = Function.NOTHING;
-    }
-    @FXML private void idLookup(ActionEvent actionEvent) {
-        gridPane.setVisible(true);
-        gridPane.setDisable(false);
-        xcoordField.setVisible(false);
-        ycoordField.setVisible(false);
-        floorField.setVisible(false);
-        buildingField.setVisible(false);
-        nodeTypeField.setVisible(false);
-        longNameField.setVisible(false);
-        shortNameField.setVisible(false);
-
-        func = Function.IDLOOKUP;
     }
 }

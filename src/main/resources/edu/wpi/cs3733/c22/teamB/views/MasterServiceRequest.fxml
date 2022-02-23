@@ -27,15 +27,15 @@
             <Label fx:id="srLabel" layoutX="15.0" layoutY="15.0" prefHeight="17.0" prefWidth="511.0" text="Label" />
             <JFXButton fx:id="srTableButton" layoutX="364.50003814697266" layoutY="327.0" onAction="#goToSRTable" prefHeight="25.0" prefWidth="149.0" style="-fx-border-color: #002168; -fx-background-color: #99a6c2;" text="Service Request Table" textFill="WHITE" />
             <JFXComboBox fx:id="assignedEmployeeField" layoutX="364.50003814697266" layoutY="205.0" prefHeight="25.0" prefWidth="149.0" styleClass="lightBlueBorderless" stylesheets="@../styles/style.css" />
-         </children>
-      </Pane>
-      <Pane fx:id="popup" layoutX="323.0" layoutY="-154.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
-         <children>
-            <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white;" text="Submitted!">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
+            <Pane fx:id="popup" layoutX="126.0" layoutY="123.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
+               <children>
+                  <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white; -fx-font-size: 30;" text="Submitted!">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class EmployeeTableController extends AbsPage {
 
@@ -39,6 +42,7 @@ public class EmployeeTableController extends AbsPage {
     @FXML private JFXButton deleteButton;
     @FXML private TableView<Employee> table;
     @FXML private JFXButton loadButton;
+    @FXML private Pane popup;
 
     @Override
     public void namePage() {
@@ -59,6 +63,7 @@ public class EmployeeTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         modifyButton.setDisable(true);
         deleteButton.setDisable(true);
+        popup.setVisible(false);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
@@ -71,15 +76,12 @@ public class EmployeeTableController extends AbsPage {
         });
 
         loadTable();
-//        TODO fix initResize bug
-//        initResize();
+        initResize();
         resize();
         namePage();
-        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
-            table.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
-            table.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
-        });
 
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     @FXML
@@ -219,6 +221,17 @@ public class EmployeeTableController extends AbsPage {
                     phoneNumberField.getText());
             db.addEmployee(e);
             loadTable();
+
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
+
         } else if (func == Function.MODIFY) {
             Employee n = new Employee(
                     employeeIDField.getText(),
@@ -233,6 +246,16 @@ public class EmployeeTableController extends AbsPage {
             db.updateEmployee(n);
 
             loadTable();
+
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
         } else if (func == Function.IDLOOKUP) {
             table.getItems().clear();
             table.getItems().add(db.getEmployee(employeeIDField.getText())); // create and add object
