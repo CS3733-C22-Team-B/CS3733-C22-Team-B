@@ -76,15 +76,12 @@ public class EmployeeTableController extends AbsPage {
         });
 
         loadTable();
-//        TODO fix initResize bug
-//        initResize();
+        initResize();
         resize();
         namePage();
-        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
-            table.setPrefWidth(Bapp.getPrimaryStage().getWidth()-50 );
-            table.setPrefHeight(Bapp.getPrimaryStage().getHeight()- 50);
-        });
 
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     @FXML

@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPage" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.EmployeeTableController">
+<AnchorPane fx:id="anchorPane" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.EmployeeTableController">
    <children>
-      <AnchorPane fx:id="contentPage" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
+      <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
           <children>
               <GridPane alignment="CENTER" layoutX="34.0" layoutY="137.0" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="137.0">
                   <columnConstraints>

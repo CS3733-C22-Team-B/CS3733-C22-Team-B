@@ -73,6 +73,9 @@ public class LocationTableController extends AbsPage {
         initResize();
         resize();
         namePage();
+
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     @FXML
