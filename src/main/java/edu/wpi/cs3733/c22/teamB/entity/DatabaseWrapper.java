@@ -621,9 +621,3 @@ public class DatabaseWrapper {
     }
 }
 
-//     return (mainSRList.contains(getSR(srID)));
-//            return true;
-//        } else {
-//            return false;
-// return ((MainSRDaoI) MainSRDao).isInTable(srID);
-//        }
