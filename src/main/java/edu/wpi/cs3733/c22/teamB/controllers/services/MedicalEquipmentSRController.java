@@ -37,7 +37,7 @@ public class MedicalEquipmentSRController implements IController {
 
     @FXML
     public void initialize() {
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         medEqpList = dw.getAllMedicalEquipment();
         medEqpMap =
                 IntStream.range(0, medEqpList.size())
@@ -82,7 +82,7 @@ public class MedicalEquipmentSRController implements IController {
     // Use this submit with argument
     @Override
     public void submit(AbstractSR sr) {
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         if (this.sr == null)
             dw.addSR(new MedicalEquipmentSR(sr, medEqpMap.get(equipmentNameField.getValue())));
         else
