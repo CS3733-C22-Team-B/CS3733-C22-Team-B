@@ -63,7 +63,7 @@ public class EmployeeTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         modifyButton.setDisable(true);
         deleteButton.setDisable(true);
-        popup.setVisible(true);
+        popup.setVisible(false);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
