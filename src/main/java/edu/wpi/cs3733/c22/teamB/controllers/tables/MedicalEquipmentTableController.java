@@ -36,7 +36,6 @@ public class MedicalEquipmentTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
-    @FXML private TextField equipmentIDField;
     @FXML private TextField equipmentTypeField;
     @FXML private TextField equipmentNameField;
     @FXML private TextField manufacturerField;
@@ -229,7 +228,6 @@ public class MedicalEquipmentTableController extends AbsPage {
         amountField.setDisable(false);
 
         MedicalEquipment loc = table.getSelectionModel().getSelectedItem();
-        equipmentIDField.setText(loc.getEquipmentID());
         equipmentNameField.setText(loc.getEquipmentName());
         equipmentTypeField.setText(loc.getEquipmentType());
         manufacturerField.setText(loc.getManufacturer());
@@ -262,14 +260,16 @@ public class MedicalEquipmentTableController extends AbsPage {
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
-        modifyButton.setVisible(true);
         deleteButton.setVisible(true);
+
+        if (table.getSelectionModel() != null){
+            modifyLocation(null);
+        }
     }
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == MedicalEquipmentTableController.Function.ADD) {
             MedicalEquipment m = new MedicalEquipment(
-                    equipmentIDField.getText(),
                     equipmentNameField.getText(),
                     equipmentTypeField.getText(),
                     manufacturerField.getText(),
@@ -294,7 +294,7 @@ public class MedicalEquipmentTableController extends AbsPage {
             visiblePause.play();
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
             MedicalEquipment newEquip = new MedicalEquipment(
-                    equipmentIDField.getText(),
+                    table.getSelectionModel().getSelectedItem().getEquipmentID(),
                     equipmentNameField.getText(),
                     equipmentTypeField.getText(),
                     manufacturerField.getText(),
@@ -323,7 +323,6 @@ public class MedicalEquipmentTableController extends AbsPage {
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
-        equipmentIDField.clear();
         equipmentNameField.clear();
         equipmentTypeField.clear();
         manufacturerField.clear();
