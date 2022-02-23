@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -8,8 +9,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.Color?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.LoginController">
@@ -23,45 +26,70 @@
          </effect>
       </ImageView>
       <Pane fx:id="contentPane" layoutX="-5.0" layoutY="-7.0" opacity="0.31" prefHeight="418.0" prefWidth="625.0" style="-fx-background-color: black;" />
-      <Pane fx:id="logInBox" layoutX="45.0" layoutY="100.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 5;">
+      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Pane fx:id="info" layoutX="5.0" layoutY="14.0">
+            <Pane fx:id="info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="225.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <children>
-                  <Label layoutX="11.0" layoutY="131.0" text="Forgot your log in?">
-                     <font>
-                        <Font name="System Italic" size="10.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" layoutY="44.0" prefHeight="17.0" prefWidth="165.0" style="-fx-text-fill: #ff0000;" textAlignment="CENTER" />
-                  <TextField fx:id="userField" layoutX="11.0" layoutY="67.0" prefHeight="27.0" prefWidth="141.0" promptText="Username" styleClass="text-field" stylesheets="@../styles/style.css" />
-                  <PasswordField fx:id="passField" layoutX="11.0" layoutY="98.0" prefHeight="27.0" prefWidth="141.0" promptText="Password" stylesheets="@../styles/style.css" />
-                  <JFXButton layoutX="9.0" layoutY="154.0" onAction="#loginButton" prefHeight="23.0" prefWidth="148.0" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign In">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </JFXButton>
-                  <ImageView fitHeight="43.0" fitWidth="82.0" layoutX="137.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Brigham_and_Womens_Hospital_logo.svg.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="TOP_CENTER" layoutX="8.0" layoutY="6.0" prefHeight="43.0" prefWidth="118.0" text="Brigham and Women's Hospital" textOverrun="CLIP" wrapText="true" />
-                  <JFXButton layoutX="9.0" layoutY="187.0" onAction="#signupButton" prefHeight="23.0" prefWidth="148.0" style="-fx-background-color: #526598;" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign Up">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="93.0" layoutY="218.0" text=" " />
+                  <AnchorPane prefHeight="300.0" prefWidth="225.0">
+                     <children>
+                        <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" vgap="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="errorMessage" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="150.0" text="Welcome Back!" textAlignment="CENTER" textFill="BLACK" wrapText="true" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Italic" size="10.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="userField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" promptText="Username" styleClass="text-field" stylesheets="@../styles/style.css" GridPane.rowIndex="2" />
+                              <PasswordField fx:id="passField" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="150.0" promptText="Password" stylesheets="@../styles/style.css" GridPane.rowIndex="3" />
+                              <JFXButton onAction="#loginButton" prefHeight="23.0" prefWidth="150.0" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign In" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </JFXButton>
+                              <ImageView fitHeight="43.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Brigham_and_Womens_Hospital_logo.svg.png" />
+                                 </image>
+                              </ImageView>
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0" text="Brigham and Women's Hospital" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1" />
+                              <JFXButton onAction="#signupButton" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #526598;" styleClass="submit-button" stylesheets="@../styles/style.css" text="Sign Up" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton text=" " GridPane.rowIndex="7" />
+                           </children>
+                           <padding>
+                              <Insets left="38.0" top="20.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
                </children>
+               <padding>
+                  <Insets bottom="50.0" left="50.0" />
+               </padding>
             </Pane>
          </children>
-         <effect>
-            <DropShadow blurType="ONE_PASS_BOX" offsetX="3.0" offsetY="3.0" spread="0.5">
-               <color>
-                  <Color green="0.004035087767988443" blue="0.24210526049137115" opacity="0.5" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Pane>
+      </GridPane>
    </children>
 </AnchorPane>
