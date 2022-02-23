@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ServiceRequestManagerController {
-    DatabaseWrapper dw = new DatabaseWrapper();
+    DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
     @FXML private TableView<AbstractSR> srTable;
     @FXML private TableColumn<AbstractSR, String> idCol;
@@ -254,6 +254,10 @@ public class ServiceRequestManagerController {
                 filterSubmit(null);
             }
         });
+
+//        initResize();
+//        resize();
+        namePage();
     }
 
     @FXML
@@ -326,5 +330,9 @@ public class ServiceRequestManagerController {
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {
         filterDialog.close();
+    }
+
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.setPageName("Service Request Manger");
     }
 }

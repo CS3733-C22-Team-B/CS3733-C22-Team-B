@@ -27,7 +27,7 @@ public class SecuritySRController implements IController {
     @Override
     public void submit(AbstractSR sr) {
 
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         dw.addSR(new SecuritySR(sr));
 
     }

@@ -36,7 +36,7 @@ public class MedicalEquipment {
     }
 
     private String getUniqueID(){
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<MedicalEquipment> medicalEquipmentList = db.getAllMedicalEquipment();
         int equipmentCount = 0;
         for (MedicalEquipment medicalEquipment : medicalEquipmentList) {

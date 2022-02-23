@@ -26,7 +26,7 @@ public class LaundrySRController implements IController {
 
     @Override
     public void submit(AbstractSR sr) {
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         if (this.sr == null)
             dw.addSR(new LaundrySR(sr));
         else

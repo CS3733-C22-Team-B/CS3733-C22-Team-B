@@ -65,7 +65,7 @@ public class Location {
     }
 
     private String getUniqueID(){
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         return "b" + nodeType.toUpperCase() +  String.format("%03d",db.nodeTypeCountLocation(nodeType,floor) + 1)+ floor;
     }
 
