@@ -58,7 +58,6 @@
             <JFXButton fx:id="clearButton" alignment="CENTER" layoutX="327.0" layoutY="382.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
             <JFXButton fx:id="loadButton" layoutX="495.0" layoutY="101.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
             <JFXButton fx:id="deleteButton" layoutX="408.0" layoutY="101.0" minWidth="75.0" onAction="#deleteLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
-            <JFXButton fx:id="idLookupButton" layoutX="212.0" layoutY="101.0" minWidth="75.0" onAction="#idLookup" prefHeight="26.0" prefWidth="96.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="ID Lookup" />
             <JFXButton fx:id="addButton" layoutX="321.0" layoutY="101.0" minWidth="75.0" onAction="#addLocation" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add" />
             <Pane layoutX="27.0" layoutY="88.0" prefHeight="1.0" prefWidth="546.0" style="-fx-background-color: #08246c;" />
             <ImageView fitHeight="70.0" fitWidth="75.0" layoutX="25.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">

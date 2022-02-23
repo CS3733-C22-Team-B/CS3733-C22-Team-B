@@ -45,7 +45,7 @@ public class LocationTableController extends AbsPage {
     }
 
 
-    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
+    private enum Function {ADD, MODIFY, DELETE, NOTHING};
     Function func = Function.NOTHING;
 
     private boolean initTable = false;
@@ -179,6 +179,16 @@ public class LocationTableController extends AbsPage {
         db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
         loadTable();
         cancelForm(null);
+
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
@@ -238,13 +248,7 @@ public class LocationTableController extends AbsPage {
             visiblePause.play();
 
             cancelForm(actionEvent);
-
-        } else if (func == Function.IDLOOKUP) {
-            table.getItems().clear();
-//            table.getItems().add(db.getLocation(nodeIDField.getText())); // create and add object
         }
-
-//        func = Function.NOTHING;
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
@@ -268,17 +272,5 @@ public class LocationTableController extends AbsPage {
         deleteButton.setDisable(false);
 
         func = Function.NOTHING;
-    }
-    @FXML private void idLookup(ActionEvent actionEvent) {
-        gridPane.setVisible(true);
-        gridPane.setDisable(false);
-        xcoordField.setVisible(false);
-        ycoordField.setVisible(false);
-        floorField.setVisible(false);
-        nodeTypeField.setVisible(false);
-        longNameField.setVisible(false);
-        shortNameField.setVisible(false);
-
-        func = Function.IDLOOKUP;
     }
 }
