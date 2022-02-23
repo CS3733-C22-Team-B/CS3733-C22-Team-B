@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.SettingsController">
    <children>
-      <Pane fx:id="contentPane" layoutX="45.0" layoutY="14.0">
+      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
             <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="11.0" prefHeight="45.0" prefWidth="199.0" style="-fx-font-size: 30;" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
                <font>
@@ -40,9 +40,9 @@
                </image>
             </ImageView>
             <Pane layoutX="290.0" layoutY="160.0" prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: #002168;" />
+            <JFXButton fx:id="RestoreB" layoutX="368.0" layoutY="355.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Restore" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Restore Files" textFill="WHITE" />
+            <JFXButton fx:id="BackupB" layoutX="368.0" layoutY="306.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Backup Files" textFill="WHITE" />
          </children>
       </Pane>
-      <JFXButton fx:id="RestoreB" layoutX="368.0" layoutY="355.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Restore" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Restore Files" textFill="WHITE" />
-      <JFXButton fx:id="BackupB" layoutX="368.0" layoutY="306.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Backup Files" textFill="WHITE" />
    </children>
 </AnchorPane>
