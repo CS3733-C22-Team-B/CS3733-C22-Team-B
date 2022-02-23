@@ -17,6 +17,7 @@ import java.util.stream.IntStream;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +29,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class MedicalEquipmentTableController extends AbsPage {
 
@@ -50,6 +53,7 @@ public class MedicalEquipmentTableController extends AbsPage {
     @FXML private TextField amountField;
     private List<Location> locList;
     private Map<String, Location> locMap;
+    @FXML private Pane popup;
 
     @Override
     public void namePage() {
@@ -71,6 +75,7 @@ public class MedicalEquipmentTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         modifyButton.setDisable(true);
         deleteButton.setDisable(true);
+        popup.setVisible(false);
 
         locList = db.getAllLocation();
         locMap =
@@ -100,6 +105,9 @@ public class MedicalEquipmentTableController extends AbsPage {
         initResize();
         resize();
         namePage();
+
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     public void loadTable() throws NullPointerException {
@@ -242,7 +250,15 @@ public class MedicalEquipmentTableController extends AbsPage {
         db.deleteMedicalEquipment(value);
         loadTable();
 
-//        func = Function.DELETE;
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
@@ -266,6 +282,16 @@ public class MedicalEquipmentTableController extends AbsPage {
             System.out.println(m);
             db.addMedicalEquipment(m);
             loadTable();
+
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
         } else if (func == MedicalEquipmentTableController.Function.MODIFY) {
             MedicalEquipment newEquip = new MedicalEquipment(
                     equipmentIDField.getText(),
@@ -280,6 +306,16 @@ public class MedicalEquipmentTableController extends AbsPage {
                     Integer.parseInt(amountField.getText()));
             db.updateMedicalEquipment(newEquip);
             loadTable();
+
+            // submitted confirmation popup
+            popup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> popup.setVisible(false)
+            );
+            visiblePause.play();
         } else if (func == MedicalEquipmentTableController.Function.IDLOOKUP) {
             table.getItems().clear();
             table.getItems().add(db.getMedicalEquipment(equipmentIDField.getText())); // create and add object
