@@ -216,8 +216,6 @@ public class MasterServiceRequestController extends AbsPage {
 
     // DO NOT TOUCH THIS
     @FXML private void submit(ActionEvent actionEvent) {
-//        System.out.println(locationField.getValue());
-//        System.out.println(locationField.getValue().getClass().getSimpleName());
         childSR = new MainSR(
                 SRIDGenerator.generateID(),
                 childSRType,
