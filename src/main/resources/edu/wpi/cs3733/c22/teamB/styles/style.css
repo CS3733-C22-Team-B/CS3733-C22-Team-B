@@ -224,5 +224,9 @@
 /* ----------- SECONDARY COLORS -------------- */
 
 .anchor {
-    -fx-background-color: white;
+    -fx-background-color: #b3bcd2;
+}
+.content-pane {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 7;
 }
