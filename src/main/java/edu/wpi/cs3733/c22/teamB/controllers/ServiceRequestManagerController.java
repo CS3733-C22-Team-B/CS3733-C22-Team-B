@@ -254,6 +254,10 @@ public class ServiceRequestManagerController {
                 filterSubmit(null);
             }
         });
+
+//        initResize();
+//        resize();
+        namePage();
     }
 
     @FXML
@@ -326,5 +330,9 @@ public class ServiceRequestManagerController {
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {
         filterDialog.close();
+    }
+
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.setPageName("Service Request Manger");
     }
 }
