@@ -9,7 +9,8 @@ import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
-import javafx.geometry.Bounds;
+import javafx.beans.binding.Bindings;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,8 +19,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -28,10 +31,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.transform.Translate;
 import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapEditorController{
@@ -101,6 +103,7 @@ public class MapEditorController{
     boolean moveState = false;
     String clicked = "location";
     final double medOffset = 10;
+    TableView sideviewTable = new TableView();
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -177,12 +180,27 @@ public class MapEditorController{
         //877
         gesturePane.setOnScroll(new EventHandler<ScrollEvent>() {
             public void handle(ScrollEvent event) {
-                System.out.println("new stackpane");
                 coordTrans.setStackPane(stackPane);
                 coordTrans.setGesturePane(gesturePane);
             }
         });
         refresh();
+        setupSideviewColumns();
+        sideviewTable.setTranslateX(200);
+        sideviewTable.setTranslateY(-50);
+    }
+
+    private void setupSideviewColumns(){
+        List<String> columns = new ArrayList<>();
+        columns.add("Locations");
+        columns.add("DirtyEquipment");
+        columns.add("CleanEquipment");
+        columns.add("ServiceRequests");
+        for(String subject : columns){
+            TableColumn<SideviewRow, String> nextColumn = new TableColumn<>(subject);
+            nextColumn.setCellValueFactory(new PropertyValueFactory<>(subject));
+            sideviewTable.getColumns().add(nextColumn);
+        }
     }
 
     public void setTextPos(){
@@ -546,6 +564,10 @@ public class MapEditorController{
         removeAllPoints();
         setTextPos();
         addPoints();
+        if(currentFloor.equals("side")){
+            System.out.println("bruh table about to exist");
+            stackPane.getChildren().add(sideviewTable);
+        }
     }
 
 
@@ -594,6 +616,9 @@ public class MapEditorController{
         goToL2Button.setStyle("-fx-background-color: #eaeaea");
         goToSideViewButton.setStyle("-fx-background-color: #eaeaea");
         setTextVisible(false);
+        if(!moveState){
+            gesturePane.setGestureEnabled(true);
+        }
 
         switch (currentFloor) {
             case "01":
@@ -614,10 +639,34 @@ public class MapEditorController{
                 break;
             case"side":
                 setTextVisible(true);
-                setText();
+//                setText();
+                gesturePane.reset();
+                gesturePane.setGestureEnabled(false);
                 imageView.setImage(sideViewImage);
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
+
+                if(sideviewTable.getItems()!=null){
+                    sideviewTable.getItems().remove(0,sideviewTable.getItems().size()-1);
+                }
+                List<String> floors = new ArrayList<>();
+                floors.add("03");
+                floors.add("02");
+                floors.add("01");
+                floors.add("L1");
+                floors.add("L2");
+                List<SideviewRow> allRows = new ArrayList<>();
+                for(String fl : floors){
+                    SideviewRow row = new SideviewRow(String.valueOf(locationCount(fl)),String.valueOf(equipmentCount(fl,"DIRTY")),String.valueOf(equipmentCount(fl,"CLEAN")),String.valueOf(SRCount(fl)));
+//                    sideviewTable.getItems().add(row);
+                    System.out.println("next row: " + row);
+                    allRows.add(row);
+                }
+                sideviewTable.getItems().addAll(allRows);
+                sideviewTable.setMaxHeight(300);
+                sideviewTable.setMaxWidth(390);
+                sideviewTable.setFixedCellSize(50);
                 break;
+
             default:
                 imageView.setImage(thirdFloorImage);
                 goTo3Button.setStyle("-fx-background-color: #007fff");
@@ -694,6 +743,8 @@ public class MapEditorController{
 
     @FXML
     void imageClicked(MouseEvent event) {
+        System.out.println("NodeX Clicked: " + coordTrans.eventToNode(event).getX());
+        System.out.println("NodeY Clicked: " + coordTrans.eventToNode(event).getY());
         if(addState){
             //Set up ID, coordinates, etc
             int nextID = 0;
@@ -835,11 +886,11 @@ public class MapEditorController{
         return count;
     }
 
-    int equipmentCount(String floor){
+    int equipmentCount(String floor, String status){
         medicalList = dbWrapper.getAllMedicalEquipment();
         int count = 0;
         for (MedicalEquipment equip : medicalList){
-            if (equip.getLocation().getFloor().equals(floor)) count++;
+            if (equip.getLocation().getFloor().equals(floor) && equip.getStatus().equals(status)) count++;
         }
         return count;
     }
@@ -871,21 +922,21 @@ public class MapEditorController{
         summaryL2SR.setVisible(isVisible);
     }
 
-    public void setText(){
-        summaryL2Location.setText(String.valueOf(locationCount("L2")));
-        summaryL1Location.setText(String.valueOf(locationCount("L1")));
-        summary1Location.setText(String.valueOf(locationCount("01")));
-        summary2Location.setText(String.valueOf(locationCount("02")));
-        summary3Location.setText(String.valueOf(locationCount("03")));
-        summaryL2Equipment.setText(String.valueOf(equipmentCount("L2")));
-        summaryL1Equipment.setText(String.valueOf(equipmentCount("L1")));
-        summary1Equipment.setText(String.valueOf(equipmentCount("01")));
-        summary2Equipment.setText(String.valueOf(equipmentCount("02")));
-        summary3Equipment.setText(String.valueOf(equipmentCount("03")));
-        summaryL2SR.setText(String.valueOf(SRCount("L2")));
-        summaryL1SR.setText(String.valueOf(SRCount("L1")));
-        summary1SR.setText(String.valueOf(SRCount("01")));
-        summary2SR.setText(String.valueOf(SRCount("02")));
-        summary3SR.setText(String.valueOf(SRCount("03")));
-    }
+//    public void setText(){
+//        summaryL2Location.setText("L2 Locations: " + String.valueOf(locationCount("L2")));
+//        summaryL1Location.setText("L1 Locations: " + String.valueOf(locationCount("L1")));
+//        summary1Location.setText("01 Locations: " + String.valueOf(locationCount("01")));
+//        summary2Location.setText("02 Locations: " + String.valueOf(locationCount("02")));
+//        summary3Location.setText("03 Locations: " + String.valueOf(locationCount("03")));
+//        summaryL2Equipment.setText("L2 Equip: " + String.valueOf(equipmentCount("L2")));
+//        summaryL1Equipment.setText("L1 Equip: " + String.valueOf(equipmentCount("L1")));
+//        summary1Equipment.setText("01 Equip: " + String.valueOf(equipmentCount("01")));
+//        summary2Equipment.setText("02 Equip: " + String.valueOf(equipmentCount("02")));
+//        summary3Equipment.setText("03 Equip: " + String.valueOf(equipmentCount("03")));
+//        summaryL2SR.setText("L2 SR: " + String.valueOf(SRCount("L2")));
+//        summaryL1SR.setText("L1 SR: " + String.valueOf(SRCount("L1")));
+//        summary1SR.setText("01 SR: " + String.valueOf(SRCount("01")));
+//        summary2SR.setText("02 SR: " + String.valueOf(SRCount("02")));
+//        summary3SR.setText("03 SR: " + String.valueOf(SRCount("03")));
+//    }
 }
