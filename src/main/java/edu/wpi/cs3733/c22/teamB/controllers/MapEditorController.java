@@ -186,8 +186,8 @@ public class MapEditorController{
         });
         refresh();
         setupSideviewColumns();
-        sideviewTable.setTranslateX(200);
-        sideviewTable.setTranslateY(-50);
+        sideviewTable.setTranslateX(0);
+        sideviewTable.setTranslateY(-300);
     }
 
     private void setupSideviewColumns(){
@@ -639,7 +639,7 @@ public class MapEditorController{
                 goToL1Button.setStyle("-fx-background-color: #007fff");
                 break;
             case"side":
-                setTextVisible(true);
+//                setTextVisible(true);
 //                setText();
                 gesturePane.reset();
                 gesturePane.setGestureEnabled(false);
