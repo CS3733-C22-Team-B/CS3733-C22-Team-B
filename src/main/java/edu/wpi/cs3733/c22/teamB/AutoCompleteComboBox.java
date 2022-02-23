@@ -52,8 +52,10 @@ public class AutoCompleteComboBox<T> {
         box.setSkin(boxSkin);
         box.setOnAction(event -> {
             if (box.getValue() != prevSelection) {
-                if (box.getValue() == null)
-                    box.getSelectionModel().select(prevSelection);
+                if (box.getValue() == null) {
+//                    box.getSelectionModel().select(prevSelection);
+                    box.setValue(prevSelection);
+                }
                 else
                     prevSelection = box.getValue();
             }
@@ -74,7 +76,6 @@ public class AutoCompleteComboBox<T> {
                     box.getItems().addAll(data);
                     fullData = true;
                 }
-
         });
     }
     public void updateData(List<T> newData) {
