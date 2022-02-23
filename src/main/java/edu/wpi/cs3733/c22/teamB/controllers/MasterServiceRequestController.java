@@ -301,6 +301,7 @@ public class MasterServiceRequestController extends AbsPage {
         AnchorHomeController.curAnchorHomeController.pageName.setText(getLabel());
     }
 
+    @FXML
     public void goToSRTable(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(
