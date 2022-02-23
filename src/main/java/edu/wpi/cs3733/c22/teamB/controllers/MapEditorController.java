@@ -166,7 +166,7 @@ public class MapEditorController{
         goTo3Button.setStyle("-fx-background-color: #007fff");
         nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
         floor.getItems().addAll("L2","L1","01","02","03");
-        status.getItems().addAll("DONE","CANCELLED","IN PROGRESS","WAITING");
+        status.getItems().addAll("CLEAN","DIRTY","WAITING","IN USE");
         floor.setValue(currentFloor);
         //addPoint("1",0,0,Color.ORANGE);
         //addPoint("2",imageWidth,imageHeight, Color.RED);
@@ -192,6 +192,7 @@ public class MapEditorController{
 
     private void setupSideviewColumns(){
         List<String> columns = new ArrayList<>();
+        columns.add("Floor");
         columns.add("Locations");
         columns.add("DirtyEquipment");
         columns.add("CleanEquipment");
@@ -471,8 +472,8 @@ public class MapEditorController{
             //Set point ID
             testImg.idProperty().set(ID);
             Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-            testImg.setTranslateX(nodeCoords.getX());
-            testImg.setTranslateY(nodeCoords.getY());
+            testImg.setTranslateX(nodeCoords.getX()-10);
+            testImg.setTranslateY(nodeCoords.getY()-10);
             testImg.setPreserveRatio(true);
             testImg.setFitWidth(15);
         }
@@ -656,14 +657,14 @@ public class MapEditorController{
                 floors.add("L2");
                 List<SideviewRow> allRows = new ArrayList<>();
                 for(String fl : floors){
-                    SideviewRow row = new SideviewRow(String.valueOf(locationCount(fl)),String.valueOf(equipmentCount(fl,"DIRTY")),String.valueOf(equipmentCount(fl,"CLEAN")),String.valueOf(SRCount(fl)));
+                    SideviewRow row = new SideviewRow(fl,String.valueOf(locationCount(fl)),String.valueOf(equipmentCount(fl,"DIRTY")),String.valueOf(equipmentCount(fl,"CLEAN")),String.valueOf(SRCount(fl)));
 //                    sideviewTable.getItems().add(row);
-                    System.out.println("next row: " + row);
+//                    System.out.println("next row: " + row);
                     allRows.add(row);
                 }
                 sideviewTable.getItems().addAll(allRows);
                 sideviewTable.setMaxHeight(300);
-                sideviewTable.setMaxWidth(390);
+                sideviewTable.setMaxWidth(440);
                 sideviewTable.setFixedCellSize(50);
                 break;
 
@@ -891,6 +892,9 @@ public class MapEditorController{
         int count = 0;
         for (MedicalEquipment equip : medicalList){
             if (equip.getLocation().getFloor().equals(floor) && equip.getStatus().equals(status)) count++;
+            if(status.equals("CLEAN")){
+                if (equip.getLocation().getFloor().equals(floor) && equip.getStatus().equals("WAITING")) count++;
+            }
         }
         return count;
     }

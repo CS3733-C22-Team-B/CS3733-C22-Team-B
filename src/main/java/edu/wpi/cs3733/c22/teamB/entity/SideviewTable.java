@@ -7,11 +7,12 @@ import java.util.List;
 
 public class SideviewTable extends TableView {
 
+    TableColumn<String, String> floor;
     TableColumn<Integer, Integer> locations;
     TableColumn<Integer, Integer> equipment;
     TableColumn<Integer, Integer> serviceRequests;
 
     public SideviewTable(){
-        this.getColumns().addAll(locations,equipment,serviceRequests);
+        this.getColumns().addAll(floor,locations,equipment,serviceRequests);
     }
 }
