@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -52,6 +53,8 @@ public class MedicalEquipmentTableController extends AbsPage {
     private List<Location> locList;
     private Map<String, Location> locMap;
     @FXML private Pane popup;
+    @FXML private Pane contentPane;
+    @FXML private AnchorPane anchorPane;
 
     @Override
     public void namePage() {
@@ -346,6 +349,12 @@ public class MedicalEquipmentTableController extends AbsPage {
 
         func = MedicalEquipmentTableController.Function.NOTHING;
     }
-
+    @Override
+    public void initResize() {
+        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/8);
+        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/12);
+        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
+        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
+    }
 }
 
