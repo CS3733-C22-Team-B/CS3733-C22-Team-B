@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="344.0" prefWidth="400.0" style="-fx-background-color: #b3bcd2; -fx-background-radius: 10px; -fx-border-radius: 10px;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.LogOutController">
+   <children>
+      <Pane layoutX="53.0" layoutY="47.0" prefHeight="251.0" prefWidth="295.0" style="-fx-background-color: white; -fx-background-radius: 5px;">
+         <children>
+            <JFXButton fx:id="confirmButton" layoutX="200.0" layoutY="141.0" onAction="#logOut" style="-fx-background-color: #02168;" text="Yes" />
+            <JFXButton layoutX="54.0" layoutY="141.0" onAction="#hide" style="-fx-background-color: #002168;" text="No" textFill="WHITE" />
+            <Label layoutX="19.0" layoutY="51.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Are you sure you want to sign out?" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

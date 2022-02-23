@@ -19,7 +19,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
         String pass = employee.getPassword();
 
         // if pass is already hashed, do nothing; else hash it
-        if (pass == PasswordHashing.hashPassword(employee.getPassword())) {
+        if (pass.length() > 20) {
         } else {
             pass = PasswordHashing.hashPassword(employee.getPassword());
         }
@@ -70,6 +70,14 @@ public class EmployeeDaoI implements IDatabase<Employee> {
     public void updateValue(Employee employee) {
         Connection conn = ConnectionManager.getInstance().getConnection();
 
+        String pass = employee.getPassword();
+
+        // if pass is already hashed, do nothing; else hash it
+        if (pass.length() > 20) {
+        } else {
+            pass = PasswordHashing.hashPassword(employee.getPassword());
+        }
+
         try {
             PreparedStatement pstmt =
                     conn.prepareStatement(
@@ -80,7 +88,7 @@ public class EmployeeDaoI implements IDatabase<Employee> {
             pstmt.setString(3, employee.getPosition());
             pstmt.setInt(4, employee.getAccessLevel());
             pstmt.setString(5, employee.getUsername());
-            pstmt.setString(6, PasswordHashing.hashPassword(employee.getPassword()));
+            pstmt.setString(6, pass);
             pstmt.setString(7, employee.getEmail());
             pstmt.setString(8, employee.getPhoneNumber());
             pstmt.setString(9, employee.getEmployeeID());
