@@ -56,7 +56,7 @@ public class Employee {
     }
 
     private String getUniqueID(){
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<Employee> employeeList = db.getAllEmployee();
         int emloyeeCount = 0;
         for (Employee employee : employeeList) {

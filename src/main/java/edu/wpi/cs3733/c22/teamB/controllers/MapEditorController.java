@@ -93,7 +93,7 @@ public class MapEditorController{
     double imageHeight;
     double imageWidth;
     Point2D orgNodePoint;
-    DatabaseWrapper dbWrapper = new DatabaseWrapper();
+    DatabaseWrapper dbWrapper = DatabaseWrapper.getInstance();
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
     List<AbstractSR> srList = dbWrapper.getAllSR();

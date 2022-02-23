@@ -41,7 +41,7 @@ public class LoginController implements IPage {
         picture.setFitHeight(Bapp.getPrimaryStage().getHeight()+100);
         resize();
 
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<Employee> employeeList = db.getAllEmployee();
         for(Employee employee : employeeList){
             employeeUser = employee.getUsername();
@@ -52,7 +52,7 @@ public class LoginController implements IPage {
 
     @FXML
     void loginButton(ActionEvent event) {
-        DatabaseWrapper db = new DatabaseWrapper();
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<Employee> employeeList = db.getAllEmployee();
         String pass = PasswordHashing.hashPassword(passField.getText());
         for (Employee employee : employeeList) {

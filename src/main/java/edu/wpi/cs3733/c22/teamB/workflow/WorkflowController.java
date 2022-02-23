@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class WorkflowController {
-    DatabaseWrapper dw = new DatabaseWrapper();
+    DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
     @FXML private TableView<AbstractSR> srTable;
     @FXML private TableColumn<AbstractSR, String> idCol;
@@ -155,8 +155,7 @@ public class WorkflowController {
                                 btn.setOnAction(event -> {
                                     workflow.addTask(new EquipmentMoveTask(
                                             workflow,
-                                            (MedicalEquipmentSR) (new DatabaseWrapper()).getSR(sr.getSrID()),
-                                            Workflow.infusionPumpPath));
+                                            (MedicalEquipmentSR) (DatabaseWrapper.getInstance().getSR(sr.getSrID())), Workflow.infusionPumpPath));
                                 });
                             }
                             setGraphic(btn);

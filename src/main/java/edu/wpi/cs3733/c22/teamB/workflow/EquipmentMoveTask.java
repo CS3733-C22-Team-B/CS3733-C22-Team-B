@@ -18,14 +18,14 @@ public class EquipmentMoveTask extends AbstractTask implements Runnable {
     public EquipmentMoveTask(Workflow workflow, MedicalEquipmentSR sr, List<String> path) {
         super(workflow);
         this.sr = sr;
-        DatabaseWrapper dw = new DatabaseWrapper();
+        DatabaseWrapper dw = DatabaseWrapper.getInstance();
         this.path = path.stream().map(s -> dw.getLocation(s)).collect(Collectors.toList());
     }
 
     @Override
     public void run() {
         try {
-            DatabaseWrapper dw = new DatabaseWrapper();
+            DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
             // first complete the SR
             System.out.println("Service " + sr.getSrID() + " starting");
