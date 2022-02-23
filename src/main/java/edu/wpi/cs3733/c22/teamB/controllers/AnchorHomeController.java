@@ -1,13 +1,16 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Popup;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,11 +31,13 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
 
+    Popup popup = new Popup();
+    Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
 
 
     private Pane childPane;
 
-    public AnchorHomeController() {
+    public AnchorHomeController() throws IOException {
         curAnchorHomeController = this;
     }
 
@@ -88,6 +93,7 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip7 = new Tooltip("Help");
             helpButton.setTooltip(tooltip7);
 
+            popup.getContent().add(popUpMessage);
 //            anchorPane.setStyle("");
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Home")));
             childPane = loader.load();
@@ -175,6 +181,27 @@ public class AnchorHomeController implements Initializable {
             anchorPane.toBack();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void logOut() {
+        try {
+            popup.setAutoHide(true);
+            popup.setAutoFix(true);
+            Label popupLabel = new Label("text");
+            popupLabel.setStyle("-fx-background-color:white;"
+                    + " -fx-text-fill: " + "black" + ";"
+                    + " -fx-font-size: " + "100px" + ";"
+                    + " -fx-padding: 10px;"
+                    + " -fx-background-radius: 6;");
+
+
+            popup.show(Bapp.getPrimaryStage());
+
+        } catch (Exception e) {
+            System.out.println("uh oh. pop up did not work");
+
         }
     }
 }
