@@ -8,6 +8,8 @@ import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import java.io.IOException;
 import java.util.List;
+
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class LocationTableController extends AbsPage {
 
@@ -36,6 +40,7 @@ public class LocationTableController extends AbsPage {
     @FXML private JFXButton deleteButton;
     @FXML private TableView<Location> table;
     @FXML private JFXButton loadButton;
+    @FXML private Pane popup;
 
     @Override
     public void namePage() {
@@ -57,6 +62,7 @@ public class LocationTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         modifyButton.setDisable(true);
         deleteButton.setDisable(true);
+//        popup.setVisible(true);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
@@ -202,6 +208,17 @@ public class LocationTableController extends AbsPage {
                     shortNameField.getText());
             db.addLocation((w));
             loadTable();
+
+            // submitted confirmation popup
+//            popup.setVisible(true);
+//            PauseTransition visiblePause = new PauseTransition(
+//                    Duration.seconds(1)
+//            );
+//            visiblePause.setOnFinished(
+//                    event -> popup.setVisible(false)
+//            );
+//            visiblePause.play();
+
         } else if (func == Function.MODIFY) {
             Location n = new Location(
                     nodeIDField.getText(),
@@ -214,6 +231,17 @@ public class LocationTableController extends AbsPage {
                     shortNameField.getText());
             db.updateLocation(n);
             loadTable();
+
+            // submitted confirmation popup
+//            popup.setVisible(true);
+//            PauseTransition visiblePause = new PauseTransition(
+//                    Duration.seconds(1)
+//            );
+//            visiblePause.setOnFinished(
+//                    event -> popup.setVisible(false)
+//            );
+//            visiblePause.play();
+
         } else if (func == Function.IDLOOKUP) {
             table.getItems().clear();
             table.getItems().add(db.getLocation(nodeIDField.getText())); // create and add object
