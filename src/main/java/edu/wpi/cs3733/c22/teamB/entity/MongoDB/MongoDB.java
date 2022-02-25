@@ -19,13 +19,20 @@ public class MongoDB {
     public static void getConnection()  {
 
 //        try {
+        ConnectionString connectionString = new ConnectionString("mongodb+srv://admin:admin@softwareengineeringteam.hurpz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .serverApi(ServerApi.builder()
+                        .version(ServerApiVersion.V1)
+                        .build())
+                .build();
+        mongoClient = MongoClients.create(settings);
 
-
-            ConnectionString connectionString = new ConnectionString("mongodb+srv://admin:<admin>@softwareengineeringteam.hurpz.mongodb.net/BDBMongo?retryWrites=true&w=majority");
-            MongoClientSettings settings = MongoClientSettings.builder()
-                    .applyConnectionString(connectionString)
-                    .build();
-            mongoClient = MongoClients.create(settings);
+//            ConnectionString connectionString = new ConnectionString("mongodb+srv://admin:<admin>@softwareengineeringteam.hurpz.mongodb.net/BDBMongo?retryWrites=true&w=majority");
+//            MongoClientSettings settings = MongoClientSettings.builder()
+//                    .applyConnectionString(connectionString)
+//                    .build();
+//            mongoClient = MongoClients.create(settings);
 
 
 

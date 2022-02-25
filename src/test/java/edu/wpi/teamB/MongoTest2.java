@@ -22,7 +22,7 @@ public class MongoTest2 {
 
         MongoDB.getConnection();
         LocationMongo locationMongo = new LocationMongo();
-        locationMongo.dropTable();
+//        locationMongo.dropTable();
         locationMongo.createTable();
 
         Location location1 = new Location("12", 12, 12, "12", "123", "123", "21e", "q2e");
