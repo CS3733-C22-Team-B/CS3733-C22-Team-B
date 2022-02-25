@@ -8,6 +8,7 @@ import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.net.UnknownHostException;
 import java.time.LocalDate;
@@ -22,7 +23,7 @@ public class MongoTest2 {
 
         MongoDB.getConnection();
         LocationMongo locationMongo = new LocationMongo();
-//        locationMongo.dropTable();
+        locationMongo.dropTable();
         locationMongo.createTable();
 
         Location location1 = new Location("12", 12, 12, "12", "123", "123", "21e", "q2e");
@@ -30,26 +31,29 @@ public class MongoTest2 {
 
         locationMongo.addValue(location1);
         locationMongo.addValue(location2);
+        assertEquals(locationMongo.getValue(location1.getNodeID()), location1);
+        locationMongo.getAllValues();
 
 //        //Employee
-//
-//        EmployeeMongo employeeMongo = new EmployeeMongo();
-//        employeeMongo.dropTable();
-//        employeeMongo.createTable();
-//
-//        Employee employee1 = new Employee("123", "123", "123", "123", 12, "123", "123", "213", "123");
-//        Employee employee2 = new Employee("223", "123", "123", "123", 12, "123", "123", "213", "123");
-//        Employee employee3 = new Employee("323", "123", "Ben", "123", 12, "123", "123", "213", "123");
-//
-//        employeeMongo.addValue(employee1);
-//        employeeMongo.addValue(employee2);
-//        employeeMongo.addValue(employee3);
-//
+
+        EmployeeMongo employeeMongo = new EmployeeMongo();
+        employeeMongo.dropTable();
+        employeeMongo.createTable();
+
+        Employee employee1 = new Employee("123", "123", "123", "123", 12, "123", "123", "213", "123");
+        Employee employee2 = new Employee("223", "123", "123", "123", 12, "123", "123", "213", "123");
+        Employee employee3 = new Employee("323", "123", "Ben", "123", 12, "123", "123", "213", "123");
+
+        employeeMongo.addValue(employee1);
+        employeeMongo.addValue(employee2);
+        employeeMongo.addValue(employee3);
+        employeeMongo.getValue(employee1.getEmployeeID());
+
 //        IDatabase<AbstractSR> mainSRMongo = new MainSRMongo(locationMongo, employeeMongo);
 //        mainSRMongo.dropTable();
 //        mainSRMongo.createTable();
 //        LocalDate date = LocalDate.parse("2022-12-12");
-//
+////
 //        //Food
 //
 //        FoodDeliverySRMongo foodDeliverySRMongo = new FoodDeliverySRMongo(mainSRMongo);
