@@ -1,17 +1,21 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.services.ExternalTransportSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicineDeliverySR;
 import org.bson.Document;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicineDeliverySRMongo implements IDatabase<MedicineDeliverySR> {
@@ -52,35 +56,49 @@ public class MedicineDeliverySRMongo implements IDatabase<MedicineDeliverySR> {
 
     @Override
     public MedicineDeliverySR getValue(String objectID) {
-//        MedicineDeliverySR medicineDeliverySR;
-//
-//        Document query = new Document("_id", objectID);
-//        Document cursor = MedicineDeliverySRTable.find(query);
-//
-//        AbstractSR mainSR = MainSRMongo.getValue(objectID);
-//
-//        String status = mainSR.getStatus();
-////        String srType
-//        Location location = mainSR.getLocation();
-//        Employee requestor = mainSR.getRequestor();
-//        Employee assignedEmployee = mainSR.getAssignedEmployee();
-//        LocalDate dateRequested = mainSR.getDateRequested();
-//        String notes = mainSR.getNotes();
-//
-//        BasicDBObject foodObj = (BasicDBObject) cursor.one();
-//        String srID = foodObj.getString("_id");
-//        String medicineID = foodObj.getString("medicineID");
-//        String patientID = foodObj.getString("patientID");
-//
-//        medicineDeliverySR = new MedicineDeliverySR(srID, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
-//
-//        return medicineDeliverySR;
-        return null;
+        MedicineDeliverySR medicineDeliverySR;
+
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = MedicineDeliverySRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
+
+
+        AbstractSR mainSR = MainSRMongo.getValue(objectID);
+
+        String status = mainSR.getStatus();
+//        String srType
+        Location location = mainSR.getLocation();
+        Employee requestor = mainSR.getRequestor();
+        Employee assignedEmployee = mainSR.getAssignedEmployee();
+        LocalDate dateRequested = mainSR.getDateRequested();
+        String notes = mainSR.getNotes();
+
+        Document externalObj = cursor.next();
+        String srID = externalObj.getString("_id");
+        String medicineID = externalObj.getString("medicineID");
+        String patientID = externalObj.getString("patientID");
+
+        medicineDeliverySR = new MedicineDeliverySR(srID, status, location, requestor, assignedEmployee, dateRequested, notes, medicineID, patientID);
+
+        return medicineDeliverySR;
     }
 
     @Override
     public List<MedicineDeliverySR> getAllValues() {
-        return null;
+        List<MedicineDeliverySR> medicineDeliverySRList = new ArrayList<>();
+
+        Document query = new Document();
+        FindIterable<Document> iterable = MedicineDeliverySRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
+
+        while (cursor.hasNext()) {
+            Document object = cursor.next();
+
+            String srID = (String) object.get("_id");
+            medicineDeliverySRList.add(getValue(srID));
+        }
+
+        return medicineDeliverySRList;
     }
 
     @Override
