@@ -21,7 +21,8 @@ dependencies {
     String javaFxVersion = '17'
 
     //MongoDB
-    compile 'org.mongodb:mongo-java-driver:2.12.3'
+    compile 'org.mongodb:mongodb-driver-sync:4.1.1'
+//    compile 'org.mongodb:mongo-java-driver:2.12.3'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'

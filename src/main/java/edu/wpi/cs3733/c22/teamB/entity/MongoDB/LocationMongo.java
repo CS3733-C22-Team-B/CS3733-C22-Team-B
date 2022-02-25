@@ -1,8 +1,11 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import org.bson.Document;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -11,15 +14,15 @@ import java.util.List;
 
 public class LocationMongo implements IDatabase<Location> {
 
-    private DB conn;
-    private DBCollection LocationTable;
+    private MongoDatabase conn;
+    private MongoCollection LocationTable;
 
     public LocationMongo(){
         conn = MongoDB.getBDBMongo();
     }
 
-    public static DBObject convertLocation(Location location){
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertLocation(Location location){
+        Document document = new Document();
         document.put("_id", location.getNodeID());
         document.put("xcoord", location.getXcoord());
         document.put("ycoord", location.getYcoord());
@@ -35,57 +38,59 @@ public class LocationMongo implements IDatabase<Location> {
     @Override
     public void addValue(Location object) {
 
-        conn.getCollection("Location").insert(convertLocation(object));
+        conn.getCollection("Location").insertOne(convertLocation(object));
 
     }
 
     @Override
     public void deleteValue(String objectID) {
 
-        LocationTable.remove(convertLocation(getValue(objectID)));
+        LocationTable.deleteOne(convertLocation(getValue(objectID)));
     }
 
     @Override
     public void updateValue(Location object) {
-        DBObject query = new BasicDBObject("_id", object.getNodeID());
-        LocationTable.findAndModify(query, convertLocation(object));
+        Document query = new Document("_id", object.getNodeID());
+        LocationTable.findOneAndReplace(query, convertLocation(object));
     }
 
     @Override
     public Location getValue(String objectID) {
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = LocationTable.find(query);
-
-        BasicDBObject locationObj = (BasicDBObject) cursor.one();
-        String nodeID = locationObj.getString("_id");
-        int xcoord = Integer.parseInt(locationObj.getString("xcoord"));
-        int ycoord = Integer.parseInt(locationObj.getString("ycoord"));
-        String floor = locationObj.getString("floor");
-        String building = locationObj.getString("building");
-        String nodeType = locationObj.getString("nodeType");
-        String longName = locationObj.getString("longName");
-        String shortName = locationObj.getString("shortName");
-
-        Location location = new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
-
-        return location;
+//        DBObject query = new BasicDBObject("_id", objectID);
+//        DBCursor cursor = LocationTable.find(query);
+//
+//        BasicDBObject locationObj = (BasicDBObject) cursor.one();
+//        String nodeID = locationObj.getString("_id");
+//        int xcoord = Integer.parseInt(locationObj.getString("xcoord"));
+//        int ycoord = Integer.parseInt(locationObj.getString("ycoord"));
+//        String floor = locationObj.getString("floor");
+//        String building = locationObj.getString("building");
+//        String nodeType = locationObj.getString("nodeType");
+//        String longName = locationObj.getString("longName");
+//        String shortName = locationObj.getString("shortName");
+//
+//        Location location = new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
+//
+//        return location;
+        return null;
     }
 
     @Override
     public List<Location> getAllValues() {
-        List<Location> locationList = new ArrayList<>();
-
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = LocationTable.find(query);
-
-        while (cursor.hasNext()) {
-            DBObject object = cursor.next();
-
-            String nodeID = (String) object.get("_id");
-            locationList.add(getValue(nodeID));
-            }
-
-        return locationList;
+//        List<Location> locationList = new ArrayList<>();
+//
+//        BasicDBObject query = new BasicDBObject();
+//        DBCursor cursor = LocationTable.find(query);
+//
+//        while (cursor.hasNext()) {
+//            DBObject object = cursor.next();
+//
+//            String nodeID = (String) object.get("_id");
+//            locationList.add(getValue(nodeID));
+//            }
+//
+//        return locationList;
+        return null;
     }
 
     @Override

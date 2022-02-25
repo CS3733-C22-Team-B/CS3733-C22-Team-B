@@ -81,35 +81,35 @@ public class DatabaseWrapper {
         this.LocationDao = LocationDerby;
 
         this.EmployeeDerby = new EmployeeDaoI();
-        this.EmployeeMongo = new EmployeeMongo();
+//        this.EmployeeMongo = new EmployeeMongo();
         this.EmployeeDao = EmployeeDerby;
 
         this.MedicalEquipmentDerby = new MedicalEquipmentDaoI();
-        this.MedicalEquipmentMongo = new EquipmentMongo(this.LocationMongo);
+//        this.MedicalEquipmentMongo = new EquipmentMongo(this.LocationMongo);
         this.MedicalEquipmentDao = MedicalEquipmentDerby;
 
         this.MainSRDerby = new MainSRDaoI();
-        this.MainSRMongo = new MainSRMongo(this.LocationMongo, this.EmployeeMongo);
+//        this.MainSRMongo = new MainSRMongo(this.LocationMongo, this.EmployeeMongo);
         this.MainSRDao = MainSRDerby;
 
         this.ExternalTransportDerby = new ExternalTransportSRDaoI();
-        this.ExternalTransportMongo = new ExternalTransportSRMongo(this.MainSRMongo);
+//        this.ExternalTransportMongo = new ExternalTransportSRMongo(this.MainSRMongo);
         this.ExternalTransportDao = ExternalTransportDerby;
 
         this.FoodDeliveryDerby = new FoodDeliverySRDaoI();
-        this.FoodDeliveryMongo = new FoodDeliverySRMongo(this.MainSRMongo);
+//        this.FoodDeliveryMongo = new FoodDeliverySRMongo(this.MainSRMongo);
         this.FoodDeliveryDao = FoodDeliveryDerby;
 
         this.GiftFloralSRDerby = new GiftFloralSRDaoI();
-        this.GiftFloralSRMongo = new GiftFloralSRMongo(this.MainSRMongo);
+//        this.GiftFloralSRMongo = new GiftFloralSRMongo(this.MainSRMongo);
         this.GiftFloralSRDao = GiftFloralSRDerby;
 
         this.LaundrySRDerby = new LaundrySRDaoI();
-        this.LaundrySRMongo = new LaundrySRMongo(this.MainSRMongo);
+//        this.LaundrySRMongo = new LaundrySRMongo(this.MainSRMongo);
         this.LaundrySRDao = LaundrySRDerby;
 
         this.MedicalEquipmentSRDerby = new MedicalEquipmentSRDaoI();
-        this.MedicalEquipmentSRMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
+//        this.MedicalEquipmentSRMongo = new MedicalEquipmentSRMongo(this.MainSRMongo, this.MedicalEquipmentMongo);
         this.MedicalEquipmentSRDao = MedicalEquipmentSRDerby;
 
         this.MedicineDeliverySRDerby = new MedicineDeliverySRDaoI();
@@ -117,11 +117,11 @@ public class DatabaseWrapper {
         this.MedicineDeliverySRDao = MedicineDeliverySRDerby;
 
         this.ComputerServiceSRDerby = new ComputerServiceSRDaoI();
-        this.ComputerServiceSRMongo = new ComputerServiceSRMongo(this.MainSRDao);
+//        this.ComputerServiceSRMongo = new ComputerServiceSRMongo(this.MainSRDao);
         this.ComputerServiceSRDao = ComputerServiceSRDerby;
 
         this.SanitationSRDerby = new SanitationSRDaoI();
-        this.SanitationSRMongo = new SanitationSRMongo(this.MainSRMongo);
+//        this.SanitationSRMongo = new SanitationSRMongo(this.MainSRMongo);
         this.SanitationSRDao = SanitationSRDerby;
 
         connectionManager = ConnectionManager.getInstance();
