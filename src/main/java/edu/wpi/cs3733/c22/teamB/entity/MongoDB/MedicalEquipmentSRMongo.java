@@ -1,20 +1,25 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
+import org.bson.Document;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalEquipmentSRMongo implements IDatabase<MedicalEquipmentSR> {
-    private DB conn;
-    private DBCollection MedicalEquipmentSRTable;
+    private MongoDatabase conn;
+    private MongoCollection MedicalEquipmentSRTable;
     private IDatabase<AbstractSR> MainSRMongo;
     private IDatabase<MedicalEquipment> MedicalEquipmentMongo;
 
@@ -24,8 +29,8 @@ public class MedicalEquipmentSRMongo implements IDatabase<MedicalEquipmentSR> {
         this.MedicalEquipmentMongo = MedicalEquipmentMongo;
     }
 
-    public static DBObject convertMedicalEquipmentSR(MedicalEquipmentSR sr) {
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertMedicalEquipmentSR(MedicalEquipmentSR sr) {
+        Document document = new Document();
         document.put("_id", sr.getSrID());
         document.put("medicalEquipment", sr.getMedicalEquipment().getEquipmentID());
 
@@ -34,26 +39,27 @@ public class MedicalEquipmentSRMongo implements IDatabase<MedicalEquipmentSR> {
 
     @Override
     public void addValue(MedicalEquipmentSR object) {
-        conn.getCollection("MedicalEquipmentSR").insert(convertMedicalEquipmentSR(object));
+        conn.getCollection("MedicalEquipmentSR").insertOne(convertMedicalEquipmentSR(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        MedicalEquipmentSRTable.remove(convertMedicalEquipmentSR(getValue(objectID)));
+        MedicalEquipmentSRTable.deleteOne(convertMedicalEquipmentSR(getValue(objectID)));
     }
 
     @Override
     public void updateValue(MedicalEquipmentSR object) {
-        DBObject query = new BasicDBObject("_id", object.getSrID());
-        MedicalEquipmentSRTable.findAndModify(query, convertMedicalEquipmentSR(object));
+        Document query = new Document("_id", object.getSrID());
+        MedicalEquipmentSRTable.findOneAndReplace(query, convertMedicalEquipmentSR(object));
     }
 
     @Override
     public MedicalEquipmentSR getValue(String objectID) {
         MedicalEquipmentSR medicalEquipmentSR;
 
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = MedicalEquipmentSRTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = MedicalEquipmentSRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         AbstractSR mainSR = MainSRMongo.getValue(objectID);
 
@@ -65,7 +71,7 @@ public class MedicalEquipmentSRMongo implements IDatabase<MedicalEquipmentSR> {
         LocalDate dateRequested = mainSR.getDateRequested();
         String notes = mainSR.getNotes();
 
-        BasicDBObject medEqSR = (BasicDBObject) cursor.one();
+        Document medEqSR = cursor.next();
         String srID = medEqSR.getString("_id");
         String medicalEquipmentID = medEqSR.getString("medicalEquipment");
         MedicalEquipment medicalEquipment = MedicalEquipmentMongo.getValue(medicalEquipmentID);
@@ -79,11 +85,12 @@ public class MedicalEquipmentSRMongo implements IDatabase<MedicalEquipmentSR> {
     public List<MedicalEquipmentSR> getAllValues() {
         List<MedicalEquipmentSR> equipmentSRList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = MedicalEquipmentSRTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = MedicalEquipmentSRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String nodeID = (String) object.get("_id");
             equipmentSRList.add(getValue(nodeID));
