@@ -33,7 +33,8 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton dashButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
-    @FXML VBox sidebar;
+    @FXML
+    public VBox sidebar;
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
