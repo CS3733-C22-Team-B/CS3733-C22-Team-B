@@ -18,8 +18,9 @@
             <Pane minHeight="75.0" prefHeight="75.0" style="-fx-background-color: #002168;">
                <children>
                   <Label fx:id="pageName" layoutX="35.0" layoutY="27.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Label" textFill="WHITE" />
-               </children></Pane>
-            <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
+               </children>
+            </Pane>
+            <HBox nodeOrientation="RIGHT_TO_LEFT">
                <children>
                   <VBox fx:id="sidebar" alignment="TOP_CENTER" prefWidth="130.0" spacing="17.0" style="-fx-background-color: #ffffff;">
                      <children>
