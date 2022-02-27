@@ -13,7 +13,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import net.kurobako.gesturefx.GesturePane?>
+
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
       <GesturePane fx:id="gesturePane">
@@ -89,16 +91,50 @@
             </VBox>
          </StackPane>
       </GesturePane>
-      <JFXButton fx:id="addButton" layoutX="771.2000122070312" layoutY="56.0" onAction="#add" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Add" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" />
-      <JFXToggleButton fx:id="moveButton" onAction="#move" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0" />
-      <JFXButton fx:id="goToL2Button" onAction="#goToL2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L2" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="150.0" />
-      <JFXButton fx:id="goToL1Button" onAction="#goToL1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor L1" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="250.0" />
-      <JFXButton fx:id="goTo1Button" onAction="#goTo1" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 1" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0" />
-      <JFXButton fx:id="goTo2Button" onAction="#goTo2" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 2" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="350.0" />
-      <JFXButton fx:id="goTo3Button" onAction="#goTo3" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo Floor 3" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="400.0" />
-      <JFXButton fx:id="goToSideViewButton" onAction="#goToSideView" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="GoTo SideView" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="450.0" />
-      <JFXButton fx:id="loadFromCSVButton" layoutX="771.2000122070312" onAction="#loadFromCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Load from CSV" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="500.0" />
-      <JFXButton fx:id="saveToCSVButton" layoutX="771.2000122070312" onAction="#saveToCSV" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Save to CSV" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="550.0" />
+      <JFXButton fx:id="addButton" layoutX="771.2000122070312" layoutY="56.0" onAction="#add" styleClass="map-button" stylesheets="@../styles/style.css" text="+" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0">
+         <font>
+            <Font size="24.0" />
+         </font></JFXButton>
+      <JFXToggleButton fx:id="moveButton" onAction="#move" style="-fx-font-size: 16;" styleClass="map-button" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="24.0" />
+         </font></JFXToggleButton>
+      <HBox fx:id="floorBox" layoutX="150.0" layoutY="554.4000244140625">
+         <children>
+            <JFXButton fx:id="goToL2Button" onAction="#goToL2" styleClass="map-button" stylesheets="@../styles/style.css" text="L2" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="goToL1Button" onAction="#goToL1" styleClass="map-button" stylesheets="@../styles/style.css" text="L1" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="goTo1Button" onAction="#goTo1" styleClass="map-button" stylesheets="@../styles/style.css" text="1" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="goTo2Button" onAction="#goTo2" styleClass="map-button" stylesheets="@../styles/style.css" text="2" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="goTo3Button" onAction="#goTo3" styleClass="map-button" stylesheets="@../styles/style.css" text="3" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="goToSideViewButton" onAction="#goToSideView" styleClass="map-button" stylesheets="@../styles/style.css" text="Side" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></JFXButton>
+         </children>
+      </HBox>
+      <JFXButton fx:id="loadFromCSVButton" layoutX="771.2000122070312" onAction="#loadFromCSV" styleClass="map-button" stylesheets="@../styles/style.css" text="CSV Load" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="500.0">
+         <font>
+            <Font size="24.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="saveToCSVButton" layoutX="771.2000122070312" onAction="#saveToCSV" styleClass="map-button" stylesheets="@../styles/style.css" text="CSV Safe" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="550.0">
+         <font>
+            <Font size="24.0" />
+         </font></JFXButton>
       <JFXCheckBox fx:id="showLocations" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
       <JFXCheckBox fx:id="showMedical" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Medical Equipment" textAlignment="CENTER" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0" />
       <JFXCheckBox fx:id="showSR" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Service Requests" textAlignment="CENTER" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0" />

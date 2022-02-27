@@ -86,6 +86,7 @@ public class MapEditorController{
     public GesturePane gesturePane;
     public JFXButton loadFromCSVButton;
     public JFXButton saveToCSVButton;
+    public HBox floorBox;
     String selectedPoint;
     Circle selectedPnt;
     String selectedImage;
@@ -199,12 +200,13 @@ public class MapEditorController{
         double bottomAnchor = 100;
         anchorPane.setBottomAnchor(addButton,bottomAnchor);
         anchorPane.setBottomAnchor(moveButton,bottomAnchor);
-        anchorPane.setBottomAnchor(goToL2Button,bottomAnchor);
-        anchorPane.setBottomAnchor(goToL1Button,bottomAnchor);
-        anchorPane.setBottomAnchor(goTo1Button,bottomAnchor);
-        anchorPane.setBottomAnchor(goTo2Button,bottomAnchor);
-        anchorPane.setBottomAnchor(goTo3Button,bottomAnchor);
-        anchorPane.setBottomAnchor(goToSideViewButton,bottomAnchor);
+        anchorPane.setBottomAnchor(floorBox,bottomAnchor);
+//        anchorPane.setBottomAnchor(goToL2Button,bottomAnchor);
+//        anchorPane.setBottomAnchor(goToL1Button,bottomAnchor);
+//        anchorPane.setBottomAnchor(goTo1Button,bottomAnchor);
+//        anchorPane.setBottomAnchor(goTo2Button,bottomAnchor);
+//        anchorPane.setBottomAnchor(goTo3Button,bottomAnchor);
+//        anchorPane.setBottomAnchor(goToSideViewButton,bottomAnchor);
         anchorPane.setBottomAnchor(loadFromCSVButton,bottomAnchor);
         anchorPane.setBottomAnchor(saveToCSVButton,bottomAnchor);
         anchorPane.setBottomAnchor(showLocations,bottomAnchor);
@@ -212,20 +214,22 @@ public class MapEditorController{
         anchorPane.setBottomAnchor(showSR,bottomAnchor);
 
         double leftAnchor = 50;
-        double buffer = 100;
-        anchorPane.setLeftAnchor(addButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(moveButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(goToL2Button,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(goToL1Button,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(goTo1Button,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(goTo2Button,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(goTo3Button,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(goToSideViewButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(loadFromCSVButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(saveToCSVButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(showLocations,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(showMedical,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(showSR,leftAnchor+=buffer);
+        double smallBuffer = 100;
+        double bigBuffer = 170;
+        anchorPane.setLeftAnchor(addButton,leftAnchor+=smallBuffer);
+        anchorPane.setLeftAnchor(moveButton,leftAnchor+=smallBuffer);
+        anchorPane.setLeftAnchor(floorBox,leftAnchor+=smallBuffer+smallBuffer);
+//        anchorPane.setLeftAnchor(goToL2Button,leftAnchor+=buffer);
+//        anchorPane.setLeftAnchor(goToL1Button,leftAnchor+=buffer);
+//        anchorPane.setLeftAnchor(goTo1Button,leftAnchor+=buffer);
+//        anchorPane.setLeftAnchor(goTo2Button,leftAnchor+=buffer);
+//        anchorPane.setLeftAnchor(goTo3Button,leftAnchor+=buffer);
+//        anchorPane.setLeftAnchor(goToSideViewButton,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(loadFromCSVButton,leftAnchor+=bigBuffer+bigBuffer);
+        anchorPane.setLeftAnchor(saveToCSVButton,leftAnchor+=bigBuffer);
+        anchorPane.setLeftAnchor(showLocations,leftAnchor+=smallBuffer);
+        anchorPane.setLeftAnchor(showMedical,leftAnchor+=smallBuffer);
+        anchorPane.setLeftAnchor(showSR,leftAnchor+=smallBuffer);
     }
 
     private void setupSideviewColumns(){
@@ -648,12 +652,12 @@ public class MapEditorController{
     }
 
     @FXML public void goTo(){
-        goTo1Button.setStyle("-fx-background-color: #eaeaea");
-        goTo2Button.setStyle("-fx-background-color: #eaeaea");
-        goTo3Button.setStyle("-fx-background-color: #eaeaea");
-        goToL1Button.setStyle("-fx-background-color: #eaeaea");
-        goToL2Button.setStyle("-fx-background-color: #eaeaea");
-        goToSideViewButton.setStyle("-fx-background-color: #eaeaea");
+        goTo1Button.setStyle("-fx-background-color: #7B94C9");
+        goTo2Button.setStyle("-fx-background-color: #7B94C9");
+        goTo3Button.setStyle("-fx-background-color: #7B94C9");
+        goToL1Button.setStyle("-fx-background-color: #7B94C9");
+        goToL2Button.setStyle("-fx-background-color: #7B94C9");
+        goToSideViewButton.setStyle("-fx-background-color: #7B94C9");
         setTextVisible(false);
         if(!moveState){
             gesturePane.setGestureEnabled(true);
