@@ -16,7 +16,6 @@
 <?import net.kurobako.gesturefx.GesturePane?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.MapEditorController">
    <children>
-      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <GesturePane fx:id="gesturePane">
          <StackPane fx:id="stackPane" onMouseClicked="#imageClicked">
             <ImageView fx:id="imageView" onMouseClicked="#imageClicked" pickOnBounds="true" preserveRatio="true" smooth="false">
