@@ -84,6 +84,8 @@ public class MapEditorController{
     public Label summaryL2SR;
     public Label summaryL1SR;
     public GesturePane gesturePane;
+    public JFXButton loadFromCSVButton;
+    public JFXButton saveToCSVButton;
     String selectedPoint;
     Circle selectedPnt;
     String selectedImage;
@@ -188,6 +190,42 @@ public class MapEditorController{
         setupSideviewColumns();
         sideviewTable.setTranslateX(0);
         sideviewTable.setTranslateY(-300);
+        setAnchors();
+    }
+
+    private void setAnchors(){
+        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight());
+        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-130);
+        double bottomAnchor = 100;
+        anchorPane.setBottomAnchor(addButton,bottomAnchor);
+        anchorPane.setBottomAnchor(moveButton,bottomAnchor);
+        anchorPane.setBottomAnchor(goToL2Button,bottomAnchor);
+        anchorPane.setBottomAnchor(goToL1Button,bottomAnchor);
+        anchorPane.setBottomAnchor(goTo1Button,bottomAnchor);
+        anchorPane.setBottomAnchor(goTo2Button,bottomAnchor);
+        anchorPane.setBottomAnchor(goTo3Button,bottomAnchor);
+        anchorPane.setBottomAnchor(goToSideViewButton,bottomAnchor);
+        anchorPane.setBottomAnchor(loadFromCSVButton,bottomAnchor);
+        anchorPane.setBottomAnchor(saveToCSVButton,bottomAnchor);
+        anchorPane.setBottomAnchor(showLocations,bottomAnchor);
+        anchorPane.setBottomAnchor(showMedical,bottomAnchor);
+        anchorPane.setBottomAnchor(showSR,bottomAnchor);
+
+        double leftAnchor = 50;
+        double buffer = 100;
+        anchorPane.setLeftAnchor(addButton,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(moveButton,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(goToL2Button,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(goToL1Button,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(goTo1Button,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(goTo2Button,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(goTo3Button,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(goToSideViewButton,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(loadFromCSVButton,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(saveToCSVButton,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(showLocations,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(showMedical,leftAnchor+=buffer);
+        anchorPane.setLeftAnchor(showSR,leftAnchor+=buffer);
     }
 
     private void setupSideviewColumns(){
@@ -782,19 +820,6 @@ public class MapEditorController{
         }
     }
 
-
-    @FXML
-    void homeButton(ActionEvent event) {
-        // Try to go home
-        try {
-            Bapp.getPrimaryStage().resizableProperty().set(true);
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/AnchorHome.fxml"));
-            Bapp.getPrimaryStage().getScene().setRoot(root);
-            // Print stack trace if unable to go home
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     @FXML public void add(){
         if(addState){
