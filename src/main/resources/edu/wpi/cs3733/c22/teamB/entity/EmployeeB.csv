@@ -1,13 +1,14 @@
 employeeID,lastName,firstName,position,accessLevel,username,password,email,phoneNumber
-1,E,Hushmand,Ward Assistant,9,pushman,he,hushmand@wpi.edu,1
-2,Y,Sits,Doctor,9,sits,sy,sits@wpi.edu,2
-3,L,Nick,Nurse,9,nich,nl,nick@wpi.edu,3
-4,P,Calvin,Pharmacist,9,cpage,cp,calvin@wpi.edu,4
-5,R,Chris,Ward Assistant,9,cris,cr,chris@wpi.edu,5
-6,N,Andrew,IT,9,andy,an,andrew@wpi.edu,6
-7,G,Ben,Pharmacist,9,ben,bg,ben@wpi.edu,7
-8,L,Noah,Doctor,9,noah,nl,Noah@wpi.edu,8
-9,B,Kiki,Hospital Administrator,9,kiki,kb,kiki@wpi.edu,9
-10,T,Duc,Building Manager,9,duc,dt,duc@wpi.edu,10
-11,W,Wilson,VP,9,admin,admin,wwong2@wpi.edu,11
-12,M,William,Office Assistant,5,staff,staff,william@wpi.edu,12
+1,Esmaeili,Hushmand,Ward Assistant,9,pushman,he,hushmand@wpi.edu,1
+2,Young,Sits,Doctor,9,sits,sy,sits@wpi.edu,2
+3,Li,Nick,Nurse,9,nich,nl,nick@wpi.edu,3
+4,Page,Calvin,Pharmacist,9,cpage,cp,calvin@wpi.edu,4
+5,Rincon Rogers,Chris,Ward Assistant,9,cris,cr,chris@wpi.edu,5
+6,Nguyen,Andrew,IT,9,andy,an,andrew@wpi.edu,6
+7,Gilchrist,Ben,Pharmacist,9,ben,bg,ben@wpi.edu,7
+8,Leibowitz,Noah,Doctor,9,noah,nl,Noah@wpi.edu,8
+9,Bajer,Kiki,Hospital Administrator,9,kiki,kb,kiki@wpi.edu,9
+10,Doan,Duc,Building Manager,9,duc,dt,duc@wpi.edu,10
+11,Wong,Wilson,VP,9,admin,admin,wwong2@wpi.edu,11
+12,McDonald,William,Office Assistant,5,staff,staff,william@wpi.edu,12
+13,Musk,Elon,Office Assistant,1,elon,musk,elon@wpi.edu,13
