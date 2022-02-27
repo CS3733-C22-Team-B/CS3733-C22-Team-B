@@ -134,6 +134,10 @@ public class AnchorHomeController implements Initializable {
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
+            anchorPane.setLeftAnchor(childPane,0.0);
+            anchorPane.setRightAnchor(childPane,0.0);
+            anchorPane.setTopAnchor(childPane,0.0);
+            anchorPane.setBottomAnchor(childPane,0.0);
             anchorPane.toBack();
         } catch (IOException e) {
             e.printStackTrace();
