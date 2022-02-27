@@ -1,4 +1,7 @@
 equipmentID,equipmentName,equipmentType,manufacturer,location,status,color,size,description,amount
-EQ1,BED,bed,WPI,FHALL00201,WAITING,red,large,yes,1
-EQ2,CHAIR,chair,WPI,FHALL00301,WAITING,yellow,small,no,1
-EQ3,PENCIL,pencil,WPI,FHALL00401,WAITING,brown,XL,maybe,2
+bBED00101,Bed1,Bed,mattress,bPATI00303,CLEAN,white,large,Its a Bed,1
+bBED00201,Bed2,Bed,bedding,bPATI00503,IN USE,black,small,small bed,1
+bXRAY00101,XRay,Xray,Xray,bPATI00603,CLEAN,white,small,machine,1
+bCATSCAN00102,Cat Scan,Cat Scan,Cat Scan,bPATI00803,CLEAN,white,medium,machine,2
+bRECLINER00101,Recliner,Recliner,Recliner,bPATI00703,DIRTY,blue,large,moving bed,1
+bRECLINER00202,Recliner,Recliner,Recliner,bPATI00403,CLEAN,blue ,small,recliner,2
