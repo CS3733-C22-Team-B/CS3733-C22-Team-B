@@ -196,9 +196,9 @@ public class MapEditorController{
     }
 
     private void setAnchors(){
-        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight());
-        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-130);
-        double bottomAnchor = 90;
+//        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight());
+//        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-130);
+        double bottomAnchor = 20;
         anchorPane.setBottomAnchor(addButton,bottomAnchor);
         anchorPane.setBottomAnchor(moveButton,bottomAnchor);
         anchorPane.setBottomAnchor(floorBox,bottomAnchor);
