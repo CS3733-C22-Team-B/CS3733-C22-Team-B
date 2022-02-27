@@ -1,12 +1,17 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.FoodDeliverySR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.GiftFloralSR;
+import org.bson.Document;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,8 +19,8 @@ import java.util.List;
 
 public class GiftFloralSRMongo implements IDatabase<GiftFloralSR> {
 
-    private DB conn;
-    private DBCollection GiftFloralTable;
+    private MongoDatabase conn;
+    private MongoCollection GiftFloralTable;
     private IDatabase<AbstractSR> MainSRMongo;
 
 
@@ -24,8 +29,8 @@ public class GiftFloralSRMongo implements IDatabase<GiftFloralSR> {
         this.MainSRMongo = mainSRMongo;
     }
 
-    public static DBObject convertGiftFloralSR(GiftFloralSR sr) {
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertGiftFloralSR(GiftFloralSR sr) {
+        Document document = new Document();
         document.put("_id", sr.getSrID());
         document.put("giftName", sr.getGiftName());
 
@@ -34,26 +39,27 @@ public class GiftFloralSRMongo implements IDatabase<GiftFloralSR> {
 
     @Override
     public void addValue(GiftFloralSR object) {
-        conn.getCollection("GiftFloralSR").insert(convertGiftFloralSR(object));
+        conn.getCollection("GiftFloralSR").insertOne(convertGiftFloralSR(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        GiftFloralTable.remove(convertGiftFloralSR(getValue(objectID)));
+        GiftFloralTable.deleteOne(convertGiftFloralSR(getValue(objectID)));
     }
 
     @Override
     public void updateValue(GiftFloralSR object) {
-        DBObject query = new BasicDBObject("_id", object.getSrID());
-        GiftFloralTable.findAndModify(query, convertGiftFloralSR(object));
+        Document query = new Document("_id", object.getSrID());
+        GiftFloralTable.findOneAndReplace(query, convertGiftFloralSR(object));
     }
 
     @Override
     public GiftFloralSR getValue(String objectID) {
         GiftFloralSR giftFloralSR;
 
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = GiftFloralTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = GiftFloralTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         AbstractSR mainSR = MainSRMongo.getValue(objectID);
 
@@ -65,7 +71,7 @@ public class GiftFloralSRMongo implements IDatabase<GiftFloralSR> {
         LocalDate dateRequested = mainSR.getDateRequested();
         String notes = mainSR.getNotes();
 
-        BasicDBObject foodObj = (BasicDBObject) cursor.one();
+        Document foodObj = cursor.next();
         String srID = foodObj.getString("_id");
         String giftName = foodObj.getString("giftName");
 
@@ -77,11 +83,12 @@ public class GiftFloralSRMongo implements IDatabase<GiftFloralSR> {
     public List<GiftFloralSR> getAllValues() {
         List<GiftFloralSR> giftFloralSRList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = GiftFloralTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = GiftFloralTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String srID = (String) object.get("_id");
             giftFloralSRList.add(getValue(srID));

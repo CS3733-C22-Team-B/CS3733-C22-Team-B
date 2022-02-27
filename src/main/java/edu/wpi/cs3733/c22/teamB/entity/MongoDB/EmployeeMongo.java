@@ -1,25 +1,31 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.PasswordHashing;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import org.bson.Document;
 
+import javax.print.Doc;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeMongo implements IDatabase<Employee> {
 
-    private DB conn;
-    private DBCollection EmployeeTable;
+    private MongoDatabase conn;
+    private MongoCollection EmployeeTable;
 
     public EmployeeMongo(){
         conn = MongoDB.getBDBMongo();
     }
 
-    public static DBObject convertEmployee(Employee employee){
+    public static Document convertEmployee(Employee employee){
         String pass = employee.getPassword();
 
         // if pass is already hashed, do nothing; else hash it
@@ -27,7 +33,7 @@ public class EmployeeMongo implements IDatabase<Employee> {
         } else {
             pass = PasswordHashing.hashPassword(employee.getPassword());
         }
-        BasicDBObject document = new BasicDBObject();
+        Document document = new Document();
         document.put("_id", employee.getEmployeeID());
         document.put("lastName", employee.getLastName());
         document.put("firstName", employee.getFirstName());
@@ -43,56 +49,66 @@ public class EmployeeMongo implements IDatabase<Employee> {
 
     @Override
     public void addValue(Employee object) {
-        conn.getCollection("Employee").insert(convertEmployee(object));
+        conn.getCollection("Employee").insertOne(convertEmployee(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        EmployeeTable.remove(convertEmployee(getValue(objectID)));
+        EmployeeTable.deleteOne(convertEmployee(getValue(objectID)));
     }
 
     @Override
     public void updateValue(Employee object) {
-        DBObject query = new BasicDBObject("_id", object.getEmployeeID());
-        EmployeeTable.findAndModify(query, convertEmployee(object));
+        Document query = new Document("_id", object.getEmployeeID());
+        EmployeeTable.findOneAndReplace(query, convertEmployee(object));
     }
 
     @Override
     public Employee getValue(String objectID) {
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = EmployeeTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = EmployeeTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
-        BasicDBObject employeeObj = (BasicDBObject) cursor.one();
+//        String employeeObj = cursor.next().toJson();
+
+        Document employeeObj = cursor.next();
+
+
         String employeeID = employeeObj.getString("_id");
         String lastName = employeeObj.getString("lastName");
         String firstName = employeeObj.getString("firstName");
         String position = employeeObj.getString("position");
-        int accessLevel = Integer.parseInt(employeeObj.getString("accessLevel"));
+        int accessLevel = employeeObj.getInteger("accessLevel");
         String username = employeeObj.getString("username");
         String password = employeeObj.getString("password");
         String email = employeeObj.getString("email");
         String phoneNumber = employeeObj.getString("phoneNumber");
 
         Employee employee = new Employee(employeeID, lastName, firstName, position, accessLevel, username, password, email, phoneNumber);
-//        System.out.print(employee);
+        System.out.print(employeeObj);
         return employee;
+//        System.out.println(employeeObj);
+//        return null;
     }
 
     @Override
     public List<Employee> getAllValues() {
         List<Employee> employeeList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = EmployeeTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = EmployeeTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
+
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String nodeID = (String) object.get("_id");
             employeeList.add(getValue(nodeID));
         }
 
         return employeeList;
+
     }
 
     @Override
