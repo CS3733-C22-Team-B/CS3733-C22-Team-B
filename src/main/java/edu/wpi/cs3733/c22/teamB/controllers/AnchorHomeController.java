@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import edu.wpi.cs3733.c22.teamB.entity.BedBrotherCV;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton helpButton;
     @FXML
     public VBox sidebar;
+    BedBrotherCV equipCamera = new BedBrotherCV();
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -112,6 +114,7 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        equipCamera.call();
     }
 
     @FXML
