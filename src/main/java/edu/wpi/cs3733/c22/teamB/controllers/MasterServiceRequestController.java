@@ -139,6 +139,7 @@ public class MasterServiceRequestController extends AbsPage {
 
         // locationField init
         locList = dw.getAllLocation();
+        locationField.setPromptText("");
         locationField.setConverter(new StringConverter<>() {
             @Override
             public String toString(Location object) {
@@ -182,6 +183,8 @@ public class MasterServiceRequestController extends AbsPage {
         initResize();
         resize();
         namePage();
+
+
     }
 
     private String getLabel() {
@@ -249,9 +252,10 @@ public class MasterServiceRequestController extends AbsPage {
     // DO NOT TOUCH THIS
     @FXML private void clear(ActionEvent actionEvent) {
         floorField.setValue("ALL");
-        locationField.setValue(null);
+        locationField.setValue(new Location(0, 0, "","","","", ""));
+        locationField.cancelEdit();
         notesField.clear();
-        assignedEmployeeField.setValue(null);
+        assignedEmployeeField.setValue(new Employee("","", "", "", 0, "", "", "",""));
         childController.clear();
         popup.setVisible(false);
     }
