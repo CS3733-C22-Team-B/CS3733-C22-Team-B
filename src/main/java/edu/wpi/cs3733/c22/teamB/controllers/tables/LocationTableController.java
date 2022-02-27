@@ -73,6 +73,8 @@ public class LocationTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         deleteButton.setDisable(true);
         popup.setVisible(false);
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
@@ -88,8 +90,8 @@ public class LocationTableController extends AbsPage {
         resize();
         namePage();
 
-        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
-        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
+//        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+//        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
 
         filterFields.addAll(List.of(new String[]{"nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"}));
         textFilterField.setOnKeyPressed(event -> {

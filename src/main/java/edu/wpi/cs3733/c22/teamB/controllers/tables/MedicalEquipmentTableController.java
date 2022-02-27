@@ -76,6 +76,8 @@ public class MedicalEquipmentTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         deleteButton.setDisable(true);
         popup.setVisible(false);
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
 
         locList = db.getAllLocation();
         locMap =
@@ -105,8 +107,8 @@ public class MedicalEquipmentTableController extends AbsPage {
         resize();
         namePage();
 
-        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
-        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
+//        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+//        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     public void loadTable() throws NullPointerException {
