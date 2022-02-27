@@ -29,7 +29,6 @@ public class EmployeeTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
-    @FXML private TextField employeeIDField;
     @FXML private TextField lastNameField;
     @FXML private TextField firstNameField;
     @FXML private TextField positionField;
@@ -184,7 +183,6 @@ public class EmployeeTableController extends AbsPage {
         phoneNumberField.setDisable(false);
 
         Employee loc = table.getSelectionModel().getSelectedItem();
-        employeeIDField.setText(loc.getEmployeeID());
         lastNameField.setText(loc.getLastName());
         firstNameField.setText(loc.getFirstName());
         positionField.setText(loc.getPosition());
@@ -225,7 +223,6 @@ public class EmployeeTableController extends AbsPage {
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == Function.ADD) {
             Employee e = new Employee(
-                    employeeIDField.getText(),
                     lastNameField.getText(),
                     firstNameField.getText(),
                     positionField.getText(),
@@ -251,7 +248,7 @@ public class EmployeeTableController extends AbsPage {
 
         } else if (func == Function.MODIFY) {
             Employee n = new Employee(
-                    employeeIDField.getText(),
+                    table.getSelectionModel().getSelectedItem().getEmployeeID(),
                     lastNameField.getText(),
                     firstNameField.getText(),
                     positionField.getText(),
@@ -278,7 +275,6 @@ public class EmployeeTableController extends AbsPage {
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
-        employeeIDField.clear();
         lastNameField.clear();
         firstNameField.clear();
         positionField.clear();

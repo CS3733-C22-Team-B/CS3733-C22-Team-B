@@ -34,24 +34,22 @@
                       </TableView>
                   </children>
               </GridPane>
-              <GridPane fx:id="gridPane" layoutX="21.0" layoutY="423.0" prefHeight="78.0" prefWidth="546.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="33.0">
+              <GridPane fx:id="gridPane" layoutX="30.0" layoutY="423.0" prefHeight="78.0" prefWidth="546.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                   <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.4000244140625" minWidth="10.0" prefWidth="119.4000244140625" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.79998779296875" minWidth="10.0" prefWidth="126.5999755859375" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.79995117187497" minWidth="10.0" prefWidth="96.59998779296876" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.20001220703125" minWidth="10.0" prefWidth="80.5999755859375" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="228.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="244.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.0" minWidth="10.0" prefWidth="220.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="151.0" />
                   </columnConstraints>
                   <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                      <TextField fx:id="employeeIDField" prefHeight="25.0" prefWidth="99.0" promptText="employeeID" stylesheets="@../../styles/style.css" />
-                      <TextField fx:id="lastNameField" prefHeight="25.0" prefWidth="60.0" promptText="lastName" GridPane.columnIndex="1" />
-                      <TextField fx:id="firstNameField" prefHeight="25.0" prefWidth="60.0" promptText="firstName" GridPane.columnIndex="2" />
-                      <TextField fx:id="positionField" prefHeight="25.0" prefWidth="99.0" promptText="position" GridPane.columnIndex="3" />
-                      <TextField fx:id="accessLevel" promptText="accessLevel" GridPane.columnIndex="4" />
+                      <TextField fx:id="lastNameField" prefHeight="25.0" prefWidth="60.0" promptText="lastName" />
+                      <TextField fx:id="firstNameField" prefHeight="25.0" prefWidth="60.0" promptText="firstName" GridPane.columnIndex="1" />
+                      <TextField fx:id="positionField" prefHeight="25.0" prefWidth="99.0" promptText="position" GridPane.columnIndex="2" />
+                      <TextField fx:id="accessLevel" promptText="accessLevel" GridPane.columnIndex="3" />
                       <TextField fx:id="usernameField" prefHeight="25.0" prefWidth="145.0" promptText="username" GridPane.rowIndex="1" />
                       <TextField fx:id="passwordField" prefHeight="25.0" prefWidth="99.0" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                       <TextField fx:id="emailField" prefHeight="25.0" prefWidth="126.0" promptText="email" GridPane.columnIndex="2" GridPane.rowIndex="1" />
