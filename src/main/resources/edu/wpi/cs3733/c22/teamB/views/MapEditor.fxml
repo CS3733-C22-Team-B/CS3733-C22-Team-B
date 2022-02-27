@@ -136,9 +136,13 @@
             <Font size="24.0" />
          </font>
       </JFXButton>
-      <JFXCheckBox fx:id="showLocations" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-      <JFXCheckBox fx:id="showMedical" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Medical Equipment" textAlignment="CENTER" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="70.0" />
-      <JFXCheckBox fx:id="showSR" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Service Requests" textAlignment="CENTER" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="130.0" />
+      <VBox fx:id="showVBox" layoutX="741.5999755859375" layoutY="10.399999618530273" style="-fx-spacing: 10;">
+         <children>
+            <JFXCheckBox fx:id="showLocations" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Locations" textAlignment="CENTER" />
+            <JFXCheckBox fx:id="showMedical" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Medical Equipment" textAlignment="CENTER" />
+            <JFXCheckBox fx:id="showSR" onAction="#refresh" styleClass="JFXButtonMinor" stylesheets="@../styles/style.css" text="Service Requests" textAlignment="CENTER" />
+         </children>
+      </VBox>
    </children>
 
 </AnchorPane>

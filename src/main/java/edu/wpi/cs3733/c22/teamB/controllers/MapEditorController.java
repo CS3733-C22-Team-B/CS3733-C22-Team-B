@@ -87,6 +87,7 @@ public class MapEditorController{
     public JFXButton loadFromCSVButton;
     public JFXButton saveToCSVButton;
     public HBox floorBox;
+    public VBox showVBox;
     String selectedPoint;
     Circle selectedPnt;
     String selectedImage;
@@ -209,9 +210,9 @@ public class MapEditorController{
 //        anchorPane.setBottomAnchor(goToSideViewButton,bottomAnchor);
         anchorPane.setBottomAnchor(loadFromCSVButton,bottomAnchor);
         anchorPane.setBottomAnchor(saveToCSVButton,bottomAnchor);
-        anchorPane.setBottomAnchor(showLocations,bottomAnchor);
-        anchorPane.setBottomAnchor(showMedical,bottomAnchor);
-        anchorPane.setBottomAnchor(showSR,bottomAnchor);
+
+        anchorPane.setLeftAnchor(showVBox,20.0);
+        anchorPane.setTopAnchor(showVBox,20.0);
 
         double leftAnchor = 20;
         double buffer = 10;
@@ -852,7 +853,7 @@ public class MapEditorController{
             refresh();
             moveState = true;
             gesturePane.setGestureEnabled(false);
-            moveButton.setText("Cancel");
+            moveButton.setText("Pan");
         }
     }
 
