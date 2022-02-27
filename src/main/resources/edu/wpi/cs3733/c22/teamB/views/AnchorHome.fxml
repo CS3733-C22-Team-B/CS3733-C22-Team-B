@@ -18,14 +18,16 @@
             <Pane minHeight="75.0" prefHeight="75.0" style="-fx-background-color: #002168;">
                <children>
                   <Label fx:id="pageName" layoutX="35.0" layoutY="27.0" styleClass="main-label" stylesheets="@../styles/style.css" text="Label" textFill="WHITE" />
-               </children></Pane>
-            <HBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
+               </children>
+            </Pane>
+            <HBox nodeOrientation="RIGHT_TO_LEFT" VBox.vgrow="ALWAYS">
                <children>
+                  <AnchorPane fx:id="anchorPane" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #b3bcd2;" HBox.hgrow="ALWAYS" />
                   <VBox fx:id="sidebar" alignment="TOP_CENTER" prefWidth="130.0" spacing="17.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="homeButton" onAction="#goHome" text=" ">
+                              <JFXButton fx:id="homeButton" onAction="#goHome" text="       Home     ">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -34,12 +36,11 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label text="Home" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="mapButton" onAction="#goToMap" text=" ">
+                              <JFXButton fx:id="mapButton" onAction="#goToMap" text="         Map       ">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -48,12 +49,11 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label text="Map" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="srButton" onAction="#goToServiceRequest" text=" ">
+                              <JFXButton fx:id="srButton" onAction="#goToServiceRequest" text="Service Request">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -62,12 +62,11 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label alignment="CENTER" text="Service" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="tableButton" onAction="#goToTables" text=" ">
+                              <JFXButton fx:id="tableButton" onAction="#goToTables" text="      Tables      ">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -76,12 +75,11 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label alignment="CENTER" text="Tables" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="dashButton" onAction="#goToDashboard" text=" ">
+                              <JFXButton fx:id="dashButton" onAction="#goToDashboard" text="   Dashboard   ">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -90,12 +88,11 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label text="Dashboard" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="settingsButton" onAction="#goToSettings" text=" ">
+                              <JFXButton fx:id="settingsButton" onAction="#goToSettings" text="      Settings      ">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -104,7 +101,6 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label text="Settings" />
                            </children>
                         </HBox>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="222.0" prefWidth="6.0" />
@@ -140,7 +136,6 @@
                         <Insets top="17.0" />
                      </padding>
                   </VBox>
-                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: #b3bcd2;" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

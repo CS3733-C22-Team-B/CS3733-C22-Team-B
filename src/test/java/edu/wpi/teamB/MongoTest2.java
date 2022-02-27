@@ -8,6 +8,7 @@ import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.*;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.net.UnknownHostException;
 import java.time.LocalDate;
@@ -30,8 +31,10 @@ public class MongoTest2 {
 
         locationMongo.addValue(location1);
         locationMongo.addValue(location2);
+        assertEquals(locationMongo.getValue(location1.getNodeID()), location1);
+        locationMongo.getAllValues();
 
-        //Employee
+//        //Employee
 
         EmployeeMongo employeeMongo = new EmployeeMongo();
         employeeMongo.dropTable();
@@ -44,11 +47,59 @@ public class MongoTest2 {
         employeeMongo.addValue(employee1);
         employeeMongo.addValue(employee2);
         employeeMongo.addValue(employee3);
+        employeeMongo.getValue(employee1.getEmployeeID());
 
         IDatabase<AbstractSR> mainSRMongo = new MainSRMongo(locationMongo, employeeMongo);
         mainSRMongo.dropTable();
         mainSRMongo.createTable();
         LocalDate date = LocalDate.parse("2022-12-12");
+
+
+        //Computer Service
+        ComputerServiceSRMongo computerServiceSRMongo = new ComputerServiceSRMongo(mainSRMongo);
+        computerServiceSRMongo.dropTable();
+        computerServiceSRMongo.createTable();
+
+        ComputerServiceSR computerServiceSR = new ComputerServiceSR("Comp1", "123", location1, employee1, employee2, date, "123" ,"123");
+        ComputerServiceSR computerServiceSR2 = new ComputerServiceSR("Comp2", "123", location1, employee1, employee2, date, "123" ,"123");
+        ComputerServiceSR computerServiceSR3 = new ComputerServiceSR("Comp3", "123", location1, employee1, employee2, date, "123" ,"123");
+        ComputerServiceSR computerServiceSR32 = new ComputerServiceSR("Comp3", "123", location1, employee3, employee2, date, "123" ,"123");
+
+        mainSRMongo.addValue(computerServiceSR);
+        mainSRMongo.addValue(computerServiceSR2);
+        mainSRMongo.addValue(computerServiceSR3);
+
+        computerServiceSRMongo.addValue(computerServiceSR);
+        computerServiceSRMongo.addValue(computerServiceSR2);
+        computerServiceSRMongo.addValue(computerServiceSR3);
+        computerServiceSRMongo.updateValue(computerServiceSR32);
+        computerServiceSRMongo.deleteValue(computerServiceSR32.getSrID());
+        computerServiceSRMongo.getValue(computerServiceSR.getSrID());
+        computerServiceSRMongo.getAllValues();
+
+
+        //External Transport
+
+        ExternalTransportSRMongo externalTransportSRMongo = new ExternalTransportSRMongo(mainSRMongo);
+        externalTransportSRMongo.dropTable();
+        externalTransportSRMongo.createTable();
+
+        ExternalTransportSR externalTransportSR = new ExternalTransportSR("External1", "123", location1, employee1, employee2, date, "123", "123", "123", "23");
+        ExternalTransportSR externalTransportSR2 = new ExternalTransportSR("External2", "123", location1, employee1, employee2, date, "123", "123", "123", "23");
+        ExternalTransportSR externalTransportSR3 = new ExternalTransportSR("External3", "123", location1, employee1, employee2, date, "123", "123", "123", "23");
+        ExternalTransportSR externalTransportSR32 = new ExternalTransportSR("External3", "123", location1, employee3, employee2, date, "123", "123", "123", "23");
+
+        mainSRMongo.addValue(externalTransportSR);
+        mainSRMongo.addValue(externalTransportSR2);
+        mainSRMongo.addValue(externalTransportSR3);
+
+        externalTransportSRMongo.addValue(externalTransportSR);
+        externalTransportSRMongo.addValue(externalTransportSR2);
+        externalTransportSRMongo.addValue(externalTransportSR3);
+        externalTransportSRMongo.updateValue(externalTransportSR32);
+        externalTransportSRMongo.deleteValue(externalTransportSR32.getSrID());
+        externalTransportSRMongo.getValue(externalTransportSR.getSrID());
+        externalTransportSRMongo.getAllValues();
 
         //Food
 

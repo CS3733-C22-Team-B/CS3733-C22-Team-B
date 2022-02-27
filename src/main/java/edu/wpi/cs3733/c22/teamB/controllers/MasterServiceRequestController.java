@@ -219,17 +219,21 @@ public class MasterServiceRequestController extends AbsPage {
 
     // DO NOT TOUCH THIS
     @FXML private void submit(ActionEvent actionEvent) {
-//        System.out.println(locationField.getValue());
-//        System.out.println(locationField.getValue().getClass().getSimpleName());
-        childSR = new MainSR(
-                SRIDGenerator.generateID(),
-                childSRType,
-                "WAITING",
-                locationField.getValue(),
-                LoginController.getLoggedInEmployee(),
-                assignedEmployeeField.getValue(),
-                LocalDate.now(),
-                notesField.getText());
+        if (childSR == null)
+            childSR = new MainSR(
+                    SRIDGenerator.generateID(),
+                    childSRType,
+                    "WAITING",
+                    locationField.getValue(),
+                    LoginController.getLoggedInEmployee(),
+                    assignedEmployeeField.getValue(),
+                    LocalDate.now(),
+                    notesField.getText());
+        else {
+            childSR.setLocation(locationField.getValue());
+            childSR.setAssignedEmployee(assignedEmployeeField.getValue());
+            childSR.setNotes(notesField.getText());
+        }
         childController.submit(childSR);
 
         this.clear(null);

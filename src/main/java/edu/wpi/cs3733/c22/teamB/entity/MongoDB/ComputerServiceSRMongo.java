@@ -1,12 +1,17 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.ComputerServiceSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MainSR;
+import org.bson.Document;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,8 +19,8 @@ import java.util.List;
 
 public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
 
-    private DB conn;
-    private DBCollection ComputerServiceSRTable;
+    private MongoDatabase conn;
+    private MongoCollection ComputerServiceSRTable;
     private IDatabase<AbstractSR> MainSRMongo;
 
     public ComputerServiceSRMongo(IDatabase<AbstractSR> MainSRMongo) {
@@ -23,8 +28,8 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
         this.MainSRMongo = MainSRMongo;
     }
 
-    public static DBObject convertComputerServiceSR(ComputerServiceSR sr){
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertComputerServiceSR(ComputerServiceSR sr){
+        Document document = new Document();
         document.put("_id", sr.getSrID());
         document.put("helpType", sr.getHelpType());
 
@@ -33,26 +38,27 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
 
     @Override
     public void addValue(ComputerServiceSR object) {
-        conn.getCollection("ComputerServiceSR").insert(convertComputerServiceSR(object));
+        conn.getCollection("ComputerServiceSR").insertOne(convertComputerServiceSR(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        ComputerServiceSRTable.remove(convertComputerServiceSR(getValue(objectID)));
+        ComputerServiceSRTable.deleteOne(convertComputerServiceSR(getValue(objectID)));
     }
 
     @Override
     public void updateValue(ComputerServiceSR object) {
-        DBObject query = new BasicDBObject("_id", object.getSrID());
-        ComputerServiceSRTable.findAndModify(query, convertComputerServiceSR(object));
+        Document query = new Document("_id", object.getSrID());
+        ComputerServiceSRTable.findOneAndReplace(query, convertComputerServiceSR(object));
     }
 
     @Override
     public ComputerServiceSR getValue(String objectID) {
         ComputerServiceSR computerServiceSR;
 
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = ComputerServiceSRTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = ComputerServiceSRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         AbstractSR mainSR = MainSRMongo.getValue(objectID);
 
@@ -66,7 +72,7 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
 
 
 
-        BasicDBObject computerObj = (BasicDBObject) cursor.one();
+        Document computerObj = cursor.next();
         String srID = computerObj.getString("_id");
         String helpType = computerObj.getString("helpType");
 
@@ -80,11 +86,12 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
     public List<ComputerServiceSR> getAllValues() {
         List<ComputerServiceSR> computerServiceSRList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = ComputerServiceSRTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = ComputerServiceSRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String srID = (String) object.get("_id");
             computerServiceSRList.add(getValue(srID));

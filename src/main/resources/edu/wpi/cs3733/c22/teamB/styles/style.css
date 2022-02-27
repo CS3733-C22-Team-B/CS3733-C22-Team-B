@@ -60,6 +60,13 @@
 
 }
 
+.map-button {
+    -fx-background-color: #7B94C9;
+    -fx-text-fill: white;
+    -fx-background-radius: 30;
+    -fx-font-size: 24;
+}
+
 
 /* ----------- COMBO BOX -------------- */
 .combo-box .combo-box-popup > .list-view {
