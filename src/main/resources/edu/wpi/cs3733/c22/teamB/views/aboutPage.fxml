@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AboutPageController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.AboutPageController">
    <children>
       <Pane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
@@ -31,7 +26,7 @@
                  </font>
             </Label>
              <Pane layoutX="114.0" layoutY="205.0" prefHeight="2.0" prefWidth="170.0" style="-fx-background-color: #052265;" />
-             <Label layoutX="98.0" layoutY="206.0" prefHeight="85.0" prefWidth="216.0" text="Brigham and Women's Hospital: Especially their representative Andrew Shinn for their time and input." textAlignment="CENTER" wrapText="true" />
+             <Label layoutX="98.0" layoutY="206.0" prefHeight="85.0" prefWidth="216.0" text="Brigham and Women's Hospital, especially their representative Andrew Shinn for their time and input" textAlignment="CENTER" wrapText="true" />
              <Label layoutX="145.0" layoutY="327.0" styleClass="text" stylesheets="@../styles/style.css" text="School &amp; Staff">
                  <font>
                      <Font name="System Bold" size="16.0" />
