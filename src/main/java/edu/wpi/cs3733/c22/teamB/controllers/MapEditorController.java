@@ -37,6 +37,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapEditorController{
+    private static final double MODIFY_POPUP_LOC_W = 250;
+    private static final double MODIFY_POPUP_LOC_H = 261.2;
+    private static final double MODIFY_POPUP_EQP_W = 250;
+    private static final double MODIFY_POPUP_EQP_H = 430.8;
 
     public javafx.scene.control.TextField idField;
     public JFXComboBox floor;
@@ -902,13 +906,13 @@ public class MapEditorController{
         if(clicked.equals("location")){
             loc =  dbWrapper.getLocation(selectedPnt.getId());
             Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(),loc.getYcoord());
-            modifyPopup.setTranslateX(nodeCoords.getX() + modifyPopup.getWidth()/2);
-            modifyPopup.setTranslateY(nodeCoords.getY() + modifyPopup.getHeight()/2);
+            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_LOC_W/2);
+            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_LOC_H/2);
         } else{
             loc =  dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation();
             Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(),loc.getYcoord());
-            modifyPopup.setTranslateX(nodeCoords.getX() + modifyPopup.getWidth()/2 + medOffset);
-            modifyPopup.setTranslateY(nodeCoords.getY() + modifyPopup.getHeight()/2 + medOffset);
+            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_EQP_W/2 + medOffset);
+            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_EQP_H/2 + medOffset);
         }
     }
 
