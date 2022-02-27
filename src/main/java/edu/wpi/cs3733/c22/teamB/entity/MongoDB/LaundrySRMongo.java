@@ -1,21 +1,27 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.ComputerServiceSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.LaundrySR;
+import org.bson.Document;
 
+import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LaundrySRMongo implements IDatabase<LaundrySR> {
 
-    private DB conn;
-    private DBCollection LaundrySRTable;
+    private MongoDatabase conn;
+    private MongoCollection LaundrySRTable;
     private IDatabase<AbstractSR> MainSRMongo;
 
     public LaundrySRMongo(IDatabase<AbstractSR> MainSRMongo) {
@@ -23,8 +29,8 @@ public class LaundrySRMongo implements IDatabase<LaundrySR> {
         this.MainSRMongo = MainSRMongo;
     }
 
-    public static DBObject convertLaundrySR(LaundrySR sr) {
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertLaundrySR(LaundrySR sr) {
+        Document document = new Document();
         document.put("_id", sr.getSrID());
 
         return document;
@@ -32,18 +38,18 @@ public class LaundrySRMongo implements IDatabase<LaundrySR> {
 
     @Override
     public void addValue(LaundrySR object) {
-        conn.getCollection("LaundrySR").insert(convertLaundrySR(object));
+        conn.getCollection("LaundrySR").insertOne(convertLaundrySR(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        LaundrySRTable.remove(convertLaundrySR(getValue(objectID)));
+        LaundrySRTable.deleteOne(convertLaundrySR(getValue(objectID)));
     }
 
     @Override
     public void updateValue(LaundrySR object) {
-        DBObject query = new BasicDBObject("_id", object.getSrID());
-        LaundrySRTable.findAndModify(query, convertLaundrySR(object));
+        Document query = new Document("_id", object.getSrID());
+        LaundrySRTable.findOneAndReplace(query, convertLaundrySR(object));
     }
 
     @Override
@@ -68,11 +74,13 @@ public class LaundrySRMongo implements IDatabase<LaundrySR> {
     public List<LaundrySR> getAllValues() {
         List<LaundrySR> laundrySRList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = LaundrySRTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = LaundrySRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
+
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String srID = (String) object.get("_id");
             laundrySRList.add(getValue(srID));

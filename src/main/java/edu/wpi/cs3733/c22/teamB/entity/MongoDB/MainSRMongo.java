@@ -1,12 +1,18 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MainSR;
+import org.bson.Document;
 
+import javax.print.Doc;
 import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,8 +20,8 @@ import java.util.List;
 
 public class MainSRMongo implements IDatabase<AbstractSR> {
 
-    private DB conn;
-    private DBCollection MainSRTable;
+    private MongoDatabase conn;
+    private MongoCollection MainSRTable;
     private IDatabase<Location> LocationTable;
     private IDatabase<Employee> EmployeeTable;
 
@@ -25,8 +31,8 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
         conn = MongoDB.getBDBMongo();
     }
 
-    public static DBObject convertSR(AbstractSR mainSR){
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertSR(AbstractSR mainSR){
+        Document document = new Document();
         document.put("_id", mainSR.getSrID());
         document.put("srType", mainSR.getSrType());
         document.put("status", mainSR.getStatus());
@@ -41,34 +47,36 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
 
     @Override
     public void addValue(AbstractSR object) {
-        conn.getCollection("MainSR").insert(convertSR(object));
+        conn.getCollection("MainSR").insertOne(convertSR(object));
 
     }
 
     @Override
     public void deleteValue(String objectID) {
-        MainSRTable.remove(convertSR(getValue(objectID)));
+        MainSRTable.deleteOne(convertSR(getValue(objectID)));
 
 
     }
 
     @Override
     public void updateValue(AbstractSR object) {
-        DBObject query = new BasicDBObject("_id", object.getSrID());
-        MainSRTable.findAndModify(query, convertSR(object));
+        Document query = new Document("_id", object.getSrID());
+        MainSRTable.findOneAndReplace(query, convertSR(object));
     }
 
     @Override
     public AbstractSR getValue(String objectID){
 
         MainSR mainSR;
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = MainSRTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = MainSRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
+
         Location location = new Location();
         Employee requestor = new Employee();
         Employee assignedEmployee = new Employee();
 
-        BasicDBObject mainSRObj = (BasicDBObject) cursor.one();
+        Document mainSRObj = cursor.next();
         String srID = mainSRObj.getString("_id");
         String srType = mainSRObj.getString("srType");
         String status = mainSRObj.getString("status");
@@ -93,11 +101,12 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
     public List<AbstractSR> getAllValues() {
         List<AbstractSR> MainSRList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = MainSRTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = MainSRTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String nodeID = (String) object.get("_id");
             MainSRList.add(getValue(nodeID));

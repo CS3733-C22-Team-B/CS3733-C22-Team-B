@@ -1,9 +1,14 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import org.bson.Document;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -11,8 +16,8 @@ import java.util.List;
 
 public class EquipmentMongo implements IDatabase<MedicalEquipment> {
 
-    private DB conn;
-    private DBCollection MedicalEquipmentTable;
+    private MongoDatabase conn;
+    private MongoCollection MedicalEquipmentTable;
     private IDatabase<Location> LocationTable;
 
     public EquipmentMongo(IDatabase<Location> LocationTable) {
@@ -20,9 +25,9 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
         conn = MongoDB.getBDBMongo();
     }
 
-    public static DBObject convertEquipment(MedicalEquipment equipment){
+    public static Document convertEquipment(MedicalEquipment equipment){
 
-        BasicDBObject document = new BasicDBObject();
+        Document document = new Document();
         document.put("_id", equipment.getEquipmentID());
         document.put("equipmentName", equipment.getEquipmentName());
         document.put("equipmentType", equipment.getEquipmentType());
@@ -39,28 +44,29 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
 
     @Override
     public void addValue(MedicalEquipment object) {
-        conn.getCollection("MedicalEquipment").insert(convertEquipment(object));
+        conn.getCollection("MedicalEquipment").insertOne(convertEquipment(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        MedicalEquipmentTable.remove(convertEquipment(getValue(objectID)));
+        MedicalEquipmentTable.deleteOne(convertEquipment(getValue(objectID)));
     }
 
     @Override
     public void updateValue(MedicalEquipment object) {
-        DBObject query = new BasicDBObject("_id", object.getEquipmentID());
-        MedicalEquipmentTable.findAndModify(query, convertEquipment(object));
+        Document query = new Document("_id", object.getEquipmentID());
+        MedicalEquipmentTable.findOneAndReplace(query, convertEquipment(object));
     }
 
     @Override
     public MedicalEquipment getValue(String objectID) {
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = MedicalEquipmentTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = MedicalEquipmentTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
         Location location = new Location();
 
 
-        BasicDBObject employeeObj = (BasicDBObject) cursor.one();
+        Document employeeObj = cursor.next();
         String equipmentID = employeeObj.getString("_id");
         String equipmentName = employeeObj.getString("equipmentName");
         String equipmentType = employeeObj.getString("equipmentType");
@@ -78,7 +84,7 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
         String color = employeeObj.getString("color");
         String size = employeeObj.getString("size");
         String description = employeeObj.getString("description");
-        int amount = Integer.parseInt(employeeObj.getString("amount"));
+        int amount = employeeObj.getInteger("amount");
 
 
 
@@ -91,11 +97,12 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
     public List<MedicalEquipment> getAllValues() {
         List<MedicalEquipment> equipmentList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = MedicalEquipmentTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = MedicalEquipmentTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String nodeID = (String) object.get("_id");
             equipmentList.add(getValue(nodeID));
