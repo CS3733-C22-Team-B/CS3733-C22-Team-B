@@ -1,21 +1,27 @@
 package edu.wpi.cs3733.c22.teamB.entity.MongoDB;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.ComputerServiceSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.ExternalTransportSR;
+import org.bson.Document;
 
+import javax.print.Doc;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> {
 
-    private DB conn;
-    private DBCollection ExternalTransportTable;
+    private MongoDatabase conn;
+    private MongoCollection ExternalTransportTable;
     private IDatabase<AbstractSR> MainSRMongo;
 
     public ExternalTransportSRMongo(IDatabase<AbstractSR> MainSRMongo) {
@@ -23,8 +29,8 @@ public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> 
         this.MainSRMongo = MainSRMongo;
     }
 
-    public static DBObject convertExternalTransportSR(ExternalTransportSR sr){
-        BasicDBObject document = new BasicDBObject();
+    public static Document convertExternalTransportSR(ExternalTransportSR sr){
+        Document document = new Document();
         document.put("_id", sr.getSrID());
         document.put("patientID", sr.getPatientID());
         document.put("dropOffLocation", sr.getDropOffLocation());
@@ -35,26 +41,27 @@ public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> 
 
     @Override
     public void addValue(ExternalTransportSR object) {
-        conn.getCollection("ExternalTransportSR").insert(convertExternalTransportSR(object));
+        conn.getCollection("ExternalTransportSR").insertOne(convertExternalTransportSR(object));
     }
 
     @Override
     public void deleteValue(String objectID) {
-        ExternalTransportTable.remove(convertExternalTransportSR(getValue(objectID)));
+        ExternalTransportTable.deleteOne(convertExternalTransportSR(getValue(objectID)));
     }
 
     @Override
     public void updateValue(ExternalTransportSR object) {
-        DBObject query = new BasicDBObject("_id", object.getSrID());
-        ExternalTransportTable.findAndModify(query, convertExternalTransportSR(object));
+        Document query = new Document("_id", object.getSrID());
+        ExternalTransportTable.findOneAndReplace(query, convertExternalTransportSR(object));
     }
 
     @Override
     public ExternalTransportSR getValue(String objectID) {
         ExternalTransportSR externalTransportSR;
 
-        DBObject query = new BasicDBObject("_id", objectID);
-        DBCursor cursor = ExternalTransportTable.find(query);
+        Document query = new Document("_id", objectID);
+        FindIterable<Document> iterable = ExternalTransportTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         AbstractSR mainSR = MainSRMongo.getValue(objectID);
 
@@ -68,7 +75,7 @@ public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> 
 
 
 
-        BasicDBObject externalObj = (BasicDBObject) cursor.one();
+        Document externalObj = cursor.next();
         String srID = externalObj.getString("_id");
         String patientID = externalObj.getString("patientID");
         String dropOffLocation = externalObj.getString("dropOffLocation");
@@ -82,11 +89,12 @@ public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> 
     public List<ExternalTransportSR> getAllValues() {
         List<ExternalTransportSR> externalTransportSRList = new ArrayList<>();
 
-        BasicDBObject query = new BasicDBObject();
-        DBCursor cursor = ExternalTransportTable.find(query);
+        Document query = new Document();
+        FindIterable<Document> iterable = ExternalTransportTable.find(query);
+        MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
-            DBObject object = cursor.next();
+            Document object = cursor.next();
 
             String srID = (String) object.get("_id");
             externalTransportSRList.add(getValue(srID));

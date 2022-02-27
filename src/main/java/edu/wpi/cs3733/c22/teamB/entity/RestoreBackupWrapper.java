@@ -65,6 +65,15 @@ public class RestoreBackupWrapper {
     private final String locationFileNameF = "TowerLocationsB.csv";
     private final String employeeFileNameF = "EmployeeB.csv";
     private final String medicalEquipmentFileNameF = "MedicalEquipmentB.csv";
+    private final String computerSRFileNameF = "ComputerServiceSRB.csv";
+    private final String externalTransportSRFileNameF = "ExternalTransportSRB.csv";
+    private final String foodDeliverySRFileNameF = "FoodDeliverySRB.csv";
+    private final String giftFloralSRFileNameF = "GiftFloralSRB.csv";
+    private final String laundrySRFileNameF = "LaundrySRB.csv";
+    private final String mainSRFileNameF = "MainSR.csv";
+    private final String medicalEquipmentSRFileNameF = "MedicalEquipmentSRB.csv";
+    private final String medicineDeliveryFileNameF = "MedicineDeliverySRB.csv";
+    private final String sanitationFileNameF = "SanitationSRB.csv";
 
 
     RestoreBackupWrapper(IDatabase<Location> LocationDao, IDatabase<Employee> EmployeeDao, IDatabase<MedicalEquipment> MedicalEquipmentDao,
@@ -199,18 +208,55 @@ public class RestoreBackupWrapper {
         LocationParserI parserL = new LocationParserI();
         EmployeeParserI parserE = new EmployeeParserI();
         MedicalEquipmentParserI parserM = new MedicalEquipmentParserI();
+        MainSRParserI parserMain = new MainSRParserI();
+        ComputerServiceSRParserI parserC = new ComputerServiceSRParserI();
+        ExternalTransportSRParserI parserExternal = new ExternalTransportSRParserI();
+        FoodDeliverySRParserI parserF = new FoodDeliverySRParserI();
+        GiftFloralSRParserI parserG = new GiftFloralSRParserI();
+        LaundrySRParserI parserLaundry = new LaundrySRParserI();
+        MedicalEquipmentSRParserI parserMedSR = new MedicalEquipmentSRParserI();
+        MedicineDeliverySRParserI parserMedD = new MedicineDeliverySRParserI();
+        SanitationSRParserI parserS = new SanitationSRParserI();
 
         List<String> locationStringList = reader.firstRestore(locationFileNameF);
         List<String> employeeStringList = reader.firstRestore(employeeFileNameF);
         List<String> medicalEquipmentStringList = reader.firstRestore(medicalEquipmentFileNameF);
+        List<String> mainSRStringList = reader.firstRestore(mainSRFileNameF);
+        List<String> computerSRStringList = reader.firstRestore(computerSRFileNameF);
+        List<String> externalSRStringList = reader.firstRestore(externalTransportSRFileNameF);
+        List<String> foodSRStringList = reader.firstRestore(foodDeliverySRFileNameF);
+        List<String> giftSRStringList = reader.firstRestore(giftFloralSRFileNameF);
+        List<String> laundrySRStringList = reader.firstRestore(laundrySRFileNameF);
+        List<String> medicalSRStringList = reader.firstRestore(medicalEquipmentSRFileNameF);
+        List<String> medicineSRStringList = reader.firstRestore(medicineDeliveryFileNameF);
+        List<String> sanitationSRStringList = reader.firstRestore(sanitationFileNameF);
 
         List<Location> locationList = parserL.fromStringsToObjects(locationStringList);
         List<Employee> employeeList = parserE.fromStringsToObjects(employeeStringList);
         List<MedicalEquipment> medicalEquipmentList = parserM.fromStringsToObjects(medicalEquipmentStringList);
+        List<ComputerServiceSR> computerSRList = parserC.fromStringsToObjects(computerSRStringList);
+        List<ExternalTransportSR> externalTransportSRList = parserExternal.fromStringsToObjects(externalSRStringList);
+        List<FoodDeliverySR> foodDeliverySRList = parserF.fromStringsToObjects(foodSRStringList);
+        List<GiftFloralSR> giftFloralSRList = parserG.fromStringsToObjects(giftSRStringList);
+        List<LaundrySR> laundrySRList = parserLaundry.fromStringsToObjects(laundrySRStringList);
+        List<AbstractSR> mainSRList = parserMain.fromStringsToObjects(mainSRStringList);
+        List<MedicalEquipmentSR> medicalEquipmentSRList = parserMedSR.fromStringsToObjects(medicalSRStringList);
+        List<MedicineDeliverySR> medicineDeliverySRList = parserMedD.fromStringsToObjects(medicineSRStringList);
+        List<SanitationSR> sanitationSRList = parserS.fromStringsToObjects(sanitationSRStringList);
+
 
         LocationDao.restoreTable(locationList);
         EmployeeDao.restoreTable(employeeList);
         MedicalEquipmentDao.restoreTable(medicalEquipmentList);
+        MainSRDao.restoreTable(mainSRList);
+        ComputerServiceSRDao.restoreTable(computerSRList);
+        ExternalTransportDao.restoreTable(externalTransportSRList);
+        FoodDeliveryDao.restoreTable(foodDeliverySRList);
+        GiftFloralSRDao.restoreTable(giftFloralSRList);
+        LaundrySRDao.restoreTable(laundrySRList);
+        MedicalEquipmentSRDao.restoreTable(medicalEquipmentSRList);
+        MedicineDeliverySRDao.restoreTable(medicineDeliverySRList);
+        SanitationSRDao.restoreTable(sanitationSRList);
     }
 
     void restoreLocation() throws IOException {
