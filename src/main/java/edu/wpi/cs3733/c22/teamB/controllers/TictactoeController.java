@@ -1,16 +1,14 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.ResourceBundle;
 
-public class Tictactoe implements Initializable {
+
+public class TictactoeController extends AbsPage {
     @FXML
     private JFXButton button1;
     @FXML
@@ -30,8 +28,10 @@ public class Tictactoe implements Initializable {
     @FXML
     private JFXButton button9;
 
+
     ArrayList<JFXButton> buttons;
     private int playerTurn = 0;
+    @FXML
     private Label winnerText;
 
     private void setupButton(JFXButton button){
@@ -78,11 +78,17 @@ public class Tictactoe implements Initializable {
             //X winner
             if (line.equals("XXX")) {
                 winnerText.setText("X won!");
+                for(JFXButton button : buttons){
+                    button.setDisable(true);
+                }
             }
 
             //O winner
             else if (line.equals("OOO")) {
                 winnerText.setText("O won!");
+                for (JFXButton button : buttons) {
+                    button.setDisable(true);
+                }
             }
         }
     }
@@ -98,13 +104,32 @@ public class Tictactoe implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+
+    public void initialize() {
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
         buttons.forEach(jfxButton -> {
-        jfxButton.setFocusTraversable(false);
+            setupButton(jfxButton);
+            jfxButton.setFocusTraversable(false);
         });
+        initResize();
+        resize();
+        namePage();
+
     }
 
 
+    public void restartGame(ActionEvent actionEvent) {
+        buttons.forEach(this::resetButton);
+        winnerText.setText("Tic-Tac-Toe");
+    }
+
+    private void resetButton(JFXButton jfxButton) {
+        jfxButton.setDisable(false);
+        jfxButton.setText("");
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.setPageName("TicTacToe");
+    }
 }

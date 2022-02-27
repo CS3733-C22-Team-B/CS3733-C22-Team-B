@@ -103,6 +103,19 @@
                               </JFXButton>
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="gameButton" onAction="#goToGames" text="    Games      ">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-automation-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="222.0" prefWidth="6.0" />
                         <JFXButton fx:id="helpButton" onAction="#goToAboutPage" text=" ">
                            <graphic>

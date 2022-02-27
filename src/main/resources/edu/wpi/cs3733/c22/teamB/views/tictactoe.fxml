@@ -5,45 +5,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.Tictactoe">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.TictactoeController">
    <children>
-      <GridPane gridLinesVisible="true" layoutX="221.0" layoutY="53.0" prefHeight="312.0" prefWidth="337.0" styleClass="service-button" stylesheets="@../styles/style.css">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <JFXButton fx:id="button1" prefHeight="105.0" prefWidth="113.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " />
-            <JFXButton fx:id="button2" prefHeight="105.0" prefWidth="112.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" />
-            <JFXButton fx:id="button3" prefHeight="105.0" prefWidth="112.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" />
-            <JFXButton fx:id="button4" prefHeight="105.0" prefWidth="113.0" text=" " GridPane.rowIndex="1" />
-            <JFXButton fx:id="button5" prefHeight="105.0" prefWidth="113.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <JFXButton fx:id="button6" prefHeight="105.0" prefWidth="113.0" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <JFXButton fx:id="button7" prefHeight="105.0" prefWidth="113.0" text=" " GridPane.rowIndex="2" />
-            <JFXButton fx:id="button8" prefHeight="105.0" prefWidth="113.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <JFXButton fx:id="button9" prefHeight="105.0" prefWidth="113.0" text=" " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <GridPane gridLinesVisible="true" layoutX="241.0" layoutY="50.0" prefHeight="300.0" prefWidth="317.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="button3" prefHeight="109.0" prefWidth="143.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" />
+                  <JFXButton fx:id="button1" prefHeight="104.0" prefWidth="109.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " />
+                  <JFXButton fx:id="button2" prefHeight="104.0" prefWidth="118.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" />
+                  <JFXButton fx:id="button4" prefHeight="119.0" prefWidth="109.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button5" prefHeight="117.0" prefWidth="178.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button6" prefHeight="139.0" prefWidth="173.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button7" prefHeight="136.0" prefWidth="199.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.rowIndex="2" />
+                  <JFXButton fx:id="button8" prefHeight="108.0" prefWidth="162.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXButton fx:id="button9" prefHeight="117.0" prefWidth="179.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Label fx:id="winnerText" layoutX="35.0" layoutY="179.0" prefHeight="42.0" prefWidth="165.0" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="78.0" layoutY="281.0" onAction="#restartGame" styleClass="service-button1" stylesheets="@../styles/style.css" text="Restart" />
          </children>
-      </GridPane>
-      <Label layoutX="55.0" layoutY="26.0" prefHeight="54.0" prefWidth="99.0" text="  TicTacToe">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <JFXButton layoutX="65.0" layoutY="306.0" onAction="#restartGame" styleClass="service-button1" stylesheets="@../styles/style.css" text="Restart" />
-      <Label fx:id="winnerText" layoutX="39.0" layoutY="115.0" prefHeight="47.0" prefWidth="140.0" stylesheets="@../styles/style.css">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      </Pane>
    </children>
 </AnchorPane>
