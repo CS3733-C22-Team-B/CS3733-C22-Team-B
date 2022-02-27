@@ -698,7 +698,7 @@ public class MapEditorController{
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
 
                 if(sideviewTable.getItems()!=null){
-                    sideviewTable.getItems().remove(0,sideviewTable.getItems().size()-1);
+                    sideviewTable.getItems().remove(0,sideviewTable.getItems().size());
                 }
                 List<String> floors = new ArrayList<>();
                 floors.add("03");
