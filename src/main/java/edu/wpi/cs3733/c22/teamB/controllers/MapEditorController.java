@@ -197,7 +197,7 @@ public class MapEditorController{
     private void setAnchors(){
         anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight());
         anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-130);
-        double bottomAnchor = 100;
+        double bottomAnchor = 90;
         anchorPane.setBottomAnchor(addButton,bottomAnchor);
         anchorPane.setBottomAnchor(moveButton,bottomAnchor);
         anchorPane.setBottomAnchor(floorBox,bottomAnchor);
@@ -213,23 +213,27 @@ public class MapEditorController{
         anchorPane.setBottomAnchor(showMedical,bottomAnchor);
         anchorPane.setBottomAnchor(showSR,bottomAnchor);
 
-        double leftAnchor = 50;
-        double smallBuffer = 100;
-        double bigBuffer = 170;
-        anchorPane.setLeftAnchor(addButton,leftAnchor+=smallBuffer);
-        anchorPane.setLeftAnchor(moveButton,leftAnchor+=smallBuffer);
-        anchorPane.setLeftAnchor(floorBox,leftAnchor+=smallBuffer+smallBuffer);
+        double leftAnchor = 20;
+        double buffer = 10;
+        double smallWidth = 50;
+        double moveWidth = 120;
+        double lowerWidth = 60;
+        double sideWidth = 80;
+        double csvWidth = 140;
+        anchorPane.setLeftAnchor(addButton,leftAnchor);
+        anchorPane.setLeftAnchor(moveButton,leftAnchor+=smallWidth+buffer);
+        anchorPane.setLeftAnchor(floorBox,leftAnchor+=moveWidth+buffer);
 //        anchorPane.setLeftAnchor(goToL2Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goToL1Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goTo1Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goTo2Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goTo3Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goToSideViewButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(loadFromCSVButton,leftAnchor+=bigBuffer+bigBuffer);
-        anchorPane.setLeftAnchor(saveToCSVButton,leftAnchor+=bigBuffer);
-        anchorPane.setLeftAnchor(showLocations,leftAnchor+=smallBuffer);
-        anchorPane.setLeftAnchor(showMedical,leftAnchor+=smallBuffer);
-        anchorPane.setLeftAnchor(showSR,leftAnchor+=smallBuffer);
+        anchorPane.setLeftAnchor(loadFromCSVButton,leftAnchor+=2*lowerWidth+3*smallWidth+sideWidth+buffer);
+        anchorPane.setLeftAnchor(saveToCSVButton,leftAnchor+=csvWidth+buffer);
+        anchorPane.setLeftAnchor(showLocations,leftAnchor+=csvWidth+buffer);
+        anchorPane.setLeftAnchor(showMedical,leftAnchor+=csvWidth+buffer);
+        anchorPane.setLeftAnchor(showSR,leftAnchor+=csvWidth+buffer);
     }
 
     private void setupSideviewColumns(){
@@ -818,7 +822,7 @@ public class MapEditorController{
 
             //Set button back to add mode
             addButton.setOpacity(1);
-            addButton.setText("Add");
+            addButton.setText("+");
             //No longer adding a node
             addState = false;
         }
@@ -829,11 +833,11 @@ public class MapEditorController{
         if(addState){
             addState = false;
             addButton.setOpacity(1);
-            addButton.setText("Add");
+            addButton.setText("+");
         } else{
             addState = true;
             addButton.setOpacity(0.5);
-            addButton.setText("Cancel Add");
+            addButton.setText("x");
         }
     }
 

@@ -63,7 +63,7 @@
 .map-button {
     -fx-background-color: #7B94C9;
     -fx-text-fill: white;
-    -fx-border-radius: 10;
+    -fx-background-radius: 30;
     -fx-font-size: 24;
 }
 
