@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -91,6 +92,12 @@ public class LocationTableController extends AbsPage {
         popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
 
         filterFields.addAll(List.of(new String[]{"nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"}));
+        textFilterField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                filterSubmit(null);
+            }
+        });
+
     }
 
     @FXML
