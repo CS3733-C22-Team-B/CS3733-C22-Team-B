@@ -211,7 +211,7 @@ public class MedicalEquipmentDaoI implements IDatabase<MedicalEquipment> {
                         + "description VARCHAR(255),"
                         + "amount int not null,"
                         + "PRIMARY KEY (equipmentID),"
-                        + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID) ON DELETE SET NULL)");
+                        + "CONSTRAINT FK_MedicalEquipment_Location FOREIGN KEY (locationID) REFERENCES Location (nodeID))"); //ON DELETE SET NULL
             }
         } catch (SQLException e) {
             System.out.println("Create MedicalEquipment Table: Failed!");

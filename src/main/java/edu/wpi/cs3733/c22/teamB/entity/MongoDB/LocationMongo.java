@@ -5,8 +5,10 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import org.bson.Document;
 
 import java.net.UnknownHostException;
@@ -47,7 +49,26 @@ public class LocationMongo implements IDatabase<Location> {
     @Override
     public void deleteValue(String objectID) {
 
-        LocationTable.deleteOne(convertLocation(getValue(objectID)));
+        MongoCollection EquipmentTable = conn.getCollection("MedicalEquipment");
+        EquipmentMongo equipmentMongo = new EquipmentMongo(this);
+        EmployeeMongo employeeMongo = new EmployeeMongo();
+        MainSRMongo mainSRMongo = new MainSRMongo(this, employeeMongo);
+        List<AbstractSR> mainList = mainSRMongo.getAllValues();
+        List<MedicalEquipment> equipmentList = equipmentMongo.getAllValues();
+
+        for (MedicalEquipment medicalEquipment : equipmentList) {
+            for (AbstractSR abstractSR : mainList) {
+                if (medicalEquipment.getLocation().getNodeID() == objectID) {
+
+                }
+                else if (abstractSR.getLocation().getNodeID() == objectID) {
+
+                } else {
+                    LocationTable.deleteOne(convertLocation(getValue(objectID)));
+                }
+            }
+
+        }
     }
 
     @Override
