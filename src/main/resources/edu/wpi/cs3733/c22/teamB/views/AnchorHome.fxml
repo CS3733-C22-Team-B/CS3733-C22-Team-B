@@ -22,7 +22,7 @@
             </Pane>
             <HBox nodeOrientation="RIGHT_TO_LEFT" VBox.vgrow="ALWAYS">
                <children>
-                  <AnchorPane fx:id="anchorPane" style="-fx-background-color: #b3bcd2;" HBox.hgrow="ALWAYS" />
+                  <AnchorPane fx:id="anchorPane" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #b3bcd2;" HBox.hgrow="ALWAYS" />
                   <VBox fx:id="sidebar" alignment="TOP_CENTER" prefWidth="130.0" spacing="17.0" style="-fx-background-color: #ffffff;">
                      <children>
                         <HBox alignment="CENTER">
