@@ -37,7 +37,7 @@ public class GameMenuController extends AbsPage{
         }
     }
 
-    public void goToSnake(ActionEvent ActionEvent) {
+    public void goToSnake(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/snake.fxml"));

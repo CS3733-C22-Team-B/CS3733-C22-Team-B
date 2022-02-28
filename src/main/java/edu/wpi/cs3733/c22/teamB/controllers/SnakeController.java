@@ -171,6 +171,8 @@ public class SnakeController extends AbsPage {
         startGame();
     }
 
+
+
   /*  public static void main (String[] args){
         launch(args);
     }*/

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.SnakeController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.SnakeController">
     <children>
-        <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" />
+        <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Pane layoutX="130.0" layoutY="23.0" prefHeight="354.0" prefWidth="450.0" />
+            <JFXButton fx:id="startButton" layoutX="38.0" layoutY="292.0" prefHeight="40.0" prefWidth="76.0" styleClass="service-button1" stylesheets="@../styles/style.css" text="Start" />
+         </children>
+        </Pane>
     </children>
 </AnchorPane>
