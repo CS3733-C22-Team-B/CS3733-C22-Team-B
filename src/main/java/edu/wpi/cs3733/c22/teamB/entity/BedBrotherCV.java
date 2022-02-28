@@ -21,15 +21,31 @@ public class BedBrotherCV implements Runnable{
             while(input.hasNext()){
                 String tagID = input.next();
                 System.out.println("Data: " + tagID);
-
+                String equipID = tagToEquipID(tagID);
+                if(!equipID.equals("No equip")){
+                    changeLocation(equipID);
+                }
             }
         }
     }
 
-    public void changeLocation(){
-        MedicalEquipment old = dbWrapper.getMedicalEquipment();
-        old.setLocation((Location) Locations.getValue());
+    private void changeLocation(String equipID){
+        MedicalEquipment old = dbWrapper.getMedicalEquipment(equipID);
+        old.setLocation(dbWrapper.getLocation("HHALL01203"));
         dbWrapper.updateMedicalEquipment(old);//TODO
+    }
+
+    public String tagToEquipID(String tagID){
+        String equipID;
+        switch(tagID){
+            case "1":
+                equipID = "bBED00201";
+                break;
+            default:
+                equipID = "No equip";
+                break;
+        }
+        return equipID;
     }
 
 }
