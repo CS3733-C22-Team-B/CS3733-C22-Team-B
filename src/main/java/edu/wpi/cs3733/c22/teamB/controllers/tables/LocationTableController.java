@@ -218,67 +218,113 @@ public class LocationTableController extends AbsPage {
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
-        if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
-            try {
-                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+//        if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
+        db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
 
-                loadTable();
-                cancelForm(null);
+        loadTable();
+        cancelForm(null);
 
-                // submitted confirmation popup
-                popup.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(
-                        Duration.seconds(1)
-                );
-                visiblePause.setOnFinished(
-                        event -> popup.setVisible(false)
-                );
-                visiblePause.play();
-            } catch (Exception e) {
-                System.out.println("exception" + e);
-                if (e instanceof java.lang.NullPointerException) {
-                    locationPopup.setVisible(true);
-                    PauseTransition visiblePause = new PauseTransition(
-                            Duration.seconds(1)
-                    );
-                    visiblePause.setOnFinished(
-                            event -> locationPopup.setVisible(false)
-                    );
-                    visiblePause.play();
-                }
-            }
-        } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
-            System.out.println("MONGO");
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
+//
+//            try {
+//                System.out.println(table.getSelectionModel().getSelectedItem().getNodeID());
+//                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+//
+//                loadTable();
+//                cancelForm(null);
+//
+//                // submitted confirmation popup
+//                popup.setVisible(true);
+//                PauseTransition visiblePause = new PauseTransition(
+//                        Duration.seconds(1)
+//                );
+//                visiblePause.setOnFinished(
+//                        event -> popup.setVisible(false)
+//                );
+//                visiblePause.play();
+//            } catch (Exception e) {
+//                System.out.println("exception" + e);
+//                if ((e instanceof java.lang.NullPointerException) && (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI)){
+//                    locationPopup.setVisible(true);
+//                    PauseTransition visiblePause = new PauseTransition(
+//                            Duration.seconds(1)
+//                    );
+//                    visiblePause.setOnFinished(
+//                            event -> locationPopup.setVisible(false)
+//                    );
+//                    visiblePause.play();
 
-            try {
-                System.out.println("Mongo3");
-                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
-                loadTable();
-                cancelForm(null);
 
-                // submitted confirmation popup
-                popup.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(
-                        Duration.seconds(1)
-                );
-                visiblePause.setOnFinished(
-                        event -> popup.setVisible(false)
-                );
-                visiblePause.play();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
+//                }
+//            try {
+//                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+//
+//                loadTable();
+//                cancelForm(null);
+//
+//                // submitted confirmation popup
+//                popup.setVisible(true);
+//                PauseTransition visiblePause = new PauseTransition(
+//                        Duration.seconds(1)
+//                );
+//                visiblePause.setOnFinished(
+//                        event -> popup.setVisible(false)
+//                );
+//                visiblePause.play();
+//            } catch (Exception e) {
+//                System.out.println("exception" + e);
+//                if (e instanceof java.lang.NullPointerException) {
+//                    locationPopup.setVisible(true);
+//                    PauseTransition visiblePause = new PauseTransition(
+//                            Duration.seconds(1)
+//                    );
+//                    visiblePause.setOnFinished(
+//                            event -> locationPopup.setVisible(false)
+//                    );
+//                    visiblePause.play();
+//                }
+//            }
+//        } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+//            System.out.println("MONGO");
+//
+//            try {
+//                System.out.println("Mongo3");
+//                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+//                loadTable();
+//                cancelForm(null);
+//
+//                // submitted confirmation popup
+//                popup.setVisible(true);
+//                PauseTransition visiblePause = new PauseTransition(
+//                        Duration.seconds(1)
+//                );
+//                visiblePause.setOnFinished(
+//                        event -> popup.setVisible(false)
+//                );
+//                visiblePause.play();
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            if (LocationMongo.referenced == true) {
+//                System.out.println("Mongo1");
+//                locationPopup.setVisible(true);
+//                PauseTransition visiblePause = new PauseTransition(
+//                        Duration.seconds(1)
+//                );
+//                visiblePause.setOnFinished(
+//                        event -> locationPopup.setVisible(false)
+//                );
 
-            }
-            if (LocationMongo.referenced == true) {
-                System.out.println("Mongo1");
-                locationPopup.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(
-                        Duration.seconds(1)
-                );
-                visiblePause.setOnFinished(
-                        event -> locationPopup.setVisible(false)
-                );
+
 //            }else {
 //                System.out.println("Mongo2");
 //                try {
@@ -303,8 +349,7 @@ public class LocationTableController extends AbsPage {
 //
 
             }
-        }
-    }
+
 
 
     @FXML public void locationPopup(){
