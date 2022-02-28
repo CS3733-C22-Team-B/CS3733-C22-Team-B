@@ -32,7 +32,9 @@ public class BedBrotherCV implements Runnable {
                 String tagID = input.next();
                 System.out.println("Data: " + tagID);
                 String equipID = tagToEquipID(tagID);
-                if (!equipID.equals("No equip")) {
+                if (equipID.equals("No equip")) {
+                    System.out.println("Located tag does not correspond to a medical equipment");
+                } else{
                     changeLocation(equipID);
                 }
             }
@@ -40,16 +42,39 @@ public class BedBrotherCV implements Runnable {
     }
 
     private void changeLocation(String equipID) {
-        MedicalEquipment old = dbWrapper.getMedicalEquipment(equipID);
-        old.setLocation(dbWrapper.getLocation("HHALL01203"));
-        dbWrapper.updateMedicalEquipment(old);//TODO
+        final String cameraLocation = "HHALL01203";
+        //Check if the camera is in a valid location
+        if(dbWrapper.isInTableLocation(cameraLocation)){
+            //Check if medical equipment is in DB
+            //if(dbWrapper.isInTableLocation() dbWrapper.getMedicalEquipment(equipID)){
+                MedicalEquipment old = dbWrapper.getMedicalEquipment(equipID);
+                old.setLocation(dbWrapper.getLocation(cameraLocation));
+                dbWrapper.updateMedicalEquipment(old);
+            //} else{
+            //    System.out.println("Equipment has a corresponding Apriltag but does not exist in DB");
+            //}
+        } else{
+            System.out.println("Camera is not set to a valid location");
+        }
     }
 
     public String tagToEquipID(String tagID) {
         String equipID;
         switch (tagID) {
+            case "0":
+                equipID = "bBED00101";
+                break;
             case "1":
                 equipID = "bBED00201";
+                break;
+            case "2":
+                equipID = "bXRAY00101";
+                break;
+            case "3":
+                equipID = "bRECLINER00101";
+                break;
+            case "4":
+                equipID = "bRECLINER00202";
                 break;
             default:
                 equipID = "No equip";
