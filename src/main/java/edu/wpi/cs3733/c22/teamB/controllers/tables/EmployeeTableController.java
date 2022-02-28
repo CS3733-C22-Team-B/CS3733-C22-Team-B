@@ -29,7 +29,6 @@ public class EmployeeTableController extends AbsPage {
 
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
-    @FXML private TextField employeeIDField;
     @FXML private TextField lastNameField;
     @FXML private TextField firstNameField;
     @FXML private TextField positionField;
@@ -39,7 +38,6 @@ public class EmployeeTableController extends AbsPage {
     @FXML private TextField emailField;
     @FXML private TextField phoneNumberField;
     @FXML private JFXButton addButton;
-    @FXML private JFXButton modifyButton;
     @FXML private JFXButton deleteButton;
     @FXML private TableView<Employee> table;
     @FXML private JFXButton loadButton;
@@ -53,7 +51,7 @@ public class EmployeeTableController extends AbsPage {
     }
 
 
-    private enum Function {ADD, MODIFY, DELETE, NOTHING, IDLOOKUP};
+    private enum Function {ADD, MODIFY, DELETE, NOTHING};
     Function func = Function.NOTHING;
 
     private boolean initTable = false;
@@ -64,16 +62,16 @@ public class EmployeeTableController extends AbsPage {
 
     @FXML
     private void initialize() throws NullPointerException {
-        modifyButton.setDisable(true);
         deleteButton.setDisable(true);
         popup.setVisible(false);
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                modifyButton.setDisable(false);
                 deleteButton.setDisable(false);
             }
         });
@@ -83,8 +81,8 @@ public class EmployeeTableController extends AbsPage {
         resize();
         namePage();
 
-        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
-        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
+//        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+//        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
     }
 
     @FXML
@@ -162,6 +160,7 @@ public class EmployeeTableController extends AbsPage {
         emailField.setDisable(false);
         phoneNumberField.setDisable(false);
         func = Function.ADD;
+        clearForm(null);
     }
 
     @FXML
@@ -186,7 +185,6 @@ public class EmployeeTableController extends AbsPage {
         phoneNumberField.setDisable(false);
 
         Employee loc = table.getSelectionModel().getSelectedItem();
-        employeeIDField.setText(loc.getEmployeeID());
         lastNameField.setText(loc.getLastName());
         firstNameField.setText(loc.getFirstName());
         positionField.setText(loc.getPosition());
@@ -203,17 +201,30 @@ public class EmployeeTableController extends AbsPage {
     private void deleteEmployee(ActionEvent actionEvent) {
         db.deleteEmployee(table.getSelectionModel().getSelectedItem().getEmployeeID());
         loadTable();
+        cancelForm(null);
+
+        // submitted confirmation popup
+        popup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> popup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
-        modifyButton.setVisible(true);
         deleteButton.setVisible(true);
+
+        if (table.getSelectionModel().getSelectedItem().getEmployeeID() != null){
+            modifyEmployee(null);
+        }
     }
 
     @FXML private void confirm(ActionEvent actionEvent) {
         if(func == Function.ADD) {
             Employee e = new Employee(
-                    employeeIDField.getText(),
                     lastNameField.getText(),
                     firstNameField.getText(),
                     positionField.getText(),
@@ -235,9 +246,11 @@ public class EmployeeTableController extends AbsPage {
             );
             visiblePause.play();
 
+            clearForm(actionEvent);
+
         } else if (func == Function.MODIFY) {
             Employee n = new Employee(
-                    employeeIDField.getText(),
+                    table.getSelectionModel().getSelectedItem().getEmployeeID(),
                     lastNameField.getText(),
                     firstNameField.getText(),
                     positionField.getText(),
@@ -247,7 +260,6 @@ public class EmployeeTableController extends AbsPage {
                     emailField.getText(),
                     phoneNumberField.getText());
             db.updateEmployee(n);
-
             loadTable();
 
             // submitted confirmation popup
@@ -259,17 +271,12 @@ public class EmployeeTableController extends AbsPage {
                     event -> popup.setVisible(false)
             );
             visiblePause.play();
-        } else if (func == Function.IDLOOKUP) {
-            table.getItems().clear();
-            table.getItems().add(db.getEmployee(employeeIDField.getText())); // create and add object
         }
 
-        clearForm(actionEvent);
-        func = Function.NOTHING;
+        cancelForm(actionEvent);
     }
 
     @FXML private void clearForm(ActionEvent actionEvent) {
-        employeeIDField.clear();
         lastNameField.clear();
         firstNameField.clear();
         positionField.clear();
@@ -288,28 +295,12 @@ public class EmployeeTableController extends AbsPage {
         addButton.setVisible(true);
         addButton.setDisable(false);
 
-        modifyButton.setVisible(true);
-        modifyButton.setDisable(false);
-
         deleteButton.setVisible(true);
         deleteButton.setDisable(false);
 
         func = Function.NOTHING;
     }
-    @FXML private void idLookup(ActionEvent actionEvent) {
-        gridPane.setVisible(true);
-        gridPane.setDisable(false);
-        lastNameField.setVisible(false);
-        firstNameField.setVisible(false);
-        positionField.setVisible(false);
-        accessLevel.setVisible(false);
-        usernameField.setVisible(false);
-        passwordField.setVisible(false);
-        emailField.setVisible(false);
-        phoneNumberField.setVisible(false);
 
-        func = Function.IDLOOKUP;
-    }
     @Override
     public void initResize() {
         contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/8);

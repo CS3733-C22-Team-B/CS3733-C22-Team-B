@@ -5,3 +5,10 @@ bXRAY00101,XRay,Xray,Xray,bPATI00603,CLEAN,white,small,machine,1
 bCATSCAN00102,Cat Scan,Cat Scan,Cat Scan,bPATI00803,CLEAN,white,medium,machine,2
 bRECLINER00101,Recliner,Recliner,Recliner,bPATI00703,DIRTY,blue,large,moving bed,1
 bRECLINER00202,Recliner,Recliner,Recliner,bPATI00403,CLEAN,blue ,small,recliner,2
+bLASER00101,Red Laser,Laser,Laser Maker,CREST002L1,DIRTY,red,medium,laser,1
+bLASER00201,Blue Laser,Laser,Laser Maker,bPATI01703,IN USE,blue,medium,baby blue rim,1
+bTABLE00101,Foldable Table,Table,Table Maker,WELEV00M02,DIRTY,black,small,has a few dents,1
+bCHAIR00101,Foldable Chair,Chair,Chair Maker,HHALL00202,WAITING,white,small,is a wooden chair,1
+bGLOVES00102,Gloves,Gloves,Glove Maker,FHALL03001,CLEAN,clear,small,small gloves,2
+bGLOVES00205,Gloves,Gloves,Glove Maker,FHALL02701,WAITING,blue,large,blue gloves,5
+bGLOVES00303,Gloves,Gloves,Glove Maker,FHALL01201,CLEAN,black,medium,black gloves,3
