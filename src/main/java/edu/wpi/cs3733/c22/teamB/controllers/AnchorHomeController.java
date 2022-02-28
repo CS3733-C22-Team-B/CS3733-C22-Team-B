@@ -199,7 +199,7 @@ public class AnchorHomeController implements Initializable {
     @FXML
     void goToSimulator() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Workflow Simulator")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Simulator")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
