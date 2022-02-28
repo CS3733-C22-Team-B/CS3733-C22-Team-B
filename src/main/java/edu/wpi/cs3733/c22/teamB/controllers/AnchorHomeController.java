@@ -76,7 +76,6 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
     @Override

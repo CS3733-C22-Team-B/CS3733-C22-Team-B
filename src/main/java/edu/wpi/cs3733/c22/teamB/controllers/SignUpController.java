@@ -24,8 +24,6 @@ import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
 
-
-
     @FXML private TextField lastName;
     @FXML private TextField firstName;
     @FXML private TextField position;
