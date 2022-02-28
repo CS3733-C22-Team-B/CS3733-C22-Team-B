@@ -177,19 +177,14 @@ public class ServiceRequestMenuController extends AbsPage{
     }
 
 
-    public void goToSecurityAPI(ActionEvent actionEvent) {
+    public void goToSecurityAPI(ActionEvent actionEvent) throws IOException {
 //        try {
 //            FXMLLoader loader = new FXMLLoader(
 //                    getClass().getResource("libs/TeamESecurityServiceRequest"));
-        try {
-            DatabaseWrapper db = DatabaseWrapper.getInstance();
-            List<Location> andrew = db.getAllLocation();
-            TeamESecurityServiceRequest.getInstance().run(0, 0, (int) Bapp.getPrimaryStage().getWidth(), (int) Bapp.getPrimaryStage().getHeight(), "resources/edu/wpi/cs3733/c22/teamB/styles/style.css", andrew.get(0).getNodeID());
-
-        } catch (ServerException e) {
-            e.printStackTrace();
-        }
-//            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+        DatabaseWrapper db = DatabaseWrapper.getInstance();
+        List<Location> andrew = db.getAllLocation();
+        TeamESecurityServiceRequest.getInstance().run(0, 0, (int) Bapp.getPrimaryStage().getWidth(), (int) Bapp.getPrimaryStage().getHeight(), "resources/edu/wpi/cs3733/c22/teamB/styles/style.css", andrew.get(0).getNodeID());
+        //            AnchorHomeController.curAnchorHomeController.changeNode(loader);
 //        } catch (IOException ex) {
 //            ex.printStackTrace();
 //        }
