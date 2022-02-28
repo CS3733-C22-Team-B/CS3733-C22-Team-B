@@ -61,19 +61,19 @@ public class BedBrotherCV implements Runnable {
     public String tagToEquipID(String tagID) {
         String equipID;
         switch (tagID) {
-            case "0":
+            case "69":
                 equipID = "bBED00101";
                 break;
-            case "1":
+            case "169":
                 equipID = "bBED00201";
                 break;
-            case "2":
+            case "269":
                 equipID = "bXRAY00101";
                 break;
-            case "3":
+            case "369":
                 equipID = "bRECLINER00101";
                 break;
-            case "4":
+            case "420":
                 equipID = "bRECLINER00202";
                 break;
             default:
