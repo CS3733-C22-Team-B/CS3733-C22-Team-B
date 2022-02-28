@@ -53,7 +53,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="srButton" contentDisplay="RIGHT" onAction="#goToServiceRequest" prefWidth="130.0" text="Service Request">
+                              <JFXButton fx:id="srButton" contentDisplay="RIGHT" onAction="#goToServiceRequest" prefWidth="130.0" text="Services">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
