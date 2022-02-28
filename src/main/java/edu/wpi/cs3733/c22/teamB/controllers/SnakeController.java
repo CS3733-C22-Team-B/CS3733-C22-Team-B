@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,6 +20,7 @@ import static javafx.application.Application.launch;
 
 public class SnakeController extends AbsPage {
 
+    @FXML Pane contentPane;
 
     public enum Direction {
         UP, DOWN, LEFT, RIGHT
@@ -36,8 +39,9 @@ public class SnakeController extends AbsPage {
     private ObservableList<Node> snake;
 
     private Parent createContent() {
-        Pane root = new Pane();
-        root.setPrefSize(APP_W, APP_H);
+        Pane root = contentPane;
+
+        root.setPrefSize(APP_W, APP_H + 5*BLOCK_SIZE);
 
         Group snakeBody = new Group();
         snake = snakeBody.getChildren();
@@ -139,9 +143,13 @@ public class SnakeController extends AbsPage {
     }
 
    // @Override
-    public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene (createContent());
-        scene.setOnKeyPressed(event -> {
+    public void initialize() {
+        createContent();
+
+        Bapp.getPrimaryStage().getScene().setOnKeyPressed(event -> {
+            System.out.println("hello");
+            System.out.println(event);
+            System.out.println(event.getCode());
             if (!moved)
                 return;
 
@@ -165,18 +173,12 @@ public class SnakeController extends AbsPage {
             }
 
         });
-        primaryStage.setTitle("Tutorial");
-        primaryStage.setScene(scene);
-        primaryStage.show();
         startGame();
+
+        initResize();
+        resize();
+        namePage();
     }
-
-
-
-  /*  public static void main (String[] args){
-        launch(args);
-    }*/
-
 
 
     @Override
