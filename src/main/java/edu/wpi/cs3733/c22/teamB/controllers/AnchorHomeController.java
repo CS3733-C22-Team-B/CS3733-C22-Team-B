@@ -33,6 +33,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton dashButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
+    @FXML JFXButton gameButton;
     @FXML
     public VBox sidebar;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
@@ -102,6 +103,8 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip7 = new Tooltip("Help");
             helpButton.setTooltip(tooltip7);
 
+            Tooltip tooltip8 = new Tooltip("Games");
+            gameButton.setTooltip(tooltip8);
             sidebar.setMinWidth(130);
 
             popup.getContent().add(popUpMessage);
@@ -235,6 +238,18 @@ public class AnchorHomeController implements Initializable {
 
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void goToGames(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/GamesMenu.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

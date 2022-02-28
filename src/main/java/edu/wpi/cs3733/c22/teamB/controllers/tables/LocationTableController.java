@@ -5,19 +5,23 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
 import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -27,6 +31,9 @@ import javafx.util.Duration;
 
 public class LocationTableController extends AbsPage {
 
+    public JFXButton filterSubmitButton;
+    public TextField textFilterField;
+    public ContextMenu filterMenu;
     @FXML private GridPane gridPane;
     @FXML private JFXButton confirmButton;
     @FXML private TextField ycoordField;
@@ -42,6 +49,8 @@ public class LocationTableController extends AbsPage {
     @FXML private Pane popup;
     @FXML private Pane contentPane;
     @FXML private AnchorPane anchorPane;
+    @FXML private MenuButton visibilityMenu;
+    private Set<String> filterFields = new HashSet<>();
 
     @Override
     public void namePage() {
@@ -63,6 +72,8 @@ public class LocationTableController extends AbsPage {
     private void initialize() throws NullPointerException {
         deleteButton.setDisable(true);
         popup.setVisible(false);
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
 
         gridPane.setVisible(false);
         gridPane.setDisable(true);
@@ -78,8 +89,24 @@ public class LocationTableController extends AbsPage {
         resize();
         namePage();
 
-        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
-        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
+//        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
+//        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
+
+        filterFields.addAll(List.of(new String[]{"nodeID", "xcoord", "ycoord", "floor", "building", "nodeType", "longName", "shortName"}));
+        textFilterField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                filterSubmit(null);
+            }
+        });
+
+        for (TableColumn<Location, ?> col : table.getColumns()) {
+            CheckMenuItem item = new CheckMenuItem(col.getText());
+            item.setSelected(true);
+            item.setOnAction(event -> col.setVisible(item.isSelected()));
+            visibilityMenu.getItems().add(item);
+        }
+
+
     }
 
     @FXML
@@ -287,4 +314,30 @@ public class LocationTableController extends AbsPage {
         anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
         anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
     }
+
+    @FXML
+    private void filterSubmit(ActionEvent actionEvent) {
+        table.getItems().clear();
+        table.getItems().removeAll();
+        table.getItems().addAll(db.getAllLocation().stream().filter(sr -> {
+            String input = textFilterField.getText().toLowerCase(Locale.ROOT);
+            return  (filterFields.contains("nodeID") && sr.getNodeID().toLowerCase(Locale.ROOT).contains(input)) || //||
+                    (filterFields.contains("xcoord") && String.valueOf(sr.getXcoord()).contains(input))||
+                    (filterFields.contains("ycoord") && String.valueOf(sr.getYcoord()).contains(input)) ||
+                    (filterFields.contains("floor") && sr.getFloor().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("building") && sr.getBuilding().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("nodeType") && sr.getNodeType().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("longName") && sr.getLongName().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("shortName") && sr.getShortName().toLowerCase(Locale.ROOT).contains(input));
+        }).collect(Collectors.toList()));
+    }
 }
+
+//    TableColumn<Location, String> col1 = new TableColumn<>("nodeID"); // column names
+//    TableColumn<Location, String> col2 = new TableColumn<>("xcoord");
+//    TableColumn<Location, String> col3 = new TableColumn<>("ycoord");
+//    TableColumn<Location, String> col4 = new TableColumn<>("floor");
+//    TableColumn<Location, String> col5 = new TableColumn<>("building"); // column names
+//    TableColumn<Location, String> col6 = new TableColumn<>("nodeType");
+//    TableColumn<Location, String> col7 = new TableColumn<>("longName");
+//    TableColumn<Location, String> col8 = new TableColumn<>("shortName");
