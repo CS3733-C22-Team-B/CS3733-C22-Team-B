@@ -60,6 +60,7 @@ public class BedBrotherCV implements Runnable {
 
     public String tagToEquipID(String tagID) {
         String equipID;
+        System.out.println("Tag ID Found: " + tagID);
         switch (tagID) {
             case "69":
                 equipID = "bBED00101";
