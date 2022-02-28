@@ -31,8 +31,11 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton srButton;
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
+    @FXML JFXButton profileButton;
     @FXML JFXButton settingsButton;
+    @FXML JFXButton helpButton;
     @FXML JFXButton aboutButton;
+    @FXML JFXButton creditsButton;
     @FXML JFXButton logOutButton;
     @FXML JFXButton exitButton;
     @FXML public VBox sidebar;
@@ -91,20 +94,23 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip4 = new Tooltip("Tables");
             tableButton.setTooltip(tooltip4);
 
-            Tooltip tooltip5 = new Tooltip("Dashboard");
+            Tooltip tooltip5 = new Tooltip("Workflow Simulator");
             dashButton.setTooltip(tooltip5);
 
             Tooltip tooltip6 = new Tooltip("Settings");
             settingsButton.setTooltip(tooltip6);
 
-            Tooltip tooltip7 = new Tooltip("About");
-            aboutButton.setTooltip(tooltip7);
+            Tooltip tooltip7 = new Tooltip("Help");
+            helpButton.setTooltip(tooltip7);
 
-            Tooltip tooltip8 = new Tooltip("Log Out");
-            logOutButton.setTooltip(tooltip8);
+            Tooltip tooltip8 = new Tooltip("About");
+            aboutButton.setTooltip(tooltip8);
 
-            Tooltip tooltip9 = new Tooltip("Exit");
-            exitButton.setTooltip(tooltip9);
+            Tooltip tooltip9 = new Tooltip("Log Out");
+            logOutButton.setTooltip(tooltip9);
+
+            Tooltip tooltip10 = new Tooltip("Exit");
+            exitButton.setTooltip(tooltip10);
 
             sidebar.setMinWidth(130);
 
@@ -191,9 +197,9 @@ public class AnchorHomeController implements Initializable {
     }
 
     @FXML
-    void goToDashboard() {
+    void goToSimulator() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Workflow Simulator")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -228,6 +234,9 @@ public class AnchorHomeController implements Initializable {
         }
     }
 
+    public void goToHelpPage(ActionEvent actionEvent) {
+    }
+
     @FXML
     void logOut() {
         try {
@@ -252,6 +261,7 @@ public class AnchorHomeController implements Initializable {
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
     }
+
 
 }
 
