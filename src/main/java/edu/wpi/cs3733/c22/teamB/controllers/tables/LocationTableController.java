@@ -5,6 +5,7 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
 import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.LocationDaoI;
 import edu.wpi.cs3733.c22.teamB.entity.MongoDB.LocationMongo;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
@@ -217,25 +218,60 @@ public class LocationTableController extends AbsPage {
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
+        if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
+            try {
+                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
 
-        try {
-            db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+                loadTable();
+                cancelForm(null);
 
-            loadTable();
-            cancelForm(null);
+                // submitted confirmation popup
+                popup.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(1)
+                );
+                visiblePause.setOnFinished(
+                        event -> popup.setVisible(false)
+                );
+                visiblePause.play();
+            } catch (Exception e) {
+                System.out.println("exception" + e);
+                if (e instanceof java.lang.NullPointerException) {
+                    locationPopup.setVisible(true);
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(1)
+                    );
+                    visiblePause.setOnFinished(
+                            event -> locationPopup.setVisible(false)
+                    );
+                    visiblePause.play();
+                }
+            }
+        } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+            System.out.println("MONGO");
 
-            // submitted confirmation popup
-            popup.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(
-                    Duration.seconds(1)
-            );
-            visiblePause.setOnFinished(
-                    event -> popup.setVisible(false)
-            );
-            visiblePause.play();
-        } catch (Exception e) {
-            System.out.println("exception" + e);
-            if (e instanceof java.lang.NullPointerException) {
+            try {
+                System.out.println("Mongo3");
+                db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+                loadTable();
+                cancelForm(null);
+
+                // submitted confirmation popup
+                popup.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(1)
+                );
+                visiblePause.setOnFinished(
+                        event -> popup.setVisible(false)
+                );
+                visiblePause.play();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            if (LocationMongo.referenced == true) {
+                System.out.println("Mongo1");
                 locationPopup.setVisible(true);
                 PauseTransition visiblePause = new PauseTransition(
                         Duration.seconds(1)
@@ -243,8 +279,28 @@ public class LocationTableController extends AbsPage {
                 visiblePause.setOnFinished(
                         event -> locationPopup.setVisible(false)
                 );
-                visiblePause.play();
-            } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+//            }else {
+//                System.out.println("Mongo2");
+//                try {
+//                    System.out.println("Mongo3");
+//                    db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+//                    loadTable();
+//                    cancelForm(null);
+//
+//                    // submitted confirmation popup
+//                    popup.setVisible(true);
+//                    PauseTransition visiblePause = new PauseTransition(
+//                            Duration.seconds(1)
+//                    );
+//                    visiblePause.setOnFinished(
+//                            event -> popup.setVisible(false)
+//                    );
+//                    visiblePause.play();
+//                }
+//                catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//
 
             }
         }

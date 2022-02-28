@@ -20,6 +20,7 @@ public class LocationMongo implements IDatabase<Location> {
 
     private MongoDatabase conn;
     private MongoCollection LocationTable;
+    public static boolean referenced;
 
     public LocationMongo(){
         conn = MongoDB.getBDBMongo();
@@ -59,11 +60,12 @@ public class LocationMongo implements IDatabase<Location> {
         for (MedicalEquipment medicalEquipment : equipmentList) {
             for (AbstractSR abstractSR : mainList) {
                 if (medicalEquipment.getLocation().getNodeID() == objectID) {
-
+                    referenced = true;
                 }
                 else if (abstractSR.getLocation().getNodeID() == objectID) {
-
+                    referenced = true;
                 } else {
+                    referenced = false;
                     LocationTable.deleteOne(convertLocation(getValue(objectID)));
                 }
             }
