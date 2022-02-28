@@ -37,6 +37,7 @@ public class AnchorHomeController implements Initializable {
     @FXML
     public VBox sidebar;
     BedBrotherCV equipCamera = new BedBrotherCV();
+    Thread visionThread = new Thread(equipCamera);
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -114,7 +115,7 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        equipCamera.call();
+        visionThread.start();
     }
 
     @FXML
