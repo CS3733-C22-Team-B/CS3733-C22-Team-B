@@ -32,7 +32,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
     @FXML JFXButton settingsButton;
-    @FXML JFXButton helpButton;
+    @FXML JFXButton aboutButton;
     @FXML
     public VBox sidebar;
 
@@ -96,8 +96,8 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip6 = new Tooltip("Settings");
             settingsButton.setTooltip(tooltip6);
 
-            Tooltip tooltip7 = new Tooltip("Help");
-            helpButton.setTooltip(tooltip7);
+            Tooltip tooltip7 = new Tooltip("About");
+            aboutButton.setTooltip(tooltip7);
 
             sidebar.setMinWidth(130);
 

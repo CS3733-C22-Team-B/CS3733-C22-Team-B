@@ -106,7 +106,7 @@
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="222.0" prefWidth="6.0" />
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="helpButton" contentDisplay="RIGHT" onAction="#goToAboutPage" prefWidth="130.0" text=" About">
+                              <JFXButton fx:id="aboutButton" contentDisplay="RIGHT" onAction="#goToAboutPage" prefWidth="130.0" text=" About">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -119,7 +119,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="helpButton1" contentDisplay="RIGHT" onAction="#logOut" prefWidth="130.0" text=" Log Out">
+                              <JFXButton fx:id="logOutButton" contentDisplay="RIGHT" onAction="#logOut" prefWidth="130.0" text=" Log Out">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
