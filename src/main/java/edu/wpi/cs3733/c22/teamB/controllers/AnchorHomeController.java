@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -36,8 +35,9 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton helpButton;
     @FXML
     public VBox sidebar;
-    BedBrotherCV equipCamera = new BedBrotherCV();
-    Thread visionThread = new Thread(equipCamera);
+    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
+    BedBrotherCV equipVision = new BedBrotherCV();
+    Thread visionThread = new Thread(equipVision);
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -134,8 +134,8 @@ public class AnchorHomeController implements Initializable {
     @FXML
     void goToMap() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
-            childPane = loader.load();
+            childPane = mapLoader.load();
+            equipVision.setMapController((MapEditorController) mapLoader.getController());
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
             anchorPane.setLeftAnchor(childPane,0.0);
