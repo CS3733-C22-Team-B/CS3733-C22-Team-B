@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.controllers.tables.LocationTableController;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 
@@ -170,6 +171,11 @@ public class LocationDaoI implements IDatabase<Location> {
         } catch (SQLException e) {
             System.out.println("Delete From Table Using Node ID: Failed!");
             e.printStackTrace();
+            System.out.println(e);
+            if (e instanceof org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException) {
+                LocationTableController locationTableController = new LocationTableController();
+                locationTableController.locationPopup();
+            }
         }
     }
 
