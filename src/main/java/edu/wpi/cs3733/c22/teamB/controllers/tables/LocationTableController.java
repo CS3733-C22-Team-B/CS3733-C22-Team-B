@@ -5,6 +5,7 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
 import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import java.io.IOException;
 import java.util.HashSet;
@@ -18,10 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -51,6 +49,7 @@ public class LocationTableController extends AbsPage {
     @FXML private Pane popup;
     @FXML private Pane contentPane;
     @FXML private AnchorPane anchorPane;
+    @FXML private MenuButton visibilityMenu;
     private Set<String> filterFields = new HashSet<>();
 
     @Override
@@ -99,6 +98,14 @@ public class LocationTableController extends AbsPage {
                 filterSubmit(null);
             }
         });
+
+        for (TableColumn<Location, ?> col : table.getColumns()) {
+            CheckMenuItem item = new CheckMenuItem(col.getText());
+            item.setSelected(true);
+            item.setOnAction(event -> col.setVisible(item.isSelected()));
+            visibilityMenu.getItems().add(item);
+        }
+
 
     }
 
