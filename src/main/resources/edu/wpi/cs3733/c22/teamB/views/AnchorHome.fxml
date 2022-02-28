@@ -92,7 +92,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="gameButton" onAction="#goToGames" text="    Games      ">
+                              <JFXButton fx:id="gameButton" contentDisplay="RIGHT" onAction="#goToGames" prefWidth="130.0" text="Games">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
