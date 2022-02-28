@@ -90,6 +90,7 @@ public class TictactoeController extends AbsPage {
                     button.setDisable(true);
                 }
             }
+
         }
     }
 

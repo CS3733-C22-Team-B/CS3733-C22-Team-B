@@ -13,7 +13,7 @@
    <children>
       <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <GridPane gridLinesVisible="true" layoutX="241.0" layoutY="50.0" prefHeight="300.0" prefWidth="317.0">
+            <GridPane gridLinesVisible="true" layoutX="241.0" layoutY="50.0" prefHeight="300.0" prefWidth="317.0" style="-fx-border-color: white;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,18 +25,18 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="button3" prefHeight="109.0" prefWidth="143.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" />
-                  <JFXButton fx:id="button1" prefHeight="104.0" prefWidth="109.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " />
-                  <JFXButton fx:id="button2" prefHeight="104.0" prefWidth="118.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" />
-                  <JFXButton fx:id="button4" prefHeight="119.0" prefWidth="109.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.rowIndex="1" />
-                  <JFXButton fx:id="button5" prefHeight="117.0" prefWidth="178.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXButton fx:id="button6" prefHeight="139.0" prefWidth="173.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <JFXButton fx:id="button7" prefHeight="136.0" prefWidth="199.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.rowIndex="2" />
-                  <JFXButton fx:id="button8" prefHeight="108.0" prefWidth="162.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXButton fx:id="button9" prefHeight="117.0" prefWidth="179.0" styleClass="service-button1" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXButton fx:id="button3" prefHeight="109.0" prefWidth="143.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" />
+                  <JFXButton fx:id="button1" prefHeight="100.0" prefWidth="108.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " />
+                  <JFXButton fx:id="button2" prefHeight="104.0" prefWidth="118.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" />
+                  <JFXButton fx:id="button4" prefHeight="119.0" prefWidth="109.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button5" prefHeight="117.0" prefWidth="178.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button6" prefHeight="139.0" prefWidth="173.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="button7" prefHeight="136.0" prefWidth="199.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.rowIndex="2" />
+                  <JFXButton fx:id="button8" prefHeight="108.0" prefWidth="162.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXButton fx:id="button9" prefHeight="117.0" prefWidth="179.0" styleClass="tictactoe-button" stylesheets="@../styles/style.css" text=" " GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Label fx:id="winnerText" layoutX="35.0" layoutY="179.0" prefHeight="42.0" prefWidth="165.0" textAlignment="CENTER">
+            <Label fx:id="winnerText" layoutX="84.0" layoutY="179.0" prefHeight="42.0" prefWidth="79.0" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
