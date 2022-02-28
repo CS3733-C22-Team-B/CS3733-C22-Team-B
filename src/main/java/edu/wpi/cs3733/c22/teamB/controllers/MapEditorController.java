@@ -34,6 +34,7 @@ import javafx.scene.shape.Circle;
 import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapEditorController{
@@ -112,6 +113,8 @@ public class MapEditorController{
     String clicked = "location";
     final double medOffset = 10;
     TableView sideviewTable = new TableView();
+    //Holds locations so med equip doesn't go on top of it or something idk
+    List<Location> equipLocations = new ArrayList<Location>();
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -363,8 +366,14 @@ public class MapEditorController{
         for (MedicalEquipment local : medicalList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getEquipmentID();
-                double imageX = local.getLocation().getXcoord(); //TODO fix for future iterations
-                double imageY = local.getLocation().getYcoord();
+                Location equipLoc = local.getLocation();
+                double imageX = equipLoc.getXcoord();
+                double imageY = equipLoc.getYcoord();
+                int existingEquipCount = Collections.frequency(equipLocations,equipLoc);
+                double existingOffset = 10;
+                imageX += existingEquipCount*existingOffset;
+                imageY += existingEquipCount*existingOffset;
+                equipLocations.add(equipLoc);
                 addPointMedical(ID, imageX, imageY, Color.BLUE);
             }
         }
@@ -595,6 +604,7 @@ public class MapEditorController{
     void removeAllPoints(){
         stackPane.getChildren().remove(16,stackPane.getChildren().size());
         stackPane.getChildren().add(modifyPopup);
+        equipLocations = new ArrayList<Location>();
     }
 
     void deleteSelectedNode(){
@@ -604,6 +614,7 @@ public class MapEditorController{
         } else if (clicked == "equipment"){
             stackPane.getChildren().remove(selectedImg);
             dbWrapper.deleteMedicalEquipment(selectedImg.getId());
+            equipLocations.remove(dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation());
         }
     }
 
