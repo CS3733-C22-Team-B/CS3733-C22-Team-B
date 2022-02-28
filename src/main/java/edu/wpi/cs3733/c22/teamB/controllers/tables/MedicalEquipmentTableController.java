@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import javafx.animation.PauseTransition;
@@ -22,9 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -57,6 +56,7 @@ public class MedicalEquipmentTableController extends AbsPage {
     @FXML private AnchorPane anchorPane;
     @FXML private JFXButton filterSubmitButton;
     @FXML private TextField textFilterField;
+    @FXML private MenuButton visibilityMenu;
 
     private Set<String> filterFields = new HashSet<>();
 
@@ -118,6 +118,14 @@ public class MedicalEquipmentTableController extends AbsPage {
                 filterSubmit(null);
             }
         });
+
+        for (TableColumn<MedicalEquipment, ?> col : table.getColumns()) {
+            CheckMenuItem item = new CheckMenuItem(col.getText());
+            item.setSelected(true);
+            item.setOnAction(event -> col.setVisible(item.isSelected()));
+            visibilityMenu.getItems().add(item);
+        }
+
 
 //        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
 //        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
