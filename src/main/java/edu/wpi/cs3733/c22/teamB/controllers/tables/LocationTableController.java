@@ -50,7 +50,7 @@ public class LocationTableController extends AbsPage {
     @FXML private JFXButton loadButton;
     @FXML private Pane popup;
     @FXML private Pane contentPane;
-    @FXML private Pane locationPopup;
+    @FXML public Pane locationPopup;
     @FXML private AnchorPane anchorPane;
     @FXML private MenuButton visibilityMenu;
     private Set<String> filterFields = new HashSet<>();
@@ -215,8 +215,10 @@ public class LocationTableController extends AbsPage {
 
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
+
         try {
             db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+
             loadTable();
             cancelForm(null);
 
@@ -229,23 +231,28 @@ public class LocationTableController extends AbsPage {
                     event -> popup.setVisible(false)
             );
             visiblePause.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (e instanceof org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException) {
-                locationPopup.setVisible(true);
-                PauseTransition visiblePause = new PauseTransition(
-                        Duration.seconds(1)
-                );
-//                visiblePause.setOnFinished(
-//                        event -> locationPopup.setVisible(false)
-//                );
-//                visiblePause.play();
-            }
+        } catch (Exception e){
+            locationPopup.setVisible(true);
+            PauseTransition visiblePause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            visiblePause.setOnFinished(
+                    event -> locationPopup.setVisible(false)
+            );
+            visiblePause.play();
         }
     }
 
-    @FXML public void locationPopup(){
 
+    @FXML public void locationPopup(){
+        locationPopup.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        visiblePause.setOnFinished(
+                event -> locationPopup.setVisible(false)
+        );
+        visiblePause.play();
     }
 
     @FXML private void locationTableClick(MouseEvent mouseEvent) {
