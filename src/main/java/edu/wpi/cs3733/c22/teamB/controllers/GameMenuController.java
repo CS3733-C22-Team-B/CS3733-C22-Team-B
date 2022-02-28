@@ -36,4 +36,15 @@ public class GameMenuController extends AbsPage{
             ex.printStackTrace();
         }
     }
+
+    public void goToSnake(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/snake.fxml"));
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

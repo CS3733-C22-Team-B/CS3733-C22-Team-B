@@ -19,7 +19,7 @@ import static javafx.application.Application.launch;
 public class SnakeController extends AbsPage {
 
 
-    public enum Direction {
+   /* public enum Direction {
         UP, DOWN, LEFT, RIGHT
     }
 
@@ -174,6 +174,8 @@ public class SnakeController extends AbsPage {
   /*  public static void main (String[] args){
         launch(args);
     }*/
+
+
 
     @Override
     public void namePage() {
