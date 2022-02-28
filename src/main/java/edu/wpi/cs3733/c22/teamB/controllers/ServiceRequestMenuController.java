@@ -2,17 +2,20 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import java.util.*;
+
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import edu.wpi.teame.TeamESecurityServiceRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.rmi.ServerException;
 
 
 public class ServiceRequestMenuController extends AbsPage{
@@ -174,4 +177,21 @@ public class ServiceRequestMenuController extends AbsPage{
     }
 
 
+    public void goToSecurityAPI(ActionEvent actionEvent) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(
+//                    getClass().getResource("libs/TeamESecurityServiceRequest"));
+        try {
+            DatabaseWrapper db = DatabaseWrapper.getInstance();
+            List<Location> andrew = db.getAllLocation();
+            TeamESecurityServiceRequest.getInstance().run(0, 0, (int) Bapp.getPrimaryStage().getWidth(), (int) Bapp.getPrimaryStage().getHeight(), "resources/edu/wpi/cs3733/c22/teamB/styles/style.css", andrew.get(0).getNodeID());
+
+        } catch (ServerException e) {
+            e.printStackTrace();
+        }
+//            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+    }
 }

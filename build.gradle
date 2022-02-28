@@ -57,6 +57,7 @@ dependencies {
     )
 
     implementation(files("src/main/resources/gesturefx-0.7.1.jar"))
+    implementation(files("src/main/java/edu/wpi/cs3733/c22/teamB/libs/TeamESecurityServiceRequest.jar"))
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
