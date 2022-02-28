@@ -13,15 +13,14 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -51,6 +50,7 @@ public class EmployeeTableController extends AbsPage {
     @FXML private AnchorPane anchorPane;
     @FXML private JFXButton filterSubmitButton;
     @FXML private TextField textFilterField;
+    @FXML private MenuButton visibilityMenu;
     private Set<String> filterFields = new HashSet<>();
 
     @Override
@@ -95,6 +95,14 @@ public class EmployeeTableController extends AbsPage {
                 filterSubmit(null);
             }
         });
+
+        // column visibility
+        for (TableColumn<Employee, ?> col : table.getColumns()) {
+                CheckMenuItem item = new CheckMenuItem(col.getText());
+                item.setSelected(true);
+                item.setOnAction(event -> col.setVisible(item.isSelected()));
+                visibilityMenu.getItems().add(item);
+        }
 
 //        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
 //        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
