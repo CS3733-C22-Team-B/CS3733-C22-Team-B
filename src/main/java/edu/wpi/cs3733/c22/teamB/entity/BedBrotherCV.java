@@ -84,6 +84,11 @@ public class BedBrotherCV implements Runnable {
         Platform.runLater(() -> {
             mapController.refresh();
         });
+        try{
+            Thread.currentThread().sleep(500);
+        } catch(InterruptedException e){
+            System.out.println(e);
+        }
         return equipID;
     }
 }
