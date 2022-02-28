@@ -178,6 +178,19 @@ public class AnchorHomeController implements Initializable {
     }
 
     @FXML
+    void goToSettings() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void goToDashboard() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
@@ -189,6 +202,7 @@ public class AnchorHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     void goToAboutPage() {
         try {
@@ -202,10 +216,9 @@ public class AnchorHomeController implements Initializable {
         }
     }
 
-    @FXML
-    void goToSettings() {
+    public void goToCreditsPage(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -239,5 +252,6 @@ public class AnchorHomeController implements Initializable {
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
     }
+
 }
 
