@@ -5,9 +5,11 @@ import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
 import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
+import edu.wpi.cs3733.c22.teamB.entity.MongoDB.LocationMongo;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -78,8 +80,8 @@ public class LocationTableController extends AbsPage {
         locationPopup.setVisible(false);
         popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
         popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
-//        locationPopup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
-//        locationPopup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
+        locationPopup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        locationPopup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
         gridPane.setVisible(false);
         gridPane.setDisable(true);
 
@@ -231,15 +233,20 @@ public class LocationTableController extends AbsPage {
                     event -> popup.setVisible(false)
             );
             visiblePause.play();
-        } catch (Exception e){
-            locationPopup.setVisible(true);
-            PauseTransition visiblePause = new PauseTransition(
-                    Duration.seconds(1)
-            );
-            visiblePause.setOnFinished(
-                    event -> locationPopup.setVisible(false)
-            );
-            visiblePause.play();
+        } catch (Exception e) {
+            System.out.println("exception" + e);
+            if (e instanceof java.lang.NullPointerException) {
+                locationPopup.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(1)
+                );
+                visiblePause.setOnFinished(
+                        event -> locationPopup.setVisible(false)
+                );
+                visiblePause.play();
+            } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+
+            }
         }
     }
 
