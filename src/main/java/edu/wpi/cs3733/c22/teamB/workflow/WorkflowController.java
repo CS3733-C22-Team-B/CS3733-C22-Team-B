@@ -74,7 +74,7 @@ public class WorkflowController {
         requestorCol.setCellValueFactory(cd -> {
             AbstractSR sr = cd.getValue();
 
-            return Bindings.createStringBinding(() -> sr.getRequestor().getEmployeeID() + ' ' + sr.getRequestor().getName());
+            return Bindings.createStringBinding(() -> sr.getRequestor().getName());
         });
 
         timeCol.setCellValueFactory(cd -> {
@@ -86,7 +86,7 @@ public class WorkflowController {
         employeeCol.setCellValueFactory(cd -> {
             AbstractSR sr = cd.getValue();
 
-            return Bindings.createStringBinding(() -> sr.getAssignedEmployee().getEmployeeID() + ' ' + sr.getAssignedEmployee().getName());
+            return Bindings.createStringBinding(() -> sr.getAssignedEmployee().getName());
         });
         employeeCol.setCellFactory(tc -> {
             ComboBox<String> combo = new ComboBox<>();

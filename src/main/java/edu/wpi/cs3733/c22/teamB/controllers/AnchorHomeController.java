@@ -31,11 +31,15 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton srButton;
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
+    @FXML JFXButton profileButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
+    @FXML JFXButton aboutButton;
+    @FXML JFXButton creditsButton;
+    @FXML JFXButton logOutButton;
+    @FXML JFXButton exitButton;
+    @FXML public VBox sidebar;
     @FXML JFXButton gameButton;
-    @FXML
-    public VBox sidebar;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
     BedBrotherCV equipVision = new BedBrotherCV();
     Thread visionThread = new Thread(equipVision);
@@ -94,7 +98,7 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip4 = new Tooltip("Tables");
             tableButton.setTooltip(tooltip4);
 
-            Tooltip tooltip5 = new Tooltip("Dashboard");
+            Tooltip tooltip5 = new Tooltip("Workflow Simulator");
             dashButton.setTooltip(tooltip5);
 
             Tooltip tooltip6 = new Tooltip("Settings");
@@ -103,8 +107,18 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip7 = new Tooltip("Help");
             helpButton.setTooltip(tooltip7);
 
-            Tooltip tooltip8 = new Tooltip("Games");
-            gameButton.setTooltip(tooltip8);
+            Tooltip tooltip8 = new Tooltip("About");
+            aboutButton.setTooltip(tooltip8);
+
+            Tooltip tooltip9 = new Tooltip("Log Out");
+            logOutButton.setTooltip(tooltip9);
+
+            Tooltip tooltip10 = new Tooltip("Exit");
+            exitButton.setTooltip(tooltip10);
+
+            Tooltip tooltip11 = new Tooltip("Games");
+            gameButton.setTooltip(tooltip11);
+
             sidebar.setMinWidth(130);
 
             popup.getContent().add(popUpMessage);
@@ -178,9 +192,9 @@ public class AnchorHomeController implements Initializable {
     }
 
     @FXML
-    void goToDashboard() {
+    void goToSettings() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -189,6 +203,20 @@ public class AnchorHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void goToSimulator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Simulator")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void goToAboutPage() {
         try {
@@ -202,10 +230,9 @@ public class AnchorHomeController implements Initializable {
         }
     }
 
-    @FXML
-    void goToSettings() {
+    public void goToCreditsPage(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -213,6 +240,9 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToHelpPage(ActionEvent actionEvent) {
     }
 
     @FXML

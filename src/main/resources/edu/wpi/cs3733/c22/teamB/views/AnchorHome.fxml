@@ -27,7 +27,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="homeButton" onAction="#goHome" text="       Home     ">
+                              <JFXButton fx:id="homeButton" contentDisplay="RIGHT" onAction="#goHome" prefWidth="130.0" text="Home">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -40,7 +40,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="mapButton" onAction="#goToMap" text="         Map       ">
+                              <JFXButton fx:id="mapButton" contentDisplay="RIGHT" onAction="#goToMap" prefWidth="130.0" text="Map">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -53,7 +53,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="srButton" onAction="#goToServiceRequest" text="Service Request">
+                              <JFXButton fx:id="srButton" contentDisplay="RIGHT" onAction="#goToServiceRequest" prefWidth="130.0" text="Services">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -66,7 +66,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="tableButton" onAction="#goToTables" text="      Tables      ">
+                              <JFXButton fx:id="tableButton" contentDisplay="RIGHT" onAction="#goToTables" prefWidth="130.0" text="Tables">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -79,7 +79,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="dashButton" onAction="#goToDashboard" text="   Dashboard   ">
+                              <JFXButton fx:id="dashButton" contentDisplay="RIGHT" onAction="#goToSimulator" prefWidth="130.0" text="Simulator">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -92,20 +92,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="settingsButton" onAction="#goToSettings" text="      Settings      ">
-                                 <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/icons/thin-icons/icons8-automation-50.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT">
-                           <children>
-                              <JFXButton fx:id="gameButton" onAction="#goToGames" text="    Games      ">
+                              <JFXButton fx:id="gameButton" contentDisplay="RIGHT" onAction="#goToGames" prefWidth="130.0" text="Games">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -116,34 +103,98 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="222.0" prefWidth="6.0" />
-                        <JFXButton fx:id="helpButton" onAction="#goToAboutPage" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="helpButton1" onAction="#logOut" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-open-door-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="exitButton" onAction="#exit" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="profileButton" contentDisplay="RIGHT" prefWidth="130.0" text="Profile">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="settingsButton" contentDisplay="RIGHT" onAction="#goToSettings" prefWidth="130.0" text="Settings">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-automation-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="5.0" />
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="helpButton" contentDisplay="RIGHT" onAction="#goToHelpPage" prefWidth="130.0" text="Help">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="aboutButton" contentDisplay="RIGHT" onAction="#goToAboutPage" prefWidth="130.0" text=" About">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="creditsButton" contentDisplay="RIGHT" onAction="#goToCreditsPage" prefWidth="130.0" text="Credits">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="logOutButton" contentDisplay="RIGHT" onAction="#logOut" prefWidth="130.0" text=" Log Out">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-open-door-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <JFXButton fx:id="exitButton" contentDisplay="RIGHT" onAction="#exit" prefWidth="130.0" text="Exit">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
                      </children>
                      <padding>
                         <Insets top="17.0" />
