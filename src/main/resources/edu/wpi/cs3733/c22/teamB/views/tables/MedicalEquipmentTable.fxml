@@ -2,7 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -14,7 +16,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ContextMenu?>
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.MedicalEquipmentTableController">
     <children>
         <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
@@ -95,6 +96,7 @@
             <JFXButton fx:id="clearButton" layoutX="617.0" layoutY="551.0" minWidth="75.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
             <JFXButton fx:id="cancelButton" layoutX="704.0" layoutY="551.0" minWidth="75.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
             <JFXButton fx:id="confirmButton" layoutX="791.0" layoutY="551.0" minWidth="75.0" onAction="#confirm" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
+            <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="329.0" layoutY="543.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="102.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
             </children>
         </AnchorPane>
         <Pane fx:id="popup" layoutX="300.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
