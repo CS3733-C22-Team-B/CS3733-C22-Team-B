@@ -40,8 +40,6 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton exitButton;
     @FXML public VBox sidebar;
     @FXML JFXButton gameButton;
-    @FXML
-    public VBox sidebar;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
     BedBrotherCV equipVision = new BedBrotherCV();
     Thread visionThread = new Thread(equipVision);
