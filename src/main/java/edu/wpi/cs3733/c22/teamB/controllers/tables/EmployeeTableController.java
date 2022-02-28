@@ -7,18 +7,22 @@ import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -44,6 +48,10 @@ public class EmployeeTableController extends AbsPage {
     @FXML private Pane popup;
     @FXML private Pane contentPane;
     @FXML private AnchorPane anchorPane;
+    @FXML private JFXButton filterSubmitButton;
+    @FXML private TextField textFilterField;
+    @FXML private MenuButton visibilityMenu;
+    private Set<String> filterFields = new HashSet<>();
 
     @Override
     public void namePage() {
@@ -80,6 +88,21 @@ public class EmployeeTableController extends AbsPage {
         initResize();
         resize();
         namePage();
+
+        filterFields.addAll(List.of(new String[]{"employeeID", "lastName", "firstName", "position", "accessLevel", "username", "password", "email", "phoneNumber"}));
+        textFilterField.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                filterSubmit(null);
+            }
+        });
+
+        // column visibility
+        for (TableColumn<Employee, ?> col : table.getColumns()) {
+                CheckMenuItem item = new CheckMenuItem(col.getText());
+                item.setSelected(true);
+                item.setOnAction(event -> col.setVisible(item.isSelected()));
+                visibilityMenu.getItems().add(item);
+        }
 
 //        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/2.5);
 //        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/2.5);
@@ -307,5 +330,21 @@ public class EmployeeTableController extends AbsPage {
         contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/12);
         anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
         anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
+    }
+
+    public void filterSubmit(ActionEvent actionEvent) {
+        table.getItems().clear();
+        table.getItems().removeAll();
+        table.getItems().addAll(db.getAllEmployee().stream().filter(sr -> {
+            String input = textFilterField.getText().toLowerCase(Locale.ROOT);
+            return  (filterFields.contains("employeeID") && sr.getEmployeeID().toLowerCase(Locale.ROOT).contains(input)) || //||
+                    (filterFields.contains("lastName") && sr.getLastName().toLowerCase(Locale.ROOT).contains(input))||
+                    (filterFields.contains("firstName") && sr.getFirstName().toLowerCase(Locale.ROOT).contains(input))||
+                    (filterFields.contains("position") && sr.getPosition().toLowerCase(Locale.ROOT).contains(input))||
+                    (filterFields.contains("accessLevel") && String.valueOf(sr.getAccessLevel()).contains(input)) ||
+                    (filterFields.contains("username") && sr.getUsername().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("email") && sr.getEmail().toLowerCase(Locale.ROOT).contains(input)) ||
+                    (filterFields.contains("phoneNumber") && sr.getPhoneNumber().toLowerCase(Locale.ROOT).contains(input));
+        }).collect(Collectors.toList()));
     }
 }
