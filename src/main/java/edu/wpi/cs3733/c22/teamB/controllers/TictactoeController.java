@@ -115,13 +115,13 @@ public class TictactoeController extends AbsPage {
         initResize();
         resize();
         namePage();
-
+        winnerText.setText("TIC-TAC-TOE");
     }
 
 
     public void restartGame(ActionEvent actionEvent) {
         buttons.forEach(this::resetButton);
-        winnerText.setText("Tic-Tac-Toe");
+        winnerText.setText("TIC-TAC-TOE");
     }
 
     private void resetButton(JFXButton jfxButton) {
