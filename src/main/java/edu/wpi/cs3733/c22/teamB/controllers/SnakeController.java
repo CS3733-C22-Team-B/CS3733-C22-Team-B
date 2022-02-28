@@ -58,6 +58,7 @@ public class SnakeController extends AbsPage {
             double tailX = tail.getTranslateX();
             double tailY = tail.getTranslateY();
 
+            // snake directions
             switch (direction) {
                 case UP:
                     tail.setTranslateX(snake.get(0).getTranslateX());
@@ -77,22 +78,102 @@ public class SnakeController extends AbsPage {
                     break;
             }
 
+            moved = true;
+
+            if (toRemove){
+                snake.add(0, tail);
+            }
+
+            // collision; if snake hits its own body
+            for (Node rect : snake){
+                if (rect != tail && tail.getTranslateX() == rect.getTranslateX()
+                        && tail.getTranslateY() == rect.getTranslateY()){
+                    restartGame();
+                    break;
+                }
+            }
+            // collision against walls of screen
+            if (tail.getTranslateX() < 0 || tail.getTranslateX() >= APP_W || tail.getTranslateY() < 0 || tail.getTranslateY() >= APP_W){
+                restartGame();
+            }
+
+            // snake eat fude
+            if (tail.getTranslateX() == food.getTranslateX() && tail.getTranslateY() == food.getTranslateY()){
+                food.setTranslateX((int)(Math.random() * (APP_W - BLOCK_SIZE)) / BLOCK_SIZE * BLOCK_SIZE);
+                food.setTranslateY((int)(Math.random() * (APP_H - BLOCK_SIZE)) / BLOCK_SIZE * BLOCK_SIZE);
+
+                Rectangle rect = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
+                rect.setTranslateX(tailX);
+                rect.setTranslateY(tailY);
+
+                snake.add(rect);
+            }
+
         });
 
+        // necessary for animation to be infinite
+        timeline.getKeyFrames().add(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+
+        root.getChildren().addAll(food, snakeBody);
         return root;
     }
 
-    @Override
+    private void restartGame(){
+        stopGame();
+        startGame();
+    }
+
+    private void startGame(){
+        direction = Direction.RIGHT;
+        Rectangle head = new Rectangle(BLOCK_SIZE, BLOCK_SIZE);
+        snake.add(head);
+        timeline.play();
+        running = true;
+    }
+
+    private void stopGame(){
+        running = false;
+        timeline.stop();
+        snake.clear();
+    }
+
+   // @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene (createContent());
+        scene.setOnKeyPressed(event -> {
+            if (!moved)
+                return;
+
+            switch (event.getCode()){
+                    case W:
+                        if (direction != Direction.DOWN)
+                            direction = Direction.UP;
+                        break;
+                    case S:
+                        if (direction!= Direction.UP)
+                            direction = Direction.DOWN;
+                        break;
+                    case A:
+                        if (direction != Direction.RIGHT)
+                            direction = Direction.LEFT;
+                        break;
+                    case D:
+                        if (direction != Direction.LEFT)
+                            direction = Direction.RIGHT;
+                        break;
+            }
+
+        });
         primaryStage.setTitle("Tutorial");
         primaryStage.setScene(scene);
         primaryStage.show();
+        startGame();
     }
 
-    public static void main (String[] args){
+  /*  public static void main (String[] args){
         launch(args);
-    }
+    }*/
 
     @Override
     public void namePage() {
