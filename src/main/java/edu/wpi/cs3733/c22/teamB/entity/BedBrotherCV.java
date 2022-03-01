@@ -11,6 +11,7 @@ import javafx.application.Platform;
 public class BedBrotherCV implements Runnable {
 
     MapEditorController mapController;
+    Location cameraLocation;
 
     public void setMapController(MapEditorController mapController) {
         this.mapController = mapController;
@@ -21,28 +22,45 @@ public class BedBrotherCV implements Runnable {
     List<Location> locationList = dbWrapper.getAllLocation();
 
     public void run() {
-        System.out.println("e");
-        chosenPort = SerialPort.getCommPort("COM5");
-        chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
-        if (chosenPort.openPort()) {
-            Scanner input = new Scanner(chosenPort.getInputStream());
-            while (input.hasNext()) {
-                String tagID = input.next();
-                System.out.println("Data: " + tagID);
-                moveEquipTagID(tagID);
+        for(SerialPort port : SerialPort.getCommPorts()){
+            if(port.getPortDescription().equals("OpenMV Virtual Comm Port in FS Mode")){
+                System.out.println("Camera found let's gooooooo!");
+                chosenPort = port;
             }
-            try{
-                System.out.println("CV thread sleep start");
-                Thread.currentThread().sleep(500);
-                System.out.println("CV thread sleep end");
-            } catch(InterruptedException e){
-                System.out.println(e);
+            System.out.println(port.getPortDescription());
+        }
+        if(chosenPort!=null){
+            chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+            if (chosenPort.openPort()) {
+                Scanner input = new Scanner(chosenPort.getInputStream());
+                while (input.hasNext()) {
+                    String tagID = input.next();
+                    System.out.println("Data: " + tagID);
+                    if(tagID.equals("cam1")){
+                        cameraLocation = dbWrapper.getLocation("HHALL01203");
+                    } else if(tagID.equals("cam2")){
+                        cameraLocation = dbWrapper.getLocation("HHALL01403");
+                    } else{
+                        moveEquipTagID(tagID);
+                    }
+                }
+                try{
+                    System.out.println("CV thread sleep start");
+                    Thread.currentThread().sleep(500);
+                    System.out.println("CV thread sleep end");
+                } catch(InterruptedException e){
+                    System.out.println(e);
+                }
+            } else{
+                System.out.println("Port closed");
             }
+        } else{
+            System.out.println("no camera :( stopping camera thread");
+            Thread.currentThread().interrupt();
         }
     }
 
     public void moveEquipTagID(String tagID) {
-        final Location cameraLocation = dbWrapper.getLocation("HHALL01203");
         String equipID;
         System.out.println("Tag ID Found: " + tagID);
         switch (tagID) {
