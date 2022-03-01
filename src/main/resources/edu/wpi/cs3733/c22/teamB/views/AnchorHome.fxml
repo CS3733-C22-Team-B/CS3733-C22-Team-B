@@ -113,7 +113,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                        <image>
-                                          <Image url="@../images/icons/Game1.png" />
+                                          <Image url="@../images/icons/new-icons/icons8-visual-game-boy-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

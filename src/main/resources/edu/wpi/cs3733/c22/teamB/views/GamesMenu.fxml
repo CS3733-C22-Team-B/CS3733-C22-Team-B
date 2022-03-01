@@ -12,29 +12,39 @@
     <children>
         <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
             <children>
-                <StackPane layoutX="25.0" layoutY="90.0" onMouseClicked="#goToTicTacToe" prefHeight="100.0" prefWidth="100.0" styleClass="service-button1" stylesheets="@../styles/style.css">
+                <StackPane layoutX="131.0" layoutY="150.0" onMouseClicked="#goToTicTacToe" prefHeight="100.0" prefWidth="100.0" styleClass="service-button1" stylesheets="@../styles/style.css">
                     <children>
-                  <JFXButton onAction="#goToTicTacToe" prefHeight="100.0" prefWidth="100.0" text=" ">
+                  <JFXButton graphicTextGap="0.0" onAction="#goToTicTacToe" prefHeight="100.0" prefWidth="100.0" text=" ">
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
+                        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/icons/TicTacToe.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                        <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="TicTacToe" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
                     </children>
                 </StackPane>
-                <Pane layoutX="15.0" layoutY="65.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-                <Label layoutX="70.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Games" />
-            <StackPane layoutX="236.0" layoutY="90.0" onMouseClicked="#goToSnake" prefHeight="100.0" prefWidth="100.0" styleClass="service-button1" stylesheets="@../styles/style.css">
+            <StackPane layoutX="342.0" layoutY="150.0" onMouseClicked="#goToSnake" prefHeight="100.0" prefWidth="100.0" styleClass="service-button1" stylesheets="@../styles/style.css">
                <children>
-                  <JFXButton onAction="#goToSnake" prefHeight="103.0" prefWidth="106.0" text=" " />
-                  <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Snake" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
+                  <JFXButton graphicTextGap="0.0" onAction="#goToSnake" prefHeight="103.0" prefWidth="106.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/new-icons/Snake2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                </children>
             </StackPane>
             </children>
         </Pane>
+      <Pane layoutX="30.0" layoutY="95.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
+      <ImageView fitHeight="59.0" fitWidth="65.0" layoutX="30.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icons/new-icons/Game%20time.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="98.0" layoutY="31.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Games" />
     </children>
 </AnchorPane>
