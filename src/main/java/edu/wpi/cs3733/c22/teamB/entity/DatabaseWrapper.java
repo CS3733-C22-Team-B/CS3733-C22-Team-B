@@ -619,5 +619,9 @@ public class DatabaseWrapper {
         }
         return false;
     }
+
+    public IDatabase<Location> modeLocation() {
+        return this.LocationDao;
+    }
 }
 
