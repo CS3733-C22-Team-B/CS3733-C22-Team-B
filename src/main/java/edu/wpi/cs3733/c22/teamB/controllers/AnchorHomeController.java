@@ -281,5 +281,17 @@ public class AnchorHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void goToProfile(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Profile.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
