@@ -186,6 +186,7 @@ public class ServiceRequestMenuController extends AbsPage{
 //                    getClass().getResource("libs/TeamESecurityServiceRequest"));
         DatabaseWrapper db = DatabaseWrapper.getInstance();
         List<Location> andrew = db.getAllLocation();
+        List<Employee> newEmployeeList = new ArrayList<Employee>();
         Employee Hushmand = new Employee(1, DepartmentType.CLINICALSERVICES, "Hushmand", EmployeeType.Admin);
         Employee Sits = new Employee(2, DepartmentType.PLASTICSURGERY, "Sits", EmployeeType.Admin);
         Employee Nick = new Employee(3, DepartmentType.NEUROSURGERY, "Nick", EmployeeType.Admin);
@@ -198,19 +199,22 @@ public class ServiceRequestMenuController extends AbsPage{
         Employee Duc = new Employee(10, DepartmentType.MICU, "Duc", EmployeeType.Admin);
         Employee Wong = new Employee(11, DepartmentType.NEUROSURGERY, "Wilson", EmployeeType.Admin);
         Employee William = new Employee(12, DepartmentType.MICU, "William", EmployeeType.Staff);
+        newEmployeeList.add(Hushmand);
+        newEmployeeList.add(Sits);
+        newEmployeeList.add(Nick);
+        newEmployeeList.add(Calvin);
+        newEmployeeList.add(Chris);
+        newEmployeeList.add(andrewEmployee);
+        newEmployeeList.add(Ben);
+        newEmployeeList.add(Noah);
+        newEmployeeList.add(Kiki);
+        newEmployeeList.add(Duc);
+        newEmployeeList.add(Wong);
+        newEmployeeList.add(William);
         TeamESecurityServiceRequest.getInstance().run(0, 0, (int) Bapp.getPrimaryStage().getWidth(), (int) Bapp.getPrimaryStage().getHeight(), "resources/edu/wpi/cs3733/c22/teamB/styles/style.css", andrew.get(1).getNodeID());
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Hushmand);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Sits);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Nick);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Calvin);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Chris);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(andrewEmployee);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Ben);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Noah);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Kiki);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Duc);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(Wong);
-        TeamESecurityServiceRequest.getInstance().insertEmployee(William);
+        for(Employee employee: newEmployeeList){
+            TeamESecurityServiceRequest.getInstance().insertEmployee(employee);
+        }
         //System.out.println("----------------------------------------------");
         //System.out.println(TeamESecurityServiceRequest.getInstance().getAllEmployees().size());
         //for(Employee employee: TeamESecurityServiceRequest.getInstance().getAllEmployees()){
