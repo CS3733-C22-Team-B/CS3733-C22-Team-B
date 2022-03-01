@@ -105,7 +105,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="profileButton" contentDisplay="RIGHT" prefWidth="130.0" text="Profile">
+                              <JFXButton fx:id="profileButton" contentDisplay="RIGHT" onAction="#goToProfile" prefWidth="130.0" text="Profile">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true">
                                        <image>
