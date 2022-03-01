@@ -58,19 +58,20 @@ public class LocationMongo implements IDatabase<Location> {
 
 
         for (MedicalEquipment medicalEquipment : equipmentList) {
+            if ((!referenced && medicalEquipment.getLocation().getNodeID().equals(objectID))) {
+                referenced = true;
+            }
+        }
+        if(!referenced){
             for (AbstractSR abstractSR : mainList) {
-                if ((medicalEquipment.getLocation().getNodeID().equals(objectID)) || (abstractSR.getLocation().getNodeID().equals(objectID))) {
+                if (!referenced && abstractSR.getLocation().getNodeID().equals(objectID)) {
                     referenced = true;
-                } else {
-                    referenced = false;
-//                    LocationTable.findOneAndDelete(convertLocation(getValue(objectID)));
                 }
             }
         }
+
         if (!referenced) {
             LocationTable.deleteOne(convertLocation(getValue(objectID)));
-        } else {
-
         }
     }
 
