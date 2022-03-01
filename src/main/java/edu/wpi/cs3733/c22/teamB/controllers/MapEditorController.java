@@ -6,9 +6,11 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.MongoDB.LocationMongo;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Insets;
@@ -31,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,6 +109,7 @@ public class MapEditorController{
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
     List<AbstractSR> srList = dbWrapper.getAllSR();
+    @FXML private Pane locationPopup;
     //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
@@ -139,6 +143,7 @@ public class MapEditorController{
 
 //    @FXML
 //    private JFXButton modifyButton;
+
 
 
 
@@ -200,6 +205,10 @@ public class MapEditorController{
         sideviewTable.setTranslateX(0);
         sideviewTable.setTranslateY(-300);
         setAnchors();
+
+        locationPopup.setVisible(false);
+        locationPopup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        locationPopup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
     }
 
     private void setAnchors(){
@@ -610,7 +619,48 @@ public class MapEditorController{
     void deleteSelectedNode(){
         if(clicked == "location") {
             stackPane.getChildren().remove(selectedPnt);
-            dbWrapper.deleteLocation(selectedPnt.getId());
+            if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
+                try {
+                    dbWrapper.deleteLocation(selectedPnt.getId());
+                } catch (Exception e) {
+                    if (e instanceof java.lang.NullPointerException) {
+                        locationPopup.setVisible(true);
+                        PauseTransition visiblePause = new PauseTransition(
+                                Duration.seconds(1)
+                        );
+                        visiblePause.setOnFinished(
+                                event -> locationPopup.setVisible(false)
+                        );
+                        visiblePause.play();
+                    }
+                }
+            } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+                if (LocationMongo.referenced == true) {
+                    locationPopup.setVisible(true);
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(1)
+                    );
+                    visiblePause.setOnFinished(
+                            event -> locationPopup.setVisible(false)
+                    );
+                    visiblePause.play();
+                } else {
+                    try {
+                        dbWrapper.deleteLocation(selectedPnt.getId());
+                    } catch (Exception e){
+                        e.printStackTrace();
+                        locationPopup.setVisible(true);
+                        PauseTransition visiblePause = new PauseTransition(
+                                Duration.seconds(1)
+                        );
+                        visiblePause.setOnFinished(
+                                event -> locationPopup.setVisible(false)
+                        );
+                        visiblePause.play();
+                    }
+                }
+                    }
+
         } else if (clicked == "equipment"){
             stackPane.getChildren().remove(selectedImg);
             dbWrapper.deleteMedicalEquipment(selectedImg.getId());
