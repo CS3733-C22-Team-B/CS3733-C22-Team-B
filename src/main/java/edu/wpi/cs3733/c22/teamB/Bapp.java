@@ -53,5 +53,6 @@ public class Bapp extends Application {
     @Override
     public void stop() {
         log.info("Shutting Down");
+        DatabaseWrapper.getInstance().closeConnection();
     }
 }
