@@ -113,9 +113,12 @@ public class FoodDeliverySRMongo implements IDatabase<FoodDeliverySR> {
     @Override
     public void restoreTable(List<FoodDeliverySR> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
+
         for (FoodDeliverySR foodDeliverySR : list) {
-            addValue(foodDeliverySR);
+            newList.add(convertFoodDeliverySR(foodDeliverySR));
         }
+        FoodDeliveryTable.insertMany(newList);
 
     }
 }
