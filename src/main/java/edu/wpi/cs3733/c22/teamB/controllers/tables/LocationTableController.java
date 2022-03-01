@@ -219,7 +219,7 @@ public class LocationTableController extends AbsPage {
     @FXML
     private void deleteLocation(ActionEvent actionEvent) {
 
-//        if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
+        if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
             try {
                 db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
 
@@ -247,6 +247,48 @@ public class LocationTableController extends AbsPage {
                     );
                     visiblePause.play();
                 }
+            }
+        } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+            if (LocationMongo.referenced == true) {
+                locationPopup.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(1)
+                );
+                visiblePause.setOnFinished(
+                        event -> locationPopup.setVisible(false)
+                );
+                visiblePause.play();
+            } else {
+                try {
+                    db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
+
+                    loadTable();
+                    cancelForm(null);
+
+                    // submitted confirmation popup
+                    popup.setVisible(true);
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(1)
+                    );
+                    visiblePause.setOnFinished(
+                            event -> popup.setVisible(false)
+                    );
+                    visiblePause.play();
+                } catch (Exception e) {
+                    System.out.println("exception" + e);
+                        locationPopup.setVisible(true);
+                        PauseTransition visiblePause = new PauseTransition(
+                                Duration.seconds(1)
+                        );
+                        visiblePause.setOnFinished(
+                                event -> locationPopup.setVisible(false)
+                        );
+                        visiblePause.play();
+
+                }
+            }
+        }
+    }
 //            }
 
 //        } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
@@ -305,8 +347,7 @@ public class LocationTableController extends AbsPage {
 //                }
 //
 
-            }
-        }
+
 
 
 

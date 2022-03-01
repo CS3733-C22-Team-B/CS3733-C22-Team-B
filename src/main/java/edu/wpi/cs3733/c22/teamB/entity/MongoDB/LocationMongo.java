@@ -21,7 +21,7 @@ public class LocationMongo implements IDatabase<Location> {
 
     private MongoDatabase conn;
     private MongoCollection LocationTable;
-    static boolean referenced;
+    public static boolean referenced;
 
 
     public LocationMongo(){
