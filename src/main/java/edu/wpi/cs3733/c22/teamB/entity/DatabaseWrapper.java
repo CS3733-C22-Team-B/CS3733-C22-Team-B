@@ -449,15 +449,11 @@ public class DatabaseWrapper {
         if (SRChanged == true){
             List<AbstractSR> list = MainSRDao.getAllValues();
 
-//        for (AbstractSR abstractSR : list) {
-//            abstractSR = getSR(abstractSR.getSrID());
-//        }
             for (AbstractSR abstractSR : list) {
                 abstractSR = getSR(abstractSR.getSrID());
             }
             SRChanged = false;
             SRCache = list;
-
         }
         return SRCache;
 
