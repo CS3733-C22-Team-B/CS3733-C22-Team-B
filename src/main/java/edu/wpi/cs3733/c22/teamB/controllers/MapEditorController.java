@@ -129,6 +129,7 @@ public class MapEditorController {
 
     //Holds locations so med equip doesn't go on top of it or something idk
     List<Location> equipLocations = new ArrayList<>();
+    AnchorPane sideviewNode;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -640,7 +641,6 @@ public class MapEditorController {
     }
 
     public void onPointClick(Circle testPoint) {
-        // Good Example
         //Deselect previous point, make black
         for (Location local : locationList) {
             if (local.getNodeID().equals(selectedPoint)) {
@@ -667,7 +667,6 @@ public class MapEditorController {
     public void onImgClick(ImageView testImg) {
         selectedImg = testImg;
         clicked = "equipment";
-        // Same Thing
         MedicalEquipment local = dbWrapper.getMedicalEquipment(selectedImg.getId());
         idField.setText(local.getEquipmentID());
         typeField.setText(local.getEquipmentType());
@@ -738,7 +737,6 @@ public class MapEditorController {
         } else if (clicked == "equipment") {
             String imgId = selectedImg.getId();
             stackPane.getChildren().remove(selectedImg);
-            //Same Thing
             Location loc = dbWrapper.getMedicalEquipment(imgId).getLocation();
             dbWrapper.deleteMedicalEquipment(imgId);
             shuffleMed(loc);
@@ -756,8 +754,29 @@ public class MapEditorController {
         setTextPos();
         addPoints();
         if (currentFloor.equals("side")) {
-            System.out.println("bruh table about to exist");
-            stackPane.getChildren().add(sideviewTable);
+            System.out.println("bruh sideView about to exist");
+//            stackPane.getChildren().add(sideviewTable);
+            anchorPane.getChildren().add(1, sideviewNode);
+            anchorPane.setLeftAnchor(sideviewNode,0.0);
+            anchorPane.setTopAnchor(sideviewNode,0.0);
+            anchorPane.setRightAnchor(sideviewNode,0.0);
+            anchorPane.setBottomAnchor(sideviewNode,0.0);
+            showLocations.setVisible(false);
+            showMedical.setVisible(false);
+            showSR.setVisible(false);
+            moveButton.setDisable(true);
+            addButton.setDisable(true);
+            moveButton.setOpacity(0.5);
+            addButton.setOpacity(0.5);
+        } else{
+            anchorPane.getChildren().remove(sideviewNode);
+            showLocations.setVisible(true);
+            showMedical.setVisible(true);
+            showSR.setVisible(true);
+            moveButton.setDisable(false);
+            addButton.setDisable(false);
+            moveButton.setOpacity(1);
+            addButton.setOpacity(1);
         }
     }
 
@@ -844,7 +863,6 @@ public class MapEditorController {
 //                setText();
                 gesturePane.reset();
                 gesturePane.setGestureEnabled(false);
-                imageView.setImage(sideViewImage);
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
 
                 if (sideviewTable.getItems() != null) {
@@ -867,6 +885,12 @@ public class MapEditorController {
                 sideviewTable.setMaxHeight(300);
                 sideviewTable.setMaxWidth(440);
                 sideviewTable.setFixedCellSize(50);
+                try{
+                    FXMLLoader sideviewLoader = new FXMLLoader(Bapp.class.getClassLoader().getResource("edu/wpi/cs3733/c22/teamB/views/Sideview.fxml"));
+                    sideviewNode = sideviewLoader.load();
+                } catch (IOException e){
+                    System.out.println(e);
+                }
                 break;
 
             default:
@@ -901,7 +925,6 @@ public class MapEditorController {
     @FXML
     public void modify() {
         if (clicked == "location") {
-            //Same Thing
             Location local = dbWrapper.getLocation(selectedPoint);
             idField.setText(selectedPoint);
             floor.setValue(local.getFloor());
@@ -909,7 +932,6 @@ public class MapEditorController {
             shortName.setText(local.getShortName());
             longName.setText(local.getLongName());
         } else if (clicked == "equipment") {
-            //Same Thing
             MedicalEquipment local = dbWrapper.getMedicalEquipment(selectedImg.getId());
             idField.setText(local.getEquipmentID());
             floor.setValue(local.getLocation().getFloor());
@@ -926,14 +948,11 @@ public class MapEditorController {
 
     public void submitModify(ActionEvent actionEvent) {
         if (clicked == "location") {
-            //Same Thing
             Location old = dbWrapper.getLocation(selectedPnt.getId());
             Location changedNode = new Location(idField.getText(), old.getXcoord(), old.getYcoord(), floor.getValue().toString(), "TOWER", nodeType.getValue().toString(), shortName.getText(), longName.getText());
             dbWrapper.updateLocation(changedNode);
         } else if (clicked == "equipment") {
-
             System.out.println(dbWrapper.getMedicalEquipment(selectedImg.getId()));
-            // Same Thing
             MedicalEquipment old = dbWrapper.getMedicalEquipment(selectedImg.getId());
             old.setEquipmentName(nameField.getText());
             old.setEquipmentType(typeField.getText());
@@ -1053,7 +1072,6 @@ public class MapEditorController {
                 }
             }
         }
-        // Same Thing
         Point2D pnt = coordTrans.imageToNode(dbWrapper.getLocation(closest.getId()).getXcoord(), dbWrapper.getLocation(closest.getId()).getYcoord());
         System.out.println("new location node X" + pnt.getX());
         System.out.println("drag x: " + nodeX);
@@ -1065,13 +1083,11 @@ public class MapEditorController {
     void updatePopup() {
         Location loc;
         if (clicked.equals("location")) {
-            // Same Thing
             loc = dbWrapper.getLocation(selectedPnt.getId());
             Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(), loc.getYcoord());
             modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_LOC_W / 2);
             modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_LOC_H / 2);
         } else {
-            // Same Thing
             loc = dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation();
             Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(), loc.getYcoord());
             modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_EQP_W / 2 + medOffset);
@@ -1128,10 +1144,7 @@ public class MapEditorController {
     }
 
     public void moveEquip(String equipID, Location newLoc) {
-
         //Updating DB
-
-        // Same Thing
         MedicalEquipment equip = dbWrapper.getMedicalEquipment(equipID);
         equipLocations.remove(equip.getLocation());
         equip.setLocation(newLoc);
@@ -1166,7 +1179,6 @@ public class MapEditorController {
             while (equipLocations.contains(loc)) {
                 equipLocations.remove(loc);
             }
-            // Same Thing
             for (MedicalEquipment thisEquip : dbWrapper.getAllMedicalEquipment()) {
                 if (thisEquip.getLocation().equals(loc)) {
                     equipLocations.add(loc);

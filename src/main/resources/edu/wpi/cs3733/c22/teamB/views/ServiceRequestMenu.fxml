@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
+<AnchorPane fx:id="anchorPane" prefHeight="454.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
    <children>
-      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
+      <Pane fx:id="contentPane" prefHeight="454.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
             <StackPane layoutX="25.0" layoutY="90.0" onMouseClicked="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0">
                <children>
@@ -134,6 +134,24 @@
                         </ImageView>
                      </graphic></JFXButton>
                   <Label mouseTransparent="true" text="Sanitation" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane layoutX="174.0" layoutY="340.0" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToSecurityAPI" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
+                           <image>
+                              <Image url="@../images/icons/Security2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label mouseTransparent="true" text="Security" textAlignment="CENTER" textFill="WHITE" translateY="25.0" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
