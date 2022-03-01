@@ -24,6 +24,10 @@ public class ProfileController extends AbsPage {
     public Label passwordError;
     DatabaseWrapper db;
 
+    public ProfileController() {
+        this.db = DatabaseWrapper.getInstance();
+    }
+
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         initResize();
