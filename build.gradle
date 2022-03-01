@@ -58,7 +58,9 @@ dependencies {
     )
 
     implementation(files("src/main/resources/jSerialComm-2.9.1.jar"))
-    implementation(files("src/main/resources/gesturefx-0.7.1.jar"))
+    implementation(files("src/main/resources/gesturefx-0.7.1.jar",
+            "libs/Iteration-3-API.jar",
+            "libs/TeamESecurityServiceRequest.jar"))
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",

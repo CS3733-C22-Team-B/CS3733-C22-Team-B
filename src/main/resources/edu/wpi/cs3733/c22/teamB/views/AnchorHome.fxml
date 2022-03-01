@@ -90,6 +90,19 @@
                               </JFXButton>
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="229.0">
+                           <children>
+                              <JFXButton fx:id="apiButton" contentDisplay="RIGHT" onAction="#goToAPI" prefWidth="130.0" text="API">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/icons/thin-icons/icons8-web-analytics-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
                               <JFXButton fx:id="gameButton" contentDisplay="RIGHT" onAction="#goToGames" prefWidth="130.0" text="Games">
