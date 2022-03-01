@@ -169,15 +169,40 @@ public class MapEditorController {
 
     @FXML
     public void initialize() {
+        System.out.println("1" + java.time.LocalDateTime.now());
+
         Bapp.getPrimaryStage().setMaximized(true);
+
+        System.out.println("2" + java.time.LocalDateTime.now());
+
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
+
+        System.out.println("3" + java.time.LocalDateTime.now());
+
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
+
+        System.out.println("4" + java.time.LocalDateTime.now());
+
         imageHeight = imageView.getImage().getHeight();
+
+        System.out.println("5" + java.time.LocalDateTime.now());
+
         imageWidth = imageView.getImage().getWidth();
+
+        System.out.println("6" + java.time.LocalDateTime.now());
+
         gesturePane.setMinHeight(sceneHeight);
+
+        System.out.println("7" + java.time.LocalDateTime.now());
+
         gesturePane.setMinWidth(sceneHeight * (imageWidth / imageHeight));
+
+        System.out.println("8" + java.time.LocalDateTime.now());
+
+//
 //        Bapp.getPrimaryStage().resizableProperty().set(false);
         imageView.setFitHeight(gesturePane.getWidth());
+        System.out.println(java.time.LocalDateTime.now());
         gesturePane.setGestureEnabled(true);
         coordTrans = new CoordTransformer(imageView, gesturePane);
         showLocations.setSelected(true);

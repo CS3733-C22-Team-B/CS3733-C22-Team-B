@@ -151,9 +151,12 @@ public class AnchorHomeController implements Initializable {
 
     @FXML
     void goToMap() {
+        System.out.println("0" + java.time.LocalDateTime.now());
         try {
             mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
+            System.out.println("0.1" + java.time.LocalDateTime.now());
             childPane = mapLoader.load();
+            System.out.println("0.2" + java.time.LocalDateTime.now());
             equipVision.setMapController((MapEditorController) mapLoader.getController());
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
