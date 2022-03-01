@@ -632,5 +632,11 @@ public class DatabaseWrapper {
 
         return isReferenced;
     }
+
+    public void closeConnection() {
+        if (this.LocationDao instanceof LocationMongo) {
+            MongoDB.closeConnection();
+        }
+    }
 }
 

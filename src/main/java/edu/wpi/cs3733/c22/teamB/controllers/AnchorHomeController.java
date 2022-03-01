@@ -238,7 +238,7 @@ public class AnchorHomeController implements Initializable {
 
     public void goToCreditsPage(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage2")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
