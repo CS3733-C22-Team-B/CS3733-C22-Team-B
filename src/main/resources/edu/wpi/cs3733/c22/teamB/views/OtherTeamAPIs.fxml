@@ -19,7 +19,7 @@
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
-                              <Image url="@../images/icons/PatientTransport2.png" />
+                              <Image url="@../images/icons/giftnfloral2.png" />
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
@@ -43,7 +43,7 @@
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
                            <image>
-                              <Image url="@../images/icons/PatientTransport2.png" />
+                              <Image url="@../images/icons/Security2.png" />
                            </image>
                         </ImageView>
                      </graphic>
