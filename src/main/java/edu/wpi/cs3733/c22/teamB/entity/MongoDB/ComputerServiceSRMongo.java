@@ -70,8 +70,6 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
         LocalDate dateRequested = mainSR.getDateRequested();
         String notes = mainSR.getNotes();
 
-
-
         Document computerObj = cursor.next();
         String srID = computerObj.getString("_id");
         String helpType = computerObj.getString("helpType");
@@ -114,10 +112,12 @@ public class ComputerServiceSRMongo implements IDatabase<ComputerServiceSR> {
     @Override
     public void restoreTable(List<ComputerServiceSR> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
 
         for(ComputerServiceSR computerServiceSR : list) {
-            addValue(computerServiceSR);
+            newList.add(convertComputerServiceSR(computerServiceSR));
         }
+        ComputerServiceSRTable.insertMany(newList);
 
     }
 }

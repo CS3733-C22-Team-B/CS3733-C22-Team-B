@@ -85,10 +85,8 @@ public class EmployeeMongo implements IDatabase<Employee> {
         String phoneNumber = employeeObj.getString("phoneNumber");
 
         Employee employee = new Employee(employeeID, lastName, firstName, position, accessLevel, username, password, email, phoneNumber);
-        System.out.print(employeeObj);
+
         return employee;
-//        System.out.println(employeeObj);
-//        return null;
     }
 
     @Override
@@ -126,9 +124,11 @@ public class EmployeeMongo implements IDatabase<Employee> {
     @Override
     public void restoreTable(List<Employee> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
 
         for(Employee employee : list) {
-            addValue(employee);
+            newList.add(convertEmployee(employee));
         }
+        EmployeeTable.insertMany(newList);
     }
 }
