@@ -29,6 +29,7 @@
             <Label layoutX="59.0" layoutY="289.0" text="Confirm Password" />
             <PasswordField fx:id="confirmPassword" layoutX="59.0" layoutY="312.0" />
             <JFXButton fx:id="editPassword" layoutX="56.0" layoutY="366.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Change Password" textFill="WHITE" />
+            <Label layoutX="40.0" layoutY="130.0" prefHeight="58.0" prefWidth="255.0" text=" You are appreciated. Thank you to all healthcare professionals for your hard work." textAlignment="CENTER" wrapText="true" />
         </children>
     </Pane>
 </children>

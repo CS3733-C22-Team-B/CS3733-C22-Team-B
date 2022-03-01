@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,35 +13,27 @@
    <children>
       <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <Label alignment="TOP_CENTER" layoutX="163.0" layoutY="11.0" prefHeight="45.0" prefWidth="199.0" style="-fx-font-size: 30;" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="89.0" layoutY="65.0" prefHeight="58.0" prefWidth="346.0" text=" You are appreciated. Thank you to all healthcare professionals for your hard work." textAlignment="CENTER" wrapText="true" />
-            <ImageView fitHeight="70.0" fitWidth="109.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="21.0" layoutY="123.0" text="Change password" />
-            <PasswordField fx:id="changePassword" layoutX="21.0" layoutY="146.0" />
-            <Label layoutX="21.0" layoutY="178.0" text="Confirm Password" />
-            <PasswordField fx:id="confirmPassword" layoutX="21.0" layoutY="201.0" />
-            <JFXToggleButton fx:id="clientServerToggle" layoutX="310.0" layoutY="191.0" onAction="#onClientToggle" prefHeight="58.0" prefWidth="199.0" text="Client Server" />
-            <JFXButton fx:id="editPassword" layoutX="18.0" layoutY="255.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Edit User Profile" textFill="WHITE" />
-            <JFXToggleButton fx:id="remoteToggle" layoutX="310.0" layoutY="231.0" onAction="#onRemoteToggle" prefHeight="58.0" prefWidth="199.0" text="Remote      " />
-            <JFXToggleButton fx:id="embeddedToggle" layoutX="310.0" layoutY="151.0" onAction="#onEmbeddedToggle" prefHeight="58.0" prefWidth="199.0" text="Embedded" />
-            <Label layoutX="306.0" layoutY="113.0" prefHeight="37.0" prefWidth="169.0" style="-fx-font-size: 16;" text="Database Loading Type" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <Pane layoutY="65.0" prefHeight="1.0" prefWidth="524.0" style="-fx-background-color: #002168;" />
-            <ImageView fitHeight="51.0" fitWidth="69.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="51.0" fitWidth="69.0" layoutX="50.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icons/Gear.png" />
                </image>
             </ImageView>
-            <Pane layoutX="290.0" layoutY="160.0" prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: #002168;" />
-            <JFXButton fx:id="RestoreB" layoutX="368.0" layoutY="355.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Restore" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Restore Files" textFill="WHITE" />
-            <JFXButton fx:id="BackupB" layoutX="368.0" layoutY="306.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Backup Files" textFill="WHITE" />
-            <Label fx:id="passwordError" layoutX="14.0" layoutY="231.0" prefHeight="17.0" prefWidth="199.0" textFill="RED" wrapText="true" />
+            <Label alignment="TOP_CENTER" layoutX="82.0" layoutY="11.0" prefHeight="45.0" prefWidth="199.0" style="-fx-font-size: 30;" styleClass="lightPane" stylesheets="@../styles/style.css" text="Settings">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Pane layoutX="40.0" layoutY="65.0" prefHeight="1.0" prefWidth="524.0" style="-fx-background-color: #002168;" />
+            <Label layoutX="56.0" layoutY="104.0" prefHeight="37.0" prefWidth="169.0" style="-fx-font-size: 16;" text="Database Loading Type" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <Pane layoutX="40.0" layoutY="151.0" prefHeight="1.0" prefWidth="200.0" style="-fx-background-color: #002168;" />
+            <JFXToggleButton fx:id="embeddedToggle" layoutX="41.0" layoutY="151.0" onAction="#onEmbeddedToggle" prefHeight="58.0" prefWidth="199.0" text="Embedded" />
+            <JFXToggleButton fx:id="clientServerToggle" layoutX="41.0" layoutY="191.0" onAction="#onClientToggle" prefHeight="58.0" prefWidth="199.0" text="Client         " />
+            <JFXToggleButton fx:id="remoteToggle" layoutX="41.0" layoutY="231.0" onAction="#onRemoteToggle" prefHeight="58.0" prefWidth="199.0" text="Remote      " />
+            <JFXButton fx:id="BackupB" layoutX="345.0" layoutY="157.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Backup" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Backup Files" textFill="WHITE" />
+            <JFXButton fx:id="RestoreB" layoutX="345.0" layoutY="206.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#Restore" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168;" text="Restore Files" textFill="WHITE" />
          </children>
       </Pane>
    </children>

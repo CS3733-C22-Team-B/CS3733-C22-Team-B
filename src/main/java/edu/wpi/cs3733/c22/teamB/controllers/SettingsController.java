@@ -28,8 +28,6 @@ import java.util.ResourceBundle;
 
 public class SettingsController extends AbsPage implements Initializable{
     @FXML
-    JFXButton HomeB;
-    @FXML
     JFXButton RestoreB;
     @FXML
     JFXButton BackupB;
@@ -41,14 +39,6 @@ public class SettingsController extends AbsPage implements Initializable{
     Pane anchorPane;
     @FXML
     Pane contentPane;
-    @FXML
-    PasswordField changePassword;
-    @FXML
-    PasswordField confirmPassword;
-    private static Employee loggedInEmployee;
-    private String employeePass;
-    private String employeeID;
-    public Label passwordError;
 
     DatabaseWrapper db;
 
@@ -65,19 +55,6 @@ public class SettingsController extends AbsPage implements Initializable{
         //call DB restore here
         db.restoreAll();
 
-    }
-
-    // Go to the home fxml when the home button is pressed
-    @FXML
-    void goToHome(ActionEvent event) {
-        // Try to go home
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Home.fxml"));
-            Bapp.getPrimaryStage().getScene().setRoot(root);
-            // Print stack trace if unable to go home
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public void onEmbeddedToggle(ActionEvent actionEvent) throws IOException {
@@ -129,15 +106,7 @@ public class SettingsController extends AbsPage implements Initializable{
             clientServerToggle.setSelected(false);
             embeddedToggle.setSelected(true);
             System.out.println("Embedded");
-
-            List<Employee> employeeList = db.getAllEmployee();
-            for(Employee employee: employeeList){
-                employeeID = employee.getEmployeeID();
-                employeePass = employee.getPassword();
-            }
-
         }
-
         initResize();
         resize();
         namePage();
@@ -146,26 +115,6 @@ public class SettingsController extends AbsPage implements Initializable{
     @Override
     public void namePage() {
         AnchorHomeController.curAnchorHomeController.pageName.setText("Settings");
-    }
-
-    public void editProfile(ActionEvent actionEvent) {
-        if(changePassword.getText().equals(confirmPassword.getText())){
-          Employee employee = LoginController.getLoggedInEmployee();
-          loggedInEmployee = new Employee(employee.getEmployeeID(), employee.getLastName(), employee.getFirstName(), employee.getPosition(), employee.getAccessLevel(), employee.getUsername(), confirmPassword.getText(), employee.getPassword(), employee.getPhoneNumber());
-          db.updateEmployee(loggedInEmployee);
-          changePassword.setText("");
-          confirmPassword.setText("");
-          passwordError.setTextFill(Color.RED);
-          passwordError.setText("Password Change Confirmed");
-        }
-        else if(changePassword.getText().isEmpty() || confirmPassword.getText().isEmpty()){
-          passwordError.setTextFill(Color.RED);
-          passwordError.setText("A password field is empty, please fill in both");
-        }
-        else{
-          passwordError.setTextFill(Color.RED);
-          passwordError.setText("Passwords do not match, Try again");
-        }
     }
 
 }
