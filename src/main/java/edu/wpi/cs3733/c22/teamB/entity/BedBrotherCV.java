@@ -40,11 +40,7 @@ public class BedBrotherCV implements Runnable {
                             String camID = input.next();
                             String tagID = input.next();
                             System.out.println("Cam: " + camID + " Tag: " + tagID);
-                            if (camID.equals("cam1")) {
-                                cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01203");
-                            } else if (camID.equals("cam2")) {
-                                cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01403");
-                            }
+                            cameraLocation[camIndex] = dbWrapper.getLocation(camID);
                             moveEquipTagID(camIndex, tagID);
                         }
 
