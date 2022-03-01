@@ -37,6 +37,7 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -641,8 +642,8 @@ public class MapEditorController {
                     }
                 }
             } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
-                System.out.println("LocationMongo.referenced: " + LocationMongo.referenced);
-                if (LocationMongo.referenced) {
+                System.out.println("LocationMongo.referenced: " + DatabaseWrapper.getInstance().isLocationReferenced(selectedPnt.getId()));
+                if (DatabaseWrapper.getInstance().isLocationReferenced(selectedPnt.getId())) {
                     locationPopup.setVisible(true);
                     PauseTransition visiblePause = new PauseTransition(
                             Duration.seconds(1)

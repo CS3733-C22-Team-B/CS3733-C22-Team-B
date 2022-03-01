@@ -249,7 +249,7 @@ public class LocationTableController extends AbsPage {
                 }
             }
         } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
-            if (LocationMongo.referenced == true) {
+            if (DatabaseWrapper.getInstance().isLocationReferenced(table.getSelectionModel().getSelectedItem().getNodeID())) {
                 locationPopup.setVisible(true);
                 PauseTransition visiblePause = new PauseTransition(
                         Duration.seconds(1)
@@ -259,7 +259,6 @@ public class LocationTableController extends AbsPage {
                 );
                 visiblePause.play();
             } else {
-                try {
                     db.deleteLocation(table.getSelectionModel().getSelectedItem().getNodeID());
 
                     loadTable();
@@ -274,18 +273,6 @@ public class LocationTableController extends AbsPage {
                             event -> popup.setVisible(false)
                     );
                     visiblePause.play();
-                } catch (Exception e) {
-                    System.out.println("exception" + e);
-                        locationPopup.setVisible(true);
-                        PauseTransition visiblePause = new PauseTransition(
-                                Duration.seconds(1)
-                        );
-                        visiblePause.setOnFinished(
-                                event -> locationPopup.setVisible(false)
-                        );
-                        visiblePause.play();
-
-                }
             }
         }
     }

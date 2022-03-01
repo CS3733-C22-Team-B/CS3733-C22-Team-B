@@ -623,5 +623,14 @@ public class DatabaseWrapper {
     public IDatabase<Location> modeLocation() {
         return this.LocationDao;
     }
+
+    public boolean isLocationReferenced(String objectID) {
+        boolean isReferenced = true;
+        if (this.LocationDao instanceof LocationMongo) {
+            isReferenced = ((LocationMongo) this.LocationDao).isLocationReferenced(objectID);
+        }
+
+        return isReferenced;
+    }
 }
 

@@ -21,7 +21,7 @@ public class LocationMongo implements IDatabase<Location> {
 
     private MongoDatabase conn;
     private MongoCollection LocationTable;
-    public static boolean referenced;
+//    public static boolean referenced;
 
 
     public LocationMongo(){
@@ -51,26 +51,7 @@ public class LocationMongo implements IDatabase<Location> {
 
     @Override
     public void deleteValue(String objectID) {
-        referenced = false;
-
-        List<AbstractSR> mainList = DatabaseWrapper.getInstance().getAllSR();
-        List<MedicalEquipment> equipmentList = DatabaseWrapper.getInstance().getAllMedicalEquipment();
-
-
-        for (MedicalEquipment medicalEquipment : equipmentList) {
-            if ((!referenced && medicalEquipment.getLocation().getNodeID().equals(objectID))) {
-                referenced = true;
-            }
-        }
-        if(!referenced){
-            for (AbstractSR abstractSR : mainList) {
-                if (!referenced && abstractSR.getLocation().getNodeID().equals(objectID)) {
-                    referenced = true;
-                }
-            }
-        }
-
-        if (!referenced) {
+        if (!isLocationReferenced(objectID)) {
             LocationTable.deleteOne(convertLocation(getValue(objectID)));
         }
     }
@@ -100,7 +81,6 @@ public class LocationMongo implements IDatabase<Location> {
         Location location = new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
 
         return location;
-//        return null;
     }
 
     @Override
@@ -120,7 +100,6 @@ public class LocationMongo implements IDatabase<Location> {
 
         System.out.println(locationList);
         return locationList;
-//        return null;
     }
 
     @Override
@@ -141,5 +120,25 @@ public class LocationMongo implements IDatabase<Location> {
             addValue(location);
         }
 
+    }
+
+    public boolean isLocationReferenced(String objectID) {
+
+        List<AbstractSR> mainList = DatabaseWrapper.getInstance().getAllSR();
+        List<MedicalEquipment> equipmentList = DatabaseWrapper.getInstance().getAllMedicalEquipment();
+
+        for (MedicalEquipment medicalEquipment : equipmentList) {
+            if ((medicalEquipment.getLocation().getNodeID().equals(objectID))) {
+                return true;
+            }
+        }
+
+        for (AbstractSR abstractSR : mainList) {
+            if (abstractSR.getLocation().getNodeID().equals(objectID)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
