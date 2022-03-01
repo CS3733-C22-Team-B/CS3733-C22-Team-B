@@ -37,5 +37,14 @@
             <JFXButton fx:id="editPassword" layoutX="87.0" layoutY="366.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Change Password" textFill="WHITE" />
         </children>
     </Pane>
+      <Pane fx:id="popup" layoutX="250.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
+         <children>
+            <Label alignment="CENTER" layoutY="26.0" prefHeight="59.0" prefWidth="290.0" style="-fx-text-fill: white;" text="Password Changed!">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
 </children>
 </AnchorPane>
