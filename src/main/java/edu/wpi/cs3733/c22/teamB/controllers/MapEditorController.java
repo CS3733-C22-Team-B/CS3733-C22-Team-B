@@ -39,6 +39,7 @@ import net.kurobako.gesturefx.GesturePane;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -123,6 +124,7 @@ public class MapEditorController {
     TableView sideviewTable = new TableView();
     //Holds locations so med equip doesn't go on top of it or something idk
     List<Location> equipLocations = new ArrayList<Location>();
+    AnchorPane sideviewNode;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -690,8 +692,29 @@ public class MapEditorController {
         setTextPos();
         addPoints();
         if (currentFloor.equals("side")) {
-            System.out.println("bruh table about to exist");
-            stackPane.getChildren().add(sideviewTable);
+            System.out.println("bruh sideView about to exist");
+//            stackPane.getChildren().add(sideviewTable);
+            anchorPane.getChildren().add(1, sideviewNode);
+            anchorPane.setLeftAnchor(sideviewNode,0.0);
+            anchorPane.setTopAnchor(sideviewNode,0.0);
+            anchorPane.setRightAnchor(sideviewNode,0.0);
+            anchorPane.setBottomAnchor(sideviewNode,0.0);
+            showLocations.setVisible(false);
+            showMedical.setVisible(false);
+            showSR.setVisible(false);
+            moveButton.setDisable(true);
+            addButton.setDisable(true);
+            moveButton.setOpacity(0.5);
+            addButton.setOpacity(0.5);
+        } else{
+            anchorPane.getChildren().remove(sideviewNode);
+            showLocations.setVisible(true);
+            showMedical.setVisible(true);
+            showSR.setVisible(true);
+            moveButton.setDisable(false);
+            addButton.setDisable(false);
+            moveButton.setOpacity(1);
+            addButton.setOpacity(1);
         }
     }
 
@@ -778,7 +801,6 @@ public class MapEditorController {
 //                setText();
                 gesturePane.reset();
                 gesturePane.setGestureEnabled(false);
-                imageView.setImage(sideViewImage);
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
 
                 if (sideviewTable.getItems() != null) {
@@ -801,6 +823,12 @@ public class MapEditorController {
                 sideviewTable.setMaxHeight(300);
                 sideviewTable.setMaxWidth(440);
                 sideviewTable.setFixedCellSize(50);
+                try{
+                    FXMLLoader sideviewLoader = new FXMLLoader(Bapp.class.getClassLoader().getResource("edu/wpi/cs3733/c22/teamB/views/Sideview.fxml"));
+                    sideviewNode = sideviewLoader.load();
+                } catch (IOException e){
+                    System.out.println(e);
+                }
                 break;
 
             default:
