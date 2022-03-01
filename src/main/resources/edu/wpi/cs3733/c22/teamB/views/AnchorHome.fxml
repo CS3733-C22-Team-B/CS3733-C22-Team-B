@@ -90,9 +90,9 @@
                               </JFXButton>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="229.0">
                            <children>
-                              <JFXButton fx:id="apiButton" onAction="#goToAPI" text="        APIs          " textAlignment="RIGHT">
+                              <JFXButton fx:id="apiButton" contentDisplay="RIGHT" onAction="#goToAPI" prefWidth="130.0" text="API">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
