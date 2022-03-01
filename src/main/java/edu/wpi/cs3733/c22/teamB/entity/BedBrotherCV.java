@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,56 +12,58 @@ import javafx.application.Platform;
 public class BedBrotherCV implements Runnable {
 
     MapEditorController mapController;
-    Location cameraLocation;
+    Location[] cameraLocation = new Location[2];
+    List<SerialPort> chosenPortList = new ArrayList<SerialPort>();
+    DatabaseWrapper dbWrapper = DatabaseWrapper.getInstance();
+    List<Location> locationList = dbWrapper.getAllLocation();
 
     public void setMapController(MapEditorController mapController) {
         this.mapController = mapController;
     }
 
-    static SerialPort chosenPort;
-    DatabaseWrapper dbWrapper = DatabaseWrapper.getInstance();
-    List<Location> locationList = dbWrapper.getAllLocation();
-
     public void run() {
-        for(SerialPort port : SerialPort.getCommPorts()){
-            if(port.getPortDescription().equals("OpenMV Virtual Comm Port in FS Mode")){
+        for (SerialPort port : SerialPort.getCommPorts()) {
+            if (port.getPortDescription().equals("OpenMV Virtual Comm Port in FS Mode")) {
                 System.out.println("Camera found let's gooooooo!");
-                chosenPort = port;
+                chosenPortList.add(port);
+
             }
             System.out.println(port.getPortDescription());
         }
-        if(chosenPort!=null){
-            chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
-            if (chosenPort.openPort()) {
-                Scanner input = new Scanner(chosenPort.getInputStream());
-                while (input.hasNext()) {
-                    String tagID = input.next();
-                    System.out.println("Data: " + tagID);
-                    if(tagID.equals("cam1")){
-                        cameraLocation = dbWrapper.getLocation("HHALL01203");
-                    } else if(tagID.equals("cam2")){
-                        cameraLocation = dbWrapper.getLocation("HHALL01403");
-                    } else{
-                        moveEquipTagID(tagID);
+        if (chosenPortList.size() > 0) {
+            for (int camIndex = 0; camIndex < chosenPortList.size(); camIndex++) {
+                chosenPortList.get(camIndex).setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+                if (chosenPortList.get(camIndex).openPort()) {
+                    Scanner input = new Scanner(chosenPortList.get(camIndex).getInputStream());
+                    while (input.hasNext()) {
+                        String tagID = input.next();
+                        System.out.println("Data: " + tagID);
+                        if (tagID.equals("cam1")) {
+                            cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01203");
+                        } else if (tagID.equals("cam2")) {
+                            cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01403");
+                        } else {
+                            moveEquipTagID(camIndex,tagID);
+                        }
                     }
+                    try {
+                        System.out.println("CV thread sleep start");
+                        Thread.currentThread().sleep(500);
+                        System.out.println("CV thread sleep end");
+                    } catch (InterruptedException e) {
+                        System.out.println(e);
+                    }
+                } else {
+                    System.out.println("Port closed");
                 }
-                try{
-                    System.out.println("CV thread sleep start");
-                    Thread.currentThread().sleep(500);
-                    System.out.println("CV thread sleep end");
-                } catch(InterruptedException e){
-                    System.out.println(e);
-                }
-            } else{
-                System.out.println("Port closed");
             }
         } else{
-            System.out.println("no camera :( stopping camera thread");
+            System.out.println("no cameras :( stopping camera thread");
             Thread.currentThread().interrupt();
         }
     }
 
-    public void moveEquipTagID(String tagID) {
+    public void moveEquipTagID(int camIndex,String tagID) {
         String equipID;
         System.out.println("Tag ID Found: " + tagID);
         switch (tagID) {
@@ -85,13 +88,13 @@ public class BedBrotherCV implements Runnable {
                 break;
         }
         Location oldLoc = dbWrapper.getMedicalEquipment(equipID).getLocation();
-        if(equipID.equals("No equip")){
+        if (equipID.equals("No equip")) {
             System.out.println("invalid tag");
-        } else{
-            if(dbWrapper.getMedicalEquipment(equipID).getLocation().equals(cameraLocation)){
-            } else{
+        } else {
+            if (dbWrapper.getMedicalEquipment(equipID).getLocation().equals(cameraLocation[camIndex])) {
+            } else {
                 Platform.runLater(() -> {
-                    mapController.moveEquip(equipID,cameraLocation);
+                    mapController.moveEquip(equipID, cameraLocation[camIndex]);
                     mapController.shuffleMed(oldLoc);
                 });
             }
