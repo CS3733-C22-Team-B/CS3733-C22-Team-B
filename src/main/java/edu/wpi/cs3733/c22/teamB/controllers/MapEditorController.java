@@ -6,9 +6,12 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.*;
+import edu.wpi.cs3733.c22.teamB.entity.MongoDB.LocationMongo;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import javafx.animation.TranslateTransition;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Insets;
@@ -31,13 +34,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
+
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MapEditorController{
+public class MapEditorController {
     private static final double MODIFY_POPUP_LOC_W = 250;
     private static final double MODIFY_POPUP_LOC_H = 261.2;
     private static final double MODIFY_POPUP_EQP_W = 250;
@@ -106,6 +112,8 @@ public class MapEditorController{
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
     List<AbstractSR> srList = dbWrapper.getAllSR();
+    @FXML
+    private Pane locationPopup;
     //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
     String currentFloor = "03";
     boolean addState = false;
@@ -141,26 +149,31 @@ public class MapEditorController{
 //    private JFXButton modifyButton;
 
 
-
     @FXML
     private JFXButton submitModifyButton;
-    @FXML private JFXButton goToL1Button;
-    @FXML private JFXButton goToL2Button;
-    @FXML private JFXButton goTo1Button;
-    @FXML private JFXButton goTo2Button;
-    @FXML private JFXButton goTo3Button;
-    @FXML private JFXButton goToSideViewButton;
+    @FXML
+    private JFXButton goToL1Button;
+    @FXML
+    private JFXButton goToL2Button;
+    @FXML
+    private JFXButton goTo1Button;
+    @FXML
+    private JFXButton goTo2Button;
+    @FXML
+    private JFXButton goTo3Button;
+    @FXML
+    private JFXButton goToSideViewButton;
 
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         Bapp.getPrimaryStage().setMaximized(true);
         sceneWidth = Bapp.getPrimaryStage().getScene().getWidth();
         sceneHeight = Bapp.getPrimaryStage().getScene().getHeight();
         imageHeight = imageView.getImage().getHeight();
         imageWidth = imageView.getImage().getWidth();
         gesturePane.setMinHeight(sceneHeight);
-        gesturePane.setMinWidth(sceneHeight*(imageWidth/imageHeight));
+        gesturePane.setMinWidth(sceneHeight * (imageWidth / imageHeight));
 //        Bapp.getPrimaryStage().resizableProperty().set(false);
         imageView.setFitHeight(gesturePane.getWidth());
         gesturePane.setGestureEnabled(true);
@@ -175,14 +188,14 @@ public class MapEditorController{
 //        deleteButton.setOpacity(0.5);
 //        deleteButton.setDisable(true);
         goTo3Button.setStyle("-fx-background-color: #007fff");
-        nodeType.getItems().addAll("PATI","STOR","DIRT","HALL","ELEV","REST","STAI","DEPT","LABS","INFO","CONF","EXIT","RETL","SERV");
-        floor.getItems().addAll("L2","L1","01","02","03");
-        status.getItems().addAll("CLEAN","DIRTY","WAITING","IN USE");
+        nodeType.getItems().addAll("PATI", "STOR", "DIRT", "HALL", "ELEV", "REST", "STAI", "DEPT", "LABS", "INFO", "CONF", "EXIT", "RETL", "SERV");
+        floor.getItems().addAll("L2", "L1", "01", "02", "03");
+        status.getItems().addAll("CLEAN", "DIRTY", "WAITING", "IN USE");
         floor.setValue(currentFloor);
         //addPoint("1",0,0,Color.ORANGE);
         //addPoint("2",imageWidth,imageHeight, Color.RED);
-        modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0,12,12,12,false), javafx.geometry.Insets.EMPTY)));
-        modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID, new CornerRadii(0,12,12,12,false),new BorderWidths(1), Insets.EMPTY)));
+        modifyPopup.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(0, 12, 12, 12, false), javafx.geometry.Insets.EMPTY)));
+        modifyPopup.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(0, 12, 12, 12, false), new BorderWidths(1), Insets.EMPTY)));
         modifyPopup.setVisible(false);
         setTextVisible(false);
         //updateText(summary3Location,getImageX(1000),getImageX(877));
@@ -200,26 +213,30 @@ public class MapEditorController{
         sideviewTable.setTranslateX(0);
         sideviewTable.setTranslateY(-300);
         setAnchors();
+
+        locationPopup.setVisible(false);
+        locationPopup.setLayoutX(Bapp.getPrimaryStage().getWidth() / 3.5);
+        locationPopup.setLayoutY(Bapp.getPrimaryStage().getHeight() / 3.5);
     }
 
-    private void setAnchors(){
+    private void setAnchors() {
 //        anchorPane.setPrefHeight(Bapp.getPrimaryStage().getHeight());
 //        anchorPane.setPrefWidth(Bapp.getPrimaryStage().getWidth()-130);
         double bottomAnchor = 20;
-        anchorPane.setBottomAnchor(addButton,bottomAnchor);
-        anchorPane.setBottomAnchor(moveButton,bottomAnchor);
-        anchorPane.setBottomAnchor(floorBox,bottomAnchor);
+        anchorPane.setBottomAnchor(addButton, bottomAnchor);
+        anchorPane.setBottomAnchor(moveButton, bottomAnchor);
+        anchorPane.setBottomAnchor(floorBox, bottomAnchor);
 //        anchorPane.setBottomAnchor(goToL2Button,bottomAnchor);
 //        anchorPane.setBottomAnchor(goToL1Button,bottomAnchor);
 //        anchorPane.setBottomAnchor(goTo1Button,bottomAnchor);
 //        anchorPane.setBottomAnchor(goTo2Button,bottomAnchor);
 //        anchorPane.setBottomAnchor(goTo3Button,bottomAnchor);
 //        anchorPane.setBottomAnchor(goToSideViewButton,bottomAnchor);
-        anchorPane.setBottomAnchor(loadFromCSVButton,bottomAnchor);
-        anchorPane.setBottomAnchor(saveToCSVButton,bottomAnchor);
+        anchorPane.setBottomAnchor(loadFromCSVButton, bottomAnchor);
+        anchorPane.setBottomAnchor(saveToCSVButton, bottomAnchor);
 
-        anchorPane.setLeftAnchor(showVBox,20.0);
-        anchorPane.setTopAnchor(showVBox,20.0);
+        anchorPane.setLeftAnchor(showVBox, 20.0);
+        anchorPane.setTopAnchor(showVBox, 20.0);
 
         double leftAnchor = 20;
         double buffer = 10;
@@ -228,131 +245,131 @@ public class MapEditorController{
         double lowerWidth = 60;
         double sideWidth = 80;
         double csvWidth = 140;
-        anchorPane.setLeftAnchor(addButton,leftAnchor);
-        anchorPane.setLeftAnchor(moveButton,leftAnchor+=smallWidth+buffer);
-        anchorPane.setLeftAnchor(floorBox,leftAnchor+=moveWidth+buffer);
+        anchorPane.setLeftAnchor(addButton, leftAnchor);
+        anchorPane.setLeftAnchor(moveButton, leftAnchor += smallWidth + buffer);
+        anchorPane.setLeftAnchor(floorBox, leftAnchor += moveWidth + buffer);
 //        anchorPane.setLeftAnchor(goToL2Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goToL1Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goTo1Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goTo2Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goTo3Button,leftAnchor+=buffer);
 //        anchorPane.setLeftAnchor(goToSideViewButton,leftAnchor+=buffer);
-        anchorPane.setLeftAnchor(loadFromCSVButton,leftAnchor+=2*lowerWidth+3*smallWidth+sideWidth+buffer);
-        anchorPane.setLeftAnchor(saveToCSVButton,leftAnchor+=csvWidth+buffer);
-        anchorPane.setLeftAnchor(showLocations,leftAnchor+=csvWidth+buffer);
-        anchorPane.setLeftAnchor(showMedical,leftAnchor+=csvWidth+buffer);
-        anchorPane.setLeftAnchor(showSR,leftAnchor+=csvWidth+buffer);
+        anchorPane.setLeftAnchor(loadFromCSVButton, leftAnchor += 2 * lowerWidth + 3 * smallWidth + sideWidth + buffer);
+        anchorPane.setLeftAnchor(saveToCSVButton, leftAnchor += csvWidth + buffer);
+        anchorPane.setLeftAnchor(showLocations, leftAnchor += csvWidth + buffer);
+        anchorPane.setLeftAnchor(showMedical, leftAnchor += csvWidth + buffer);
+        anchorPane.setLeftAnchor(showSR, leftAnchor += csvWidth + buffer);
     }
 
-    private void setupSideviewColumns(){
+    private void setupSideviewColumns() {
         List<String> columns = new ArrayList<>();
         columns.add("Floor");
         columns.add("Locations");
         columns.add("DirtyEquipment");
         columns.add("CleanEquipment");
         columns.add("ServiceRequests");
-        for(String subject : columns){
+        for (String subject : columns) {
             TableColumn<SideviewRow, String> nextColumn = new TableColumn<>(subject);
             nextColumn.setCellValueFactory(new PropertyValueFactory<>(subject));
             sideviewTable.getColumns().add(nextColumn);
         }
     }
 
-    public void setTextPos(){
-        Point2D sum1Point = coordTrans.imageToNode(300,-175);
+    public void setTextPos() {
+        Point2D sum1Point = coordTrans.imageToNode(300, -175);
         summaryL1Location.setTranslateX(sum1Point.getX());
         summaryL1Location.setTranslateY(sum1Point.getY());
 //        summaryL1Location.setTranslateX(getImageX(300));
 //        summaryL1Location.setTranslateY(getImageY(-175));
 
-        Point2D sumL2Point = coordTrans.imageToNode(300,-325);
+        Point2D sumL2Point = coordTrans.imageToNode(300, -325);
         summaryL2Location.setTranslateX(sumL2Point.getX());
         summaryL2Location.setTranslateY(sumL2Point.getY());
 //        summaryL2Location.setTranslateX(getImageX(300));
 //        summaryL2Location.setTranslateY(getImageY(-325));
 
-        Point2D sum1LPoint = coordTrans.imageToNode(300,-25);
+        Point2D sum1LPoint = coordTrans.imageToNode(300, -25);
 //        summary1Location.setTranslateX(getImageX(300));
 //        summary1Location.setTranslateY(getImageY(-25));
         summary1Location.setTranslateX(sum1LPoint.getX());
         summary1Location.setTranslateY(sum1LPoint.getY());
 
-        Point2D sum2LPoint = coordTrans.imageToNode(300,125);
- //       summary2Location.setTranslateX(getImageX(300));
- //       summary2Location.setTranslateY(getImageY(125));
+        Point2D sum2LPoint = coordTrans.imageToNode(300, 125);
+        //       summary2Location.setTranslateX(getImageX(300));
+        //       summary2Location.setTranslateY(getImageY(125));
         summary2Location.setTranslateX(sum2LPoint.getX());
         summary2Location.setTranslateY(sum2LPoint.getY());
 
-        Point2D sum3LPoint = coordTrans.imageToNode(300,275);
-       // summary3Location.setTranslateX(getImageX(300));
-       // summary3Location.setTranslateY(getImageY(275));
+        Point2D sum3LPoint = coordTrans.imageToNode(300, 275);
+        // summary3Location.setTranslateX(getImageX(300));
+        // summary3Location.setTranslateY(getImageY(275));
         summary3Location.setTranslateX(sum3LPoint.getX());
         summary3Location.setTranslateY(sum3LPoint.getY());
 
 
-        Point2D sum2LEqPoint = coordTrans.imageToNode(400,-175);
+        Point2D sum2LEqPoint = coordTrans.imageToNode(400, -175);
 //        summaryL2Equipment.setTranslateX(getImageX(400));
 //        summaryL2Equipment.setTranslateY(getImageY(-175));
         summaryL2Equipment.setTranslateX(sum2LEqPoint.getX());
         summaryL2Equipment.setTranslateY(sum2LEqPoint.getY());
 
-        Point2D sumL1EqPoint = coordTrans.imageToNode(400,-325);
+        Point2D sumL1EqPoint = coordTrans.imageToNode(400, -325);
 //        summaryL1Equipment.setTranslateX(getImageX(400));
 //        summaryL1Equipment.setTranslateY(getImageY(-325));
         summaryL1Equipment.setTranslateX(sumL1EqPoint.getX());
         summaryL1Equipment.setTranslateY(sumL1EqPoint.getY());
 
-        Point2D sum1EqPoint = coordTrans.imageToNode(400,-25);
+        Point2D sum1EqPoint = coordTrans.imageToNode(400, -25);
 //        summary1Equipment.setTranslateX(getImageX(400));
 //        summary1Equipment.setTranslateY(getImageY(-25));
         summary1Equipment.setTranslateX(sum1EqPoint.getX());
         summary1Equipment.setTranslateY(sum1EqPoint.getY());
 
-        Point2D sum2EqPoint = coordTrans.imageToNode(400,125);
+        Point2D sum2EqPoint = coordTrans.imageToNode(400, 125);
         //summary2Equipment.setTranslateX(getImageX(400));
         //summary2Equipment.setTranslateY(getImageY(125));
         summary2Equipment.setTranslateX(sum2EqPoint.getX());
         summary2Equipment.setTranslateY(sum2EqPoint.getY());
 
-        Point2D sum3EqPoint = coordTrans.imageToNode(400,275);
+        Point2D sum3EqPoint = coordTrans.imageToNode(400, 275);
 //        summary3Equipment.setTranslateX(getImageX(400));
 //        summary3Equipment.setTranslateY(getImageY(275));
         summary2Equipment.setTranslateX(sum3EqPoint.getX());
         summary2Equipment.setTranslateY(sum3EqPoint.getY());
 
-        Point2D sumL2SRPoint = coordTrans.imageToNode(500,-175);
+        Point2D sumL2SRPoint = coordTrans.imageToNode(500, -175);
 //        summaryL2SR.setTranslateX(getImageX(500));
 //        summaryL2SR.setTranslateY(getImageY(-175));
         summaryL2SR.setTranslateX(sumL2SRPoint.getX());
         summaryL2SR.setTranslateY(sumL2SRPoint.getY());
 
-        Point2D sumL1SRPoint = coordTrans.imageToNode(500,-325);
- //       summaryL1SR.setTranslateX(getImageX(500));
- //       summaryL1SR.setTranslateY(getImageY(-325));
+        Point2D sumL1SRPoint = coordTrans.imageToNode(500, -325);
+        //       summaryL1SR.setTranslateX(getImageX(500));
+        //       summaryL1SR.setTranslateY(getImageY(-325));
         summaryL1SR.setTranslateX(sumL1SRPoint.getX());
         summaryL1SR.setTranslateY(sumL1SRPoint.getY());
 
-        Point2D sum1SRPoint = coordTrans.imageToNode(500,-25);
-       // summary1SR.setTranslateX(getImageX(500));
-       // summary1SR.setTranslateY(getImageY(-25));
+        Point2D sum1SRPoint = coordTrans.imageToNode(500, -25);
+        // summary1SR.setTranslateX(getImageX(500));
+        // summary1SR.setTranslateY(getImageY(-25));
         summary1SR.setTranslateX(sum1SRPoint.getX());
         summary1SR.setTranslateY(sum1SRPoint.getY());
 
-        Point2D sum2SRPoint = coordTrans.imageToNode(500,125);
+        Point2D sum2SRPoint = coordTrans.imageToNode(500, 125);
 //        summary2SR.setTranslateX(getImageX(500));
- //       summary2SR.setTranslateY(getImageY(125));
+        //       summary2SR.setTranslateY(getImageY(125));
         summary2SR.setTranslateX(sum2SRPoint.getX());
         summary2SR.setTranslateY(sum2SRPoint.getY());
 
-        Point2D sum3SRPoint = coordTrans.imageToNode(500,275);
+        Point2D sum3SRPoint = coordTrans.imageToNode(500, 275);
 //        summary3SR.setTranslateX(getImageX(500));
- //       summary3SR.setTranslateY(getImageY(275));
+        //       summary3SR.setTranslateY(getImageY(275));
         summary3SR.setTranslateX(sum3SRPoint.getX());
         summary3SR.setTranslateY(sum3SRPoint.getY());
     }
 
     //Add points from DB
-    public void addPoints(){
+    public void addPoints() {
         for (Location local : locationList) {
             if (local.getFloor().equals(currentFloor)) {
                 String ID = local.getNodeID();
@@ -362,17 +379,13 @@ public class MapEditorController{
             }
         }
 
-
         for (MedicalEquipment local : medicalList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getEquipmentID();
                 Location equipLoc = local.getLocation();
-                double imageX = equipLoc.getXcoord();
-                double imageY = equipLoc.getYcoord();
-                int existingEquipCount = Collections.frequency(equipLocations,equipLoc);
-                double existingOffset = 10;
-                imageX += existingEquipCount*existingOffset;
-                imageY += existingEquipCount*existingOffset;
+                Point2D imageOffsets = calcMedOffsets(equipLoc);
+                double imageX = equipLoc.getXcoord() + imageOffsets.getX();
+                double imageY = equipLoc.getYcoord() + imageOffsets.getY();
                 equipLocations.add(equipLoc);
                 addPointMedical(ID, imageX, imageY, Color.BLUE);
             }
@@ -386,20 +399,26 @@ public class MapEditorController{
                 addPointSR(ID, imageX, imageY, Color.LIME);
             }
         }
+    }
 
-
+    private Point2D calcMedOffsets(Location equipLoc) {
+        double existingOffset = 10;
+        int existingEquipCount = Collections.frequency(equipLocations, equipLoc);
+        double imageXOffset = existingEquipCount * existingOffset;
+        double imageYOffset = existingEquipCount * existingOffset;
+        return new Point2D(imageXOffset, imageYOffset);
     }
 
     //Add a point to the map using image coordinates. Set up onclick.
-    public Circle addPoint(String ID, double imageX, double imageY, Color color){
+    public Circle addPoint(String ID, double imageX, double imageY, Color color) {
         //Create the point
-        Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
+        Point2D nodeCoords = coordTrans.imageToNode(imageX, imageY);
         Circle testPoint = new Circle();
         testPoint.setRadius(3);
         testPoint.setTranslateX(nodeCoords.getX());
         testPoint.setTranslateY(nodeCoords.getY());
         //Add the point to the stackPane's children
-        if(showLocations.isSelected()) {
+        if (showLocations.isSelected()) {
             stackPane.getChildren().remove(modifyPopup);
             stackPane.getChildren().add(testPoint);
             stackPane.getChildren().add(modifyPopup);
@@ -421,7 +440,7 @@ public class MapEditorController{
                     if (moveState) {
                         Location temp = dbWrapper.getLocation(selectedPoint);
                         Circle c = (Circle) (event.getSource());
-                        Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(),c.getTranslateY());
+                        Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(), c.getTranslateY());
                         dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
                         refresh();
                     }
@@ -443,7 +462,7 @@ public class MapEditorController{
                 }
             });
 
-        } else{
+        } else {
             moveButton.setSelected(false);
             moveState = false;
             gesturePane.setGestureEnabled(true);
@@ -454,8 +473,8 @@ public class MapEditorController{
 
 
     //add a medical point
-    public void addPointMedical(String ID, double imageX, double imageY, Color color){
-        if(showMedical.isSelected()) {
+    public void addPointMedical(String ID, double imageX, double imageY, Color color) {
+        if (showMedical.isSelected()) {
             //Create the point
             //getImageX(x),getImageY(y)
             ImageView testImg = new ImageView(medical);
@@ -465,9 +484,9 @@ public class MapEditorController{
             stackPane.getChildren().add(modifyPopup);
             //Set point ID
             testImg.idProperty().set(ID);
-            Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-            testImg.setTranslateX(nodeCoords.getX()+medOffset);
-            testImg.setTranslateY(nodeCoords.getY()+medOffset);
+            Point2D nodeCoords = coordTrans.imageToNode(imageX, imageY);
+            testImg.setTranslateX(nodeCoords.getX() + medOffset);
+            testImg.setTranslateY(nodeCoords.getY() + medOffset);
             testImg.setPreserveRatio(true);
             testImg.setFitWidth(15);
 
@@ -479,13 +498,13 @@ public class MapEditorController{
                         Location tempLoc = getClosestLocation(imgView.getTranslateX(), imgView.getTranslateY());
                         //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         //System.out.println(dist);
-                        MedicalEquipment temp = dbWrapper.getMedicalEquipment(imgView.getId());
-                        temp.setLocation(tempLoc);
-                        dbWrapper.updateMedicalEquipment(temp);
-                        Point2D nodeCoords = coordTrans.imageToNode(tempLoc.getXcoord(),tempLoc.getYcoord());
+                        //
+                        Location oldLoc = dbWrapper.getMedicalEquipment(imgView.getId()).getLocation();
+                        moveEquip(imgView.getId(), tempLoc);
+                        shuffleMed(oldLoc);
 //                        System.out.println("newImgNode x: " + nodeCoords.getX());
 //                        System.out.println("newImgNode y: " + nodeCoords.getY());
-                        refresh();
+                        //refresh();
                     }
                 }
             });
@@ -521,8 +540,8 @@ public class MapEditorController{
         }
     }
 
-    public void addPointSR(String ID, double imageX, double imageY,Color color){
-        if(showSR.isSelected()) {
+    public void addPointSR(String ID, double imageX, double imageY, Color color) {
+        if (showSR.isSelected()) {
             //Create the point
             ImageView testImg = new ImageView(clipboard);
             //Add the point to the anchorPane's children
@@ -531,9 +550,9 @@ public class MapEditorController{
             stackPane.getChildren().add(modifyPopup);
             //Set point ID
             testImg.idProperty().set(ID);
-            Point2D nodeCoords = coordTrans.imageToNode(imageX,imageY);
-            testImg.setTranslateX(nodeCoords.getX()-10);
-            testImg.setTranslateY(nodeCoords.getY()-10);
+            Point2D nodeCoords = coordTrans.imageToNode(imageX, imageY);
+            testImg.setTranslateX(nodeCoords.getX() - 10);
+            testImg.setTranslateY(nodeCoords.getY() - 10);
             testImg.setPreserveRatio(true);
             testImg.setFitWidth(15);
         }
@@ -545,22 +564,22 @@ public class MapEditorController{
 
     void setEditFieldsVisible(boolean isVisible) {
         modifyPopup.setVisible(isVisible);
-        modifyPopup.getChildren().removeAll(new Node[]{header12,size,header11,color,header10,status,Locations,header9,header2,header3,header5,nameField,typeField,manField,header1,header4,header6,header7,header8,idField,floor,nodeType,shortName,longName,submitModifyButton});
+        modifyPopup.getChildren().removeAll(new Node[]{header12, size, header11, color, header10, status, Locations, header9, header2, header3, header5, nameField, typeField, manField, header1, header4, header6, header7, header8, idField, floor, nodeType, shortName, longName, submitModifyButton});
         if (clicked == "location") {
-            modifyPopup.getChildren().addAll(new Node[]{header1,idField,header4,floor,header6,nodeType,header7,shortName,header8,longName,submitModifyButton});
+            modifyPopup.getChildren().addAll(new Node[]{header1, idField, header4, floor, header6, nodeType, header7, shortName, header8, longName, submitModifyButton});
             header1.setText("Location ID:");
             header8.setText("Long Name:");
-        } else if (clicked == "equipment"){
-            modifyPopup.getChildren().addAll(new Node[]{header1,idField,header2,nameField,header3,typeField,header5,manField,header9,Locations,header10,status,header11,color,header12,size,header8,longName,submitModifyButton});
+        } else if (clicked == "equipment") {
+            modifyPopup.getChildren().addAll(new Node[]{header1, idField, header2, nameField, header3, typeField, header5, manField, header9, Locations, header10, status, header11, color, header12, size, header8, longName, submitModifyButton});
             header1.setText("Equipment ID:");
             header8.setText("Description:");
         }
     }
 
-    public void onPointClick(Circle testPoint){
+    public void onPointClick(Circle testPoint) {
         //Deselect previous point, make black
-        for(Location local: locationList){
-            if(local.getNodeID().equals(selectedPoint)){
+        for (Location local : locationList) {
+            if (local.getNodeID().equals(selectedPoint)) {
                 //addPoint(local.getNodeID(),local.getXcoord(),local.getYcoord(),Color.BLACK);
                 selectedPnt.setFill(Color.BLACK);
             }
@@ -581,7 +600,7 @@ public class MapEditorController{
         updatePopup();
     }
 
-    public void onImgClick(ImageView testImg){
+    public void onImgClick(ImageView testImg) {
         selectedImg = testImg;
         clicked = "equipment";
         MedicalEquipment local = dbWrapper.getMedicalEquipment(selectedImg.getId());
@@ -598,27 +617,70 @@ public class MapEditorController{
     }
 
 
-
-
-
-    void removeAllPoints(){
-        stackPane.getChildren().remove(16,stackPane.getChildren().size());
+    void removeAllPoints() {
+        stackPane.getChildren().remove(16, stackPane.getChildren().size());
         stackPane.getChildren().add(modifyPopup);
         equipLocations = new ArrayList<Location>();
     }
 
-    void deleteSelectedNode(){
-        if(clicked == "location") {
-            stackPane.getChildren().remove(selectedPnt);
-            dbWrapper.deleteLocation(selectedPnt.getId());
-        } else if (clicked == "equipment"){
+    void deleteSelectedNode() {
+        if (clicked == "location") {
+            if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationDaoI) {
+                try {
+                    dbWrapper.deleteLocation(selectedPnt.getId());
+                    stackPane.getChildren().remove(selectedPnt);
+                } catch (Exception e) {
+                    if (e instanceof java.lang.NullPointerException) {
+                        locationPopup.setVisible(true);
+                        PauseTransition visiblePause = new PauseTransition(
+                                Duration.seconds(1)
+                        );
+                        visiblePause.setOnFinished(
+                                event -> locationPopup.setVisible(false)
+                        );
+                        visiblePause.play();
+                    }
+                }
+            } else if (DatabaseWrapper.getInstance().modeLocation() instanceof LocationMongo) {
+                System.out.println("LocationMongo.referenced: " + DatabaseWrapper.getInstance().isLocationReferenced(selectedPnt.getId()));
+                if (DatabaseWrapper.getInstance().isLocationReferenced(selectedPnt.getId())) {
+                    locationPopup.setVisible(true);
+                    PauseTransition visiblePause = new PauseTransition(
+                            Duration.seconds(1)
+                    );
+                    visiblePause.setOnFinished(
+                            event -> locationPopup.setVisible(false)
+                    );
+                    visiblePause.play();
+                } else {
+//                    try {
+                        dbWrapper.deleteLocation(selectedPnt.getId());
+                        stackPane.getChildren().remove(selectedPnt);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        locationPopup.setVisible(true);
+//                        PauseTransition visiblePause = new PauseTransition(
+//                                Duration.seconds(1)
+//                        );
+//                        visiblePause.setOnFinished(
+//                                event -> locationPopup.setVisible(false)
+//                        );
+//                        visiblePause.play();
+//                    }
+                }
+            }
+
+        } else if (clicked == "equipment") {
+            String imgId = selectedImg.getId();
             stackPane.getChildren().remove(selectedImg);
-            dbWrapper.deleteMedicalEquipment(selectedImg.getId());
-            equipLocations.remove(dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation());
+            Location loc = dbWrapper.getMedicalEquipment(imgId).getLocation();
+            dbWrapper.deleteMedicalEquipment(imgId);
+            shuffleMed(loc);
         }
     }
 
-    @FXML public void refresh(){
+    @FXML
+    public void refresh() {
         locationList = dbWrapper.getAllLocation();
         medicalList = dbWrapper.getAllMedicalEquipment();
         srList = dbWrapper.getAllSR();
@@ -627,51 +689,62 @@ public class MapEditorController{
         removeAllPoints();
         setTextPos();
         addPoints();
-        if(currentFloor.equals("side")){
+        if (currentFloor.equals("side")) {
             System.out.println("bruh table about to exist");
             stackPane.getChildren().add(sideviewTable);
         }
     }
 
 
-    @FXML public void goToL2(){
+    @FXML
+    public void goToL2() {
         currentFloor = "L2";
         goTo();
     }
 
 
-    @FXML public void goToSideView() {
+    @FXML
+    public void goToSideView() {
         currentFloor = "side";
         goTo();
     }
 
-    @FXML public void goToL1(){
+    @FXML
+    public void goToL1() {
         currentFloor = "L1";
         goTo();
     }
-    @FXML public void goTo1(){
+
+    @FXML
+    public void goTo1() {
         currentFloor = "01";
         goTo();
     }
-    @FXML public void goTo2(){
+
+    @FXML
+    public void goTo2() {
         currentFloor = "02";
         goTo();
     }
-    @FXML public void goTo3(){
+
+    @FXML
+    public void goTo3() {
         currentFloor = "03";
         goTo();
     }
 
-    @FXML public void saveToCSV(){
+    @FXML
+    public void saveToCSV() {
         try {
             dbWrapper.backupAll();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
         refresh();
     }
 
-    @FXML public void goTo(){
+    @FXML
+    public void goTo() {
         goTo1Button.setStyle("-fx-background-color: #7B94C9");
         goTo2Button.setStyle("-fx-background-color: #7B94C9");
         goTo3Button.setStyle("-fx-background-color: #7B94C9");
@@ -679,7 +752,7 @@ public class MapEditorController{
         goToL2Button.setStyle("-fx-background-color: #7B94C9");
         goToSideViewButton.setStyle("-fx-background-color: #7B94C9");
         setTextVisible(false);
-        if(!moveState){
+        if (!moveState) {
             gesturePane.setGestureEnabled(true);
         }
 
@@ -692,15 +765,15 @@ public class MapEditorController{
                 imageView.setImage(secondFloorImage);
                 goTo2Button.setStyle("-fx-background-color: #007fff");
                 break;
-            case"L2":
+            case "L2":
                 imageView.setImage(lowerLevel2Image);
                 goToL2Button.setStyle("-fx-background-color: #007fff");
                 break;
-            case"L1":
+            case "L1":
                 imageView.setImage(lowerLevel1Image);
                 goToL1Button.setStyle("-fx-background-color: #007fff");
                 break;
-            case"side":
+            case "side":
 //                setTextVisible(true);
 //                setText();
                 gesturePane.reset();
@@ -708,8 +781,8 @@ public class MapEditorController{
                 imageView.setImage(sideViewImage);
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
 
-                if(sideviewTable.getItems()!=null){
-                    sideviewTable.getItems().remove(0,sideviewTable.getItems().size());
+                if (sideviewTable.getItems() != null) {
+                    sideviewTable.getItems().remove(0, sideviewTable.getItems().size());
                 }
                 List<String> floors = new ArrayList<>();
                 floors.add("03");
@@ -718,8 +791,8 @@ public class MapEditorController{
                 floors.add("L1");
                 floors.add("L2");
                 List<SideviewRow> allRows = new ArrayList<>();
-                for(String fl : floors){
-                    SideviewRow row = new SideviewRow(fl,String.valueOf(locationCount(fl)),String.valueOf(equipmentCount(fl,"DIRTY")),String.valueOf(equipmentCount(fl,"CLEAN")),String.valueOf(SRCount(fl)));
+                for (String fl : floors) {
+                    SideviewRow row = new SideviewRow(fl, String.valueOf(locationCount(fl)), String.valueOf(equipmentCount(fl, "DIRTY")), String.valueOf(equipmentCount(fl, "CLEAN")), String.valueOf(SRCount(fl)));
 //                    sideviewTable.getItems().add(row);
 //                    System.out.println("next row: " + row);
                     allRows.add(row);
@@ -745,27 +818,30 @@ public class MapEditorController{
         close();
     }
 
-    @FXML public void delete(){
+    @FXML
+    public void delete() {
         deleteSelectedNode();
         setEditFieldsVisible(false);
     }
 
-    @FXML public void close(){
+    @FXML
+    public void close() {
         setEditFieldsVisible(false);
-        if(selectedPnt!=null){
+        if (selectedPnt != null) {
             selectedPnt.setFill(Color.BLACK);
         }
     }
 
-    @FXML public void modify(){
-        if(clicked == "location") {
+    @FXML
+    public void modify() {
+        if (clicked == "location") {
             Location local = dbWrapper.getLocation(selectedPoint);
             idField.setText(selectedPoint);
             floor.setValue(local.getFloor());
             nodeType.setValue(local.getNodeType());
             shortName.setText(local.getShortName());
             longName.setText(local.getLongName());
-        } else if (clicked == "equipment"){
+        } else if (clicked == "equipment") {
             MedicalEquipment local = dbWrapper.getMedicalEquipment(selectedImg.getId());
             idField.setText(local.getEquipmentID());
             floor.setValue(local.getLocation().getFloor());
@@ -774,18 +850,18 @@ public class MapEditorController{
             longName.setText(local.getDescription());
         }
 
-        if(!moveState){
+        if (!moveState) {
             setEditFieldsVisible(true);
             updatePopup();
         }
     }
 
     public void submitModify(ActionEvent actionEvent) {
-        if(clicked == "location") {
+        if (clicked == "location") {
             Location old = dbWrapper.getLocation(selectedPnt.getId());
             Location changedNode = new Location(idField.getText(), old.getXcoord(), old.getYcoord(), floor.getValue().toString(), "TOWER", nodeType.getValue().toString(), shortName.getText(), longName.getText());
             dbWrapper.updateLocation(changedNode);
-        } else if (clicked == "equipment"){
+        } else if (clicked == "equipment") {
             System.out.println(dbWrapper.getMedicalEquipment(selectedImg.getId()));
             MedicalEquipment old = dbWrapper.getMedicalEquipment(selectedImg.getId());
             old.setEquipmentName(nameField.getText());
@@ -808,11 +884,11 @@ public class MapEditorController{
     void imageClicked(MouseEvent event) {
         System.out.println("NodeX Clicked: " + coordTrans.eventToNode(event).getX());
         System.out.println("NodeY Clicked: " + coordTrans.eventToNode(event).getY());
-        if(addState){
+        if (addState) {
             //Set up ID, coordinates, etc
             int nextID = 0;
             //Generate next unique ID
-            while(dbWrapper.isInTableLocation(String.valueOf(nextID))){
+            while (dbWrapper.isInTableLocation(String.valueOf(nextID))) {
                 nextID++;
             }
             //Get coordinates in the space of the original map
@@ -822,9 +898,9 @@ public class MapEditorController{
             double imageX = imageCoords.getX();
             double imageY = imageCoords.getY();
             //Adds point to the map
-            selectedPnt = addPoint(String.valueOf(nextID),imageX,imageY,Color.YELLOW);
+            selectedPnt = addPoint(String.valueOf(nextID), imageX, imageY, Color.YELLOW);
             //Create new location
-            Location newLoc = new Location(String.valueOf(nextID),(int)imageX,(int)imageY,currentFloor,"Building","Node Type","Long Name","Short Name");
+            Location newLoc = new Location(String.valueOf(nextID), (int) imageX, (int) imageY, currentFloor, "Building", "Node Type", "Long Name", "Short Name");
             //Add new location to the database
             dbWrapper.addLocation(newLoc);
 
@@ -845,24 +921,26 @@ public class MapEditorController{
     }
 
 
-    @FXML public void add(){
-        if(addState){
+    @FXML
+    public void add() {
+        if (addState) {
             addState = false;
             addButton.setOpacity(1);
             addButton.setText("+");
-        } else{
+        } else {
             addState = true;
             addButton.setOpacity(0.5);
             addButton.setText("x");
         }
     }
 
-    @FXML public void move(){
-        if(!moveButton.isSelected()){
+    @FXML
+    public void move() {
+        if (!moveButton.isSelected()) {
             moveState = false;
             gesturePane.setGestureEnabled(true);
             moveButton.setText("Move");
-        } else{
+        } else {
             close();
             showLocations.setSelected(true);
             refresh();
@@ -877,7 +955,7 @@ public class MapEditorController{
         try {
             dbWrapper.restoreAll();
             refresh();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -892,19 +970,19 @@ public class MapEditorController{
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
     }
 
-    public Location getClosestLocation(double nodeX, double nodeY){
+    public Location getClosestLocation(double nodeX, double nodeY) {
         Circle closest = new Circle();
         double distance = 5000.0;
         for (Node child : stackPane.getChildren()) {
             if (child instanceof Circle) {
-                double dist = calculateDistanceBetweenPoints(((Circle) child).getTranslateX(),((Circle) child).getTranslateY(),nodeX,nodeY);
-                if(dist < distance){
-                    closest = (Circle)child;
+                double dist = calculateDistanceBetweenPoints(((Circle) child).getTranslateX(), ((Circle) child).getTranslateY(), nodeX, nodeY);
+                if (dist < distance) {
+                    closest = (Circle) child;
                     distance = dist;
                 }
             }
         }
-        Point2D pnt = coordTrans.imageToNode(dbWrapper.getLocation(closest.getId()).getXcoord(),dbWrapper.getLocation(closest.getId()).getYcoord());
+        Point2D pnt = coordTrans.imageToNode(dbWrapper.getLocation(closest.getId()).getXcoord(), dbWrapper.getLocation(closest.getId()).getYcoord());
         System.out.println("new location node X" + pnt.getX());
         System.out.println("drag x: " + nodeX);
         System.out.println("new location node Y" + pnt.getY());
@@ -912,52 +990,52 @@ public class MapEditorController{
         return dbWrapper.getLocation(closest.getId());
     }
 
-    void updatePopup(){
+    void updatePopup() {
         Location loc;
-        if(clicked.equals("location")){
-            loc =  dbWrapper.getLocation(selectedPnt.getId());
-            Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(),loc.getYcoord());
-            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_LOC_W/2);
-            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_LOC_H/2);
-        } else{
-            loc =  dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation();
-            Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(),loc.getYcoord());
-            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_EQP_W/2 + medOffset);
-            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_EQP_H/2 + medOffset);
+        if (clicked.equals("location")) {
+            loc = dbWrapper.getLocation(selectedPnt.getId());
+            Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(), loc.getYcoord());
+            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_LOC_W / 2);
+            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_LOC_H / 2);
+        } else {
+            loc = dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation();
+            Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(), loc.getYcoord());
+            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_EQP_W / 2 + medOffset);
+            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_EQP_H / 2 + medOffset);
         }
     }
 
-    int locationCount(String floor){
+    int locationCount(String floor) {
         locationList = dbWrapper.getAllLocation();
         int count = 0;
-        for (Location local : locationList){
+        for (Location local : locationList) {
             if (local.getFloor().equals(floor)) count++;
         }
         return count;
     }
 
-    int equipmentCount(String floor, String status){
+    int equipmentCount(String floor, String status) {
         medicalList = dbWrapper.getAllMedicalEquipment();
         int count = 0;
-        for (MedicalEquipment equip : medicalList){
+        for (MedicalEquipment equip : medicalList) {
             if (equip.getLocation().getFloor().equals(floor) && equip.getStatus().equals(status)) count++;
-            if(status.equals("CLEAN")){
+            if (status.equals("CLEAN")) {
                 if (equip.getLocation().getFloor().equals(floor) && equip.getStatus().equals("WAITING")) count++;
             }
         }
         return count;
     }
 
-    int SRCount(String floor){
+    int SRCount(String floor) {
         srList = dbWrapper.getAllSR();
         int count = 0;
-        for (AbstractSR sr : srList){
+        for (AbstractSR sr : srList) {
             if (sr.getLocation().getFloor().equals(floor)) count++;
         }
         return count;
     }
 
-    public void setTextVisible(boolean isVisible){
+    public void setTextVisible(boolean isVisible) {
         summary1Location.setVisible(isVisible);
         summary2Location.setVisible(isVisible);
         summary3Location.setVisible(isVisible);
@@ -975,21 +1053,48 @@ public class MapEditorController{
         summaryL2SR.setVisible(isVisible);
     }
 
-//    public void setText(){
-//        summaryL2Location.setText("L2 Locations: " + String.valueOf(locationCount("L2")));
-//        summaryL1Location.setText("L1 Locations: " + String.valueOf(locationCount("L1")));
-//        summary1Location.setText("01 Locations: " + String.valueOf(locationCount("01")));
-//        summary2Location.setText("02 Locations: " + String.valueOf(locationCount("02")));
-//        summary3Location.setText("03 Locations: " + String.valueOf(locationCount("03")));
-//        summaryL2Equipment.setText("L2 Equip: " + String.valueOf(equipmentCount("L2")));
-//        summaryL1Equipment.setText("L1 Equip: " + String.valueOf(equipmentCount("L1")));
-//        summary1Equipment.setText("01 Equip: " + String.valueOf(equipmentCount("01")));
-//        summary2Equipment.setText("02 Equip: " + String.valueOf(equipmentCount("02")));
-//        summary3Equipment.setText("03 Equip: " + String.valueOf(equipmentCount("03")));
-//        summaryL2SR.setText("L2 SR: " + String.valueOf(SRCount("L2")));
-//        summaryL1SR.setText("L1 SR: " + String.valueOf(SRCount("L1")));
-//        summary1SR.setText("01 SR: " + String.valueOf(SRCount("01")));
-//        summary2SR.setText("02 SR: " + String.valueOf(SRCount("02")));
-//        summary3SR.setText("03 SR: " + String.valueOf(SRCount("03")));
-//    }
+    public void moveEquip(String equipID, Location newLoc) {
+        //Updating DB
+        MedicalEquipment equip = dbWrapper.getMedicalEquipment(equipID);
+        equipLocations.remove(equip.getLocation());
+        equip.setLocation(newLoc);
+        dbWrapper.updateMedicalEquipment(equip);
+
+        //Animating Node
+        ImageView medImg = null;
+        List<Node> paneChildren = stackPane.getChildren();
+        for (Node n : paneChildren) {
+            if (n.getId().equals(equipID) && n.getClass() == ImageView.class) {
+                medImg = (ImageView) n;
+            }
+        }
+        if (medImg == null) {
+            System.out.println("No corresponding ImageView found!");
+        } else {
+            TranslateTransition anim = new TranslateTransition();
+            anim.setNode(medImg);
+            anim.setDuration(new Duration(1000));
+            anim.setAutoReverse(false);
+            Point2D newNodeCoord = coordTrans.imageToNode(newLoc.getXcoord() + medOffset, newLoc.getYcoord() + medOffset);
+            Point2D offsets = calcMedOffsets(newLoc);
+            anim.setToX(newNodeCoord.getX() + offsets.getX());
+            anim.setToY(newNodeCoord.getY() + offsets.getY());
+            anim.play();
+        }
+        equipLocations.add(newLoc);
+    }
+
+    public void shuffleMed(Location loc) {
+        if (Collections.frequency(equipLocations, loc) > 0) {
+            while (equipLocations.contains(loc)) {
+                equipLocations.remove(loc);
+            }
+            for (MedicalEquipment thisEquip : dbWrapper.getAllMedicalEquipment()) {
+                if (thisEquip.getLocation().equals(loc)) {
+                    equipLocations.add(loc);
+                    moveEquip(thisEquip.getEquipmentID(), thisEquip.getLocation());
+                }
+            }
+        }
+    }
 }

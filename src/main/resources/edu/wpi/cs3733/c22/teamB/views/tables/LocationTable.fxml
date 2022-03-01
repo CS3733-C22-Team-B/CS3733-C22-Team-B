@@ -98,5 +98,10 @@
                </Label>
            </children>
        </Pane>
+      <Pane fx:id="locationPopup" layoutX="310.0" layoutY="260.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white; -fx-font-size: 18;" text="Location Is Being Referenced!" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

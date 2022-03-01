@@ -5,6 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
@@ -20,6 +21,8 @@ public class LocationMongo implements IDatabase<Location> {
 
     private MongoDatabase conn;
     private MongoCollection LocationTable;
+//    public static boolean referenced;
+
 
     public LocationMongo(){
         conn = MongoDB.getBDBMongo();
@@ -48,26 +51,8 @@ public class LocationMongo implements IDatabase<Location> {
 
     @Override
     public void deleteValue(String objectID) {
-
-        MongoCollection EquipmentTable = conn.getCollection("MedicalEquipment");
-        EquipmentMongo equipmentMongo = new EquipmentMongo(this);
-        EmployeeMongo employeeMongo = new EmployeeMongo();
-        MainSRMongo mainSRMongo = new MainSRMongo(this, employeeMongo);
-        List<AbstractSR> mainList = mainSRMongo.getAllValues();
-        List<MedicalEquipment> equipmentList = equipmentMongo.getAllValues();
-
-        for (MedicalEquipment medicalEquipment : equipmentList) {
-            for (AbstractSR abstractSR : mainList) {
-                if (medicalEquipment.getLocation().getNodeID() == objectID) {
-
-                }
-                else if (abstractSR.getLocation().getNodeID() == objectID) {
-
-                } else {
-                    LocationTable.deleteOne(convertLocation(getValue(objectID)));
-                }
-            }
-
+        if (!isLocationReferenced(objectID)) {
+            LocationTable.deleteOne(convertLocation(getValue(objectID)));
         }
     }
 
@@ -96,7 +81,6 @@ public class LocationMongo implements IDatabase<Location> {
         Location location = new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
 
         return location;
-//        return null;
     }
 
     @Override
@@ -116,7 +100,6 @@ public class LocationMongo implements IDatabase<Location> {
 
         System.out.println(locationList);
         return locationList;
-//        return null;
     }
 
     @Override
@@ -137,5 +120,25 @@ public class LocationMongo implements IDatabase<Location> {
             addValue(location);
         }
 
+    }
+
+    public boolean isLocationReferenced(String objectID) {
+
+        List<AbstractSR> mainList = DatabaseWrapper.getInstance().getAllSR();
+        List<MedicalEquipment> equipmentList = DatabaseWrapper.getInstance().getAllMedicalEquipment();
+
+        for (MedicalEquipment medicalEquipment : equipmentList) {
+            if ((medicalEquipment.getLocation().getNodeID().equals(objectID))) {
+                return true;
+            }
+        }
+
+        for (AbstractSR abstractSR : mainList) {
+            if (abstractSR.getLocation().getNodeID().equals(objectID)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
