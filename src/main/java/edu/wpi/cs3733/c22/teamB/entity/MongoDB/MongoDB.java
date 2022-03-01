@@ -51,4 +51,8 @@ public class MongoDB {
         BDBMongo = mongoClient.getDatabase("BDBMongo");
         return BDBMongo;
     }
+
+    public static void closeConnection() {
+        mongoClient.close();
+    }
 }
