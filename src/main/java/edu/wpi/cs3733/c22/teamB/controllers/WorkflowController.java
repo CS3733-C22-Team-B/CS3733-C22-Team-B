@@ -65,6 +65,7 @@ public class WorkflowController extends AbsPage {
     @FXML
     private void initialize() {
         // get employee list from db
+        initResize();
         employeeList = dw.getAllEmployee();
         employeeMap =
                 IntStream.range(0, employeeList.size())
@@ -272,23 +273,7 @@ public class WorkflowController extends AbsPage {
 
     }
 
-    @Override
-    public void initResize() {
-        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
-        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
-        stackPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
-        stackPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
-    }
 
-    @Override
-    public void resize() {
-        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
-            stackPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
-            stackPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
-            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
-            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
-        });
-    }
 
     @FXML
     private void filterSubmit(ActionEvent actionEvent) {
