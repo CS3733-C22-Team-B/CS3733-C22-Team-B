@@ -1,11 +1,14 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.c22.teamB.entity.TicTacToeAI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 
 public class TictactoeController extends AbsPage {
@@ -33,13 +36,17 @@ public class TictactoeController extends AbsPage {
     private int playerTurn = 0;
     @FXML
     private Label winnerText;
+    @FXML
+    private JFXToggleButton toggleAI;
+    private TicTacToeAI tAI = new TicTacToeAI(false, 0 , false);
 
     private void setupButton(JFXButton button){
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
             button.setDisable(true);
-            draw();
-            gameRun();
+                draw();
+                gameRun();
+                gameOver();
         });
     }
 
@@ -89,6 +96,11 @@ public class TictactoeController extends AbsPage {
                 winnerText.setText("O won!");
                 for (JFXButton button : buttons) {
                     button.setDisable(true);
+                }
+            }
+            for(int i = 0; i < buttons.size(); i++){
+                if(buttons.get(i).isDisable()){
+                    toggleAI.setDisable(true);
                 }
             }
         }
@@ -143,6 +155,12 @@ public class TictactoeController extends AbsPage {
                 }
             }
         }
+
+    private void gameOver(){
+        if(winnerText.getText().equals("X won!")|| winnerText.getText().equals("O won!") || winnerText.getText().equals("DRAW")){
+            toggleAI.setDisable(false);
+        }
+    }
     private void setPlayerSymbol(JFXButton button) {
         if(playerTurn % 2 == 0){
             button.setText("X");
@@ -156,6 +174,7 @@ public class TictactoeController extends AbsPage {
 
 
     public void initialize() {
+
         buttons = new ArrayList<>(Arrays.asList(button1,button2,button3,button4,button5,button6,button7,button8,button9));
         buttons.forEach(jfxButton -> {
             setupButton(jfxButton);
@@ -181,5 +200,21 @@ public class TictactoeController extends AbsPage {
     @Override
     public void namePage() {
         AnchorHomeController.curAnchorHomeController.setPageName("TicTacToe");
+    }
+
+    public void setAI(ActionEvent actionEvent) {
+        if(toggleAI.isSelected()){
+            toggleAI.setText("AI ON");
+            tAI.setOn(true);
+            Random random = new Random();
+            int rn;
+            rn = random.nextInt(1) + 0;
+            tAI.setTurnNum(rn);
+        }
+        if(!toggleAI.isSelected()){
+            toggleAI.setText("AI OFF");
+            tAI.setOn(false);
+        }
+
     }
 }
