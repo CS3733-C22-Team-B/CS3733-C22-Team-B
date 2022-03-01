@@ -69,9 +69,9 @@ public class LocationMongo implements IDatabase<Location> {
 //        MongoCursor<Document> cursor = iterable.iterator();
 
         Document query = new Document("_id", objectID);
-        FindIterable<Document> iterable = LocationTable.find(query);
+        Document locationObj = (Document) LocationTable.find(query).first();
 
-        Document locationObj = cursor.next();
+//        Document locationObj = cursor.next();
         String nodeID = locationObj.getString("_id");
         int xcoord = locationObj.getInteger("xcoord");
         int ycoord = locationObj.getInteger("ycoord");
@@ -100,7 +100,6 @@ public class LocationMongo implements IDatabase<Location> {
             locationList.add(getValue(nodeID));
             }
 
-        System.out.println(locationList);
         return locationList;
     }
 

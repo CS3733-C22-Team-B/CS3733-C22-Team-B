@@ -89,7 +89,7 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
 
 
         MedicalEquipment equipment = new MedicalEquipment(equipmentID, equipmentName, equipmentType, manufacturer, location, status, color, size,  description, amount);
-//        System.out.print(employee);
+
         return equipment;
     }
 

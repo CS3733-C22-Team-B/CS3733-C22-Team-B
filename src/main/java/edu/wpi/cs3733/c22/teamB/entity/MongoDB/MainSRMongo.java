@@ -90,7 +90,6 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
         LocalDate dateRequested = LocalDate.parse(date);
         String notes = mainSRObj.getString("notes");
 
-        System.out.println(location);
 
         mainSR = new MainSR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
 

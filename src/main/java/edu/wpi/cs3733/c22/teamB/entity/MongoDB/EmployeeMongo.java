@@ -85,10 +85,8 @@ public class EmployeeMongo implements IDatabase<Employee> {
         String phoneNumber = employeeObj.getString("phoneNumber");
 
         Employee employee = new Employee(employeeID, lastName, firstName, position, accessLevel, username, password, email, phoneNumber);
-        System.out.print(employeeObj);
+
         return employee;
-//        System.out.println(employeeObj);
-//        return null;
     }
 
     @Override
