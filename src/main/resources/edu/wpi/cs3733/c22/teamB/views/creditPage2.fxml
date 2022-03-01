@@ -16,7 +16,7 @@
         <children>
             <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="56.0" layoutY="38.0">
                <image>
-                  <Image url="@../images/icons/Credit.png" />
+                  <Image url="@../images/icons/credits.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" layoutX="134.0" layoutY="29.0" prefHeight="103.0" prefWidth="166.0" styleClass="text" stylesheets="@../styles/style.css" text="Credits" textAlignment="CENTER" wrapText="true">
