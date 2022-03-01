@@ -67,6 +67,12 @@
     -fx-font-size: 24;
 }
 
+.tictactoe-button{
+    -fx-background-color: #002168;
+    -fx-text-fill: white;
+    -fx-padding: 0px 16px;
+    -fx-font-size: 30px;
+}
 
 /* ----------- COMBO BOX -------------- */
 .combo-box .combo-box-popup > .list-view {

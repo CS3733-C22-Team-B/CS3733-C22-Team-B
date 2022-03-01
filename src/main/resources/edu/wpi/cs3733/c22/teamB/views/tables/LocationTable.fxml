@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -85,6 +86,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
+            <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="249.0" layoutY="557.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="102.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </AnchorPane>
        <Pane fx:id="popup" layoutX="300.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
