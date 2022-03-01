@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -12,7 +14,15 @@
             <children>
                 <StackPane layoutX="25.0" layoutY="90.0" onMouseClicked="#goToTicTacToe" prefHeight="100.0" prefWidth="100.0" styleClass="service-button1" stylesheets="@../styles/style.css">
                     <children>
-                  <JFXButton onAction="#goToTicTacToe" prefHeight="103.0" prefWidth="106.0" text=" " />
+                  <JFXButton onAction="#goToTicTacToe" prefHeight="100.0" prefWidth="100.0" text=" ">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-2.0" translateY="-12.0">
+                           <image>
+                              <Image url="@../images/icons/TicTacToe.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                         <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="TicTacToe" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
                     </children>
                 </StackPane>

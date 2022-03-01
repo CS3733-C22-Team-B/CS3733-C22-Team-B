@@ -31,6 +31,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton srButton;
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
+    @FXML JFXButton apiButton;
     @FXML JFXButton profileButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
@@ -100,6 +101,9 @@ public class AnchorHomeController implements Initializable {
 
             Tooltip tooltip5 = new Tooltip("Workflow Simulator");
             dashButton.setTooltip(tooltip5);
+
+            Tooltip tooltip12 = new Tooltip("APIs");
+            apiButton.setTooltip(tooltip12);
 
             Tooltip tooltip6 = new Tooltip("Settings");
             settingsButton.setTooltip(tooltip6);
@@ -245,6 +249,15 @@ public class AnchorHomeController implements Initializable {
     }
 
     public void goToHelpPage(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Help Page")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -275,6 +288,30 @@ public class AnchorHomeController implements Initializable {
     public void goToGames(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/GamesMenu.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToAPI(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/OtherTeamAPIs.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToProfile(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Profile.fxml"));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
