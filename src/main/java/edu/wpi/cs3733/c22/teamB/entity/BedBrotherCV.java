@@ -6,9 +6,7 @@ import java.util.Scanner;
 import com.fazecast.jSerialComm.SerialPort;
 import edu.wpi.cs3733.c22.teamB.controllers.MapEditorController;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
-import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 
 public class BedBrotherCV implements Runnable {
 
@@ -31,34 +29,20 @@ public class BedBrotherCV implements Runnable {
             while (input.hasNext()) {
                 String tagID = input.next();
                 System.out.println("Data: " + tagID);
-                String equipID = tagToEquipID(tagID);
-                if (equipID.equals("No equip")) {
-                    System.out.println("Located tag does not correspond to a medical equipment");
-                } else{
-                    changeLocation(equipID);
-                }
+                moveEquipTagID(tagID);
+            }
+            try{
+                System.out.println("CV thread sleep start");
+                Thread.currentThread().sleep(500);
+                System.out.println("CV thread sleep end");
+            } catch(InterruptedException e){
+                System.out.println(e);
             }
         }
     }
 
-    private void changeLocation(String equipID) {
-        final String cameraLocation = "HHALL01203";
-        //Check if the camera is in a valid location
-        if(dbWrapper.isInTableLocation(cameraLocation)){
-            //Check if medical equipment is in DB
-            //if(dbWrapper.isInTableLocation() dbWrapper.getMedicalEquipment(equipID)){
-                MedicalEquipment old = dbWrapper.getMedicalEquipment(equipID);
-                old.setLocation(dbWrapper.getLocation(cameraLocation));
-                dbWrapper.updateMedicalEquipment(old);
-            //} else{
-            //    System.out.println("Equipment has a corresponding Apriltag but does not exist in DB");
-            //}
-        } else{
-            System.out.println("Camera is not set to a valid location");
-        }
-    }
-
-    public String tagToEquipID(String tagID) {
+    public void moveEquipTagID(String tagID) {
+        final Location cameraLocation = dbWrapper.getLocation("HHALL01203");
         String equipID;
         System.out.println("Tag ID Found: " + tagID);
         switch (tagID) {
@@ -79,16 +63,20 @@ public class BedBrotherCV implements Runnable {
                 break;
             default:
                 equipID = "No equip";
+                System.out.println("no equip tag");
                 break;
         }
-        Platform.runLater(() -> {
-            mapController.refresh();
-        });
-        try{
-            Thread.currentThread().sleep(500);
-        } catch(InterruptedException e){
-            System.out.println(e);
+        Location oldLoc = dbWrapper.getMedicalEquipment(equipID).getLocation();
+        if(equipID.equals("No equip")){
+            System.out.println("invalid tag");
+        } else{
+            if(dbWrapper.getMedicalEquipment(equipID).getLocation().equals(cameraLocation)){
+            } else{
+                Platform.runLater(() -> {
+                    mapController.moveEquip(equipID,cameraLocation);
+                    mapController.shuffleMed(oldLoc);
+                });
+            }
         }
-        return equipID;
     }
 }
