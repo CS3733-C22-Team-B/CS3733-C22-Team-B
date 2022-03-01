@@ -132,6 +132,7 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        visionThread.setPriority(Thread.MIN_PRIORITY);
         visionThread.start();
     }
 
@@ -151,6 +152,7 @@ public class AnchorHomeController implements Initializable {
     @FXML
     void goToMap() {
         try {
+            mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
             childPane = mapLoader.load();
             equipVision.setMapController((MapEditorController) mapLoader.getController());
             anchorPane.getChildren().clear();

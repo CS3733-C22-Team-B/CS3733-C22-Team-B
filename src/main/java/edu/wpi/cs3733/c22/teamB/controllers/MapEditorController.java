@@ -10,6 +10,7 @@ import edu.wpi.cs3733.c22.teamB.entity.MongoDB.LocationMongo;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
+import javafx.animation.TranslateTransition;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.collections.transformation.FilteredList;
@@ -371,17 +372,13 @@ public class MapEditorController{
             }
         }
 
-
         for (MedicalEquipment local : medicalList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getEquipmentID();
                 Location equipLoc = local.getLocation();
-                double imageX = equipLoc.getXcoord();
-                double imageY = equipLoc.getYcoord();
-                int existingEquipCount = Collections.frequency(equipLocations,equipLoc);
-                double existingOffset = 10;
-                imageX += existingEquipCount*existingOffset;
-                imageY += existingEquipCount*existingOffset;
+                Point2D imageOffsets = calcMedOffsets(equipLoc);
+                double imageX = equipLoc.getXcoord() + imageOffsets.getX();
+                double imageY = equipLoc.getYcoord() + imageOffsets.getY();
                 equipLocations.add(equipLoc);
                 addPointMedical(ID, imageX, imageY, Color.BLUE);
             }
@@ -395,8 +392,14 @@ public class MapEditorController{
                 addPointSR(ID, imageX, imageY, Color.LIME);
             }
         }
+    }
 
-
+    private Point2D calcMedOffsets(Location equipLoc){
+        double existingOffset = 10;
+        int existingEquipCount = Collections.frequency(equipLocations,equipLoc);
+        double imageXOffset = existingEquipCount*existingOffset;
+        double imageYOffset = existingEquipCount*existingOffset;
+        return new Point2D(imageXOffset,imageYOffset);
     }
 
     //Add a point to the map using image coordinates. Set up onclick.
@@ -488,13 +491,13 @@ public class MapEditorController{
                         Location tempLoc = getClosestLocation(imgView.getTranslateX(), imgView.getTranslateY());
                         //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         //System.out.println(dist);
-                        MedicalEquipment temp = dbWrapper.getMedicalEquipment(imgView.getId());
-                        temp.setLocation(tempLoc);
-                        dbWrapper.updateMedicalEquipment(temp);
-                        Point2D nodeCoords = coordTrans.imageToNode(tempLoc.getXcoord(),tempLoc.getYcoord());
+                        //
+                        Location oldLoc = dbWrapper.getMedicalEquipment(imgView.getId()).getLocation();
+                        moveEquip(imgView.getId(),tempLoc);
+                        shuffleMed(oldLoc);
 //                        System.out.println("newImgNode x: " + nodeCoords.getX());
 //                        System.out.println("newImgNode y: " + nodeCoords.getY());
-                        refresh();
+                        //refresh();
                     }
                 }
             });
@@ -1025,21 +1028,48 @@ public class MapEditorController{
         summaryL2SR.setVisible(isVisible);
     }
 
-//    public void setText(){
-//        summaryL2Location.setText("L2 Locations: " + String.valueOf(locationCount("L2")));
-//        summaryL1Location.setText("L1 Locations: " + String.valueOf(locationCount("L1")));
-//        summary1Location.setText("01 Locations: " + String.valueOf(locationCount("01")));
-//        summary2Location.setText("02 Locations: " + String.valueOf(locationCount("02")));
-//        summary3Location.setText("03 Locations: " + String.valueOf(locationCount("03")));
-//        summaryL2Equipment.setText("L2 Equip: " + String.valueOf(equipmentCount("L2")));
-//        summaryL1Equipment.setText("L1 Equip: " + String.valueOf(equipmentCount("L1")));
-//        summary1Equipment.setText("01 Equip: " + String.valueOf(equipmentCount("01")));
-//        summary2Equipment.setText("02 Equip: " + String.valueOf(equipmentCount("02")));
-//        summary3Equipment.setText("03 Equip: " + String.valueOf(equipmentCount("03")));
-//        summaryL2SR.setText("L2 SR: " + String.valueOf(SRCount("L2")));
-//        summaryL1SR.setText("L1 SR: " + String.valueOf(SRCount("L1")));
-//        summary1SR.setText("01 SR: " + String.valueOf(SRCount("01")));
-//        summary2SR.setText("02 SR: " + String.valueOf(SRCount("02")));
-//        summary3SR.setText("03 SR: " + String.valueOf(SRCount("03")));
-//    }
+    public void moveEquip(String equipID, Location newLoc){
+        //Updating DB
+        MedicalEquipment equip = dbWrapper.getMedicalEquipment(equipID);
+        equipLocations.remove(equip.getLocation());
+        equip.setLocation(newLoc);
+        dbWrapper.updateMedicalEquipment(equip);
+
+        //Animating Node
+        ImageView medImg = null;
+        List<Node> paneChildren = stackPane.getChildren();
+        for(Node n:paneChildren){
+            if(n.getId().equals(equipID) && n.getClass() == ImageView.class){
+                medImg = (ImageView) n;
+            }
+        }
+        if(medImg==null){
+            System.out.println("No corresponding ImageView found!");
+        } else{
+            TranslateTransition anim = new TranslateTransition();
+            anim.setNode(medImg);
+            anim.setDuration(new Duration(1000));
+            anim.setAutoReverse(false);
+            Point2D newNodeCoord = coordTrans.imageToNode(newLoc.getXcoord()+medOffset,newLoc.getYcoord()+medOffset);
+            Point2D offsets = calcMedOffsets(newLoc);
+            anim.setToX(newNodeCoord.getX() + offsets.getX());
+            anim.setToY(newNodeCoord.getY() + offsets.getY());
+            anim.play();
+        }
+        equipLocations.add(newLoc);
+    }
+
+    public void shuffleMed(Location loc){
+        if(Collections.frequency(equipLocations, loc)>0){
+            while(equipLocations.contains(loc)){
+                equipLocations.remove(loc);
+            }
+            for(MedicalEquipment thisEquip : dbWrapper.getAllMedicalEquipment()){
+                if(thisEquip.getLocation().equals(loc)){
+                    equipLocations.add(loc);
+                    moveEquip(thisEquip.getEquipmentID(),thisEquip.getLocation());
+                }
+            }
+        }
+    }
 }
