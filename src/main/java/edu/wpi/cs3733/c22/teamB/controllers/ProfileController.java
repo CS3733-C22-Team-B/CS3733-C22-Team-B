@@ -19,8 +19,6 @@ public class ProfileController extends AbsPage {
     @FXML PasswordField changePassword;
     @FXML PasswordField confirmPassword;
     private static Employee loggedInEmployee;
-    private String employeePass;
-    private String employeeID;
     public Label passwordError;
     DatabaseWrapper db;
 
@@ -29,7 +27,7 @@ public class ProfileController extends AbsPage {
     }
 
     @FXML
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         initResize();
         resize();
         namePage();
