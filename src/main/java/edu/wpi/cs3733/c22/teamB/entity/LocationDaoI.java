@@ -1,7 +1,10 @@
 package edu.wpi.cs3733.c22.teamB.entity;
 
+import edu.wpi.cs3733.c22.teamB.controllers.tables.LocationTableController;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.IDatabase;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -170,6 +173,18 @@ public class LocationDaoI implements IDatabase<Location> {
         } catch (SQLException e) {
             System.out.println("Delete From Table Using Node ID: Failed!");
             e.printStackTrace();
+            System.out.println(e);
+            if (e instanceof org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException) {
+                LocationTableController locationTableController = new LocationTableController();
+                locationTableController.locationPopup.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(1)
+                );
+                visiblePause.setOnFinished(
+                        event -> locationTableController.locationPopup.setVisible(false)
+                );
+                visiblePause.play();
+            }
         }
     }
 
