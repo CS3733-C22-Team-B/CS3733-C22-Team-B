@@ -34,9 +34,14 @@ import javafx.scene.shape.Circle;
 import net.kurobako.gesturefx.GesturePane;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapEditorController{
+    private static final double MODIFY_POPUP_LOC_W = 250;
+    private static final double MODIFY_POPUP_LOC_H = 261.2;
+    private static final double MODIFY_POPUP_EQP_W = 250;
+    private static final double MODIFY_POPUP_EQP_H = 430.8;
 
     public javafx.scene.control.TextField idField;
     public JFXComboBox floor;
@@ -108,6 +113,8 @@ public class MapEditorController{
     String clicked = "location";
     final double medOffset = 10;
     TableView sideviewTable = new TableView();
+    //Holds locations so med equip doesn't go on top of it or something idk
+    List<Location> equipLocations = new ArrayList<Location>();
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
     Image secondFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thesecondfloor.png");
@@ -359,8 +366,14 @@ public class MapEditorController{
         for (MedicalEquipment local : medicalList) {
             if (local.getLocation().getFloor().equals(currentFloor)) {
                 String ID = local.getEquipmentID();
-                double imageX = local.getLocation().getXcoord(); //TODO fix for future iterations
-                double imageY = local.getLocation().getYcoord();
+                Location equipLoc = local.getLocation();
+                double imageX = equipLoc.getXcoord();
+                double imageY = equipLoc.getYcoord();
+                int existingEquipCount = Collections.frequency(equipLocations,equipLoc);
+                double existingOffset = 10;
+                imageX += existingEquipCount*existingOffset;
+                imageY += existingEquipCount*existingOffset;
+                equipLocations.add(equipLoc);
                 addPointMedical(ID, imageX, imageY, Color.BLUE);
             }
         }
@@ -591,6 +604,7 @@ public class MapEditorController{
     void removeAllPoints(){
         stackPane.getChildren().remove(16,stackPane.getChildren().size());
         stackPane.getChildren().add(modifyPopup);
+        equipLocations = new ArrayList<Location>();
     }
 
     void deleteSelectedNode(){
@@ -600,6 +614,7 @@ public class MapEditorController{
         } else if (clicked == "equipment"){
             stackPane.getChildren().remove(selectedImg);
             dbWrapper.deleteMedicalEquipment(selectedImg.getId());
+            equipLocations.remove(dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation());
         }
     }
 
@@ -694,7 +709,7 @@ public class MapEditorController{
                 goToSideViewButton.setStyle("-fx-background-color: #007fff");
 
                 if(sideviewTable.getItems()!=null){
-                    sideviewTable.getItems().remove(0,sideviewTable.getItems().size()-1);
+                    sideviewTable.getItems().remove(0,sideviewTable.getItems().size());
                 }
                 List<String> floors = new ArrayList<>();
                 floors.add("03");
@@ -902,13 +917,13 @@ public class MapEditorController{
         if(clicked.equals("location")){
             loc =  dbWrapper.getLocation(selectedPnt.getId());
             Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(),loc.getYcoord());
-            modifyPopup.setTranslateX(nodeCoords.getX() + modifyPopup.getWidth()/2);
-            modifyPopup.setTranslateY(nodeCoords.getY() + modifyPopup.getHeight()/2);
+            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_LOC_W/2);
+            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_LOC_H/2);
         } else{
             loc =  dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation();
             Point2D nodeCoords = coordTrans.imageToNode(loc.getXcoord(),loc.getYcoord());
-            modifyPopup.setTranslateX(nodeCoords.getX() + modifyPopup.getWidth()/2 + medOffset);
-            modifyPopup.setTranslateY(nodeCoords.getY() + modifyPopup.getHeight()/2 + medOffset);
+            modifyPopup.setTranslateX(nodeCoords.getX() + MODIFY_POPUP_EQP_W/2 + medOffset);
+            modifyPopup.setTranslateY(nodeCoords.getY() + MODIFY_POPUP_EQP_H/2 + medOffset);
         }
     }
 

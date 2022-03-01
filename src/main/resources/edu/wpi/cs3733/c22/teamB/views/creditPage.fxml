@@ -12,7 +12,18 @@
 <children>
     <Pane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../styles/style.css">
         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="153.0" layoutY="34.0" styleClass="text" stylesheets="@../styles/style.css" text="Thanks to the following creators for the APIs incorporated into this application">
+            <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="56.0" layoutY="38.0">
+               <image>
+                  <Image url="@../images/icons/Credit.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="134.0" layoutY="29.0" prefHeight="103.0" prefWidth="166.0" styleClass="text" stylesheets="@../styles/style.css" text="Credits" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Pane layoutX="40.0" layoutY="122.0" prefHeight="2.0" prefWidth="840.0" style="-fx-background-color: #052265;" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="139.0" text="Thanks to the following creators for the APIs incorporated into this application">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -25,6 +36,11 @@
                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" />
                </columnConstraints>
                <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

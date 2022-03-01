@@ -2,13 +2,13 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.c22.teamB.Bapp;
+import edu.wpi.cs3733.c22.teamB.entity.BedBrotherCV;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.PopupControl;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -31,10 +31,18 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton srButton;
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
+    @FXML JFXButton profileButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
-    @FXML
-    public VBox sidebar;
+    @FXML JFXButton aboutButton;
+    @FXML JFXButton creditsButton;
+    @FXML JFXButton logOutButton;
+    @FXML JFXButton exitButton;
+    @FXML public VBox sidebar;
+    @FXML JFXButton gameButton;
+    FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
+    BedBrotherCV equipVision = new BedBrotherCV();
+    Thread visionThread = new Thread(equipVision);
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -90,7 +98,7 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip4 = new Tooltip("Tables");
             tableButton.setTooltip(tooltip4);
 
-            Tooltip tooltip5 = new Tooltip("Dashboard");
+            Tooltip tooltip5 = new Tooltip("Workflow Simulator");
             dashButton.setTooltip(tooltip5);
 
             Tooltip tooltip6 = new Tooltip("Settings");
@@ -98,6 +106,18 @@ public class AnchorHomeController implements Initializable {
 
             Tooltip tooltip7 = new Tooltip("Help");
             helpButton.setTooltip(tooltip7);
+
+            Tooltip tooltip8 = new Tooltip("About");
+            aboutButton.setTooltip(tooltip8);
+
+            Tooltip tooltip9 = new Tooltip("Log Out");
+            logOutButton.setTooltip(tooltip9);
+
+            Tooltip tooltip10 = new Tooltip("Exit");
+            exitButton.setTooltip(tooltip10);
+
+            Tooltip tooltip11 = new Tooltip("Games");
+            gameButton.setTooltip(tooltip11);
 
             sidebar.setMinWidth(130);
 
@@ -112,6 +132,7 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        visionThread.start();
     }
 
     @FXML
@@ -130,8 +151,8 @@ public class AnchorHomeController implements Initializable {
     @FXML
     void goToMap() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
-            childPane = loader.load();
+            childPane = mapLoader.load();
+            equipVision.setMapController((MapEditorController) mapLoader.getController());
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
             anchorPane.setLeftAnchor(childPane,0.0);
@@ -171,9 +192,9 @@ public class AnchorHomeController implements Initializable {
     }
 
     @FXML
-    void goToDashboard() {
+    void goToSettings() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Dashboard")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -182,6 +203,20 @@ public class AnchorHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void goToSimulator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Simulator")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void goToAboutPage() {
         try {
@@ -195,10 +230,9 @@ public class AnchorHomeController implements Initializable {
         }
     }
 
-    @FXML
-    void goToSettings() {
+    public void goToCreditsPage(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Settings")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -206,6 +240,9 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToHelpPage(ActionEvent actionEvent) {
     }
 
     @FXML
@@ -231,6 +268,18 @@ public class AnchorHomeController implements Initializable {
 
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void goToGames(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/GamesMenu.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

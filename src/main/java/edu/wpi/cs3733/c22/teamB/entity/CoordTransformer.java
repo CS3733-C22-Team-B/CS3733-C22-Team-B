@@ -71,8 +71,9 @@ public class CoordTransformer {
         return point;
     }
     public Point2D eventToImage(MouseEvent event){
+        final double sidebarWidth = 130;
         double scale = gesturePane.getCurrentScale();
-        double imageX = (event.getSceneX()/scale) - gesturePane.getCurrentX();
+        double imageX = ((event.getSceneX()-130)/scale) - gesturePane.getCurrentX();
         double imageY = (event.getSceneY() - yOffset)/scale - gesturePane.getCurrentY();
         return new Point2D(imageX,imageY);
     }

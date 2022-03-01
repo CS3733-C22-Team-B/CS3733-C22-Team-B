@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXToggleButton;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ServiceRequestManagerController extends AbsPage{
+    public JFXButton filterSubmitButton;
     DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
     @FXML private TableView<AbstractSR> srTable;
@@ -77,7 +79,7 @@ public class ServiceRequestManagerController extends AbsPage{
         requestorCol.setCellValueFactory(cd -> {
             AbstractSR sr = cd.getValue();
 
-            return Bindings.createStringBinding(() -> sr.getRequestor().getEmployeeID() + ' ' + sr.getRequestor().getName());
+            return Bindings.createStringBinding(() -> sr.getRequestor().getName());
         });
 
         timeCol.setCellValueFactory(cd -> {
@@ -89,7 +91,7 @@ public class ServiceRequestManagerController extends AbsPage{
         employeeCol.setCellValueFactory(cd -> {
             AbstractSR sr = cd.getValue();
 
-            return Bindings.createStringBinding(() -> sr.getAssignedEmployee().getEmployeeID() + ' ' + sr.getAssignedEmployee().getName());
+            return Bindings.createStringBinding(() -> sr.getAssignedEmployee().getName());
         });
         employeeCol.setCellFactory(tc -> {
             ComboBox<String> combo = new ComboBox<>();
