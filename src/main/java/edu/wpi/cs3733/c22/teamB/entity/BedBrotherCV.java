@@ -57,6 +57,13 @@ public class BedBrotherCV implements Runnable {
 //                        }
                     } else {
                         System.out.println("Port closed");
+                        try {
+                            System.out.println("CV thread 1 second sleep start");
+                            Thread.currentThread().sleep(1000);
+                            System.out.println("CV thread sleep end");
+                        } catch (InterruptedException e) {
+                            System.out.println(e);
+                        }
                     }
                 }
             }
