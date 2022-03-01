@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.CreditPageController">
+<children>
+    <Pane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../styles/style.css">
+        <children>
+            <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="56.0" layoutY="38.0">
+               <image>
+                  <Image url="@../images/icons/Credit.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="134.0" layoutY="29.0" prefHeight="103.0" prefWidth="166.0" styleClass="text" stylesheets="@../styles/style.css" text="Credits" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Pane layoutX="40.0" layoutY="122.0" prefHeight="2.0" prefWidth="840.0" style="-fx-background-color: #052265;" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="139.0" text="Thanks to the following creators for the APIs and code incorporated into this application">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Label>
+            <GridPane layoutX="271.0" layoutY="204.0" prefHeight="290.0" prefWidth="361.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 SoftWare Engineering    Team D: The Denim Dragons" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 Software Engineering       Team E: The Emerald Easter Bunnies" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Security Service Request API" wrapText="true" GridPane.rowIndex="1" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Internal Transport Service Request API" wrapText="true" GridPane.rowIndex="2" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Creators" wrapText="true" GridPane.columnIndex="2" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Code or API Used in this App" wrapText="true" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Baimagambetov, Almas. “JavaFX Game: Snake Classic.&quot; 12 Dec. 2014, www.youtube.com/watch?v=nK6l1uVlunc. Accessed 1 Mar. 2022." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label prefHeight="17.0" prefWidth="186.0" styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Snake Game Code" wrapText="true" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+        </children>
+    </Pane>
+</children>
+</AnchorPane>
