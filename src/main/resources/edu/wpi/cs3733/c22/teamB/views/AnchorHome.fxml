@@ -87,7 +87,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                        <image>
-                                          <Image url="@../images/icons/thin-icons/icons8-web-analytics-50.png" />
+                                          <Image url="@../images/icons/thin-icons/icons8-time-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -126,7 +126,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                        <image>
-                                          <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
+                                          <Image url="@../images/icons/thin-icons/icons8-user-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -147,26 +147,14 @@
                            </children>
                         </HBox>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="5.0" />
-                        <HBox alignment="CENTER_LEFT">
-                           <children>
-                              <JFXButton fx:id="helpButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#goToHelpPage" prefWidth="130.0" text="Help">
-                                 <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
-                                       <image>
-                                          <Image url="@../images/icons/thin-icons/icons8-shutdown-50.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </HBox>
+                        <HBox alignment="CENTER_LEFT" />
                         <HBox alignment="CENTER_LEFT">
                            <children>
                               <JFXButton fx:id="aboutButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#goToAboutPage" prefWidth="130.0" text=" About">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                        <image>
-                                          <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
+                                          <Image url="@../images/icons/thin-icons/icons8-about-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -179,7 +167,7 @@
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#goToAboutPage" pickOnBounds="true" preserveRatio="true" translateX="-10.0">
                                        <image>
-                                          <Image url="@../images/icons/thin-icons/icons8-help-50.png" />
+                                          <Image url="@../images/icons/thin-icons/icons8-applause-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
