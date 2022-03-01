@@ -90,23 +90,9 @@ public class TictactoeController extends AbsPage {
                     button.setDisable(true);
                 }
             }
-            else if(allDisabled(buttons) && !line.equals("OOO") || allDisabled(buttons) && !line.equals("XXX")){
-                winnerText.setText("DRAW");
-                for (JFXButton button : buttons) {
-                    button.setDisable(true);
-                }
-            }
-        }
-        }
 
-        private boolean allDisabled(ArrayList<JFXButton> buttonList){
-        for(JFXButton buttons: buttonList){
-            if(!buttons.isDisable()) {
-                return false;
-            }
         }
-        return true;
-        }
+    }
 
     private void setPlayerSymbol(JFXButton button) {
         if(playerTurn % 2 == 0){
