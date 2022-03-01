@@ -293,17 +293,20 @@ public class DatabaseWrapper {
     public void addLocation(Location location) {
         LocationDao.addValue(location);
         locationChanged = true;
+        equipmentChanged = true;
+        SRChanged = true;
     }
 
     public void addEmployee(Employee employee) {
         EmployeeDao.addValue(employee);
         employeeChanged = true;
+        SRChanged = true;
     }
 
     public void addMedicalEquipment(MedicalEquipment medicalEquipment) {
         MedicalEquipmentDao.addValue(medicalEquipment);
         equipmentChanged = true;
-    }
+        SRChanged = true;    }
 
     public void deleteSR(String srID) {
 
@@ -345,17 +348,19 @@ public class DatabaseWrapper {
     public void deleteLocation(String locationID) {
         LocationDao.deleteValue(locationID);
         locationChanged = true;
-    }
+        equipmentChanged = true;
+        SRChanged = true;    }
 
     public void deleteEmployee(String employeeID) {
         EmployeeDao.deleteValue(employeeID);
         employeeChanged = true;
+        SRChanged = true;
     }
 
     public void deleteMedicalEquipment(String medicalEquipmentID) {
         MedicalEquipmentDao.deleteValue(medicalEquipmentID);
         equipmentChanged = true;
-    }
+        SRChanged = true;    }
 
     public void updateSR(AbstractSR abstractSR) {
         MainSRDao.updateValue(abstractSR); //TODO do you need this or comment out?ExternalTransportDao.addValue(abstractSR);
@@ -393,17 +398,19 @@ public class DatabaseWrapper {
     public void updateLocation(Location location) {
         LocationDao.updateValue(location);
         locationChanged = true;
-    }
+        equipmentChanged = true;
+        SRChanged = true;    }
 
     public void updateEmployee(Employee employee) {
         EmployeeDao.updateValue(employee);
         employeeChanged = true;
+        SRChanged = true;
     }
 
     public void updateMedicalEquipment(MedicalEquipment medicalEquipment) {
         MedicalEquipmentDao.updateValue(medicalEquipment);
         equipmentChanged = true;
-    }
+        SRChanged = true;    }
 
     public AbstractSR getSR(String srID) {
 
