@@ -38,11 +38,13 @@ public class TictactoeController extends AbsPage {
         button.setOnMouseClicked(mouseEvent -> {
             setPlayerSymbol(button);
             button.setDisable(true);
-            checkIfGameIsOver();
+            draw();
+            gameRun();
         });
     }
 
-    private void checkIfGameIsOver() {
+
+    private void gameRun() {
         for (int a = 0; a < 8; a++) {
             String line;
             switch (a) {
@@ -74,15 +76,14 @@ public class TictactoeController extends AbsPage {
                     line = null;
                     break;
             }
-
             //X winner
             if (line.equals("XXX")) {
                 winnerText.setText("X won!");
                 for(JFXButton button : buttons){
                     button.setDisable(true);
                 }
-            }
 
+            }
             //O winner
             else if (line.equals("OOO")) {
                 winnerText.setText("O won!");
@@ -90,14 +91,8 @@ public class TictactoeController extends AbsPage {
                     button.setDisable(true);
                 }
             }
-            else if(allDisabled(buttons) && !line.equals("OOO") || allDisabled(buttons) && !line.equals("XXX")){
-                winnerText.setText("DRAW");
-                for (JFXButton button : buttons) {
-                    button.setDisable(true);
-                }
-            }
         }
-        }
+    }
 
         private boolean allDisabled(ArrayList<JFXButton> buttonList){
         for(JFXButton buttons: buttonList){
@@ -108,6 +103,46 @@ public class TictactoeController extends AbsPage {
         return true;
         }
 
+        private void draw() {
+            for (int a = 0; a < 8; a++) {
+                String line;
+                switch (a) {
+                    case 0:
+                        line = button1.getText() + button2.getText() + button3.getText();
+                        break;
+                    case 1:
+                        line = button4.getText() + button5.getText() + button6.getText();
+                        break;
+                    case 2:
+                        line = button7.getText() + button8.getText() + button9.getText();
+                        break;
+                    case 3:
+                        line = button1.getText() + button5.getText() + button9.getText();
+                        break;
+                    case 4:
+                        line = button3.getText() + button5.getText() + button7.getText();
+                        break;
+                    case 5:
+                        line = button1.getText() + button4.getText() + button7.getText();
+                        break;
+                    case 6:
+                        line = button2.getText() + button5.getText() + button8.getText();
+                        break;
+                    case 7:
+                        line = button3.getText() + button6.getText() + button9.getText();
+                        break;
+                    default:
+                        line = null;
+                        break;
+                }
+                if (allDisabled(buttons) && "OOO" != line.intern()) {
+                    winnerText.setText("DRAW");
+                }
+                if (allDisabled(buttons) && "XXX" != line.intern()) {
+                    winnerText.setText("DRAW");
+                }
+            }
+        }
     private void setPlayerSymbol(JFXButton button) {
         if(playerTurn % 2 == 0){
             button.setText("X");
