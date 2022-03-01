@@ -616,9 +616,11 @@ public class MapEditorController{
             stackPane.getChildren().remove(selectedPnt);
             dbWrapper.deleteLocation(selectedPnt.getId());
         } else if (clicked == "equipment"){
+            String imgId = selectedImg.getId();
             stackPane.getChildren().remove(selectedImg);
-            dbWrapper.deleteMedicalEquipment(selectedImg.getId());
-            equipLocations.remove(dbWrapper.getMedicalEquipment(selectedImg.getId()).getLocation());
+            Location loc = dbWrapper.getMedicalEquipment(imgId).getLocation();
+            dbWrapper.deleteMedicalEquipment(imgId);
+            shuffleMed(loc);
         }
     }
 

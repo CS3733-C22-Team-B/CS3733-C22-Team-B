@@ -11,6 +11,7 @@ import javafx.application.Platform;
 public class BedBrotherCV implements Runnable {
 
     MapEditorController mapController;
+    Location cameraLocation;
 
     public void setMapController(MapEditorController mapController) {
         this.mapController = mapController;
@@ -29,7 +30,13 @@ public class BedBrotherCV implements Runnable {
             while (input.hasNext()) {
                 String tagID = input.next();
                 System.out.println("Data: " + tagID);
-                moveEquipTagID(tagID);
+                if(tagID.equals("cam1")){
+                    cameraLocation = dbWrapper.getLocation("HHALL01203");
+                } else if(tagID.equals("cam2")){
+                    cameraLocation = dbWrapper.getLocation("HHALL01403");
+                } else{
+                    moveEquipTagID(tagID);
+                }
             }
             try{
                 System.out.println("CV thread sleep start");
@@ -42,7 +49,6 @@ public class BedBrotherCV implements Runnable {
     }
 
     public void moveEquipTagID(String tagID) {
-        final Location cameraLocation = dbWrapper.getLocation("HHALL01203");
         String equipID;
         System.out.println("Tag ID Found: " + tagID);
         switch (tagID) {
