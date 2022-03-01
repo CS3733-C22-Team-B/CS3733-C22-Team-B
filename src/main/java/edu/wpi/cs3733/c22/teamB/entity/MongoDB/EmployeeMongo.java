@@ -126,9 +126,11 @@ public class EmployeeMongo implements IDatabase<Employee> {
     @Override
     public void restoreTable(List<Employee> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
 
         for(Employee employee : list) {
-            addValue(employee);
+            newList.add(convertEmployee(employee));
         }
+        EmployeeTable.insertMany(newList);
     }
 }

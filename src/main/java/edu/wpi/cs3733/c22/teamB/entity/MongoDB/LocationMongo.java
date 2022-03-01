@@ -115,10 +115,12 @@ public class LocationMongo implements IDatabase<Location> {
     @Override
     public void restoreTable(List<Location> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
 
         for(Location location : list) {
-            addValue(location);
+            newList.add(convertLocation(location));
         }
+        LocationTable.insertMany(newList);
 
     }
 

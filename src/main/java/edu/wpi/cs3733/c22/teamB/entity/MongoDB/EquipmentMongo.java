@@ -126,9 +126,10 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
     @Override
     public void restoreTable(List<MedicalEquipment> list) {
         createTable();
-
+        List<Document> newList = new ArrayList<>();
         for(MedicalEquipment equipment : list) {
-            addValue(equipment);
+            newList.add(convertEquipment(equipment));
         }
+        MedicalEquipmentTable.insertMany(newList);
     }
 }

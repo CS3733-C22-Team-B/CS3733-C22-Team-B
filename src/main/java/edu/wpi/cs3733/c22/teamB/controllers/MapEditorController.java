@@ -112,6 +112,7 @@ public class MapEditorController {
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
     List<AbstractSR> srList = dbWrapper.getAllSR();
+
     @FXML
     private Pane locationPopup;
     //CSVRestoreBackupController backupper = new CSVRestoreBackupController();

@@ -111,8 +111,11 @@ public class SanitationSRMongo implements IDatabase<SanitationSR> {
     @Override
     public void restoreTable(List<SanitationSR> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
+
         for (SanitationSR sanitationSR : list) {
-            addValue(sanitationSR);
+            newList.add(convertSanitationSR(sanitationSR));
         }
+        SanitationSRTable.insertMany(newList);
     }
 }

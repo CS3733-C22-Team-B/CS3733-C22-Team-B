@@ -128,10 +128,12 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
 
     @Override
     public void restoreTable(List<AbstractSR> list) {
+        createTable();
+        List<Document> newList = new ArrayList<>();
 
-        createTable();;
         for(AbstractSR abstractSR : list) {
-            addValue(abstractSR);
+            newList.add(convertSR(abstractSR));
         }
+        MainSRTable.insertMany(newList);
     }
 }
