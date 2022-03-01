@@ -47,6 +47,9 @@ public class TictactoeController extends AbsPage {
                 draw();
                 gameRun();
                 gameOver();
+            if(!winnerText.getText().equals("X won!")) {
+                tAI.playTurn(buttons);
+            }
         });
     }
 
@@ -83,12 +86,14 @@ public class TictactoeController extends AbsPage {
                     line = null;
                     break;
             }
+
             //X winner
             if (line.equals("XXX")) {
                 winnerText.setText("X won!");
                 for(JFXButton button : buttons){
                     button.setDisable(true);
                 }
+                playerTurn = 0;
 
             }
             //O winner
@@ -97,12 +102,16 @@ public class TictactoeController extends AbsPage {
                 for (JFXButton button : buttons) {
                     button.setDisable(true);
                 }
+                playerTurn = 0;
             }
             for(int i = 0; i < buttons.size(); i++){
                 if(buttons.get(i).isDisable()){
                     toggleAI.setDisable(true);
                 }
             }
+        }
+        if(tAI.isOn()) {
+            playerTurn = 0;
         }
     }
 
@@ -149,10 +158,15 @@ public class TictactoeController extends AbsPage {
                 }
                 if (allDisabled(buttons) && "OOO" != line.intern()) {
                     winnerText.setText("DRAW");
+                    playerTurn = 0;
                 }
                 if (allDisabled(buttons) && "XXX" != line.intern()) {
                     winnerText.setText("DRAW");
+                    playerTurn = 0;
                 }
+            }
+            if(tAI.isOn()) {
+                playerTurn = 0;
             }
         }
 
@@ -165,13 +179,30 @@ public class TictactoeController extends AbsPage {
         if(playerTurn % 2 == 0){
             button.setText("X");
             playerTurn = 1;
+            tAI.setTurnNum(1);
         }
         else{
             button.setText("O");
             playerTurn = 0;
         }
+        if(tAI.isOn()){
+            playerTurn = 0;
+        }
     }
+    public void setAI(ActionEvent actionEvent) {
+        if(toggleAI.isSelected()){
+            toggleAI.setText("AI ON");
+            tAI.setOn(true);
+            tAI.setTurnNum(1);
+            tAI.setAiTurn(true);
+        }
+        if(!toggleAI.isSelected()){
+            toggleAI.setText("AI OFF");
+            tAI.setOn(false);
+            tAI.setAiTurn(false);
+        }
 
+    }
 
     public void initialize() {
 
@@ -190,6 +221,7 @@ public class TictactoeController extends AbsPage {
     public void restartGame(ActionEvent actionEvent) {
         buttons.forEach(this::resetButton);
         winnerText.setText("TIC-TAC-TOE");
+        toggleAI.setDisable(false);
     }
 
     private void resetButton(JFXButton jfxButton) {
@@ -202,19 +234,5 @@ public class TictactoeController extends AbsPage {
         AnchorHomeController.curAnchorHomeController.setPageName("TicTacToe");
     }
 
-    public void setAI(ActionEvent actionEvent) {
-        if(toggleAI.isSelected()){
-            toggleAI.setText("AI ON");
-            tAI.setOn(true);
-            Random random = new Random();
-            int rn;
-            rn = random.nextInt(1) + 0;
-            tAI.setTurnNum(rn);
-        }
-        if(!toggleAI.isSelected()){
-            toggleAI.setText("AI OFF");
-            tAI.setOn(false);
-        }
 
-    }
 }

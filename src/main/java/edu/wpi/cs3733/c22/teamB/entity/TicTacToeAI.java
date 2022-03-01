@@ -41,18 +41,13 @@ public class TicTacToeAI {
     }
 
     public void playTurn(List<JFXButton> jfxButtonList){
-        if(on && aiTurn){
+        if(on){
             Random rn = new Random();
-            int buttonToPress = rn.nextInt(8) + 0;
-                if(!jfxButtonList.get(buttonToPress).isDisable() && getTurnNum() % 2 == 0){
-                    jfxButtonList.get(buttonToPress).setText("X");
-                    jfxButtonList.get(buttonToPress).setDisable(true);
-                    setTurnNum(1);
-                }
-                else if(!jfxButtonList.get(buttonToPress).isDisable() ){
+            int buttonToPress = rn.nextInt(8);
+                if(!jfxButtonList.get(buttonToPress).isDisable()){
                     jfxButtonList.get(buttonToPress).setText("O");
                     jfxButtonList.get(buttonToPress).setDisable(true);
-                    setTurnNum(0);
+                    setTurnNum(1);
                 }
                 else {
                     playTurn(jfxButtonList);
