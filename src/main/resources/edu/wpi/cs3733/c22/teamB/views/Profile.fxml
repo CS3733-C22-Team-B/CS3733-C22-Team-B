@@ -24,9 +24,9 @@
                </font>
             </Label>
             <Pane layoutX="40.0" layoutY="122.0" prefHeight="2.0" prefWidth="840.0" style="-fx-background-color: #052265;" />
-            <Label layoutX="59.0" layoutY="234.0" text="Old Password" />
+            <Label layoutX="59.0" layoutY="234.0" text="New Password" />
             <PasswordField fx:id="changePassword" layoutX="59.0" layoutY="257.0" />
-            <Label layoutX="59.0" layoutY="289.0" text="New Password" />
+            <Label layoutX="59.0" layoutY="289.0" text="Confirm Password" />
             <PasswordField fx:id="confirmPassword" layoutX="59.0" layoutY="312.0" />
             <JFXButton fx:id="editPassword" layoutX="56.0" layoutY="366.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Change Password" textFill="WHITE" />
         </children>
