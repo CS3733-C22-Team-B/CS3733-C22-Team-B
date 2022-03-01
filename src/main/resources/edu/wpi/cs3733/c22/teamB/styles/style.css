@@ -237,3 +237,8 @@
     -fx-background-color: #ffffff;
     -fx-background-radius: 7;
 }
+
+.CreditLabel {
+    -fx-text-fill: #002168;
+    -fx-wrap-text: true;
+}
