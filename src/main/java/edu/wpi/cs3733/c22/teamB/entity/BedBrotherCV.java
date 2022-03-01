@@ -26,35 +26,38 @@ public class BedBrotherCV implements Runnable {
             if (port.getPortDescription().equals("OpenMV Virtual Comm Port in FS Mode")) {
                 System.out.println("Camera found let's gooooooo!");
                 chosenPortList.add(port);
-
             }
             System.out.println(port.getPortDescription());
         }
         if (chosenPortList.size() > 0) {
-            for (int camIndex = 0; camIndex < chosenPortList.size(); camIndex++) {
-                chosenPortList.get(camIndex).setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
-                if (chosenPortList.get(camIndex).openPort()) {
-                    Scanner input = new Scanner(chosenPortList.get(camIndex).getInputStream());
-                    while (input.hasNext()) {
-                        String tagID = input.next();
-                        System.out.println("Data: " + tagID);
-                        if (tagID.equals("cam1")) {
-                            cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01203");
-                        } else if (tagID.equals("cam2")) {
-                            cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01403");
-                        } else {
-                            moveEquipTagID(camIndex,tagID);
+            while(true) {
+                for (int camIndex = 0; camIndex < chosenPortList.size(); camIndex++) {
+                    chosenPortList.get(camIndex).setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
+                    if (chosenPortList.get(camIndex).openPort()) {
+                        System.out.println("Reading from camera index " + camIndex);
+                    while (chosenPortList.get(camIndex).bytesAvailable()>0) {
+                            Scanner input = new Scanner(chosenPortList.get(camIndex).getInputStream());
+                            String camID = input.next();
+                            String tagID = input.next();
+                            System.out.println("Cam: " + camID + " Tag: " + tagID);
+                            if (camID.equals("cam1")) {
+                                cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01203");
+                            } else if (camID.equals("cam2")) {
+                                cameraLocation[camIndex] = dbWrapper.getLocation("HHALL01403");
+                            }
+                            moveEquipTagID(camIndex, tagID);
                         }
+
+//                        try {
+////                            System.out.println("CV thread sleep start");
+////                            Thread.currentThread().sleep(10);
+////                            System.out.println("CV thread sleep end");
+//                        } catch (InterruptedException e) {
+//                            System.out.println(e);
+//                        }
+                    } else {
+                        System.out.println("Port closed");
                     }
-                    try {
-                        System.out.println("CV thread sleep start");
-                        Thread.currentThread().sleep(500);
-                        System.out.println("CV thread sleep end");
-                    } catch (InterruptedException e) {
-                        System.out.println(e);
-                    }
-                } else {
-                    System.out.println("Port closed");
                 }
             }
         } else{
