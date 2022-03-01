@@ -95,7 +95,7 @@
          <font>
             <Font size="24.0" />
          </font></JFXButton>
-      <JFXToggleButton fx:id="moveButton" maxHeight="50.0" minHeight="50.0" onAction="#move" prefHeight="50.0" prefWidth="120.0" style="-fx-font-size: 16;" styleClass="map-button" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0">
+      <JFXToggleButton fx:id="moveButton" maxHeight="50.0" minHeight="50.0" onAction="#move" prefHeight="50.0" prefWidth="120.0" style="-fx-font-size: 16;" styleClass="map-button" stylesheets="@../styles/style.css" text="Move" textAlignment="CENTER" toggleColor="#0047cc" toggleLineColor="#cccccc" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="100.0">
          <font>
             <Font size="24.0" />
          </font></JFXToggleButton>
