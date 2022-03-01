@@ -1,8 +1,10 @@
-package edu.wpi.cs3733.c22.teamB.workflow;
+package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.c22.teamB.Bapp;
+import edu.wpi.cs3733.c22.teamB.controllers.AbsPage;
 import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.controllers.MasterServiceRequestController;
 import edu.wpi.cs3733.c22.teamB.entity.inheritance.AbstractSR;
@@ -10,6 +12,8 @@ import edu.wpi.cs3733.c22.teamB.entity.*;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import edu.wpi.cs3733.c22.teamB.entity.objects.MedicalEquipment;
 import edu.wpi.cs3733.c22.teamB.entity.objects.services.MedicalEquipmentSR;
+import edu.wpi.cs3733.c22.teamB.workflow.EquipmentMoveTask;
+import edu.wpi.cs3733.c22.teamB.workflow.Workflow;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 
@@ -25,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class WorkflowController {
+public class WorkflowController extends AbsPage {
     DatabaseWrapper dw = DatabaseWrapper.getInstance();
 
     @FXML private TableView<AbstractSR> srTable;
@@ -47,6 +52,8 @@ public class WorkflowController {
     @FXML private JFXCheckBox requestorFilterCheckBox;
     @FXML private JFXCheckBox statusFilterCheckBox;
     @FXML private JFXToggleButton incompleteToggle;
+    @FXML Pane contentPane;
+    @FXML Pane stackPane;
 
     private Set<String> filterFields = new HashSet<>();
 
@@ -258,6 +265,29 @@ public class WorkflowController {
                 filterSubmit(null);
             }
         });
+
+        initResize();
+        resize();
+        namePage();
+
+    }
+
+    @Override
+    public void initResize() {
+        contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+        contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        stackPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
+        stackPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
+    }
+
+    @Override
+    public void resize() {
+        Bapp.getPrimaryStage().heightProperty().addListener((observable)-> {
+            stackPane.setPrefWidth(Bapp.getPrimaryStage().getWidth() - AnchorHomeController.curAnchorHomeController.sidebar.getWidth());
+            stackPane.setPrefHeight(Bapp.getPrimaryStage().getHeight() - AnchorHomeController.curAnchorHomeController.sidebar.getHeight());
+            contentPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+            contentPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
+        });
     }
 
     @FXML
@@ -330,6 +360,11 @@ public class WorkflowController {
 
     public void onCloseFilterDialog(ActionEvent actionEvent) {
         filterDialog.close();
+    }
+
+    @Override
+    public void namePage() {
+        AnchorHomeController.curAnchorHomeController.pageName.setText("Workflow Simulator");
     }
 }
 
