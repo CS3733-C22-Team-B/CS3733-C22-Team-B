@@ -439,13 +439,18 @@ public class MapEditorController {
 
             testPoint.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
+                    Location temp;
                     if (moveState) {
                         // Maybe For Loop Traversing local list
-                        Location temp = dbWrapper.getLocation(selectedPoint);
-                        Circle c = (Circle) (event.getSource());
-                        Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(), c.getTranslateY());
-                        dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
-                        refresh();
+                        for (Location location : locationList) {
+                            if (location.getNodeID().equals(selectedPoint)) {
+                                temp = location;
+                                Circle c = (Circle) (event.getSource());
+                                Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(), c.getTranslateY());
+                                dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
+                                refresh();
+                            }
+                        }
                     }
                 }
             });

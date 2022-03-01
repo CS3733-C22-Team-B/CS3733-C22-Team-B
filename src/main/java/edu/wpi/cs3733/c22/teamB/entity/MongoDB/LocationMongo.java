@@ -64,9 +64,12 @@ public class LocationMongo implements IDatabase<Location> {
 
     @Override
     public Location getValue(String objectID) {
+//        Document query = new Document("_id", objectID);
+//        FindIterable<Document> iterable = LocationTable.find(query);
+//        MongoCursor<Document> cursor = iterable.iterator();
+
         Document query = new Document("_id", objectID);
         FindIterable<Document> iterable = LocationTable.find(query);
-        MongoCursor<Document> cursor = iterable.iterator();
 
         Document locationObj = cursor.next();
         String nodeID = locationObj.getString("_id");
@@ -87,8 +90,7 @@ public class LocationMongo implements IDatabase<Location> {
     public List<Location> getAllValues() {
         List<Location> locationList = new ArrayList<>();
 
-        Document query = new Document();
-        FindIterable<Document> iterable = LocationTable.find(query);
+        FindIterable<Document> iterable = LocationTable.find();
         MongoCursor<Document> cursor = iterable.iterator();
 
         while (cursor.hasNext()) {
