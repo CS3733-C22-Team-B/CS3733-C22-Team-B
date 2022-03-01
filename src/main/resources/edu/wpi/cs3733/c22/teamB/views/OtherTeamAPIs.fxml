@@ -13,7 +13,18 @@
    <children>
       <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <StackPane layoutX="175.0" layoutY="211.0" onMouseClicked="#goToGiftSR" prefHeight="100.0" prefWidth="100.0">
+            <Pane layoutX="15.0" layoutY="65.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
+            <ImageView fitHeight="47.0" fitWidth="60.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/hand%20hold%20heart.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="70.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Other Teams' APIs" />
+            <Label fx:id="name6" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="236.0" text="Team C" />
+            <Label fx:id="name8" alignment="CENTER" contentDisplay="CENTER" layoutX="359.0" layoutY="236.0" text="Team E" />
+
+            <JFXToggleButton fx:id="toggleName" layoutX="435.0" layoutY="270.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" toggleColor="#0c094e" toggleLineColor="#897ec1" wrapText="true" />
+            <StackPane layoutX="172.0" layoutY="132.0" onMouseClicked="#goToGiftSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToGiftSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -26,18 +37,7 @@
                   <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="     Gift Service" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="2.0" translateY="23.0" wrapText="true" />
                </children>
             </StackPane>
-            <Pane layoutX="15.0" layoutY="65.0" prefHeight="1.0" prefWidth="542.0" style="-fx-background-color: #002168;" />
-            <ImageView fitHeight="47.0" fitWidth="60.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/hand%20hold%20heart.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="70.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Other Teams API" />
-            <Label fx:id="name6" alignment="CENTER" contentDisplay="CENTER" layoutX="205.0" layoutY="315.0" text="Team C" />
-            <Label fx:id="name8" alignment="CENTER" contentDisplay="CENTER" layoutX="362.0" layoutY="315.0" text="Team E" />
-
-            <JFXToggleButton fx:id="toggleName" layoutX="450.0" layoutY="331.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" toggleColor="#0c094e" toggleLineColor="#897ec1" wrapText="true" />
-            <StackPane layoutX="331.0" layoutY="211.0" onMouseClicked="#goToSecuritySR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="328.0" layoutY="132.0" onMouseClicked="#goToSecuritySR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToSecuritySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
