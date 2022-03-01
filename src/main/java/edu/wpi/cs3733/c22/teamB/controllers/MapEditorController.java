@@ -39,7 +39,6 @@ import net.kurobako.gesturefx.GesturePane;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -113,6 +112,7 @@ public class MapEditorController {
     List<Location> locationList = dbWrapper.getAllLocation();
     List<MedicalEquipment> medicalList = dbWrapper.getAllMedicalEquipment();
     List<AbstractSR> srList = dbWrapper.getAllSR();
+
     @FXML
     private Pane locationPopup;
     //CSVRestoreBackupController backupper = new CSVRestoreBackupController();
@@ -122,8 +122,9 @@ public class MapEditorController {
     String clicked = "location";
     final double medOffset = 10;
     TableView sideviewTable = new TableView();
+
     //Holds locations so med equip doesn't go on top of it or something idk
-    List<Location> equipLocations = new ArrayList<Location>();
+    List<Location> equipLocations = new ArrayList<>();
     AnchorPane sideviewNode;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
@@ -184,7 +185,7 @@ public class MapEditorController {
         showMedical.setSelected(true);
         showSR.setSelected(true);
         setEditFieldsVisible(false);
-        Locations.getItems().addAll(dbWrapper.getAllLocation());
+        Locations.getItems().addAll(locationList);
 //        modifyButton.setOpacity(0.5);
 //        modifyButton.setDisable(true);
 //        deleteButton.setOpacity(0.5);
@@ -439,12 +440,18 @@ public class MapEditorController {
 
             testPoint.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
+                    Location temp;
                     if (moveState) {
-                        Location temp = dbWrapper.getLocation(selectedPoint);
-                        Circle c = (Circle) (event.getSource());
-                        Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(), c.getTranslateY());
-                        dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
-                        refresh();
+                        // Maybe For Loop Traversing local list
+                        for (Location location : locationList) {
+                            if (location.getNodeID().equals(selectedPoint)) {
+                                temp = location;
+                                Circle c = (Circle) (event.getSource());
+                                Point2D releasedImageCoords = coordTrans.nodeToImage(c.getTranslateX(), c.getTranslateY());
+                                dbWrapper.updateLocation(new Location(selectedPnt.getId(), (int) releasedImageCoords.getX(), (int) releasedImageCoords.getY(), temp.getFloor(), temp.getBuilding(), temp.getNodeType(), temp.getLongName(), temp.getShortName()));
+                                refresh();
+                            }
+                        }
                     }
                 }
             });
@@ -501,6 +508,7 @@ public class MapEditorController {
                         //double dist = calculateDistanceBetweenPoints(tempLoc.getXcoord(), tempLoc.getYcoord(), event.getX(), event.getY());
                         //System.out.println(dist);
                         //
+                        //Maybe Faster to use for loop to traverse local list
                         Location oldLoc = dbWrapper.getMedicalEquipment(imgView.getId()).getLocation();
                         moveEquip(imgView.getId(), tempLoc);
                         shuffleMed(oldLoc);
@@ -622,7 +630,7 @@ public class MapEditorController {
     void removeAllPoints() {
         stackPane.getChildren().remove(16, stackPane.getChildren().size());
         stackPane.getChildren().add(modifyPopup);
-        equipLocations = new ArrayList<Location>();
+        equipLocations = new ArrayList<>();
     }
 
     void deleteSelectedNode() {

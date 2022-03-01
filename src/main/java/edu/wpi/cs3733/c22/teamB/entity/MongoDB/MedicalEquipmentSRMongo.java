@@ -112,9 +112,11 @@ public class MedicalEquipmentSRMongo implements IDatabase<MedicalEquipmentSR> {
     @Override
     public void restoreTable(List<MedicalEquipmentSR> list) {
         createTable();
-        for(MedicalEquipmentSR medicalEquipmentSR : list) {
-            addValue(medicalEquipmentSR);
-        }
+        List<Document> newList = new ArrayList<>();
 
+        for(MedicalEquipmentSR medicalEquipmentSR : list) {
+            newList.add(convertMedicalEquipmentSR(medicalEquipmentSR));
+        }
+        MedicalEquipmentSRTable.insertMany(newList);
     }
 }

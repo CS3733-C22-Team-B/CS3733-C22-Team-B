@@ -110,9 +110,11 @@ public class GiftFloralSRMongo implements IDatabase<GiftFloralSR> {
     @Override
     public void restoreTable(List<GiftFloralSR> list) {
         createTable();
-        for(GiftFloralSR giftFloralSR : list) {
-            addValue(giftFloralSR);
-        }
+        List<Document> newList = new ArrayList<>();
 
+        for(GiftFloralSR giftFloralSR : list) {
+            newList.add(convertGiftFloralSR(giftFloralSR));
+        }
+        GiftFloralTable.insertMany(newList);
     }
 }

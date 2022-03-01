@@ -102,8 +102,11 @@ public class LaundrySRMongo implements IDatabase<LaundrySR> {
     @Override
     public void restoreTable(List<LaundrySR> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
+
         for(LaundrySR laundrySR : list) {
-            addValue(laundrySR);
+            newList.add(convertLaundrySR(laundrySR));
         }
+        LaundrySRTable.insertMany(newList);
     }
 }

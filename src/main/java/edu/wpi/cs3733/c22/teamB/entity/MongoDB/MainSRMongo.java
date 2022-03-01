@@ -90,7 +90,6 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
         LocalDate dateRequested = LocalDate.parse(date);
         String notes = mainSRObj.getString("notes");
 
-        System.out.println(location);
 
         mainSR = new MainSR(objectID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
 
@@ -128,10 +127,12 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
 
     @Override
     public void restoreTable(List<AbstractSR> list) {
+        createTable();
+        List<Document> newList = new ArrayList<>();
 
-        createTable();;
         for(AbstractSR abstractSR : list) {
-            addValue(abstractSR);
+            newList.add(convertSR(abstractSR));
         }
+        MainSRTable.insertMany(newList);
     }
 }

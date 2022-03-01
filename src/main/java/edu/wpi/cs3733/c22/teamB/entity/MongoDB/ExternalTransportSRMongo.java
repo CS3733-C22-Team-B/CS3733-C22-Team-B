@@ -117,9 +117,11 @@ public class ExternalTransportSRMongo implements IDatabase<ExternalTransportSR> 
     @Override
     public void restoreTable(List<ExternalTransportSR> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
 
         for(ExternalTransportSR externalTransportSR : list) {
-            addValue(externalTransportSR);
+            newList.add(convertExternalTransportSR(externalTransportSR));
         }
+        ExternalTransportTable.insertMany(newList);
     }
 }
