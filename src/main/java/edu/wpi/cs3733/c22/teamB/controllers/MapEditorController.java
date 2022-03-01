@@ -125,7 +125,6 @@ public class MapEditorController {
 
     //Holds locations so med equip doesn't go on top of it or something idk
     List<Location> equipLocations = new ArrayList<>();
-    List<Location> equipLocations = new ArrayList<Location>();
     AnchorPane sideviewNode;
 
     Image firstFloorImage = new Image("/edu/wpi/cs3733/c22/teamB/images/thefirstfloor.png");
