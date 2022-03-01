@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -30,6 +31,21 @@ public class GameMenuController extends AbsPage{
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/tictactoe.fxml"));
+            AnchorHomeController.curAnchorHomeController.changeNode(loader);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void goToSnake(ActionEvent actionEvent) {
+
+//        SnakeController snakeController = new SnakeController();
+//        snakeController.initialize();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/snake.fxml"));
             AnchorHomeController.curAnchorHomeController.changeNode(loader);
 
         } catch (IOException ex) {

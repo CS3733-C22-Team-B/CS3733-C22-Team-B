@@ -132,6 +132,7 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        visionThread.setPriority(Thread.MIN_PRIORITY);
         visionThread.start();
     }
 
@@ -151,6 +152,7 @@ public class AnchorHomeController implements Initializable {
     @FXML
     void goToMap() {
         try {
+            mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
             childPane = mapLoader.load();
             equipVision.setMapController((MapEditorController) mapLoader.getController());
             anchorPane.getChildren().clear();
@@ -243,6 +245,15 @@ public class AnchorHomeController implements Initializable {
     }
 
     public void goToHelpPage(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Help Page")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -273,6 +284,18 @@ public class AnchorHomeController implements Initializable {
     public void goToGames(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/GamesMenu.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToProfile(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Profile.fxml"));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);

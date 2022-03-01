@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="423.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.LocationTableController">
    <children>
-      <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
+      <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../../styles/style.css">
          <children>
              <TextField fx:id="textFilterField" layoutX="41.0" layoutY="102.0" prefHeight="25.0" prefWidth="532.0" style="-fx-font-family: open-sans;">
                  <contextMenu>
@@ -86,7 +86,7 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="249.0" layoutY="557.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="102.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
+            <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="759.0" layoutY="32.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="103.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </AnchorPane>
        <Pane fx:id="popup" layoutX="300.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
@@ -98,5 +98,10 @@
                </Label>
            </children>
        </Pane>
+      <Pane fx:id="locationPopup" layoutX="310.0" layoutY="260.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="26.0" prefHeight="59.0" prefWidth="242.0" style="-fx-text-fill: white; -fx-font-size: 18;" text="Location Is Being Referenced!" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

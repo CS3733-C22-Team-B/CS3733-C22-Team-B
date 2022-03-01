@@ -8,7 +8,8 @@
 }
 
 /* ----------- LABEL -------------- */
-.label {
+.sideview-label{
+    -fx-font-size: 36px;
 }
 
 .main-label {
