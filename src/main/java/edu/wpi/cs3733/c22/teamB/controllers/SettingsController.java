@@ -50,7 +50,6 @@ public class SettingsController extends AbsPage implements Initializable{
     private String employeeID;
     public Label passwordError;
 
-
     DatabaseWrapper db;
 
     public SettingsController() throws SQLException {
@@ -150,7 +149,7 @@ public class SettingsController extends AbsPage implements Initializable{
     }
 
     public void editProfile(ActionEvent actionEvent) {
-      if(changePassword.getText().equals(confirmPassword.getText())){
+        if(changePassword.getText().equals(confirmPassword.getText())){
           Employee employee = LoginController.getLoggedInEmployee();
           loggedInEmployee = new Employee(employee.getEmployeeID(), employee.getLastName(), employee.getFirstName(), employee.getPosition(), employee.getAccessLevel(), employee.getUsername(), confirmPassword.getText(), employee.getPassword(), employee.getPhoneNumber());
           db.updateEmployee(loggedInEmployee);
@@ -158,15 +157,15 @@ public class SettingsController extends AbsPage implements Initializable{
           confirmPassword.setText("");
           passwordError.setTextFill(Color.RED);
           passwordError.setText("Password Change Confirmed");
-      }
-      else if(changePassword.getText().isEmpty() || confirmPassword.getText().isEmpty()){
+        }
+        else if(changePassword.getText().isEmpty() || confirmPassword.getText().isEmpty()){
           passwordError.setTextFill(Color.RED);
           passwordError.setText("A password field is empty, please fill in both");
-      }
-      else{
+        }
+        else{
           passwordError.setTextFill(Color.RED);
           passwordError.setText("Passwords do not match, Try again");
-      }
         }
+    }
 
 }
