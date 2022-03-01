@@ -14,7 +14,7 @@
    <children>
       <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <StackPane layoutX="175.0" layoutY="211.0" onMouseClicked="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="175.0" layoutY="211.0" onMouseClicked="#goToInternalTransportSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToInternalTransportSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>

@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXToggleButton;
 //import edu.wpi.GoldenGandaberundas.Main;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Location;
-import edu.wpi.cs3733.c22.teamD.Main;
+//import edu.wpi.cs3733.c22.teamD.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,12 +28,12 @@ public class OtherTeamAPIsController extends AbsPage{
     }
 
     public void goToInternalTransportSR(ActionEvent actionEvent) {
-        List<Location> locs = DatabaseWrapper.getInstance().getAllLocation();
-        try {
-            Main.run(100, 100, 900, 600, "/edu/wpi/cs3733/c22/teamB/styles/style.css", locs.get(23).getNodeID(), locs.get(54).getNodeID());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        List<Location> locs = DatabaseWrapper.getInstance().getAllLocation();
+//        try {
+//            Main.run(100, 100, 900, 600, "/edu/wpi/cs3733/c22/teamB/styles/style.css", locs.get(23).getNodeID(), locs.get(54).getNodeID());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void goToSanitationSR(ActionEvent actionEvent) {

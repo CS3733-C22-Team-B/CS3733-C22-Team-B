@@ -58,9 +58,9 @@ dependencies {
     )
 
     implementation(files("src/main/resources/jSerialComm-2.9.1.jar"))
-    implementation(files("src/main/resources/gesturefx-0.7.1.jar"))
-    implementation(files("src/main/java/edu/wpi/cs3733/c22/teamB/libs/TeamESecurityServiceRequest.jar"))
-    implementation(files("src/main/resources/gesturefx-0.7.1.jar", "libs/InternalTranspoAPI.jar"))
+    implementation(files("src/main/resources/gesturefx-0.7.1.jar",
+            "libs/InternalTranspoAPI.jar",
+            "libs/TeamESecurityServiceRequest.jar"))
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",

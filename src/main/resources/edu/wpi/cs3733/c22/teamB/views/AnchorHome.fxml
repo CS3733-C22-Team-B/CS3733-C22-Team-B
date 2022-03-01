@@ -105,7 +105,6 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <JFXButton fx:id="settingsButton" onAction="#goToSettings" text="      Settings      ">
                               <JFXButton fx:id="gameButton" contentDisplay="RIGHT" onAction="#goToGames" prefWidth="130.0" text="Games">
                                  <graphic>
                                     <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
