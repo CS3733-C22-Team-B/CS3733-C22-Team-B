@@ -421,9 +421,9 @@ public class DatabaseWrapper {
     public List<AbstractSR> getAllSR() {
         List<AbstractSR> list = MainSRDao.getAllValues();
 
-        for (AbstractSR abstractSR : list) {
-            abstractSR = getSR(abstractSR.getSrID());
-        }
+//        for (AbstractSR abstractSR : list) {
+//            abstractSR = getSR(abstractSR.getSrID());
+//        }
 
         return list;
     }

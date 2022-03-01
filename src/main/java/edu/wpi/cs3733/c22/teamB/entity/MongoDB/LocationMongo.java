@@ -96,9 +96,10 @@ public class LocationMongo implements IDatabase<Location> {
         while (cursor.hasNext()) {
             Document object = cursor.next();
 
-            String nodeID = (String) object.get("_id");
-            locationList.add(getValue(nodeID));
-            }
+//            String nodeID = (String) object.get("_id");
+//            locationList.add(getValue(nodeID));
+            locationList.add(getLocationFromValue(object));
+        }
 
         return locationList;
     }
@@ -143,5 +144,22 @@ public class LocationMongo implements IDatabase<Location> {
         }
 
         return false;
+    }
+
+    private Location getLocationFromValue(Document locationObj) {
+
+        String nodeID = locationObj.getString("_id");
+        int xcoord = locationObj.getInteger("xcoord");
+        int ycoord = locationObj.getInteger("ycoord");
+        String floor = locationObj.getString("floor");
+        String building = locationObj.getString("building");
+        String nodeType = locationObj.getString("nodeType");
+        String longName = locationObj.getString("longName");
+        String shortName = locationObj.getString("shortName");
+
+        Location location = new Location(nodeID, xcoord, ycoord, floor, building, nodeType, longName, shortName);
+
+        return location;
+
     }
 }
