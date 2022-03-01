@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.MedicalEquipmentTableController">
     <children>
-        <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
+        <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../../styles/style.css">
             <children>
                 <TextField fx:id="textFilterField" layoutX="41.0" layoutY="102.0" prefHeight="25.0" prefWidth="532.0" style="-fx-font-family: open-sans;">
                     <contextMenu>
@@ -82,13 +82,13 @@
                         </TableView>
                     </children>
                 </GridPane>
-                <Pane layoutX="19.0" layoutY="67.0" prefHeight="1.0" prefWidth="546.0" style="-fx-background-color: #08246c;" />
-                <ImageView fitHeight="61.0" fitWidth="59.0" layoutX="19.0" pickOnBounds="true" preserveRatio="true">
+                <Pane layoutX="27.0" layoutY="88.0" prefHeight="1.0" prefWidth="546.0" style="-fx-background-color: #08246c;" />
+                <ImageView fitHeight="61.0" fitWidth="59.0" layoutX="25.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../images/icons/MedicalEquipment.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="91.0" layoutY="3.0" prefHeight="58.0" prefWidth="466.0" style="-fx-font-size: 30;" text="Equipment Database">
+                <Label layoutX="93.0" layoutY="22.0" prefHeight="58.0" prefWidth="466.0" style="-fx-font-size: 30;" text="Equipment Database">
                     <font>
                         <Font size="30.0" />
                     </font>
@@ -96,7 +96,7 @@
             <JFXButton fx:id="clearButton" layoutX="617.0" layoutY="551.0" minWidth="75.0" onAction="#clearForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Clear" />
             <JFXButton fx:id="cancelButton" layoutX="704.0" layoutY="551.0" minWidth="75.0" onAction="#cancelForm" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Cancel" />
             <JFXButton fx:id="confirmButton" layoutX="791.0" layoutY="551.0" minWidth="75.0" onAction="#confirm" prefHeight="26.0" prefWidth="67.0" style="-fx-font-size: 11;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Confirm" />
-            <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="329.0" layoutY="543.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="102.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
+            <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="759.0" layoutY="32.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="103.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
             </children>
         </AnchorPane>
         <Pane fx:id="popup" layoutX="300.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">

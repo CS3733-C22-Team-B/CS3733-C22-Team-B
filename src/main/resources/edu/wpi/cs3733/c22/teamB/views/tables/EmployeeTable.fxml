@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="anchorPane" styleClass="anchor" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.tables.EmployeeTableController">
    <children>
-      <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="anchor" stylesheets="@../../styles/style.css">
+      <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../../styles/style.css">
           <children>
             <TextField fx:id="textFilterField" layoutX="41.0" layoutY="102.0" prefHeight="25.0" prefWidth="532.0" style="-fx-font-family: open-sans;">
                <contextMenu>
@@ -78,18 +78,18 @@
             <JFXButton fx:id="addButton" layoutX="610.0" layoutY="101.0" minWidth="75.0" onAction="#addEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Add" />
                 <JFXButton fx:id="deleteButton" layoutX="697.0" layoutY="101.0" minWidth="75.0" onAction="#deleteEmployee" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Delete" />
                 <JFXButton fx:id="loadButton" layoutX="784.0" layoutY="101.0" minWidth="75.0" onAction="#loadTable" prefHeight="26.0" prefWidth="75.0" style="-fx-font-size: 12;" styleClass="submit-button" stylesheets="@../../styles/style.css" text="Refresh" />
-            <Pane layoutX="39.0" layoutY="88.0" prefHeight="1.0" prefWidth="825.0" style="-fx-background-color: #08246c;" />
+            <Pane layoutX="27.0" layoutY="88.0" prefHeight="1.0" prefWidth="825.0" style="-fx-background-color: #08246c;" />
             <ImageView fitHeight="71.0" fitWidth="79.0" layoutX="25.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/icons/Employee.png" />
                </image>
             </ImageView>
-            <Label layoutX="100.0" layoutY="20.0" prefHeight="71.0" prefWidth="296.0" style="-fx-font-size: 30;" text="Employee Database">
+            <Label layoutX="93.0" layoutY="22.0" prefHeight="71.0" prefWidth="296.0" style="-fx-font-size: 30;" text="Employee Database">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-              <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="557.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="102.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
+              <MenuButton fx:id="visibilityMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="759.0" layoutY="32.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="103.0" style="-fx-text-fill: WHITE; -fx-background-color: #7B94C9; -fx-font-size: 16;" styleClass="service-button1" stylesheets="@../styles/style.css" text="Visibility" textAlignment="CENTER" textFill="WHITE" />
           </children>
       </AnchorPane>
       <Pane fx:id="popup" layoutX="300.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
