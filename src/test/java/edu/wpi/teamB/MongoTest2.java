@@ -254,5 +254,7 @@ public class MongoTest2 {
         laundrySRMongo.deleteValue(laundrySR32.getSrID());
         laundrySRMongo.getValue(laundrySR.getSrID());
         laundrySRMongo.getAllValues();
+
+        locationMongo.deleteValue(location1.getNodeID());
     }
 }
