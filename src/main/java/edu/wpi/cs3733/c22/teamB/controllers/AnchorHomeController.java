@@ -31,6 +31,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton srButton;
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
+    @FXML JFXButton apiButton;
     @FXML JFXButton settingsButton;
     @FXML JFXButton helpButton;
     @FXML
@@ -92,6 +93,9 @@ public class AnchorHomeController implements Initializable {
 
             Tooltip tooltip5 = new Tooltip("Dashboard");
             dashButton.setTooltip(tooltip5);
+
+            Tooltip tooltip8 = new Tooltip("APIs");
+            apiButton.setTooltip(tooltip8);
 
             Tooltip tooltip6 = new Tooltip("Settings");
             settingsButton.setTooltip(tooltip6);
@@ -231,6 +235,18 @@ public class AnchorHomeController implements Initializable {
 
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void goToAPI(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/OtherTeamAPIs.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -56,7 +56,7 @@ dependencies {
 
     )
 
-    implementation(files("src/main/resources/gesturefx-0.7.1.jar"))
+    implementation(files("src/main/resources/gesturefx-0.7.1.jar", "libs/InternalTranspoAPI.jar"))
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
