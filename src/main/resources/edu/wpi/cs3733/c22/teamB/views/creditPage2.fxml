@@ -45,7 +45,7 @@
                <children>
                   <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 SoftWare Engineering    Team C: The Cyan Cyclopes" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 Software Engineering       Team E: The Emerald Easter Bunnies" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Security Service Request API" wrapText="true" GridPane.rowIndex="1" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Gift and Floral Service Request API" wrapText="true" GridPane.rowIndex="1" />
                   <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Internal Transport Service Request API" wrapText="true" GridPane.rowIndex="2" />
                   <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Creators" wrapText="true" GridPane.columnIndex="2" />
                   <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Code or API Used in this App" wrapText="true" />
