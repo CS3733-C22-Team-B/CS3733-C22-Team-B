@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
+<AnchorPane fx:id="anchorPane" prefHeight="454.0" prefWidth="600.0" styleClass="anchor" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ServiceRequestMenuController">
    <children>
-      <Pane fx:id="contentPane" prefHeight="400.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
+      <Pane fx:id="contentPane" prefHeight="454.0" prefWidth="600.0" styleClass="content-pane" stylesheets="@../styles/style.css">
          <children>
-            <StackPane layoutX="25.0" layoutY="90.0" onMouseClicked="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="25.0" layoutY="104.0" onMouseClicked="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToMedicalEquipmentSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -28,7 +28,7 @@
                   <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Medical Equipment" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="23.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="175.0" layoutY="90.0" onMouseClicked="#goToComputerServiceSR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="175.0" layoutY="104.0" onMouseClicked="#goToComputerServiceSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToComputerServiceSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="   " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -41,7 +41,7 @@
                   <Label alignment="CENTER" mouseTransparent="true" prefHeight="47.0" prefWidth="91.0" text="Computer" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateY="26.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="325.0" layoutY="90.0" onMouseClicked="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="325.0" layoutY="104.0" onMouseClicked="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToLaundryServiceSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text="  " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -54,7 +54,7 @@
                   <Label alignment="CENTER" mouseTransparent="true" prefHeight="34.0" prefWidth="87.0" text="Laundry" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="3.0" translateY="25.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="475.0" layoutY="90.0" onMouseClicked="#goToGiftFloralSR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="475.0" layoutY="104.0" onMouseClicked="#goToGiftFloralSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToGiftFloralSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -72,7 +72,7 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane layoutX="25.0" layoutY="211.0" onMouseClicked="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="25.0" layoutY="225.0" onMouseClicked="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToFoodDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -89,7 +89,7 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane layoutX="175.0" layoutY="211.0" onMouseClicked="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="175.0" layoutY="225.0" onMouseClicked="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToExternalTransportSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -102,7 +102,7 @@
                   <Label mouseTransparent="true" prefHeight="47.0" prefWidth="102.0" text="External Patient Transportation" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" translateX="2.0" translateY="23.0" wrapText="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="325.0" layoutY="211.0" onMouseClicked="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="325.0" layoutY="225.0" onMouseClicked="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToMedicineDeliverySR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -123,7 +123,7 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane layoutX="475.0" layoutY="211.0" prefHeight="100.0" prefWidth="100.0">
+            <StackPane layoutX="475.0" layoutY="225.0" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#goToSanitationSR" prefHeight="100.0" prefWidth="100.0" styleClass="service-button" stylesheets="@../styles/style.css" text=" " textAlignment="CENTER" wrapText="true">
                      <graphic>
@@ -147,16 +147,16 @@
                </image>
             </ImageView>
             <Label layoutX="70.0" prefHeight="66.0" prefWidth="484.0" style="-fx-font-size: 36;" styleClass="service-title" stylesheets="@../styles/style.css" text="Service Request Systems" />
-            <Label fx:id="name1" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="70.0" text="Duc" />
-            <Label fx:id="name2" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="70.0" text="Nick" />
-            <Label fx:id="name3" alignment="CENTER" contentDisplay="CENTER" layoutX="359.0" layoutY="70.0" text="Calvin" />
-            <Label fx:id="name4" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="70.0" text="Kiki" />
-            <Label fx:id="name5" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="315.0" text="Andrew" />
-            <Label fx:id="name6" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="315.0" text="Noah" />
-            <Label fx:id="name7" alignment="CENTER" contentDisplay="CENTER" layoutX="365.0" layoutY="315.0" text="Cris" />
-            <Label fx:id="name8" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="315.0" text="Sits" />
+            <Label fx:id="name1" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="84.0" text="Duc" />
+            <Label fx:id="name2" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="84.0" text="Nick" />
+            <Label fx:id="name3" alignment="CENTER" contentDisplay="CENTER" layoutX="359.0" layoutY="84.0" text="Calvin" />
+            <Label fx:id="name4" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="84.0" text="Kiki" />
+            <Label fx:id="name5" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="329.0" text="Andrew" />
+            <Label fx:id="name6" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="329.0" text="Noah" />
+            <Label fx:id="name7" alignment="CENTER" contentDisplay="CENTER" layoutX="365.0" layoutY="329.0" text="Cris" />
+            <Label fx:id="name8" alignment="CENTER" contentDisplay="CENTER" layoutX="516.0" layoutY="329.0" text="Sits" />
 
-            <JFXToggleButton fx:id="toggleName" layoutX="450.0" layoutY="331.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" toggleColor="#0c094e" toggleLineColor="#897ec1" wrapText="true" />
+            <JFXToggleButton fx:id="toggleName" layoutX="457.0" layoutY="361.0" onAction="#toggleName" prefHeight="59.0" prefWidth="119.0" selected="true" text="Show Names" toggleColor="#0c094e" toggleLineColor="#897ec1" wrapText="true" />
          </children>
       </Pane>
    </children>

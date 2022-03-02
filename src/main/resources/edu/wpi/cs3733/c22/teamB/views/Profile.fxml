@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.c22.teamB.controllers.ProfileController">
+<children>
+    <Pane fx:id="contentPane" prefHeight="600.0" prefWidth="900.0" styleClass="content-pane" stylesheets="@../styles/style.css">
+        <children>
+            <ImageView fitHeight="84.0" fitWidth="108.0" layoutX="40.0" layoutY="29.0">
+               <image>
+                  <Image url="@../images/icons/Profile.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="133.0" layoutY="20.0" prefHeight="103.0" prefWidth="166.0" styleClass="text" stylesheets="@../styles/style.css" text="Profile" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Pane layoutX="40.0" layoutY="122.0" prefHeight="2.0" prefWidth="840.0" style="-fx-background-color: #052265;" />
+            <ImageView fitHeight="272.0" fitWidth="455.0" layoutX="379.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../images/Brigham-Womens-TO-USE.jpg" />
+                </image>
+            </ImageView>
+            <Label layoutX="242.0" layoutY="477.0" prefHeight="58.0" prefWidth="437.0" styleClass="main-label" stylesheets="@../styles/style.css" text=" You are appreciated. Thank you to all healthcare professionals for your hard work." textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="90.0" layoutY="234.0" text="New Password" />
+            <PasswordField fx:id="changePassword" layoutX="90.0" layoutY="257.0" />
+            <Label layoutX="90.0" layoutY="289.0" text="Confirm Password" />
+            <PasswordField fx:id="confirmPassword" layoutX="90.0" layoutY="312.0" />
+            <JFXButton fx:id="editPassword" layoutX="87.0" layoutY="366.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#editProfile" prefHeight="37.0" prefWidth="199.0" style="-fx-background-color: #002168; -fx-border-color: #FFFFFF;" text="Change Password" textFill="WHITE" />
+        </children>
+    </Pane>
+    <Pane fx:id="popup" layoutX="250.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
+        <children>
+            <Label alignment="CENTER" layoutY="26.0" prefHeight="59.0" prefWidth="290.0" style="-fx-text-fill: white; -fx-font-size: 30;" text="Password Changed!">
+                <font>
+                    <Font size="30.0" />
+                </font>
+            </Label>
+        </children>
+    </Pane>
+</children>
+</AnchorPane>

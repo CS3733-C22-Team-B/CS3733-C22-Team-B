@@ -31,9 +31,10 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton srButton;
     @FXML JFXButton tableButton;
     @FXML JFXButton dashButton;
+    @FXML JFXButton apiButton;
     @FXML JFXButton profileButton;
     @FXML JFXButton settingsButton;
-    @FXML JFXButton helpButton;
+//    @FXML JFXButton helpButton;
     @FXML JFXButton aboutButton;
     @FXML JFXButton creditsButton;
     @FXML JFXButton logOutButton;
@@ -46,7 +47,6 @@ public class AnchorHomeController implements Initializable {
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
-
 
     private Pane childPane;
 
@@ -101,11 +101,11 @@ public class AnchorHomeController implements Initializable {
             Tooltip tooltip5 = new Tooltip("Workflow Simulator");
             dashButton.setTooltip(tooltip5);
 
+            Tooltip tooltip12 = new Tooltip("APIs");
+            apiButton.setTooltip(tooltip12);
+
             Tooltip tooltip6 = new Tooltip("Settings");
             settingsButton.setTooltip(tooltip6);
-
-            Tooltip tooltip7 = new Tooltip("Help");
-            helpButton.setTooltip(tooltip7);
 
             Tooltip tooltip8 = new Tooltip("About");
             aboutButton.setTooltip(tooltip8);
@@ -234,7 +234,7 @@ public class AnchorHomeController implements Initializable {
 
     public void goToCreditsPage(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("creditPage2")));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
@@ -245,6 +245,15 @@ public class AnchorHomeController implements Initializable {
     }
 
     public void goToHelpPage(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pageToFXMLPath("Help Page")));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -275,6 +284,30 @@ public class AnchorHomeController implements Initializable {
     public void goToGames(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/GamesMenu.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToAPI(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/OtherTeamAPIs.fxml"));
+            childPane = loader.load();
+            anchorPane.getChildren().clear();
+            anchorPane.getChildren().add(childPane);
+            anchorPane.toBack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void goToProfile(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/c22/teamB/views/Profile.fxml"));
             childPane = loader.load();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);

@@ -114,8 +114,11 @@ public class MedicineDeliverySRMongo implements IDatabase<MedicineDeliverySR> {
     @Override
     public void restoreTable(List<MedicineDeliverySR> list) {
         createTable();
+        List<Document> newList = new ArrayList<>();
+
         for(MedicineDeliverySR medicineDeliverySR : list) {
-            addValue(medicineDeliverySR);
+            newList.add(convertMedicineDeliverySR(medicineDeliverySR));
         }
+        MedicineDeliverySRTable.insertMany(newList);
     }
 }
