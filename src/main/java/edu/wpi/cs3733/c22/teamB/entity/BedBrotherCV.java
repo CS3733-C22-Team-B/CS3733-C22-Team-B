@@ -12,7 +12,7 @@ import javafx.application.Platform;
 public class BedBrotherCV implements Runnable {
 
     MapEditorController mapController;
-    Location[] cameraLocation = new Location[2];
+    Location[] cameraLocation = new Location[5];
     List<SerialPort> chosenPortList = new ArrayList<SerialPort>();
     DatabaseWrapper dbWrapper = DatabaseWrapper.getInstance();
     List<Location> locationList = dbWrapper.getAllLocation();
