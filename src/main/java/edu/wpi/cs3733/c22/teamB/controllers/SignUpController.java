@@ -31,6 +31,7 @@ public class SignUpController implements Initializable {
     @FXML private TextField password;
     @FXML private TextField email;
     @FXML private TextField phoneNumber;
+    @FXML private Pane anchorPane;
     @FXML private Button submitButton;
     @FXML private Button backButton;
     @FXML private Pane popup;
@@ -85,5 +86,8 @@ public class SignUpController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         setVisible(true);
+
+        anchorPane.setLayoutX(Bapp.getPrimaryStage().getWidth()/4);
+        anchorPane.setLayoutY(Bapp.getPrimaryStage().getHeight()/6);
     }
 }
