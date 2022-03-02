@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.c22.teamB;
 
+import edu.wpi.cs3733.c22.teamB.controllers.AnchorHomeController;
 import edu.wpi.cs3733.c22.teamB.entity.*;
 import java.io.IOException;
 import java.util.List;
@@ -53,6 +54,9 @@ public class Bapp extends Application {
     @Override
     public void stop() {
         log.info("Shutting Down");
+        if (AnchorHomeController.visionThread != null && AnchorHomeController.visionThread.isAlive()) {
+            AnchorHomeController.visionThread.stop();
+        }
         DatabaseWrapper.getInstance().closeConnection();
     }
 }

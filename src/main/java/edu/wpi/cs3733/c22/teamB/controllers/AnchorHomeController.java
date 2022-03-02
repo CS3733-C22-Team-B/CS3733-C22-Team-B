@@ -42,8 +42,8 @@ public class AnchorHomeController implements Initializable {
     @FXML public VBox sidebar;
     @FXML JFXButton gameButton;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
-    BedBrotherCV equipVision = new BedBrotherCV();
-    Thread visionThread = new Thread(equipVision);
+    static BedBrotherCV equipVision = new BedBrotherCV();
+    public static Thread visionThread = new Thread(equipVision);
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -134,6 +134,7 @@ public class AnchorHomeController implements Initializable {
         }
         visionThread.setPriority(Thread.MIN_PRIORITY);
         visionThread.start();
+
     }
 
     @FXML
@@ -281,6 +282,7 @@ public class AnchorHomeController implements Initializable {
     }
 
     public void exit(ActionEvent actionEvent) {
+        visionThread.stop();
         Platform.exit();
     }
 

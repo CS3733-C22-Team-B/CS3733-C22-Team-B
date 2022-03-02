@@ -274,6 +274,10 @@ public class MapEditorController {
         locationPopup.setLayoutY(Bapp.getPrimaryStage().getHeight() / 3.5);
 
         System.out.println("100 " + java.time.LocalDateTime.now());
+        loadFromCSVButton.setVisible(false);
+        loadFromCSVButton.setDisable(true);
+        saveToCSVButton.setVisible(false);
+        saveToCSVButton.setDisable(true);
     }
 
     private void setAnchors() {
