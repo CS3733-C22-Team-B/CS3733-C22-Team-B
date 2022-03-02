@@ -12,10 +12,9 @@ import javafx.application.Platform;
 public class BedBrotherCV implements Runnable {
 
     MapEditorController mapController;
-    Location[] cameraLocation = new Location[5];
+    Location[] cameraLocation;
     List<SerialPort> chosenPortList = new ArrayList<SerialPort>();
     DatabaseWrapper dbWrapper = DatabaseWrapper.getInstance();
-    List<Location> locationList = dbWrapper.getAllLocation();
 
     public void setMapController(MapEditorController mapController) {
         this.mapController = mapController;
@@ -30,6 +29,7 @@ public class BedBrotherCV implements Runnable {
             System.out.println(port.getPortDescription());
         }
         if (chosenPortList.size() > 0) {
+            cameraLocation = new Location[chosenPortList.size()];
             while(true) {
                 for (int camIndex = 0; camIndex < chosenPortList.size(); camIndex++) {
                     chosenPortList.get(camIndex).setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
@@ -43,14 +43,6 @@ public class BedBrotherCV implements Runnable {
                             cameraLocation[camIndex] = dbWrapper.getLocation(camID);
                             moveEquipTagID(camIndex, tagID);
                         }
-
-//                        try {
-////                            System.out.println("CV thread sleep start");
-////                            Thread.currentThread().sleep(10);
-////                            System.out.println("CV thread sleep end");
-//                        } catch (InterruptedException e) {
-//                            System.out.println(e);
-//                        }
                     } else {
                         System.out.println("Port closed");
                         try {
