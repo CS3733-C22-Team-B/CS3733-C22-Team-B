@@ -54,9 +54,9 @@ public class Bapp extends Application {
     @Override
     public void stop() {
         log.info("Shutting Down");
-        if (AnchorHomeController.visionThread != null && AnchorHomeController.visionThread.isAlive()) {
-            AnchorHomeController.visionThread.stop();
-        }
+//        if (AnchorHomeController.visionThread != null && AnchorHomeController.visionThread.isAlive()) {
+//            AnchorHomeController.visionThread.stop();
+//        }
         DatabaseWrapper.getInstance().closeConnection();
     }
 }

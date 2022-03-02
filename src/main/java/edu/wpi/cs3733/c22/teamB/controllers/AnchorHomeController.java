@@ -42,8 +42,8 @@ public class AnchorHomeController implements Initializable {
     @FXML public VBox sidebar;
     @FXML JFXButton gameButton;
     FXMLLoader mapLoader = new FXMLLoader(getClass().getResource(pageToFXMLPath("MapEditor")));
-    static BedBrotherCV equipVision = new BedBrotherCV();
-    public static Thread visionThread = new Thread(equipVision);
+//    static BedBrotherCV equipVision = new BedBrotherCV();
+//    public static Thread visionThread = new Thread(equipVision);
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
@@ -132,8 +132,8 @@ public class AnchorHomeController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        visionThread.setPriority(Thread.MIN_PRIORITY);
-        visionThread.start();
+//        visionThread.setPriority(Thread.MIN_PRIORITY);
+//        visionThread.start();
 
     }
 
@@ -158,7 +158,7 @@ public class AnchorHomeController implements Initializable {
             System.out.println("0.1" + java.time.LocalDateTime.now());
             childPane = mapLoader.load();
             System.out.println("0.2" + java.time.LocalDateTime.now());
-            equipVision.setMapController((MapEditorController) mapLoader.getController());
+//            equipVision.setMapController((MapEditorController) mapLoader.getController());
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(childPane);
             anchorPane.setLeftAnchor(childPane,0.0);
@@ -282,7 +282,7 @@ public class AnchorHomeController implements Initializable {
     }
 
     public void exit(ActionEvent actionEvent) {
-        visionThread.stop();
+//        visionThread.stop();
         Platform.exit();
     }
 
