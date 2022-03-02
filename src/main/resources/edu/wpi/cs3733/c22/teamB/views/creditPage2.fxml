@@ -30,10 +30,10 @@
                     <Font name="System Bold" size="16.0" />
                 </font>
             </Label>
-            <GridPane layoutX="271.0" layoutY="204.0" prefHeight="290.0" prefWidth="361.0">
+            <GridPane layoutX="282.0" layoutY="208.0" prefHeight="185.0" prefWidth="336.0">
                <columnConstraints>
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="150.0" />
-                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="111.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="49.0" />
                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" />
                </columnConstraints>
                <rowConstraints>
@@ -43,14 +43,14 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 SoftWare Engineering    Team C: The Cyan Cyclopes" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 Software Engineering         Team C: The Cyan Cyclopes" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="CS3733 Software Engineering       Team E: The Emerald Easter Bunnies" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Gift and Floral Service Request API" wrapText="true" GridPane.rowIndex="1" />
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Internal Transport Service Request API" wrapText="true" GridPane.rowIndex="2" />
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Creators" wrapText="true" GridPane.columnIndex="2" />
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Code or API Used in this App" wrapText="true" />
-                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Baimagambetov, Almas. “JavaFX Game: Snake Classic.&quot; 12 Dec. 2014, www.youtube.com/watch?v=nK6l1uVlunc. Accessed 1 Mar. 2022." wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label prefHeight="17.0" prefWidth="186.0" styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Snake Game Code" wrapText="true" GridPane.rowIndex="3" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Gift and Floral Service Request API" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="1" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Internal Transport Service Request API" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="2" />
+                  <Label style="-fx-font-size: 20;" styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Creator" wrapText="true" GridPane.columnIndex="2" />
+                  <Label style="-fx-font-size: 20;" styleClass="CreditLabel" stylesheets="@../styles/style.css" text="API / Code" wrapText="true" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Almas Baimagambetov" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label styleClass="CreditLabel" stylesheets="@../styles/style.css" text="Snake Game Code" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="3" />
                </children>
             </GridPane>
         </children>
