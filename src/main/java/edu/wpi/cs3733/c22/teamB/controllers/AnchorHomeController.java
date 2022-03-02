@@ -134,6 +134,7 @@ public class AnchorHomeController implements Initializable {
         }
         visionThread.setPriority(Thread.MIN_PRIORITY);
         visionThread.start();
+
     }
 
     @FXML
