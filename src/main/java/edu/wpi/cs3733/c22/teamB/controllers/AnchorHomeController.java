@@ -34,7 +34,7 @@ public class AnchorHomeController implements Initializable {
     @FXML JFXButton apiButton;
     @FXML JFXButton profileButton;
     @FXML JFXButton settingsButton;
-    @FXML JFXButton helpButton;
+//    @FXML JFXButton helpButton;
     @FXML JFXButton aboutButton;
     @FXML JFXButton creditsButton;
     @FXML JFXButton logOutButton;
@@ -47,7 +47,6 @@ public class AnchorHomeController implements Initializable {
 
     Popup popup = new Popup();
     Pane popUpMessage = new FXMLLoader(getClass().getResource(pageToFXMLPath("LogOutPopUp"))).load();
-
 
     private Pane childPane;
 
@@ -107,9 +106,6 @@ public class AnchorHomeController implements Initializable {
 
             Tooltip tooltip6 = new Tooltip("Settings");
             settingsButton.setTooltip(tooltip6);
-
-            Tooltip tooltip7 = new Tooltip("Help");
-            helpButton.setTooltip(tooltip7);
 
             Tooltip tooltip8 = new Tooltip("About");
             aboutButton.setTooltip(tooltip8);
