@@ -72,6 +72,16 @@ public class DatabaseWrapper {
 
     private RestoreBackupWrapper restoreBackupWrapper;
 
+//    private boolean locationChanged = true;
+//    private boolean employeeChanged = true;
+//    private boolean equipmentChanged = true;
+//    private boolean SRChanged = true;
+
+//    private List<Location> locationCache;
+//    private List<Employee> employeeCache;
+//    private List<MedicalEquipment> equipmentCache;
+//    private List<AbstractSR> SRCache;
+
     private DatabaseWrapper() {
 
         MongoDB.getConnection();
@@ -128,6 +138,11 @@ public class DatabaseWrapper {
         restoreBackupWrapper = new RestoreBackupWrapper(LocationDao, EmployeeDao, MedicalEquipmentDao, MainSRDao,
                 ExternalTransportDao, FoodDeliveryDao, GiftFloralSRDao, LaundrySRDao, MedicalEquipmentSRDao,
                 MedicineDeliverySRDao, ComputerServiceSRDao, SanitationSRDao);
+
+//        locationCache = getAllLocation();
+//        employeeCache = getAllEmployee();
+//        equipmentCache = getAllMedicalEquipment();
+//        SRCache = getAllSR();
     }
 
     public static DatabaseWrapper getInstance() {
@@ -277,14 +292,21 @@ public class DatabaseWrapper {
 
     public void addLocation(Location location) {
         LocationDao.addValue(location);
+//        locationChanged = true;
+//        equipmentChanged = true;
+//        SRChanged = true;
     }
 
     public void addEmployee(Employee employee) {
-        EmployeeDao.addValue(employee);
+//        EmployeeDao.addValue(employee);
+//        employeeChanged = true;
+//        SRChanged = true;
     }
 
     public void addMedicalEquipment(MedicalEquipment medicalEquipment) {
         MedicalEquipmentDao.addValue(medicalEquipment);
+//        equipmentChanged = true;
+//        SRChanged = true;
     }
 
     public void deleteSR(String srID) {
@@ -320,18 +342,27 @@ public class DatabaseWrapper {
         }
         MainSRDao.deleteValue(srID);
 
+//        SRChanged = true;
+
     }
 
     public void deleteLocation(String locationID) {
         LocationDao.deleteValue(locationID);
+//        locationChanged = true;
+//        equipmentChanged = true;
+//        SRChanged = true;
     }
 
     public void deleteEmployee(String employeeID) {
         EmployeeDao.deleteValue(employeeID);
+//        employeeChanged = true;
+//        SRChanged = true;
     }
 
     public void deleteMedicalEquipment(String medicalEquipmentID) {
         MedicalEquipmentDao.deleteValue(medicalEquipmentID);
+//        equipmentChanged = true;
+//        SRChanged = true;
     }
 
     public void updateSR(AbstractSR abstractSR) {
@@ -364,18 +395,26 @@ public class DatabaseWrapper {
             default:
                 System.out.println("Invalid SR Input: " + abstractSR.getSrType());
         }
+//        SRChanged = true;
     }
 
     public void updateLocation(Location location) {
         LocationDao.updateValue(location);
-    }
+//        locationChanged = true;
+//        equipmentChanged = true;
+//        SRChanged = true;
+        }
 
     public void updateEmployee(Employee employee) {
         EmployeeDao.updateValue(employee);
+//        employeeChanged = true;
+//        SRChanged = true;
     }
 
     public void updateMedicalEquipment(MedicalEquipment medicalEquipment) {
         MedicalEquipmentDao.updateValue(medicalEquipment);
+//        equipmentChanged = true;
+//        SRChanged = true;
     }
 
     public AbstractSR getSR(String srID) {
@@ -419,26 +458,45 @@ public class DatabaseWrapper {
     }
 
     public List<AbstractSR> getAllSR() {
-        List<AbstractSR> list = MainSRDao.getAllValues();
+//        if (SRChanged == true){
+            List<AbstractSR> list = MainSRDao.getAllValues();
 
-        for (AbstractSR abstractSR : list) {
-            abstractSR = getSR(abstractSR.getSrID());
-        }
-
+//            for (AbstractSR abstractSR : list) {
+//                abstractSR = getSR(abstractSR.getSrID());
+//            }
+//            SRChanged = false;
+//            SRCache = list;
+//        }
+//        return SRCache;
         return list;
     }
 
     public List<Location> getAllLocation() {
+//        if (locationChanged) {
+//            locationCache = LocationDao.getAllValues();
         return LocationDao.getAllValues();
+//            locationChanged = false;
+//        }
+//        return locationCache;
     }
 
     public List<Employee> getAllEmployee() {
+//        if (employeeChanged){
+//            employeeCache =
         return EmployeeDao.getAllValues();
-    }
+//            employeeChanged = false;
+        }
+//        return employeeCache;
+//    }
 
     public List<MedicalEquipment> getAllMedicalEquipment() {
+//        if (equipmentChanged){
+//            equipmentCache =
         return MedicalEquipmentDao.getAllValues();
-    }
+//            equipmentChanged = false;
+        }
+//        return equipmentCache;
+//    }
 
     public void createTableSR() {
         MainSRDao.createTable();

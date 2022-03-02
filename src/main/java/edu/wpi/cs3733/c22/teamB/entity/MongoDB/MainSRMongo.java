@@ -107,8 +107,9 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
         while (cursor.hasNext()) {
             Document object = cursor.next();
 
-            String nodeID = (String) object.get("_id");
-            MainSRList.add(getValue(nodeID));
+//            String nodeID = (String) object.get("_id");
+//            MainSRList.add(getValue(nodeID));
+            MainSRList.add(getSRFromValue(object));
         }
 
         return MainSRList;
@@ -135,4 +136,30 @@ public class MainSRMongo implements IDatabase<AbstractSR> {
         }
         MainSRTable.insertMany(newList);
     }
+
+    private MainSR getSRFromValue(Document mainSRObj) {
+        MainSR mainSR;
+
+        Location location;
+        Employee requestor;
+        Employee assignedEmployee;
+
+        String srID = mainSRObj.getString("_id");
+        String srType = mainSRObj.getString("srType");
+        String status = mainSRObj.getString("status");
+        String locationID = mainSRObj.getString("locationID");
+        location = LocationTable.getValue(locationID);
+        String requestorID = mainSRObj.getString("requestorID");
+        String assignedEmployeeID = mainSRObj.getString("assignedEmployeeID");
+        requestor = EmployeeTable.getValue(requestorID);
+        assignedEmployee = EmployeeTable.getValue(assignedEmployeeID);
+        String date = mainSRObj.getString("dateRequested");
+        LocalDate dateRequested = LocalDate.parse(date);
+        String notes = mainSRObj.getString("notes");
+
+        mainSR = new MainSR(srID, srType, status, location, requestor, assignedEmployee, dateRequested, notes);
+
+        return mainSR;
+    }
+
 }

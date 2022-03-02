@@ -72,13 +72,7 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
         String equipmentType = employeeObj.getString("equipmentType");
         String manufacturer = employeeObj.getString("manufacturer");
         String locationID = employeeObj.getString("locationID");
-//        try {
-//            LocationMongo locationMongo = new LocationMongo();
-//            location = locationMongo.getValue(locationID);
-//
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        }
+
         location = LocationTable.getValue(locationID);
         String status = employeeObj.getString("status");
         String color = employeeObj.getString("color");
@@ -104,8 +98,9 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
         while (cursor.hasNext()) {
             Document object = cursor.next();
 
-            String nodeID = (String) object.get("_id");
-            equipmentList.add(getValue(nodeID));
+//            String nodeID = (String) object.get("_id");
+//            equipmentList.add(getValue(nodeID));
+            equipmentList.add(getEquipmentFromValue(object));
         }
 
         return equipmentList;
@@ -131,5 +126,30 @@ public class EquipmentMongo implements IDatabase<MedicalEquipment> {
             newList.add(convertEquipment(equipment));
         }
         MedicalEquipmentTable.insertMany(newList);
+    }
+
+    private MedicalEquipment getEquipmentFromValue(Document equipmentObj) {
+
+        Location location = new Location();
+
+        String equipmentID = equipmentObj.getString("_id");
+        String equipmentName = equipmentObj.getString("equipmentName");
+        String equipmentType = equipmentObj.getString("equipmentType");
+        String manufacturer = equipmentObj.getString("manufacturer");
+        String locationID = equipmentObj.getString("locationID");
+
+        location = LocationTable.getValue(locationID);
+        String status = equipmentObj.getString("status");
+        String color = equipmentObj.getString("color");
+        String size = equipmentObj.getString("size");
+        String description = equipmentObj.getString("description");
+        int amount = equipmentObj.getInteger("amount");
+
+
+
+        MedicalEquipment equipment = new MedicalEquipment(equipmentID, equipmentName, equipmentType, manufacturer, location, status, color, size,  description, amount);
+
+        return equipment;
+
     }
 }
