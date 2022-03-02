@@ -39,7 +39,7 @@
     </Pane>
     <Pane fx:id="popup" layoutX="250.0" layoutY="250.0" prefHeight="111.0" prefWidth="290.0" style="-fx-background-color: #002168; -fx-background-radius: 5px;">
         <children>
-            <Label alignment="CENTER" layoutY="26.0" prefHeight="59.0" prefWidth="290.0" style="-fx-text-fill: white;" text="Password Changed!">
+            <Label alignment="CENTER" layoutY="26.0" prefHeight="59.0" prefWidth="290.0" style="-fx-text-fill: white; -fx-font-size: 30;" text="Password Changed!">
                 <font>
                     <Font size="30.0" />
                 </font>

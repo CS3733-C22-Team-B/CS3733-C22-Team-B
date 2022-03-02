@@ -2,6 +2,7 @@ package edu.wpi.cs3733.c22.teamB.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.cs3733.c22.teamB.Bapp;
 import edu.wpi.cs3733.c22.teamB.entity.DatabaseWrapper;
 import edu.wpi.cs3733.c22.teamB.entity.objects.Employee;
 import javafx.animation.PauseTransition;
@@ -32,6 +33,9 @@ public class ProfileController extends AbsPage {
     @FXML
     public void initialize() {
         popup.setVisible(false);
+        popup.setLayoutX(Bapp.getPrimaryStage().getWidth()/3.5);
+        popup.setLayoutY(Bapp.getPrimaryStage().getHeight()/3.5);
+
         initResize();
         resize();
         namePage();
@@ -47,10 +51,6 @@ public class ProfileController extends AbsPage {
             Employee employee = LoginController.getLoggedInEmployee();
             loggedInEmployee = new Employee(employee.getEmployeeID(), employee.getLastName(), employee.getFirstName(), employee.getPosition(), employee.getAccessLevel(), employee.getUsername(), confirmPassword.getText(), employee.getPassword(), employee.getPhoneNumber());
             db.updateEmployee(loggedInEmployee);
-            changePassword.setText("");
-            confirmPassword.setText("");
-            passwordError.setTextFill(Color.RED);
-            passwordError.setText("Password Change Confirmed");
 
             // password change confirmation popup
             popup.setVisible(true);
